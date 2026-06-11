@@ -64,11 +64,20 @@ function nameStatus(baseCommit){
 }
 
 function statusRows(){
-  return git(['status', '--short']).split('\n').filter(Boolean).map(line => ({
-    raw: line,
-    status: line.slice(0, 2).trim() || 'dirty',
-    file: line.slice(2).trim()
-  })).filter(row => row.file);
+  const rows = [];
+  for(const line of git(['status', '--short']).split('\n').filter(Boolean)){
+    const status = line.slice(0, 2).trim() || 'dirty';
+    const file = line.slice(2).trim();
+    if(!file) continue;
+    if(status === '??' && file.endsWith('/')){
+      for(const child of walkFiles(path.join(ROOT, file))){
+        rows.push({ raw: line, status, file: rel(child) });
+      }
+    }else{
+      rows.push({ raw: line, status, file });
+    }
+  }
+  return rows;
 }
 
 function uniqueRows(baseRows, dirtyRows){
@@ -80,6 +89,16 @@ function uniqueRows(baseRows, dirtyRows){
   return [...byFile.values()]
     .filter(row => !isExcludedReviewArtifact(row.file))
     .sort((a, b) => a.file.localeCompare(b.file));
+}
+
+function walkFiles(dir, files = []){
+  if(!fs.existsSync(dir)) return files;
+  for(const entry of fs.readdirSync(dir, { withFileTypes: true })){
+    const full = path.join(dir, entry.name);
+    if(entry.isDirectory()) walkFiles(full, files);
+    else if(entry.isFile()) files.push(full);
+  }
+  return files;
 }
 
 function classify(file){
