@@ -2,8 +2,8 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-06-11T02:26:39.166Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/report.json`
+Generated: `2026-06-11T11:50:53.160Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/report.json`
 
 ## Current Local-Vs-Cloud Read
 
@@ -122,19 +122,19 @@ These tables answer the practical question behind the economics work: when we sp
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/cost-per-positive-score-point.svg)
 
-![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/gpu-equivalent-use-by-purpose.svg)
+![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/gpu-equivalent-use-by-purpose.svg)
 
-![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/cpu-use-by-purpose.svg)
+![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/cpu-use-by-purpose.svg)
 
-![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-06-11-86f9d22e/gameplay-improvement-by-project-part.svg)
+![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-06-11-a983c816/gameplay-improvement-by-project-part.svg)
 
 ## Codex / OpenAI Accounting
 
