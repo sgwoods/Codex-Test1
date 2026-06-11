@@ -83,7 +83,7 @@ function isSignedInAsTestAccount(){
  return !!email&&isConfiguredTestAccountEmail(email);
 }
 function remoteAuthEnabled(){
- return RELEASE_CHANNEL==='production'||testAccountEnabled();
+ return RELEASE_CHANNEL==='production'||RELEASE_CHANNEL==='production beta'||testAccountEnabled();
 }
 function harnessForceRemoteWriteEnabled(){
  if(!NON_PRODUCTION_LANE)return false;

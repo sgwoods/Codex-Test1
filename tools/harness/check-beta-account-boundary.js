@@ -50,6 +50,7 @@ async function main(){
   }
 
   const html = fs.readFileSync(indexPath, 'utf8');
+  const remoteSubmitBlocked = html.includes('Remote score submit disabled in public lanes pending server-side validation');
   const { server, port } = await serve(APP_ROOT);
   const browser = await launchHarnessBrowser();
 
@@ -59,6 +60,9 @@ async function main(){
     await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
     await page.click('#accountDockBtn');
     await page.waitForTimeout(250);
+
+    await page.fill('#accountEmail', 'pilot@example.com');
+    await page.fill('#accountPassword', 'betaProbe123');
 
     const result = await page.evaluate(() => ({
       channel: document.getElementById('buildStampChannel')?.textContent || '',
@@ -70,23 +74,29 @@ async function main(){
       loginDisabled: !!document.getElementById('accountLoginBtn')?.disabled,
       resetDisabled: !!document.getElementById('accountResetBtn')?.disabled,
       emailDisabled: !!document.getElementById('accountEmail')?.disabled,
-      passwordDisabled: !!document.getElementById('accountPassword')?.disabled
+      passwordDisabled: !!document.getElementById('accountPassword')?.disabled,
+      emailValue: document.getElementById('accountEmail')?.value || '',
+      passwordValueLength: String(document.getElementById('accountPassword')?.value || '').length
     }));
+    result.remoteSubmitBlocked = remoteSubmitBlocked;
 
     if(!/production beta/i.test(String(result.channel || '').trim())){
       fail('beta account boundary check did not run against a beta lane', result);
     }
-    if(!result.signupDisabled || !result.loginDisabled || !result.resetDisabled || !result.emailDisabled || !result.passwordDisabled){
-      fail('beta account controls should remain disabled while public score writes await server-side validation', result);
+    if(result.signupDisabled || result.loginDisabled || result.resetDisabled || result.emailDisabled || result.passwordDisabled){
+      fail('beta account controls should remain enabled for normal pilot sign-in', result);
     }
-    if(!/sign-in is disabled|pilot sign-in disabled|keeps pilot sign-in disabled/i.test(`${result.pilotStatus} ${result.accountSummary}`)){
-      fail('beta account panel should explain why pilot sign-in fields are disabled', result);
+    if(result.emailValue !== 'pilot@example.com' || result.passwordValueLength !== 'betaProbe123'.length){
+      fail('beta account fields should be visible and fillable', result);
     }
-    if(/Sign in when you want|Sign in for synced/i.test(`${result.pilotStatus} ${result.accountSummary}`)){
-      fail('beta account panel still invites sign-in even though beta auth is disabled', result);
+    if(!/Sign in for synced|Sign in when you want/i.test(`${result.pilotStatus} ${result.accountSummary}`)){
+      fail('beta account panel should invite normal pilot sign-in', result);
     }
     if(!/const TEST_ACCOUNT_EMAILS=\[\];/.test(html)){
       fail('beta artifact should not expose non-production test pilot emails', result);
+    }
+    if(!result.remoteSubmitBlocked){
+      fail('beta artifact should keep public score writes disabled pending server-side validation', result);
     }
 
     console.log(JSON.stringify({ ok: true, ...result }, null, 2));

@@ -773,22 +773,17 @@ function checkBuildInfo(cfg){
   return info;
 }
 
-function checkBetaTestPilotConfig(cfg){
+function checkBetaPublicAccountConfig(cfg){
   if(cfg.lane !== 'beta') return;
-  const expectedEmails = Array.from(new Set([
-    ...parseListEnv(process.env.TEST_ACCOUNT_EMAILS),
-    ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL)
-  ]));
-  if(!expectedEmails.length) return;
   const html = loadText(require('path').join(cfg.dir, 'index.html'));
   const builtEmails = Array.isArray(extractBuiltJsonConstant(html, 'TEST_ACCOUNT_EMAILS'))
     ? extractBuiltJsonConstant(html, 'TEST_ACCOUNT_EMAILS').map((email) => String(email || '').trim().toLowerCase()).filter(Boolean)
     : [];
-  const missing = expectedEmails.filter((email) => !builtEmails.includes(email));
-  if(missing.length){
+  const builtSingleEmail = html.match(/const TEST_ACCOUNT_EMAIL='([^']*)';/)?.[1] || '';
+  if(builtEmails.length || builtSingleEmail){
     throw new Error(
-      `Publish preflight failed: beta artifact is missing expected test pilot config (${missing.join(', ')}). ` +
-      `Rebuild with TEST_ACCOUNT_EMAILS set before publishing beta.`
+      `Publish preflight failed: beta artifact exposes non-production test pilot config. ` +
+      `Promote beta from a public-safe build that strips TEST_ACCOUNT_EMAILS and TEST_ACCOUNT_EMAIL.`
     );
   }
 }
@@ -936,7 +931,7 @@ function main(){
   if(cfg.lane === 'beta' || cfg.lane === 'production'){
     checkSecurityReleaseGate({ lane: cfg.lane });
   }
-  checkBetaTestPilotConfig(cfg);
+  checkBetaPublicAccountConfig(cfg);
   if(cfg.lane === 'production'){
     checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
