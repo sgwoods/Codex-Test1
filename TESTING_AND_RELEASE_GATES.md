@@ -76,6 +76,17 @@ screenshot under `harness-artifacts/hosted-lane-smoke/`.
 Keep the older `harness:check:live-input:*` checks for lanes/artifacts where the
 gameplay harness is intentionally present.
 
+Before a hosted `/dev` publish, use the dry release-preflight wrapper:
+
+- `npm run release:preflight:dev`
+
+This command does not deploy. It checks whether the code-review packet and
+release conformance/documentation artifacts are current, refreshes the stale
+piece only when needed, stops for a commit if refresh output changed tracked
+files, then performs a clean rebuild and `publish:check:dev`. It exists to catch
+the common freshness/build blockers before `npm run publish:dev` reaches the
+hosted push step.
+
 ## Bug-Fix Discipline
 
 We should not address a bug without also deciding how the fix is protected in

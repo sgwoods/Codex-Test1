@@ -28,6 +28,7 @@
     "publish:check:dev": "node tools/build/check-publish-ready.js --lane dev",
     "publish:check:beta": "node tools/build/check-publish-ready.js --lane beta",
     "publish:check:production": "node tools/build/check-publish-ready.js --lane production",
+    "release:preflight:dev": "node tools/build/release-preflight-dev.js",
     "security:review:dev": "node tools/build/check-security-release-gate.js --lane dev --write",
     "security:review:beta": "node tools/build/check-security-release-gate.js --lane beta --write",
     "security:review:production": "node tools/build/check-security-release-gate.js --lane production --write",
