@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-06-11T17:08:23.000Z`
+Generated: `2026-06-11T22:25:16.211Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -77,10 +77,10 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 1276 | History depth behind score trends |
 | Score deltas found | 138 | Past-goal movement available for review |
-| Measured runs | 979 | Tracked harness/model/local compute work |
-| Tracked wall time | 980.6 min | Human clock-time planning input |
-| Tracked CPU time | 991.1 min | Local compute-cost planning input |
-| Tracked artifact growth | 1512.2 MB | Evidence volume and storage/review-cost proxy |
+| Measured runs | 984 | Tracked harness/model/local compute work |
+| Tracked wall time | 980.8 min | Human clock-time planning input |
+| Tracked CPU time | 991.6 min | Local compute-cost planning input |
+| Tracked artifact growth | 1512.8 MB | Evidence volume and storage/review-cost proxy |
 
 ### Latest Self-Critical Work-Block Read
 
@@ -113,7 +113,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | Local CPU/browser purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
 | Audio conformance and cue feedback | 519 | 504.8 min | 82% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
-| Gameplay behavior and level complexity | 420 | 100.2 min | 16.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
+| Gameplay behavior and level complexity | 425 | 100.4 min | 16.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
 | Visual and video reference analysis | 18 | 0.5 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
 | Dashboard, docs, and release planning | 6 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
@@ -130,7 +130,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min |
-| cpu | 933 | 585.3 min | 937.7 min |
+| cpu | 938 | 585.6 min | 938.2 min |
 | browser | 365 | 434.2 min | 668.8 min |
 | codex | 13 | 365.7 min | 1.2 min |
 | openai-gpu-equivalent | 1 | 75 min | 0 min |
@@ -147,7 +147,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | challenge-perfect | 71 | 180.7 min | 180.1 min |
 | audio-runtime-trial | 27 | 162.1 min | 31.9 min |
 | audio-activity-profile | 10 | 127.2 min | 14 min |
-| challenge-stage | 200 | 112.3 min | 58.9 min |
+| challenge-stage | 205 | 112.6 min | 59.4 min |
 | audio-risk-stability | 8 | 91.4 min | 2.7 min |
 | release-hardening | 1 | 90 min | 0 min |
 
@@ -193,23 +193,23 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 | 13 | Aurora visual look screenshots | visual look / UI readability | browser screenshots plus DOM/canvas metrics | 4 surfaces | first-pass scored | medium-low | Overall visual look and feel | reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json | Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique. |
 | 14 | Aurora evidence-cycle windows | general ingestion framework | manifests, contact sheets, traces, event logs, audio timelines | 4 planned windows | seed-plan-only | medium | Level arc / challenge variation / visual look | reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json | Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest. |
 | 15 | Reference manifests and event logs inventory | source provenance / annotation coverage | source-manifest.json and reference-events.json | 31 manifests; 11 event logs | mixed | mixed | All conformance metrics | reference-artifacts/analyses | Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest. |
-| 16 | Reference contact sheets and frame evidence | visual / motion / entry formation | contact sheets and still frames | 67 contact/frame evidence files | extracted, partially labeled | medium | Visual look, alien entry, challenge variation | reference-artifacts/analyses | Attach contact-sheet families to metric rows and add image-level comparison scores. |
+| 16 | Reference contact sheets and frame evidence | visual / motion / entry formation | contact sheets and still frames | 72 contact/frame evidence files | extracted, partially labeled | medium | Visual look, alien entry, challenge variation | reference-artifacts/analyses | Attach contact-sheet families to metric rows and add image-level comparison scores. |
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-24-ff249bba/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-06-11-6520cf32/report.json`
 - Equal current quality-category weight: `0.077`
