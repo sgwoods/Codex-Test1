@@ -27,10 +27,39 @@ function fail(message, payload){
 function currentChangedFiles(report){
   const baseCommit = report.baseCommit || git(['merge-base', 'HEAD', report.baseRef || 'origin/main']);
   const committed = git(['diff', '--name-only', `${baseCommit}..HEAD`]).split('\n').filter(Boolean);
-  const dirty = git(['status', '--short']).split('\n').filter(Boolean).map(line => line.slice(2).trim()).filter(Boolean);
+  const dirty = dirtyStatusFiles();
   return [...new Set([...committed, ...dirty])]
     .filter(file => !EXCLUDED_PREFIXES.some(prefix => file.startsWith(prefix)))
     .sort();
+}
+
+function rel(file){
+  return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+function walkFiles(dir, files = []){
+  if(!fs.existsSync(dir)) return files;
+  for(const entry of fs.readdirSync(dir, { withFileTypes: true })){
+    const full = path.join(dir, entry.name);
+    if(entry.isDirectory()) walkFiles(full, files);
+    else if(entry.isFile()) files.push(full);
+  }
+  return files;
+}
+
+function dirtyStatusFiles(){
+  const files = [];
+  for(const line of git(['status', '--short']).split('\n').filter(Boolean)){
+    const status = line.slice(0, 2).trim();
+    const file = line.slice(2).trim();
+    if(!file) continue;
+    if(status === '??' && file.endsWith('/')){
+      files.push(...walkFiles(path.join(ROOT, file)).map(rel));
+    }else{
+      files.push(file);
+    }
+  }
+  return files;
 }
 
 function packetChangedFiles(report){
