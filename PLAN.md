@@ -328,11 +328,9 @@ from the roadmap.
    isolation table. Motion/profile, spacing, scoreable-route, no-combat,
    zero-shot, zero-attack, zero-ship-loss, and focused zero-challenge-contact
    guardrails passed. This is the third accepted Stage 3 `/dev`
-   gameplay keeper, not beta justification. Reference-path backing,
-   lane/type-specific phrase authoring, and better per-group isolation remain
-   architecture debt; next Stage 3 quality work should target a focused
-   player-visible gap with before/after source evidence only when protected
-   keepers can remain green.
+   gameplay keeper, not beta justification. The earlier group 1 blocker still
+   applies to blunt whole-group controls, but the later lane/type-specific pass
+   below supersedes it for the accepted Stage 3 source state.
    A focused Stage 3 group 3 fast-lane cycle is now also accepted as the fourth
    Stage 3 `/dev` gameplay keeper, with evidence at
    `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group3-fast-lane/latest-group3-fast-lane.json`.
@@ -348,10 +346,22 @@ from the roadmap.
    zero-shot, zero-attack, zero-ship-loss, and focused zero-challenge-contact
    guardrails passed. The broad challenge-collision check still reports the
    known single contact, which is distinct from this keeper's clean targeted
-   safety evidence. This keeper is not beta justification. With groups 2, 3, 4,
-   and 5 now kept and group 1 still blocked, the next Stage 3 step should be
-   a small architecture pass for lane/type-specific challenge phrase controls
-   or reference-path backing, not another whole-group fast-lane pass.
+   safety evidence. This keeper is not beta justification.
+   A focused Stage 3 group 1 lane/type-specific fast-lane cycle is now accepted
+   as the fifth Stage 3 `/dev` gameplay keeper, with evidence at
+   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane.json`.
+   The kept controls are `laneOrder: [4,5,6,7,0,1,2,3]` and
+   `lanePhaseOffsets: [0,0,0,0,0.18,0.12,0.06,0]` on Stage 3 group 1 only.
+   Source evidence shows bee entry `left` -> `right`, bee exit `right` ->
+   `left`, bee path length `1.4133` -> `1.349`, and upper-band share `0.7439`
+   -> `0.7531`; groups 2, 3, 4, and 5 remain preserved. The broad
+   challenge-motion profile gate now asserts this accepted semantic bee-right
+   line, and challenge-stage conformance, spacing/readability, scoreable-route,
+   no-combat, zero-shot, zero-attack, zero-ship-loss, and focused
+   zero-challenge-contact guardrails passed. This is not beta justification by
+   itself. The next Stage 3 step should start from all five accepted group
+   keepers and either refresh strict conformance/readability deltas or choose
+   one new player-visible gap; do not restart broad candidate generation.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth

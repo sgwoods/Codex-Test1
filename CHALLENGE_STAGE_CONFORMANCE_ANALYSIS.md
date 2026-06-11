@@ -64,7 +64,7 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Original target:** First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.
 
-**Aurora current:** first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 6.8/10.
+**Aurora current:** first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 6.8/10. The current Stage 3 source state includes five focused `/dev` challenge keepers: group 1 uses lane/type-specific `laneOrder` and `lanePhaseOffsets` to make the bee line read right-to-left, while groups 2, 3, 4, and 5 preserve their accepted path/readability controls.
 
 **Graphics read:** Strict graphics score 4.4/10. Current visible family/type labels are present, Direct runtime-vs-Galaga target-crop comparator reads 5.97/10 overall and 3.86/10 for challenge specialty sprites; weakest challenge crop is challenge-mosquito at 3.68/10. Runtime sprite-motion hook observed 1 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 36 object-tracked silhouette track(s). Aurora runtime motion corresponds to 3 frame-labeled segmented-reference target row(s), average 6.2/10; phase-order average is 4.8/10. Weakest row bee-zako-pulse-pair at 5.42/10. Graphics remain capped at 5.1/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.
 
@@ -85,8 +85,8 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 - Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.
 
 **Next actions:**
-- Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.
-- Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing.
+- Protect all five accepted Stage 3 group keepers, then refresh strict object-track/path-length, turn-count, and rack-slot precision against challenge-1 arrival and late-wave labels.
+- Use contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass improves trajectory precision without subjective guessing.
 
 
 ## Stage 7 / Challenge 2

@@ -1,11 +1,11 @@
 # Stage 3 Group 1 Fast-Lane Report
 
-Generated: 2026-06-11T18:21:16.633Z
+Generated: 2026-06-11T18:17:13.811Z
 Commit: a8a2ea93
 Branch: main
 
 Mode: source-attempt
-Verdict: dev-visible-gameplay-keeper
+Verdict: rejected
 Selected candidate: stage3-g1-bee-right-phase-read-0.1
 
 ## Group 1 Read
@@ -33,8 +33,8 @@ Selected candidate: stage3-g1-bee-right-phase-read-0.1
 - No-combat grammar pass: true
 - Safety pass: true
 
-Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane-contact-sheet.svg
+Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/2026-06-11T18-17-13-a8a2ea93-stage3-g1-bee-right-phase-read-0.1/contact-sheet.svg
 
 ## Blockers
 
-- none
+- source-control-not-consumed: One or more group 1 source controls did not appear on runtime enemies.

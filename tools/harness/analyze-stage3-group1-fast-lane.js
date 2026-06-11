@@ -32,44 +32,35 @@ const PROTECTED_GROUP_LIMITS = Object.freeze({
 
 const VARIANTS = Object.freeze([
   Object.freeze({
-    candidateId: 'stage3-g1-curve-entry-left-peel-0.1',
-    transformId: 'group1-curve-entry-left-peel',
-    read: 'Use route curve and phase controls to pull the first bee-line read rightward, then let the same phrase resolve left without re-slotting lanes.',
+    candidateId: 'stage3-g1-bee-right-lane-order-0.1',
+    transformId: 'group1-lane-type-specific-bee-right-line',
+    read: 'Use lane-order authoring to move the bee lanes onto the right-side phrase while keeping this as a group 1-only non-overwriting proof.',
     motionSpec: Object.freeze({
       controls: Object.freeze({
-        phaseOffsetS: 0.68,
-        pathPlaybackScale: 0.96,
-        routeOffsetX: -58,
-        routeCurveX: 320,
-        routeCurveY: -5
+        laneOrder: Object.freeze([4, 5, 6, 7, 0, 1, 2, 3])
       })
     })
   }),
   Object.freeze({
-    candidateId: 'stage3-g1-soft-curve-score-window-0.1',
-    transformId: 'group1-soft-curve-score-window',
-    read: 'Use a milder right-entry curve while preserving upper-band scoreability and group 4 keeper timing.',
+    candidateId: 'stage3-g1-bee-right-phase-read-0.1',
+    transformId: 'group1-lane-type-specific-bee-right-phase-read',
+    read: 'Use lane-order plus per-lane phase offsets so the top-right bee line becomes visible without moving protected groups.',
     motionSpec: Object.freeze({
       controls: Object.freeze({
-        phaseOffsetS: 0.48,
-        pathPlaybackScale: 1.03,
-        routeOffsetX: -42,
-        routeCurveX: 240,
-        routeCurveY: -3
+        laneOrder: Object.freeze([4, 5, 6, 7, 0, 1, 2, 3]),
+        lanePhaseOffsets: Object.freeze([0, 0, 0, 0, 0.18, 0.12, 0.06, 0])
       })
     })
   }),
   Object.freeze({
-    candidateId: 'stage3-g1-upper-band-path-tighten-0.1',
-    transformId: 'group1-upper-band-path-tighten',
-    read: 'Tighten the group 1 path and vertical band with consumed path/arc controls while leaving lane ownership alone.',
+    candidateId: 'stage3-g1-bee-right-spaced-peel-0.1',
+    transformId: 'group1-lane-type-specific-bee-right-spaced-peel',
+    read: 'Use lane-order plus light lane staggering to protect spacing/readability while testing the right-side bee-line read.',
     motionSpec: Object.freeze({
       controls: Object.freeze({
-        pathPlaybackScale: 1.22,
-        dropAmp: 0.76,
-        arcAmp: 0.92,
-        routeOffsetX: -22,
-        routeCurveY: -6
+        laneOrder: Object.freeze([4, 5, 6, 7, 0, 1, 2, 3]),
+        lanePhaseOffsets: Object.freeze([0, 0, 0, 0, 0.16, 0.1, 0.04, 0]),
+        laneStaggerS: 0.03
       })
     })
   })
@@ -316,6 +307,8 @@ async function capture(){
           routeControls: group.slice(0, 4).map(enemy => ({
             lane: enemy.lane,
             type: enemy.type,
+            side: enemy.side,
+            slot: enemy.slot,
             pathPlaybackScale: enemy.pathPlaybackScale,
             routeOffsetX: enemy.routeOffsetX,
             routeCurveY: enemy.routeCurveY,
@@ -680,19 +673,48 @@ function sourceControlRows({ scenario, variant, sourceAttempt }){
   const group = scenario.layoutSummary.motionSpecGroups?.[0] || {};
   const controls = group.controls || {};
   const routeReads = scenario.routeControlRead.group1 || [];
+  const laneOrder = Array.isArray(controls.laneOrder) ? controls.laneOrder : null;
   return expected.map(row => {
     const sourceValue = row.enemyField ? controls[row.enemyField] : group.spawnOffsetS;
-    const runtimeValues = row.enemyField
-      ? routeReads.map(enemy => enemy[row.enemyField]).filter(value => value != null)
-      : [];
+    let runtimeValues = [];
+    if(row.enemyField === 'laneOrder'){
+      runtimeValues = routeReads.map(enemy => {
+        if(!Number.isFinite(+enemy?.side) || !Number.isFinite(+enemy?.slot)) return null;
+        const inferredMotionLane = (+enemy.side > 0 ? 4 : 0) + (+enemy.slot || 0);
+        return { lane: enemy.lane, inferredMotionLane };
+      }).filter(Boolean);
+    }else if(row.enemyField === 'lanePhaseOffsets'){
+      const expectedOffsets = Array.isArray(row.expectedValue) ? row.expectedValue : [];
+      runtimeValues = routeReads.map(enemy => {
+        const motionLane = Number.isFinite(+laneOrder?.[enemy.lane]) ? +laneOrder[enemy.lane] : enemy.lane;
+        const expectedOffset = Number.isFinite(+expectedOffsets?.[motionLane])
+          ? +expectedOffsets[motionLane]
+          : (Number.isFinite(+expectedOffsets?.[enemy.lane]) ? +expectedOffsets[enemy.lane] : 0);
+        return {
+          lane: enemy.lane,
+          motionLane,
+          expectedOffset,
+          actualOffset: Number.isFinite(+enemy.lanePhaseOffsetS) ? +enemy.lanePhaseOffsetS : 0,
+          matches: Math.abs((+enemy.lanePhaseOffsetS || 0) - expectedOffset) <= 0.001
+        };
+      });
+    }else{
+      runtimeValues = row.enemyField
+        ? routeReads.map(enemy => enemy[row.enemyField]).filter(value => value != null)
+        : [];
+    }
     const sourceMatches = Array.isArray(row.expectedValue)
       ? JSON.stringify(sourceValue || []) === JSON.stringify(row.expectedValue)
       : Math.abs((+sourceValue || 0) - (+row.expectedValue || 0)) <= 0.001;
-    const runtimeMatches = row.enemyField
-      ? runtimeValues.length > 0 && runtimeValues.every(value => Array.isArray(row.expectedValue)
+    const runtimeMatches = row.enemyField === 'laneOrder'
+      ? runtimeValues.length > 0 && runtimeValues.every(value => +value.inferredMotionLane === +(row.expectedValue?.[value.lane] ?? value.lane))
+      : (row.enemyField === 'lanePhaseOffsets'
+        ? runtimeValues.length > 0 && runtimeValues.every(value => value.matches === true)
+        : (row.enemyField
+          ? runtimeValues.length > 0 && runtimeValues.every(value => Array.isArray(row.expectedValue)
         ? JSON.stringify(value || []) === JSON.stringify(row.expectedValue)
         : Math.abs((+value || 0) - (+row.expectedValue || 0)) <= 0.001)
-      : true;
+          : true));
     return {
       runtimeField: row.runtimeField,
       expectedValue: row.expectedValue,

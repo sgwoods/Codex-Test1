@@ -26,11 +26,11 @@ const CONTRACT_GROUP_EXPECTATIONS = Object.freeze({
   })
 });
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 39.28, maxY: 46.83, lane0X: 22.81, lane7X: 314.34 }),
-  1.05: Object.freeze({ avgX: 140, minY: 40.15, maxY: 47.69, lane0X: 50.7, lane7X: 292.44 }),
-  1.4: Object.freeze({ avgX: 140, minY: 41.01, maxY: 48.56, lane0X: 72.38, lane7X: 272.62 }),
-  1.75: Object.freeze({ avgX: 140, minY: 41.88, maxY: 49.43, lane0X: 86.44, lane7X: 256.16 }),
-  2.1: Object.freeze({ avgX: 140, minY: 42.75, maxY: 50.29, lane0X: 91.94, lane7X: 244.15 })
+  0.7: Object.freeze({ avgX: 137.65, minY: 39.28, maxY: 46.92, lane0X: 247.44, lane7X: -34.34, beeAvgX: 282.79, butterflyAvgX: -7.49, beeMinX: 247.44, butterflyMaxX: 22.81 }),
+  1.05: Object.freeze({ avgX: 138.03, minY: 40.15, maxY: 47.79, lane0X: 221.41, lane7X: -12.44, beeAvgX: 258.19, butterflyAvgX: 17.88, beeMinX: 221.41, butterflyMaxX: 50.7 }),
+  1.4: Object.freeze({ avgX: 138.54, minY: 41.01, maxY: 48.65, lane0X: 202.1, lane7X: 7.38, beeAvgX: 237.9, butterflyAvgX: 39.17, beeMinX: 202.1, butterflyMaxX: 72.38 }),
+  1.75: Object.freeze({ avgX: 139.14, minY: 41.88, maxY: 49.52, lane0X: 190.78, lane7X: 23.84, beeAvgX: 223.25, butterflyAvgX: 55.03, beeMinX: 190.78, butterflyMaxX: 86.44 }),
+  2.1: Object.freeze({ avgX: 139.73, minY: 38.17, maxY: 50.39, lane0X: 187.61, lane7X: 35.85, beeAvgX: 215.07, butterflyAvgX: 64.39, beeMinX: 187.61, butterflyMaxX: 91.94 })
 });
 
 function fail(message, payload){
@@ -70,6 +70,10 @@ async function sampleChallengeMotion(page){
     const firstWave = (formation.enemies || []).filter(e => e.wave === 0).sort((a, b) => a.lane - b.lane);
     const xs = firstWave.map(e => e.x);
     const ys = firstWave.map(e => e.y);
+    const bees = firstWave.filter(e => e.type === 'bee');
+    const butterflies = firstWave.filter(e => e.type === 'but');
+    const beeXs = bees.map(e => e.x);
+    const butterflyXs = butterflies.map(e => e.x);
     samples.push({
       t,
       firstWave,
@@ -78,7 +82,11 @@ async function sampleChallengeMotion(page){
         minY: +Math.min(...ys).toFixed(2),
         maxY: +Math.max(...ys).toFixed(2),
         lane0X: firstWave[0]?.x ?? null,
-        lane7X: firstWave[7]?.x ?? null
+        lane7X: firstWave[7]?.x ?? null,
+        beeAvgX: beeXs.length ? +(beeXs.reduce((sum, value) => sum + value, 0) / beeXs.length).toFixed(2) : null,
+        butterflyAvgX: butterflyXs.length ? +(butterflyXs.reduce((sum, value) => sum + value, 0) / butterflyXs.length).toFixed(2) : null,
+        beeMinX: beeXs.length ? +Math.min(...beeXs).toFixed(2) : null,
+        butterflyMaxX: butterflyXs.length ? +Math.max(...butterflyXs).toFixed(2) : null
       }
     });
   }
@@ -438,7 +446,12 @@ async function main(){
       minY: approxEqual(sample.stats.minY, expected.minY, verticalTolerance),
       maxY: approxEqual(sample.stats.maxY, expected.maxY, verticalTolerance),
       lane0X: approxEqual(sample.stats.lane0X, expected.lane0X, 10),
-      lane7X: approxEqual(sample.stats.lane7X, expected.lane7X, 10)
+      lane7X: approxEqual(sample.stats.lane7X, expected.lane7X, 10),
+      beeAvgX: approxEqual(sample.stats.beeAvgX, expected.beeAvgX, 10),
+      butterflyAvgX: approxEqual(sample.stats.butterflyAvgX, expected.butterflyAvgX, 10),
+      beeMinX: approxEqual(sample.stats.beeMinX, expected.beeMinX, 12),
+      butterflyMaxX: approxEqual(sample.stats.butterflyMaxX, expected.butterflyMaxX, 12),
+      semanticBeeRightLine: sample.stats.beeMinX > sample.stats.butterflyMaxX + 70
     };
     if(Object.values(checks).some(v => !v)){
       fail('challenge motion profile drifted away from the measured branch baseline', {

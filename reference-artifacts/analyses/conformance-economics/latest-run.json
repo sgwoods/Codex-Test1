@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-10T15-24-33-427Z-75715",
-  "startedAt": "2026-06-10T15:24:33.427Z",
-  "endedAt": "2026-06-10T15:24:39.009Z",
-  "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-  "commit": "389e5fa9",
+  "id": "2026-06-11T18-21-13-229Z-79488",
+  "startedAt": "2026-06-11T18:21:13.229Z",
+  "endedAt": "2026-06-11T18:21:16.665Z",
+  "branch": "main",
+  "commit": "a8a2ea93",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-foreground-audio-balance"
+    "harness:analyze:stage3-group1-fast-lane"
   ],
   "axes": [
-    "audio"
+    "challenge-stage"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "Aurora foreground audio lane contract verification clean 389e5fa9",
+  "notes": "Stage 3 group 1 lane-specific source attempt consumption verified",
   "measurement": {
-    "wallSeconds": 5.582,
-    "timeRealSeconds": 5.57,
-    "timeUserSeconds": 5.85,
-    "timeSystemSeconds": 1.51,
-    "cpuSeconds": 7.36,
+    "wallSeconds": 3.436,
+    "timeRealSeconds": 3.43,
+    "timeUserSeconds": 5.34,
+    "timeSystemSeconds": 1.12,
+    "cpuSeconds": 6.46,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1277092733,
-    "artifactBytesAfter": 1277092765,
-    "artifactBytesDelta": 32
+    "artifactBytesBefore": 1295979834,
+    "artifactBytesAfter": 1296091664,
+    "artifactBytesDelta": 111830
   }
 }

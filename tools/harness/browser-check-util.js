@@ -137,7 +137,7 @@ async function withHarnessPage(cfg, fn){
       localStorage.setItem('platinumTestCfg', JSON.stringify(local.testCfg));
       localStorage.setItem('platinumHarnessSeed', String(local.seed >>> 0));
     }, { testCfg, seed });
-    await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
+    await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'domcontentloaded' });
     try{
       await page.waitForFunction(() => !!window.__galagaHarness__);
     }catch(err){

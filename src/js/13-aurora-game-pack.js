@@ -826,7 +826,12 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
   groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel']),
   motionSpecGroups:Object.freeze([
-   null,
+   Object.freeze({
+    controls:Object.freeze({
+     laneOrder:Object.freeze([4,5,6,7,0,1,2,3]),
+     lanePhaseOffsets:Object.freeze([0,0,0,0,.18,.12,.06,0])
+    })
+   }),
    Object.freeze({
     controls:Object.freeze({
      arcAmp:.76,

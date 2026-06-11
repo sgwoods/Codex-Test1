@@ -33,7 +33,7 @@ Selected candidate: stage3-g1-bee-right-phase-read-0.1
 - No-combat grammar pass: true
 - Safety pass: true
 
-Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane-contact-sheet.svg
+Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/2026-06-11T18-21-16-a8a2ea93-stage3-g1-bee-right-phase-read-0.1/contact-sheet.svg
 
 ## Blockers
 

@@ -1320,6 +1320,7 @@ window.__galagaHarness__={
    lane:e.c,
    wave:e.wave,
    row:e.row,
+   slot:e.slot,
    side:e.side,
    spawn:+(+e.spawn||0).toFixed(2),
    spawnPlan:+(+e.spawnPlan||0).toFixed(2),

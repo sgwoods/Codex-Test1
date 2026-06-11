@@ -248,9 +248,10 @@ Latest Stage 7 calibration:
   zero timing/path drift, preserving the accepted group 4 and group 5 keepers.
   Motion/profile, spacing, scoreable-route, no-combat, zero-shot, zero-attack,
   zero-ship-loss, and focused zero-challenge-contact guardrails passed. This is
-  a `/dev` gameplay keeper only, not beta justification. Group 1 remains
-  blocked under current group-level controls; the next fast-lane target should
-  not disturb the three accepted Stage 3 keepers.
+  a `/dev` gameplay keeper only, not beta justification. The earlier group 1
+  blocker remained valid for blunt whole-group controls, but the later
+  lane/type-specific pass below supersedes it for the accepted Stage 3 source
+  state.
 - A focused Stage 3 group 3 fast-lane cycle has now produced and accepted a
   fourth `/dev` `dev-visible-gameplay-keeper`, with evidence at
   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group3-fast-lane/latest-group3-fast-lane.json`
@@ -270,10 +271,27 @@ Latest Stage 7 calibration:
   focused zero-challenge-contact guardrails passed. Broad
   `harness:check:challenge-collision` still reports the known single contact,
   but targeted source-attempt safety remains clean. This is a `/dev` gameplay
-  keeper only, not beta justification. With groups 2, 3, 4, and 5 kept and
-  group 1 blocked, the next Stage 3 quality step should be lane/type-specific
-  phrase controls or reference-path backing rather than more group-level
-  fast-lane tuning.
+  keeper only, not beta justification.
+- A focused Stage 3 group 1 lane/type-specific fast-lane cycle has now produced
+  and accepted a fifth `/dev` `dev-visible-gameplay-keeper`, with evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane.json`
+  and contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane-contact-sheet.svg`.
+  The kept source controls are limited to Stage 3 group 1:
+  `motionSpecGroups[0].controls.laneOrder: [4,5,6,7,0,1,2,3]` and
+  `lanePhaseOffsets: [0,0,0,0,0.18,0.12,0.06,0]`. Source evidence shows the
+  top-right bee-line read improved: bee entry `left` -> `right`, bee exit
+  `right` -> `left`, bee path length `1.4133` -> `1.349`, and upper-band share
+  `0.7439` -> `0.7531`. Groups 2, 3, 4, and 5 preserved, including all
+  accepted Stage 3 keepers. The broad challenge motion/profile gate now asserts
+  this accepted semantic bee-right line instead of the old lane-index baseline;
+  motion/profile, challenge-stage conformance, spacing, scoreable-route,
+  no-combat, zero-shot, zero-attack, zero-ship-loss, and focused
+  zero-challenge-contact guardrails passed. This is a `/dev` gameplay keeper
+  only, not beta justification. The next Aurora quality step should use the
+  full Stage 3 keeper set as baseline and choose either a strict conformance
+  refresh/read or the next single player-visible gap; do not return to Stage 7
+  candidate generation.
 
 ## Historical Or Stale Current-State Docs
 

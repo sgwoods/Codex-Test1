@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage3-group1-fast-lane-report",
-  "generatedAt": "2026-06-11T18:21:16.633Z",
+  "generatedAt": "2026-06-11T18:17:13.811Z",
   "generatedBy": "tools/harness/analyze-stage3-group1-fast-lane.js",
   "commit": "a8a2ea93",
   "branch": "main",
@@ -154,26 +154,9 @@
         2,
         3
       ],
-      "runtimeEnemyValues": [
-        {
-          "lane": 0,
-          "inferredMotionLane": 4
-        },
-        {
-          "lane": 1,
-          "inferredMotionLane": 5
-        },
-        {
-          "lane": 2,
-          "inferredMotionLane": 6
-        },
-        {
-          "lane": 3,
-          "inferredMotionLane": 7
-        }
-      ],
-      "consumedByRuntime": true,
-      "matchesExpected": true
+      "runtimeEnemyValues": [],
+      "consumedByRuntime": false,
+      "matchesExpected": false
     },
     {
       "runtimeField": "motionSpecGroups[0].controls.lanePhaseOffsets",
@@ -1494,7 +1477,6 @@
           "lane": 0,
           "type": "bee",
           "side": 1,
-          "slot": 0,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -1505,7 +1487,6 @@
           "lane": 1,
           "type": "bee",
           "side": 1,
-          "slot": 1,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -1516,7 +1497,6 @@
           "lane": 2,
           "type": "bee",
           "side": 1,
-          "slot": 2,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -1527,7 +1507,6 @@
           "lane": 3,
           "type": "bee",
           "side": 1,
-          "slot": 3,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -1540,7 +1519,6 @@
           "lane": 0,
           "type": "bee",
           "side": -1,
-          "slot": 0,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -1551,7 +1529,6 @@
           "lane": 1,
           "type": "but",
           "side": -1,
-          "slot": 1,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -1562,7 +1539,6 @@
           "lane": 2,
           "type": "bee",
           "side": -1,
-          "slot": 2,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -1573,7 +1549,6 @@
           "lane": 3,
           "type": "but",
           "side": -1,
-          "slot": 3,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -2897,7 +2872,6 @@
           "lane": 0,
           "type": "bee",
           "side": -1,
-          "slot": 0,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -2908,7 +2882,6 @@
           "lane": 1,
           "type": "bee",
           "side": -1,
-          "slot": 1,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -2919,7 +2892,6 @@
           "lane": 2,
           "type": "bee",
           "side": -1,
-          "slot": 2,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -2930,7 +2902,6 @@
           "lane": 3,
           "type": "bee",
           "side": -1,
-          "slot": 3,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -2943,7 +2914,6 @@
           "lane": 0,
           "type": "bee",
           "side": -1,
-          "slot": 0,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -2954,7 +2924,6 @@
           "lane": 1,
           "type": "but",
           "side": -1,
-          "slot": 1,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -2965,7 +2934,6 @@
           "lane": 2,
           "type": "bee",
           "side": -1,
-          "slot": 2,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -2976,7 +2944,6 @@
           "lane": 3,
           "type": "but",
           "side": -1,
-          "slot": 3,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -4323,7 +4290,6 @@
           "lane": 0,
           "type": "bee",
           "side": 1,
-          "slot": 0,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -4334,7 +4300,6 @@
           "lane": 1,
           "type": "bee",
           "side": 1,
-          "slot": 1,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -4345,7 +4310,6 @@
           "lane": 2,
           "type": "bee",
           "side": 1,
-          "slot": 2,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -4356,7 +4320,6 @@
           "lane": 3,
           "type": "bee",
           "side": 1,
-          "slot": 3,
           "pathPlaybackScale": 1,
           "routeOffsetX": 0,
           "routeCurveY": 0,
@@ -4369,7 +4332,6 @@
           "lane": 0,
           "type": "bee",
           "side": -1,
-          "slot": 0,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -4380,7 +4342,6 @@
           "lane": 1,
           "type": "but",
           "side": -1,
-          "slot": 1,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -4391,7 +4352,6 @@
           "lane": 2,
           "type": "bee",
           "side": -1,
-          "slot": 2,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -4402,7 +4362,6 @@
           "lane": 3,
           "type": "but",
           "side": -1,
-          "slot": 3,
           "pathPlaybackScale": 0.5,
           "routeOffsetX": 60,
           "routeCurveY": 17.464,
@@ -5053,9 +5012,14 @@
       }
     }
   },
-  "failureClassification": [],
-  "verdict": "dev-visible-gameplay-keeper",
-  "runtimeKeeperClassification": "dev-visible-gameplay-keeper",
+  "failureClassification": [
+    {
+      "category": "source-control-not-consumed",
+      "read": "One or more group 1 source controls did not appear on runtime enemies."
+    }
+  ],
+  "verdict": "rejected",
+  "runtimeKeeperClassification": "rejected",
   "betaJustification": false,
   "visualEvidence": {
     "contactSheet": "reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group1-fast-lane/latest-group1-fast-lane-contact-sheet.svg",
@@ -5063,14 +5027,16 @@
     "read": "Before-source-edit and after-source-edit browser traces are plotted with group 1 highlighted and bee-line focus dashed."
   },
   "decision": {
-    "sourceEditKept": true,
-    "read": "Group 1 source controls reproduced the fast-lane proof and are accepted as a second dev-visible gameplay keeper only."
+    "sourceEditKept": false,
+    "read": "No group 1 fast-lane candidate passed quickly; stop without broadening the search."
   },
   "summary": {
     "selectedCandidateId": "stage3-g1-bee-right-phase-read-0.1",
-    "verdict": "dev-visible-gameplay-keeper",
+    "verdict": "rejected",
     "group4KeeperPreserved": true,
     "guardrailsPass": true,
-    "blockerTypes": []
+    "blockerTypes": [
+      "source-control-not-consumed"
+    ]
   }
 }
