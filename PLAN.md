@@ -2,15 +2,15 @@
 
 ## Current State
 
-Verified June 7, 2026:
+Verified June 11, 2026:
 
 - hosted `/dev`
-  - active `1.4.1.1` patch-candidate forward-review line; exact current build label is
+  - active `1.4.1.1` patch follow-through line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`
-  - active `1.4.1-beta.1` reviewed patch-candidate lane
+  - accepted `1.4.1-beta.1` reviewed patch lane
 - hosted `/production`
-  - stable `1.4.0` public line
+  - live `1.4.1` public patch line
 - `main`
   - authoritative integration branch for the `1.4.1` patch-candidate line,
     including the consolidated Aurora challenge grammar and Guardians
@@ -18,14 +18,13 @@ Verified June 7, 2026:
 
 This means:
 
-- the `1.4.0` multi-game release is now the public production family
-- hosted `/dev` and hosted `/beta` now carry the deliberate `1.4.1` review lanes
-  rather than shadow production mirrors
-- the active source-planning question is now "is the `1.4.1` patch candidate
-  strong enough for production?" rather than "should this be a build-only
-  refresh of `1.4.0`?"
-- the post-`1.4.0` work should be treated as the intentional `1.4.1` patch
-  candidate, not as rediscovery of the shipped baseline
+- the `1.4.1` patch packet promotes accepted Stage 3 challenge keepers,
+  sign-in repair, audio/theme clarity, public-safe audio balance, and release
+  gate hardening
+- hosted `/dev` and hosted `/beta` remain review lanes rather than shadow
+  production mirrors
+- the active source-planning question after this patch is which targeted
+  quality path should become the next patch review lane
 - the white paper and preserved-source recovery work are now part of the
   maintained release/documentation posture, but they are not yet fully
   published on every hosted lane
@@ -55,9 +54,9 @@ from the roadmap.
 
 ## Active Workstreams
 
-### 1. `1.4.0` Production Stabilization
+### 1. `1.4.1` Production Stabilization
 
-- keep the shipped `1.4.0` production line trustworthy
+- keep the shipped `1.4.1` production patch trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) as the
@@ -538,15 +537,12 @@ Current conformance read:
 ## Release Direction
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
-  release discipline, with hosted `/dev` and hosted `/beta` intentionally ahead
-  as the `1.4.1` patch-candidate review lanes
+  release discipline, with hosted `/dev` and hosted `/beta` reserved for the
+  next review lane after the `1.4.1` production patch
 - the active source line now presents itself as the deliberate `1.4.1`
-  patch-candidate family, not as an unnamed post-`1.4.0` follow-through bundle
-- the latest accepted beta artifact is the `1.4.1-beta.1` patch candidate,
-  while the accepted production artifact remains the public `1.4.0` family
-- the next hosted `/production` decision is now about whether the
-  `1.4.1-beta.1` review line has enough player-visible, security, audio, auth,
-  and release-gate evidence to promote as plain `1.4.1`
+  production patch packet, not as an unnamed post-`1.4.0` follow-through bundle
+- the accepted beta artifact is the `1.4.1-beta.1` review packet, and the
+  production packet is plain `1.4.1`
 - `1.4.0` is the intentional shipped bundle for multi-game public identity,
   Platinum release discipline, and the first public Galaxy Guardians slice
 - the shipped `1.4.0` family is now the stable public baseline while `main`
@@ -563,9 +559,8 @@ Current conformance read:
 
 After `1.4.0` shipped, the next patch plan should pick up in this order:
 
-1. Short term: keep the live `1.4.0` public line trustworthy while publishing
-   and reviewing the `1.4.1.1` dev line and `1.4.1-beta.1` beta candidate
-   cleanly.
+1. Short term: keep the live `1.4.1` public patch trustworthy and use hosted
+   `/dev` plus hosted `/beta` for the next coherent review lane.
 2. Medium term: deepen `1.4.1` arcade depth and platform-contract
    follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,

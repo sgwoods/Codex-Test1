@@ -147,6 +147,7 @@ Release planning and readiness docs:
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [RELEASE_NOTE_1.4.1_PRODUCTION.md](RELEASE_NOTE_1.4.1_PRODUCTION.md)
 - [RELEASE_NOTE_1.4.1_BETA_1.md](RELEASE_NOTE_1.4.1_BETA_1.md)
 - [RELEASE_NOTE_1.4.0_PRODUCTION.md](RELEASE_NOTE_1.4.0_PRODUCTION.md)
 - [RELEASE_NOTE_1.4.0_PRODUCTION_FOLLOW_THROUGH.md](RELEASE_NOTE_1.4.0_PRODUCTION_FOLLOW_THROUGH.md)
@@ -177,21 +178,20 @@ Historical current-state snapshots that should not be used as live lane truth:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.4.1.1` patch-candidate forward-review line; exact current build label is
+  - active `1.4.1.1` patch follow-through line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`:
-  - active `1.4.1-beta.1` patch-candidate review lane
+  - accepted `1.4.1-beta.1` patch review lane
 - hosted `/production`:
-  - live `1.4.0` public line
+  - live `1.4.1` public patch line
 
 What that means:
 
 - Aurora now ships as the first playable application on Platinum
-- the public production family remains `1.4.0`, while hosted `/dev` and
-  hosted `/beta` now name the next patch path as `1.4.1.1` and
-  `1.4.1-beta.1`
-- hosted `/dev` remains the visible forward-review lane for the `1.4.1`
-  patch-candidate cycle
+- the `1.4.1` patch promotes the accepted Stage 3 keepers, sign-in repair,
+  audio/theme clarity, public-safe audio balance, and stronger release gates
+- hosted `/dev` remains the visible forward-review lane after the `1.4.1`
+  patch packet
 - Galaxy Guardians is now part of the beta review story as a playable preview
   with game-owned conformance and release identity
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
@@ -199,10 +199,9 @@ What that means:
 
 Current go-forward focus:
 
-- keep the shipped `1.4.0` public line stable
-- use the hosted `1.4.1.1` `/dev` line and `1.4.1-beta.1` hosted `/beta`
-  lane to review the next coherent patch candidate rather than blurring
-  production and review work together
+- keep the `1.4.1` production patch trustworthy after publication
+- use hosted `/dev` and hosted `/beta` for the next coherent patch review
+  rather than blurring production and review work together
 - use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
@@ -211,7 +210,7 @@ Current go-forward focus:
   Guardians v1, shared personas/Watch/Rival, ingestion grammar, and platform
   boundaries stay aligned
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
-  current readable quality table while shaping the next post-`1.4.0`
+  current readable quality table while shaping the next post-`1.4.1`
   improvement bundle
 - use the multi-machine bootstrap, release-authority workflow, and
   machine-allocation model: MacBook M4 for high-feedback gameplay/integration,

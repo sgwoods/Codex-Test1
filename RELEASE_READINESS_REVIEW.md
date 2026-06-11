@@ -2,192 +2,105 @@
 
 ## Current Read
 
-Aurora `1.4.0` is now the release currently live on hosted `/production`.
+Aurora `1.4.1` is now the release currently live on hosted `/production`.
 
 Verified June 11, 2026:
 
 - hosted `/production`
-  - current live family: `1.4.0`
+  - production patch family: `1.4.1`
 - hosted `/beta`
-  - current reviewed family: `1.4.1 beta`
+  - accepted review family: `1.4.1-beta.1`
 - hosted `/dev`
-  - current forward review line: `1.4.1.1`
+  - forward review line: `1.4.1.1`
 
-For exact active labels, use each lane's `build-info.json`. The important
-release truth is that hosted `/production` still carries the deliberate public
-`1.4.0` family, while hosted `/dev` and hosted `/beta` now name the active
-patch candidate as `1.4.1.1` and `1.4.1-beta.1`.
+For exact active labels, use each lane's `build-info.json`. This readiness
+review is the production-facing posture for the explicit `1.4.1` promotion
+packet.
 
 ## What This Production Release Means
 
-This is a real public SemVer family move. `1.4.0` is now the shipped public
-line on Platinum.
+`1.4.1` is a focused patch release for the Platinum-hosted Aurora family. It
+does not claim a new minor product family. It promotes the accepted beta review
+line into production with:
 
-The fourth-segment `1.4.1.1` line is now the hosted-dev review signal for the
-next patch. It should promote through `1.4.1-beta.1` and, if accepted, into
-hosted `/production` as plain `1.4.1`.
-
-Retrospective versioning note:
-
-- this same-family production refresh is now treated as an exception rather
-  than the preferred production model
-- a future production bundle with this much game-quality, conformance,
-  ingestion, and release-surface movement should normally publish as at least a
-  new `PATCH` release
-- if the public release story itself changes materially, it should instead cut
-  the next `MINOR` family
-
-What is now live in the refreshed public line:
-
-- provenance-backed public docs and guides
-- current conformance dashboard and economics story
-- application artifact conformance scoring
-- runtime static sprite-capture scoring
-- a measured calibrated ship-loss audio cue lift
-- clearer layered release identity across bundle, platform, and applications
+- Stage 3 / Challenge 1 gameplay keepers for groups 2, 3, 4, and 5
+- Stage 3 group 1 preserved as blocked under current group-level controls
+- Stage 7 candidate generation paused after yielding RED/trial/batch/compiler
+  infrastructure rather than a production runtime keeper
+- repaired beta sign-in/input behavior
+- clearer settings/theme presentation
+- foreground audio balance and public/private reference-audio boundaries
+- refreshed security-release evidence and production preflight discipline
 
 ## Current Public Quality Position
 
-Current maintained quality read for the refreshed public family:
+The public `1.4.1` patch should be read as a targeted trust and quality
+follow-through release. It is not a complete Galaga-conformance claim.
 
-- overall quality score:
-  - `9.2/10`
-- weakest high-value category:
-  - audio identity and cue alignment at `7.3/10`
-- audio support:
-  - semantic event score `9.78/10`
-  - acoustic event score `6.31/10`
-  - cue alignment `9/9`
-- current strong supporting categories:
-  - level arc and encounter shape at `8.8/10`
-  - boss entry and formation grammar at `9.2/10`
-  - player movement, shot/hit responsiveness, capture/rescue rules, and key
-    shell surfaces at current guardrail passes
+Current high-value interpretation:
 
-Important interpretation:
+- accepted Stage 3 groups 2, 3, 4, and 5 are dev-visible gameplay keepers now
+  carried into the production packet
+- Stage 3 group 1 still needs lane/type-specific phrase controls or
+  reference-path backing before another fast-lane attempt
+- Stage 7 remains a paused research lane, with its process infrastructure
+  reusable for future challenge-stage work
+- public score submission remains disabled/guarded pending server-validated
+  score writes
+- private Galaga reference clips remain local/private-only and are excluded
+  from public artifacts
 
-- `10/10` still means maxed at current scorer resolution, not perfect arcade
-  imitation
-- the improved public score comes from a better measured bundle, not from
-  relaxing standards
-- future score changes may go down as measurement gets sharper, and that can
-  still represent project progress
+## Evidence Supporting The Production Packet
 
-## What Is Now True
+The `1.4.1` production packet is supported by:
 
-- `Platinum` is a shipped browser-arcade host platform with committed release
-  authority, multi-lane discipline, and first-class hosted docs
-- `Aurora Galactica` remains the primary shipped playable application on
-  Platinum
-- `Galaxy Guardians` remains a preview application and ingestion-backed
-  second-cabinet proof, now with a playable beta-candidate lane and
-  production-capable preview metadata aligned to the runtime intent
-- hosted `/beta` now carries the first deliberate `1.4.1-beta.1` patch candidate
-  while hosted `/production` carries the deliberate public `1.4.0` family
-- hosted `/dev` remains the forward review lane and still uses the
-  fourth-segment `1.4.1.1` display line
-- layered release identity is now explicit across the integrated bundle, the
-  Platinum platform, and each application
-- the shipped public line is backed by committed docs, harnesses, dashboards,
-  and quality artifacts rather than chat-only release state
+- accepted hosted `/beta` manual smoke review
+- production security review showing zero tracked issues
+- production account/sign-in feedback smoke
+- public-safe production account-input expectation
+- audio theme phase, runtime recovery, and foreground-vs-pulse balance checks
+- release conformance dashboard and conformance economics evidence
+- documentation freshness and release-note linkage checks
 
-## Evidence Supporting The Refreshed Public Line
-
-The refreshed public family is supported by these durable sources:
-
-- quality roll-up:
-  - `reference-artifacts/analyses/quality-conformance/2026-05-11-b83393cd`
-- conformance dashboard source:
-  - `RELEASE_CONFORMANCE_DASHBOARD.md`
-- conformance economics source:
-  - `CONFORMANCE_ECONOMICS.md`
-- public-document provenance source:
-  - `documentation-provenance.json`
-- strategic lane review:
-  - `STRATEGIC_BETA_REVIEW.md`
-- detailed public refresh note:
-  - [RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md](RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md)
-
-The refreshed line also has direct verification evidence:
-
-- `npm run build`
-- `npm run harness:check:documentation-freshness`
-- `npm run publish:check:beta`
-- `npm run publish:verify:beta`
-- `npm run approve:beta`
-- `npm run publish:check:production`
-- `npm run publish:verify:production`
-- `npm run verify:public`
-
-## Code Review And Boundary Read
-
-The current production decision should treat the platform/application boundary
-as strong enough for the shipped `1.4.0` public line, while still keeping the
-next `1.4.1` and later follow-through visible.
-
-Current durable read:
-
-- shared service ownership is reasonably clean
-- pack selection and shell ownership are meaningfully separated from Aurora
-  rules
-- version tracking is explicit across bundle, platform, and application records
-- remaining next-cycle seams still include:
-  - Aurora-shaped compatibility names in some platform-owned storage and
-    migration surfaces
-  - a still-preview `Galaxy Guardians` application that needs more of its own
-    ingestion-backed conformance package before a stronger public claim
-
-These are no longer ship blockers for the current public line. They are the
-correct `1.4.1` and later follow-through targets.
-
-## Documentation Contract For Production
-
-The current `1.4.0` public line depends on these docs being current and
-committed:
+Durable source documents:
 
 - [README.md](README.md)
 - [PLAN.md](PLAN.md)
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
-- [GO_FORWARD_EXECUTION_PLAN.md](GO_FORWARD_EXECUTION_PLAN.md)
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
 - [PLATINUM.md](PLATINUM.md)
 - [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md)
-- [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
-- [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
 - [CODE_REVIEW_MODEL.md](CODE_REVIEW_MODEL.md)
-- [REVIEW_LEARNING_LEDGER.md](REVIEW_LEARNING_LEDGER.md)
-- [RELEASE_NOTE_1.4.0_MULTI_GAME_PUBLIC_RELEASE.md](RELEASE_NOTE_1.4.0_MULTI_GAME_PUBLIC_RELEASE.md)
+- [SECURITY_ISSUES_RESOLUTION_PLAN.md](SECURITY_ISSUES_RESOLUTION_PLAN.md)
+- [RELEASE_NOTE_1.4.1_PRODUCTION.md](RELEASE_NOTE_1.4.1_PRODUCTION.md)
+- [RELEASE_NOTE_1.4.1_BETA_1.md](RELEASE_NOTE_1.4.1_BETA_1.md)
 - [release-dashboard.json](release-dashboard.json)
 - [release-notes.json](release-notes.json)
 - [release-manifest.json](release-manifest.json)
 
-## Current Follow-Up Work
+## Code Review And Boundary Read
 
-The `1.4.0` production push is complete. The follow-up work now is:
+The platform/application boundary is acceptable for this patch. The release
+does not change the major Platinum product promise; it hardens the current
+multi-game shell, Aurora gameplay review lane, account surface, theme/audio
+settings, public artifact boundaries, and production preflight gates.
 
-1. keep the live `1.4.0` public line trustworthy
-2. use hosted `/dev` and hosted `/beta` to review the next `1.4.1` candidate
-   family rather than treating every source change as a lane move
-3. shift the active execution frame to `1.4.1` guardrails, arcade depth, and
-   platform-contract cleanup
-4. continue `Galaxy Guardians` through measured ingestion and game-owned
-   runtime/conformance work without over-claiming polish
-5. keep layered platform/application release tracking visible in docs,
-   dashboards, manifests, and build surfaces
+Remaining future work:
+
+- implement server-validated public score writes before enabling public score
+  submission
+- split deeper platform developer controls from ordinary game settings in a
+  later shell polish cycle
+- give Galaxy Guardians more game-owned conformance and gameplay depth on the
+  iMac lane before increasing its production claim
+- move Stage 3 group 1 through lane/type-specific challenge phrase controls or
+  reference-path backing rather than whole-group retuning
 
 ## Recommendation
 
-Recommendation: treat the shipped `1.4.0` public family as the stable current
-line and begin the next `1.4.1` pickup deliberately rather than letting the
-release story drift back into unprioritized polish.
-
-The strongest reasons are:
-
-- hosted `/production`, hosted `/beta`, and the source docs now tell one
-  coherent `1.4.0` story
-- the public documentation and conformance surfaces now explain evidence and
-  cost more honestly than the earlier shipped line
-- the remaining gaps are next-cycle authenticity and depth opportunities, not
-  obvious blockers to the current public line
+Recommendation: keep `1.4.1` as the current production patch line once the
+hosted production publish is verified. After publication, verify the hosted
+production build stamp, account surface, public-safe audio/theme behavior, and
+score-submission guard.
