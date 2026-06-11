@@ -903,11 +903,14 @@ function playerTwoSnapshot(state=S.playerTwo){
 function currentPilotCardState(){
  const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
  const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
+ const authEnabled=typeof remoteAuthEnabled==='function'?remoteAuthEnabled():true;
  const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
  const gameTitle=typeof currentScoreStorageGameTitle==='function'
   ? String(currentScoreStorageGameTitle()||'Current Cabinet').trim()
   : 'Current Cabinet';
  const gameHudLabel=gameTitle.toUpperCase();
+ const localOnlyStatus=`Pilot sign-in is disabled in this public ${gameTitle} lane. Local scores still work on this device.`;
+ const localOnlySummary=`This public lane keeps pilot sign-in disabled while shared-score writes await server-side validation. ${gameTitle} runs still save locally on this device.`;
  const p2=S.playerTwo;
  if(S.watchMode){
   const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
@@ -964,8 +967,8 @@ function currentPilotCardState(){
    panelTitle:`${gameHudLabel} 1UP`,
    panelSub:'HUMAN TURN ACTIVE',
    callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
-   status:`2UP ${persona.label} rival alternates after each ship loss. Human score only.`,
-   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} now uses arcade-style per-life 1UP/2UP alternation; 2UP rival scores do not post.`:`Local ${gameTitle} score path active. Sign in to post verified human scores.`,
+   status:!authEnabled&&!signedIn?`2UP ${persona.label} rival alternates after each ship loss. Human score saves locally only in this lane.`:`2UP ${persona.label} rival alternates after each ship loss. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} now uses arcade-style per-life 1UP/2UP alternation; 2UP rival scores do not post.`:authEnabled?`Local ${gameTitle} score path active. Sign in to post verified human scores.`:localOnlySummary,
    email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
    userId:`2UP rival: ${persona.label} for ${gameTitle}`,
    hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
@@ -975,14 +978,14 @@ function currentPilotCardState(){
  return{
   mode:signedIn?'human-signed-in':'human-local',
   icon:'🧑‍🚀',
-   dockLabel:signedIn?'ONBOARD':'SIGN IN',
-  dockStatus:signedIn?humanId:'Pilot offline',
-  dockTitle:signedIn?`${humanId} onboard for ${gameTitle}`:`${gameTitle} Pilot Sign In`,
+   dockLabel:signedIn?'ONBOARD':authEnabled?'SIGN IN':'LOCAL',
+  dockStatus:signedIn?humanId:authEnabled?'Pilot offline':'Scores only',
+  dockTitle:signedIn?`${humanId} onboard for ${gameTitle}`:authEnabled?`${gameTitle} Pilot Sign In`:`${gameTitle} local-score lane; pilot sign-in disabled`,
   panelTitle:`${gameHudLabel} PILOT`,
   panelSub:'QUICK PILOT REFERENCE',
   callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
-  status:signedIn?`${gameTitle} pilot identity active. Scores and records are summarized below.`:`Sign in for synced ${gameTitle} records, or keep flying locally.`,
-  summary:signedIn?`This pilot card summarizes your current ${gameTitle} identity, records, and posting state.`:`Local ${gameTitle} score path is available now. Sign in when you want synced records and verified posting.`,
+  status:signedIn?`${gameTitle} pilot identity active. Scores and records are summarized below.`:authEnabled?`Sign in for synced ${gameTitle} records, or keep flying locally.`:localOnlyStatus,
+  summary:signedIn?`This pilot card summarizes your current ${gameTitle} identity, records, and posting state.`:authEnabled?`Local ${gameTitle} score path is available now. Sign in when you want synced records and verified posting.`:localOnlySummary,
   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
   userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
