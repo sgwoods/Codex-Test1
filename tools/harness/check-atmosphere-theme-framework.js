@@ -7,6 +7,13 @@ function fail(message, payload){
   process.exit(1);
 }
 
+function renderedBackground(state){
+  return state?.renderDebug?.backgroundMode
+    || state?.visualAtmosphere?.backgroundMode
+    || state?.atmosphere?.backgroundMode
+    || '';
+}
+
 async function main(){
   const result = await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 24134, skipStart: true }, async ({ page }) => {
     const frontDoor = await page.evaluate(() => {
@@ -49,8 +56,9 @@ async function main(){
 
   if(!result.challengeEleven.challenge) fail('challenge-stage harness state did not start in challenge mode', result);
   if(result.challengeEleven.atmosphere?.phase !== 'challenge') fail('challenge stage did not resolve the challenge atmosphere phase', result);
-  if(result.challengeEleven.atmosphere?.backgroundMode !== 'aurora-borealis') fail('challenge stage did not keep the configured Aurora background', result);
-  if(result.challengeEleven.atmosphere?.audioTheme !== 'aurora-surge') fail('challenge stage did not use the expected challenge audio theme', result);
+  if(result.challengeEleven.visualAtmosphere?.backgroundMode !== 'aurora-borealis') fail('challenge stage did not keep the configured Aurora visual atmosphere', result);
+  if(renderedBackground(result.challengeEleven) !== 'aurora-borealis') fail('challenge stage did not render the configured Aurora background', result);
+  if(result.challengeEleven.atmosphere?.audioTheme !== 'classic-arcade') fail('challenge stage did not keep the expected public-safe challenge audio atmosphere', result);
   if(result.challengeEleven.audioCue?.phase !== 'challenge') fail('challenge-stage start cue did not resolve through the challenge audio phase', result);
 
   console.log(JSON.stringify({
@@ -69,6 +77,8 @@ async function main(){
     challengeEleven: {
       presentation: result.challengeEleven.stagePresentation,
       atmosphere: result.challengeEleven.atmosphere,
+      visualAtmosphere: result.challengeEleven.visualAtmosphere,
+      renderedBackground: renderedBackground(result.challengeEleven),
       audioCue: result.challengeEleven.audioCue
     }
   }, null, 2));
