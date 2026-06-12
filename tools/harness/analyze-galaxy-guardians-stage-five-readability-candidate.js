@@ -496,8 +496,18 @@ function main(){
   };
   const candidates = profileSet.candidates.map(candidate => evaluateCandidate(candidate, baseline));
   const topologyCandidates = candidates.filter(candidate => candidate.family === 'path-topology-lane-separation');
+  const threatSourceCandidates = candidates.filter(candidate => candidate.family === 'threat-source-firing-eligibility');
   const bestTopology = topologyCandidates.slice().sort((a, b) => {
     if(b.readabilityLift10 !== a.readabilityLift10) return b.readabilityLift10 - a.readabilityLift10;
+    return b.routeabilityLift10 - a.routeabilityLift10;
+  })[0] || null;
+  const bestThreatSource = threatSourceCandidates.slice().sort((a, b) => {
+    if(b.promotionGate.pass !== a.promotionGate.pass) return b.promotionGate.pass ? 1 : -1;
+    if(b.readabilityLift10 !== a.readabilityLift10) return b.readabilityLift10 - a.readabilityLift10;
+    return b.routeabilityLift10 - a.routeabilityLift10;
+  })[0] || null;
+  const bestStrictReadability = candidates.slice().sort((a, b) => {
+    if(b.lowerFieldReadabilityScore10 !== a.lowerFieldReadabilityScore10) return b.lowerFieldReadabilityScore10 - a.lowerFieldReadabilityScore10;
     return b.routeabilityLift10 - a.routeabilityLift10;
   })[0] || null;
   const best = candidates.slice().sort((a, b) => {
@@ -557,22 +567,34 @@ function main(){
       missilePacePreservedByBestCandidate: !!best?.missilePacePreserved,
       runtimeChangeAllowed: false,
       bestCandidateRead: best
-        ? `${best.label} changes lower-field readability by ${best.readabilityLift10}/10, routeability by ${best.routeabilityLift10}/10, collision-loss share by ${round(best.collisionLossDelta * 100, 0)} points, and retains ${round(best.pressureRetention * 100, 0)}% of measured pressure.`
+        ? `${best.label} is the best gate-clearing candidate: lower-field readability changes by ${best.readabilityLift10}/10, routeability by ${best.routeabilityLift10}/10, collision-loss share by ${round(best.collisionLossDelta * 100, 0)} points, and measured pressure retention is ${round(best.pressureRetention * 100, 0)}%.`
         : 'No candidate was measured.',
+      bestStrictReadabilityCandidateId: bestStrictReadability?.id || null,
+      bestStrictReadabilityScore10: bestStrictReadability?.lowerFieldReadabilityScore10 ?? null,
+      bestStrictReadabilityPass: !!bestStrictReadability?.promotionGate?.pass,
+      bestStrictReadabilityRead: bestStrictReadability
+        ? `${bestStrictReadability.label} has the highest strict readability at ${bestStrictReadability.lowerFieldReadabilityScore10}/10, but gate pass is ${bestStrictReadability.promotionGate.pass ? 'yes' : 'no'} with collision-loss share ${round(bestStrictReadability.routeability.collisionLossShare * 100, 0)}%.`
+        : 'No strict-readability candidate was measured.',
       bestTopologyCandidateId: bestTopology?.id || null,
       bestTopologyCandidateReadabilityLift10: bestTopology?.readabilityLift10 ?? null,
       bestTopologyCandidateRouteabilityLift10: bestTopology?.routeabilityLift10 ?? null,
       expandedFamilyRead: bestTopology
         ? `${bestTopology.label} is the best expanded path-topology profile at ${bestTopology.readabilityLift10}/10 readability lift and ${bestTopology.routeabilityLift10}/10 routeability lift; the family did not beat the commitment-window candidate.`
         : 'No path-topology family candidate was measured.',
+      bestThreatSourceCandidateId: bestThreatSource?.id || null,
+      bestThreatSourceCandidateReadabilityLift10: bestThreatSource?.readabilityLift10 ?? null,
+      bestThreatSourceCandidateRouteabilityLift10: bestThreatSource?.routeabilityLift10 ?? null,
+      threatSourceFamilyRead: bestThreatSource
+        ? `${bestThreatSource.label} is the best threat-source profile at ${bestThreatSource.readabilityLift10}/10 readability lift and ${bestThreatSource.routeabilityLift10}/10 routeability lift.`
+        : 'No threat-source family candidate was measured.',
       releaseRead: best
-        ? `Measured ${candidates.length} stage-five readability candidates against ${specDelta.candidateId}. ${best.label} is best so far: ${best.readabilityLift10}/10 readability lift, ${best.routeabilityLift10}/10 routeability lift, missile pace preserved: ${best.missilePacePreserved ? 'yes' : 'no'}.`
+        ? `Measured ${candidates.length} stage-five readability candidates against ${specDelta.candidateId}. ${best.label} is the best gate-clearing profile; ${bestStrictReadability?.label || 'no candidate'} has the highest strict readability but ${bestStrictReadability?.promotionGate?.pass ? 'also clears' : 'does not clear'} the gate. Missile pace preserved: ${best.missilePacePreserved ? 'yes' : 'no'}.`
         : 'No stage-five readability candidates were measured.'
     },
     nextSteps: [
       'Use the best passing candidate, if any, to generate a browser/contact-sheet before-after review.',
       'Do not promote runtime constants until the candidate also passes stage-five closeness, routeability review, and first-class conformance after refreshed artifacts.',
-      'Because the expanded path-topology family did not beat commitment-window-v1, the next family should test threat source selection, firing eligibility, or player-corridor rules before changing missile pace.'
+      'If the threat-source family still does not clear visual review, the next candidate family should combine source eligibility with dive selection fairness before changing missile pace.'
     ]
   };
   report.media = {

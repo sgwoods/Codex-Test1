@@ -53,6 +53,7 @@ function validateGuardiansCandidateProfileSet(profile, file){
     const scales = patch.scales || {};
     const offsets = patch.offsets || {};
     const overrides = patch.overrides || {};
+    const behavior = patch.behavior || {};
     for(const bucket of [scales, offsets]){
       for(const [key, value] of Object.entries(bucket)){
         if(!Number.isFinite(+value)) failProfile('Guardians candidate profile patch has a non-finite numeric value.', { id: candidate.id, key, value });
@@ -64,6 +65,14 @@ function validateGuardiansCandidateProfileSet(profile, file){
     for(const forbidden of ['enemyShotVy', 'enemyShotIntervalBase', 'singleShotCooldown']){
       if(Object.prototype.hasOwnProperty.call(offsets, forbidden) || Object.prototype.hasOwnProperty.call(overrides, forbidden)){
         failProfile('Guardians candidate profile cannot offset or override missile pace or single-shot cadence.', { id: candidate.id, forbidden });
+      }
+    }
+    if(behavior.enemyShotSourcePolicy){
+      const policy = behavior.enemyShotSourcePolicy;
+      for(const key of ['crowdingThreshold', 'playerCorridorExclusionPx', 'minPlayerYGapPx', 'lowerFieldDiveShotSeparationPx', 'lowerFieldDiveShotYSeparationPx', 'formationPoolSize']){
+        if(Object.prototype.hasOwnProperty.call(policy, key) && !Number.isFinite(+policy[key])){
+          failProfile('Guardians enemy-shot source policy has a non-finite numeric value.', { id: candidate.id, key, value: policy[key] });
+        }
       }
     }
   }

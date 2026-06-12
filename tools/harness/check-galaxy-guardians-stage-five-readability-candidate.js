@@ -90,6 +90,9 @@ function main(){
   if(!candidates.some(candidate => candidate.family === 'path-topology-lane-separation')){
     fail('Stage-five readability candidate report must include the path-topology/lane-separation family.', { families: candidates.map(candidate => candidate.family) });
   }
+  if(!candidates.some(candidate => candidate.family === 'threat-source-firing-eligibility')){
+    fail('Stage-five readability candidate report must include the threat-source/firing-eligibility family.', { families: candidates.map(candidate => candidate.family) });
+  }
   for(const candidate of candidates){
     if(!candidate.id || !candidate.patch || !finite(candidate.lowerFieldReadabilityScore10) || !finite(candidate.readabilityLift10)){
       fail('Stage-five readability candidate is missing patch or readability metrics.', candidate);
@@ -109,6 +112,12 @@ function main(){
   }
   if(!artifact.summary?.bestTopologyCandidateId || !finite(artifact.summary.bestTopologyCandidateReadabilityLift10)){
     fail('Stage-five readability candidate summary must report the expanded topology-family result.', artifact.summary);
+  }
+  if(!artifact.summary?.bestThreatSourceCandidateId || !finite(artifact.summary.bestThreatSourceCandidateReadabilityLift10)){
+    fail('Stage-five readability candidate summary must report the threat-source-family result.', artifact.summary);
+  }
+  if(!artifact.summary?.bestStrictReadabilityCandidateId || !finite(artifact.summary.bestStrictReadabilityScore10)){
+    fail('Stage-five readability candidate summary must report the highest strict-readability result.', artifact.summary);
   }
   if(artifact.summary.bestCandidatePass !== true || artifact.summary.bestCandidateReadabilityLift10 < 0.2){
     fail('Stage-five readability candidate must identify at least one missile-neutral profile that clears the measurement gate.', artifact.summary);

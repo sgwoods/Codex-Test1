@@ -89,6 +89,70 @@ function installGuardiansRuntimeRulePatch(ctx, patch = {}){
    return rules;
   };
   this.guardiansRuntimeRules = guardiansRuntimeRules;
+  if(!this.__guardiansBasePickEnemyShotSource){
+   this.__guardiansBasePickEnemyShotSource = pickGuardiansEnemyShotSource;
+  }
+  pickGuardiansEnemyShotSource = function patchedPickGuardiansEnemyShotSource(state){
+   const patch = this.__guardiansRuntimeRulePatch || {};
+   const behavior = patch.behavior || {};
+   const policy = behavior.enemyShotSourcePolicy || null;
+   const rank = guardiansStageRank(state);
+   const applies = (!patch.minRank || rank >= patch.minRank)
+    && (!patch.maxRank || rank <= patch.maxRank);
+   if(!applies || !policy || policy.enabled === false){
+    return this.__guardiansBasePickEnemyShotSource(state);
+   }
+   const rules = guardiansRuntimeRules(state);
+   const pressure = guardiansPressureSnapshot(state, rules);
+   const playerX = +state.player?.x || 0;
+   const playerY = +state.player?.y || 0;
+   const live = liveGuardiansAliens(state).filter(alien => alien.y < playerY - 24);
+   if(!live.length) return null;
+   const lowerFieldDives = Array.isArray(pressure.lowerFieldDives) ? pressure.lowerFieldDives : [];
+   const crowdingThreshold = Number.isFinite(+policy.crowdingThreshold) ? +policy.crowdingThreshold : 3;
+   const crowded = pressure.crowdingPenalty >= crowdingThreshold;
+   const corridorPx = Number.isFinite(+policy.playerCorridorExclusionPx)
+    ? +policy.playerCorridorExclusionPx
+    : (crowded ? 22 : 14);
+   const minPlayerYGap = Number.isFinite(+policy.minPlayerYGapPx)
+    ? +policy.minPlayerYGapPx
+    : (pressure.crowdingPenalty >= 2 ? 88 : 64);
+   const minDiveShotSeparationPx = Number.isFinite(+policy.lowerFieldDiveShotSeparationPx)
+    ? +policy.lowerFieldDiveShotSeparationPx
+    : 0;
+   const minDiveShotYSeparationPx = Number.isFinite(+policy.lowerFieldDiveShotYSeparationPx)
+    ? +policy.lowerFieldDiveShotYSeparationPx
+    : 96;
+   const avoidsCrowdedLane = alien => {
+    if(crowded && Math.abs((+alien.x || 0) - playerX) <= corridorPx) return false;
+    if((+alien.y || 0) >= playerY - minPlayerYGap) return false;
+    if(minDiveShotSeparationPx > 0 && lowerFieldDives.some(threat =>
+     Math.abs((+alien.x || 0) - (+threat.x || 0)) <= minDiveShotSeparationPx
+     && Math.abs((+alien.y || 0) - (+threat.y || 0)) <= minDiveShotYSeparationPx
+    )) return false;
+    return true;
+   };
+   const preferFormation = policy.preferFormationWhenCrowded && crowded;
+   const formation = live
+    .filter(alien => alien.mode === 'formation' && avoidsCrowdedLane(alien))
+    .sort((a, b) => {
+     const yDelta = (b.y - a.y);
+     if(Math.abs(yDelta) > 1e-9) return yDelta;
+     return Math.abs(a.x - playerX) - Math.abs(b.x - playerX);
+    })
+    .slice(0, Math.max(1, +policy.formationPoolSize || 6));
+   const diving = live
+    .filter(alien => (alien.mode === 'diving' || alien.mode === 'wrapping') && avoidsCrowdedLane(alien));
+   let candidates = preferFormation ? formation : diving;
+   if(!candidates.length && !preferFormation) candidates = formation;
+   if(!candidates.length && policy.allowBaseFallback !== false){
+    return this.__guardiansBasePickEnemyShotSource(state);
+   }
+   if(!candidates.length) return null;
+   const index = Math.floor(state.rng() * candidates.length) % candidates.length;
+   return candidates[index];
+  };
+  this.pickGuardiansEnemyShotSource = pickGuardiansEnemyShotSource;
  `, ctx);
  return ctx;
 }

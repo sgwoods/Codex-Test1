@@ -1,11 +1,11 @@
 # Galaxy Guardians Stage-Five Readability Candidate
 
-Generated: 2026-06-12T21:28:05.331Z
+Generated: 2026-06-12T22:50:38.905Z
 Status: analysis-only-no-runtime-change
 
 ## Summary
 
-Measured 7 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Commitment window v1 is best so far: 0.2/10 readability lift, 0.6/10 routeability lift, missile pace preserved: yes.
+Measured 10 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Commitment window v1 is the best gate-clearing profile; Threat source corridor v1 has the highest strict readability but does not clear the gate. Missile pace preserved: yes.
 
 This artifact is candidate-harness evidence only. It does not change shipped
 Guardians runtime constants.
@@ -19,6 +19,9 @@ Guardians runtime constants.
 | Topology lane offset v1 | 3.3/10 | 0/10 | 5.8/10 | 27% | 29% | 89% | blocked |
 | Topology corridor v2 | 2.7/10 | -0.6/10 | 6.1/10 | 60% | 35% | 119% | blocked |
 | Topology lane weave v3 | 3.4/10 | 0.1/10 | 6.8/10 | 33% | 26% | 121% | blocked |
+| Threat source corridor v1 | 3.6/10 | 0.3/10 | 6.5/10 | 50% | 12% | 125% | blocked |
+| Threat source separation v2 | 2.8/10 | -0.5/10 | 5.5/10 | 62% | 16% | 109% | blocked |
+| Threat source formation v3 | 2.7/10 | -0.6/10 | 5.3/10 | 57% | 17% | 86% | blocked |
 
 ## Baseline
 
@@ -34,10 +37,10 @@ Guardians runtime constants.
 ## Best Candidate
 
 guardians-stage-five-commitment-window-v1 is the current best measured
-candidate. Commitment window v1 changes lower-field readability by 0.2/10, routeability by 0.6/10, collision-loss share by -7 points, and retains 104% of measured pressure.
+candidate. Commitment window v1 is the best gate-clearing candidate: lower-field readability changes by 0.2/10, routeability by 0.6/10, collision-loss share by -7 points, and measured pressure retention is 104%.
 
 ## Next Step
 
 - Use the best passing candidate, if any, to generate a browser/contact-sheet before-after review.
 - Do not promote runtime constants until the candidate also passes stage-five closeness, routeability review, and first-class conformance after refreshed artifacts.
-- Because the expanded path-topology family did not beat commitment-window-v1, the next family should test threat source selection, firing eligibility, or player-corridor rules before changing missile pace.
+- If the threat-source family still does not clear visual review, the next candidate family should combine source eligibility with dive selection fairness before changing missile pace.

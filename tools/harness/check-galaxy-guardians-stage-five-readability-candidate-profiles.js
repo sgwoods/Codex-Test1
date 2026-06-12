@@ -20,12 +20,17 @@ try {
   if(topologyCandidates.length < 4){
     fail('Guardians stage-five readability profile set needs a richer path-topology family.', { topologyCount: topologyCandidates.length });
   }
+  const threatSourceCandidates = profile.candidates.filter(candidate => candidate.family === 'threat-source-firing-eligibility');
+  if(threatSourceCandidates.length < 3){
+    fail('Guardians stage-five readability profile set needs a threat-source/firing-eligibility family.', { threatSourceCount: threatSourceCandidates.length });
+  }
   console.log(JSON.stringify({
     ok: true,
     artifact: rel(PROFILE),
     candidateCount: profile.candidates.length,
     familyCount: profile.families.length,
     topologyCandidateCount: topologyCandidates.length,
+    threatSourceCandidateCount: threatSourceCandidates.length,
     targetStrictReadabilityScore10: profile.promotionGate.targetStrictReadabilityScore10,
     runtimeChangeAllowed: profile.promotionGate.runtimeChangeAllowed
   }, null, 2));

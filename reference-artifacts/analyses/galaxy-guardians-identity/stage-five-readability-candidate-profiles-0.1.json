@@ -49,6 +49,10 @@
     {
       "id": "path-topology-lane-separation",
       "read": "Change horizontal/vertical threat separation and shot-origin spacing before spending missile pace."
+    },
+    {
+      "id": "threat-source-firing-eligibility",
+      "read": "Change which aliens are allowed to fire during crowded lower-field windows without changing missile speed or cadence."
     }
   ],
   "candidates": [
@@ -291,6 +295,140 @@
         },
         "offsets": {
           "enemyShotStartYOffset": 10
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-threat-source-corridor-v1",
+      "label": "Threat source corridor v1",
+      "family": "threat-source-firing-eligibility",
+      "intent": "Keep missile pace fixed while avoiding enemy-shot sources that stack directly into the player's crowded lower-field corridor.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "shot-window",
+        "player-routeability",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.93
+        },
+        "behavior": {
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 3,
+            "playerCorridorExclusionPx": 24,
+            "minPlayerYGapPx": 96,
+            "lowerFieldDiveShotSeparationPx": 24,
+            "lowerFieldDiveShotYSeparationPx": 96,
+            "preferFormationWhenCrowded": true,
+            "formationPoolSize": 6,
+            "allowBaseFallback": true
+          }
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-threat-source-separation-v2",
+      "label": "Threat source separation v2",
+      "family": "threat-source-firing-eligibility",
+      "intent": "Bias enemy-shot sources away from active lower-field dive lanes while keeping the same missile velocity and scheduled cadence.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "audio-visual-hooks",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "shot-window",
+        "path-topology",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.93
+        },
+        "behavior": {
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 2,
+            "playerCorridorExclusionPx": 22,
+            "minPlayerYGapPx": 88,
+            "lowerFieldDiveShotSeparationPx": 36,
+            "lowerFieldDiveShotYSeparationPx": 112,
+            "preferFormationWhenCrowded": false,
+            "formationPoolSize": 8,
+            "allowBaseFallback": true
+          }
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-threat-source-formation-v3",
+      "label": "Threat source formation v3",
+      "family": "threat-source-firing-eligibility",
+      "intent": "During crowded lower-field moments, prefer readable formation shot sources instead of stacking shots from diving aliens already occupying the lower field.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "shot-window",
+        "player-routeability",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.93
+        },
+        "behavior": {
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 2,
+            "playerCorridorExclusionPx": 28,
+            "minPlayerYGapPx": 104,
+            "lowerFieldDiveShotSeparationPx": 30,
+            "lowerFieldDiveShotYSeparationPx": 128,
+            "preferFormationWhenCrowded": true,
+            "formationPoolSize": 10,
+            "allowBaseFallback": false
+          }
         }
       }
     }
