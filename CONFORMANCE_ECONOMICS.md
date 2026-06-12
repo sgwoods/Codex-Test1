@@ -2,21 +2,21 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-06-11T17:08:22.821Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/report.json`
+Generated: `2026-06-12T01:18:03.743Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/report.json`
 
 ## Current Local-Vs-Cloud Read
 
 | Read | Current value | Interpretation |
 | --- | --- | --- |
-| Overall quality | 8.8/10 | Current release-quality conformance roll-up. |
-| Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
-| Measured runs | 979 | Commands or manual entries logged in the economics ledger. |
-| Local CPU tracked wall | 585.3 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
+| Overall quality | 8.7/10 | Current release-quality conformance roll-up. |
+| Level arc | 8.6/10 | Current long-play/gameplay-shape roll-up. |
+| Measured runs | 984 | Commands or manual entries logged in the economics ledger. |
+| Local CPU tracked wall | 585.6 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
 | Browser-backed local wall | 434.2 min | Subset of local work that exercised Chromium/gameplay runtime. |
 | GPU-equivalent tracked wall | 630.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
 | GPU-equivalent share | 64.3% | Approximate declared cloud/model share of tracked wall time. |
-| Artifact growth | 1512.2 MB | Evidence volume and review/storage-cost proxy. |
+| Artifact growth | 1512.8 MB | Evidence volume and review/storage-cost proxy. |
 
 The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.
 
@@ -46,7 +46,7 @@ Retrospective artifact: `reference-artifacts/analyses/conformance-investment-ret
 | Resource class | Measured runs | Wall time | CPU time | Share of tracked wall |
 | --- | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min | 64.3% |
-| cpu | 933 | 585.3 min | 937.7 min | 59.7% |
+| cpu | 938 | 585.6 min | 938.2 min | 59.7% |
 | browser | 365 | 434.2 min | 668.8 min | 44.3% |
 | codex | 13 | 365.7 min | 1.2 min | 37.3% |
 | openai-gpu-equivalent | 1 | 75 min | 0 min | 7.6% |
@@ -72,7 +72,7 @@ These tables answer the practical question behind the economics work: when we sp
 | Local CPU/browser purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
 | Audio conformance and cue feedback | 519 | 504.8 min | 82% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
-| Gameplay behavior and level complexity | 420 | 100.2 min | 16.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
+| Gameplay behavior and level complexity | 425 | 100.4 min | 16.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
 | Visual and video reference analysis | 18 | 0.5 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
 | Dashboard, docs, and release planning | 6 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
@@ -81,10 +81,10 @@ These tables answer the practical question behind the economics work: when we sp
 
 | Project part | Positive score movement | Share | Player/designer meaning |
 | --- | --- | --- | --- |
-| Gameplay complexity and stage arc | +47.4 | 74.2% | Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve. |
-| Core mechanics and control feel | +7.9 | 12.4% | Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes. |
-| Audio feedback and event clarity | +5.8 | 9.1% | Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity. |
-| Overall release-quality rollup | +2.8 | 4.4% | Composite release score movement that reflects several subsystems at once. |
+| Gameplay complexity and stage arc | +47.4 | 73.7% | Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve. |
+| Core mechanics and control feel | +8.2 | 12.8% | Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes. |
+| Audio feedback and event clarity | +5.8 | 9% | Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity. |
+| Overall release-quality rollup | +2.9 | 4.5% | Composite release score movement that reflects several subsystems at once. |
 
 ## Spend By Conformance Axis
 
@@ -95,7 +95,7 @@ These tables answer the practical question behind the economics work: when we sp
 | challenge-perfect | 71 | 180.7 min | 180.1 min |
 | audio-runtime-trial | 27 | 162.1 min | 31.9 min |
 | audio-activity-profile | 10 | 127.2 min | 14 min |
-| challenge-stage | 200 | 112.3 min | 58.9 min |
+| challenge-stage | 205 | 112.6 min | 59.4 min |
 | audio-risk-stability | 8 | 91.4 min | 2.7 min |
 | release-hardening | 1 | 90 min | 0 min |
 | audio-theme-comparison | 39 | 84.2 min | 100.1 min |
@@ -108,11 +108,11 @@ These tables answer the practical question behind the economics work: when we sp
 | Axis | Runs | Wall min | Positive score gain | Wall min / +1 score | Attribution |
 | --- | --- | --- | --- | --- | --- |
 | formation-boss-grammar | 4 | 0.139 | 2.5 | 0.06 | tracked-spend-and-score-movement |
-| overall-quality | 2 | 2.178 | 2.8 | 0.78 | tracked-spend-and-score-movement |
+| overall-quality | 2 | 2.178 | 2.9 | 0.75 | tracked-spend-and-score-movement |
 | stage4-pressure | 28 | 12.824 | 10 | 1.28 | tracked-spend-and-score-movement |
 | level-arc | 97 | 8.811 | 3.4 | 2.59 | tracked-spend-and-score-movement |
 | audio | 317 | 254.312 | 5.8 | 43.85 | tracked-spend-and-score-movement |
-| movement | 0 | 0 | 7.9 | n/a | historical-score-movement-without-tracked-spend |
+| movement | 0 | 0 | 8.2 | n/a | historical-score-movement-without-tracked-spend |
 | challenge-timing | 0 | 0 | 6.5 | n/a | historical-score-movement-without-tracked-spend |
 | stage1-timing | 0 | 0 | 6.4 | n/a | historical-score-movement-without-tracked-spend |
 | stage-signature-distance | 0 | 0 | 4.3 | n/a | historical-score-movement-without-tracked-spend |
@@ -122,19 +122,19 @@ These tables answer the practical question behind the economics work: when we sp
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/cost-per-positive-score-point.svg)
 
-![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/gpu-equivalent-use-by-purpose.svg)
+![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/gpu-equivalent-use-by-purpose.svg)
 
-![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/cpu-use-by-purpose.svg)
+![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/cpu-use-by-purpose.svg)
 
-![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-06-11-494b4b29/gameplay-improvement-by-project-part.svg)
+![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-06-12-70efcc85/gameplay-improvement-by-project-part.svg)
 
 ## Codex / OpenAI Accounting
 
