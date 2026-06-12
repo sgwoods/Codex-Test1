@@ -1,0 +1,118 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "stage-five-galaxian-closeness",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-06-12T17:11:44.560Z",
+  "status": "stage-five-galaxian-closeness-planning-gate-not-runtime-promotion",
+  "sourceEvidence": {
+    "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "routeabilityReview": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+    "longSurfaceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
+    "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json"
+  },
+  "summary": {
+    "stageFiveClosenessScore10": 6.8,
+    "stageFiveRouteabilityScore10": 6.6,
+    "alienShipPaceConformanceScore10": 5.6,
+    "missilePaceConformanceScore10": 9.9,
+    "lowerFieldReadabilityScore10": 5,
+    "weakestFocus": "lower-field-readability",
+    "releaseRead": "Stage-five Guardians closeness is 6.8/10. The next Galaxian-fidelity work should keep stage-five routeability, alien-ship pace, and missile pace in the same promotion gate; the weakest current signal is lower-field-readability at 5/10."
+  },
+  "stageFiveRules": {
+    "firstScoutDiveDelay": 2.259,
+    "scoutDiveIntervalBase": 1.321,
+    "flagshipDiveIntervalBase": 5.665,
+    "diveBaseVy": 35.144,
+    "diveAccel": 6.264,
+    "enemyShotIntervalBase": 0.987,
+    "enemyShotVy": 128.563,
+    "enemyShotMaxLive": 4,
+    "playerShotVy": -178,
+    "singleShotCooldown": 0.72
+  },
+  "stageFiveWindow": {
+    "stage": 5,
+    "persona": "professional",
+    "seconds": 24,
+    "seed": 12553,
+    "simT": 24,
+    "events": {
+      "alienDiveStart": 10,
+      "flagshipDiveStart": 3,
+      "escortJoin": 3,
+      "enemyShot": 15,
+      "enemyWrapOrReturn": 10,
+      "playerShotFired": 14,
+      "playerShotResolved": 13
+    },
+    "pace": {
+      "medianAlienShipSpeedPxPerSecond": 85.2,
+      "medianAlienShipYSpeedPxPerSecond": 63.6,
+      "medianEnemyMissileSpeedPxPerSecond": 128.4,
+      "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+      "medianPlayerMissileYSpeedPxPerSecond": 178,
+      "lowerFieldThreatShare": 0.806,
+      "lowerFieldMultiThreatShare": 0.812,
+      "averageConcurrentThreats": 3.34,
+      "maxConcurrentThreats": 8,
+      "maxEnemyShots": 3
+    },
+    "finalState": {
+      "score": 690,
+      "lives": 4,
+      "stage": 5,
+      "gameOver": false,
+      "gameOverReason": ""
+    }
+  },
+  "paceFocus": {
+    "alienShipMovement": {
+      "score10": 5.6,
+      "scoreParts": {
+        "durationFit10": 5.2,
+        "xSpanFit10": 9,
+        "ySpanFit10": 6.3,
+        "observedLowerFieldPressure10": 1,
+        "routeabilityBridge10": 6.6
+      },
+      "currentRead": "Runtime movement has strong x-span fit (9/10) but weaker dive-duration fit (5.2/10), so stage-five tuning should lengthen and clarify attack motion before simply adding density.",
+      "maintainedSignal": "Future Guardians promotion candidates must report alien ship dive duration, x/y span, lower-field threat share, and routeability together."
+    },
+    "missileMovement": {
+      "score10": 9.9,
+      "scoreParts": {
+        "enemyShotVelocityEscalation10": 9.6,
+        "enemyShotIntervalEscalation10": 9.9,
+        "observedEnemyMissileSpeedFit10": 9.8,
+        "observedPlayerMissileSpeedFit10": 10,
+        "singleShotCadenceAnchor10": 10
+      },
+      "currentRead": "Stage-five enemy missiles run at 128.6px/s with a 0.987s base interval; player missiles remain single-shot at about 178px/s.",
+      "maintainedSignal": "Future Guardians promotion candidates must report enemy missile velocity, enemy missile cadence, player missile velocity, and single-shot cooldown before changing pressure."
+    },
+    "lowerFieldReadability": {
+      "score10": 5,
+      "routeability": {
+        "score10": 6.6,
+        "collisionLossShare": 0.278,
+        "progressionShare": 0,
+        "survivalShare": 0.997,
+        "read": "midrun-stage-five-stress averages 6.6/10 routeability, 100% survival share, 0% progression share, and 28% collision-loss share."
+      },
+      "currentRead": "The lower field has enough pressure to read as Galaxian-family, but route conversion and collision clarity remain the stage-five bottleneck."
+    }
+  },
+  "promotionPolicy": "Do not promote Guardians stage-five movement candidates only because they increase pressure or look more active. A candidate must preserve or improve stage-five routeability while explicitly reporting alien ship pace and missile pace: dive duration/shape, x/y span, lower-field threat share, enemy missile velocity/cadence, player missile velocity, and single-shot cooldown.",
+  "nextSteps": [
+    "Build the next stage-five candidate as a measured before/after against this artifact, not as a subjective runtime tweak.",
+    "Prioritize longer, more readable alien dive shape before increasing enemy count or missile density.",
+    "Keep missile movement as a named conformance lane whenever shot velocity, shot cadence, or single-shot timing changes.",
+    "Refresh routeability-review, runtime-reference-movement, and this stage-five closeness artifact after each promoted candidate."
+  ],
+  "relatedLongSurfaceRead": "Guardians now has a real longer-surface review contract: stage-band pressure continues into later bands, stage presentation changes across the run, and personas can stress the game in differentiated ways. The main remaining weakness is still stage-five-and-beyond survivability and clean-clear consistency.",
+  "movementPacingStatus": "dev-preview-pacing-contract-not-public-release-tuning",
+  "runtimeReferenceMovementStatus": "runtime-vs-reference-track-comparison-not-public-release"
+}

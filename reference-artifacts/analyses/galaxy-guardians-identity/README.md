@@ -55,6 +55,10 @@ Current artifacts:
   `formation_rack_complete` events.
 - `frame-motion-conformance-0.1.json` - first CPU-only frame-proxy analysis
   over Galaxian rack, dive, flagship, and wrap reference windows.
+- `game-spec-language-0.1.json` - Guardians-specific game specification
+  language that ties stage bands, role families, movement primitives, scoring
+  and result rules, audio/visual hooks, and promotion gates into a single
+  adjustment contract before future runtime tuning.
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
@@ -100,6 +104,10 @@ Current artifacts:
   preserves the measured stage-one timing while making stages three, five,
   seven, nine, and eleven measurably faster and denser for dives, shots, drift,
   and wrap pressure.
+- `stage-five-galaxian-closeness-0.1.json` - stage-five planning gate that
+  keeps routeability, alien ship movement pace, enemy missile pace, player
+  missile pace, and single-shot cadence in one promotion signal before deeper
+  gameplay candidates are promoted.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.

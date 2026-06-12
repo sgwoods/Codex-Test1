@@ -198,6 +198,11 @@ The first-class Galaxy process should always be reviewable through this spine:
   - `npm run harness:check:galaxian-reference-profile`
 - aggregate process parity
   - `npm run harness:check:galaxy-guardians-first-class-conformance`
+- game specification language
+  - `npm run harness:check:galaxy-guardians-game-spec-language`
+  - future tuning should be expressible as a stage-band, role-family,
+    movement-primitive, scoring/result, audio/visual hook, and promotion-gate
+    delta before runtime constants change
 - current reference and playtest posture
   - `npm run harness:check:galaxy-guardians-reference-conformance`
   - `npm run harness:check:galaxy-guardians-playtest-conformance-review`

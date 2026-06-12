@@ -8,6 +8,7 @@ const REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-gua
 const PLAYTEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'playtest-conformance-review-0.1.json');
 const CANDIDATE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'candidate-0.1.json');
 const SCORE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'score-progression-0.1.json');
+const GAME_SPEC = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'game-spec-language-0.1.json');
 
 const REQUIRED_DOC_CHECKS = [
   {
@@ -16,6 +17,7 @@ const REQUIRED_DOC_CHECKS = [
       'first-class conformance',
       '7.7/10',
       '6.9/10',
+      'harness:check:galaxy-guardians-game-spec-language',
       'harness:check:galaxy-guardians-first-class-conformance',
       'GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md'
     ]
@@ -69,6 +71,7 @@ const REQUIRED_DOC_CHECKS = [
     required: [
       'first-class-conformance',
       'check-galaxy-guardians-first-class-conformance.js',
+      'game-spec-language-0.1.json',
       'long-surface-conformance-0.1.json'
     ]
   },
@@ -87,6 +90,7 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:check:galaxian-reference-profile'
   ],
   aggregate: [
+    'harness:check:galaxy-guardians-game-spec-language',
     'harness:check:galaxy-guardians-first-class-conformance',
     'harness:check:galaxy-guardians-reference-conformance',
     'harness:check:galaxy-guardians-playtest-conformance-review'
@@ -187,6 +191,7 @@ function main(){
   const playtest = readJson(PLAYTEST);
   const candidate = readJson(CANDIDATE);
   const score = readJson(SCORE);
+  const gameSpec = readJson(GAME_SPEC);
 
   const missingScripts = [];
   for(const [group, scriptNames] of Object.entries(REQUIRED_SCRIPT_GROUPS)){
@@ -224,12 +229,19 @@ function main(){
   const maturity = reference.summary?.referenceMaturityScore10 ?? 0;
   const compellingPreview = playtest.summary?.compellingPreviewTargetScore10 ?? 0;
 
-  if(reference.gameKey !== 'galaxy-guardians-preview' || playtest.gameKey !== reference.gameKey || candidate.gameKey !== reference.gameKey || score.gameKey !== reference.gameKey){
+  if(reference.gameKey !== 'galaxy-guardians-preview' || playtest.gameKey !== reference.gameKey || candidate.gameKey !== reference.gameKey || score.gameKey !== reference.gameKey || gameSpec.gameKey !== reference.gameKey){
     fail('Galaxy first-class conformance artifacts are not linked to the same game key.', {
       reference: reference.gameKey,
       playtest: playtest.gameKey,
       candidate: candidate.gameKey,
-      score: score.gameKey
+      score: score.gameKey,
+      gameSpec: gameSpec.gameKey
+    });
+  }
+  if(gameSpec.artifactType !== 'galaxy-guardians-game-spec-language' || gameSpec.status !== 'planning-contract-active-not-runtime-promotion'){
+    fail('Galaxy first-class conformance requires the active game-spec language contract.', {
+      artifactType: gameSpec.artifactType,
+      status: gameSpec.status
     });
   }
   if(referenceScore < 7.5){
@@ -316,6 +328,7 @@ function main(){
     'reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-motion-targets-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/platform-frame-parity-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json',
+    'reference-artifacts/analyses/galaxy-guardians-identity/game-spec-language-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json'
   ]){
     if(!exists(relPath)){
