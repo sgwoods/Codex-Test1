@@ -79,7 +79,8 @@ function main(){
     'movement-language',
     'scoring-progression-results',
     'audio-visual-hooks',
-    'promotion-gates'
+    'promotion-gates',
+    'platform-execution-contract'
   ]);
 
   const stageBand = (artifact.specLayers || []).find(layer => layer.id === 'stage-band-arc');
@@ -124,6 +125,24 @@ function main(){
     }
   }
 
+  const strategy = artifact.platformLanguageStrategy || {};
+  const strategyText = JSON.stringify(strategy).toLowerCase();
+  for(const phrase of ['platinum', 'execute', 'aurora-galactica', 'windigo-invaders-candidate', 'ingestion', 'video gameplay analysis']){
+    if(!strategyText.includes(phrase)){
+      fail('Guardians game spec language is missing a required platform-language strategy phrase.', { phrase, strategy });
+    }
+  }
+  if(!Array.isArray(strategy.expectedPlatformChanges) || strategy.expectedPlatformChanges.length < 5){
+    fail('Guardians game spec language must name expected Platinum platform changes.', { strategy });
+  }
+
+  const ingestionFields = new Set(artifact.ingestionCandidateTemplate?.requiredFields || []);
+  for(const field of ['sourceManifest', 'referenceWindow', 'detectedEvents', 'objectTracks', 'proposedSpecDelta', 'runtimePromotionGate']){
+    if(!ingestionFields.has(field)){
+      fail('Guardians ingestion candidate template is missing a required field.', { field });
+    }
+  }
+
   for(const scriptName of ['harness:check:galaxy-guardians-game-spec-language', 'harness:check:galaxy-guardians-first-class-conformance']){
     if(!scripts[scriptName]){
       fail('Guardians game spec language is missing an npm gate script.', { scriptName });
@@ -131,7 +150,7 @@ function main(){
   }
 
   const markdown = read(MARKDOWN);
-  for(const phrase of ['Adjustment Template', 'Promotion Rule', 'stage-five lower-field readability']){
+  for(const phrase of ['Adjustment Template', 'Promotion Rule', 'Platform Direction', 'Ingestion Direction', 'stage-five lower-field readability']){
     if(!markdown.includes(phrase)){
       fail('Guardians game spec language markdown is missing required explanatory text.', { phrase });
     }
@@ -144,7 +163,9 @@ function main(){
     specLayerCount: artifact.specLayers.length,
     stageBandCount: stageBand.bands.length,
     roleCount: roles.roles.length,
-    requiredTemplateFieldCount: artifact.futureAdjustmentTemplate.requiredFields.length
+    requiredTemplateFieldCount: artifact.futureAdjustmentTemplate.requiredFields.length,
+    ingestionTemplateFieldCount: artifact.ingestionCandidateTemplate.requiredFields.length,
+    expectedPlatformChangeCount: strategy.expectedPlatformChanges.length
   }, null, 2));
 }
 

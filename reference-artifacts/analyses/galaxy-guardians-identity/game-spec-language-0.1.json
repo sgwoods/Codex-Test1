@@ -4,7 +4,7 @@
   "version": "0.1-dev-preview",
   "createdOn": "2026-06-12",
   "status": "planning-contract-active-not-runtime-promotion",
-  "purpose": "Define a compact but expandable Galaxy Guardians game specification language so future gameplay adjustments are described as stage-band, role, movement, scoring, audio, visual, and promotion-rule changes instead of scattered tuning constants.",
+  "purpose": "Define a compact but expandable Galaxy Guardians game specification language so future gameplay adjustments are described as stage-band, role, movement, scoring, audio, visual, and promotion-rule changes instead of scattered tuning constants. This is also an early proving contract for a broader Platinum game-definition language that should eventually describe Aurora and future games.",
   "sourceEvidence": {
     "sharedMotionGrammar": "reference-artifacts/analyses/shared-motion-grammar/vocabulary-0.1.json",
     "scoreProgression": "reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json",
@@ -19,7 +19,40 @@
   "summary": {
     "currentRead": "Guardians now has enough score, movement, stage-band, and routeability evidence to benefit from a broader game-spec language before more constants are tuned.",
     "scope": "This contract describes the current 0.1 preview and future adjustment proposals. It is not a claim that all public lanes expose the deeper stage-band runtime yet.",
-    "primaryUse": "Future Guardians changes should be proposed as spec deltas with affected stage band, role family, movement primitive, scoring/result effect, audio/visual hooks, and promotion gates."
+    "primaryUse": "Future Guardians changes should be proposed as spec deltas with affected stage band, role family, movement primitive, scoring/result effect, audio/visual hooks, and promotion gates.",
+    "longTermUse": "Platinum should increasingly execute games from this kind of specification language rather than from hard-coded, game-specific control paths, while preserving each game's lineage and evidence."
+  },
+  "platformLanguageStrategy": {
+    "direction": "Guardians is the small proving ground for a specification-like game definition language that can expand over time from planning contract to platform execution contract.",
+    "platformGoal": "Platinum should eventually use the game specification language as the primary way to execute and validate games: pack identity, stage arcs, enemy roles, movement primitives, scoring, audio/visual hooks, result states, and promotion gates should be declarative enough for shared platform systems to run and inspect them.",
+    "crossGameScope": [
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "role": "smallest active proving game for spec-first runtime changes"
+      },
+      {
+        "gameKey": "aurora-galactica",
+        "role": "next migration target once Guardians proves the language can describe a real playable loop without losing lineage-specific behavior"
+      },
+      {
+        "gameKey": "windigo-invaders-candidate",
+        "role": "future third-game test that the language is not only Galaxian/Galaga shaped"
+      }
+    ],
+    "ingestionGoal": "The same language, or a highly related ingestion dialect, should be populated from video gameplay analysis: source manifests, frame windows, event logs, object tracks, audio windows, sprite crops, routeability reads, and correspondence scores should become candidate game-spec deltas.",
+    "expectedPlatformChanges": [
+      "load and validate game spec artifacts as first-class pack contracts",
+      "map declarative role and stage-band definitions into runtime state machines",
+      "route scoring, replay, pilot records, and high-score ownership through game spec identity",
+      "bind movement primitives to reusable runtime executors where evidence supports promotion",
+      "let ingestion outputs propose spec deltas before runtime constants change",
+      "keep per-game escape hatches only where the shared language cannot yet express a real lineage requirement"
+    ],
+    "nonGoals": [
+      "forcing every game into the same behavior",
+      "promoting generated ingestion candidates without human/evidence gates",
+      "removing game-specific code before the language can execute the behavior safely"
+    ]
   },
   "specLayers": [
     {
@@ -217,6 +250,18 @@
         "harness:check:galaxy-guardians-long-surface-conformance"
       ],
       "rule": "Spec deltas must name the affected layer and pass the smallest focused gate plus the aggregate first-class gate before being described as a quality improvement."
+    },
+    {
+      "id": "platform-execution-contract",
+      "owns": [
+        "spec loading and validation",
+        "declarative pack identity",
+        "stage-band to runtime mapping",
+        "role-family to runtime entity mapping",
+        "scoring/result ownership",
+        "ingestion-to-spec candidate flow"
+      ],
+      "rule": "Platform changes may be required as the language moves from planning artifact to executable game definition. Until then, the spec remains an evidence-backed contract for safe implementation."
     }
   ],
   "futureAdjustmentTemplate": {
@@ -246,9 +291,25 @@
       "first-class conformance aggregate pass"
     ]
   },
+  "ingestionCandidateTemplate": {
+    "requiredFields": [
+      "sourceManifest",
+      "referenceWindow",
+      "detectedEvents",
+      "objectTracks",
+      "spriteOrCueTargets",
+      "inferredSpecLayers",
+      "proposedSpecDelta",
+      "confidence",
+      "humanReviewNeed",
+      "runtimePromotionGate"
+    ],
+    "rule": "Video-derived ingestion should propose candidate spec deltas, not silently mutate runtime behavior."
+  },
   "nextSteps": [
     "Use this contract as the intake shape for the next lower-field readability and alien-ship pace candidate.",
     "Promote the next candidate as a spec delta before changing runtime constants.",
-    "If the pattern works for Guardians, extract a shared game-spec schema that can cover Aurora challenge stages and Windigo."
+    "If the pattern works for Guardians, extract a shared game-spec schema that can cover Aurora challenge stages and Windigo.",
+    "Plan the first Platinum platform change that treats a game-spec artifact as a loaded, validated pack contract rather than only documentation."
   ]
 }
