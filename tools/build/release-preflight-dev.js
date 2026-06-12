@@ -64,25 +64,41 @@ function assertClean(reason){
   }
 }
 
+function failIfGeneratedEvidenceChanged(refreshes){
+  const status = statusShort();
+  if(!status) return;
+  const labels = refreshes.length ? refreshes.join(', ') : 'release evidence';
+  fail('Dev release preflight refreshed generated evidence and stopped before build/publish.', {
+    refreshed: refreshes,
+    status,
+    nextAction: `Commit the generated evidence (${labels}), then rerun npm run release:preflight:dev. No hosted lane was published.`
+  });
+}
+
 function main(){
   const startedAt = new Date().toISOString();
   const head = git(['rev-parse', '--short', 'HEAD']);
   assertClean('Dev release preflight requires a clean source tree before it starts.');
+  const refreshes = [];
 
-  const codeReview = tryRun('npm', ['run', 'review:code:check']);
-  if(!codeReview.ok){
-    printBlocker('Code review packet is stale; refreshing it now.', codeReview);
-    run('npm', ['run', 'review:code']);
-    assertClean('Code review refresh produced new review evidence.');
-  }
-
+  // SHA-sensitive conformance/documentation artifacts must refresh before the
+  // code-review packet, otherwise committing those generated artifacts changes
+  // the review surface and creates a stale-packet ping-pong.
   const docs = tryRun(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')]);
   if(!docs.ok){
     printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs now.', docs);
     run('npm', ['run', 'harness:refresh:release-conformance-docs']);
-    assertClean('Release conformance refresh produced new artifacts.');
+    refreshes.push('release conformance/documentation artifacts');
   }
 
+  const codeReview = tryRun('npm', ['run', 'review:code:check']);
+  if(!codeReview.ok){
+    printBlocker('Code review packet is stale; refreshing it last.', codeReview);
+    run('npm', ['run', 'review:code']);
+    refreshes.push('code-review evidence');
+  }
+
+  failIfGeneratedEvidenceChanged(refreshes);
   run('npm', ['run', 'build']);
   assertClean('Build changed tracked files; commit or inspect the generated source artifacts before publishing.');
   run('npm', ['run', 'publish:check:dev']);
