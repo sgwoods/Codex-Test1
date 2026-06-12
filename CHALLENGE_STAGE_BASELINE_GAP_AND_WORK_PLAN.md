@@ -57,6 +57,51 @@ Interpretation:
 9. Feed spacing, lead-in continuity, and no-magic-appearance checks into strict challenge scoring instead of leaving them as separate guardrails.
 10. Update Application Guide and project docs after each meaningful pass so the human-visible story matches the current artifacts.
 
+## June 12 Follow-Up: Cadence And Perfect-Route Risk
+
+This is an important follow-up note from manual play review, not yet a measured
+artifact.
+
+Two concerns need explicit investigation before claiming mature challenge-stage
+or level-flow conformance:
+
+1. Between-level cadence may have regressed. The current Aurora release appears
+   to have significant new waits between the end of one level and the start of
+   the next. If those waits are intentional audio/conformance pacing, document
+   the expected timing and compare it to the Galaga reference flow. If they are
+   not intentional, treat them as a timing/performance regression and restore a
+   reference-consistent stage-to-stage cadence.
+2. Challenge stages must preserve real perfect-score opportunity. A skilled
+   persona, especially professional, should have probabilistic perfect-score
+   routes across many challenge windows. Every target group must be fully
+   visible on screen at some point, with enough scoreable window to make a
+   perfect result hard but possible. If later-stage alien progression is so fast
+   that targets are partly hidden, unreachable, or feel unlike the original,
+   slow/tune the progression or widen the scoreable window before promoting the
+   work.
+
+Reference target shape from `Success Trajectory - Challenging - Google
+Sheets.pdf`:
+
+| Persona | I | II | III | IV | V | VI | VII | VIII | IX | X |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Beginner | 75 | 60 | 45 | 30 | 15 | 0 | 0 | 0 | 0 | 0 |
+| Intermediate | 85 | 75 | 65 | 55 | 45 | 35 | 25 | 15 | 5 | -5 |
+| Expert | 95 | 88 | 81 | 74 | 67 | 60 | 53 | 46 | 39 | 32 |
+| Professional | 100 | 95 | 90 | 85 | 80 | 75 | 70 | 65 | 60 | 55 |
+
+Use this as a design trajectory, not a measured score. The next harness work
+should clamp any implemented success-rate target at `0%` or above; the `-5`
+source-table value is preserved only as a "falls below floor" trend marker. The
+next harness work should add:
+
+- a level-transition timing probe that compares end-of-level to next-level-start
+  waits against reference expectations
+- a challenge perfect-route opportunity probe by persona and challenge number
+- a full-target-visibility assertion for challenge groups
+- a late-challenge speed/readability guard so higher difficulty does not become
+  non-conformant acceleration
+
 ## Evidence Sources
 
 - `CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md`
