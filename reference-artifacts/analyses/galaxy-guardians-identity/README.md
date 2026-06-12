@@ -55,6 +55,10 @@ Current artifacts:
   `formation_rack_complete` events.
 - `frame-motion-conformance-0.1.json` - first CPU-only frame-proxy analysis
   over Galaxian rack, dive, flagship, and wrap reference windows.
+- `game-spec-language-0.1.json` - Guardians-specific game specification
+  language that ties stage bands, role families, movement primitives, scoring
+  and result rules, audio/visual hooks, and promotion gates into a single
+  adjustment contract before future runtime tuning.
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
