@@ -1,0 +1,131 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-spec-delta",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-06-12",
+  "status": "spec-delta-proposed-no-runtime-change",
+  "candidateId": "guardians-stage-five-lower-field-readability-v0",
+  "intent": "Improve stage-five lower-field readability and alien ship path clarity without weakening Galaxian-family pressure, missile pace, routeability, or single-shot discipline.",
+  "sourceEvidence": {
+    "gameSpecLanguage": "reference-artifacts/analyses/galaxy-guardians-identity/game-spec-language-0.1.json",
+    "stageFiveCloseness": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-galaxian-closeness-0.1.json",
+    "routeabilityReview": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+    "motionCandidateQueue": "reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json",
+    "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "stageRankPressure": "reference-artifacts/analyses/galaxy-guardians-identity/stage-rank-pressure-0.1.json"
+  },
+  "affectedSpecLayers": [
+    "stage-band-arc",
+    "role-family-model",
+    "movement-language",
+    "audio-visual-hooks",
+    "promotion-gates"
+  ],
+  "stageBand": {
+    "id": "early-escalation",
+    "stages": "3-5",
+    "focusStage": 5,
+    "playerFeeling": "Pressure rises without collapsing into unreadable collision stress."
+  },
+  "roleFamilies": [
+    "signal-scout",
+    "signal-escort",
+    "signal-flagship",
+    "player-interceptor"
+  ],
+  "movementPrimitives": [
+    "dive-attack",
+    "escort-linked-dive",
+    "bottom-wrap-return",
+    "scoring-routeability-window"
+  ],
+  "axesTouched": [
+    "temporal-cadence",
+    "path-topology",
+    "player-routeability",
+    "collision-safety",
+    "shot-window",
+    "visual-readability",
+    "audio-cue-hooks"
+  ],
+  "baseline": {
+    "stageFiveClosenessScore10": 6.8,
+    "stageFiveRouteabilityScore10": 6.6,
+    "alienShipPaceConformanceScore10": 5.6,
+    "missilePaceConformanceScore10": 9.9,
+    "lowerFieldReadabilityScore10": 5,
+    "collisionLossShare": 0.278,
+    "survivalShare": 0.997,
+    "progressionShare": 0,
+    "weakestFocus": "lower-field-readability"
+  },
+  "proposedSpecDelta": {
+    "summary": "Create a measured candidate that lengthens and clarifies alien ship lower-field paths, preserves bottom wrap/reentry readability, and slightly widens readable escape/shot lanes without reducing pressure into an easy pattern.",
+    "runtimeChangeAllowed": false,
+    "candidateHarnessFirst": true,
+    "preferredAdjustments": [
+      "slightly lengthen stage-five scout dive duration or visible lower-field path commitment",
+      "reduce ambiguous overlap between diving aliens and enemy missile lanes",
+      "preserve enemy missile speed and single-shot player cadence",
+      "keep flagship/escort pressure visible as special pressure rather than generic crowding",
+      "make wrap/reentry paths easier to predict before any density increase"
+    ],
+    "forbiddenShortcuts": [
+      "do not lower enemy missile pace to make the lane easier",
+      "do not remove flagship/escort pressure as the primary relief mechanism",
+      "do not promote a candidate from visual object-track improvement alone",
+      "do not change score/result rules for this candidate"
+    ]
+  },
+  "scoringOrResultImpact": {
+    "status": "unchanged",
+    "rule": "No score table, one-level completion, high-score, replay, or result-state behavior should change in this candidate."
+  },
+  "audioHookImpact": {
+    "status": "declare-before-promotion",
+    "candidateExpectation": "If dive timing, escort joins, or wrap/reentry timing changes materially, the candidate must declare whether scoutDive, flagshipDive, escortJoin, or wrapReturn cue timing remains aligned or needs a follow-up audio pass."
+  },
+  "visualHookImpact": {
+    "status": "required",
+    "candidateExpectation": "Candidate evidence must include a stage-five contact sheet or gameplay capture that makes lower-field alien paths, missile lanes, and wrap/reentry commitments reviewable by a human."
+  },
+  "routeabilityExpectation": {
+    "preserveStageFiveRouteabilityScore10AtLeast": 6.6,
+    "targetStageFiveRouteabilityScore10": 6.9,
+    "targetLowerFieldReadabilityScore10AtLeast": 5.6,
+    "preserveSurvivalShareAtLeast": 0.997,
+    "improveProgressionShareAbove": 0,
+    "read": "A strong player should still feel pressure but see a route through stage-five lower-field threats."
+  },
+  "collisionSafetyExpectation": {
+    "preserveCollisionLossShareAtOrBelow": 0.278,
+    "targetCollisionLossShareAtOrBelow": 0.22,
+    "read": "Collision losses should not remain the dominant explanation for failed stage-five pressure."
+  },
+  "paceExpectations": {
+    "preserveStageFiveClosenessScore10AtLeast": 6.8,
+    "preserveAlienShipPaceConformanceScore10AtLeast": 5.6,
+    "targetAlienShipPaceConformanceScore10AtLeast": 5.9,
+    "preserveMissilePaceConformanceScore10AtLeast": 9.7,
+    "preserveSingleShotCadence": true,
+    "read": "Alien ship movement should become clearer and closer without spending the already-strong missile pace signal."
+  },
+  "evidenceToGenerate": [
+    "focused before/after stage-five candidate artifact",
+    "stage-five routeability before/after comparison",
+    "stage-five closeness refresh",
+    "stage-five professional gameplay capture or contact sheet",
+    "runtime-reference movement read for changed path/timing behavior",
+    "first-class conformance aggregate check"
+  ],
+  "promotionGates": [
+    "harness:check:galaxy-guardians-stage-five-readability-spec-delta",
+    "harness:check:galaxy-guardians-stage-five-closeness",
+    "harness:check:galaxy-guardians-routeability-review",
+    "harness:check:galaxy-guardians-motion-grammar-candidates",
+    "harness:check:galaxy-guardians-game-spec-language",
+    "harness:check:galaxy-guardians-first-class-conformance"
+  ],
+  "rollbackSignal": "Revert or reject the runtime candidate if stage-five routeability drops below 6.6/10, collision-loss share rises above 0.278, missile pace falls below 9.7/10, single-shot cadence changes unintentionally, or browser/contact-sheet review shows lower-field threats are less readable despite metric lift.",
+  "nextStep": "Build the candidate harness that can compare baseline and proposed runtime constants without changing shipped Guardians behavior."
+}

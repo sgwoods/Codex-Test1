@@ -108,6 +108,10 @@ Current artifacts:
   keeps routeability, alien ship movement pace, enemy missile pace, player
   missile pace, and single-shot cadence in one promotion signal before deeper
   gameplay candidates are promoted.
+- `stage-five-lower-field-readability-spec-delta-0.1.json` - first formal
+  game-spec delta for the next stage-five lower-field readability candidate;
+  it preserves missile pace, single-shot cadence, and routeability floors while
+  requiring a measured candidate harness before any runtime change.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.
