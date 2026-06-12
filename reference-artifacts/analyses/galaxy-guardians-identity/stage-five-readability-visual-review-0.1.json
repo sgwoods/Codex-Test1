@@ -1,0 +1,2015 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-stage-five-readability-visual-review",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-06-12T20:28:53.919Z",
+  "status": "visual-review-qualified-pass-runtime-hold",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-stage-five-readability-visual-review.js",
+  "sourceEvidence": {
+    "candidateArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-candidate-0.1.json"
+  },
+  "bestCandidate": {
+    "id": "guardians-stage-five-commitment-window-v1",
+    "label": "Commitment window v1",
+    "intent": "Lengthen the readable lower-field commitment window without spending missile velocity or player single-shot cadence.",
+    "patch": {
+      "minRank": 3,
+      "maxRank": 3,
+      "scales": {
+        "scoutDiveIntervalBase": 1.04,
+        "diveBaseVy": 0.95,
+        "diveAccel": 0.92,
+        "diveSideDrift": 0.9,
+        "diveSwayAmplitude": 0.93
+      }
+    },
+    "routeability": {
+      "label": "stage-five-routeability-window",
+      "score10": 6.4,
+      "survivalShare": 0.873,
+      "collisionLossShare": 0.2,
+      "playerLosses": 3.33,
+      "waveClears": 0,
+      "divePressurePerMinute": 21.17,
+      "shotPressurePerMinute": 35.33,
+      "rows": [
+        {
+          "persona": "advanced",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 75.467,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 960,
+          "lives": 0,
+          "completed": false,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 38,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "player_shot_resolved": 35,
+            "rack_pulse": 42,
+            "alien_dive_start": 33,
+            "enemy_shot": 49,
+            "flagship_dive_start": 9,
+            "escort_join": 9,
+            "enemy_wrap_or_return": 38,
+            "player_lost": 5,
+            "wave_reset": 4,
+            "game_over": 1
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "progression": [],
+          "lossReasons": [
+            "alien_scout_collision",
+            "alien_scout_collision",
+            "enemy_shot",
+            "alien_scout_collision",
+            "enemy_shot"
+          ],
+          "score10": 4.9,
+          "components": {
+            "survivalShare": 0.629,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.4,
+            "shotResolutionShare": 0.921,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 16.5,
+            "shotPressurePerMinute": 24.5,
+            "collisionLossShare": 0.6
+          }
+        },
+        {
+          "persona": "expert",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 119.5,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 1150,
+          "lives": 3,
+          "completed": false,
+          "gameOver": false,
+          "gameOverReason": "",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 41,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 70,
+            "player_shot_resolved": 40,
+            "alien_dive_start": 44,
+            "enemy_shot": 82,
+            "flagship_dive_start": 18,
+            "escort_join": 18,
+            "enemy_wrap_or_return": 79,
+            "player_lost": 2,
+            "wave_reset": 2
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 2,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "enemy_shot"
+          ],
+          "score10": 7.3,
+          "components": {
+            "survivalShare": 0.996,
+            "progressionShare": 0,
+            "lossBudgetShare": 0.6,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.976,
+            "pressureSurvivability": 0.951,
+            "divePressurePerMinute": 22,
+            "shotPressurePerMinute": 41,
+            "collisionLossShare": 0
+          }
+        },
+        {
+          "persona": "professional",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 119.4,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 2110,
+          "lives": 2,
+          "completed": false,
+          "gameOver": false,
+          "gameOverReason": "",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 43,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 71,
+            "player_shot_resolved": 41,
+            "alien_dive_start": 50,
+            "enemy_shot": 81,
+            "flagship_dive_start": 13,
+            "escort_join": 13,
+            "enemy_wrap_or_return": 70,
+            "player_lost": 3,
+            "wave_reset": 3
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 3,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "enemy_shot",
+            "enemy_shot"
+          ],
+          "score10": 6.9,
+          "components": {
+            "survivalShare": 0.995,
+            "progressionShare": 0,
+            "lossBudgetShare": 0.4,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.953,
+            "pressureSurvivability": 0.899,
+            "divePressurePerMinute": 25,
+            "shotPressurePerMinute": 40.5,
+            "collisionLossShare": 0
+          }
+        }
+      ]
+    },
+    "readabilityWindow": {
+      "stage": 5,
+      "stageRank": 3,
+      "persona": "professional",
+      "seed": 12553,
+      "seconds": 36,
+      "simT": 36,
+      "rules": {
+        "scoutDiveIntervalBase": 1.374,
+        "flagshipDiveIntervalBase": 5.665,
+        "diveBaseVy": 33.387,
+        "diveAccel": 5.763,
+        "diveSideDrift": 16.043,
+        "diveSwayAmplitude": 35.889,
+        "enemyShotIntervalBase": 0.987,
+        "enemyShotVy": 128.563,
+        "enemyShotMaxLive": 4,
+        "singleShotCooldown": 0.72
+      },
+      "events": {
+        "alienDiveStart": 15,
+        "flagshipDiveStart": 5,
+        "escortJoin": 5,
+        "enemyShot": 23,
+        "enemyWrapOrReturn": 12,
+        "playerShotFired": 18,
+        "playerShotResolved": 17
+      },
+      "pace": {
+        "medianAlienShipSpeedPxPerSecond": 78.47,
+        "medianAlienShipYSpeedPxPerSecond": 54.6,
+        "medianEnemyMissileSpeedPxPerSecond": 128.4,
+        "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+        "medianPlayerMissileYSpeedPxPerSecond": 178,
+        "lowerFieldThreatShare": 0.704,
+        "lowerFieldMultiThreatShare": 0.752,
+        "laneOverlapShare": 0.3,
+        "playerCorridorBlockedShare": 0.167,
+        "medianNearestShotLaneGapPx": 31.11,
+        "averageConcurrentThreats": 2.98,
+        "maxConcurrentThreats": 7,
+        "maxEnemyShots": 3
+      },
+      "finalState": {
+        "score": 640,
+        "lives": 3,
+        "stage": 5,
+        "gameOver": false,
+        "gameOverReason": ""
+      }
+    },
+    "lowerFieldReadabilityScore10": 3.5,
+    "routeabilityLift10": 0.6,
+    "readabilityLift10": 0.2,
+    "collisionLossDelta": -0.067,
+    "laneOverlapDelta": -0.045,
+    "pressureRetention": 1.043,
+    "missilePacePreserved": true,
+    "promotionGate": {
+      "pass": true,
+      "runtimeChangeAllowed": false,
+      "requiredReadabilityLift10": 0.2,
+      "minPressureRetention": 0.88,
+      "requireMissilePacePreserved": true,
+      "read": "Candidate clears the measurement gate for browser/contact-sheet review, but it remains analysis-only."
+    }
+  },
+  "baselineCandidateMetrics": {
+    "routeability": {
+      "label": "stage-five-routeability-window",
+      "score10": 5.8,
+      "survivalShare": 0.84,
+      "collisionLossShare": 0.267,
+      "playerLosses": 5,
+      "waveClears": 0,
+      "divePressurePerMinute": 21.33,
+      "shotPressurePerMinute": 32.83,
+      "rows": [
+        {
+          "persona": "advanced",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 101.267,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 1680,
+          "lives": 0,
+          "completed": false,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 52,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "player_shot_resolved": 49,
+            "rack_pulse": 58,
+            "alien_dive_start": 42,
+            "enemy_shot": 67,
+            "flagship_dive_start": 15,
+            "escort_join": 15,
+            "enemy_wrap_or_return": 53,
+            "player_lost": 5,
+            "wave_reset": 4,
+            "game_over": 1
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "enemy_shot",
+            "enemy_shot",
+            "enemy_shot",
+            "enemy_shot"
+          ],
+          "score10": 6.2,
+          "components": {
+            "survivalShare": 0.844,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.942,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 21,
+            "shotPressurePerMinute": 33.5,
+            "collisionLossShare": 0
+          }
+        },
+        {
+          "persona": "expert",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 97.033,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 1330,
+          "lives": 0,
+          "completed": false,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 39,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 55,
+            "player_shot_resolved": 35,
+            "alien_dive_start": 40,
+            "enemy_shot": 62,
+            "flagship_dive_start": 13,
+            "escort_join": 13,
+            "enemy_wrap_or_return": 48,
+            "player_lost": 5,
+            "wave_reset": 4,
+            "game_over": 1
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "enemy_shot",
+            "alien_escort_collision",
+            "alien_scout_collision",
+            "enemy_shot"
+          ],
+          "score10": 5.5,
+          "components": {
+            "survivalShare": 0.809,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.6,
+            "shotResolutionShare": 0.897,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 20,
+            "shotPressurePerMinute": 31,
+            "collisionLossShare": 0.4
+          }
+        },
+        {
+          "persona": "professional",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 104.2,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 1390,
+          "lives": 0,
+          "completed": false,
+          "gameOver": true,
+          "gameOverReason": "alien_scout_collision",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 42,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 59,
+            "player_shot_resolved": 38,
+            "alien_dive_start": 46,
+            "enemy_shot": 68,
+            "flagship_dive_start": 14,
+            "escort_join": 11,
+            "player_lost": 5,
+            "wave_reset": 4,
+            "enemy_wrap_or_return": 51,
+            "game_over": 1
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "enemy_shot",
+            "enemy_shot",
+            "alien_scout_collision",
+            "alien_scout_collision"
+          ],
+          "score10": 5.6,
+          "components": {
+            "survivalShare": 0.868,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.6,
+            "shotResolutionShare": 0.905,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 23,
+            "shotPressurePerMinute": 34,
+            "collisionLossShare": 0.4
+          }
+        }
+      ]
+    },
+    "readabilityWindow": {
+      "stage": 5,
+      "stageRank": 3,
+      "persona": "professional",
+      "seed": 12553,
+      "seconds": 36,
+      "simT": 36,
+      "rules": {
+        "scoutDiveIntervalBase": 1.321,
+        "flagshipDiveIntervalBase": 5.665,
+        "diveBaseVy": 35.144,
+        "diveAccel": 6.264,
+        "diveSideDrift": 17.825,
+        "diveSwayAmplitude": 38.59,
+        "enemyShotIntervalBase": 0.987,
+        "enemyShotVy": 128.563,
+        "enemyShotMaxLive": 4,
+        "singleShotCooldown": 0.72
+      },
+      "events": {
+        "alienDiveStart": 16,
+        "flagshipDiveStart": 4,
+        "escortJoin": 4,
+        "enemyShot": 24,
+        "enemyWrapOrReturn": 16,
+        "playerShotFired": 19,
+        "playerShotResolved": 18
+      },
+      "pace": {
+        "medianAlienShipSpeedPxPerSecond": 85.82,
+        "medianAlienShipYSpeedPxPerSecond": 64.2,
+        "medianEnemyMissileSpeedPxPerSecond": 128.4,
+        "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+        "medianPlayerMissileYSpeedPxPerSecond": 178,
+        "lowerFieldThreatShare": 0.799,
+        "lowerFieldMultiThreatShare": 0.802,
+        "laneOverlapShare": 0.345,
+        "playerCorridorBlockedShare": 0.241,
+        "medianNearestShotLaneGapPx": 37.53,
+        "averageConcurrentThreats": 3.26,
+        "maxConcurrentThreats": 8,
+        "maxEnemyShots": 3
+      },
+      "finalState": {
+        "score": 880,
+        "lives": 4,
+        "stage": 5,
+        "gameOver": false,
+        "gameOverReason": ""
+      }
+    },
+    "lowerFieldReadabilityScore10": 3.3
+  },
+  "baselineVisual": {
+    "rules": {
+      "playfieldWidth": 280,
+      "playfieldHeight": 360,
+      "playerFireMode": "single-shot",
+      "singleShotCooldown": 0.72,
+      "firstScoutDiveDelay": 2.259,
+      "flagshipEscortDelay": 6.012,
+      "formationEntrySettleAt": 0.42,
+      "formationEntryCompleteAt": 0.76,
+      "formationEntryTravelY": 18,
+      "formationEntrySideSpread": 6,
+      "formationEntryRowLag": 0.035,
+      "playerSpeed": 108,
+      "formationDriftAmplitude": 46.612,
+      "formationDriftHz": 0.129,
+      "scoutDiveIntervalBase": 1.321,
+      "scoutDiveIntervalJitter": 0.64,
+      "flagshipDiveIntervalBase": 5.665,
+      "flagshipDiveIntervalJitter": 1.168,
+      "diveSwayAmplitude": 38.59,
+      "diveSwayHz": 2.25,
+      "diveSideDrift": 17.825,
+      "diveBaseVy": 35.144,
+      "diveAccel": 6.264,
+      "escortSpacing": 11,
+      "escortLag": 0.14,
+      "escortYOffset": 7,
+      "bottomExitPadding": 12,
+      "firstEnemyShotDelay": 2.522,
+      "enemyShotIntervalBase": 0.987,
+      "enemyShotIntervalJitter": 0.626,
+      "enemyShotVy": 128.563,
+      "enemyShotMaxLive": 4,
+      "enemyShotStartYOffset": 8,
+      "enemyShotPlayerHitbox": 7,
+      "alienCollisionHitbox": 10,
+      "enemyShotBottomPadding": 10,
+      "rackPulseIntervalBase": 1.637,
+      "topReentryVy": 78.82,
+      "topReentryAccel": 9.66,
+      "topReentrySwayAmplitude": 13.44,
+      "topReentrySwayHz": 2.35,
+      "playerRespawnDelay": 1.35,
+      "playerInvulnerability": 0.95,
+      "waveClearDelay": 1.2,
+      "maxPlayableStage": 1,
+      "wrapThreatModel": "bottom-exit-or-return-explicit-preview-rule",
+      "formation": {
+        "flagshipSlots": 2,
+        "escortSlots": 6,
+        "scoutSlots": 30,
+        "totalSlots": 38
+      }
+    },
+    "snapshots": [
+      {
+        "t": 6.02,
+        "score": 180,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 153.05,
+            "y": 48.87
+          },
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 164.05,
+            "y": 55.87
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 142.05,
+            "y": 55.87
+          },
+          {
+            "id": "gg-scout-2-5",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 194.25,
+            "y": 179.31
+          },
+          {
+            "id": "gg-scout-2-6",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 222.93,
+            "y": 109.48
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-2-5",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 194.25,
+            "y": 179.31
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-18",
+            "role": "scout",
+            "x": 243.6,
+            "y": 255.41
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 2
+      },
+      {
+        "t": 10,
+        "score": 400,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 238.51,
+            "y": 289.08
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 227.51,
+            "y": 311.52
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 37.85,
+            "y": 253.47
+          },
+          {
+            "id": "gg-scout-4-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 25.94,
+            "y": 204.18
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 238.51,
+            "y": 289.08
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 227.51,
+            "y": 311.52
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 37.85,
+            "y": 253.47
+          },
+          {
+            "id": "gg-scout-4-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 25.94,
+            "y": 204.18
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-34",
+            "role": "scout",
+            "x": 8,
+            "y": 286.12
+          }
+        ],
+        "laneOverlaps": 1,
+        "lowerFieldThreats": 5
+      },
+      {
+        "t": 14,
+        "score": 430,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 183.29,
+            "y": 159.57
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": -1,
+            "x": 172.29,
+            "y": 175.07
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": 1,
+            "x": 194.29,
+            "y": 174.51
+          },
+          {
+            "id": "gg-scout-3-0",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 34.65,
+            "y": 265.27
+          },
+          {
+            "id": "gg-scout-3-7",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 249.02,
+            "y": 158.53
+          },
+          {
+            "id": "gg-scout-4-1",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 82.61,
+            "y": 121.24
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 183.29,
+            "y": 159.57
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": -1,
+            "x": 172.29,
+            "y": 175.07
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": 1,
+            "x": 194.29,
+            "y": 174.51
+          },
+          {
+            "id": "gg-scout-3-0",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 34.65,
+            "y": 265.27
+          },
+          {
+            "id": "gg-scout-3-7",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 249.02,
+            "y": 158.53
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-45",
+            "role": "scout",
+            "x": 56.8,
+            "y": 303.37
+          },
+          {
+            "id": "gg-enemy-shot-51",
+            "role": "scout",
+            "x": 83.42,
+            "y": 355.9
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 7
+      },
+      {
+        "t": 18,
+        "score": 460,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 176.02,
+            "y": 58.31
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 165.02,
+            "y": 65.88
+          },
+          {
+            "id": "gg-escort-1-6",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 187.02,
+            "y": 65.32
+          },
+          {
+            "id": "gg-scout-3-7",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 219.38,
+            "y": 49.57
+          },
+          {
+            "id": "gg-scout-3-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 176.66,
+            "y": 180.95
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-3-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 176.66,
+            "y": 180.95
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-57",
+            "role": "scout",
+            "x": 20.58,
+            "y": 313.13
+          },
+          {
+            "id": "gg-enemy-shot-64",
+            "role": "flagship",
+            "x": 200.52,
+            "y": 132.99
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 3
+      },
+      {
+        "t": 22,
+        "score": 690,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 216.2,
+            "y": 313.31
+          },
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 272,
+            "y": 319.13
+          },
+          {
+            "id": "gg-scout-3-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 195.4,
+            "y": 235.9
+          },
+          {
+            "id": "gg-scout-3-8",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 205.36,
+            "y": 92.79
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 216.2,
+            "y": 313.31
+          },
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 272,
+            "y": 319.13
+          },
+          {
+            "id": "gg-scout-3-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 195.4,
+            "y": 235.9
+          }
+        ],
+        "enemyShots": [],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 3
+      },
+      {
+        "t": 26.02,
+        "score": 690,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 88.13,
+            "y": 114.29
+          },
+          {
+            "id": "gg-escort-1-2",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": 1,
+            "x": 99.13,
+            "y": 126.11
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": -1,
+            "x": 77.13,
+            "y": 126.67
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 14.4,
+            "y": 275.08
+          },
+          {
+            "id": "gg-scout-4-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 80.49,
+            "y": 221.99
+          },
+          {
+            "id": "gg-scout-4-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 225.46,
+            "y": 142.9
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 14.4,
+            "y": 275.08
+          },
+          {
+            "id": "gg-scout-4-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 80.49,
+            "y": 221.99
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-96",
+            "role": "scout",
+            "x": 108.77,
+            "y": 366.23
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 3
+      },
+      {
+        "t": 30.02,
+        "score": 720,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 77.38,
+            "y": 21.77
+          },
+          {
+            "id": "gg-escort-1-2",
+            "role": "escort",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 64.26,
+            "y": 44.81
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 76.15,
+            "y": 46.39
+          },
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 256.63,
+            "y": 111.51
+          },
+          {
+            "id": "gg-scout-4-8",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 256.89,
+            "y": -5.08
+          }
+        ],
+        "lowerFieldDives": [],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-104",
+            "role": "scout",
+            "x": 63.82,
+            "y": 202.36
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 1
+      },
+      {
+        "t": 34.02,
+        "score": 720,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 18.88,
+            "y": 247.62
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 7.88,
+            "y": 268.06
+          },
+          {
+            "id": "gg-escort-1-7",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 29.88,
+            "y": 267.5
+          },
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 263.88,
+            "y": -20.7
+          },
+          {
+            "id": "gg-scout-4-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 45.24,
+            "y": 272.81
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 18.88,
+            "y": 247.62
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 7.88,
+            "y": 268.06
+          },
+          {
+            "id": "gg-escort-1-7",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 29.88,
+            "y": 267.5
+          },
+          {
+            "id": "gg-scout-4-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 45.24,
+            "y": 272.81
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-120",
+            "role": "escort",
+            "x": 102.31,
+            "y": 322.53
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 5
+      }
+    ],
+    "eventCounts": {
+      "alienDiveStart": 15,
+      "flagshipDiveStart": 5,
+      "enemyShot": 25,
+      "enemyWrapOrReturn": 20
+    },
+    "summary": {
+      "snapshotCount": 8,
+      "averageLowerFieldThreats": 3.63,
+      "maxLowerFieldThreats": 7,
+      "overlapSnapshotShare": 0.125,
+      "totalLaneOverlaps": 1
+    }
+  },
+  "candidateVisual": {
+    "rules": {
+      "playfieldWidth": 280,
+      "playfieldHeight": 360,
+      "playerFireMode": "single-shot",
+      "singleShotCooldown": 0.72,
+      "firstScoutDiveDelay": 2.259,
+      "flagshipEscortDelay": 6.012,
+      "formationEntrySettleAt": 0.42,
+      "formationEntryCompleteAt": 0.76,
+      "formationEntryTravelY": 18,
+      "formationEntrySideSpread": 6,
+      "formationEntryRowLag": 0.035,
+      "playerSpeed": 108,
+      "formationDriftAmplitude": 46.612,
+      "formationDriftHz": 0.129,
+      "scoutDiveIntervalBase": 1.374,
+      "scoutDiveIntervalJitter": 0.64,
+      "flagshipDiveIntervalBase": 5.665,
+      "flagshipDiveIntervalJitter": 1.168,
+      "diveSwayAmplitude": 35.889,
+      "diveSwayHz": 2.25,
+      "diveSideDrift": 16.043,
+      "diveBaseVy": 33.387,
+      "diveAccel": 5.763,
+      "escortSpacing": 11,
+      "escortLag": 0.14,
+      "escortYOffset": 7,
+      "bottomExitPadding": 12,
+      "firstEnemyShotDelay": 2.522,
+      "enemyShotIntervalBase": 0.987,
+      "enemyShotIntervalJitter": 0.626,
+      "enemyShotVy": 128.563,
+      "enemyShotMaxLive": 4,
+      "enemyShotStartYOffset": 8,
+      "enemyShotPlayerHitbox": 7,
+      "alienCollisionHitbox": 10,
+      "enemyShotBottomPadding": 10,
+      "rackPulseIntervalBase": 1.637,
+      "topReentryVy": 78.82,
+      "topReentryAccel": 9.66,
+      "topReentrySwayAmplitude": 13.44,
+      "topReentrySwayHz": 2.35,
+      "playerRespawnDelay": 1.35,
+      "playerInvulnerability": 0.95,
+      "waveClearDelay": 1.2,
+      "maxPlayableStage": 1,
+      "wrapThreatModel": "bottom-exit-or-return-explicit-preview-rule",
+      "formation": {
+        "flagshipSlots": 2,
+        "escortSlots": 6,
+        "scoutSlots": 30,
+        "totalSlots": 38
+      }
+    },
+    "snapshots": [
+      {
+        "t": 6.02,
+        "score": 180,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 152.91,
+            "y": 48.84
+          },
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 163.91,
+            "y": 55.84
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 141.91,
+            "y": 55.84
+          },
+          {
+            "id": "gg-scout-2-5",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 194.65,
+            "y": 171.55
+          },
+          {
+            "id": "gg-scout-2-6",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 207.9,
+            "y": 104.73
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-2-5",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 194.65,
+            "y": 171.55
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-18",
+            "role": "scout",
+            "x": 240.96,
+            "y": 251.03
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 2
+      },
+      {
+        "t": 10,
+        "score": 300,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 230.26,
+            "y": 274.03
+          },
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 241.26,
+            "y": 295.91
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 219.26,
+            "y": 296.47
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 58.34,
+            "y": 233.62
+          },
+          {
+            "id": "gg-scout-4-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 73.8,
+            "y": 189.26
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 230.26,
+            "y": 274.03
+          },
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 241.26,
+            "y": 295.91
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 219.26,
+            "y": 296.47
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 58.34,
+            "y": 233.62
+          },
+          {
+            "id": "gg-scout-4-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 73.8,
+            "y": 189.26
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-34",
+            "role": "scout",
+            "x": 59.38,
+            "y": 276.23
+          }
+        ],
+        "laneOverlaps": 1,
+        "lowerFieldThreats": 6
+      },
+      {
+        "t": 14,
+        "score": 300,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-5",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 217.99,
+            "y": 82.35
+          },
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 228.99,
+            "y": 91.83
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 206.99,
+            "y": 92.39
+          },
+          {
+            "id": "gg-scout-2-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 59.51,
+            "y": 121.52
+          },
+          {
+            "id": "gg-scout-3-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 90.81,
+            "y": 238.75
+          },
+          {
+            "id": "gg-scout-4-4",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 115.92,
+            "y": 78.89
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-3-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 90.81,
+            "y": 238.75
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-44",
+            "role": "escort",
+            "x": 187.57,
+            "y": 354.14
+          },
+          {
+            "id": "gg-enemy-shot-48",
+            "role": "scout",
+            "x": 98.95,
+            "y": 331.76
+          },
+          {
+            "id": "gg-enemy-shot-52",
+            "role": "escort",
+            "x": 229.3,
+            "y": 101.18
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 4
+      },
+      {
+        "t": 18,
+        "score": 1100,
+        "activeDives": [
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 199.82,
+            "y": 344.92
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 213.24,
+            "y": 357.19
+          },
+          {
+            "id": "gg-scout-2-1",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 58.45,
+            "y": -16.67
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-escort-1-4",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": 1,
+            "x": 199.82,
+            "y": 344.92
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-5",
+            "escortSlot": -1,
+            "x": 213.24,
+            "y": 357.19
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-59",
+            "role": "scout",
+            "x": 68.58,
+            "y": 216.91
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 3
+      },
+      {
+        "t": 22,
+        "score": 1220,
+        "activeDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 206.04,
+            "y": 182.3
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": -1,
+            "x": 195.04,
+            "y": 199.67
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": 1,
+            "x": 217.04,
+            "y": 199.11
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 175.62,
+            "y": 183.13
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-flagship-0-4",
+            "role": "flagship",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 206.04,
+            "y": 182.3
+          },
+          {
+            "id": "gg-escort-1-3",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": -1,
+            "x": 195.04,
+            "y": 199.67
+          },
+          {
+            "id": "gg-escort-1-5",
+            "role": "escort",
+            "mode": "diving",
+            "linkedTo": "gg-flagship-0-4",
+            "escortSlot": 1,
+            "x": 217.04,
+            "y": 199.11
+          },
+          {
+            "id": "gg-scout-2-4",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 175.62,
+            "y": 183.13
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-74",
+            "role": "escort",
+            "x": 203.74,
+            "y": 344.58
+          },
+          {
+            "id": "gg-enemy-shot-78",
+            "role": "flagship",
+            "x": 165.84,
+            "y": 229.4
+          }
+        ],
+        "laneOverlaps": 1,
+        "lowerFieldThreats": 6
+      },
+      {
+        "t": 26.02,
+        "score": 1380,
+        "activeDives": [
+          {
+            "id": "gg-scout-3-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 55.42,
+            "y": 156.93
+          },
+          {
+            "id": "gg-scout-3-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 174.56,
+            "y": 236.38
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-3-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 55.42,
+            "y": 156.93
+          },
+          {
+            "id": "gg-scout-3-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 174.56,
+            "y": 236.38
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-88",
+            "role": "escort",
+            "x": 193.42,
+            "y": 219.25
+          },
+          {
+            "id": "gg-enemy-shot-91",
+            "role": "scout",
+            "x": 60.21,
+            "y": 229.75
+          }
+        ],
+        "laneOverlaps": 1,
+        "lowerFieldThreats": 4
+      },
+      {
+        "t": 30.02,
+        "score": 1410,
+        "activeDives": [
+          {
+            "id": "gg-scout-2-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 47.37,
+            "y": 291.7
+          },
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 250.62,
+            "y": 108.51
+          },
+          {
+            "id": "gg-scout-3-3",
+            "role": "scout",
+            "mode": "wrapping",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 67.77,
+            "y": 33.91
+          },
+          {
+            "id": "gg-scout-4-2",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 137.69,
+            "y": 218.85
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-2-3",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 47.37,
+            "y": 291.7
+          },
+          {
+            "id": "gg-scout-4-2",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 137.69,
+            "y": 218.85
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-98",
+            "role": "scout",
+            "x": 202.93,
+            "y": 257.58
+          },
+          {
+            "id": "gg-enemy-shot-102",
+            "role": "scout",
+            "x": 201.95,
+            "y": 208.08
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 4
+      },
+      {
+        "t": 34.02,
+        "score": 1410,
+        "activeDives": [
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 262.65,
+            "y": 355.79
+          },
+          {
+            "id": "gg-scout-3-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 38.17,
+            "y": 169.2
+          },
+          {
+            "id": "gg-scout-4-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 212.19,
+            "y": 283.22
+          }
+        ],
+        "lowerFieldDives": [
+          {
+            "id": "gg-scout-2-9",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 262.65,
+            "y": 355.79
+          },
+          {
+            "id": "gg-scout-3-1",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 38.17,
+            "y": 169.2
+          },
+          {
+            "id": "gg-scout-4-8",
+            "role": "scout",
+            "mode": "diving",
+            "linkedTo": "",
+            "escortSlot": 0,
+            "x": 212.19,
+            "y": 283.22
+          }
+        ],
+        "enemyShots": [
+          {
+            "id": "gg-enemy-shot-109",
+            "role": "scout",
+            "x": 94.67,
+            "y": 324.66
+          },
+          {
+            "id": "gg-enemy-shot-113",
+            "role": "scout",
+            "x": 94.05,
+            "y": 155.2
+          }
+        ],
+        "laneOverlaps": 0,
+        "lowerFieldThreats": 5
+      }
+    ],
+    "eventCounts": {
+      "alienDiveStart": 16,
+      "flagshipDiveStart": 3,
+      "enemyShot": 24,
+      "enemyWrapOrReturn": 15
+    },
+    "summary": {
+      "snapshotCount": 8,
+      "averageLowerFieldThreats": 4.25,
+      "maxLowerFieldThreats": 6,
+      "overlapSnapshotShare": 0.375,
+      "totalLaneOverlaps": 3
+    }
+  },
+  "candidateStageFiveClosenessEstimate": {
+    "mode": "candidate-profile-analysis-not-runtime-refresh",
+    "baselineStageFiveClosenessScore10": 6.8,
+    "estimatedStageFiveClosenessScore10": 7,
+    "routeabilityLift10": 0.6,
+    "readabilityLift10": 0.2,
+    "read": "Candidate analysis estimates stage-five closeness would move from 6.8/10 to about 7/10 before runtime refresh."
+  },
+  "alienShipPaceComparison": {
+    "baselineMedianAlienShipSpeedPxPerSecond": 85.82,
+    "candidateMedianAlienShipSpeedPxPerSecond": 78.47,
+    "baselineMedianAlienShipYSpeedPxPerSecond": 64.2,
+    "candidateMedianAlienShipYSpeedPxPerSecond": 54.6,
+    "baselineLowerFieldThreatShare": 0.799,
+    "candidateLowerFieldThreatShare": 0.704,
+    "baselineLaneOverlapShare": 0.345,
+    "candidateLaneOverlapShare": 0.3,
+    "read": "Candidate analysis slows/lengthens alien path commitment while preserving enemy missile velocity, enemy missile cadence, and player single-shot cadence."
+  },
+  "missilePaceLock": {
+    "enemyShotVy": 128.563,
+    "enemyShotIntervalBase": 0.987,
+    "singleShotCooldown": 0.72,
+    "preserved": true
+  },
+  "visualVerdict": {
+    "pass": false,
+    "hardPromotionHold": true,
+    "missileLocked": true,
+    "laneOverlapImproves": true,
+    "collisionImproves": true,
+    "routeabilityImproves": true,
+    "contactSheetImproves": false,
+    "read": "Commitment window v1 improves routeability and aggregate lane/collision metrics, but the contact-sheet sample is still mixed and strict lower-field readability is only 3.5/10, so this pass should not promote runtime constants yet."
+  },
+  "promotionDecision": {
+    "runtimePromotion": "hold",
+    "promoteNow": false,
+    "read": "Hold runtime promotion. Keep the candidate as a measured improvement and use the next pass to raise absolute lower-field clarity before changing shipped behavior."
+  },
+  "nextSteps": [
+    "Do not promote the current candidate constants into runtime yet.",
+    "Use commitment-window-v1 as the baseline for the next candidate family.",
+    "Try path-topology and lane-separation variants that lower lane overlap without collapsing routeability.",
+    "Refresh visual review after a candidate reaches at least 4.0/10 on the strict lower-field readability scale."
+  ],
+  "media": {
+    "contactSheet": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-visual-review-0.1.svg"
+  }
+}

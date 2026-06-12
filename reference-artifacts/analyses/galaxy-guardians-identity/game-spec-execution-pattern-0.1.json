@@ -1,0 +1,77 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "game-spec-execution-pattern",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-06-12",
+  "status": "planning-contract-platform-extraction",
+  "purpose": "Capture the reusable pattern proven by the Guardians stage-five readability work so Platinum can move from hard-coded tuning toward spec-driven execution and ingestion-derived candidate deltas.",
+  "sourceEvidence": {
+    "gameSpecLanguage": "reference-artifacts/analyses/galaxy-guardians-identity/game-spec-language-0.1.json",
+    "readabilitySpecDelta": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-lower-field-readability-spec-delta-0.1.json",
+    "readabilityCandidate": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-candidate-0.1.json",
+    "visualReview": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-visual-review-0.1.json"
+  },
+  "reusablePattern": [
+    "declare a game-spec layer and affected runtime axes before tuning",
+    "generate harness-only candidate profiles from the spec delta",
+    "measure baseline versus candidates without changing shipped runtime behavior",
+    "require visual/contact-sheet evidence before runtime promotion",
+    "promote only bounded runtime deltas with rollback signals and refreshed conformance gates"
+  ],
+  "candidateProfileContract": {
+    "requiredFields": [
+      "candidateId",
+      "affectedSpecLayers",
+      "stageBand",
+      "roleFamilies",
+      "movementPrimitives",
+      "axesTouched",
+      "runtimeScope",
+      "patch",
+      "measurementScenario",
+      "promotionGate",
+      "rollbackSignal"
+    ],
+    "runtimeScopeFields": [
+      "gameKey",
+      "stage",
+      "rank",
+      "minRank",
+      "maxRank",
+      "releaseChannels"
+    ],
+    "promotionGateFields": [
+      "routeabilityNonRegression",
+      "collisionLossNonRegression",
+      "visualReadabilityReview",
+      "alienShipPaceReport",
+      "missilePaceLock",
+      "singleShotCadenceLock",
+      "firstClassConformance"
+    ]
+  },
+  "platformExtractionPlan": [
+    "Introduce a shared validator for game-spec and candidate-profile artifacts.",
+    "Allow harnesses to load candidate profiles by id instead of duplicating patch literals in each analyzer.",
+    "Make runtime pack contracts expose declarative stage-band/rank rule maps behind the current hard-coded functions.",
+    "Keep shipped runtime behavior unchanged unless a promoted candidate profile is explicitly selected by the pack.",
+    "Add Aurora as the second consumer after Guardians proves one full spec-delta-to-promotion cycle.",
+    "Feed video-ingestion outputs into proposed candidate profiles rather than directly mutating runtime constants."
+  ],
+  "auroraReadiness": {
+    "expectedSharedLayers": [
+      "stage-band-arc",
+      "role-family-model",
+      "movement-language",
+      "scoring-result-rules",
+      "audio-visual-hooks",
+      "promotion-gates"
+    ],
+    "guardrails": [
+      "Aurora-specific capture/challenge mechanics must remain declared as Aurora layers, not backfilled into Guardians.",
+      "Reference-video ingestion should produce candidate deltas with confidence and human-review needs.",
+      "Platform execution must preserve game identity, score ownership, replay metadata, and release-channel boundaries."
+    ]
+  },
+  "nextStep": "Build a shared candidate-profile loader and validator, then convert the Guardians readability candidate analyzer to consume the profile contract instead of local candidate literals."
+}

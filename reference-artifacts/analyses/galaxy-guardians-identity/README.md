@@ -59,6 +59,10 @@ Current artifacts:
   language that ties stage bands, role families, movement primitives, scoring
   and result rules, audio/visual hooks, and promotion gates into a single
   adjustment contract before future runtime tuning.
+- `game-spec-execution-pattern-0.1.json` - reusable platform/spec extraction
+  pattern learned from the Guardians readability pass, including the candidate
+  profile contract, Aurora-readiness guardrails, and first Platinum execution
+  changes needed to make game specs loadable pack contracts.
 - `identity-baseline-0.1.json` - first application-owned sprite, palette, audio,
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
@@ -116,6 +120,10 @@ Current artifacts:
   candidate study for the lower-field readability spec delta, including
   rank-three-only rule profiles, routeability reads, lane-overlap reads,
   missile-pace preservation, and an SVG summary chart.
+- `stage-five-readability-visual-review-0.1.json` - contact-sheet-backed
+  baseline-versus-candidate visual review that decides whether the measured
+  readability candidate is ready for a bounded runtime branch or should remain
+  held for a stronger follow-up profile.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.
