@@ -69,18 +69,24 @@ function main(){
   const head = git(['rev-parse', '--short', 'HEAD']);
   assertClean('Dev release preflight requires a clean source tree before it starts.');
 
-  const codeReview = tryRun('npm', ['run', 'review:code:check']);
-  if(!codeReview.ok){
-    printBlocker('Code review packet is stale; refreshing it now.', codeReview);
-    run('npm', ['run', 'review:code']);
-    assertClean('Code review refresh produced new review evidence.');
-  }
-
+  const refreshed = [];
   const docs = tryRun(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')]);
   if(!docs.ok){
     printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs now.', docs);
     run('npm', ['run', 'harness:refresh:release-conformance-docs']);
-    assertClean('Release conformance refresh produced new artifacts.');
+    refreshed.push('release conformance/documentation');
+  }
+
+  const codeReview = tryRun('npm', ['run', 'review:code:check']);
+  if(!codeReview.ok){
+    printBlocker('Code review packet is stale; refreshing it now.', codeReview);
+    run('npm', ['run', 'review:code']);
+    refreshed.push('code review');
+  }
+
+  if(refreshed.length){
+    const label = refreshed.join(' and ');
+    assertClean(`${label} refresh produced generated artifacts.`);
   }
 
   run('npm', ['run', 'build']);
