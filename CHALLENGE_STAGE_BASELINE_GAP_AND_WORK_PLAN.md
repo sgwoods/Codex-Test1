@@ -102,6 +102,18 @@ next harness work should add:
 - a late-challenge speed/readability guard so higher difficulty does not become
   non-conformant acceleration
 
+Measured follow-up now exists at
+`reference-artifacts/analyses/aurora-cadence-perfect-route-risk/latest.json`.
+Initial read: ordinary stage handoffs measure at `3.2s`, challenge entry at
+`3.35s`, and challenge-result clear-to-next-stage spawn at `15.15s` (`7.77s`
+result hold plus `7.35s` transition window). This supports treating the
+between-level complaint as challenge-result cadence debt until it is compared
+against archived reference footage. The same packet flags full-target
+visibility gaps in seven of eight sampled challenge stages, no professional
+perfects across the sampled challenge set, and challenge-contact events for
+some lower-persona rows. Do not tune from this packet alone; use it to choose
+the next reference-video/contact-sheet comparison.
+
 ## Evidence Sources
 
 - `CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md`
@@ -112,6 +124,7 @@ next harness work should add:
 - `reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json`
 - `reference-artifacts/analyses/challenge-movement-grammar/latest.json`
 - `reference-artifacts/analyses/challenge-motion-primitives/latest.json`
+- `reference-artifacts/analyses/aurora-cadence-perfect-route-risk/latest.json`
 - `reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json`
 - `tools/harness/check-challenge-motion-profile.js`
 
