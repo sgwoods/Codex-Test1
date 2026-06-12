@@ -112,6 +112,10 @@ Current artifacts:
   game-spec delta for the next stage-five lower-field readability candidate;
   it preserves missile pace, single-shot cadence, and routeability floors while
   requiring a measured candidate harness before any runtime change.
+- `stage-five-readability-candidate-0.1.json` - harness-only before/after
+  candidate study for the lower-field readability spec delta, including
+  rank-three-only rule profiles, routeability reads, lane-overlap reads,
+  missile-pace preservation, and an SVG summary chart.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.

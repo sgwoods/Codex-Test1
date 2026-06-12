@@ -67,7 +67,8 @@ function installGuardiansRuntimeRulePatch(ctx, patch = {}){
    const rules = Object.assign({}, this.__guardiansBaseRuntimeRules(stateOrStage));
    const patch = this.__guardiansRuntimeRulePatch || {};
    const rank = guardiansStageRank(stateOrStage);
-   const applies = !patch.minRank || rank >= patch.minRank;
+   const applies = (!patch.minRank || rank >= patch.minRank)
+    && (!patch.maxRank || rank <= patch.maxRank);
    if(!applies) return rules;
    const scales = patch.scales || {};
    for(const key of Object.keys(scales)){

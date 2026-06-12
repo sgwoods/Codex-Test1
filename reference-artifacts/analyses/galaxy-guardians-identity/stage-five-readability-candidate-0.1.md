@@ -1,0 +1,40 @@
+# Galaxy Guardians Stage-Five Readability Candidate
+
+Generated: 2026-06-12T20:22:57.521Z
+Status: analysis-only-no-runtime-change
+
+## Summary
+
+Measured 4 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Commitment window v1 is best so far: 0.2/10 readability lift, 0.6/10 routeability lift, missile pace preserved: yes.
+
+This artifact is candidate-harness evidence only. It does not change shipped
+Guardians runtime constants.
+
+| Candidate | Readability | Lift | Routeability | Collision Losses | Lane Overlap | Pressure Retention | Gate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Lower-field path clarity v0 | 3.1/10 | -0.2/10 | 6/10 | 41% | 33% | 112% | blocked |
+| Lane separation v1 | 2.4/10 | -0.9/10 | 5.5/10 | 72% | 26% | 116% | blocked |
+| Commitment window v1 | 3.5/10 | 0.2/10 | 6.4/10 | 20% | 30% | 104% | measurement pass |
+| Commitment window v2 | 3.1/10 | -0.2/10 | 6.5/10 | 45% | 25% | 121% | blocked |
+
+## Baseline
+
+| Signal | Current |
+| --- | ---: |
+| Lower-field readability | 3.3/10 |
+| Routeability | 5.8/10 |
+| Collision-loss share | 27% |
+| Lane-overlap share | 35% |
+| Enemy missile speed | 128.563px/s |
+| Single-shot cooldown | 0.72s |
+
+## Best Candidate
+
+guardians-stage-five-commitment-window-v1 is the current best measured
+candidate. Commitment window v1 changes lower-field readability by 0.2/10, routeability by 0.6/10, collision-loss share by -7 points, and retains 104% of measured pressure.
+
+## Next Step
+
+- Use the best passing candidate, if any, to generate a browser/contact-sheet before-after review.
+- Do not promote runtime constants until the candidate also passes stage-five closeness, routeability review, and first-class conformance after refreshed artifacts.
+- If visual review says the lower field is still confusing, bias the next candidate toward path shape and lane separation before changing missile pace.
