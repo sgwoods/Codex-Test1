@@ -116,6 +116,10 @@ Current artifacts:
   game-spec delta for the next stage-five lower-field readability candidate;
   it preserves missile pace, single-shot cadence, and routeability floors while
   requiring a measured candidate harness before any runtime change.
+- `stage-five-readability-candidate-profiles-0.1.json` - loadable
+  candidate-profile contract for the stage-five readability spec delta,
+  including the original commitment-window profiles and the expanded
+  path-topology/lane-separation family.
 - `stage-five-readability-candidate-0.1.json` - harness-only before/after
   candidate study for the lower-field readability spec delta, including
   rank-three-only rule profiles, routeability reads, lane-overlap reads,

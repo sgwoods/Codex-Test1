@@ -10,6 +10,10 @@ Platinum: declare the game-spec delta, generate harness-only candidate
 profiles, measure them without changing runtime behavior, require visual
 evidence, and only then consider bounded promotion.
 
+The first profile-set extraction is now represented by
+`stage-five-readability-candidate-profiles-0.1.json`, which lets the analyzer
+load candidate profiles instead of embedding tuning literals in the harness.
+
 ## Reusable Pattern
 
 - declare affected game-spec layers and runtime axes before tuning

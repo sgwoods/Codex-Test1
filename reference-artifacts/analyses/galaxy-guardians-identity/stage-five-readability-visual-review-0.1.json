@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "galaxy-guardians-stage-five-readability-visual-review",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-06-12T20:28:53.919Z",
+  "createdOn": "2026-06-12T21:29:17.302Z",
   "status": "visual-review-qualified-pass-runtime-hold",
   "generatedBy": "tools/harness/analyze-galaxy-guardians-stage-five-readability-visual-review.js",
   "sourceEvidence": {
@@ -11,7 +11,24 @@
   "bestCandidate": {
     "id": "guardians-stage-five-commitment-window-v1",
     "label": "Commitment window v1",
+    "family": "commitment-window",
     "intent": "Lengthen the readable lower-field commitment window without spending missile velocity or player single-shot cadence.",
+    "affectedSpecLayers": [
+      "stage-band-arc",
+      "movement-language",
+      "promotion-gates"
+    ],
+    "movementPrimitives": [
+      "dive-attack",
+      "bottom-wrap-return",
+      "scoring-routeability-window"
+    ],
+    "axesTouched": [
+      "temporal-cadence",
+      "path-topology",
+      "visual-readability",
+      "player-routeability"
+    ],
     "patch": {
       "minRank": 3,
       "maxRank": 3,
@@ -2006,7 +2023,7 @@
   "nextSteps": [
     "Do not promote the current candidate constants into runtime yet.",
     "Use commitment-window-v1 as the baseline for the next candidate family.",
-    "Try path-topology and lane-separation variants that lower lane overlap without collapsing routeability.",
+    "Because static path-topology variants did not beat commitment-window-v1, test threat source selection, firing eligibility, or player-corridor rules next.",
     "Refresh visual review after a candidate reaches at least 4.0/10 on the strict lower-field readability scale."
   ],
   "media": {

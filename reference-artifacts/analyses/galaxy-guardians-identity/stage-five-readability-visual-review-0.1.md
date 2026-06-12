@@ -1,6 +1,6 @@
 # Galaxy Guardians Stage-Five Readability Visual Review
 
-Generated: 2026-06-12T20:28:53.919Z
+Generated: 2026-06-12T21:29:17.302Z
 Status: visual-review-qualified-pass-runtime-hold
 
 ## Verdict
@@ -33,5 +33,5 @@ Hold runtime promotion. Keep the candidate as a measured improvement and use the
 
 - Do not promote the current candidate constants into runtime yet.
 - Use commitment-window-v1 as the baseline for the next candidate family.
-- Try path-topology and lane-separation variants that lower lane overlap without collapsing routeability.
+- Because static path-topology variants did not beat commitment-window-v1, test threat source selection, firing eligibility, or player-corridor rules next.
 - Refresh visual review after a candidate reaches at least 4.0/10 on the strict lower-field readability scale.

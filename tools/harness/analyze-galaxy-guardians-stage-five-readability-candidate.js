@@ -7,10 +7,14 @@ const {
   simulatePersona,
   installGuardiansRuntimeRulePatch
 } = require('./guardians-long-surface-lib');
+const {
+  loadGuardiansCandidateProfileSet
+} = require('./guardians-candidate-profile-lib');
 
 const IDENTITY_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity');
 const SPEC_DELTA = path.join(IDENTITY_ROOT, 'stage-five-lower-field-readability-spec-delta-0.1.json');
 const STAGE_FIVE = path.join(IDENTITY_ROOT, 'stage-five-galaxian-closeness-0.1.json');
+const PROFILE_SET = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-profiles-0.1.json');
 const OUT = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.json');
 const OUT_MD = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.md');
 const OUT_SVG = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.svg');
@@ -21,74 +25,6 @@ const SEEDS = {
   expert: 12144,
   professional: 12187
 };
-
-const CANDIDATES = [
-  {
-    id: 'guardians-stage-five-lower-field-readability-v0',
-    label: 'Lower-field path clarity v0',
-    intent: 'Clarify stage-five lower-field alien paths by slightly lengthening visible dive commitment and reducing lateral ambiguity while preserving missile pace.',
-    patch: {
-      minRank: 3,
-      maxRank: 3,
-      scales: {
-        scoutDiveIntervalBase: 1.03,
-        flagshipDiveIntervalBase: 1.02,
-        diveBaseVy: 0.97,
-        diveAccel: 0.94,
-        diveSideDrift: 0.86,
-        diveSwayAmplitude: 0.9,
-        topReentrySwayAmplitude: 0.9
-      }
-    }
-  },
-  {
-    id: 'guardians-stage-five-lane-separation-v1',
-    label: 'Lane separation v1',
-    intent: 'Reduce confusing lower-field horizontal overlap while leaving dive and shot cadence nearly unchanged.',
-    patch: {
-      minRank: 3,
-      maxRank: 3,
-      scales: {
-        diveSideDrift: 0.82,
-        diveSwayAmplitude: 0.86,
-        topReentrySwayAmplitude: 0.88
-      }
-    }
-  },
-  {
-    id: 'guardians-stage-five-commitment-window-v1',
-    label: 'Commitment window v1',
-    intent: 'Lengthen the readable lower-field commitment window without spending missile velocity or player single-shot cadence.',
-    patch: {
-      minRank: 3,
-      maxRank: 3,
-      scales: {
-        scoutDiveIntervalBase: 1.04,
-        diveBaseVy: 0.95,
-        diveAccel: 0.92,
-        diveSideDrift: 0.9,
-        diveSwayAmplitude: 0.93
-      }
-    }
-  },
-  {
-    id: 'guardians-stage-five-commitment-window-v2',
-    label: 'Commitment window v2',
-    intent: 'Test a stronger alien-path readability window while preserving enemy missile velocity, enemy missile cadence, and player single-shot cadence exactly.',
-    patch: {
-      minRank: 3,
-      maxRank: 3,
-      scales: {
-        scoutDiveIntervalBase: 1.06,
-        flagshipDiveIntervalBase: 1.02,
-        diveBaseVy: 0.93,
-        diveAccel: 0.88,
-        diveSideDrift: 0.94,
-        diveSwayAmplitude: 0.96
-      }
-    }
-  }
-];
 
 function readJson(file, fallback = {}){
   try {
@@ -394,7 +330,11 @@ function evaluateCandidate(candidate, baseline){
   return {
     id: candidate.id,
     label: candidate.label,
+    family: candidate.family,
     intent: candidate.intent,
+    affectedSpecLayers: candidate.affectedSpecLayers || [],
+    movementPrimitives: candidate.movementPrimitives || [],
+    axesTouched: candidate.axesTouched || [],
     patch: candidate.patch,
     routeability,
     readabilityWindow,
@@ -545,6 +485,7 @@ function writeChart(report){
 function main(){
   const specDelta = readJson(SPEC_DELTA);
   const stageFive = readJson(STAGE_FIVE);
+  const profileSet = loadGuardiansCandidateProfileSet(PROFILE_SET);
   const baselineCtx = buildContext();
   const baselineRouteability = simulateRouteability(baselineCtx);
   const baselineWindow = simulateReadabilityWindow(baselineCtx);
@@ -553,7 +494,12 @@ function main(){
     readabilityWindow: baselineWindow,
     lowerFieldReadabilityScore10: readabilityScore(baselineWindow, baselineRouteability)
   };
-  const candidates = CANDIDATES.map(candidate => evaluateCandidate(candidate, baseline));
+  const candidates = profileSet.candidates.map(candidate => evaluateCandidate(candidate, baseline));
+  const topologyCandidates = candidates.filter(candidate => candidate.family === 'path-topology-lane-separation');
+  const bestTopology = topologyCandidates.slice().sort((a, b) => {
+    if(b.readabilityLift10 !== a.readabilityLift10) return b.readabilityLift10 - a.readabilityLift10;
+    return b.routeabilityLift10 - a.routeabilityLift10;
+  })[0] || null;
   const best = candidates.slice().sort((a, b) => {
     if(b.promotionGate.pass !== a.promotionGate.pass) return b.promotionGate.pass ? 1 : -1;
     if(b.readabilityLift10 !== a.readabilityLift10) return b.readabilityLift10 - a.readabilityLift10;
@@ -568,7 +514,16 @@ function main(){
     generatedBy: 'tools/harness/analyze-galaxy-guardians-stage-five-readability-candidate.js',
     sourceEvidence: {
       specDelta: rel(SPEC_DELTA),
-      stageFiveCloseness: rel(STAGE_FIVE)
+      stageFiveCloseness: rel(STAGE_FIVE),
+      candidateProfiles: rel(PROFILE_SET)
+    },
+    candidateProfileSet: {
+      artifact: rel(PROFILE_SET),
+      status: profileSet.status,
+      familyCount: profileSet.families.length,
+      candidateCount: profileSet.candidates.length,
+      targetStrictReadabilityScore10: profileSet.promotionGate.targetStrictReadabilityScore10,
+      runtimeChangeAllowed: profileSet.promotionGate.runtimeChangeAllowed
     },
     specDeltaCandidateId: specDelta.candidateId || 'guardians-stage-five-lower-field-readability-v0',
     baselineSpecRead: {
@@ -604,6 +559,12 @@ function main(){
       bestCandidateRead: best
         ? `${best.label} changes lower-field readability by ${best.readabilityLift10}/10, routeability by ${best.routeabilityLift10}/10, collision-loss share by ${round(best.collisionLossDelta * 100, 0)} points, and retains ${round(best.pressureRetention * 100, 0)}% of measured pressure.`
         : 'No candidate was measured.',
+      bestTopologyCandidateId: bestTopology?.id || null,
+      bestTopologyCandidateReadabilityLift10: bestTopology?.readabilityLift10 ?? null,
+      bestTopologyCandidateRouteabilityLift10: bestTopology?.routeabilityLift10 ?? null,
+      expandedFamilyRead: bestTopology
+        ? `${bestTopology.label} is the best expanded path-topology profile at ${bestTopology.readabilityLift10}/10 readability lift and ${bestTopology.routeabilityLift10}/10 routeability lift; the family did not beat the commitment-window candidate.`
+        : 'No path-topology family candidate was measured.',
       releaseRead: best
         ? `Measured ${candidates.length} stage-five readability candidates against ${specDelta.candidateId}. ${best.label} is best so far: ${best.readabilityLift10}/10 readability lift, ${best.routeabilityLift10}/10 routeability lift, missile pace preserved: ${best.missilePacePreserved ? 'yes' : 'no'}.`
         : 'No stage-five readability candidates were measured.'
@@ -611,7 +572,7 @@ function main(){
     nextSteps: [
       'Use the best passing candidate, if any, to generate a browser/contact-sheet before-after review.',
       'Do not promote runtime constants until the candidate also passes stage-five closeness, routeability review, and first-class conformance after refreshed artifacts.',
-      'If visual review says the lower field is still confusing, bias the next candidate toward path shape and lane separation before changing missile pace.'
+      'Because the expanded path-topology family did not beat commitment-window-v1, the next family should test threat source selection, firing eligibility, or player-corridor rules before changing missile pace.'
     ]
   };
   report.media = {

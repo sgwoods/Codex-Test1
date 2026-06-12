@@ -305,7 +305,7 @@ function main(){
     nextSteps: hardPromotionHold ? [
       'Do not promote the current candidate constants into runtime yet.',
       'Use commitment-window-v1 as the baseline for the next candidate family.',
-      'Try path-topology and lane-separation variants that lower lane overlap without collapsing routeability.',
+      'Because static path-topology variants did not beat commitment-window-v1, test threat source selection, firing eligibility, or player-corridor rules next.',
       'Refresh visual review after a candidate reaches at least 4.0/10 on the strict lower-field readability scale.'
     ] : [
       'Promote the exact candidate profile in a bounded rank-three runtime branch.',

@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const ARTIFACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'stage-five-readability-candidate-0.1.json');
 const MARKDOWN = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'stage-five-readability-candidate-0.1.md');
 const SPEC_DELTA = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'stage-five-lower-field-readability-spec-delta-0.1.json');
+const PROFILE_SET = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'stage-five-readability-candidate-profiles-0.1.json');
 
 function fail(message, payload){
   console.error(message);
@@ -40,6 +41,7 @@ function main(){
   }
   const artifact = readJson(ARTIFACT);
   const specDelta = readJson(SPEC_DELTA);
+  const profileSet = readJson(PROFILE_SET);
   const payload = {
     artifact: rel(ARTIFACT),
     status: artifact.status,
@@ -63,6 +65,15 @@ function main(){
   for(const source of Object.values(artifact.sourceEvidence || {})){
     mustExist(source, payload);
   }
+  if(artifact.sourceEvidence?.candidateProfiles !== rel(PROFILE_SET)){
+    fail('Stage-five readability candidate must cite the loadable candidate-profile set.', artifact.sourceEvidence);
+  }
+  if(artifact.candidateProfileSet?.candidateCount !== profileSet.candidates?.length){
+    fail('Stage-five readability candidate profile metadata drifted from the profile artifact.', {
+      report: artifact.candidateProfileSet,
+      profileCandidateCount: profileSet.candidates?.length
+    });
+  }
   if(artifact.scenario?.stage !== 5 || artifact.scenario?.stageRank !== 3){
     fail('Stage-five readability candidate must target stage five / rank three.', artifact.scenario);
   }
@@ -73,8 +84,11 @@ function main(){
     fail('Stage-five readability candidate baseline readability is missing or implausible for the stricter lane-overlap scale.', artifact.baseline);
   }
   const candidates = artifact.candidates || [];
-  if(candidates.length < 3){
-    fail('Stage-five readability candidate needs at least three candidate profiles.', { count: candidates.length });
+  if(candidates.length < 5){
+    fail('Stage-five readability candidate needs the original candidates plus an expanded profile family.', { count: candidates.length });
+  }
+  if(!candidates.some(candidate => candidate.family === 'path-topology-lane-separation')){
+    fail('Stage-five readability candidate report must include the path-topology/lane-separation family.', { families: candidates.map(candidate => candidate.family) });
   }
   for(const candidate of candidates){
     if(!candidate.id || !candidate.patch || !finite(candidate.lowerFieldReadabilityScore10) || !finite(candidate.readabilityLift10)){
@@ -92,6 +106,9 @@ function main(){
   }
   if(!artifact.summary?.bestCandidateId || !finite(artifact.summary.bestCandidateReadabilityLift10)){
     fail('Stage-five readability candidate summary is missing best-candidate metrics.', artifact.summary);
+  }
+  if(!artifact.summary?.bestTopologyCandidateId || !finite(artifact.summary.bestTopologyCandidateReadabilityLift10)){
+    fail('Stage-five readability candidate summary must report the expanded topology-family result.', artifact.summary);
   }
   if(artifact.summary.bestCandidatePass !== true || artifact.summary.bestCandidateReadabilityLift10 < 0.2){
     fail('Stage-five readability candidate must identify at least one missile-neutral profile that clears the measurement gate.', artifact.summary);

@@ -1,0 +1,299 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-candidate-profile-set",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-06-12",
+  "status": "candidate-profile-contract-analysis-only",
+  "sourceEvidence": {
+    "gameSpecLanguage": "reference-artifacts/analyses/galaxy-guardians-identity/game-spec-language-0.1.json",
+    "specDelta": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-lower-field-readability-spec-delta-0.1.json",
+    "executionPattern": "reference-artifacts/analyses/galaxy-guardians-identity/game-spec-execution-pattern-0.1.json"
+  },
+  "runtimeScope": {
+    "stage": 5,
+    "rank": 3,
+    "minRank": 3,
+    "maxRank": 3,
+    "releaseChannels": [
+      "analysis-only"
+    ]
+  },
+  "measurementScenario": {
+    "personas": [
+      "advanced",
+      "expert",
+      "professional"
+    ],
+    "ships": 5,
+    "maxPlayableStage": 9,
+    "routeabilityDurationSeconds": 120,
+    "readabilityWindowSeconds": 36
+  },
+  "promotionGate": {
+    "runtimeChangeAllowed": false,
+    "requiredReadabilityLift10": 0.2,
+    "targetStrictReadabilityScore10": 4,
+    "minPressureRetention": 0.88,
+    "routeabilityNonRegression": true,
+    "collisionLossNonRegression": true,
+    "laneOverlapNonRegression": true,
+    "missilePaceLock": true,
+    "singleShotCadenceLock": true,
+    "requiresVisualReview": true
+  },
+  "families": [
+    {
+      "id": "commitment-window",
+      "read": "Lengthen lower-field path commitment without changing missile pace."
+    },
+    {
+      "id": "path-topology-lane-separation",
+      "read": "Change horizontal/vertical threat separation and shot-origin spacing before spending missile pace."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "guardians-stage-five-lower-field-readability-v0",
+      "label": "Lower-field path clarity v0",
+      "family": "commitment-window",
+      "intent": "Clarify stage-five lower-field alien paths by slightly lengthening visible dive commitment and reducing lateral ambiguity while preserving missile pace.",
+      "affectedSpecLayers": [
+        "stage-band-arc",
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "path-topology",
+        "visual-readability",
+        "player-routeability"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.03,
+          "flagshipDiveIntervalBase": 1.02,
+          "diveBaseVy": 0.97,
+          "diveAccel": 0.94,
+          "diveSideDrift": 0.86,
+          "diveSwayAmplitude": 0.9,
+          "topReentrySwayAmplitude": 0.9
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-lane-separation-v1",
+      "label": "Lane separation v1",
+      "family": "path-topology-lane-separation",
+      "intent": "Reduce confusing lower-field horizontal overlap while leaving dive and shot cadence nearly unchanged.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "audio-visual-hooks",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "path-topology",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "diveSideDrift": 0.82,
+          "diveSwayAmplitude": 0.86,
+          "topReentrySwayAmplitude": 0.88
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-commitment-window-v1",
+      "label": "Commitment window v1",
+      "family": "commitment-window",
+      "intent": "Lengthen the readable lower-field commitment window without spending missile velocity or player single-shot cadence.",
+      "affectedSpecLayers": [
+        "stage-band-arc",
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "temporal-cadence",
+        "path-topology",
+        "visual-readability",
+        "player-routeability"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.93
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-commitment-window-v2",
+      "label": "Commitment window v2",
+      "family": "commitment-window",
+      "intent": "Test a stronger alien-path readability window while preserving enemy missile velocity, enemy missile cadence, and player single-shot cadence exactly.",
+      "affectedSpecLayers": [
+        "stage-band-arc",
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "temporal-cadence",
+        "path-topology",
+        "visual-readability",
+        "player-routeability"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.06,
+          "flagshipDiveIntervalBase": 1.02,
+          "diveBaseVy": 0.93,
+          "diveAccel": 0.88,
+          "diveSideDrift": 0.94,
+          "diveSwayAmplitude": 0.96
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-topology-lane-offset-v1",
+      "label": "Topology lane offset v1",
+      "family": "path-topology-lane-separation",
+      "intent": "Keep the commitment-window improvement but separate lower-field alien lanes from missile spawn lanes by narrowing alien sweep and offsetting shot origin spacing.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "audio-visual-hooks",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "path-topology",
+        "shot-window",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.82,
+          "diveSwayAmplitude": 0.86,
+          "topReentrySwayAmplitude": 0.86
+        },
+        "offsets": {
+          "enemyShotStartYOffset": 6
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-topology-corridor-v2",
+      "label": "Topology corridor v2",
+      "family": "path-topology-lane-separation",
+      "intent": "Preserve the same missile pace but open a more readable lower-field player corridor through modest dive sweep, sway, and acceleration changes.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "path-topology",
+        "player-routeability",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.05,
+          "flagshipDiveIntervalBase": 1.03,
+          "diveBaseVy": 0.94,
+          "diveAccel": 0.9,
+          "diveSideDrift": 0.78,
+          "diveSwayAmplitude": 0.8,
+          "topReentrySwayAmplitude": 0.82
+        },
+        "offsets": {
+          "enemyShotStartYOffset": -4
+        }
+      }
+    },
+    {
+      "id": "guardians-stage-five-topology-lane-weave-v3",
+      "label": "Topology lane weave v3",
+      "family": "path-topology-lane-separation",
+      "intent": "Test a less crowded weave that keeps dive pressure active while reducing low-field missile/dive ambiguity.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "audio-visual-hooks",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "path-topology",
+        "shot-window",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.02,
+          "flagshipDiveIntervalBase": 1.02,
+          "diveBaseVy": 0.96,
+          "diveAccel": 0.91,
+          "diveSideDrift": 0.74,
+          "diveSwayAmplitude": 0.74,
+          "topReentrySwayAmplitude": 0.78
+        },
+        "offsets": {
+          "enemyShotStartYOffset": 10
+        }
+      }
+    }
+  ],
+  "rollbackSignal": "Reject or hold candidate profiles if routeability regresses, collision-loss share rises, lane overlap does not improve, missile pace changes, single-shot cadence changes, or visual/contact-sheet review remains mixed below the strict lower-field readability floor."
+}
