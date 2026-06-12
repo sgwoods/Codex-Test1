@@ -1,0 +1,838 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-cadence-reference-comparison",
+  "generatedAt": "2026-06-12T19:50:43.243Z",
+  "commit": "b74b1910",
+  "branch": "codex/aurora-cadence-perfect-route-investigation",
+  "dirty": false,
+  "sources": {
+    "riskReport": "reference-artifacts/analyses/aurora-cadence-perfect-route-risk/latest.json",
+    "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json",
+    "galagaChallengeTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "galagaChallengeVideo": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "galagaPathLabels": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    "auroraGamePack": "src/js/13-aurora-game-pack.js"
+  },
+  "cadence": {
+    "status": "challenge-result-cadence-regression-suspected",
+    "currentMeasured": {
+      "source": "reference-artifacts/analyses/aurora-cadence-perfect-route-risk/latest.json",
+      "clearToSpawnS": 15.15,
+      "resultHoldWindowS": 7.77,
+      "challengeResultTransitionWindowS": 7.35,
+      "read": "result banner hold plus challengeResult transition committed to next regular stage"
+    },
+    "currentConfigured": {
+      "source": "src/js/13-aurora-game-pack.js",
+      "resultCueDelayS": 0.34,
+      "resultHoldWindowS": 4.25,
+      "resultHoldWindowByChallengeS": [
+        7.77,
+        15.77,
+        14.77,
+        11.77,
+        10.65,
+        10.65,
+        10.65,
+        10.65
+      ],
+      "resultBannerWindowS": 4.25,
+      "resultBannerWindowByChallengeS": [
+        7.77,
+        15.77,
+        14.77,
+        11.77,
+        10.65,
+        10.65,
+        10.65,
+        10.65
+      ],
+      "nextStageWindowS": 7.35,
+      "nextCueLeadBeforeSpawnS": 3.15,
+      "challenge1ConfiguredClearToSpawnS": 15.12,
+      "lineage": [
+        "b31ffb402 (Steven G Woods 2026-05-30 12:14:08 -0400 141)   resultHoldWindow:4.25,",
+        "0d74533e6 (Steven G Woods 2026-05-31 08:22:59 -0400 142)   resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),",
+        "b31ffb402 (Steven G Woods 2026-05-30 12:14:08 -0400 143)   resultBannerWindow:4.25,",
+        "0d74533e6 (Steven G Woods 2026-05-31 08:22:59 -0400 144)   resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),",
+        "b31ffb402 (Steven G Woods 2026-05-30 12:14:08 -0400 145)   nextStageWindow:7.35,",
+        "b31ffb402 (Steven G Woods 2026-05-30 12:14:08 -0400 146)   nextCueLeadBeforeSpawn:3.15,"
+      ]
+    },
+    "preservedReferenceTarget": {
+      "familyId": "challenge-entry-results-perfect",
+      "label": "Challenge Entry, Results, And Perfect",
+      "source": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json",
+      "resultCueAfterClearS": 0.342,
+      "nextCueAfterClearS": 2.851,
+      "spawnAfterClearS": 4.401,
+      "read": "Preserved Galaga-aligned Aurora timing target from the reference timing library; it is the current durable timing baseline until superseded by a newer measured reference decision."
+    },
+    "deltas": {
+      "measuredMinusTargetS": 10.749,
+      "measuredOverTargetRatio": 3.442,
+      "configuredMinusTargetS": 10.719
+    },
+    "interpretation": [
+      "Ordinary regular-stage handoff remains near the historical 3.2s window; the user-visible wait concern concentrates in challenge-result-to-next-regular-stage cadence.",
+      "The long current behavior is configured in source as a result hold plus next-stage transition window, not a rendering/performance stall.",
+      "The long timing predates the Stage 3 group 1 keeper and appears to come from May 30-31 challenge ceremony/timing work.",
+      "Unless a newer measured audio-conformance decision intentionally superseded the 4.401s target, treat the 15.15s clear-to-spawn as release-cadence debt."
+    ],
+    "nextProofNeeded": "Refresh challenge-stage timing correspondence against the current built /dev source and, if it fails, adjust ceremony timing to preserve full canonical audio only within a Galaga-conformant gameplay window."
+  },
+  "referenceTracks": {
+    "source": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "summary": {
+      "challengeCount": 8,
+      "trackedChallengeCount": 8,
+      "averageTrackCount": 51.1,
+      "averageGroupCount": 5,
+      "averageGroupConfidence": 0.685,
+      "targetTrackReadinessScore10": 8.6,
+      "weakestChallengeNumber": 4,
+      "read": "CPU object tracking now converts ingested Galaga challenge reference clips into per-challenge group target vectors. This makes challenge movement conformance comparable against source video instead of relying only on first-pass descriptive contracts."
+    },
+    "challengeRows": [
+      {
+        "challengeNumber": 1,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 55,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.752,
+        "groupStartS": [
+          0,
+          4.38,
+          7.75,
+          11.25,
+          15.25
+        ],
+        "groupEndS": [
+          3.25,
+          10.5,
+          11.88,
+          15.88,
+          15.88
+        ],
+        "averageConfidence": 0.714,
+        "families": [
+          "classic-column-and-side-arc"
+        ],
+        "read": "Reference Challenge 1 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 2,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 61,
+        "groupCount": 5,
+        "averageGroupDurationS": 2.376,
+        "groupStartS": [
+          0,
+          2.88,
+          4.25,
+          7.13,
+          13.38
+        ],
+        "groupEndS": [
+          1.88,
+          6.38,
+          5,
+          10.38,
+          15.88
+        ],
+        "averageConfidence": 0.67,
+        "families": [
+          "red-column-blue-side-cross"
+        ],
+        "read": "Reference Challenge 2 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 3,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 46,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.45,
+        "groupStartS": [
+          0,
+          0.88,
+          4.38,
+          7.88,
+          12.13
+        ],
+        "groupEndS": [
+          1.5,
+          3.88,
+          8.38,
+          12.88,
+          15.88
+        ],
+        "averageConfidence": 0.686,
+        "families": [
+          "blue-hook-green-novelty"
+        ],
+        "read": "Reference Challenge 3 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 4,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 45,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.2,
+        "groupStartS": [
+          0,
+          0.5,
+          2.88,
+          6.38,
+          13.13
+        ],
+        "groupEndS": [
+          3.25,
+          3.25,
+          6.63,
+          9.88,
+          15.88
+        ],
+        "averageConfidence": 0.691,
+        "families": [
+          "pink-serpentine-and-green-entry"
+        ],
+        "read": "Reference Challenge 4 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 5,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 46,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.298,
+        "groupStartS": [
+          0,
+          3.13,
+          7.38,
+          10.63,
+          12.88
+        ],
+        "groupEndS": [
+          3.25,
+          7.5,
+          10.88,
+          13,
+          15.88
+        ],
+        "averageConfidence": 0.681,
+        "families": [
+          "pink-green-cascade"
+        ],
+        "read": "Reference Challenge 5 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 6,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 48,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.476,
+        "groupStartS": [
+          0,
+          2.63,
+          5.75,
+          9.63,
+          14
+        ],
+        "groupEndS": [
+          2.63,
+          6.75,
+          10,
+          14.13,
+          15.88
+        ],
+        "averageConfidence": 0.678,
+        "families": [
+          "green-ladder-and-split"
+        ],
+        "read": "Reference Challenge 6 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 7,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 48,
+        "groupCount": 5,
+        "averageGroupDurationS": 2.574,
+        "groupStartS": [
+          0,
+          1.25,
+          4.75,
+          9.13,
+          10.38
+        ],
+        "groupEndS": [
+          2,
+          5.5,
+          7.63,
+          11.25,
+          12
+        ],
+        "averageConfidence": 0.651,
+        "families": [
+          "yellow-diagonal-fan"
+        ],
+        "read": "Reference Challenge 7 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      },
+      {
+        "challengeNumber": 8,
+        "durationSeconds": 16,
+        "sampleFps": 8,
+        "trackCount": 60,
+        "groupCount": 5,
+        "averageGroupDurationS": 3.326,
+        "groupStartS": [
+          1,
+          2.38,
+          5.38,
+          10.75,
+          13.5
+        ],
+        "groupEndS": [
+          3,
+          5.25,
+          10.13,
+          15.38,
+          15.88
+        ],
+        "averageConfidence": 0.711,
+        "families": [
+          "blue-purple-finale"
+        ],
+        "read": "Reference Challenge 8 carries 5 tracked target group(s), which is the expected readable route unit for Aurora comparison."
+      }
+    ],
+    "allChallengesHaveFiveGroups": true,
+    "averageGroupCount": 5,
+    "averageTrackCount": 51.125,
+    "averageGroupConfidence": 0.685,
+    "read": "The Galaga reference side is already machine-readable enough to require five grouped, visible, routeable challenge arrivals before runtime tuning is trusted."
+  },
+  "challengeVideo": {
+    "source": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "commit": "360ee8de",
+    "status": "late-challenge-media-windows-ready-for-labeling",
+    "primarySourceId": "challenge-all2-single-ship-all-perfects",
+    "challengeWindowCount": 8,
+    "windows": [
+      {
+        "challengeNumber": 1,
+        "stageMarker": 3,
+        "family": "classic-column-and-side-arc",
+        "startS": 5,
+        "durationS": 31,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json",
+        "auroraContract": "Use as the teaching stage: five readable groups, no combat, clear upper-band score lanes, and a result cadence that lets the player understand 40/40."
+      },
+      {
+        "challengeNumber": 2,
+        "stageMarker": 7,
+        "family": "red-column-blue-side-cross",
+        "startS": 36,
+        "durationS": 39,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json",
+        "auroraContract": "Add distinct side-entry crossing groups and a red-column vertical train; preserve no-shot/no-collision behavior while increasing route memory."
+      },
+      {
+        "challengeNumber": 3,
+        "stageMarker": 11,
+        "family": "blue-hook-green-novelty",
+        "startS": 75,
+        "durationS": 38,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/frame-index.json",
+        "auroraContract": "Introduce a clearly new visual family and hooked side trajectories; score should reward anticipation of the hook, not pure center firing."
+      },
+      {
+        "challengeNumber": 4,
+        "stageMarker": 15,
+        "family": "pink-serpentine-and-green-entry",
+        "startS": 113,
+        "durationS": 35,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/frame-index.json",
+        "auroraContract": "Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target."
+      },
+      {
+        "challengeNumber": 5,
+        "stageMarker": 19,
+        "family": "pink-green-cascade",
+        "startS": 142,
+        "durationS": 35,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/frame-index.json",
+        "auroraContract": "Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4."
+      },
+      {
+        "challengeNumber": 6,
+        "stageMarker": 23,
+        "family": "green-ladder-and-split",
+        "startS": 175,
+        "durationS": 38,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/frame-index.json",
+        "auroraContract": "Use staggered ladders and split exits; measure group spacing and route separation so the stage feels authored, not dense noise."
+      },
+      {
+        "challengeNumber": 7,
+        "stageMarker": 27,
+        "family": "yellow-diagonal-fan",
+        "startS": 215,
+        "durationS": 34,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/frame-index.json",
+        "auroraContract": "Add a yellow diagonal/fan stage with long path length, readable aim bands, and a visually obvious new family."
+      },
+      {
+        "challengeNumber": 8,
+        "stageMarker": 31,
+        "family": "blue-purple-finale",
+        "startS": 241,
+        "durationS": 30,
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/frame-index.json",
+        "auroraContract": "Use as the late-loop capstone: blue/purple clustered arcs, compact timing, and no repeated early-stage motion vocabulary."
+      }
+    ],
+    "read": "The primary Galaga challenge reference is an all-perfect single-ship source with committed derived windows and contact sheets; raw video remains outside the repo."
+  },
+  "pathLabels": {
+    "source": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    "summary": {
+      "status": "direct-reference-label-gate-passed",
+      "sourceFileCount": 2,
+      "acceptedLabelCount": 35,
+      "acceptedRegularEntryCount": 6,
+      "acceptedChallengeEntryCount": 29,
+      "invalidLabelCount": 0,
+      "regularCoverage": 1,
+      "challengeCoverage": 1,
+      "coverageScore10": 10,
+      "confidenceScore": 0.728,
+      "directReferenceReady": true,
+      "playerMeaning": "These labels let the harness compare Aurora alien arrivals, rack settling, challenge paths, and bonus windows against actual Galaga reference windows instead of broad heuristic path families.",
+      "nextAction": "Wire direct labels into path-family comparison and lift the heuristic cap in alien-entry/challenge scoring."
+    },
+    "acceptedLabelCount": 35,
+    "acceptedChallengeEntryCount": 29,
+    "directReferenceReady": true,
+    "challengeCoverage": 1,
+    "confidenceScore": 0.728,
+    "exampleChallengeLabels": [
+      {
+        "labelId": "challenge-4-pink-serpentine-group-1",
+        "challengeNumber": 4,
+        "groupIndex": 1,
+        "entrySide": "top-right",
+        "exitSide": "left",
+        "entityFamily": "pink-serpentine-specialty",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "late challenge specialty arc with long readable upper-field scoring lane"
+      },
+      {
+        "labelId": "challenge-4-pink-serpentine-group-2",
+        "challengeNumber": 4,
+        "groupIndex": 2,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "entityFamily": "pink-serpentine-specialty",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "second serpentine arc with a mirrored upper-band score lane"
+      },
+      {
+        "labelId": "challenge-4-pink-serpentine-group-3",
+        "challengeNumber": 4,
+        "groupIndex": 3,
+        "entrySide": "top-right",
+        "exitSide": "left",
+        "entityFamily": "pink-serpentine-specialty",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "middle serpentine group that rewards tracking the bend rather than waiting in the center lane"
+      },
+      {
+        "labelId": "challenge-4-pink-serpentine-group-4",
+        "challengeNumber": 4,
+        "groupIndex": 4,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "entityFamily": "pink-serpentine-specialty",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "late serpentine repeat that preserves a readable upper scoring route"
+      },
+      {
+        "labelId": "challenge-4-pink-serpentine-group-5",
+        "challengeNumber": 4,
+        "groupIndex": 5,
+        "entrySide": "top-right",
+        "exitSide": "left",
+        "entityFamily": "pink-serpentine-specialty",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "final pink serpentine pass before the result surface"
+      },
+      {
+        "labelId": "challenge-5-pink-green-cascade-group-1",
+        "challengeNumber": 5,
+        "groupIndex": 1,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "entityFamily": "pink-green-cascade",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "alternating specialty groups with lower-field pass awareness while remaining nonlethal"
+      },
+      {
+        "labelId": "challenge-5-pink-green-cascade-group-2",
+        "challengeNumber": 5,
+        "groupIndex": 2,
+        "entrySide": "top-right",
+        "exitSide": "left",
+        "entityFamily": "pink-green-cascade",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "second pink/green cascade group with a mirrored lower-field pass"
+      },
+      {
+        "labelId": "challenge-5-pink-green-cascade-group-3",
+        "challengeNumber": 5,
+        "groupIndex": 3,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "entityFamily": "pink-green-cascade",
+        "confidenceScore": 0.72,
+        "bonusOpportunity": "middle cascade group that starts to make lower-field timing relevant"
+      }
+    ],
+    "read": "Direct labels are available as source-backed comparison vectors, but the object-track artifact is the stronger current machine-readable source for all eight challenges."
+  },
+  "routeability": {
+    "status": "professional-perfect-routeability-regression-risk",
+    "reference": {
+      "allPerfectSource": "challenge-all2-single-ship-all-perfects",
+      "trackedChallengeCount": 8,
+      "allChallengesHaveFiveGroups": true,
+      "averageGroupCount": 5,
+      "targetTrackReadinessScore10": 8.6,
+      "acceptedChallengeEntryLabels": 29,
+      "directReferenceReady": true,
+      "read": "Reference evidence says perfect routes exist and are organized as five readable groups per challenge."
+    },
+    "current": {
+      "professionalAttempts": 8,
+      "professionalCleared": 2,
+      "professionalPerfects": 0,
+      "professionalAverageHitRate": 0.181,
+      "professionalAverageTargetRate": 0.825,
+      "belowTrajectory": [
+        {
+          "stage": 3,
+          "challengeNumber": 1,
+          "hitRate": 0,
+          "targetRate": 1,
+          "targetDelta": null
+        },
+        {
+          "stage": 7,
+          "challengeNumber": 2,
+          "hitRate": 0.825,
+          "targetRate": 0.95,
+          "targetDelta": -0.125
+        },
+        {
+          "stage": 11,
+          "challengeNumber": 3,
+          "hitRate": 0.625,
+          "targetRate": 0.9,
+          "targetDelta": -0.275
+        },
+        {
+          "stage": 15,
+          "challengeNumber": 4,
+          "hitRate": 0,
+          "targetRate": 0.85,
+          "targetDelta": null
+        },
+        {
+          "stage": 19,
+          "challengeNumber": 5,
+          "hitRate": 0,
+          "targetRate": 0.8,
+          "targetDelta": null
+        },
+        {
+          "stage": 23,
+          "challengeNumber": 6,
+          "hitRate": 0,
+          "targetRate": 0.75,
+          "targetDelta": null
+        },
+        {
+          "stage": 27,
+          "challengeNumber": 7,
+          "hitRate": 0,
+          "targetRate": 0.7,
+          "targetDelta": null
+        },
+        {
+          "stage": 31,
+          "challengeNumber": 8,
+          "hitRate": 0,
+          "targetRate": 0.65,
+          "targetDelta": null
+        }
+      ],
+      "professionalRows": [
+        {
+          "challengeNumber": 1,
+          "stage": 3,
+          "seed": 61103,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 1,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 2,
+          "stage": 7,
+          "seed": 61203,
+          "cleared": true,
+          "hits": 33,
+          "total": 40,
+          "hitRate": 0.825,
+          "targetRate": 0.95,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 3,
+          "stage": 11,
+          "seed": 61303,
+          "cleared": true,
+          "hits": 25,
+          "total": 40,
+          "hitRate": 0.625,
+          "targetRate": 0.9,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 4,
+          "stage": 15,
+          "seed": 61403,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 0.85,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 5,
+          "stage": 19,
+          "seed": 61503,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 0.8,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 6,
+          "stage": 23,
+          "seed": 61603,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 0.75,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 7,
+          "stage": 27,
+          "seed": 61703,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 0.7,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        },
+        {
+          "challengeNumber": 8,
+          "stage": 31,
+          "seed": 61803,
+          "cleared": false,
+          "hits": null,
+          "total": null,
+          "hitRate": 0,
+          "targetRate": 0.65,
+          "perfect": false,
+          "noCombatGrammarPass": true
+        }
+      ]
+    },
+    "interpretation": [
+      "The current one-seed professional probe has zero perfects across eight challenge rows and clears only two rows.",
+      "That is not probabilistic proof, but it is incompatible with the design intent that professional should have visible perfect-score opportunity in many challenging stages.",
+      "Do not tune hit rates from one seed; first repair full-target visibility and reconcile route timing, then run a multi-seed persona sweep."
+    ]
+  },
+  "visibility": {
+    "status": "full-target-visibility-regression-risk",
+    "reference": {
+      "trackedChallenges": 8,
+      "allChallengesHaveFiveGroups": true,
+      "groupReadiness": 8.6,
+      "read": "The Galaga reference side is already machine-readable enough to require five grouped, visible, routeable challenge arrivals before runtime tuning is trusted."
+    },
+    "current": {
+      "stageCount": 8,
+      "riskStageCount": 7,
+      "riskStages": [
+        3,
+        7,
+        15,
+        19,
+        23,
+        27,
+        31
+      ],
+      "missingSpriteFullInsideTotal": 86,
+      "missingScoreWindowFullInsideTotal": 87,
+      "worstCoverage": {
+        "challengeNumber": 7,
+        "stage": 27,
+        "layoutId": "yellow-diagonal-fan",
+        "spriteFullInsideCoverage": 0.375,
+        "missingSpriteFullInside": 25
+      },
+      "rows": [
+        {
+          "challengeNumber": 1,
+          "stage": 3,
+          "layoutId": "first-challenge-peel",
+          "spriteFullInsideCoverage": 0.925,
+          "scoreWindowFullInsideCoverage": 0.925,
+          "missingSpriteFullInside": 3,
+          "missingScoreWindowFullInside": 3,
+          "firstSpriteFullInsideP90S": 13.3,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 2,
+          "stage": 7,
+          "layoutId": "scorpion-cross-sweep",
+          "spriteFullInsideCoverage": 0.95,
+          "scoreWindowFullInsideCoverage": 0.95,
+          "missingSpriteFullInside": 2,
+          "missingScoreWindowFullInside": 2,
+          "firstSpriteFullInsideP90S": 13.5,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 3,
+          "stage": 11,
+          "layoutId": "stingray-crown-hook-hybrid",
+          "spriteFullInsideCoverage": 1,
+          "scoreWindowFullInsideCoverage": 0.975,
+          "missingSpriteFullInside": 0,
+          "missingScoreWindowFullInside": 1,
+          "firstSpriteFullInsideP90S": 12,
+          "risk": "target-full-visibility-proxy-pass"
+        },
+        {
+          "challengeNumber": 4,
+          "stage": 15,
+          "layoutId": "pink-serpentine-late",
+          "spriteFullInsideCoverage": 0.525,
+          "scoreWindowFullInsideCoverage": 0.525,
+          "missingSpriteFullInside": 19,
+          "missingScoreWindowFullInside": 19,
+          "firstSpriteFullInsideP90S": 13.2,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 5,
+          "stage": 19,
+          "layoutId": "pink-green-cascade",
+          "spriteFullInsideCoverage": 0.7,
+          "scoreWindowFullInsideCoverage": 0.7,
+          "missingSpriteFullInside": 12,
+          "missingScoreWindowFullInside": 12,
+          "firstSpriteFullInsideP90S": 4.6,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 6,
+          "stage": 23,
+          "layoutId": "green-ladder-split",
+          "spriteFullInsideCoverage": 0.75,
+          "scoreWindowFullInsideCoverage": 0.75,
+          "missingSpriteFullInside": 10,
+          "missingScoreWindowFullInside": 10,
+          "firstSpriteFullInsideP90S": 5.2,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 7,
+          "stage": 27,
+          "layoutId": "yellow-diagonal-fan",
+          "spriteFullInsideCoverage": 0.375,
+          "scoreWindowFullInsideCoverage": 0.375,
+          "missingSpriteFullInside": 25,
+          "missingScoreWindowFullInside": 25,
+          "firstSpriteFullInsideP90S": 4.9,
+          "risk": "target-full-visibility-risk"
+        },
+        {
+          "challengeNumber": 8,
+          "stage": 31,
+          "layoutId": "blue-purple-finale",
+          "spriteFullInsideCoverage": 0.625,
+          "scoreWindowFullInsideCoverage": 0.625,
+          "missingSpriteFullInside": 15,
+          "missingScoreWindowFullInside": 15,
+          "firstSpriteFullInsideP90S": 4.4,
+          "risk": "target-full-visibility-risk"
+        }
+      ]
+    },
+    "interpretation": [
+      "Seven of eight sampled Aurora challenge stages have at least one target that never fully enters by the runtime proxy.",
+      "The worst sampled row is Challenge 7 / Stage 27 with 37.5% full-sprite coverage and 25 missing targets.",
+      "This supports the user concern that later challenge progression may be too fast, too offscreen, or both; final speed changes should use frame/contact-sheet comparison before runtime tuning."
+    ]
+  },
+  "verdict": {
+    "status": "reference-comparison-regression-risks-found",
+    "concerns": [
+      "challenge-result-cadence-regression-suspected",
+      "professional-perfect-routeability-regression-risk",
+      "full-target-visibility-regression-risk"
+    ],
+    "releaseImplication": "Treat as cleanup/fidelity debt before another gameplay tuning or promotion cycle; do not publish beta/production on the assumption that the waits are benign.",
+    "recommendedNextSteps": [
+      "Refresh `npm run harness:check:challenge-stage-correspondence` against the current build so the 15.15s challenge-result path is reconciled with the preserved 4.401s target.",
+      "If the timing correspondence fails, reduce challenge-result ceremony timing using the smallest source timing change that preserves the canonical result/perfect cue without holding next-stage spawn for the full phrase plus an extra transition.",
+      "Add a multi-seed professional challenge routeability sweep after visibility is repaired; one deterministic row is risk evidence, not probability evidence.",
+      "Use Galaga object-track/contact-sheet vectors to repair target full-entry and late-stage speed/readability before subjective tuning."
+    ]
+  }
+}
