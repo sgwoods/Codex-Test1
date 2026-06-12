@@ -114,6 +114,28 @@ perfects across the sampled challenge set, and challenge-contact events for
 some lower-persona rows. Do not tune from this packet alone; use it to choose
 the next reference-video/contact-sheet comparison.
 
+Measured reference comparison now exists at
+`reference-artifacts/analyses/aurora-cadence-reference-comparison/latest.json`.
+The critical timing read is that the current Challenge 1 perfect-result
+clear-to-next-stage spawn measures `15.15s`, while the preserved
+Galaga-aligned challenge timing target remains `4.401s`. The current source
+configuration explains the wait as `7.77s` result hold plus `7.35s`
+next-stage transition, and blame places the long ceremony timing in May 30-31
+challenge timing/audio work rather than in the Stage 3 group 1 keeper. Treat
+this as challenge-result cadence regression risk unless a newer measured
+audio-conformance decision explicitly supersedes the `4.401s` target.
+
+The same comparison ties the routeability concern to reference evidence:
+Galaga challenge object tracks provide five target groups across all eight
+tracked challenge windows, but the current one-seed professional probe produced
+`0/8` perfects and cleared only `2/8` sampled challenge rows. The visibility
+proxy remains severe: seven of eight challenge stages have at least one target
+that never fully enters, with Challenge 7 / Stage 27 the worst row at `0.375`
+full-sprite coverage. Next step should refresh
+`npm run harness:check:challenge-stage-correspondence` against the current
+build, then make the smallest timing/visibility repair before any new gameplay
+tuning or promotion work.
+
 ## Evidence Sources
 
 - `CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md`
@@ -125,6 +147,7 @@ the next reference-video/contact-sheet comparison.
 - `reference-artifacts/analyses/challenge-movement-grammar/latest.json`
 - `reference-artifacts/analyses/challenge-motion-primitives/latest.json`
 - `reference-artifacts/analyses/aurora-cadence-perfect-route-risk/latest.json`
+- `reference-artifacts/analyses/aurora-cadence-reference-comparison/latest.json`
 - `reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json`
 - `tools/harness/check-challenge-motion-profile.js`
 
