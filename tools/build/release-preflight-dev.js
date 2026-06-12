@@ -86,9 +86,10 @@ function main(){
   // the review surface and creates a stale-packet ping-pong.
   const docs = tryRun(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')]);
   if(!docs.ok){
-    printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs now.', docs);
+    printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs and generated build docs now.', docs);
     run('npm', ['run', 'harness:refresh:release-conformance-docs']);
-    refreshes.push('release conformance/documentation artifacts');
+    run('npm', ['run', 'build']);
+    refreshes.push('release conformance/documentation artifacts and generated build docs');
   }
 
   const codeReview = tryRun('npm', ['run', 'review:code:check']);
