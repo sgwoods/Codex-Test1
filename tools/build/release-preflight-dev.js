@@ -70,10 +70,18 @@ function main(){
   assertClean('Dev release preflight requires a clean source tree before it starts.');
 
   const refreshed = [];
-  const docs = tryRun(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')]);
+  const checkDocsArgs = [path.join(ROOT, 'tools', 'harness', 'check-documentation-freshness.js')];
+  let docs = tryRun(process.execPath, checkDocsArgs);
+  if(!docs.ok){
+    printBlocker('Release conformance/documentation freshness did not pass; rebuilding generated dist surfaces once before refreshing source artifacts.', docs);
+    run('npm', ['run', 'build']);
+    assertClean('Build changed tracked files while preparing documentation freshness.');
+    docs = tryRun(process.execPath, checkDocsArgs);
+  }
   if(!docs.ok){
     printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs now.', docs);
     run('npm', ['run', 'harness:refresh:release-conformance-docs']);
+    run('npm', ['run', 'build']);
     refreshed.push('release conformance/documentation');
   }
 
