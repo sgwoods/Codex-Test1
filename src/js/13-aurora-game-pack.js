@@ -138,12 +138,10 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  resultHoldWindow:4.25,
-  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  resultBannerWindow:4.25,
-  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  nextStageWindow:7.35,
-  nextCueLeadBeforeSpawn:3.15,
+  resultHoldWindow:1.45,
+  resultBannerWindow:1.15,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
   cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
@@ -245,7 +243,7 @@ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-s
   cooldownMs:2400,
   clipStart:0,
   clipDuration:3.35,
-  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+  stopCueNames:Object.freeze(['stagePulse'])
  }),
  attractEnter:Object.freeze({
   byPhase:Object.freeze({

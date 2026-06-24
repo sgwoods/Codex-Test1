@@ -88,7 +88,9 @@ function runScenario(name, spec){
   });
   const summary = JSON.parse(stdout);
   const after = fs.readdirSync(RUN_OUT);
-  const created = after.filter(entry => !before.has(entry)).sort();
+  const created = after
+    .filter(entry => !before.has(entry) && fs.statSync(path.join(RUN_OUT, entry)).isDirectory())
+    .sort();
   const outDir = created.length ? path.join(RUN_OUT, created[created.length - 1]) : null;
   return { summary, outDir };
 }
