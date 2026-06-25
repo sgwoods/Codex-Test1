@@ -45,6 +45,7 @@ const REQUIRED_CADENCE_KEYS = REQUIRED_TEMPORAL_KEYS;
 const MAX_SINGLE_ENEMY_BBOX = { width: 84, height: 72 };
 const MAX_PROPORTION_OVERSHOOT = { width: .35, height: .40 };
 const MIN_PROPORTION_UNDERSHOOT = { width: .28, height: .34 };
+const BOSS_LINE_REFERENCE_MIN_SCORE10 = 7.4;
 
 function fail(message, payload){
   console.error(message);
@@ -166,6 +167,24 @@ function main(){
     if((sample.litPixels || 0) < 10 || !sample.canvasClip?.bbox){
       fail(`Aurora runtime sprite sample ${sample.spriteKey} did not capture enough visible pixels`, { sample, payload });
     }
+  }
+  const bossLineSample = samples.find(item => item.spriteKey === 'boss-line');
+  const beeLineSample = samples.find(item => item.spriteKey === 'bee-line');
+  if(!bossLineSample || !Number.isFinite(+bossLineSample.score10) || bossLineSample.score10 < BOSS_LINE_REFERENCE_MIN_SCORE10){
+    fail('Aurora runtime boss-line sprite has fallen below the Galaga command-boss reference threshold', {
+      bossLineSample,
+      minScore10: BOSS_LINE_REFERENCE_MIN_SCORE10,
+      read: 'This guard preserves the repaired command-boss silhouette so the Galaga-style boss does not regress toward a sparse bee-like hybrid.',
+      payload
+    });
+  }
+  if(beeLineSample && Number.isFinite(+beeLineSample.score10) && bossLineSample.score10 <= beeLineSample.score10){
+    fail('Aurora runtime boss-line sprite no longer reads more like the command-boss model than the bee-line sprite does', {
+      bossLineSample,
+      beeLineSample,
+      read: 'The command boss should keep a stronger match to the Galaga boss model than the bee sprite; otherwise boss/bee visual identity is likely collapsing.',
+      payload
+    });
   }
   for(const key of SINGLE_ENEMY_KEYS){
     const sample = samples.find(item => item.spriteKey === key);
