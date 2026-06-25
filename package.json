@@ -55,6 +55,7 @@
     "machine:audio:bootstrap": "node tools/dev/check-private-reference-audio.js --repair",
     "machine:visual-targets:status": "node tools/dev/check-private-visual-target-artifacts.js",
     "machine:visual-targets:bootstrap": "node tools/dev/check-private-visual-target-artifacts.js --repair",
+    "machine:visual-targets:persist": "node tools/dev/check-private-visual-target-artifacts.js --persist",
     "session:brief": "node tools/dev/session-start-brief.js",
     "artifacts:prepare:import-inbox": "node tools/dev/prepare-artifact-inboxes.js",
     "codex:checkpoint": "node tools/dev/write-context-checkpoint.js",

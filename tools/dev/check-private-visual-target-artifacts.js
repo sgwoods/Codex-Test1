@@ -3,7 +3,8 @@ const { privateVisualTargetArtifactStatus } = require('./private-visual-target-a
 
 function main(){
   const repair = process.argv.includes('--repair');
-  const status = privateVisualTargetArtifactStatus({ repair });
+  const persist = process.argv.includes('--persist');
+  const status = privateVisualTargetArtifactStatus({ repair, persist });
   console.log(JSON.stringify(status, null, 2));
   if(!status.ok) process.exit(1);
 }

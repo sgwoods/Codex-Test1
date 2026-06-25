@@ -297,6 +297,42 @@ function repairManifest(manifestInfo, currentRead, candidates){
   };
 }
 
+function persistDestinationRoot(){
+  return normalizeCandidateRoot(
+    process.env.AURORA_PRIVATE_VISUAL_TARGET_PERSIST_ROOT
+    || process.env.AURORA_PRIVATE_ARTIFACT_ROOT
+    || process.env.AURORA_PRIVATE_VISUAL_TARGET_ROOT
+  );
+}
+
+function persistManifest(manifestInfo, currentRead, destinationRoot){
+  if(!destinationRoot){
+    return {
+      attempted: false,
+      changed: false,
+      reason: 'set AURORA_PRIVATE_VISUAL_TARGET_PERSIST_ROOT or AURORA_PRIVATE_ARTIFACT_ROOT before persisting private visual target artifacts'
+    };
+  }
+  if(!currentRead.ok){
+    return {
+      attempted: false,
+      changed: false,
+      reason: `${manifestInfo.spec.key} is incomplete locally; refusing to persist missing or mismatched evidence`
+    };
+  }
+  const source = abs(manifestInfo.privateRoot);
+  const destination = path.join(destinationRoot, 'repo-mirror', manifestInfo.publicMetadataRoot);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.cpSync(source, destination, { recursive: true, force: true });
+  return {
+    attempted: true,
+    changed: true,
+    source: rel(source),
+    destination,
+    reason: `persisted ${manifestInfo.spec.key} private evidence to durable companion store`
+  };
+}
+
 function nextActions(status){
   if(status.ok) return [];
   const actions = [];
@@ -315,6 +351,7 @@ function nextActions(status){
 }
 
 function privateVisualTargetArtifactStatus(options = {}){
+  const persistRoot = options.persist ? persistDestinationRoot() : '';
   const artifacts = ARTIFACT_MANIFESTS.map(spec => {
     const manifestInfo = loadManifest(spec);
     let read = manifestRead(manifestInfo);
@@ -323,12 +360,14 @@ function privateVisualTargetArtifactStatus(options = {}){
     if(repair?.changed){
       read = manifestRead(manifestInfo);
     }
+    const persist = options.persist ? persistManifest(manifestInfo, read, persistRoot) : null;
     return {
       key: spec.key,
       label: spec.label,
       read,
       sourceCandidates: candidates,
-      repair
+      repair,
+      persist
     };
   });
   const issues = [];
@@ -341,12 +380,16 @@ function privateVisualTargetArtifactStatus(options = {}){
     if(artifact.read.privateRoot && artifact.read.privateRootGitIgnored !== true){
       issues.push(`${artifact.key} private root is not covered by gitignore`);
     }
+    if(options.persist && artifact.persist?.changed !== true){
+      issues.push(`${artifact.key} private visual persistence was not completed: ${artifact.persist?.reason || 'unknown reason'}`);
+    }
   }
   const status = {
     ok: issues.length === 0,
     artifactType: 'private-visual-target-artifact-status',
     generatedAt: new Date().toISOString(),
     root: ROOT,
+    persistRoot: persistRoot || '',
     artifacts,
     summary: {
       artifactClassCount: artifacts.length,

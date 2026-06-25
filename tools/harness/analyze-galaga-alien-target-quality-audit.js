@@ -16,6 +16,7 @@ const RUNTIME = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/
 const RUNTIME_VS_TARGET = 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json';
 const TEMPORAL_TARGETS = 'reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json';
 const CADENCE_TARGETS = 'reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json';
+const PRIVATE_VISUAL_AUDIT = process.env.AURORA_PRIVATE_VISUAL_AUDIT === '1';
 
 const ROLE_SPECS = [
   {
@@ -88,6 +89,15 @@ function exists(relPath){
   return !!relPath && fs.existsSync(path.join(ROOT, relPath));
 }
 
+function isPrivateArtifactPath(relPath){
+  return String(relPath || '').replace(/\\/g, '/').startsWith('private-artifacts/');
+}
+
+function auditVisibleExists(relPath){
+  if(isPrivateArtifactPath(relPath) && !PRIVATE_VISUAL_AUDIT) return false;
+  return exists(relPath);
+}
+
 function git(args, fallback = ''){
   try{
     return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
@@ -143,11 +153,12 @@ function confidenceLabel(score){
 
 function targetImageAvailability(crops){
   const targetImages = crops.map(crop => crop.targetCrop).filter(Boolean);
-  const available = targetImages.filter(exists);
+  const available = targetImages.filter(auditVisibleExists);
   return {
     targetImageCount: targetImages.length,
     availableTargetImageCount: available.length,
-    missingTargetImages: targetImages.filter(item => !exists(item))
+    missingTargetImages: targetImages.filter(item => !auditVisibleExists(item)),
+    privateVisualAudit: PRIVATE_VISUAL_AUDIT
   };
 }
 
@@ -255,7 +266,7 @@ function roleQuality(spec, artifacts){
       roleKey: crop.roleKey,
       poseKey: crop.poseKey,
       targetCrop: crop.targetCrop,
-      targetCropExists: exists(crop.targetCrop),
+      targetCropExists: auditVisibleExists(crop.targetCrop),
       sourceKind: crop.sourceKind,
       reviewStatus: crop.reviewStatus,
       authorityStatus: crop.authorityStatus,
@@ -273,7 +284,7 @@ function svgEsc(value){
 }
 
 function encodeImage(relPath){
-  if(!exists(relPath)) return null;
+  if(!auditVisibleExists(relPath)) return null;
   const ext = path.extname(relPath).toLowerCase();
   const mime = ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' : ext === '.svg' ? 'image/svg+xml' : 'image/png';
   return `data:${mime};base64,${fs.readFileSync(path.join(ROOT, relPath)).toString('base64')}`;
