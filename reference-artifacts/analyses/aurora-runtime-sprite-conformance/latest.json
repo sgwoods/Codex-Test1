@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-sprite-conformance",
-  "generatedAt": "2026-06-07T18:47:01.682Z",
-  "commit": "5e2b75e83",
-  "branch": "codex/macbook-pro-1.4.1-challenge-specialty-runtime",
+  "generatedAt": "2026-06-25T17:47:42.418Z",
+  "commit": "71fdc32a",
+  "branch": "codex/aurora-boss-sprite-conformance",
   "dirty": true,
   "gameKey": "aurora-galactica",
   "sourceEvidence": {
@@ -13,9 +13,9 @@
     "sampleCount": 8,
     "temporalSampleCount": 5,
     "cadenceSampleCount": 5,
-    "averageScore10": 6.21,
-    "weakestSpriteKey": "boss-line",
-    "weakestScore10": 4.95,
+    "averageScore10": 6.61,
+    "weakestSpriteKey": "challenge-dragonfly",
+    "weakestScore10": 4.98,
     "captureMode": "isolated-live-canvas-sprite-crops",
     "renderMode": "reference-pixel-lab",
     "measuredKeys": [
@@ -217,14 +217,14 @@
       "currentLabel": "Live runtime canvas boss-line",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 4.95,
-      "silhouetteSimilarity": 0.439,
-      "colorSimilarity": 0.599,
-      "fillRatio": 0.5191,
+      "score10": 8.19,
+      "silhouetteSimilarity": 0.815,
+      "colorSimilarity": 0.827,
+      "fillRatio": 0.5459,
       "targetFillRatio": 0.4145,
-      "filledCells": 407,
+      "filledCells": 428,
       "targetFilledCells": 325,
-      "litPixels": 1184,
+      "litPixels": 1536,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png",
       "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -234,9 +234,9 @@
         "width": 248,
         "height": 208,
         "bbox": {
-          "x": 98,
+          "x": 94,
           "y": 78,
-          "width": 48,
+          "width": 60,
           "height": 52
         }
       },
@@ -409,12 +409,12 @@
       "motionAxis": "two-phase-flap-pulse",
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-open.png",
-      "closedScore10": 4.95,
+      "closedScore10": 8.19,
       "openScore10": 5.56,
-      "scoreDelta": 0.61,
-      "litPixelDelta": 208,
-      "filledCellDelta": 37,
-      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 208, filled-cell delta 37."
+      "scoreDelta": 2.63,
+      "litPixelDelta": 144,
+      "filledCellDelta": 16,
+      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 144, filled-cell delta 16."
     },
     {
       "spriteKey": "challenge-dragonfly",
@@ -615,18 +615,18 @@
       "motionAxis": "full-flap-cadence-window",
       "frameCount": 8,
       "windowSecondsApprox": 0.385,
-      "scoreRange10": 0.61,
-      "averageAdjacentLitPixelDelta": 59.43,
-      "averageAdjacentFilledCellDelta": 10.57,
+      "scoreRange10": 2.63,
+      "averageAdjacentLitPixelDelta": 41.14,
+      "averageAdjacentFilledCellDelta": 4.57,
       "frames": [
         {
           "frameIndex": 0,
           "enemyTm": 0,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-00.png",
-          "score10": 4.95,
-          "litPixels": 1184,
-          "filledCells": 407,
-          "fillRatio": 0.5191
+          "score10": 8.19,
+          "litPixels": 1536,
+          "filledCells": 428,
+          "fillRatio": 0.5459
         },
         {
           "frameIndex": 1,
@@ -668,31 +668,31 @@
           "frameIndex": 5,
           "enemyTm": 0.275,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-05.png",
-          "score10": 4.95,
-          "litPixels": 1184,
-          "filledCells": 407,
-          "fillRatio": 0.5191
+          "score10": 8.19,
+          "litPixels": 1536,
+          "filledCells": 428,
+          "fillRatio": 0.5459
         },
         {
           "frameIndex": 6,
           "enemyTm": 0.33,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-06.png",
-          "score10": 4.95,
-          "litPixels": 1184,
-          "filledCells": 407,
-          "fillRatio": 0.5191
+          "score10": 8.19,
+          "litPixels": 1536,
+          "filledCells": 428,
+          "fillRatio": 0.5459
         },
         {
           "frameIndex": 7,
           "enemyTm": 0.385,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-07.png",
-          "score10": 4.95,
-          "litPixels": 1184,
-          "filledCells": 407,
-          "fillRatio": 0.5191
+          "score10": 8.19,
+          "litPixels": 1536,
+          "filledCells": 428,
+          "fillRatio": 0.5459
         }
       ],
-      "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 59.4, filled-cell delta 10.6. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+      "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 41.1, filled-cell delta 4.6. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     },
     {
       "spriteKey": "challenge-dragonfly",
@@ -959,14 +959,14 @@
       "currentLabel": "Live runtime canvas boss-line-dive-left",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 6.65,
-      "silhouetteSimilarity": 0.657,
-      "colorSimilarity": 0.68,
-      "fillRatio": 0.3622,
+      "score10": 5.67,
+      "silhouetteSimilarity": 0.551,
+      "colorSimilarity": 0.597,
+      "fillRatio": 0.514,
       "targetFillRatio": 0.4145,
-      "filledCells": 284,
+      "filledCells": 403,
       "targetFilledCells": 325,
-      "litPixels": 1273,
+      "litPixels": 1608,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-dive-left.png",
       "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -977,9 +977,9 @@
         "height": 264,
         "bbox": {
           "x": 109,
-          "y": 101,
-          "width": 66,
-          "height": 64
+          "y": 103,
+          "width": 63,
+          "height": 56
         }
       },
       "runtimeSubject": {
@@ -1093,14 +1093,14 @@
       "currentLabel": "Live runtime canvas boss-capture-beam",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 5.3,
-      "silhouetteSimilarity": 0.466,
-      "colorSimilarity": 0.649,
-      "fillRatio": 0.8776,
+      "score10": 5.42,
+      "silhouetteSimilarity": 0.483,
+      "colorSimilarity": 0.65,
+      "fillRatio": 0.7245,
       "targetFillRatio": 0.4145,
-      "filledCells": 688,
+      "filledCells": 568,
       "targetFilledCells": 325,
-      "litPixels": 20482,
+      "litPixels": 22018,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-capture-beam.png",
       "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -1111,9 +1111,9 @@
         "height": 528,
         "bbox": {
           "x": 116,
-          "y": 310,
+          "y": 238,
           "width": 112,
-          "height": 218
+          "height": 290
         }
       },
       "runtimeSubject": {
@@ -1137,14 +1137,14 @@
       "currentLabel": "Live runtime canvas boss-carrying-fighter",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 5.48,
-      "silhouetteSimilarity": 0.538,
-      "colorSimilarity": 0.567,
-      "fillRatio": 0.4656,
+      "score10": 5.59,
+      "silhouetteSimilarity": 0.532,
+      "colorSimilarity": 0.608,
+      "fillRatio": 0.4286,
       "targetFillRatio": 0.4145,
-      "filledCells": 365,
+      "filledCells": 336,
       "targetFilledCells": 325,
-      "litPixels": 2432,
+      "litPixels": 2784,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-carrying-fighter.png",
       "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -1154,9 +1154,9 @@
         "width": 328,
         "height": 368,
         "bbox": {
-          "x": 138,
+          "x": 134,
           "y": 82,
-          "width": 48,
+          "width": 60,
           "height": 128
         }
       },
