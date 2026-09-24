@@ -191,6 +191,40 @@ const GUARDIANS_REFERENCE_TIMINGS=Object.freeze({
  })
 });
 
+const GUARDIANS_STAGE_BEHAVIOR_POLICIES=Object.freeze({
+ rank3:Object.freeze({
+  id:'guardians-stage-five-active-dive-cap-v5',
+  status:'bounded-runtime-promotion',
+  minRank:3,
+  maxRank:3,
+  ruleScales:Object.freeze({
+   scoutDiveIntervalBase:1,
+   diveBaseVy:.97,
+   diveAccel:.94,
+   diveSideDrift:.9,
+   diveSwayAmplitude:.92
+  }),
+  diveSelection:Object.freeze({
+   playerCorridorExclusionPx:26,
+   lowerFieldSeparationPx:40,
+   maxLowerFieldDives:2,
+   maxActiveDives:2,
+   activeDiveSeparationPx:32
+  }),
+  enemyShotSource:Object.freeze({
+   crowdingThreshold:2,
+   playerCorridorExclusionPx:22,
+   minPlayerYGapPx:88,
+   lowerFieldDiveShotSeparationPx:30,
+   lowerFieldDiveShotYSeparationPx:108,
+   preferFormationWhenCrowded:1,
+   formationPoolSize:10,
+   allowBaseFallback:1
+  }),
+  evidence:'reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-visual-review-0.1.json'
+ })
+});
+
 const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
  'signal-flagship':Object.freeze({
   id:'signal-flagship',
@@ -558,6 +592,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
  scoreAdvancePresentation:GUARDIANS_SCORE_ADVANCE_PRESENTATION,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
+ stageBehaviorPolicies:GUARDIANS_STAGE_BEHAVIOR_POLICIES,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,
  formationLayouts:GUARDIANS_FORMATION_LAYOUTS,

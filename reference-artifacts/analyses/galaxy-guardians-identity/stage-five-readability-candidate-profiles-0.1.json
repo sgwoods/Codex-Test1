@@ -465,6 +465,26 @@
       "movementPrimitives": ["dive-attack", "scoring-routeability-window"],
       "axesTouched": ["dive-selection", "shot-window", "visual-readability", "collision-safety"],
       "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.02, "diveBaseVy": 0.97, "diveAccel": 0.94, "diveSideDrift": 0.9, "diveSwayAmplitude": 0.92}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 28, "lowerFieldSeparationPx": 40, "maxLowerFieldDives": 1}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 2, "playerCorridorExclusionPx": 24, "minPlayerYGapPx": 92, "lowerFieldDiveShotSeparationPx": 32, "lowerFieldDiveShotYSeparationPx": 112, "preferFormationWhenCrowded": true, "formationPoolSize": 10, "allowBaseFallback": true}}}
+    },
+    {
+      "id": "guardians-stage-five-active-dive-cap-v4",
+      "label": "Active dive cap v4",
+      "family": "combined-dive-source-fairness",
+      "intent": "Prevent early dive launches from converging into five-alien lower-field clusters while retaining measured missile pace.",
+      "affectedSpecLayers": ["movement-language", "stage-rank-pressure", "promotion-gates"],
+      "movementPrimitives": ["dive-attack", "bottom-wrap-return", "scoring-routeability-window"],
+      "axesTouched": ["dive-selection", "threat-concurrency", "shot-window", "visual-readability", "collision-safety"],
+      "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.01, "diveBaseVy": 0.96, "diveAccel": 0.93, "diveSideDrift": 0.88, "diveSwayAmplitude": 0.9}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 28, "lowerFieldSeparationPx": 42, "maxLowerFieldDives": 2, "maxActiveDives": 3, "activeDiveSeparationPx": 34}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 3, "playerCorridorExclusionPx": 20, "minPlayerYGapPx": 84, "lowerFieldDiveShotSeparationPx": 30, "lowerFieldDiveShotYSeparationPx": 100, "preferFormationWhenCrowded": true, "formationPoolSize": 8, "allowBaseFallback": true}}}
+    },
+    {
+      "id": "guardians-stage-five-active-dive-cap-v5",
+      "label": "Active dive cap v5",
+      "family": "combined-dive-source-fairness",
+      "intent": "Measure a stricter two-active-dive ceiling as the lower-field visual-clarity bound.",
+      "affectedSpecLayers": ["movement-language", "stage-rank-pressure", "promotion-gates"],
+      "movementPrimitives": ["dive-attack", "bottom-wrap-return", "scoring-routeability-window"],
+      "axesTouched": ["dive-selection", "threat-concurrency", "shot-window", "visual-readability", "collision-safety"],
+      "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.0, "diveBaseVy": 0.97, "diveAccel": 0.94, "diveSideDrift": 0.9, "diveSwayAmplitude": 0.92}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 26, "lowerFieldSeparationPx": 40, "maxLowerFieldDives": 2, "maxActiveDives": 2, "activeDiveSeparationPx": 32}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 2, "playerCorridorExclusionPx": 22, "minPlayerYGapPx": 88, "lowerFieldDiveShotSeparationPx": 30, "lowerFieldDiveShotYSeparationPx": 108, "preferFormationWhenCrowded": true, "formationPoolSize": 10, "allowBaseFallback": true}}}
     }
   ],
   "rollbackSignal": "Reject or hold candidate profiles if routeability regresses, collision-loss share rises, lane overlap does not improve, missile pace changes, single-shot cadence changes, or visual/contact-sheet review remains mixed below the strict lower-field readability floor."

@@ -1,0 +1,14 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-stage-five-runtime-promotion",
+  "version": "0.1",
+  "status": "bounded-rank-three-runtime-promotion",
+  "candidateId": "guardians-stage-five-active-dive-cap-v5",
+  "scope": {"stage": 5, "minRank": 3, "maxRank": 3},
+  "promotedBehavior": {"maxActiveDives": 2, "maxLowerFieldDives": 2, "activeDiveSeparationPx": 32, "playerCorridorExclusionPx": 26},
+  "lockedBehavior": {"enemyMissileSpeed": true, "enemyShotCadence": true, "playerSingleShotCadence": true},
+  "prePromotionEvidence": {"readabilityScore10": 4.7, "routeabilityLift10": 1, "laneOverlapShare": 0.082, "playerCorridorBlockedShare": 0.099, "pressureRetention": 1.031, "visualReviewPass": true},
+  "postPromotionEvidence": {"stageFiveClosenessScore10": 6.8, "stageFiveRouteabilityScore10": 6.6, "missilePaceConformanceScore10": 9.9},
+  "rollbackSignals": ["active dives exceed two at rank three", "missile pace changes", "visual cohort regresses", "routeability drops below the pre-promotion runtime baseline"],
+  "sources": ["stage-five-readability-candidate-0.1.json", "stage-five-readability-visual-review-0.1.json", "stage-five-galaxian-closeness-0.1.json"]
+}

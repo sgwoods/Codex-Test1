@@ -77,7 +77,7 @@ function validateGuardiansCandidateProfileSet(profile, file){
     }
     if(behavior.diveSelectionPolicy){
       const policy = behavior.diveSelectionPolicy;
-      for(const key of ['playerCorridorExclusionPx', 'lowerFieldSeparationPx', 'maxLowerFieldDives']){
+      for(const key of ['playerCorridorExclusionPx', 'lowerFieldSeparationPx', 'maxLowerFieldDives', 'maxActiveDives', 'activeDiveSeparationPx']){
         if(Object.prototype.hasOwnProperty.call(policy, key) && !Number.isFinite(+policy[key])){
           failProfile('Guardians dive-selection policy has a non-finite numeric value.', { id: candidate.id, key, value: policy[key] });
         }

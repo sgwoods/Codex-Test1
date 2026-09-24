@@ -1,11 +1,11 @@
 # Galaxy Guardians Stage-Five Readability Candidate
 
-Generated: 2026-09-24T18:01:46.110Z
+Generated: 2026-09-24T22:13:47.671Z
 Status: analysis-only-no-runtime-change
 
 ## Summary
 
-Measured 13 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Combined lane spacing v2 is the best gate-clearing profile; Combined lane spacing v2 has the highest strict readability but also clears the gate. Missile pace preserved: yes.
+Measured 15 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Active dive cap v5 is the best gate-clearing profile; Active dive cap v4 has the highest strict readability but does not clear the gate. Missile pace preserved: yes.
 
 This artifact is candidate-harness evidence only. It does not change shipped
 Guardians runtime constants.
@@ -25,6 +25,8 @@ Guardians runtime constants.
 | Combined corridor fairness v1 | 3.4/10 | 0.4/10 | 6.3/10 | 51% | 20% | 118% | blocked |
 | Combined lane spacing v2 | 4/10 | 1/10 | 6.5/10 | 32% | 14% | 112% | measurement pass |
 | Combined single-lower-threat v3 | 3.6/10 | 0.6/10 | 6.4/10 | 49% | 12% | 113% | measurement pass |
+| Active dive cap v4 | 4.8/10 | 1.8/10 | 6.7/10 | 12% | 12% | 87% | blocked |
+| Active dive cap v5 | 4.7/10 | 1.7/10 | 6.6/10 | 40% | 8% | 103% | measurement pass |
 
 ## Baseline
 
@@ -39,8 +41,8 @@ Guardians runtime constants.
 
 ## Best Candidate
 
-guardians-stage-five-combined-fairness-v2 is the current best measured
-candidate. Combined lane spacing v2 is the best gate-clearing candidate: lower-field readability changes by 1/10, routeability by 0.9/10, collision-loss share by -17 points, and measured pressure retention is 112%.
+guardians-stage-five-active-dive-cap-v5 is the current best measured
+candidate. Active dive cap v5 is the best gate-clearing candidate: lower-field readability changes by 1.7/10, routeability by 1/10, collision-loss share by -9 points, and measured pressure retention is 103%.
 
 ## Next Step
 

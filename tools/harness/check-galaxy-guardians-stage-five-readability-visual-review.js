@@ -55,6 +55,9 @@ function main(){
   if(!finite(artifact.alienShipPaceComparison?.candidateMedianAlienShipSpeedPxPerSecond)){
     fail('Guardians stage-five readability visual review must include alien ship pace comparison.', payload);
   }
+  if(artifact.baselineVisualCohort?.summary?.seedCount < 3 || artifact.candidateVisualCohort?.summary?.seedCount < 3){
+    fail('Guardians visual review requires a three-seed visual cohort.', payload);
+  }
   if(artifact.visualVerdict?.laneOverlapImproves !== true || artifact.visualVerdict?.collisionImproves !== true){
     fail('Guardians stage-five readability visual review must show lane/collision improvement before any branch decision.', payload);
   }

@@ -12,6 +12,7 @@ const CANDIDATE = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1
 const OUT = path.join(IDENTITY_ROOT, 'stage-five-readability-visual-review-0.1.json');
 const OUT_MD = path.join(IDENTITY_ROOT, 'stage-five-readability-visual-review-0.1.md');
 const OUT_SVG = path.join(IDENTITY_ROOT, 'stage-five-readability-visual-review-0.1.svg');
+const VISUAL_SEEDS = [12553, 13550, 14547];
 
 function readJson(file, fallback = {}){
   try {
@@ -47,13 +48,13 @@ function pct(value){
   return `${round((+value || 0) * 100, 0)}%`;
 }
 
-function sampleSnapshots(patch = null){
+function sampleSnapshots(patch = null, seed = VISUAL_SEEDS[0]){
   const ctx = loadGuardiansVm();
   if(patch) installGuardiansRuntimeRulePatch(ctx, patch);
   const state = ctx.createGalaxyGuardiansRuntimeState({
     stage: 5,
     ships: 5,
-    seed: 12553,
+    seed,
     maxPlayableStage: 9
   });
   state.player.inv = 999;
@@ -88,6 +89,7 @@ function sampleSnapshots(patch = null){
     }
   }
   return {
+    seed,
     rules,
     snapshots,
     eventCounts: {
@@ -97,6 +99,20 @@ function sampleSnapshots(patch = null){
       enemyWrapOrReturn: state.events.filter(event => event.type === 'enemy_wrap_or_return').length
     }
   };
+}
+
+function sampleVisualCohort(patch = null){
+  const samples = VISUAL_SEEDS.map(seed => {
+    const sample = sampleSnapshots(patch, seed);
+    sample.summary = snapshotSummary(sample);
+    return sample;
+  });
+  const snapshots = samples.flatMap(sample => sample.snapshots);
+  const summary = snapshotSummary({ snapshots });
+  summary.seedCount = samples.length;
+  summary.worstSeedOverlapSnapshotShare = round(Math.max(...samples.map(sample => sample.summary.overlapSnapshotShare)), 3);
+  summary.worstSeedMaxLowerFieldThreats = Math.max(...samples.map(sample => sample.summary.maxLowerFieldThreats));
+  return { seeds: VISUAL_SEEDS, samples, summary };
 }
 
 function snapshotSummary(sample){
@@ -226,6 +242,8 @@ function main(){
   baselineVisual.summary = snapshotSummary(baselineVisual);
   const candidateVisual = sampleSnapshots(bestCandidate.patch);
   candidateVisual.summary = snapshotSummary(candidateVisual);
+  const baselineVisualCohort = sampleVisualCohort(null);
+  const candidateVisualCohort = sampleVisualCohort(bestCandidate.patch);
   const missileLocked = Math.abs((candidateVisual.rules.enemyShotVy || 0) - (baselineVisual.rules.enemyShotVy || 0)) < 0.001
     && Math.abs((candidateVisual.rules.enemyShotIntervalBase || 0) - (baselineVisual.rules.enemyShotIntervalBase || 0)) < 0.001
     && Math.abs((candidateVisual.rules.singleShotCooldown || 0) - (baselineVisual.rules.singleShotCooldown || 0)) < 0.001;
@@ -233,12 +251,15 @@ function main(){
   const collisionImproves = bestCandidate.routeability.collisionLossShare < candidateArtifact.baseline.routeability.collisionLossShare;
   const routeabilityImproves = bestCandidate.routeabilityLift10 >= 0.5;
   const contactSheetImproves = candidateVisual.summary.overlapSnapshotShare <= baselineVisual.summary.overlapSnapshotShare;
+  const visualCohortImproves = candidateVisualCohort.summary.overlapSnapshotShare <= baselineVisualCohort.summary.overlapSnapshotShare
+    && candidateVisualCohort.summary.worstSeedOverlapSnapshotShare <= baselineVisualCohort.summary.worstSeedOverlapSnapshotShare;
   const visualPass = !!bestCandidate.promotionGate?.pass
     && missileLocked
     && laneOverlapImproves
     && collisionImproves
     && routeabilityImproves
-    && contactSheetImproves;
+    && contactSheetImproves
+    && visualCohortImproves;
   const hardPromotionHold = bestCandidate.lowerFieldReadabilityScore10 < 4.0;
   const baselineSpec = candidateArtifact.baselineSpecRead || {};
   const estimatedStageFiveClosenessScore10 = round((+baselineSpec.stageFiveClosenessScore10 || 0)
@@ -258,6 +279,8 @@ function main(){
     baselineCandidateMetrics: candidateArtifact.baseline,
     baselineVisual,
     candidateVisual,
+    baselineVisualCohort,
+    candidateVisualCohort,
     candidateStageFiveClosenessEstimate: {
       mode: 'candidate-profile-analysis-not-runtime-refresh',
       baselineStageFiveClosenessScore10: baselineSpec.stageFiveClosenessScore10,
@@ -291,6 +314,7 @@ function main(){
       collisionImproves,
       routeabilityImproves,
       contactSheetImproves,
+      visualCohortImproves,
       read: visualPass && !hardPromotionHold
         ? `${bestCandidate.label} clears the visual/contact-sheet gate for a bounded runtime branch while preserving missile pace and single-shot cadence.`
         : `${bestCandidate.label} improves aggregate readability, routeability, lane overlap, and collision metrics, but the fixed contact-sheet overlap sample does not improve, so this pass should not promote runtime behavior yet.`,

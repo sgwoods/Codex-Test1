@@ -1,6 +1,6 @@
 # Galaxy Guardians Stage-Five Galaxian Closeness
 
-Generated: 2026-06-12T17:11:44.560Z
+Generated: 2026-09-24T22:15:01.674Z
 Status: stage-five-galaxian-closeness-planning-gate-not-runtime-promotion
 
 ## Summary
@@ -28,15 +28,15 @@ Stage-five Guardians closeness is 6.8/10. The next Galaxian-fidelity work should
 | --- | ---: |
 | Persona | professional |
 | Sim time | 24s |
-| Alien dives | 10 |
-| Flagship dives | 3 |
-| Enemy missiles | 15 |
-| Wrap/returns | 10 |
-| Median alien ship speed | 85.2px/s |
+| Alien dives | 8 |
+| Flagship dives | 0 |
+| Enemy missiles | 17 |
+| Wrap/returns | 6 |
+| Median alien ship speed | 85.88px/s |
 | Median enemy missile speed | 128.4px/s |
 | Median player missile speed | 178px/s |
-| Lower-field threat share | 81% |
-| Multi-threat share | 81% |
+| Lower-field threat share | 67% |
+| Multi-threat share | 78% |
 
 ## Promotion Policy
 

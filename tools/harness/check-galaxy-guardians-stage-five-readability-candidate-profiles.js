@@ -25,7 +25,7 @@ try {
     fail('Guardians stage-five readability profile set needs a threat-source/firing-eligibility family.', { threatSourceCount: threatSourceCandidates.length });
   }
   const combinedCandidates = profile.candidates.filter(candidate => candidate.family === 'combined-dive-source-fairness');
-  if(combinedCandidates.length < 3){
+  if(combinedCandidates.length < 5){
     fail('Guardians stage-five readability profile set needs combined dive/source candidates.', { combinedCount: combinedCandidates.length });
   }
   console.log(JSON.stringify({

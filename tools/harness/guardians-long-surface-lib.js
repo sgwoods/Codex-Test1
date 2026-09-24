@@ -54,6 +54,7 @@ function loadGuardiansVm(){
   this.guardiansHarnessPersonaCfgForKey = guardiansHarnessPersonaCfgForKey;
   this.guardiansFairDivePredicate = guardiansFairDivePredicate;
   this.guardiansDiveLaneRank = guardiansDiveLaneRank;
+  this.pickGuardiansAlien = pickGuardiansAlien;
  `, sandbox);
  return sandbox;
 }
@@ -167,18 +168,39 @@ function installGuardiansRuntimeRulePatch(ctx, patch = {}){
     return this.__guardiansBaseFairDivePredicate(state, rules, pressure);
    }
    const lower = Array.isArray(pressure?.lowerFieldDives) ? pressure.lowerFieldDives : [];
+   const active = liveGuardiansAliens(state).filter(alien => alien.mode === 'diving' || alien.mode === 'wrapping');
    const playerX = +state.player?.x || 0;
    const corridor = Number.isFinite(+policy.playerCorridorExclusionPx) ? +policy.playerCorridorExclusionPx : 28;
    const separation = Number.isFinite(+policy.lowerFieldSeparationPx) ? +policy.lowerFieldSeparationPx : 40;
    const maxLower = Number.isFinite(+policy.maxLowerFieldDives) ? +policy.maxLowerFieldDives : 2;
+   const maxActive = Number.isFinite(+policy.maxActiveDives) ? +policy.maxActiveDives : Infinity;
+   const activeSeparation = Number.isFinite(+policy.activeDiveSeparationPx) ? +policy.activeDiveSeparationPx : null;
    return alien => {
     const rackX = +alien.rackX || 0;
+    if(active.length >= maxActive) return false;
     if(lower.length >= maxLower) return false;
     if(Math.abs(rackX - playerX) <= corridor) return false;
-    return lower.every(threat => Math.abs(rackX - (+threat.x || 0)) >= separation);
+    if(!lower.every(threat => Math.abs(rackX - (+threat.x || 0)) >= separation)) return false;
+    return activeSeparation === null || active.every(threat => Math.abs(rackX - (+threat.x || +threat.rackX || 0)) >= activeSeparation);
    };
   };
   this.guardiansFairDivePredicate = guardiansFairDivePredicate;
+  if(!this.__guardiansBasePickAlien){
+   this.__guardiansBasePickAlien = pickGuardiansAlien;
+  }
+  pickGuardiansAlien = function patchedPickGuardiansAlien(state, role = '', predicate = null, ranker = null){
+   const patch = this.__guardiansRuntimeRulePatch || {};
+   const policy = patch.behavior?.diveSelectionPolicy || null;
+   const rank = guardiansStageRank(state);
+   const applies = (!patch.minRank || rank >= patch.minRank) && (!patch.maxRank || rank <= patch.maxRank);
+   if(applies && policy?.enabled !== false && Number.isFinite(+policy?.maxActiveDives)){
+    const enforced = guardiansFairDivePredicate(state, guardiansRuntimeRules(state), guardiansPressureSnapshot(state, guardiansRuntimeRules(state)));
+    const combined = predicate ? alien => predicate(alien) && enforced(alien) : enforced;
+    return this.__guardiansBasePickAlien(state, role, combined, ranker);
+   }
+   return this.__guardiansBasePickAlien(state, role, predicate, ranker);
+  };
+  this.pickGuardiansAlien = pickGuardiansAlien;
 `, ctx);
  return ctx;
 }
