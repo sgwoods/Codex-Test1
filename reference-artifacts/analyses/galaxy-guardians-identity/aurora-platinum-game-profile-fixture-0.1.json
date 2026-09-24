@@ -1,0 +1,19 @@
+{
+  "artifactType": "platinum-game-definition-profile",
+  "schemaVersion": "0.1",
+  "gameKey": "aurora-galactica",
+  "status": "schema-fixture-not-runtime-promoted",
+  "execution": {"mode": "validated-pack-contract", "runtimeAdapter": "fixture-existing-aurora-runtime", "runtimePack": "fixture-existing-aurora-pack"},
+  "layers": {
+    "identity": {"title": "Aurora Galactica", "referenceFamily": "Galaga", "highScoreOwner": "Aurora Galactica"},
+    "stageArc": {"bands": [{"id": "regular", "stages": [1, 2]}, {"id": "challenge", "stages": [3]}]},
+    "actors": {"roles": ["player", "bee", "butterfly", "boss", "captured-fighter"]},
+    "movement": {"primitives": ["formation-entry", "dive-attack", "capture-beam", "challenge-setpiece"]},
+    "projectiles": {"player": {"cadencePolicy": "single-or-dual-fighter"}, "enemy": {"speedPolicy": "stage-family-measured", "sourcePolicy": "role-and-phase"}},
+    "scoring": {"model": "role-state-challenge-bonus"},
+    "presentation": {"visualTheme": "aurora", "audioTheme": "aurora-or-reference-runtime"},
+    "promotion": {"runtimeChangeAllowed": false, "requiredReadabilityScore10": 4, "collisionNonRegression": true, "requiresVisualReview": true}
+  },
+  "extensions": {"aurora": {"captureRescue": true, "dualFighter": true, "challengeStages": true}},
+  "evidence": {"sources": ["reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json"]}
+}

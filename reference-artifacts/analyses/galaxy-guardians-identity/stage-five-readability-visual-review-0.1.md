@@ -1,33 +1,33 @@
 # Galaxy Guardians Stage-Five Readability Visual Review
 
-Generated: 2026-06-12T22:50:48.170Z
+Generated: 2026-09-24T18:02:35.707Z
 Status: visual-review-qualified-pass-runtime-hold
 
 ## Verdict
 
-Commitment window v1 improves routeability and aggregate lane/collision metrics, but the contact-sheet sample is still mixed and strict lower-field readability is only 3.5/10, so this pass should not promote runtime constants yet.
+Combined lane spacing v2 improves aggregate readability, routeability, lane overlap, and collision metrics, but the fixed contact-sheet overlap sample does not improve, so this pass should not promote runtime behavior yet.
 
 | Signal | Baseline | Candidate |
 | --- | ---: | ---: |
-| Strict readability score | 3.3/10 | 3.5/10 |
-| Routeability | 5.8/10 | 6.4/10 |
-| Collision-loss share | 27% | 20% |
-| Lane-overlap share | 35% | 30% |
-| Contact-sheet overlap snapshots | 13% | 38% |
-| Median alien ship speed | 85.82px/s | 78.47px/s |
+| Strict readability score | 3/10 | 4/10 |
+| Routeability | 5.6/10 | 6.5/10 |
+| Collision-loss share | 49% | 32% |
+| Lane-overlap share | 35% | 14% |
+| Contact-sheet overlap snapshots | 13% | 25% |
+| Median alien ship speed | 85.82px/s | 85.91px/s |
 | Enemy missile speed | 128.563px/s | 128.563px/s |
 | Single-shot cooldown | 0.72s | 0.72s |
 
 ## Candidate-Mode Closeness
 
 Estimated stage-five closeness in candidate-analysis mode:
-7/10.
+7.3/10.
 This is not a refreshed runtime artifact; it is an analysis-mode estimate used
 to decide whether a runtime branch is worth creating.
 
 ## Promotion Decision
 
-Hold runtime promotion. Keep the candidate as a measured improvement and use the next pass to raise absolute lower-field clarity before changing shipped behavior.
+Hold runtime promotion. Keep the candidate as a measured improvement and resolve the fixed contact-sheet overlap regression before changing shipped behavior.
 
 ## Next Steps
 

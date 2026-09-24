@@ -1,0 +1,19 @@
+{
+  "artifactType": "platinum-game-definition-profile",
+  "schemaVersion": "0.1",
+  "gameKey": "galaxy-guardians-preview",
+  "status": "analysis-profile-not-runtime-promoted",
+  "execution": {"mode": "validated-pack-contract", "runtimeAdapter": "src/js/13-galaxy-guardians-gameplay-adapter.js", "runtimePack": "src/js/13-galaxy-guardians-game-pack.js"},
+  "layers": {
+    "identity": {"title": "Galaxy Guardians", "referenceFamily": "Galaxian", "highScoreOwner": "Galaxy Guardians"},
+    "stageArc": {"bands": [{"id": "opening", "stages": [1, 2]}, {"id": "early-escalation", "stages": [3, 5]}, {"id": "sustained-pressure", "stages": [7, 9]}, {"id": "bounded-late-loop", "stages": [11]}]},
+    "actors": {"roles": ["player", "scout", "escort", "flagship"]},
+    "movement": {"primitives": ["formation-march", "dive-attack", "bottom-wrap-return", "top-reentry"]},
+    "projectiles": {"player": {"cadencePolicy": "single-shot-lock"}, "enemy": {"speedPolicy": "measured-rank-band", "sourcePolicy": "candidate-selectable"}},
+    "scoring": {"model": "role-and-dive-state-points"},
+    "presentation": {"visualTheme": "guardians-signal", "audioTheme": "guardians-original"},
+    "promotion": {"runtimeChangeAllowed": false, "requiredReadabilityScore10": 4, "collisionNonRegression": true, "requiresVisualReview": true}
+  },
+  "extensions": {"guardians": {"rankThreeCandidateSet": "stage-five-readability-candidate-profiles-0.1.json"}},
+  "evidence": {"sources": ["stage-five-lower-field-readability-spec-delta-0.1.json", "stage-five-readability-candidate-0.1.json"]}
+}

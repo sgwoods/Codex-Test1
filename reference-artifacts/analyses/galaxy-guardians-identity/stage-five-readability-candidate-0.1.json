@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "galaxy-guardians-stage-five-readability-candidate",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-06-12T22:50:38.905Z",
+  "createdOn": "2026-09-24T18:01:46.110Z",
   "status": "analysis-only-no-runtime-change",
   "generatedBy": "tools/harness/analyze-galaxy-guardians-stage-five-readability-candidate.js",
   "sourceEvidence": {
@@ -13,8 +13,8 @@
   "candidateProfileSet": {
     "artifact": "reference-artifacts/analyses/galaxy-guardians-identity/stage-five-readability-candidate-profiles-0.1.json",
     "status": "candidate-profile-contract-analysis-only",
-    "familyCount": 3,
-    "candidateCount": 10,
+    "familyCount": 4,
+    "candidateCount": 13,
     "targetStrictReadabilityScore10": 4,
     "runtimeChangeAllowed": false
   },
@@ -48,13 +48,23 @@
   "baseline": {
     "routeability": {
       "label": "stage-five-routeability-window",
-      "score10": 5.8,
-      "survivalShare": 0.84,
-      "collisionLossShare": 0.267,
-      "playerLosses": 5,
+      "score10": 5.6,
+      "survivalShare": 0.87,
+      "collisionLossShare": 0.494,
+      "playerLosses": 4.5,
       "waveClears": 0,
-      "divePressurePerMinute": 21.33,
-      "shotPressurePerMinute": 32.83,
+      "divePressurePerMinute": 22.08,
+      "shotPressurePerMinute": 34.42,
+      "seedCohortCount": 2,
+      "scoreSpread10": 6.2,
+      "lossDiagnostics": {
+        "lossCauseCounts": {
+          "enemy_shot": 14,
+          "alien_scout_collision": 11,
+          "alien_escort_collision": 2
+        },
+        "weightedLossCost": 33.5
+      },
       "rows": [
         {
           "persona": "advanced",
@@ -108,6 +118,60 @@
             "divePressurePerMinute": 21,
             "shotPressurePerMinute": 33.5,
             "collisionLossShare": 0
+          }
+        },
+        {
+          "persona": "advanced",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 84.3,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 880,
+          "lives": 0,
+          "completed": false,
+          "gameOver": true,
+          "gameOverReason": "alien_scout_collision",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 41,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "player_shot_resolved": 36,
+            "rack_pulse": 49,
+            "alien_dive_start": 36,
+            "enemy_shot": 55,
+            "flagship_dive_start": 11,
+            "escort_join": 11,
+            "enemy_wrap_or_return": 41,
+            "player_lost": 5,
+            "wave_reset": 4,
+            "game_over": 1
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "progression": [],
+          "lossReasons": [
+            "alien_scout_collision",
+            "alien_scout_collision",
+            "alien_scout_collision",
+            "alien_scout_collision",
+            "alien_scout_collision"
+          ],
+          "score10": 4.4,
+          "components": {
+            "survivalShare": 0.703,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0,
+            "shotResolutionShare": 0.878,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 18,
+            "shotPressurePerMinute": 27.5,
+            "collisionLossShare": 1
           }
         },
         {
@@ -165,6 +229,57 @@
           }
         },
         {
+          "persona": "expert",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 119.75,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 2610,
+          "lives": 2,
+          "completed": false,
+          "gameOver": false,
+          "gameOverReason": "",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 42,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 71,
+            "player_shot_resolved": 41,
+            "alien_dive_start": 52,
+            "enemy_shot": 82,
+            "flagship_dive_start": 14,
+            "escort_join": 14,
+            "enemy_wrap_or_return": 69,
+            "player_lost": 3,
+            "wave_reset": 3
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 3,
+          "progression": [],
+          "lossReasons": [
+            "enemy_shot",
+            "alien_scout_collision",
+            "alien_scout_collision"
+          ],
+          "score10": 6,
+          "components": {
+            "survivalShare": 0.998,
+            "progressionShare": 0,
+            "lossBudgetShare": 0.4,
+            "collisionSafetyShare": 0.333,
+            "shotResolutionShare": 0.976,
+            "pressureSurvivability": 0.874,
+            "divePressurePerMinute": 26,
+            "shotPressurePerMinute": 41,
+            "collisionLossShare": 0.667
+          }
+        },
+        {
           "persona": "professional",
           "stageStart": 5,
           "ships": 5,
@@ -216,6 +331,58 @@
             "divePressurePerMinute": 23,
             "shotPressurePerMinute": 34,
             "collisionLossShare": 0.4
+          }
+        },
+        {
+          "persona": "professional",
+          "stageStart": 5,
+          "ships": 5,
+          "maxPlayableStage": 9,
+          "durationSeconds": 120,
+          "simT": 119.833,
+          "finalStage": 5,
+          "stageRank": 3,
+          "score": 1150,
+          "lives": 1,
+          "completed": false,
+          "gameOver": false,
+          "gameOverReason": "",
+          "eventCounts": {
+            "formation_entry_start": 1,
+            "player_shot_fired": 37,
+            "formation_entry_settle": 1,
+            "formation_rack_complete": 1,
+            "rack_pulse": 69,
+            "player_shot_resolved": 33,
+            "alien_dive_start": 49,
+            "enemy_shot": 79,
+            "flagship_dive_start": 17,
+            "escort_join": 17,
+            "enemy_wrap_or_return": 73,
+            "player_lost": 4,
+            "wave_reset": 4
+          },
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 4,
+          "progression": [],
+          "lossReasons": [
+            "alien_scout_collision",
+            "alien_escort_collision",
+            "enemy_shot",
+            "enemy_shot"
+          ],
+          "score10": 5.9,
+          "components": {
+            "survivalShare": 0.999,
+            "progressionShare": 0,
+            "lossBudgetShare": 0.2,
+            "collisionSafetyShare": 0.5,
+            "shotResolutionShare": 0.892,
+            "pressureSurvivability": 0.919,
+            "divePressurePerMinute": 24.5,
+            "shotPressurePerMinute": 39.5,
+            "collisionLossShare": 0.5
           }
         }
       ]
@@ -271,7 +438,7 @@
         "gameOverReason": ""
       }
     },
-    "lowerFieldReadabilityScore10": 3.3
+    "lowerFieldReadabilityScore10": 3
   },
   "candidates": [
     {
@@ -309,13 +476,22 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 6,
-        "survivalShare": 0.949,
-        "collisionLossShare": 0.411,
-        "playerLosses": 4,
+        "score10": 5.7,
+        "survivalShare": 0.895,
+        "collisionLossShare": 0.589,
+        "playerLosses": 3.67,
         "waveClears": 0,
-        "divePressurePerMinute": 22.67,
-        "shotPressurePerMinute": 37.83,
+        "divePressurePerMinute": 21.67,
+        "shotPressurePerMinute": 36.25,
+        "seedCohortCount": 2,
+        "scoreSpread10": 6.5,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "enemy_shot": 9,
+            "alien_scout_collision": 13
+          },
+          "weightedLossCost": 28.5
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -372,6 +548,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 62.5,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1230,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 36,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 32,
+              "rack_pulse": 35,
+              "alien_dive_start": 26,
+              "enemy_shot": 39,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "flagship_dive_start": 7,
+              "escort_join": 7,
+              "enemy_wrap_or_return": 18,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 4.3,
+            "components": {
+              "survivalShare": 0.521,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.2,
+              "shotResolutionShare": 0.889,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 13,
+              "shotPressurePerMinute": 19.5,
+              "collisionLossShare": 0.8
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -420,6 +650,56 @@
               "divePressurePerMinute": 25.5,
               "shotPressurePerMinute": 40.5,
               "collisionLossShare": 0.333
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.967,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 940,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 34,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 70,
+              "player_shot_resolved": 32,
+              "alien_dive_start": 52,
+              "enemy_shot": 85,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 87,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 6.4,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.941,
+              "pressureSurvivability": 0.858,
+              "divePressurePerMinute": 26,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0.5
             }
           },
           {
@@ -472,6 +752,57 @@
               "divePressurePerMinute": 23,
               "shotPressurePerMinute": 40,
               "collisionLossShare": 0.5
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.917,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1240,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 37,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 69,
+              "player_shot_resolved": 35,
+              "alien_dive_start": 46,
+              "enemy_shot": 84,
+              "flagship_dive_start": 16,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 76,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.5,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.946,
+              "pressureSurvivability": 0.921,
+              "divePressurePerMinute": 23,
+              "shotPressurePerMinute": 42,
+              "collisionLossShare": 1
             }
           }
         ]
@@ -527,12 +858,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 3.1,
-      "routeabilityLift10": 0.2,
-      "readabilityLift10": -0.2,
-      "collisionLossDelta": 0.144,
+      "lowerFieldReadabilityScore10": 3.2,
+      "routeabilityLift10": 0.1,
+      "readabilityLift10": 0.2,
+      "collisionLossDelta": 0.095,
       "laneOverlapDelta": -0.02,
-      "pressureRetention": 1.117,
+      "pressureRetention": 1.025,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -574,12 +905,21 @@
       "routeability": {
         "label": "stage-five-routeability-window",
         "score10": 5.5,
-        "survivalShare": 0.956,
-        "collisionLossShare": 0.722,
+        "survivalShare": 0.862,
+        "collisionLossShare": 0.62,
         "playerLosses": 4,
         "waveClears": 0,
-        "divePressurePerMinute": 24.5,
-        "shotPressurePerMinute": 38.5,
+        "divePressurePerMinute": 22.42,
+        "shotPressurePerMinute": 34.5,
+        "seedCohortCount": 2,
+        "scoreSpread10": 6.9,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 16,
+            "enemy_shot": 8
+          },
+          "weightedLossCost": 32
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -636,6 +976,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 37.383,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 620,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 22,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 18,
+              "rack_pulse": 20,
+              "alien_dive_start": 17,
+              "enemy_shot": 19,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "flagship_dive_start": 3,
+              "escort_join": 3,
+              "enemy_wrap_or_return": 6,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision"
+            ],
+            "score10": 3.8,
+            "components": {
+              "survivalShare": 0.312,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.2,
+              "shotResolutionShare": 0.818,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 8.5,
+              "shotPressurePerMinute": 9.5,
+              "collisionLossShare": 0.8
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -684,6 +1078,58 @@
               "divePressurePerMinute": 24,
               "shotPressurePerMinute": 40.5,
               "collisionLossShare": 0.667
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.917,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1900,
+            "lives": 1,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 69,
+              "player_shot_resolved": 35,
+              "alien_dive_start": 53,
+              "enemy_shot": 82,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 71,
+              "player_lost": 4,
+              "wave_reset": 4
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 4,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.5,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.2,
+              "collisionSafetyShare": 0.25,
+              "shotResolutionShare": 0.897,
+              "pressureSurvivability": 0.864,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 41,
+              "collisionLossShare": 0.75
             }
           },
           {
@@ -736,6 +1182,57 @@
               "divePressurePerMinute": 25.5,
               "shotPressurePerMinute": 40,
               "collisionLossShare": 0.5
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.25,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1980,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 40,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 69,
+              "player_shot_resolved": 39,
+              "alien_dive_start": 52,
+              "enemy_shot": 82,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 80,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 6.9,
+            "components": {
+              "survivalShare": 0.994,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.975,
+              "pressureSurvivability": 0.874,
+              "divePressurePerMinute": 26,
+              "shotPressurePerMinute": 41,
+              "collisionLossShare": 0
             }
           }
         ]
@@ -791,12 +1288,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 2.4,
-      "routeabilityLift10": -0.3,
-      "readabilityLift10": -0.9,
-      "collisionLossDelta": 0.455,
+      "lowerFieldReadabilityScore10": 3.2,
+      "routeabilityLift10": -0.1,
+      "readabilityLift10": 0.2,
+      "collisionLossDelta": 0.126,
       "laneOverlapDelta": -0.082,
-      "pressureRetention": 1.163,
+      "pressureRetention": 1.007,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -842,12 +1339,21 @@
       "routeability": {
         "label": "stage-five-routeability-window",
         "score10": 6.4,
-        "survivalShare": 0.873,
-        "collisionLossShare": 0.2,
-        "playerLosses": 3.33,
+        "survivalShare": 0.935,
+        "collisionLossShare": 0.35,
+        "playerLosses": 2.83,
         "waveClears": 0,
-        "divePressurePerMinute": 21.17,
-        "shotPressurePerMinute": 35.33,
+        "divePressurePerMinute": 22.83,
+        "shotPressurePerMinute": 39,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.3,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 6,
+            "enemy_shot": 11
+          },
+          "weightedLossCost": 20
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -904,6 +1410,56 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.217,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1630,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 51,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 49,
+              "rack_pulse": 71,
+              "alien_dive_start": 52,
+              "enemy_shot": 87,
+              "flagship_dive_start": 18,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 77,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.7,
+            "components": {
+              "survivalShare": 0.993,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.961,
+              "pressureSurvivability": 0.848,
+              "divePressurePerMinute": 26,
+              "shotPressurePerMinute": 43.5,
+              "collisionLossShare": 1
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -954,6 +1510,56 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.933,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1540,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 46,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 44,
+              "alien_dive_start": 49,
+              "enemy_shot": 86,
+              "flagship_dive_start": 17,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 73,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "alien_scout_collision"
+            ],
+            "score10": 6.5,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.957,
+              "pressureSurvivability": 0.882,
+              "divePressurePerMinute": 24.5,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 0.5
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -1001,6 +1607,57 @@
               "pressureSurvivability": 0.899,
               "divePressurePerMinute": 25,
               "shotPressurePerMinute": 40.5,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.8,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2160,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 40,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 70,
+              "player_shot_resolved": 40,
+              "alien_dive_start": 46,
+              "enemy_shot": 83,
+              "flagship_dive_start": 16,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 67,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 7,
+            "components": {
+              "survivalShare": 0.998,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 1,
+              "pressureSurvivability": 0.926,
+              "divePressurePerMinute": 23,
+              "shotPressurePerMinute": 41.5,
               "collisionLossShare": 0
             }
           }
@@ -1057,12 +1714,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 3.5,
-      "routeabilityLift10": 0.6,
-      "readabilityLift10": 0.2,
-      "collisionLossDelta": -0.067,
+      "lowerFieldReadabilityScore10": 3.7,
+      "routeabilityLift10": 0.8,
+      "readabilityLift10": 0.7,
+      "collisionLossDelta": -0.144,
       "laneOverlapDelta": -0.045,
-      "pressureRetention": 1.043,
+      "pressureRetention": 1.094,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": true,
@@ -1110,11 +1767,20 @@
         "label": "stage-five-routeability-window",
         "score10": 6.5,
         "survivalShare": 0.997,
-        "collisionLossShare": 0.445,
-        "playerLosses": 2.33,
+        "collisionLossShare": 0.472,
+        "playerLosses": 2.17,
         "waveClears": 0,
-        "divePressurePerMinute": 24.67,
-        "shotPressurePerMinute": 41,
+        "divePressurePerMinute": 24.08,
+        "shotPressurePerMinute": 41.5,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.5,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 7,
+            "enemy_shot": 6
+          },
+          "weightedLossCost": 16.5
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -1165,6 +1831,56 @@
               "divePressurePerMinute": 23.5,
               "shotPressurePerMinute": 40,
               "collisionLossShare": 0.667
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 120,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2930,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 68,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 66,
+              "rack_pulse": 70,
+              "alien_dive_start": 45,
+              "enemy_shot": 83,
+              "flagship_dive_start": 12,
+              "escort_join": 11,
+              "enemy_wrap_or_return": 48,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.8,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.971,
+              "pressureSurvivability": 0.936,
+              "divePressurePerMinute": 22.5,
+              "shotPressurePerMinute": 41.5,
+              "collisionLossShare": 1
             }
           },
           {
@@ -1219,6 +1935,56 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.717,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1860,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 44,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 44,
+              "alien_dive_start": 48,
+              "enemy_shot": 85,
+              "flagship_dive_start": 18,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 76,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 7.2,
+            "components": {
+              "survivalShare": 0.998,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 1,
+              "pressureSurvivability": 0.897,
+              "divePressurePerMinute": 24,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -1265,6 +2031,56 @@
               "divePressurePerMinute": 25,
               "shotPressurePerMinute": 42,
               "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.067,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1300,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 70,
+              "player_shot_resolved": 38,
+              "alien_dive_start": 48,
+              "enemy_shot": 84,
+              "flagship_dive_start": 17,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 74,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 6.5,
+            "components": {
+              "survivalShare": 0.992,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.974,
+              "pressureSurvivability": 0.902,
+              "divePressurePerMinute": 24,
+              "shotPressurePerMinute": 42,
+              "collisionLossShare": 0.5
             }
           }
         ]
@@ -1321,11 +2137,11 @@
         }
       },
       "lowerFieldReadabilityScore10": 3.1,
-      "routeabilityLift10": 0.7,
-      "readabilityLift10": -0.2,
-      "collisionLossDelta": 0.178,
+      "routeabilityLift10": 0.9,
+      "readabilityLift10": 0.1,
+      "collisionLossDelta": -0.022,
       "laneOverlapDelta": -0.091,
-      "pressureRetention": 1.213,
+      "pressureRetention": 1.161,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -1374,13 +2190,22 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 5.8,
-        "survivalShare": 0.746,
-        "collisionLossShare": 0.267,
-        "playerLosses": 4,
+        "score10": 5.6,
+        "survivalShare": 0.791,
+        "collisionLossShare": 0.533,
+        "playerLosses": 3.83,
         "waveClears": 0,
-        "divePressurePerMinute": 18.5,
-        "shotPressurePerMinute": 29.67,
+        "divePressurePerMinute": 20.25,
+        "shotPressurePerMinute": 32,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.2,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "enemy_shot": 11,
+            "alien_scout_collision": 12
+          },
+          "weightedLossCost": 29
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -1434,6 +2259,60 @@
               "divePressurePerMinute": 15.5,
               "shotPressurePerMinute": 21,
               "collisionLossShare": 0.6
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 69.9,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1660,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "enemy_shot",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 38,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 33,
+              "rack_pulse": 40,
+              "alien_dive_start": 31,
+              "enemy_shot": 44,
+              "flagship_dive_start": 10,
+              "escort_join": 10,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "enemy_wrap_or_return": 29,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 4.4,
+            "components": {
+              "survivalShare": 0.583,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.2,
+              "shotResolutionShare": 0.868,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 15.5,
+              "shotPressurePerMinute": 22,
+              "collisionLossShare": 0.8
             }
           },
           {
@@ -1491,6 +2370,55 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.483,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1740,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 44,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 42,
+              "alien_dive_start": 52,
+              "enemy_shot": 86,
+              "flagship_dive_start": 18,
+              "escort_join": 12,
+              "enemy_wrap_or_return": 74,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 0.996,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.955,
+              "pressureSurvivability": 0.853,
+              "divePressurePerMinute": 26,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 1
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -1538,6 +2466,60 @@
               "divePressurePerMinute": 23.5,
               "shotPressurePerMinute": 42,
               "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 111.883,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1490,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 64,
+              "player_shot_resolved": 38,
+              "alien_dive_start": 49,
+              "enemy_shot": 76,
+              "flagship_dive_start": 13,
+              "escort_join": 13,
+              "enemy_wrap_or_return": 60,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot",
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.5,
+            "components": {
+              "survivalShare": 0.932,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.4,
+              "shotResolutionShare": 0.974,
+              "pressureSurvivability": 0.935,
+              "divePressurePerMinute": 24.5,
+              "shotPressurePerMinute": 38,
+              "collisionLossShare": 0.6
             }
           }
         ]
@@ -1593,12 +2575,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 3.3,
+      "lowerFieldReadabilityScore10": 3.4,
       "routeabilityLift10": 0,
-      "readabilityLift10": 0,
-      "collisionLossDelta": 0,
+      "readabilityLift10": 0.4,
+      "collisionLossDelta": 0.039,
       "laneOverlapDelta": -0.053,
-      "pressureRetention": 0.889,
+      "pressureRetention": 0.925,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -1648,12 +2630,21 @@
       "routeability": {
         "label": "stage-five-routeability-window",
         "score10": 6.1,
-        "survivalShare": 0.971,
-        "collisionLossShare": 0.6,
-        "playerLosses": 2.67,
+        "survivalShare": 0.95,
+        "collisionLossShare": 0.633,
+        "playerLosses": 2.33,
         "waveClears": 0,
-        "divePressurePerMinute": 24.83,
-        "shotPressurePerMinute": 39.67,
+        "divePressurePerMinute": 24.17,
+        "shotPressurePerMinute": 39.25,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.7,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 12,
+            "enemy_shot": 2
+          },
+          "weightedLossCost": 20
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -1710,6 +2701,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 94.467,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1310,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 44,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 40,
+              "rack_pulse": 53,
+              "alien_dive_start": 40,
+              "enemy_shot": 60,
+              "flagship_dive_start": 12,
+              "escort_join": 12,
+              "enemy_wrap_or_return": 48,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 4.6,
+            "components": {
+              "survivalShare": 0.787,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.909,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 20,
+              "shotPressurePerMinute": 30,
+              "collisionLossShare": 1
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -1760,6 +2805,55 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 120,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1850,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 41,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 40,
+              "alien_dive_start": 50,
+              "enemy_shot": 86,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 85,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.976,
+              "pressureSurvivability": 0.872,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 1
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -1805,6 +2899,51 @@
               "pressureSurvivability": 0.892,
               "divePressurePerMinute": 24.5,
               "shotPressurePerMinute": 42,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.9,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1960,
+            "lives": 5,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 42,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 73,
+              "player_shot_resolved": 41,
+              "alien_dive_start": 51,
+              "enemy_shot": 87,
+              "flagship_dive_start": 16,
+              "escort_join": 16,
+              "enemy_wrap_or_return": 89
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 0,
+            "progression": [],
+            "lossReasons": [],
+            "score10": 7.7,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 1,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.976,
+              "pressureSurvivability": 0.857,
+              "divePressurePerMinute": 25.5,
+              "shotPressurePerMinute": 43.5,
               "collisionLossShare": 0
             }
           }
@@ -1861,12 +3000,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 2.7,
-      "routeabilityLift10": 0.3,
-      "readabilityLift10": -0.6,
-      "collisionLossDelta": 0.333,
+      "lowerFieldReadabilityScore10": 2.9,
+      "routeabilityLift10": 0.5,
+      "readabilityLift10": -0.1,
+      "collisionLossDelta": 0.139,
       "laneOverlapDelta": 0.001,
-      "pressureRetention": 1.191,
+      "pressureRetention": 1.122,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -1916,13 +3055,23 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 6.8,
-        "survivalShare": 0.998,
-        "collisionLossShare": 0.333,
-        "playerLosses": 2.67,
-        "waveClears": 0.33,
-        "divePressurePerMinute": 25.33,
-        "shotPressurePerMinute": 40.33,
+        "score10": 6.1,
+        "survivalShare": 0.825,
+        "collisionLossShare": 0.4,
+        "playerLosses": 3.17,
+        "waveClears": 0.17,
+        "divePressurePerMinute": 21.08,
+        "shotPressurePerMinute": 33.17,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.4,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "enemy_shot": 9,
+            "alien_scout_collision": 9,
+            "alien_escort_collision": 1
+          },
+          "weightedLossCost": 24
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -1984,6 +3133,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 60.15,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 830,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "enemy_shot",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 31,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 28,
+              "rack_pulse": 34,
+              "alien_dive_start": 23,
+              "enemy_shot": 37,
+              "flagship_dive_start": 7,
+              "escort_join": 7,
+              "enemy_wrap_or_return": 21,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 4.6,
+            "components": {
+              "survivalShare": 0.501,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.4,
+              "shotResolutionShare": 0.903,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 11.5,
+              "shotPressurePerMinute": 18.5,
+              "collisionLossShare": 0.6
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -2035,6 +3238,55 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.283,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1760,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 34,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 33,
+              "alien_dive_start": 54,
+              "enemy_shot": 86,
+              "flagship_dive_start": 12,
+              "escort_join": 12,
+              "enemy_wrap_or_return": 78,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot"
+            ],
+            "score10": 7.4,
+            "components": {
+              "survivalShare": 0.994,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.971,
+              "pressureSurvivability": 0.834,
+              "divePressurePerMinute": 27,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 0
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -2082,6 +3334,60 @@
               "divePressurePerMinute": 26,
               "shotPressurePerMinute": 41.5,
               "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 55.033,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1360,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 19,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 29,
+              "player_shot_resolved": 16,
+              "alien_dive_start": 24,
+              "enemy_shot": 33,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "flagship_dive_start": 7,
+              "escort_join": 7,
+              "enemy_wrap_or_return": 20,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision"
+            ],
+            "score10": 4.2,
+            "components": {
+              "survivalShare": 0.459,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.2,
+              "shotResolutionShare": 0.842,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 12,
+              "shotPressurePerMinute": 16.5,
+              "collisionLossShare": 0.8
             }
           }
         ]
@@ -2137,20 +3443,20 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 3.4,
-      "routeabilityLift10": 1,
-      "readabilityLift10": 0.1,
-      "collisionLossDelta": 0.066,
+      "lowerFieldReadabilityScore10": 3.6,
+      "routeabilityLift10": 0.5,
+      "readabilityLift10": 0.6,
+      "collisionLossDelta": -0.094,
       "laneOverlapDelta": -0.081,
-      "pressureRetention": 1.212,
+      "pressureRetention": 0.96,
       "missilePacePreserved": true,
       "promotionGate": {
-        "pass": false,
+        "pass": true,
         "runtimeChangeAllowed": false,
         "requiredReadabilityLift10": 0.2,
         "minPressureRetention": 0.88,
         "requireMissilePacePreserved": true,
-        "read": "Candidate is useful evidence but does not clear the measurement gate for runtime promotion."
+        "read": "Candidate clears the measurement gate for browser/contact-sheet review, but it remains analysis-only."
       }
     },
     {
@@ -2198,13 +3504,22 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 6.5,
-        "survivalShare": 0.997,
-        "collisionLossShare": 0.5,
-        "playerLosses": 2.67,
-        "waveClears": 0.33,
-        "divePressurePerMinute": 27.33,
-        "shotPressurePerMinute": 40.5,
+        "score10": 6.3,
+        "survivalShare": 0.93,
+        "collisionLossShare": 0.55,
+        "playerLosses": 2.33,
+        "waveClears": 0.17,
+        "divePressurePerMinute": 25.25,
+        "shotPressurePerMinute": 38.42,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.7,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 9,
+            "enemy_shot": 5
+          },
+          "weightedLossCost": 18.5
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -2266,6 +3581,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 70.6,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1780,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 35,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 30,
+              "rack_pulse": 39,
+              "alien_dive_start": 31,
+              "enemy_shot": 45,
+              "flagship_dive_start": 8,
+              "escort_join": 8,
+              "enemy_wrap_or_return": 27,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision"
+            ],
+            "score10": 4.4,
+            "components": {
+              "survivalShare": 0.588,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.2,
+              "shotResolutionShare": 0.857,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 15.5,
+              "shotPressurePerMinute": 22.5,
+              "collisionLossShare": 0.8
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -2317,6 +3686,51 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.9,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2650,
+            "lives": 5,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 40,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 73,
+              "player_shot_resolved": 39,
+              "alien_dive_start": 53,
+              "enemy_shot": 88,
+              "flagship_dive_start": 13,
+              "escort_join": 13,
+              "enemy_wrap_or_return": 79
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 0,
+            "progression": [],
+            "lossReasons": [],
+            "score10": 7.7,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 1,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.975,
+              "pressureSurvivability": 0.833,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 44,
+              "collisionLossShare": 0
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -2364,6 +3778,55 @@
               "divePressurePerMinute": 29,
               "shotPressurePerMinute": 40.5,
               "collisionLossShare": 0.5
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.967,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1600,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 41,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 40,
+              "alien_dive_start": 55,
+              "enemy_shot": 85,
+              "flagship_dive_start": 14,
+              "escort_join": 11,
+              "enemy_wrap_or_return": 72,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.976,
+              "pressureSurvivability": 0.829,
+              "divePressurePerMinute": 27.5,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 1
             }
           }
         ]
@@ -2419,12 +3882,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 3.6,
+      "lowerFieldReadabilityScore10": 3.7,
       "routeabilityLift10": 0.7,
-      "readabilityLift10": 0.3,
-      "collisionLossDelta": 0.233,
+      "readabilityLift10": 0.7,
+      "collisionLossDelta": 0.056,
       "laneOverlapDelta": -0.224,
-      "pressureRetention": 1.252,
+      "pressureRetention": 1.127,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -2482,13 +3945,22 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 5.5,
-        "survivalShare": 0.884,
-        "collisionLossShare": 0.622,
-        "playerLosses": 4.33,
+        "score10": 6.2,
+        "survivalShare": 0.942,
+        "collisionLossShare": 0.478,
+        "playerLosses": 2.83,
         "waveClears": 0,
-        "divePressurePerMinute": 23.67,
-        "shotPressurePerMinute": 35.33,
+        "divePressurePerMinute": 24.17,
+        "shotPressurePerMinute": 39.17,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.5,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 9,
+            "enemy_shot": 8
+          },
+          "weightedLossCost": 21.5
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -2542,6 +4014,55 @@
               "divePressurePerMinute": 24.5,
               "shotPressurePerMinute": 37,
               "collisionLossShare": 0.6
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.95,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2340,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 52,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 51,
+              "rack_pulse": 72,
+              "alien_dive_start": 53,
+              "enemy_shot": 87,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 82,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.981,
+              "pressureSurvivability": 0.838,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 43.5,
+              "collisionLossShare": 1
             }
           },
           {
@@ -2599,6 +4120,55 @@
             }
           },
           {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 120,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1380,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 46,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 44,
+              "alien_dive_start": 44,
+              "enemy_shot": 86,
+              "flagship_dive_start": 19,
+              "escort_join": 19,
+              "enemy_wrap_or_return": 84,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot"
+            ],
+            "score10": 7.5,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.957,
+              "pressureSurvivability": 0.93,
+              "divePressurePerMinute": 22,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 0
+            }
+          },
+          {
             "persona": "professional",
             "stageStart": 5,
             "ships": 5,
@@ -2647,6 +4217,56 @@
               "divePressurePerMinute": 28.5,
               "shotPressurePerMinute": 40,
               "collisionLossShare": 0.667
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.617,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1270,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 36,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 35,
+              "alien_dive_start": 51,
+              "enemy_shot": 85,
+              "flagship_dive_start": 14,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 75,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 7.2,
+            "components": {
+              "survivalShare": 0.997,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.972,
+              "pressureSurvivability": 0.868,
+              "divePressurePerMinute": 25.5,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0
             }
           }
         ]
@@ -2702,20 +4322,20 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 2.8,
-      "routeabilityLift10": -0.3,
-      "readabilityLift10": -0.5,
-      "collisionLossDelta": 0.355,
+      "lowerFieldReadabilityScore10": 3.5,
+      "routeabilityLift10": 0.6,
+      "readabilityLift10": 0.5,
+      "collisionLossDelta": -0.016,
       "laneOverlapDelta": -0.19,
-      "pressureRetention": 1.089,
+      "pressureRetention": 1.121,
       "missilePacePreserved": true,
       "promotionGate": {
-        "pass": false,
+        "pass": true,
         "runtimeChangeAllowed": false,
         "requiredReadabilityLift10": 0.2,
         "minPressureRetention": 0.88,
         "requireMissilePacePreserved": true,
-        "read": "Candidate is useful evidence but does not clear the measurement gate for runtime promotion."
+        "read": "Candidate clears the measurement gate for browser/contact-sheet review, but it remains analysis-only."
       }
     },
     {
@@ -2763,13 +4383,22 @@
       },
       "routeability": {
         "label": "stage-five-routeability-window",
-        "score10": 5.3,
-        "survivalShare": 0.71,
-        "collisionLossShare": 0.567,
-        "playerLosses": 4,
+        "score10": 5.6,
+        "survivalShare": 0.81,
+        "collisionLossShare": 0.6,
+        "playerLosses": 3.33,
         "waveClears": 0,
-        "divePressurePerMinute": 19,
-        "shotPressurePerMinute": 27.33,
+        "divePressurePerMinute": 21.33,
+        "shotPressurePerMinute": 32.83,
+        "seedCohortCount": 2,
+        "scoreSpread10": 6.4,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "enemy_shot": 9,
+            "alien_scout_collision": 11
+          },
+          "weightedLossCost": 25.5
+        },
         "rows": [
           {
             "persona": "advanced",
@@ -2826,6 +4455,60 @@
             }
           },
           {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 87.9,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1620,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 41,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 37,
+              "rack_pulse": 50,
+              "alien_dive_start": 37,
+              "enemy_shot": 58,
+              "flagship_dive_start": 10,
+              "escort_join": 10,
+              "enemy_wrap_or_return": 38,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot",
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.3,
+            "components": {
+              "survivalShare": 0.733,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.6,
+              "shotResolutionShare": 0.902,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 18.5,
+              "shotPressurePerMinute": 29,
+              "collisionLossShare": 0.4
+            }
+          },
+          {
             "persona": "expert",
             "stageStart": 5,
             "ships": 5,
@@ -2873,6 +4556,55 @@
               "divePressurePerMinute": 30,
               "shotPressurePerMinute": 40.5,
               "collisionLossShare": 0.5
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.867,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2290,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 37,
+              "alien_dive_start": 50,
+              "enemy_shot": 87,
+              "flagship_dive_start": 15,
+              "escort_join": 15,
+              "enemy_wrap_or_return": 77,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.949,
+              "pressureSurvivability": 0.867,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 43.5,
+              "collisionLossShare": 1
             }
           },
           {
@@ -2928,6 +4660,56 @@
               "shotPressurePerMinute": 17,
               "collisionLossShare": 0.4
             }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 120,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2010,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 43,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 42,
+              "alien_dive_start": 55,
+              "enemy_shot": 85,
+              "flagship_dive_start": 13,
+              "escort_join": 13,
+              "enemy_wrap_or_return": 69,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 6.4,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.977,
+              "pressureSurvivability": 0.829,
+              "divePressurePerMinute": 27.5,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0.5
+            }
           }
         ]
       },
@@ -2982,12 +4764,12 @@
           "gameOverReason": ""
         }
       },
-      "lowerFieldReadabilityScore10": 2.7,
-      "routeabilityLift10": -0.5,
-      "readabilityLift10": -0.6,
-      "collisionLossDelta": 0.3,
+      "lowerFieldReadabilityScore10": 3,
+      "routeabilityLift10": 0,
+      "readabilityLift10": 0,
+      "collisionLossDelta": 0.106,
       "laneOverlapDelta": -0.175,
-      "pressureRetention": 0.855,
+      "pressureRetention": 0.959,
       "missilePacePreserved": true,
       "promotionGate": {
         "pass": false,
@@ -2997,32 +4779,1357 @@
         "requireMissilePacePreserved": true,
         "read": "Candidate is useful evidence but does not clear the measurement gate for runtime promotion."
       }
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v1",
+      "label": "Combined corridor fairness v1",
+      "family": "combined-dive-source-fairness",
+      "intent": "Combine the best commitment window with conservative dive admission and corridor-aware formation firing.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "stage-rank-pressure",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "dive-selection",
+        "shot-window",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.04,
+          "diveBaseVy": 0.95,
+          "diveAccel": 0.92,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.93
+        },
+        "behavior": {
+          "diveSelectionPolicy": {
+            "enabled": true,
+            "playerCorridorExclusionPx": 26,
+            "lowerFieldSeparationPx": 38,
+            "maxLowerFieldDives": 2
+          },
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 3,
+            "playerCorridorExclusionPx": 22,
+            "minPlayerYGapPx": 88,
+            "lowerFieldDiveShotSeparationPx": 28,
+            "lowerFieldDiveShotYSeparationPx": 104,
+            "preferFormationWhenCrowded": true,
+            "formationPoolSize": 8,
+            "allowBaseFallback": true
+          }
+        }
+      },
+      "routeability": {
+        "label": "stage-five-routeability-window",
+        "score10": 6.3,
+        "survivalShare": 0.997,
+        "collisionLossShare": 0.514,
+        "playerLosses": 2.67,
+        "waveClears": 0,
+        "divePressurePerMinute": 25,
+        "shotPressurePerMinute": 41.67,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.2,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "enemy_shot": 7,
+            "alien_scout_collision": 9
+          },
+          "weightedLossCost": 20.5
+        },
+        "rows": [
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.817,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1640,
+            "lives": 1,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 56,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 52,
+              "rack_pulse": 69,
+              "alien_dive_start": 49,
+              "enemy_shot": 79,
+              "flagship_dive_start": 16,
+              "escort_join": 15,
+              "enemy_wrap_or_return": 60,
+              "player_lost": 4,
+              "wave_reset": 4
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 4,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.6,
+            "components": {
+              "survivalShare": 0.998,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.2,
+              "collisionSafetyShare": 0.25,
+              "shotResolutionShare": 0.929,
+              "pressureSurvivability": 0.919,
+              "divePressurePerMinute": 24.5,
+              "shotPressurePerMinute": 39.5,
+              "collisionLossShare": 0.75
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 120,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2230,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 55,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 53,
+              "rack_pulse": 69,
+              "alien_dive_start": 52,
+              "enemy_shot": 85,
+              "flagship_dive_start": 15,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 62,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.9,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0.333,
+              "shotResolutionShare": 0.964,
+              "pressureSurvivability": 0.858,
+              "divePressurePerMinute": 26,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0.667
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.783,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2290,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 42,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 70,
+              "player_shot_resolved": 39,
+              "alien_dive_start": 50,
+              "enemy_shot": 84,
+              "flagship_dive_start": 14,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 63,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 5.9,
+            "components": {
+              "survivalShare": 0.998,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0.333,
+              "shotResolutionShare": 0.929,
+              "pressureSurvivability": 0.883,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 42,
+              "collisionLossShare": 0.667
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.983,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2470,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 44,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 43,
+              "alien_dive_start": 53,
+              "enemy_shot": 85,
+              "flagship_dive_start": 12,
+              "escort_join": 12,
+              "enemy_wrap_or_return": 68,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 6.4,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.977,
+              "pressureSurvivability": 0.849,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0.5
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.017,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2300,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 44,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 43,
+              "alien_dive_start": 47,
+              "enemy_shot": 84,
+              "flagship_dive_start": 17,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 74,
+              "player_lost": 2,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 7.2,
+            "components": {
+              "survivalShare": 0.992,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.977,
+              "pressureSurvivability": 0.912,
+              "divePressurePerMinute": 23.5,
+              "shotPressurePerMinute": 42,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.233,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1100,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 38,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 36,
+              "alien_dive_start": 49,
+              "enemy_shot": 83,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 79,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "alien_scout_collision"
+            ],
+            "score10": 6.5,
+            "components": {
+              "survivalShare": 0.994,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 0.5,
+              "shotResolutionShare": 0.947,
+              "pressureSurvivability": 0.898,
+              "divePressurePerMinute": 24.5,
+              "shotPressurePerMinute": 41.5,
+              "collisionLossShare": 0.5
+            }
+          }
+        ]
+      },
+      "readabilityWindow": {
+        "stage": 5,
+        "stageRank": 3,
+        "persona": "professional",
+        "seed": 12553,
+        "seconds": 36,
+        "simT": 36,
+        "rules": {
+          "scoutDiveIntervalBase": 1.374,
+          "flagshipDiveIntervalBase": 5.665,
+          "diveBaseVy": 33.387,
+          "diveAccel": 5.763,
+          "diveSideDrift": 16.043,
+          "diveSwayAmplitude": 35.889,
+          "enemyShotIntervalBase": 0.987,
+          "enemyShotVy": 128.563,
+          "enemyShotMaxLive": 4,
+          "singleShotCooldown": 0.72
+        },
+        "events": {
+          "alienDiveStart": 15,
+          "flagshipDiveStart": 5,
+          "escortJoin": 5,
+          "enemyShot": 24,
+          "enemyWrapOrReturn": 19,
+          "playerShotFired": 17,
+          "playerShotResolved": 15
+        },
+        "pace": {
+          "medianAlienShipSpeedPxPerSecond": 83.18,
+          "medianAlienShipYSpeedPxPerSecond": 62.4,
+          "medianEnemyMissileSpeedPxPerSecond": 128.4,
+          "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+          "medianPlayerMissileYSpeedPxPerSecond": 178,
+          "lowerFieldThreatShare": 0.71,
+          "lowerFieldMultiThreatShare": 0.751,
+          "laneOverlapShare": 0.199,
+          "playerCorridorBlockedShare": 0.16,
+          "medianNearestShotLaneGapPx": 39.83,
+          "averageConcurrentThreats": 3.36,
+          "maxConcurrentThreats": 8,
+          "maxEnemyShots": 3
+        },
+        "finalState": {
+          "score": 470,
+          "lives": 4,
+          "stage": 5,
+          "gameOver": false,
+          "gameOverReason": ""
+        }
+      },
+      "lowerFieldReadabilityScore10": 3.4,
+      "routeabilityLift10": 0.7,
+      "readabilityLift10": 0.4,
+      "collisionLossDelta": 0.02,
+      "laneOverlapDelta": -0.146,
+      "pressureRetention": 1.18,
+      "missilePacePreserved": true,
+      "promotionGate": {
+        "pass": false,
+        "runtimeChangeAllowed": false,
+        "requiredReadabilityLift10": 0.2,
+        "minPressureRetention": 0.88,
+        "requireMissilePacePreserved": true,
+        "read": "Candidate is useful evidence but does not clear the measurement gate for runtime promotion."
+      }
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v2",
+      "label": "Combined lane spacing v2",
+      "family": "combined-dive-source-fairness",
+      "intent": "Increase dive-lane separation while preserving scheduled fire and projectile motion.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "stage-rank-pressure",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "bottom-wrap-return",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "dive-selection",
+        "path-topology",
+        "shot-window",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.03,
+          "diveBaseVy": 0.96,
+          "diveAccel": 0.93,
+          "diveSideDrift": 0.88,
+          "diveSwayAmplitude": 0.9
+        },
+        "behavior": {
+          "diveSelectionPolicy": {
+            "enabled": true,
+            "playerCorridorExclusionPx": 30,
+            "lowerFieldSeparationPx": 44,
+            "maxLowerFieldDives": 2
+          },
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 3,
+            "playerCorridorExclusionPx": 20,
+            "minPlayerYGapPx": 84,
+            "lowerFieldDiveShotSeparationPx": 30,
+            "lowerFieldDiveShotYSeparationPx": 100,
+            "preferFormationWhenCrowded": true,
+            "formationPoolSize": 8,
+            "allowBaseFallback": true
+          }
+        }
+      },
+      "routeability": {
+        "label": "stage-five-routeability-window",
+        "score10": 6.5,
+        "survivalShare": 0.934,
+        "collisionLossShare": 0.322,
+        "playerLosses": 2.5,
+        "waveClears": 0,
+        "divePressurePerMinute": 24.42,
+        "shotPressurePerMinute": 39.08,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.8,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 9,
+            "enemy_shot": 6
+          },
+          "weightedLossCost": 19.5
+        },
+        "rows": [
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 76.283,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1180,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "enemy_shot",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 38,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 35,
+              "rack_pulse": 44,
+              "alien_dive_start": 34,
+              "enemy_shot": 47,
+              "flagship_dive_start": 8,
+              "escort_join": 8,
+              "enemy_wrap_or_return": 26,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "enemy_shot",
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 4.9,
+            "components": {
+              "survivalShare": 0.636,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.4,
+              "shotResolutionShare": 0.921,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 17,
+              "shotPressurePerMinute": 23.5,
+              "collisionLossShare": 0.6
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 116.25,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 3060,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 56,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 51,
+              "rack_pulse": 67,
+              "alien_dive_start": 53,
+              "enemy_shot": 80,
+              "flagship_dive_start": 12,
+              "escort_join": 12,
+              "enemy_wrap_or_return": 56,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 4.8,
+            "components": {
+              "survivalShare": 0.969,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.911,
+              "pressureSurvivability": 0.875,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 40,
+              "collisionLossShare": 1
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.967,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2550,
+            "lives": 5,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 37,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 73,
+              "player_shot_resolved": 37,
+              "alien_dive_start": 57,
+              "enemy_shot": 87,
+              "flagship_dive_start": 11,
+              "escort_join": 11,
+              "enemy_wrap_or_return": 77
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 0,
+            "progression": [],
+            "lossReasons": [],
+            "score10": 7.7,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 1,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 1,
+              "pressureSurvivability": 0.8,
+              "divePressurePerMinute": 28.5,
+              "shotPressurePerMinute": 43.5,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.867,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2030,
+            "lives": 3,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 38,
+              "alien_dive_start": 50,
+              "enemy_shot": 86,
+              "flagship_dive_start": 18,
+              "escort_join": 18,
+              "enemy_wrap_or_return": 80,
+              "player_lost": 2,
+              "wave_reset": 2
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 2,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 7.2,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.6,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.974,
+              "pressureSurvivability": 0.872,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.95,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1190,
+            "lives": 5,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 38,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 73,
+              "player_shot_resolved": 38,
+              "alien_dive_start": 49,
+              "enemy_shot": 86,
+              "flagship_dive_start": 18,
+              "escort_join": 18,
+              "enemy_wrap_or_return": 91
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 0,
+            "progression": [],
+            "lossReasons": [],
+            "score10": 7.8,
+            "components": {
+              "survivalShare": 1,
+              "progressionShare": 0,
+              "lossBudgetShare": 1,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 1,
+              "pressureSurvivability": 0.882,
+              "divePressurePerMinute": 24.5,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.883,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1450,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 70,
+              "player_shot_resolved": 38,
+              "alien_dive_start": 50,
+              "enemy_shot": 83,
+              "flagship_dive_start": 17,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 71,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot",
+              "enemy_shot"
+            ],
+            "score10": 6.5,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0.667,
+              "shotResolutionShare": 0.974,
+              "pressureSurvivability": 0.888,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 41.5,
+              "collisionLossShare": 0.333
+            }
+          }
+        ]
+      },
+      "readabilityWindow": {
+        "stage": 5,
+        "stageRank": 3,
+        "persona": "professional",
+        "seed": 12553,
+        "seconds": 36,
+        "simT": 36,
+        "rules": {
+          "scoutDiveIntervalBase": 1.361,
+          "flagshipDiveIntervalBase": 5.665,
+          "diveBaseVy": 33.738,
+          "diveAccel": 5.826,
+          "diveSideDrift": 15.686,
+          "diveSwayAmplitude": 34.731,
+          "enemyShotIntervalBase": 0.987,
+          "enemyShotVy": 128.563,
+          "enemyShotMaxLive": 4,
+          "singleShotCooldown": 0.72
+        },
+        "events": {
+          "alienDiveStart": 15,
+          "flagshipDiveStart": 5,
+          "escortJoin": 5,
+          "enemyShot": 25,
+          "enemyWrapOrReturn": 24,
+          "playerShotFired": 15,
+          "playerShotResolved": 15
+        },
+        "pace": {
+          "medianAlienShipSpeedPxPerSecond": 85.91,
+          "medianAlienShipYSpeedPxPerSecond": 66.6,
+          "medianEnemyMissileSpeedPxPerSecond": 128.4,
+          "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+          "medianPlayerMissileYSpeedPxPerSecond": 178,
+          "lowerFieldThreatShare": 0.757,
+          "lowerFieldMultiThreatShare": 0.822,
+          "laneOverlapShare": 0.139,
+          "playerCorridorBlockedShare": 0.173,
+          "medianNearestShotLaneGapPx": 61.44,
+          "averageConcurrentThreats": 3.51,
+          "maxConcurrentThreats": 7,
+          "maxEnemyShots": 2
+        },
+        "finalState": {
+          "score": 680,
+          "lives": 5,
+          "stage": 5,
+          "gameOver": false,
+          "gameOverReason": ""
+        }
+      },
+      "lowerFieldReadabilityScore10": 4,
+      "routeabilityLift10": 0.9,
+      "readabilityLift10": 1,
+      "collisionLossDelta": -0.172,
+      "laneOverlapDelta": -0.206,
+      "pressureRetention": 1.124,
+      "missilePacePreserved": true,
+      "promotionGate": {
+        "pass": true,
+        "runtimeChangeAllowed": false,
+        "requiredReadabilityLift10": 0.2,
+        "minPressureRetention": 0.88,
+        "requireMissilePacePreserved": true,
+        "read": "Candidate clears the measurement gate for browser/contact-sheet review, but it remains analysis-only."
+      }
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v3",
+      "label": "Combined single-lower-threat v3",
+      "family": "combined-dive-source-fairness",
+      "intent": "Establish the clarity ceiling with one admitted lower-field dive while retaining Galaxian-family shot pressure.",
+      "affectedSpecLayers": [
+        "movement-language",
+        "stage-rank-pressure",
+        "promotion-gates"
+      ],
+      "movementPrimitives": [
+        "dive-attack",
+        "scoring-routeability-window"
+      ],
+      "axesTouched": [
+        "dive-selection",
+        "shot-window",
+        "visual-readability",
+        "collision-safety"
+      ],
+      "patch": {
+        "minRank": 3,
+        "maxRank": 3,
+        "scales": {
+          "scoutDiveIntervalBase": 1.02,
+          "diveBaseVy": 0.97,
+          "diveAccel": 0.94,
+          "diveSideDrift": 0.9,
+          "diveSwayAmplitude": 0.92
+        },
+        "behavior": {
+          "diveSelectionPolicy": {
+            "enabled": true,
+            "playerCorridorExclusionPx": 28,
+            "lowerFieldSeparationPx": 40,
+            "maxLowerFieldDives": 1
+          },
+          "enemyShotSourcePolicy": {
+            "enabled": true,
+            "crowdingThreshold": 2,
+            "playerCorridorExclusionPx": 24,
+            "minPlayerYGapPx": 92,
+            "lowerFieldDiveShotSeparationPx": 32,
+            "lowerFieldDiveShotYSeparationPx": 112,
+            "preferFormationWhenCrowded": true,
+            "formationPoolSize": 10,
+            "allowBaseFallback": true
+          }
+        }
+      },
+      "routeability": {
+        "label": "stage-five-routeability-window",
+        "score10": 6.4,
+        "survivalShare": 0.95,
+        "collisionLossShare": 0.489,
+        "playerLosses": 2.17,
+        "waveClears": 0.17,
+        "divePressurePerMinute": 24.33,
+        "shotPressurePerMinute": 39.67,
+        "seedCohortCount": 2,
+        "scoreSpread10": 7.7,
+        "lossDiagnostics": {
+          "lossCauseCounts": {
+            "alien_scout_collision": 8,
+            "enemy_shot": 5
+          },
+          "weightedLossCost": 17
+        },
+        "rows": [
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 84.4,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1850,
+            "lives": 0,
+            "completed": false,
+            "gameOver": true,
+            "gameOverReason": "alien_scout_collision",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 39,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "player_shot_resolved": 36,
+              "rack_pulse": 48,
+              "alien_dive_start": 39,
+              "enemy_shot": 55,
+              "flagship_dive_start": 7,
+              "escort_join": 7,
+              "player_lost": 5,
+              "wave_reset": 4,
+              "enemy_wrap_or_return": 36,
+              "game_over": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 5,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "enemy_shot",
+              "enemy_shot",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5,
+            "components": {
+              "survivalShare": 0.703,
+              "progressionShare": 0,
+              "lossBudgetShare": 0,
+              "collisionSafetyShare": 0.4,
+              "shotResolutionShare": 0.923,
+              "pressureSurvivability": 1,
+              "divePressurePerMinute": 19.5,
+              "shotPressurePerMinute": 27.5,
+              "collisionLossShare": 0.6
+            }
+          },
+          {
+            "persona": "advanced",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.833,
+            "finalStage": 6,
+            "stageRank": 3,
+            "score": 2910,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 2,
+              "player_shot_fired": 59,
+              "formation_entry_settle": 2,
+              "formation_rack_complete": 2,
+              "player_shot_resolved": 56,
+              "rack_pulse": 70,
+              "alien_dive_start": 51,
+              "enemy_shot": 82,
+              "flagship_dive_start": 14,
+              "escort_join": 14,
+              "enemy_wrap_or_return": 55,
+              "player_lost": 3,
+              "wave_reset": 4,
+              "wave_clear": 1,
+              "stage_advance": 1
+            },
+            "stageAdvances": 1,
+            "waveClears": 1,
+            "playerLosses": 3,
+            "progression": [
+              {
+                "stage": 6,
+                "t": 115.417,
+                "score": 2820
+              }
+            ],
+            "lossReasons": [
+              "enemy_shot",
+              "alien_scout_collision",
+              "enemy_shot"
+            ],
+            "score10": 7,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0.4,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0.667,
+              "shotResolutionShare": 0.949,
+              "pressureSurvivability": 0.884,
+              "divePressurePerMinute": 25.5,
+              "shotPressurePerMinute": 41,
+              "collisionLossShare": 0.333
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.85,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1390,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 41,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 72,
+              "player_shot_resolved": 40,
+              "alien_dive_start": 48,
+              "enemy_shot": 85,
+              "flagship_dive_start": 18,
+              "escort_join": 18,
+              "enemy_wrap_or_return": 81,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "enemy_shot"
+            ],
+            "score10": 7.5,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 0.976,
+              "pressureSurvivability": 0.897,
+              "divePressurePerMinute": 24,
+              "shotPressurePerMinute": 42.5,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "expert",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.9,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1400,
+            "lives": 5,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 42,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 73,
+              "player_shot_resolved": 42,
+              "alien_dive_start": 50,
+              "enemy_shot": 87,
+              "flagship_dive_start": 18,
+              "escort_join": 18,
+              "enemy_wrap_or_return": 93
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 0,
+            "progression": [],
+            "lossReasons": [],
+            "score10": 7.7,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 1,
+              "collisionSafetyShare": 1,
+              "shotResolutionShare": 1,
+              "pressureSurvivability": 0.867,
+              "divePressurePerMinute": 25,
+              "shotPressurePerMinute": 43.5,
+              "collisionLossShare": 0
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.867,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 1580,
+            "lives": 2,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 49,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 69,
+              "player_shot_resolved": 45,
+              "alien_dive_start": 51,
+              "enemy_shot": 81,
+              "flagship_dive_start": 17,
+              "escort_join": 13,
+              "enemy_wrap_or_return": 70,
+              "player_lost": 3,
+              "wave_reset": 3
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 3,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision",
+              "alien_scout_collision",
+              "alien_scout_collision"
+            ],
+            "score10": 5.4,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.4,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.918,
+              "pressureSurvivability": 0.889,
+              "divePressurePerMinute": 25.5,
+              "shotPressurePerMinute": 40.5,
+              "collisionLossShare": 1
+            }
+          },
+          {
+            "persona": "professional",
+            "stageStart": 5,
+            "ships": 5,
+            "maxPlayableStage": 9,
+            "durationSeconds": 120,
+            "simT": 119.833,
+            "finalStage": 5,
+            "stageRank": 3,
+            "score": 2360,
+            "lives": 4,
+            "completed": false,
+            "gameOver": false,
+            "gameOverReason": "",
+            "eventCounts": {
+              "formation_entry_start": 1,
+              "player_shot_fired": 41,
+              "formation_entry_settle": 1,
+              "formation_rack_complete": 1,
+              "rack_pulse": 71,
+              "player_shot_resolved": 40,
+              "alien_dive_start": 53,
+              "enemy_shot": 86,
+              "flagship_dive_start": 17,
+              "escort_join": 17,
+              "enemy_wrap_or_return": 74,
+              "player_lost": 1,
+              "wave_reset": 1
+            },
+            "stageAdvances": 0,
+            "waveClears": 0,
+            "playerLosses": 1,
+            "progression": [],
+            "lossReasons": [
+              "alien_scout_collision"
+            ],
+            "score10": 6,
+            "components": {
+              "survivalShare": 0.999,
+              "progressionShare": 0,
+              "lossBudgetShare": 0.8,
+              "collisionSafetyShare": 0,
+              "shotResolutionShare": 0.976,
+              "pressureSurvivability": 0.843,
+              "divePressurePerMinute": 26.5,
+              "shotPressurePerMinute": 43,
+              "collisionLossShare": 1
+            }
+          }
+        ]
+      },
+      "readabilityWindow": {
+        "stage": 5,
+        "stageRank": 3,
+        "persona": "professional",
+        "seed": 12553,
+        "seconds": 36,
+        "simT": 36,
+        "rules": {
+          "scoutDiveIntervalBase": 1.347,
+          "flagshipDiveIntervalBase": 5.665,
+          "diveBaseVy": 34.09,
+          "diveAccel": 5.888,
+          "diveSideDrift": 16.043,
+          "diveSwayAmplitude": 35.503,
+          "enemyShotIntervalBase": 0.987,
+          "enemyShotVy": 128.563,
+          "enemyShotMaxLive": 4,
+          "singleShotCooldown": 0.72
+        },
+        "events": {
+          "alienDiveStart": 16,
+          "flagshipDiveStart": 4,
+          "escortJoin": 4,
+          "enemyShot": 24,
+          "enemyWrapOrReturn": 15,
+          "playerShotFired": 17,
+          "playerShotResolved": 17
+        },
+        "pace": {
+          "medianAlienShipSpeedPxPerSecond": 81.52,
+          "medianAlienShipYSpeedPxPerSecond": 62.4,
+          "medianEnemyMissileSpeedPxPerSecond": 128.4,
+          "medianEnemyMissileYSpeedPxPerSecond": 128.4,
+          "medianPlayerMissileYSpeedPxPerSecond": 178,
+          "lowerFieldThreatShare": 0.782,
+          "lowerFieldMultiThreatShare": 0.786,
+          "laneOverlapShare": 0.119,
+          "playerCorridorBlockedShare": 0.272,
+          "medianNearestShotLaneGapPx": 64.68,
+          "averageConcurrentThreats": 3.37,
+          "maxConcurrentThreats": 8,
+          "maxEnemyShots": 2
+        },
+        "finalState": {
+          "score": 2150,
+          "lives": 4,
+          "stage": 5,
+          "gameOver": false,
+          "gameOverReason": ""
+        }
+      },
+      "lowerFieldReadabilityScore10": 3.6,
+      "routeabilityLift10": 0.8,
+      "readabilityLift10": 0.6,
+      "collisionLossDelta": -0.005,
+      "laneOverlapDelta": -0.226,
+      "pressureRetention": 1.133,
+      "missilePacePreserved": true,
+      "promotionGate": {
+        "pass": true,
+        "runtimeChangeAllowed": false,
+        "requiredReadabilityLift10": 0.2,
+        "minPressureRetention": 0.88,
+        "requireMissilePacePreserved": true,
+        "read": "Candidate clears the measurement gate for browser/contact-sheet review, but it remains analysis-only."
+      }
     }
   ],
   "summary": {
-    "candidateCount": 10,
-    "bestCandidateId": "guardians-stage-five-commitment-window-v1",
+    "candidateCount": 13,
+    "bestCandidateId": "guardians-stage-five-combined-fairness-v2",
     "bestCandidatePass": true,
-    "bestCandidateReadabilityScore10": 3.5,
-    "bestCandidateReadabilityLift10": 0.2,
-    "bestCandidateRouteabilityLift10": 0.6,
-    "baselineReadabilityScore10": 3.3,
+    "bestCandidateReadabilityScore10": 4,
+    "bestCandidateReadabilityLift10": 1,
+    "bestCandidateRouteabilityLift10": 0.9,
+    "baselineReadabilityScore10": 3,
     "missilePacePreservedByBestCandidate": true,
     "runtimeChangeAllowed": false,
-    "bestCandidateRead": "Commitment window v1 is the best gate-clearing candidate: lower-field readability changes by 0.2/10, routeability by 0.6/10, collision-loss share by -7 points, and measured pressure retention is 104%.",
-    "bestStrictReadabilityCandidateId": "guardians-stage-five-threat-source-corridor-v1",
-    "bestStrictReadabilityScore10": 3.6,
-    "bestStrictReadabilityPass": false,
-    "bestStrictReadabilityRead": "Threat source corridor v1 has the highest strict readability at 3.6/10, but gate pass is no with collision-loss share 50%.",
+    "bestCandidateRead": "Combined lane spacing v2 is the best gate-clearing candidate: lower-field readability changes by 1/10, routeability by 0.9/10, collision-loss share by -17 points, and measured pressure retention is 112%.",
+    "bestStrictReadabilityCandidateId": "guardians-stage-five-combined-fairness-v2",
+    "bestStrictReadabilityScore10": 4,
+    "bestStrictReadabilityPass": true,
+    "bestStrictReadabilityRead": "Combined lane spacing v2 has the highest strict readability at 4/10, but gate pass is yes with collision-loss share 32%.",
     "bestTopologyCandidateId": "guardians-stage-five-topology-lane-weave-v3",
-    "bestTopologyCandidateReadabilityLift10": 0.1,
-    "bestTopologyCandidateRouteabilityLift10": 1,
-    "expandedFamilyRead": "Topology lane weave v3 is the best expanded path-topology profile at 0.1/10 readability lift and 1/10 routeability lift; the family did not beat the commitment-window candidate.",
-    "bestThreatSourceCandidateId": "guardians-stage-five-threat-source-corridor-v1",
-    "bestThreatSourceCandidateReadabilityLift10": 0.3,
-    "bestThreatSourceCandidateRouteabilityLift10": 0.7,
-    "threatSourceFamilyRead": "Threat source corridor v1 is the best threat-source profile at 0.3/10 readability lift and 0.7/10 routeability lift.",
-    "releaseRead": "Measured 10 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Commitment window v1 is the best gate-clearing profile; Threat source corridor v1 has the highest strict readability but does not clear the gate. Missile pace preserved: yes."
+    "bestTopologyCandidateReadabilityLift10": 0.6,
+    "bestTopologyCandidateRouteabilityLift10": 0.5,
+    "expandedFamilyRead": "Topology lane weave v3 is the best expanded path-topology profile at 0.6/10 readability lift and 0.5/10 routeability lift; the family did not beat the commitment-window candidate.",
+    "bestThreatSourceCandidateId": "guardians-stage-five-threat-source-separation-v2",
+    "bestThreatSourceCandidateReadabilityLift10": 0.5,
+    "bestThreatSourceCandidateRouteabilityLift10": 0.6,
+    "threatSourceFamilyRead": "Threat source separation v2 is the best threat-source profile at 0.5/10 readability lift and 0.6/10 routeability lift.",
+    "releaseRead": "Measured 13 stage-five readability candidates against guardians-stage-five-lower-field-readability-v0. Combined lane spacing v2 is the best gate-clearing profile; Combined lane spacing v2 has the highest strict readability but also clears the gate. Missile pace preserved: yes."
   },
   "nextSteps": [
     "Use the best passing candidate, if any, to generate a browser/contact-sheet before-after review.",

@@ -53,6 +53,10 @@
     {
       "id": "threat-source-firing-eligibility",
       "read": "Change which aliens are allowed to fire during crowded lower-field windows without changing missile speed or cadence."
+    },
+    {
+      "id": "combined-dive-source-fairness",
+      "read": "Coordinate dive admission and firing-source eligibility so lower-field lanes remain playable without reducing missile pace."
     }
   ],
   "candidates": [
@@ -431,6 +435,36 @@
           }
         }
       }
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v1",
+      "label": "Combined corridor fairness v1",
+      "family": "combined-dive-source-fairness",
+      "intent": "Combine the best commitment window with conservative dive admission and corridor-aware formation firing.",
+      "affectedSpecLayers": ["movement-language", "stage-rank-pressure", "promotion-gates"],
+      "movementPrimitives": ["dive-attack", "scoring-routeability-window"],
+      "axesTouched": ["dive-selection", "shot-window", "visual-readability", "collision-safety"],
+      "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.04, "diveBaseVy": 0.95, "diveAccel": 0.92, "diveSideDrift": 0.9, "diveSwayAmplitude": 0.93}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 26, "lowerFieldSeparationPx": 38, "maxLowerFieldDives": 2}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 3, "playerCorridorExclusionPx": 22, "minPlayerYGapPx": 88, "lowerFieldDiveShotSeparationPx": 28, "lowerFieldDiveShotYSeparationPx": 104, "preferFormationWhenCrowded": true, "formationPoolSize": 8, "allowBaseFallback": true}}}
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v2",
+      "label": "Combined lane spacing v2",
+      "family": "combined-dive-source-fairness",
+      "intent": "Increase dive-lane separation while preserving scheduled fire and projectile motion.",
+      "affectedSpecLayers": ["movement-language", "stage-rank-pressure", "promotion-gates"],
+      "movementPrimitives": ["dive-attack", "bottom-wrap-return", "scoring-routeability-window"],
+      "axesTouched": ["dive-selection", "path-topology", "shot-window", "collision-safety"],
+      "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.03, "diveBaseVy": 0.96, "diveAccel": 0.93, "diveSideDrift": 0.88, "diveSwayAmplitude": 0.9}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 30, "lowerFieldSeparationPx": 44, "maxLowerFieldDives": 2}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 3, "playerCorridorExclusionPx": 20, "minPlayerYGapPx": 84, "lowerFieldDiveShotSeparationPx": 30, "lowerFieldDiveShotYSeparationPx": 100, "preferFormationWhenCrowded": true, "formationPoolSize": 8, "allowBaseFallback": true}}}
+    },
+    {
+      "id": "guardians-stage-five-combined-fairness-v3",
+      "label": "Combined single-lower-threat v3",
+      "family": "combined-dive-source-fairness",
+      "intent": "Establish the clarity ceiling with one admitted lower-field dive while retaining Galaxian-family shot pressure.",
+      "affectedSpecLayers": ["movement-language", "stage-rank-pressure", "promotion-gates"],
+      "movementPrimitives": ["dive-attack", "scoring-routeability-window"],
+      "axesTouched": ["dive-selection", "shot-window", "visual-readability", "collision-safety"],
+      "patch": {"minRank": 3, "maxRank": 3, "scales": {"scoutDiveIntervalBase": 1.02, "diveBaseVy": 0.97, "diveAccel": 0.94, "diveSideDrift": 0.9, "diveSwayAmplitude": 0.92}, "behavior": {"diveSelectionPolicy": {"enabled": true, "playerCorridorExclusionPx": 28, "lowerFieldSeparationPx": 40, "maxLowerFieldDives": 1}, "enemyShotSourcePolicy": {"enabled": true, "crowdingThreshold": 2, "playerCorridorExclusionPx": 24, "minPlayerYGapPx": 92, "lowerFieldDiveShotSeparationPx": 32, "lowerFieldDiveShotYSeparationPx": 112, "preferFormationWhenCrowded": true, "formationPoolSize": 10, "allowBaseFallback": true}}}
     }
   ],
   "rollbackSignal": "Reject or hold candidate profiles if routeability regresses, collision-loss share rises, lane overlap does not improve, missile pace changes, single-shot cadence changes, or visual/contact-sheet review remains mixed below the strict lower-field readability floor."

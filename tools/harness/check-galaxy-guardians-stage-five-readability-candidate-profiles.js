@@ -24,6 +24,10 @@ try {
   if(threatSourceCandidates.length < 3){
     fail('Guardians stage-five readability profile set needs a threat-source/firing-eligibility family.', { threatSourceCount: threatSourceCandidates.length });
   }
+  const combinedCandidates = profile.candidates.filter(candidate => candidate.family === 'combined-dive-source-fairness');
+  if(combinedCandidates.length < 3){
+    fail('Guardians stage-five readability profile set needs combined dive/source candidates.', { combinedCount: combinedCandidates.length });
+  }
   console.log(JSON.stringify({
     ok: true,
     artifact: rel(PROFILE),
@@ -31,6 +35,7 @@ try {
     familyCount: profile.families.length,
     topologyCandidateCount: topologyCandidates.length,
     threatSourceCandidateCount: threatSourceCandidates.length,
+    combinedCandidateCount: combinedCandidates.length,
     targetStrictReadabilityScore10: profile.promotionGate.targetStrictReadabilityScore10,
     runtimeChangeAllowed: profile.promotionGate.runtimeChangeAllowed
   }, null, 2));

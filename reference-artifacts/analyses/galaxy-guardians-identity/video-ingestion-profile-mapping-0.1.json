@@ -1,0 +1,16 @@
+{
+  "artifactType": "platinum-video-ingestion-profile-mapping",
+  "version": "0.1",
+  "status": "draft-executable-mapping-contract",
+  "inputContract": {"required": ["videoWindow", "frameRate", "objectTracks", "eventTimeline", "confidence"]},
+  "mappings": [
+    {"observed": "formation-centroid-track", "profilePath": "layers.movement.formation", "derived": ["amplitudePx", "frequencyHz", "settleSeconds"]},
+    {"observed": "alien-dive-track", "profilePath": "layers.movement.primitives[dive-attack]", "derived": ["entryDelay", "velocityCurve", "lateralExcursion", "returnTopology"]},
+    {"observed": "enemy-projectile-track", "profilePath": "layers.projectiles.enemy", "derived": ["speedPxPerSecond", "cadenceSeconds", "sourceRole", "sourcePhase"]},
+    {"observed": "player-projectile-track", "profilePath": "layers.projectiles.player", "derived": ["speedPxPerSecond", "cadenceSeconds", "liveShotLimit"]},
+    {"observed": "collision-and-loss-event", "profilePath": "layers.promotion", "derived": ["lossCause", "threatConcurrency", "corridorOcclusion"]},
+    {"observed": "score-change-event", "profilePath": "layers.scoring", "derived": ["actorRole", "actorState", "points"]},
+    {"observed": "audio-onset-and-waveform", "profilePath": "layers.presentation.audio", "derived": ["cueRole", "onsetOffsetMs", "durationMs", "masking"]}
+  ],
+  "outputContract": {"artifactType": "platinum-game-definition-profile", "requiresHumanReview": true, "runtimePromotionAllowed": false}
+}

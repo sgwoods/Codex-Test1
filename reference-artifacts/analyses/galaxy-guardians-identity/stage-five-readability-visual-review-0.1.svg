@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1620" height="730" viewBox="0 0 1620 730" role="img">
   <rect width="100%" height="100%" fill="#06101a"/>
   <text x="36" y="42" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900" fill="#f2fbff">Galaxy Guardians Stage 5 Readability Contact Sheet</text>
-  <text x="36" y="72" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#9fc8e8">Baseline vs Commitment window v1; lower field is shaded, yellow marks enemy missiles.</text>
+  <text x="36" y="72" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#9fc8e8">Baseline vs Combined lane spacing v2; lower field is shaded, yellow marks enemy missiles.</text>
   <text x="36" y="108" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#f2fbff">Current Runtime</text>
   <text x="858" y="108" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#f2fbff">Candidate Profile</text>
   <rect x="36" y="124" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
@@ -21,12 +21,12 @@
 <line x1="858" y1="207.16" x2="1012" y2="207.16" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="858" y="110" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 6.02s</text>
 <text x="926" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 2; overlaps 0</text>
-<circle cx="942.1" cy="150.9" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="948.2" cy="154.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="936.1" cy="154.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="965.1" cy="218.4" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="972.3" cy="181.6" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="989" y="257.1" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<circle cx="931.6" cy="150.9" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="937.6" cy="154.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="925.5" cy="154.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="964.2" cy="182.4" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="973.8" cy="219.3" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="996.9" y="257.7" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="930.6" y="300" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="224" y="124" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="224" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
@@ -43,13 +43,14 @@
 <rect x="1046" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
 <line x1="1046" y1="207.16" x2="1200" y2="207.16" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1046" y="110" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 10s</text>
-<text x="1114" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 6; overlaps 1</text>
-<circle cx="1172.6" cy="274.7" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1178.7" cy="286.8" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1166.6" cy="287.1" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1078.1" cy="252.5" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1086.6" cy="228.1" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="1077.2" y="270.9" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="1114" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 6; overlaps 3</text>
+<circle cx="1078" cy="276.1" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1084.1" cy="288.1" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1163.5" cy="317.4" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1145.6" cy="168.4" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="1161.8" cy="266.2" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1076.4" cy="230.2" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="1077.9" y="239.8" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1118.6" y="300" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="412" y="124" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="412" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
@@ -69,16 +70,13 @@
 <rect x="1234" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
 <line x1="1234" y1="207.16" x2="1388" y2="207.16" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1234" y="110" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 14s</text>
-<text x="1302" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 4; overlaps 0</text>
-<circle cx="1353.9" cy="169.3" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1359.9" cy="174.5" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1347.8" cy="174.8" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1266.7" cy="190.8" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1283.9" cy="255.3" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1297.8" cy="167.4" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
-<rect x="1335.7" y="313.8" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="1286.9" y="301.5" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="1358.6" y="174.6" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="1302" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 5; overlaps 0</text>
+<circle cx="1342.9" cy="208.8" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1336.9" cy="217.3" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1349" cy="217" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1353.3" cy="193.5" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1380.4" cy="248" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="1338.9" y="260.2" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1306.6" y="300" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="600" y="124" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="600" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
@@ -97,11 +95,9 @@
 <rect x="1422" y="207.16" width="154" height="114.84000000000003" fill="#102942" opacity="0.55"/>
 <line x1="1422" y1="207.16" x2="1576" y2="207.16" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1422" y="110" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 18s</text>
-<text x="1490" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 3; overlaps 0</text>
-<circle cx="1531.9" cy="313.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1539.3" cy="320.5" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1454.1" cy="114.8" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
-<rect x="1458.2" y="238.3" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="1490" y="340" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 1; overlaps 0</text>
+<circle cx="1537.1" cy="120.9" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
+<rect x="1545.6" y="183.5" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1494.6" y="300" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="36" y="386" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="36" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
@@ -117,13 +113,12 @@
 <rect x="858" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
 <line x1="858" y1="469.15999999999997" x2="1012" y2="469.15999999999997" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="858" y="372" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 22s</text>
-<text x="926" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 6; overlaps 1</text>
-<circle cx="971.3" cy="486.3" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="965.3" cy="495.8" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="977.4" cy="495.5" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="954.6" cy="486.7" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="968.6" y="570.5" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="947.7" y="507.2" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="926" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 5; overlaps 0</text>
+<circle cx="986.6" cy="520.7" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="980.5" cy="532.1" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="937.6" cy="484.1" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1005.7" cy="553.3" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="900.3" y="494.2" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="930.6" y="562" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="224" y="386" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="224" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
@@ -142,11 +137,14 @@
 <rect x="1046" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
 <line x1="1046" y1="469.15999999999997" x2="1200" y2="469.15999999999997" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1046" y="372" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 26.02s</text>
-<text x="1114" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 4; overlaps 1</text>
-<circle cx="1076.5" cy="472.3" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1142" cy="516" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="1150.9" y="501.6" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="1077.6" y="507.4" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="1114" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 3; overlaps 1</text>
+<circle cx="1108.3" cy="457.4" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1102.2" cy="465" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1114.3" cy="464.7" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1083.4" cy="467.5" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1097" cy="512.5" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="1145.3" y="570.6" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<rect x="1087.8" y="502.5" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1118.6" y="562" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="412" y="386" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="412" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
@@ -164,13 +162,13 @@
 <rect x="1234" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
 <line x1="1234" y1="469.15999999999997" x2="1388" y2="469.15999999999997" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1234" y="372" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 30.02s</text>
-<text x="1302" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 4; overlaps 0</text>
-<circle cx="1260.1" cy="546.4" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1371.8" cy="445.7" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1271.3" cy="404.7" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
-<circle cx="1309.7" cy="506.4" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="1344.1" y="522.7" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="1343.6" y="495.4" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<text x="1302" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 1; overlaps 0</text>
+<circle cx="1288.3" cy="405.5" r="4.5" fill="#ffdb58" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="1307.1" cy="420.4" r="4.5" fill="#ff5b5b" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="1316.1" cy="420.4" r="4.5" fill="#ff5b5b" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="1251.2" cy="453.7" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1272.6" cy="405.5" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
+<rect x="1269.2" y="487.5" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1306.6" y="562" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
   <rect x="600" y="386" width="154" height="198.00000000000003" rx="6" fill="#081524" stroke="#244863"/>
 <rect x="600" y="469.15999999999997" width="154" height="114.84000000000006" fill="#102942" opacity="0.55"/>
@@ -189,11 +187,12 @@
 <line x1="1422" y1="469.15999999999997" x2="1576" y2="469.15999999999997" stroke="#7bd6ff" stroke-dasharray="4 5" opacity="0.75"/>
 <text x="1422" y="372" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#eaf8ff">candidate 34.02s</text>
 <text x="1490" y="602" font-family="Inter, Arial, sans-serif" font-size="11" fill="#9fc8e8">threats 5; overlaps 0</text>
-<circle cx="1566.5" cy="581.7" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1443" cy="479.1" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<circle cx="1538.7" cy="541.8" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
-<rect x="1472.6" y="559.6" width="3" height="10" rx="1.5" fill="#ffef8a"/>
-<rect x="1472.2" y="466.4" width="3" height="10" rx="1.5" fill="#ffef8a"/>
+<circle cx="1432.3" cy="522.1" r="4.5" fill="#ffdb58" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1426.3" cy="533.6" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1438.4" cy="533.3" r="4.5" fill="#ff5b5b" stroke="#06101a" stroke-width="1.1"/>
+<circle cx="1438.1" cy="379.8" r="4.5" fill="#4b7dff" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="1445.2" cy="535.9" r="4.5" fill="#4b7dff" stroke="#06101a" stroke-width="1.1"/>
+<rect x="1477.3" y="482.4" width="3" height="10" rx="1.5" fill="#ffef8a"/>
 <rect x="1494.6" y="562" width="8.8" height="3.8500000000000005" rx="2" fill="#49f27a"/>
-  <text x="36" y="692" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#c7dff3">Commitment window v1 improves routeability and aggregate lane/collision metrics, but the contact-sheet sample is still mixed and strict lower-field readability is only 3.5/10, so this pass should not promote runtime constants yet.</text>
+  <text x="36" y="692" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#c7dff3">Combined lane spacing v2 improves aggregate readability, routeability, lane overlap, and collision metrics, but the fixed contact-sheet overlap sample does not improve, so this pass should not promote runtime behavior yet.</text>
 </svg>

@@ -249,7 +249,7 @@ function main(){
     artifactType: 'galaxy-guardians-stage-five-readability-visual-review',
     version: '0.1-dev-preview',
     createdOn: new Date().toISOString(),
-    status: hardPromotionHold ? 'visual-review-qualified-pass-runtime-hold' : 'visual-review-pass-ready-for-bounded-runtime-branch',
+    status: visualPass && !hardPromotionHold ? 'visual-review-pass-ready-for-bounded-runtime-branch' : 'visual-review-qualified-pass-runtime-hold',
     generatedBy: 'tools/harness/analyze-galaxy-guardians-stage-five-readability-visual-review.js',
     sourceEvidence: {
       candidateArtifact: rel(CANDIDATE)
@@ -291,18 +291,18 @@ function main(){
       collisionImproves,
       routeabilityImproves,
       contactSheetImproves,
-      read: hardPromotionHold
-        ? `${bestCandidate.label} improves routeability and aggregate lane/collision metrics, but the contact-sheet sample is still mixed and strict lower-field readability is only ${bestCandidate.lowerFieldReadabilityScore10}/10, so this pass should not promote runtime constants yet.`
-        : `${bestCandidate.label} clears the visual/contact-sheet gate for a bounded runtime branch while preserving missile pace and single-shot cadence.`
+      read: visualPass && !hardPromotionHold
+        ? `${bestCandidate.label} clears the visual/contact-sheet gate for a bounded runtime branch while preserving missile pace and single-shot cadence.`
+        : `${bestCandidate.label} improves aggregate readability, routeability, lane overlap, and collision metrics, but the fixed contact-sheet overlap sample does not improve, so this pass should not promote runtime behavior yet.`,
     },
     promotionDecision: {
-      runtimePromotion: hardPromotionHold ? 'hold' : 'ready-for-branch',
+      runtimePromotion: visualPass && !hardPromotionHold ? 'ready-for-branch' : 'hold',
       promoteNow: !hardPromotionHold && visualPass,
-      read: hardPromotionHold
-        ? 'Hold runtime promotion. Keep the candidate as a measured improvement and use the next pass to raise absolute lower-field clarity before changing shipped behavior.'
-        : 'Create a bounded runtime branch for this exact rank-three profile, then refresh conformance artifacts after promotion.'
+      read: visualPass && !hardPromotionHold
+        ? 'Create a bounded runtime branch for this exact rank-three profile, then refresh conformance artifacts after promotion.'
+        : 'Hold runtime promotion. Keep the candidate as a measured improvement and resolve the fixed contact-sheet overlap regression before changing shipped behavior.'
     },
-    nextSteps: hardPromotionHold ? [
+    nextSteps: !visualPass || hardPromotionHold ? [
       'Do not promote the current candidate constants into runtime yet.',
       'Use commitment-window-v1 as the baseline for the next candidate family.',
       'Because static path-topology variants did not beat commitment-window-v1, test threat source selection, firing eligibility, or player-corridor rules next.',

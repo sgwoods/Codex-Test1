@@ -64,6 +64,9 @@ function main(){
   if(artifact.status === 'visual-review-qualified-pass-runtime-hold' && artifact.promotionDecision?.runtimePromotion !== 'hold'){
     fail('Guardians visual review hold status must keep runtime promotion held.', payload);
   }
+  if(artifact.visualVerdict?.contactSheetImproves !== true && artifact.promotionDecision?.runtimePromotion !== 'hold'){
+    fail('Guardians visual review must hold promotion when the fixed contact-sheet sample regresses.', payload);
+  }
   const contactSheet = artifact.media?.contactSheet ? path.join(ROOT, artifact.media.contactSheet) : null;
   if(!contactSheet || !fs.existsSync(contactSheet)){
     fail('Guardians stage-five readability visual review is missing contact-sheet evidence.', artifact.media);

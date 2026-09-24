@@ -52,6 +52,8 @@ function loadGuardiansVm(){
   this.guardiansRuntimeRules = guardiansRuntimeRules;
   this.galaxyGuardiansHarnessPersonaInput = galaxyGuardiansHarnessPersonaInput;
   this.guardiansHarnessPersonaCfgForKey = guardiansHarnessPersonaCfgForKey;
+  this.guardiansFairDivePredicate = guardiansFairDivePredicate;
+  this.guardiansDiveLaneRank = guardiansDiveLaneRank;
  `, sandbox);
  return sandbox;
 }
@@ -153,7 +155,31 @@ function installGuardiansRuntimeRulePatch(ctx, patch = {}){
    return candidates[index];
   };
   this.pickGuardiansEnemyShotSource = pickGuardiansEnemyShotSource;
- `, ctx);
+  if(!this.__guardiansBaseFairDivePredicate){
+   this.__guardiansBaseFairDivePredicate = guardiansFairDivePredicate;
+  }
+  guardiansFairDivePredicate = function patchedGuardiansFairDivePredicate(state, rules, pressure){
+   const patch = this.__guardiansRuntimeRulePatch || {};
+   const policy = patch.behavior?.diveSelectionPolicy || null;
+   const rank = guardiansStageRank(state);
+   const applies = (!patch.minRank || rank >= patch.minRank) && (!patch.maxRank || rank <= patch.maxRank);
+   if(!applies || !policy || policy.enabled === false){
+    return this.__guardiansBaseFairDivePredicate(state, rules, pressure);
+   }
+   const lower = Array.isArray(pressure?.lowerFieldDives) ? pressure.lowerFieldDives : [];
+   const playerX = +state.player?.x || 0;
+   const corridor = Number.isFinite(+policy.playerCorridorExclusionPx) ? +policy.playerCorridorExclusionPx : 28;
+   const separation = Number.isFinite(+policy.lowerFieldSeparationPx) ? +policy.lowerFieldSeparationPx : 40;
+   const maxLower = Number.isFinite(+policy.maxLowerFieldDives) ? +policy.maxLowerFieldDives : 2;
+   return alien => {
+    const rackX = +alien.rackX || 0;
+    if(lower.length >= maxLower) return false;
+    if(Math.abs(rackX - playerX) <= corridor) return false;
+    return lower.every(threat => Math.abs(rackX - (+threat.x || 0)) >= separation);
+   };
+  };
+  this.guardiansFairDivePredicate = guardiansFairDivePredicate;
+`, ctx);
  return ctx;
 }
 

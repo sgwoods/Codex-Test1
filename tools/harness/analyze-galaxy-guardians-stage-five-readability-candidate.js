@@ -18,6 +18,8 @@ const PROFILE_SET = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-p
 const OUT = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.json');
 const OUT_MD = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.md');
 const OUT_SVG = path.join(IDENTITY_ROOT, 'stage-five-readability-candidate-0.1.svg');
+const FAMILY_OUT = path.join(IDENTITY_ROOT, 'stage-five-readability-family-comparison-0.1.json');
+const FAMILY_MD = path.join(IDENTITY_ROOT, 'stage-five-readability-family-comparison-0.1.md');
 
 const PERSONAS = ['advanced', 'expert', 'professional'];
 const SEEDS = {
@@ -25,6 +27,7 @@ const SEEDS = {
   expert: 12144,
   professional: 12187
 };
+const SEED_OFFSETS = [0, 997];
 
 function readJson(file, fallback = {}){
   try {
@@ -130,6 +133,11 @@ function scoreRun(run = {}){
 
 function summarizeRuns(label, runs){
   const rows = runs.map(scoreRun);
+  const lossCauseCounts = {};
+  for(const row of rows){
+    for(const reason of row.lossReasons || []) lossCauseCounts[reason || 'unknown'] = (lossCauseCounts[reason || 'unknown'] || 0) + 1;
+  }
+  const weightedLossCost = Object.entries(lossCauseCounts).reduce((sum, [reason, count]) => sum + count * (reason.includes('collision') ? 1.5 : reason.includes('shot') ? 1 : 0.75), 0);
   return {
     label,
     score10: round(average(rows.map(row => row.score10)), 1),
@@ -139,18 +147,21 @@ function summarizeRuns(label, runs){
     waveClears: round(average(rows.map(row => row.waveClears)), 2),
     divePressurePerMinute: round(average(rows.map(row => row.components.divePressurePerMinute)), 2),
     shotPressurePerMinute: round(average(rows.map(row => row.components.shotPressurePerMinute)), 2),
+    seedCohortCount: SEED_OFFSETS.length,
+    scoreSpread10: round(Math.max(...rows.map(row => row.score10), 0) - Math.min(...rows.map(row => row.score10), 0), 1),
+    lossDiagnostics: { lossCauseCounts, weightedLossCost: round(weightedLossCost, 2) },
     rows
   };
 }
 
 function simulateRouteability(ctx){
-  return summarizeRuns('stage-five-routeability-window', PERSONAS.map(persona => simulatePersona(ctx, persona, {
+  return summarizeRuns('stage-five-routeability-window', PERSONAS.flatMap(persona => SEED_OFFSETS.map(offset => simulatePersona(ctx, persona, {
     stage: 5,
     ships: 5,
-    seed: SEEDS[persona],
+    seed: SEEDS[persona] + offset,
     maxPlayableStage: 9,
     durationSeconds: 120
-  })));
+  }))));
 }
 
 function trackDelta(previous, rows, dt, speeds, ySpeeds){
@@ -296,6 +307,7 @@ function readabilityScore(window, routeability){
     score10FromShare(closeness(window.pace.lowerFieldMultiThreatShare, 0.2, 0.2)),
     score10FromShare(clamp01(1 - routeability.collisionLossShare)),
     score10FromShare(clamp01(1 - (window.pace.laneOverlapShare / 0.18))),
+    score10FromShare(clamp01(1 - (window.pace.playerCorridorBlockedShare / 0.36))),
     score10FromShare(closeness(window.pace.lowerFieldThreatShare, 0.24, 0.18))
   ]), 1);
 }
@@ -600,6 +612,14 @@ function main(){
   report.media = {
     summaryChart: writeChart(report)
   };
+  const familyRows = profileSet.families.map(family => {
+    const rows = candidates.filter(candidate => candidate.family === family.id);
+    const best = rows.slice().sort((a, b) => b.lowerFieldReadabilityScore10 - a.lowerFieldReadabilityScore10)[0] || null;
+    return { id: family.id, candidateCount: rows.length, bestCandidateId: best?.id || null, bestReadabilityScore10: best?.lowerFieldReadabilityScore10 ?? null, bestRouteabilityScore10: best?.routeability?.score10 ?? null, bestCollisionLossShare: best?.routeability?.collisionLossShare ?? null, gatePassCount: rows.filter(row => row.promotionGate.pass).length };
+  });
+  const familyReport = { gameKey: report.gameKey, artifactType: 'platinum-candidate-family-comparison', createdOn: report.createdOn, baseline: report.baseline, families: familyRows, promotionDecision: { runtimePromotion: report.summary.bestStrictReadabilityScore10 >= profileSet.promotionGate.targetStrictReadabilityScore10 && report.summary.bestCandidatePass ? 'eligible-for-visual-review' : 'hold' } };
+  writeJson(FAMILY_OUT, familyReport);
+  writeText(FAMILY_MD, `# Guardians Candidate Family Comparison\n\n| Family | Candidates | Best | Readability | Routeability | Collision Loss | Passes |\n| --- | ---: | --- | ---: | ---: | ---: | ---: |\n${familyRows.map(row => `| ${row.id} | ${row.candidateCount} | ${row.bestCandidateId || 'none'} | ${row.bestReadabilityScore10 ?? 'n/a'}/10 | ${row.bestRouteabilityScore10 ?? 'n/a'}/10 | ${round((row.bestCollisionLossShare || 0) * 100, 0)}% | ${row.gatePassCount} |`).join('\n')}\n\nRuntime promotion: **${familyReport.promotionDecision.runtimePromotion}**.\n`);
   writeJson(OUT, report);
   writeText(OUT_MD, buildMarkdown(report));
   console.log(JSON.stringify({
