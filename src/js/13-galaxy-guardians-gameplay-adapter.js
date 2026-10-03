@@ -711,9 +711,9 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   ? resolveWatchModeStartScope()
   : '';
  const requestedWatchPersona=String(
-  (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
-  || cfg.watchPersona
+  cfg.watchPersona
   || cfg.persona
+  || (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
   || 'advanced'
  ).trim().toLowerCase();
  const developerWatchPersona=cfg.watchMode?requestedWatchPersona:'';
@@ -765,13 +765,21 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   stage:S.stage,
   ships:Math.max(1,+cfg.ships||+testCfg.ships||3),
   seed:(+cfg.seed>>>0)||(+localStorage.getItem(SEED_PREF_KEY)>>>0)||42719,
-  maxPlayableStage:Math.max(
+ maxPlayableStage:Math.max(
    1,
    +cfg.maxPlayableStage
    || +(window.__platinumHarnessRuntimeOverrides?.maxPlayableStage||window.__auroraHarnessRuntimeOverrides?.maxPlayableStage||0)
    || 1
  )
  });
+ if(cfg.stageFiveReview){
+  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig={
+   id:'guardians-stage-five-review',
+   stage:5,
+   seed:(+cfg.seed>>>0)||12553,
+   mode:watchMode?'professional-watch':'manual-play'
+  };
+ }
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.telemetryEventIndex=0;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
@@ -864,9 +872,11 @@ function currentGalaxyGuardiansDevPreviewState(){
 }
 
 function summarizeGalaxyGuardiansDevPreview(){
- return GALAXY_GUARDIANS_ACTIVE_DEV_STATE
-  ? summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
-  : null;
+ if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return null;
+ return Object.assign(
+  summarizeGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE),
+  {reviewConfig:GALAXY_GUARDIANS_ACTIVE_DEV_STATE.reviewConfig||null}
+ );
 }
 
 const GALAXY_GUARDIANS_DEV_PREVIEW_ADAPTER=Object.freeze({

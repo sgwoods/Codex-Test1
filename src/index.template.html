@@ -259,6 +259,28 @@
       </div>
       <input id="testChallenge" type="checkbox" hidden aria-hidden="true" />
       <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 3-4, not Level 4. Expert Plays starts the selected persona in Watch Mode for the chosen start point. Set either score to 0 to disable that bonus-ship award.</div>
+      <div id="guardiansStageFiveReview" hidden>
+        <h4>Guardians Stage 5 Review</h4>
+        <div class="settingsFieldGrid">
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveSeed">Review Seed</label>
+            <select id="guardiansStageFiveSeed">
+              <option value="12553" selected>12553 · Primary</option>
+              <option value="13550">13550 · Alternate A</option>
+              <option value="14547">14547 · Alternate B</option>
+            </select>
+          </div>
+          <div class="settingsField settingsFieldCompact">
+            <label for="guardiansStageFiveMode">Pilot</label>
+            <select id="guardiansStageFiveMode">
+              <option value="manual" selected>Manual Play</option>
+              <option value="professional">Professional Watch</option>
+            </select>
+          </div>
+        </div>
+        <button id="guardiansStageFiveLaunch" type="button">Launch Stage 5 Review</button>
+        <div id="guardiansStageFiveReviewStatus" class="settingsInlineHint">Rank-three policy · five ships · stages 5-9 · score not recorded in Watch Mode.</div>
+      </div>
     </div>
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>

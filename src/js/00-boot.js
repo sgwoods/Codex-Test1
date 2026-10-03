@@ -42,6 +42,7 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),themeSetSelect=document.getElementById('themeSetSelect'),themeSetSummary=document.getElementById('themeSetSummary'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const guardiansStageFiveReview=document.getElementById('guardiansStageFiveReview'),guardiansStageFiveSeed=document.getElementById('guardiansStageFiveSeed'),guardiansStageFiveMode=document.getElementById('guardiansStageFiveMode'),guardiansStageFiveLaunch=document.getElementById('guardiansStageFiveLaunch'),guardiansStageFiveReviewStatus=document.getElementById('guardiansStageFiveReviewStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -2247,7 +2248,39 @@ function syncDeveloperToolsUi(){
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+ let activePackKey='';
+ try{if(typeof currentGamePackKey==='function')activePackKey=currentGamePackKey();}catch{}
+ const guardiansReviewAvailable=String(BUILD_INFO?.releaseChannel||'').toLowerCase()==='development'&&activePackKey==='galaxy-guardians-preview';
+ if(guardiansStageFiveReview)guardiansStageFiveReview.hidden=!guardiansReviewAvailable;
+ if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.disabled=!guardiansReviewAvailable;
  syncChallengeStartControls();
+}
+
+function launchGuardiansStageFiveReview(){
+ if(String(BUILD_INFO?.releaseChannel||'').toLowerCase()!=='development'||typeof currentGamePackKey!=='function'||currentGamePackKey()!=='galaxy-guardians-preview')return false;
+ if(typeof startGalaxyGuardiansDevPreview!=='function')return false;
+ const seed=(+guardiansStageFiveSeed?.value>>>0)||12553;
+ const mode=String(guardiansStageFiveMode?.value||'manual');
+ const watchMode=mode==='professional';
+ if(testStartKind)testStartKind.value='level';
+ if(testStage)testStage.value='5';
+ if(testShips)testShips.value='5';
+ if(testExpertPlays)testExpertPlays.value=watchMode?'professional':'human';
+ saveTestCfg();
+ const startedReview=startGalaxyGuardiansDevPreview({
+  stage:5,
+  ships:5,
+  seed,
+  maxPlayableStage:9,
+  watchMode,
+  watchPersona:watchMode?'professional':'',
+  stageFiveReview:true
+ });
+ if(startedReview){
+  if(guardiansStageFiveReviewStatus)guardiansStageFiveReviewStatus.textContent=`Active: Stage 5 · seed ${seed} · ${watchMode?'Professional Watch':'Manual Play'}`;
+  showToast(`Stage 5 review · seed ${seed} · ${watchMode?'watch':'manual'}`);
+ }
+ return startedReview;
 }
 function syncChallengeStartControls(){
  const cfg=testCfgCache||loadTestCfg();
@@ -3208,6 +3241,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.addEventListener('click',launchGuardiansStageFiveReview);
 if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
