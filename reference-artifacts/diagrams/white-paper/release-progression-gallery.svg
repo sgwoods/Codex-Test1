@@ -1,0 +1,65 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#101C35"/>
+    </linearGradient>
+    <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFCC6E"/>
+      <stop offset="1" stop-color="#F06A2A"/>
+    </linearGradient>
+    <linearGradient id="platinum" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7EE7FF"/>
+      <stop offset="1" stop-color="#2F89FF"/>
+    </linearGradient>
+    <linearGradient id="conformance" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#9AF7C5"/>
+      <stop offset="1" stop-color="#5D78FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#07111F"/>
+  <text x="90" y="100" fill="#F2F8FF" font-family="Menlo, Monaco, monospace" font-size="54" font-weight="700">Release Story In Three Moves</text>
+  <text x="94" y="148" fill="#A9BCD8" font-family="Menlo, Monaco, monospace" font-size="24">The public surface moved from one game to a platform and then to a measured conformance program.</text>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <g transform="translate(90 230)">
+      <rect width="430" height="430" rx="30" fill="#171E2E" stroke="#FFB066" stroke-width="3"/>
+      <rect x="46" y="78" width="338" height="240" rx="18" fill="#03080D" stroke="#465365" stroke-width="2"/>
+      <rect x="186" y="268" width="58" height="28" rx="6" fill="url(#aurora)"/>
+      <circle cx="150" cy="154" r="12" fill="#F7D75C"/>
+      <circle cx="214" cy="124" r="12" fill="#FF6961"/>
+      <circle cx="278" cy="154" r="12" fill="#7EE7FF"/>
+      <path d="M214 288L214 210" stroke="#7EE7FF" stroke-width="4"/>
+      <text x="42" y="374" fill="#FFC982" font-size="34" font-weight="700">1.0.0</text>
+      <text x="42" y="410" fill="#F7E9DD" font-size="22">Public Aurora, scoring, identity, replay visibility, and real release notes.</text>
+    </g>
+    <g transform="translate(585 230)">
+      <rect width="430" height="430" rx="30" fill="#101F35" stroke="#58D6FF" stroke-width="3"/>
+      <rect x="70" y="72" width="290" height="76" rx="16" fill="#122B46" stroke="#58D6FF" stroke-width="2"/>
+      <rect x="70" y="178" width="290" height="76" rx="16" fill="#14223C" stroke="#7BA7FF" stroke-width="2"/>
+      <rect x="70" y="284" width="128" height="50" rx="14" fill="url(#aurora)"/>
+      <rect x="232" y="284" width="128" height="50" rx="14" fill="url(#platinum)"/>
+      <text x="100" y="118" fill="#8BE8FF" font-size="22" font-weight="700">Platform shell</text>
+      <text x="106" y="224" fill="#D8E8FF" font-size="22" font-weight="700">Runtime services</text>
+      <text x="42" y="374" fill="#8BE8FF" font-size="34" font-weight="700">1.2.0</text>
+      <text x="42" y="410" fill="#EAF3FF" font-size="22">Platinum becomes explicit, with Aurora as one application on the host.</text>
+    </g>
+    <g transform="translate(1080 230)">
+      <rect width="430" height="430" rx="30" fill="#10241F" stroke="#79E6C0" stroke-width="3"/>
+      <rect x="52" y="72" width="326" height="86" rx="18" fill="#0E1A2B" stroke="#79E6C0" stroke-width="2"/>
+      <rect x="52" y="184" width="150" height="86" rx="18" fill="#251B1F" stroke="#FFB066" stroke-width="2"/>
+      <rect x="228" y="184" width="150" height="86" rx="18" fill="#211B35" stroke="#B38BFF" stroke-width="2"/>
+      <path d="M82 124H340" stroke="url(#conformance)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M82 124H268" stroke="#9AF7C5" stroke-width="8" stroke-linecap="round"/>
+      <text x="76" y="238" fill="#FFC982" font-size="20" font-weight="700">Aurora</text>
+      <text x="250" y="238" fill="#E3C7FF" font-size="20" font-weight="700">Guardians</text>
+      <text x="42" y="374" fill="#9AF7C5" font-size="34" font-weight="700">1.4.0+</text>
+      <text x="42" y="410" fill="#EAF3FF" font-size="22">Multi-game posture, stricter dashboards, economics, and public review surfaces.</text>
+    </g>
+  </g>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <rect x="166" y="722" width="1268" height="86" rx="22" fill="#0D1B2D" stroke="#335B7A" stroke-width="2"/>
+    <text x="206" y="775" fill="#D8E8FF" font-size="24">Next proof: convert evidence into visible challenge-stage quality, stronger Guardians v1 play, and reusable ingestion-to-runtime grammar.</text>
+  </g>
+</svg>

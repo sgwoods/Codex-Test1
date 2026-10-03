@@ -127,6 +127,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/white-paper.html',
   'dist/dev/project-overview-slides.html',
   'dist/dev/project-overview-slides.json',
+  'dist/dev/project-overview-slides.pdf',
+  'dist/dev/project-overview-slides-pdf.json',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -149,6 +151,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/white-paper.html',
   'dist/production/project-overview-slides.html',
   'dist/production/project-overview-slides.json',
+  'dist/production/project-overview-slides.pdf',
+  'dist/production/project-overview-slides-pdf.json',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -170,6 +174,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/white-paper.html',
   'dist/beta/project-overview-slides.html',
   'dist/beta/project-overview-slides.json',
+  'dist/beta/project-overview-slides.pdf',
+  'dist/beta/project-overview-slides-pdf.json',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -193,6 +199,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'white-paper.html',
   'project-overview-slides.html',
   'project-overview-slides.json',
+  'project-overview-slides.pdf',
+  'project-overview-slides-pdf.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -210,6 +218,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/white-paper.html',
   'dev/project-overview-slides.html',
   'dev/project-overview-slides.json',
+  'dev/project-overview-slides.pdf',
+  'dev/project-overview-slides-pdf.json',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -228,6 +238,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/white-paper.html',
   'beta/project-overview-slides.html',
   'beta/project-overview-slides.json',
+  'beta/project-overview-slides.pdf',
+  'beta/project-overview-slides-pdf.json',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -274,11 +286,21 @@ function rel(file){
 
 const PUBLIC_SAFE_ARTIFACT_EXTENSIONS = new Set(['.md', '.json', '.sha256', '.txt', '.csv', '.tsv', '.yml', '.yaml']);
 const PRIVATE_COMPANION_STORE_NOTE = 'Private companion store only; not exposed from the public repo.';
+const WHITE_PAPER_MEDIA_ALLOWLIST = new Set([
+  'reference-artifacts/analyses/challenge-path-visuals/latest.svg',
+  'reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/score-trends.svg',
+  'reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/compute-minutes-by-resource.svg',
+  'reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cost-per-positive-score-point.svg',
+  'reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg',
+  'reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt-contact-sheet.svg'
+]);
 
 function isPublicSafeArtifactPath(value=''){
   const normalized = normalizeAssetSourcePath(value);
   if(!normalized) return false;
   if(normalized.startsWith('private-artifacts/')) return false;
+  if(normalized.startsWith('reference-artifacts/diagrams/')) return true;
+  if(WHITE_PAPER_MEDIA_ALLOWLIST.has(normalized)) return true;
   if(!normalized.startsWith('reference-artifacts/')) return true;
   return PUBLIC_SAFE_ARTIFACT_EXTENSIONS.has(path.extname(normalized).toLowerCase());
 }
@@ -1985,10 +2007,20 @@ function whitePaperGuideStyles(){
       }
       .tableWrap{
         overflow:visible;
+        width:100%;
         background:#fff;
       }
       .dataTable{
         min-width:0;
+        width:100% !important;
+        table-layout:fixed;
+        font-size:9.5px;
+      }
+      .dataTable th,
+      .dataTable td{
+        padding:5px 6px;
+        overflow-wrap:anywhere;
+        word-break:normal;
       }
       .dataTable th{
         position:static;
@@ -2053,7 +2085,7 @@ function projectOverviewSlidesStyles(){
     }
     a{color:#d9f7ff}
     .deckShell{
-      max-width:1180px;
+      max-width:1400px;
       margin:0 auto;
       padding:34px 22px 70px;
     }
@@ -2149,15 +2181,16 @@ function projectOverviewSlidesStyles(){
     }
     .slideStack{
       display:grid;
-      gap:22px;
+      gap:18px;
     }
     .slide{
       position:relative;
-      min-height:628px;
+      width:100%;
+      min-height:0;
       aspect-ratio:16/9;
       border-radius:24px;
       overflow:hidden;
-      padding:34px 38px;
+      padding:32px 36px;
     }
     .slide::before{
       content:"";
@@ -2172,9 +2205,10 @@ function projectOverviewSlidesStyles(){
       position:relative;
       z-index:1;
       height:100%;
+      min-height:0;
       display:grid;
-      grid-template-rows:auto auto 1fr auto;
-      gap:14px;
+      grid-template-rows:auto auto auto minmax(0,1fr) auto;
+      gap:12px;
     }
     .slideHeader{
       display:flex;
@@ -2193,41 +2227,57 @@ function projectOverviewSlidesStyles(){
     }
     .slide h2{
       margin:0;
-      max-width:930px;
-      font-size:clamp(30px,4vw,48px);
-      line-height:1.02;
-      letter-spacing:-.035em;
+      max-width:980px;
+      font-size:clamp(28px,3.6vw,42px);
+      line-height:1.08;
+      letter-spacing:0;
     }
     .claim{
-      max-width:870px;
+      max-width:900px;
       color:var(--muted);
-      font-size:20px;
-      line-height:1.45;
+      font-size:18px;
+      line-height:1.38;
       margin:0;
     }
     .proofGrid{
       align-self:end;
       grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:0;
     }
     .proofCard{
-      min-height:76px;
+      min-height:68px;
+      padding:12px 14px;
+    }
+    .proofCard span{
+      margin-bottom:5px;
+      font-size:10px;
     }
     .proofCard strong{
-      font-size:17px;
+      font-size:15px;
+      line-height:1.24;
     }
+    .nativeVisual,
     .visualFlow{
       display:grid;
-      grid-template-columns:repeat(5,1fr);
       gap:10px;
-      margin-top:14px;
+      min-height:0;
+      align-self:stretch;
+    }
+    .nativeVisual{
+      --cardGlow:rgba(103,232,249,.16);
+    }
+    .visualFlow{
+      grid-template-columns:repeat(5,1fr);
+      margin-top:0;
     }
     .flowNode{
       position:relative;
       border:1px solid rgba(255,255,255,.1);
       background:rgba(255,255,255,.05);
       border-radius:16px;
-      padding:14px;
-      min-height:106px;
+      padding:12px;
+      min-height:96px;
     }
     .flowNode strong{
       display:block;
@@ -2243,7 +2293,7 @@ function projectOverviewSlidesStyles(){
       display:grid;
       grid-template-columns:1.1fr .9fr;
       gap:16px;
-      margin-top:12px;
+      margin-top:0;
     }
     .challengeRead{
       display:grid;
@@ -2253,12 +2303,12 @@ function projectOverviewSlidesStyles(){
       border:1px solid rgba(255,255,255,.1);
       background:rgba(255,255,255,.05);
       border-radius:16px;
-      padding:14px 16px;
+      padding:12px 14px;
     }
     .bigMetric strong{
       display:block;
       color:var(--red);
-      font-size:28px;
+      font-size:25px;
       font-family:"SFMono-Regular",Consolas,monospace;
     }
     .bigMetric span{
@@ -2267,12 +2317,742 @@ function projectOverviewSlidesStyles(){
       font-size:13px;
       margin-top:5px;
     }
+    .timelineVisual,
+    .pipelineVisual,
+    .portfolioVisual,
+    .scoreVisual,
+    .releaseLaneVisual,
+    .evidenceLoopVisual,
+    .economicsVisual{
+      display:grid;
+      gap:9px;
+      margin-top:0;
+      align-self:end;
+    }
+    .timelineVisual{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .pipelineVisual{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .portfolioVisual,
+    .scoreVisual,
+    .releaseLaneVisual,
+    .economicsVisual{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .evidenceLoopVisual{
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      align-self:stretch;
+      align-content:center;
+    }
+    .visualTile{
+      min-height:88px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+    }
+    .visualTile strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--gold);
+      font-size:15px;
+      line-height:1.2;
+    }
+    .visualTile span{
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.35;
+    }
+    .scoreVisual .visualTile strong,
+    .economicsVisual .visualTile strong{
+      color:var(--green);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:23px;
+    }
+    .pipelineVisual .visualTile,
+    .evidenceLoopVisual .visualTile{
+      min-height:96px;
+    }
+    .chainVisual{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      align-content:center;
+    }
+    .chainVisual,
+    .packBoundaryVisual,
+    .portfolioVisual,
+    .movementGrammarVisual,
+    .audioRoiVisual,
+    .releaseTrackVisual,
+    .launchRiskVisual,
+    .roadmapVisual,
+    .factoryLoopVisual{
+      align-self:stretch;
+      align-content:center;
+    }
+    .chainStep,
+    .stackLayer,
+    .boundaryCard,
+    .portfolioCard,
+    .sourceCluster,
+    .pipelineStage,
+    .grammarNode,
+    .roiPanel,
+    .spriteConcept,
+    .releaseStage,
+    .riskCard,
+    .roadmapPhase,
+    .factoryNode,
+    .riskGate,
+    .decisionBand{
+      min-width:0;
+      border:1px solid rgba(255,255,255,.1);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.072), rgba(255,255,255,.035)),
+        radial-gradient(circle at 12% 0%, var(--cardGlow), transparent 44%);
+      border-radius:16px;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
+    }
+    .chainStep{
+      position:relative;
+      min-height:148px;
+      padding:16px;
+      overflow:hidden;
+    }
+    .chainStep::before,
+    .pipelineStage::before,
+    .grammarNode::before,
+    .spriteConcept::before,
+    .releaseStage::before,
+    .roadmapPhase::before,
+    .factoryNode::before{
+      content:attr(data-step);
+      position:absolute;
+      right:14px;
+      bottom:8px;
+      color:rgba(255,255,255,.045);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:52px;
+      font-weight:900;
+      line-height:1;
+    }
+    .chainStep:not(:last-child)::after,
+    .grammarNode:not(:last-child)::after,
+    .releaseStage:not(:last-child)::after,
+    .factoryNode:not(:last-child)::after{
+      content:"";
+      position:absolute;
+      right:6px;
+      top:50%;
+      width:14px;
+      height:2px;
+      background:linear-gradient(90deg,var(--cyan),transparent);
+      transform:translateY(-50%);
+      z-index:2;
+    }
+    .chainStep em,
+    .releaseStage em,
+    .roadmapPhase em{
+      display:inline-flex;
+      margin-bottom:10px;
+      color:var(--cyan);
+      font-style:normal;
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:12px;
+      font-weight:800;
+    }
+    .chainStep strong,
+    .chainStep span,
+    .chainStep em,
+    .pipelineStage small,
+    .pipelineStage strong,
+    .pipelineStage span,
+    .grammarNode strong,
+    .grammarNode span,
+    .spriteConcept small,
+    .spriteConcept strong,
+    .spriteConcept span,
+    .releaseStage em,
+    .releaseStage strong,
+    .releaseStage span,
+    .riskCard small,
+    .riskCard strong,
+    .riskCard span,
+    .roadmapPhase em,
+    .roadmapPhase strong,
+    .roadmapPhase span,
+    .factoryNode small,
+    .factoryNode strong,
+    .factoryNode span{
+      position:relative;
+      z-index:1;
+    }
+    .chainStep strong,
+    .stackLayer strong,
+    .boundaryCard strong,
+    .portfolioCard strong,
+    .sourceCluster strong,
+    .pipelineStage strong,
+    .grammarNode strong,
+    .roiPanel strong,
+    .spriteConcept strong,
+    .releaseStage strong,
+    .riskCard strong,
+    .roadmapPhase strong,
+    .factoryNode strong{
+      display:block;
+      color:#f3fbff;
+      font-size:19px;
+      line-height:1.14;
+    }
+    .chainStep span,
+    .stackLayer span,
+    .boundaryCard span,
+    .portfolioCard span,
+    .sourceCluster span,
+    .pipelineStage span,
+    .grammarNode span,
+    .roiPanel span,
+    .spriteConcept span,
+    .releaseStage span,
+    .riskCard span,
+    .roadmapPhase span,
+    .factoryNode span,
+    .decisionBand span{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.34;
+    }
+    .stackVisual,
+    .packBoundaryVisual,
+    .sourceCorpusVisual,
+    .audioRoiVisual,
+    .spriteModelVisual,
+    .roadmapVisual{
+      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+      gap:12px;
+      align-items:stretch;
+    }
+    .stackLanes,
+    .sourceClusterGrid,
+    .roadmapPhases{
+      display:grid;
+      gap:9px;
+      min-height:0;
+    }
+    .stackLayer{
+      display:grid;
+      grid-template-columns:132px minmax(0,1fr);
+      gap:12px;
+      align-items:center;
+      padding:12px 14px;
+      border-left:5px solid var(--gold);
+    }
+    .stackLayer b{
+      color:var(--gold);
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .stackCallout,
+    .sourceOutcome,
+    .roiDecision,
+    .spriteOutcome,
+    .factoryOutcome{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(103,232,249,.18);
+      background:linear-gradient(160deg,rgba(103,232,249,.09),rgba(255,255,255,.035));
+      align-self:stretch;
+    }
+    .stackCallout strong,
+    .sourceOutcome strong,
+    .roiDecision strong,
+    .spriteOutcome strong,
+    .factoryOutcome strong{
+      display:block;
+      color:var(--green);
+      font-size:28px;
+      line-height:1.08;
+    }
+    .stackCallout span,
+    .sourceOutcome span,
+    .roiDecision span,
+    .spriteOutcome span,
+    .factoryOutcome span{
+      display:block;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.38;
+    }
+    .packBoundaryVisual{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      align-items:center;
+    }
+    .boundaryCard{
+      position:relative;
+      padding:18px 18px 20px;
+      min-height:186px;
+      overflow:hidden;
+    }
+    .boundaryCard::after,
+    .portfolioCard::after,
+    .sourceCluster::after,
+    .pipelineStage::after,
+    .spriteConcept::after,
+    .roadmapPhase::after{
+      content:"";
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:16px;
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),transparent);
+      opacity:.82;
+    }
+    .boundaryCard.isPlatform{
+      border-color:rgba(103,232,249,.28);
+    }
+    .boundaryCard.isGame{
+      border-color:rgba(252,211,77,.28);
+    }
+    .boundaryCard small,
+    .portfolioCard small,
+    .sourceCluster small,
+    .pipelineStage small,
+    .spriteConcept small,
+    .factoryNode small{
+      display:inline-flex;
+      margin-bottom:10px;
+      color:var(--cyan);
+      font-size:12px;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      font-family:"SFMono-Regular",Consolas,monospace;
+    }
+    .portfolioVisual{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      align-items:center;
+    }
+    .portfolioCard{
+      position:relative;
+      padding:18px;
+      min-height:178px;
+      overflow:hidden;
+    }
+    .portfolioCard strong{
+      color:var(--gold);
+      font-size:24px;
+    }
+    .portfolioCard.isActive{
+      border-color:rgba(134,239,172,.28);
+    }
+    .portfolioCard.isPreview{
+      border-color:rgba(196,181,253,.30);
+    }
+    .portfolioCard.isIntake{
+      border-color:rgba(103,232,249,.25);
+    }
+    .sourceClusterGrid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .sourceCluster{
+      position:relative;
+      padding:15px 15px 22px;
+      min-height:128px;
+      overflow:hidden;
+    }
+    .sourceCluster strong{
+      color:var(--gold);
+      font-size:19px;
+    }
+    .pipelineVisual{
+      position:relative;
+      align-self:stretch;
+      align-content:center;
+    }
+    .pipelineVisual::before,
+    .releaseTrackVisual::before,
+    .roadmapPhases::before,
+    .spriteConceptGrid::before{
+      content:"";
+      position:absolute;
+      left:22px;
+      right:22px;
+      top:50%;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg,rgba(103,232,249,.12),rgba(103,232,249,.58),rgba(252,211,77,.32));
+      box-shadow:0 0 18px rgba(103,232,249,.2);
+      transform:translateY(-50%);
+      z-index:0;
+    }
+    .releaseTrackVisual::before,
+    .roadmapPhases::before,
+    .spriteConceptGrid::before{
+      top:auto;
+      bottom:34px;
+      transform:none;
+    }
+    .pipelineStage{
+      position:relative;
+      z-index:1;
+      min-height:112px;
+      padding:14px 14px 20px;
+      overflow:hidden;
+    }
+    .pipelineStage small{
+      color:var(--cyan);
+    }
+    .pipelineStage strong{
+      color:var(--gold);
+      font-size:18px;
+    }
+    .movementGrammarVisual,
+    .releaseTrackVisual,
+    .factoryLoopVisual{
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      align-content:center;
+    }
+    .releaseTrackVisual{
+      position:relative;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .grammarNode,
+    .releaseStage,
+    .factoryNode{
+      position:relative;
+      z-index:1;
+      padding:16px;
+      min-height:148px;
+      overflow:hidden;
+    }
+    .grammarNode strong{
+      color:var(--gold);
+      font-size:18px;
+    }
+    .grammarGuard,
+    .decisionBand{
+      grid-column:1/-1;
+      padding:13px 15px;
+      color:#eaf8ff;
+      font-size:15px;
+      line-height:1.32;
+    }
+    .grammarGuard{
+      border-color:rgba(134,239,172,.24);
+      background:rgba(134,239,172,.08);
+    }
+    .grammarGuard strong,
+    .decisionBand strong{
+      color:var(--green);
+      margin-right:6px;
+    }
+    .audioRoiVisual{
+      grid-template-columns:1fr 1fr;
+    }
+    .roiPanel{
+      padding:20px;
+      min-height:184px;
+    }
+    .roiPanel strong{
+      color:var(--gold);
+      font-size:22px;
+    }
+    .roiNumber{
+      display:block;
+      margin-top:12px;
+      color:var(--green);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:38px;
+      font-weight:900;
+      line-height:1;
+    }
+    .roiBar{
+      height:10px;
+      margin-top:14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .roiBar span{
+      display:block;
+      height:100%;
+      margin:0;
+      border-radius:inherit;
+      background:linear-gradient(90deg,var(--green),var(--cyan));
+    }
+    .roiDecision{
+      grid-column:1/-1;
+      padding:14px 16px;
+    }
+    .roiDecision strong{
+      font-size:22px;
+    }
+    .spriteConceptGrid{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+    .spriteConcept{
+      position:relative;
+      z-index:1;
+      padding:18px 16px 22px;
+      min-height:178px;
+      overflow:hidden;
+    }
+    .spriteConcept strong{
+      color:var(--gold);
+      font-size:21px;
+    }
+    .spriteOutcome{
+      display:grid;
+      align-content:center;
+    }
+    .roadmapPhases{
+      position:relative;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-column:1/-1;
+    }
+    .roadmapPhase{
+      position:relative;
+      z-index:1;
+      padding:16px 16px 22px;
+      min-height:156px;
+      overflow:hidden;
+    }
+    .roadmapPhase strong{
+      color:var(--gold);
+      font-size:21px;
+    }
+    .factoryLoopVisual{
+      grid-template-columns:repeat(5,minmax(0,1fr));
+    }
+    .factoryNode{
+      min-height:138px;
+    }
+    .factoryNode strong{
+      color:var(--gold);
+      font-size:18px;
+    }
+    .factoryOutcome{
+      grid-column:1/-1;
+      padding:14px 16px;
+    }
+    .factoryOutcome strong{
+      font-size:22px;
+    }
+    .launchRiskVisual{
+      grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+      gap:12px;
+    }
+    .riskGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:9px;
+      min-height:0;
+    }
+    .riskCard{
+      position:relative;
+      min-height:104px;
+      padding:14px 14px 16px;
+      overflow:hidden;
+      border-color:rgba(248,113,113,.24);
+      background:
+        linear-gradient(160deg, rgba(248,113,113,.105), rgba(255,255,255,.036)),
+        radial-gradient(circle at 12% 0%, rgba(248,113,113,.17), transparent 48%);
+    }
+    .riskCard::before{
+      content:attr(data-severity);
+      position:absolute;
+      right:12px;
+      top:10px;
+      color:rgba(248,113,113,.15);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:23px;
+      font-weight:900;
+      line-height:1;
+    }
+    .riskCard small{
+      display:inline-flex;
+      margin-bottom:8px;
+      color:var(--red);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .riskCard strong{
+      color:var(--gold);
+      font-size:17px;
+    }
+    .riskCard span{
+      font-size:13px;
+      line-height:1.28;
+    }
+    .riskGate{
+      display:grid;
+      align-content:center;
+      padding:20px;
+      border-color:rgba(248,113,113,.28);
+      background:
+        linear-gradient(160deg, rgba(248,113,113,.12), rgba(103,232,249,.04)),
+        radial-gradient(circle at 12% 0%, rgba(252,211,77,.16), transparent 46%);
+    }
+    .riskGate strong{
+      display:block;
+      color:#fef3c7;
+      font-size:27px;
+      line-height:1.08;
+    }
+    .riskGate span{
+      display:block;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.38;
+    }
+    .riskGate ul{
+      margin:16px 0 0;
+      padding:0;
+      display:grid;
+      gap:8px;
+      list-style:none;
+    }
+    .riskGate li{
+      display:grid;
+      grid-template-columns:12px minmax(0,1fr);
+      gap:8px;
+      align-items:start;
+      color:#eaf8ff;
+      font-size:13.5px;
+      line-height:1.28;
+    }
+    .riskGate li::before{
+      content:"";
+      width:8px;
+      height:8px;
+      margin-top:5px;
+      border-radius:999px;
+      background:var(--red);
+      box-shadow:0 0 14px rgba(248,113,113,.42);
+    }
+    .slideImageVisual{
+      display:grid;
+      grid-template-columns:minmax(0,1.6fr) minmax(176px,.4fr);
+      gap:12px;
+      min-height:0;
+      align-self:stretch;
+    }
+    .slideImageVisual.isImageOnly{
+      grid-template-columns:1fr;
+    }
+    .slideImageGrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      min-height:0;
+      height:100%;
+    }
+    .slideImageVisual.isPair .slideImageGrid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .slideImageFrame{
+      display:grid;
+      grid-template-rows:minmax(0,1fr) auto;
+      min-height:0;
+      margin:0;
+      padding:8px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(4,13,24,.72);
+      box-shadow:0 18px 38px rgba(0,0,0,.22);
+    }
+    .slideImageFrame img{
+      display:block;
+      width:100%;
+      height:100%;
+      min-height:0;
+      object-fit:contain;
+      border-radius:12px;
+      background:rgba(255,255,255,.025);
+    }
+    .slideImageFrame figcaption{
+      margin:7px 2px 0;
+      color:var(--muted);
+      font-size:11.5px;
+      line-height:1.25;
+    }
+    .imageProofRail{
+      display:grid;
+      gap:7px;
+      align-content:start;
+      min-height:0;
+    }
+    .imageProofItem{
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      color:#eaf8ff;
+      font-size:12px;
+      line-height:1.23;
+    }
     .slideFooter{
       color:#8fb3cc;
       font-size:12px;
       display:flex;
       justify-content:space-between;
       gap:16px;
+    }
+    .speakerNotes{
+      display:grid;
+      grid-template-columns:138px minmax(0,1fr);
+      gap:16px;
+      margin:-4px 0 10px;
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.045);
+    }
+    .speakerNotesHeader{
+      display:grid;
+      gap:6px;
+      align-content:start;
+      color:#dff7ff;
+    }
+    .speakerNotesHeader span{
+      color:var(--cyan);
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-weight:800;
+    }
+    .speakerNotesHeader strong{
+      font-size:24px;
+      line-height:1;
+      font-family:"SFMono-Regular",Consolas,monospace;
+    }
+    .speakerNotes ol{
+      margin:0;
+      padding-left:20px;
+      display:grid;
+      gap:8px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+    .speakerNotes li::marker{
+      color:var(--gold);
+      font-weight:800;
     }
     .toc{
       position:sticky;
@@ -2319,18 +3099,151 @@ function projectOverviewSlidesStyles(){
       line-height:1.55;
       font-size:13px;
     }
-    @media (max-width:980px){
+    @media (max-width:1180px){
       .deckLayout{grid-template-columns:1fr}
       .toc{position:static;max-height:none}
+    }
+    @media (max-width:980px){
       .slide{min-height:0;aspect-ratio:auto}
       .visualFlow{grid-template-columns:1fr}
       .challengeGrid{grid-template-columns:1fr}
+      .timelineVisual,
+      .pipelineVisual,
+      .portfolioVisual,
+      .scoreVisual,
+      .releaseLaneVisual,
+      .evidenceLoopVisual,
+      .economicsVisual,
+      .chainVisual,
+      .stackVisual,
+      .packBoundaryVisual,
+      .sourceCorpusVisual,
+      .movementGrammarVisual,
+      .audioRoiVisual,
+      .spriteModelVisual,
+      .releaseTrackVisual,
+      .launchRiskVisual,
+      .roadmapVisual,
+      .factoryLoopVisual,
+      .sourceClusterGrid,
+      .riskGrid,
+      .spriteConceptGrid,
+      .roadmapPhases{grid-template-columns:1fr}
+      .slideImageVisual,
+      .slideImageVisual.isPair .slideImageGrid{grid-template-columns:1fr}
+      .chainStep:not(:last-child)::after,
+      .grammarNode:not(:last-child)::after,
+      .releaseStage:not(:last-child)::after,
+      .factoryNode:not(:last-child)::after{display:none}
     }
     @media (max-width:720px){
       .deckShell{padding:20px 14px 54px}
       .deckHero,.slide{padding:24px 20px}
       .proofGrid{grid-template-columns:1fr}
+      .speakerNotes{grid-template-columns:1fr}
       .sourceList ul{columns:1}
+    }
+    @media print{
+      @page{
+        size:16in 9in;
+        margin:0;
+      }
+      html,
+      body{
+        width:16in;
+        margin:0;
+        background:var(--bg) !important;
+      }
+      .deckShell,
+      .deckLayout,
+      .slideStack{
+        display:block;
+        width:16in;
+        margin:0;
+        padding:0;
+      }
+      .deckHero,
+      .toc,
+      .speakerNotes,
+      .sourceList{
+        display:none !important;
+      }
+      .slide{
+        width:16in;
+        height:9in;
+        min-height:0;
+        margin:0;
+        padding:.42in .52in;
+        border-radius:0;
+        box-shadow:none;
+        break-after:page;
+        page-break-after:always;
+      }
+      .slide:last-of-type{
+        break-after:auto;
+        page-break-after:auto;
+      }
+      .slideInner{
+        gap:.11in;
+      }
+      .slide h2{
+        max-width:10.8in;
+        font-size:36px;
+        line-height:1.08;
+      }
+      .claim{
+        max-width:10in;
+        font-size:16px;
+        line-height:1.34;
+      }
+      .proofCard{
+        min-height:.62in;
+        padding:.09in .11in;
+      }
+      .proofCard strong{
+        font-size:14.5px;
+        line-height:1.24;
+      }
+      .visualTile{
+        min-height:.86in;
+      }
+      .pipelineVisual .visualTile,
+      .evidenceLoopVisual .visualTile{
+        min-height:.98in;
+      }
+      .visualTile strong{
+        font-size:14px;
+      }
+      .visualTile span,
+      .flowNode span,
+      .bigMetric span{
+        font-size:11.5px;
+        line-height:1.28;
+      }
+      .slideImageVisual{
+        grid-template-columns:minmax(0,1.7fr) minmax(1.65in,.3fr);
+        gap:.1in;
+      }
+      .slideImageFrame{
+        padding:.08in;
+        border-radius:.16in;
+      }
+      .slideImageFrame img{
+        border-radius:.1in;
+      }
+      .slideImageFrame figcaption{
+        font-size:9.5px;
+        line-height:1.18;
+        margin-top:.06in;
+      }
+      .imageProofRail{
+        gap:.06in;
+      }
+      .imageProofItem{
+        padding:.065in .085in;
+        font-size:10.5px;
+        line-height:1.18;
+      }
     }
   `.trim();
 }
@@ -2358,20 +3271,336 @@ function projectOverviewChallengeVisual(){
       </div>
       <div class="challengeRead">
         <div class="bigMetric"><strong>0</strong><span>Release-ready challenge contracts.</span></div>
-        <div class="bigMetric"><strong style="color:var(--purple)">3.6/10</strong><span>Target-video object-track fit.</span></div>
+        <div class="bigMetric"><strong style="color:var(--purple)">3.5/10</strong><span>Target-video object-track fit.</span></div>
         <div class="bigMetric"><strong style="color:var(--cyan)">Next</strong><span>Movement grammar plus human-perfect guard.</span></div>
       </div>
     </div>
   `;
 }
 
+function projectOverviewTileVisual(className, tiles){
+  return `<div class="${className}">${tiles.map(([title, body]) => `
+    <div class="visualTile"><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewAccountabilityVisual(){
+  const steps = [
+    ['01', 'Fast work', 'Use model-assisted iteration for speed.'],
+    ['02', 'Evidence trail', 'Capture sources, runs, windows, and artifacts.'],
+    ['03', 'Local checks', 'Replay CPU/browser gates before claims move.'],
+    ['04', 'Public claim', 'Publish only what the record can defend.']
+  ];
+  return `<div class="nativeVisual chainVisual">${steps.map(([number, title, body]) => `
+    <div class="chainStep" data-step="${esc(number)}"><em>${esc(number)}</em><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewOperatingStackVisual(){
+  const layers = [
+    ['Source', 'Videos, manuals, sprites, audio, cabinet records'],
+    ['Ingestion', 'Manifests, clips, windows, annotations'],
+    ['Game', 'Aurora or pack-owned runtime truth'],
+    ['Harness', 'Scorecards, personas, browser captures'],
+    ['Release', 'Lane gates, docs, public claims']
+  ];
+  return `<div class="nativeVisual stackVisual">
+    <div class="stackLanes">${layers.map(([label, body]) => `
+      <div class="stackLayer"><b>${esc(label)}</b><strong>${esc(body)}</strong></div>
+    `).join('')}</div>
+    <div class="stackCallout"><strong>Separate ownership makes quality inspectable.</strong><span>When a score moves, the team can tell whether the change came from source evidence, extraction, runtime behavior, evaluation, or release language.</span></div>
+  </div>`;
+}
+
+function projectOverviewPackBoundaryVisual(){
+  const cards = [
+    ['Platform', 'Platinum owns', 'Shell, lanes, services, picker, publishing, shared contracts.', 'isPlatform'],
+    ['Aurora', 'Game pack owns', 'Galaga-like reference truth, scoring, sprites, audio, challenge cadence.', 'isGame'],
+    ['Guardians+', 'Future packs own', 'Their own source families, first slice, gates, and public promise.', 'isGame']
+  ];
+  return `<div class="nativeVisual packBoundaryVisual">${cards.map(([eyebrow, title, body, className]) => `
+    <div class="boundaryCard ${esc(className)}"><small>${esc(eyebrow)}</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewImageVisual(slide){
+  const images = Array.isArray(slide.images)
+    ? slide.images
+    : slide.image
+      ? [slide.image]
+      : [];
+  const resolvedImages = images.map((image) => {
+    const src = typeof image === 'string' ? image : image?.src;
+    const href = catalogMediaHref(src);
+    if(!href) return null;
+    return {
+      href,
+      alt: typeof image === 'string' ? '' : image?.alt || '',
+      caption: typeof image === 'string' ? '' : image?.caption || ''
+    };
+  }).filter(Boolean).slice(0, 2);
+  if(!resolvedImages.length) return '';
+  const proofLimit = resolvedImages.length > 1 ? 2 : 3;
+  const proof = Array.isArray(slide.proof) ? slide.proof.slice(0, proofLimit) : [];
+  const proofRail = proof.length
+    ? `<div class="imageProofRail">${proof.map(item => `<div class="imageProofItem">${esc(item)}</div>`).join('')}</div>`
+    : '';
+  const imageClass = resolvedImages.length > 1 ? 'isPair' : (proofRail ? 'isSingle' : 'isImageOnly');
+  return `<div class="slideImageVisual ${imageClass}">
+    <div class="slideImageGrid">${resolvedImages.map((image) => `
+      <figure class="slideImageFrame">
+        <img src="${esc(image.href)}" alt="${esc(image.alt)}" loading="eager">
+        ${image.caption ? `<figcaption>${esc(image.caption)}</figcaption>` : ''}
+      </figure>
+    `).join('')}</div>
+    ${proofRail}
+  </div>`;
+}
+
+function projectOverviewReleaseProgressionVisual(){
+  return projectOverviewTileVisual('timelineVisual', [
+    ['1.0.0', 'Public Aurora launch, live scoring, pilot identity, and real release ladder.'],
+    ['1.2.0', 'Platinum reframing made platform and application ownership explicit.'],
+    ['1.4.0+', 'Multi-game posture, conformance dashboards, Guardians preview, and release evidence.']
+  ]);
+}
+
+function projectOverviewPortfolioVisual(){
+  const cards = [
+    ['Active', 'Aurora', 'Playable first game; current conformance investment target.', 'isActive'],
+    ['Preview', 'Guardians', 'Second proof with its own source family and first slice path.', 'isPreview'],
+    ['Intake', 'Third game', 'Evidence-first lane until the first two games are stronger.', 'isIntake']
+  ];
+  return `<div class="nativeVisual portfolioVisual">${cards.map(([state, title, body, className]) => `
+    <div class="portfolioCard ${esc(className)}"><small>${esc(state)}</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewPipelineVisual(){
+  const stages = [
+    ['01', 'Source', 'Video, manual, audio, sprite, cabinet, or source package.'],
+    ['02', 'Window', 'Clip, frame, waveform, crop, track, or segment.'],
+    ['03', 'Contract', 'Labels, timing targets, paths, and cue roles.'],
+    ['04', 'Runtime', 'Game-owned implementation and browser capture.'],
+    ['05', 'Score', 'Harness result, confidence, and residual gap.'],
+    ['06', 'Release', 'Docs, dashboard, review packet, lane claim.']
+  ];
+  return `<div class="nativeVisual pipelineVisual">${stages.map(([number, title, body]) => `
+    <div class="pipelineStage" data-step="${esc(number)}"><small>${esc(number)}</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewSourceCorpusVisual(){
+  const sources = [
+    ['Galaga', 'Challenge videos, audio cues, sprites, walkthrough bundles.'],
+    ['Galaxian', 'No-voiceover sessions and full-play references.'],
+    ['Space Invaders', 'Early preserved-source intake lane.'],
+    ['Cabinet + docs', 'Manual, rules, cabinet, and history records.']
+  ];
+  return `<div class="nativeVisual sourceCorpusVisual">
+    <div class="sourceClusterGrid">${sources.map(([title, body]) => `
+      <div class="sourceCluster"><small>Source family</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+    `).join('')}</div>
+    <div class="sourceOutcome"><strong>Broader evidence raises the bar.</strong><span>Better sources make claims more defensible and often make weak runtime behavior easier to see.</span></div>
+  </div>`;
+}
+
+function projectOverviewMovementGrammarVisual(){
+  const nodes = [
+    ['Group', 'Which formation is entering?'],
+    ['Path', 'What curve or dive is allowed?'],
+    ['Timing', 'When does it arrive?'],
+    ['Window', 'Can a player respond?'],
+    ['Variant', 'How does this game differ?']
+  ];
+  return `<div class="nativeVisual movementGrammarVisual">
+    ${nodes.map(([title, body], index) => `<div class="grammarNode" data-step="${esc(String(index + 1).padStart(2, '0'))}"><strong>${esc(title)}</strong><span>${esc(body)}</span></div>`).join('')}
+    <div class="grammarGuard"><strong>Guardrail:</strong> Conformance should preserve readable, fair, human-playable movement.</div>
+  </div>`;
+}
+
+function projectOverviewAudioRoiVisual(){
+  return `<div class="nativeVisual audioRoiVisual">
+    <div class="roiPanel"><strong>Identity signal</strong><span>Audio contributes to arcade recognition and polish.</span><b class="roiNumber">7.3/10</b><div class="roiBar"><span style="width:73%"></span></div></div>
+    <div class="roiPanel"><strong>Tuning cost</strong><span>Current loop is expensive for each positive score point.</span><b class="roiNumber">39m</b><div class="roiBar"><span style="width:92%;background:linear-gradient(90deg,var(--gold),var(--red))"></span></div></div>
+    <div class="roiDecision"><strong>Decision:</strong><span>Improve evaluators and cue windows before spending more broad tuning time.</span></div>
+  </div>`;
+}
+
+function projectOverviewSpriteModelVisual(){
+  const concepts = [
+    ['Proxy', 'Catalog', 'Static sprite-sheet comparison.'],
+    ['Runtime', 'Canvas crop', 'What the player actually sees.'],
+    ['Motion', 'Temporal fit', 'Cadence, scale, paths, and formation context.']
+  ];
+  return `<div class="nativeVisual spriteModelVisual">
+    <div class="spriteConceptGrid">${concepts.map(([eyebrow, title, body], index) => `
+      <div class="spriteConcept" data-step="${esc(String(index + 1).padStart(2, '0'))}"><small>${esc(eyebrow)}</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+    `).join('')}</div>
+    <div class="spriteOutcome"><strong>One score hides the player-visible work.</strong><span>Sprite quality needs static, runtime, and motion evidence before it can become release language.</span></div>
+  </div>`;
+}
+
+function projectOverviewScoreVisual(){
+  return projectOverviewTileVisual('scoreVisual', [
+    ['8.7/10', 'Overall conformance/economics roll-up is healthy but hides weak rows.'],
+    ['7.46/10', 'Application artifact conformance keeps visual/audio/runtime gaps visible.'],
+    ['4.3/10', 'Strict challenge-stage set-piece score remains the most important blocker.']
+  ]);
+}
+
+function projectOverviewReleaseLaneVisual(){
+  return projectOverviewTileVisual('releaseLaneVisual', [
+    ['Local', 'Fast iteration, analysis, negative results, and focused branch proof.'],
+    ['/dev', 'Hosted forward-review lane for evidence, docs, dashboards, and candidate bundles.'],
+    ['Beta / prod', 'Authority-gated public claims, not automatic results of a passing build.']
+  ]);
+}
+
+function projectOverviewReleaseTrackVisual(){
+  const stages = [
+    ['Local', 'Fast iteration', 'Analysis, negative results, branch proof.'],
+    ['/dev', 'Hosted review', 'Evidence, docs, dashboards, candidate bundles.'],
+    ['Beta', 'Authority candidate', 'Published lineage with conservative language.'],
+    ['Production', 'Stable public claim', 'Only what release notes can defend.']
+  ];
+  return `<div class="nativeVisual releaseTrackVisual">${stages.map(([label, title, body], index) => `
+    <div class="releaseStage" data-step="${esc(String(index + 1).padStart(2, '0'))}"><em>${esc(label)}</em><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewLaunchRiskVisual(){
+  const risks = [
+    ['Boundary', 'Evidence leakage', 'Private artifacts, paths, prompts, or source bytes entering public docs.'],
+    ['Data', 'Pilot and score trust', 'Auth, leaderboard, feedback, and profile rows need stricter access rules.'],
+    ['Abuse', 'Client-side spoofing', 'Scores, replay claims, and feedback can be forged or spammed at scale.'],
+    ['Capture', 'Replay/video exposure', 'Hosted uploads require consent, auth, moderation, and retention.'],
+    ['Ops', 'Quota and support load', 'Traffic can strain services, rollback, and incident ownership.'],
+    ['Claims', 'IP and AI copy risk', 'Reference language and generated claims can outrun review.']
+  ];
+  const gateItems = [
+    'No broad production push without artifact-boundary audit.',
+    'No hosted replay/video upload without server-owned policy.',
+    'No public-score trust claim without validation and abuse controls.'
+  ];
+  return `<div class="nativeVisual launchRiskVisual">
+    <div class="riskGrid">${risks.map(([label, title, body], index) => `
+      <div class="riskCard" data-severity="${esc(index < 4 ? 'HIGH' : 'MED')}"><small>${esc(label)}</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+    `).join('')}</div>
+    <div class="riskGate"><strong>Controlled review is not the same as a 1,000-user launch.</strong><span>Keep the story conservative until security, data, moderation, support, and operational gates are owned.</span><ul>${gateItems.map(item => `<li>${esc(item)}</li>`).join('')}</ul></div>
+  </div>`;
+}
+
+function projectOverviewEvidenceLoopVisual(){
+  return projectOverviewTileVisual('evidenceLoopVisual', [
+    ['Question', 'Which player-visible gap matters most now?'],
+    ['Evidence', 'Recover source and label windows.'],
+    ['Candidate', 'Make one narrow runtime or data change.'],
+    ['Gate', 'Run checks and compare before/after.'],
+    ['Keeper', 'Promote only if the record defends it.']
+  ]);
+}
+
+function projectOverviewEconomicsVisual(){
+  return projectOverviewTileVisual('economicsVisual', [
+    ['904', 'Measured runs in the current conformance economics ledger.'],
+    ['971m', 'Tracked wall minutes, with CPU and browser loops carrying repeated work.'],
+    ['1.48GB', 'Artifact accounting turns quality work into inspectable evidence.']
+  ]);
+}
+
+function projectOverviewNinetyDayRoadmapVisual(){
+  const phases = [
+    ['0-30', 'Movement grammar', 'Convert challenge evidence into reusable runtime contracts.'],
+    ['31-60', 'Sprite motion windows', 'Evaluate what players see in motion, not only static crops.'],
+    ['61-90', 'Guardians evidence', 'Promote second-game proof only when the record is first-class.']
+  ];
+  return `<div class="nativeVisual roadmapVisual">
+    <div class="roadmapPhases">${phases.map(([when, title, body], index) => `
+      <div class="roadmapPhase" data-step="${esc(String(index + 1).padStart(2, '0'))}"><em>${esc(when)}</em><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+    `).join('')}</div>
+    <div class="decisionBand"><strong>Release bar:</strong><span>1.4.1 waits for player-visible improvement and defensible notes.</span></div>
+  </div>`;
+}
+
+function projectOverviewConformanceFactoryVisual(){
+  const nodes = [
+    ['Ingest', 'Recover and label examples.'],
+    ['Conform', 'Build true-to-reference mode.'],
+    ['Measure', 'Score gaps and confidence.'],
+    ['Vary', 'Make original changes intentionally.'],
+    ['Publish', 'Tell only the defensible story.']
+  ];
+  return `<div class="nativeVisual factoryLoopVisual">
+    ${nodes.map(([title, body], index) => `<div class="factoryNode" data-step="${esc(String(index + 1).padStart(2, '0'))}"><small>Factory step</small><strong>${esc(title)}</strong><span>${esc(body)}</span></div>`).join('')}
+    <div class="factoryOutcome"><strong>Reference first, original variation second.</strong><span>The factory creates room for creativity because the team knows what it is choosing to change.</span></div>
+  </div>`;
+}
+
 function projectOverviewProofItems(slide, index){
-  const proof = Array.isArray(slide.proof) ? slide.proof.slice(0, 6) : [];
+  const proof = Array.isArray(slide.proof) ? slide.proof.slice(0, 4) : [];
+  if((Array.isArray(slide.images) && slide.images.length) || slide.image){
+    return projectOverviewImageVisual(slide);
+  }
+  if(slide.visual === 'accountability-loop'){
+    return projectOverviewAccountabilityVisual();
+  }
+  if(slide.visual === 'operating-stack'){
+    return projectOverviewOperatingStackVisual();
+  }
+  if(slide.visual === 'pack-boundary'){
+    return projectOverviewPackBoundaryVisual();
+  }
   if(slide.visual === 'flow'){
     return projectOverviewSlideFlowVisual();
   }
   if(slide.visual === 'challenge'){
     return projectOverviewChallengeVisual();
+  }
+  if(slide.visual === 'release-progression'){
+    return projectOverviewReleaseProgressionVisual();
+  }
+  if(slide.visual === 'portfolio'){
+    return projectOverviewPortfolioVisual();
+  }
+  if(slide.visual === 'pipeline'){
+    return projectOverviewPipelineVisual();
+  }
+  if(slide.visual === 'source-corpus'){
+    return projectOverviewSourceCorpusVisual();
+  }
+  if(slide.visual === 'score'){
+    return projectOverviewScoreVisual();
+  }
+  if(slide.visual === 'movement-grammar'){
+    return projectOverviewMovementGrammarVisual();
+  }
+  if(slide.visual === 'audio-roi'){
+    return projectOverviewAudioRoiVisual();
+  }
+  if(slide.visual === 'sprite-model'){
+    return projectOverviewSpriteModelVisual();
+  }
+  if(slide.visual === 'release-lanes'){
+    return projectOverviewReleaseLaneVisual();
+  }
+  if(slide.visual === 'release-track'){
+    return projectOverviewReleaseTrackVisual();
+  }
+  if(slide.visual === 'launch-risk'){
+    return projectOverviewLaunchRiskVisual();
+  }
+  if(slide.visual === 'evidence-loop'){
+    return projectOverviewEvidenceLoopVisual();
+  }
+  if(slide.visual === 'economics'){
+    return projectOverviewEconomicsVisual();
+  }
+  if(slide.visual === 'ninety-day-roadmap'){
+    return projectOverviewNinetyDayRoadmapVisual();
+  }
+  if(slide.visual === 'conformance-factory'){
+    return projectOverviewConformanceFactoryVisual();
   }
   return `<div class="proofGrid">${proof.map((item, itemIndex) => `
     <article class="proofCard">
@@ -2381,7 +3610,26 @@ function projectOverviewProofItems(slide, index){
   `).join('')}</div>`;
 }
 
+function projectOverviewSpeakerNotes(slide, index){
+  const notes = Array.isArray(slide.speakerNotes)
+    ? slide.speakerNotes.map((note) => String(note || '').trim()).filter(Boolean)
+    : [];
+  if(!notes.length) return '';
+  return `<article class="speakerNotes" id="speaker-notes-${index + 1}" aria-label="${esc(`Speaker notes for slide ${index + 1}`)}">
+    <div class="speakerNotesHeader">
+      <span>Speaker notes</span>
+      <strong>${esc(String(index + 1).padStart(2, '0'))}</strong>
+    </div>
+    <ol>${notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ol>
+  </article>`;
+}
+
 function buildProjectOverviewSlidesData(buildInfo, latestNote, slideSource, whitePaperMeta){
+  const slides = Array.isArray(slideSource.slides) ? slideSource.slides : [];
+  const speakerNotesCount = slides.filter((slide) => (
+    Array.isArray(slide.speakerNotes)
+    && slide.speakerNotes.map((note) => String(note || '').trim()).filter(Boolean).length >= 2
+  )).length;
   return {
     artifactType: 'project-overview-slides',
     schemaVersion: 1,
@@ -2396,7 +3644,9 @@ function buildProjectOverviewSlidesData(buildInfo, latestNote, slideSource, whit
     sourceArtifact: 'white-paper/project-overview-slides.json',
     sourceWhitePaper: slideSource.sourceWhitePaper || 'WHITE_PAPER.md',
     sourceReviewDate: slideSource.lastSourceReviewDate || '',
-    slideCount: Array.isArray(slideSource.slides) ? slideSource.slides.length : 0,
+    slideCount: slides.length,
+    speakerNotesCount,
+    speakerNotesMode: 'inline-html-hidden-from-slide-pdf',
     latestReleaseNote: latestNote?.title || '',
     sourceArtifacts: Array.isArray(slideSource.sourceArtifacts) ? slideSource.sourceArtifacts : []
   };
@@ -2420,6 +3670,7 @@ function buildProjectOverviewSlidesPage(buildInfo, latestNote, slideSource, whit
         </div>
       </div>
     </section>
+    ${projectOverviewSpeakerNotes(slide, index)}
   `).join('\n');
   const sourceList = (slideSource.sourceArtifacts || []).map(item => `<li><code>${esc(item)}</code></li>`).join('\n');
   return `<!DOCTYPE html>
@@ -2434,7 +3685,7 @@ function buildProjectOverviewSlidesPage(buildInfo, latestNote, slideSource, whit
   <main class="deckShell">
     <section class="deckHero">
       <div class="deckTop">
-        <span class="eyebrow">20-slide public overview</span>
+        <span class="eyebrow">21-slide public overview</span>
         <a class="button" href="white-paper.html">Open white paper</a>
       </div>
       <h1>${esc(slideSource.title || 'Project Overview Slides')}</h1>
@@ -2449,6 +3700,8 @@ function buildProjectOverviewSlidesPage(buildInfo, latestNote, slideSource, whit
       <div class="buttonRow">
         <a class="button" href="white-paper.html">Open white paper</a>
         <a class="button" href="white-paper.pdf">Open white-paper PDF</a>
+        <a class="button" href="project-overview-slides.pdf">Open slide PDF</a>
+        <a class="button" href="#speaker-notes-1">Review speaker notes</a>
         <a class="button" href="project-overview-slides.json">Open slide metadata</a>
         <a class="button" href="project-guide.html">Open project guide</a>
         <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
@@ -3760,7 +5013,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="white-paper.html">Open white paper</a>
-            <a class="button" href="project-overview-slides.html">Open 20-slide overview</a>
+            <a class="button" href="project-overview-slides.html">Open 21-slide overview</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
@@ -3848,7 +5101,8 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
-            <a class="button whitePaperDocAction" href="project-overview-slides.html">Open 20-slide overview</a>
+            <a class="button whitePaperDocAction" href="project-overview-slides.html">Open 21-slide overview</a>
+            <a class="button whitePaperDocAction" href="project-overview-slides.pdf">Open slide PDF</a>
             <a class="button whitePaperDocAction" href="project-overview-slides.json">Open slide metadata</a>
             <a class="button whitePaperDocAction" href="white-paper.pdf">Open current lane PDF</a>
             <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>
@@ -3922,6 +5176,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_RELEASE_NOTES_HREF: releaseNotesLandingHref(buildInfo),
     LANE_WHITE_PAPER_HREF: 'white-paper.html',
     LANE_PROJECT_OVERVIEW_SLIDES_HREF: 'project-overview-slides.html',
+    LANE_PROJECT_OVERVIEW_SLIDES_PDF_HREF: 'project-overview-slides.pdf',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',

@@ -68,13 +68,17 @@ The white paper is meant to be both:
   - hosted 20-slide project overview, linked next to the white paper
 - `dist/<lane>/project-overview-slides.json`
   - slide metadata and source trace for release review and public inspection
+- `dist/<lane>/project-overview-slides.pdf`
+  - one-slide-per-page PDF for talk-over presentation review
+- `dist/<lane>/project-overview-slides-pdf.json`
+  - slide PDF metadata, page count, lane, and build trace
 
 ## Suggested Review Commands
 
 - `npm run white-paper:review`
-  - refresh the dev-lane PDF, reviewer packet, review gate,
-    preserved-source-integrity check, project overview deck, and presentation
-    checks together
+  - refresh the dev-lane white-paper PDF, slide PDF, reviewer packet, review
+    gate, preserved-source-integrity check, project overview deck, and
+    rendered fit checks together
 - `npm run white-paper:review:beta`
   - run the same white-paper review spine for the beta lane
 - `npm run white-paper:review:production`

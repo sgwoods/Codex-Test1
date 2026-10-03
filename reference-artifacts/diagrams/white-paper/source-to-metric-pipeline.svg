@@ -1,0 +1,66 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#111D33"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M2 2L10 6L2 10Z" fill="#82D9FF"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#07111F"/>
+  <circle cx="1260" cy="150" r="220" fill="#183258" opacity=".32"/>
+  <circle cx="270" cy="760" r="240" fill="#12304A" opacity=".32"/>
+  <text x="90" y="102" fill="#F2F8FF" font-family="Menlo, Monaco, monospace" font-size="54" font-weight="700">Source To Metric Pipeline</text>
+  <text x="94" y="148" fill="#A9BCD8" font-family="Menlo, Monaco, monospace" font-size="24">How reference evidence becomes a reviewable release claim.</text>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <g transform="translate(86 244)">
+      <rect width="190" height="250" rx="26" fill="#10223B" stroke="#58D6FF" stroke-width="2"/>
+      <text x="24" y="54" fill="#8BE8FF" font-size="27" font-weight="700">1. Source</text>
+      <text x="24" y="100" fill="#EAF3FF" font-size="19">video, manual,</text>
+      <text x="24" y="130" fill="#EAF3FF" font-size="19">audio, sprite,</text>
+      <text x="24" y="160" fill="#EAF3FF" font-size="19">run log, package</text>
+    </g>
+    <path d="M294 369H370" stroke="#82D9FF" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(388 244)">
+      <rect width="190" height="250" rx="26" fill="#122B26" stroke="#79E6C0" stroke-width="2"/>
+      <text x="24" y="54" fill="#9AF7C5" font-size="27" font-weight="700">2. Window</text>
+      <text x="24" y="100" fill="#EAF3FF" font-size="19">clip, frame, crop,</text>
+      <text x="24" y="130" fill="#EAF3FF" font-size="19">waveform, track,</text>
+      <text x="24" y="160" fill="#EAF3FF" font-size="19">contact sheet</text>
+    </g>
+    <path d="M596 369H672" stroke="#82D9FF" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(690 244)">
+      <rect width="190" height="250" rx="26" fill="#201B2B" stroke="#D4A0FF" stroke-width="2"/>
+      <text x="24" y="54" fill="#E3C7FF" font-size="27" font-weight="700">3. Contract</text>
+      <text x="24" y="100" fill="#F4EDFF" font-size="19">labels, timing,</text>
+      <text x="24" y="130" fill="#F4EDFF" font-size="19">path controls,</text>
+      <text x="24" y="160" fill="#F4EDFF" font-size="19">cue roles</text>
+    </g>
+    <path d="M898 369H974" stroke="#82D9FF" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(992 244)">
+      <rect width="190" height="250" rx="26" fill="#251B1F" stroke="#FFB066" stroke-width="2"/>
+      <text x="24" y="54" fill="#FFC982" font-size="27" font-weight="700">4. Runtime</text>
+      <text x="24" y="100" fill="#FFF2E8" font-size="19">game-owned code,</text>
+      <text x="24" y="130" fill="#FFF2E8" font-size="19">browser capture,</text>
+      <text x="24" y="160" fill="#FFF2E8" font-size="19">persona run</text>
+    </g>
+    <path d="M1200 369H1276" stroke="#82D9FF" stroke-width="5" marker-end="url(#arrow)"/>
+    <g transform="translate(1294 244)">
+      <rect width="220" height="250" rx="26" fill="#10241F" stroke="#79E6C0" stroke-width="2"/>
+      <text x="24" y="54" fill="#9AF7C5" font-size="27" font-weight="700">5. Gate</text>
+      <text x="24" y="100" fill="#EAF3FF" font-size="19">score, guardrail,</text>
+      <text x="24" y="130" fill="#EAF3FF" font-size="19">confidence, docs,</text>
+      <text x="24" y="160" fill="#EAF3FF" font-size="19">release or deferral</text>
+    </g>
+  </g>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <rect x="170" y="632" width="1260" height="132" rx="26" fill="#0D1B2D" stroke="#335B7A" stroke-width="2"/>
+    <text x="206" y="681" fill="#F2F8FF" font-size="30" font-weight="700">Release claim</text>
+    <text x="206" y="725" fill="#D8E8FF" font-size="22">A claim can move to docs, dashboards, beta, or production only when the evidence path is inspectable.</text>
+    <text x="206" y="756" fill="#D8E8FF" font-size="22">If proof is private-boundary, this paper may still use it when the owner explicitly approves that use.</text>
+  </g>
+  <text x="90" y="832" fill="#91A8C8" font-family="Menlo, Monaco, monospace" font-size="20">White-paper illustration · first-party SVG · June 2026 status pass</text>
+</svg>

@@ -24,73 +24,60 @@ we still need to choose the most illustrative image or chart deliberately.
 | Program snapshot | `reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg` | Shows second-game identity without requiring a long explanation. |
 | Five-layer operating model | `reference-artifacts/diagrams/platinum/platinum-platform-stack.svg` | Reinforces platform-versus-application separation. |
 | Five-layer operating model | `reference-artifacts/diagrams/platinum/platinum-pack-separation.svg` | Helps explain ownership boundaries at a glance. |
-| Ingestion strategy | `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png` | Makes ingestion concrete through a visible reference-study artifact. |
-| Ingestion strategy | `reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg` | Supports the claim that Galaxy Guardians is grounded in its own source family. |
-| Harnessing and conformance | `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg` | Turns progress into an at-a-glance measurable story. |
+| Ingestion strategy | `reference-artifacts/diagrams/white-paper/source-to-metric-pipeline.svg` | Explains the source -> window -> contract -> runtime -> score -> release path without requiring private-source context. |
+| Challenge-stage case study | `reference-artifacts/analyses/challenge-path-visuals/latest.svg` | Makes the challenge-stage blocker visible as route readability and object-path evidence rather than a mood. |
+| Harnessing and conformance | `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/score-trends.svg` | Turns progress into an at-a-glance measurable story. |
 | Harnessing and conformance | `reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg` | Shows that quality is evaluated across viewpoints, not through one metric alone. |
-| Release and economics | `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg` | Makes local-first measurement strategy visible. |
-| Release and economics | `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg` | Connects release ambition to investment discipline. |
+| Release and economics | `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/compute-minutes-by-resource.svg` | Makes local-first measurement strategy visible. |
+| Release and economics | `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cost-per-positive-score-point.svg` | Connects release ambition to investment discipline. |
+| Working loop | `reference-artifacts/diagrams/white-paper/evidence-keeper-loop.svg` | Teaches how candidates become keepers, blockers, or documented deferrals. |
+| Working loop | `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt-contact-sheet.svg` | Provides a concrete before/after proof object from the June 9 Stage 3 source-attempt loop. |
+| Historical evolution | `reference-artifacts/diagrams/white-paper/release-progression-gallery.svg` | Gives the reader a compact visual memory of the 1.0.0 -> 1.2.0 -> 1.4.0+ narrative arc. |
 
 ## Deeper Supporting Visuals
 
 These are better linked from hosted guides or follow-on detail pages than pushed
 directly into the main narrative unless a specific section needs them.
 
-- `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg`
-- `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg`
-- `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg`
-- `reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg`
+- `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/largest-score-deltas.svg`
+- `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/gpu-equivalent-use-by-purpose.svg`
+- `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cpu-use-by-purpose.svg`
+- `reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/gameplay-improvement-by-project-part.svg`
 - hosted `conformance-dashboard.html`
 - hosted `release-dashboard.html`
 - hosted `project-guide.html`
 - hosted `public-project-page.html`
 
-## Open Illustration TODOs
+## First-Pass Decisions
 
-### Release-history progression strip
+The June 9 first pass resolves the previous broad TODOs this way:
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- `1.0.0` public game surface
-- `1.2.0` Platinum framing surface
-- `1.4.0` multi-game and conformance surface
-- Decision question: should the strip emphasize gameplay evolution, platform
-  architecture, or public release/documentation maturity?
+- Release-history progression: use a first-party architectural progression
+  gallery rather than screenshots, because it explains the strategic shift
+  without depending on old generated surfaces.
+- Ingestion in action: use a compact source-to-metric pipeline diagram in the
+  main paper and reserve concrete proof sheets for case-study moments.
+- Evidence loop case study: use the Stage 3 source-attempt contact sheet because
+  it is current, private-boundary use is approved for this material, and it
+  demonstrates before/after proof with guardrail context.
+- Milestone gallery: fold it into the historical evolution section rather than
+  adding a separate image wall.
 
-### Ingestion in action
+## Remaining Illustration Questions
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- contact sheet only
-- waveform plus contact sheet pair
-- raw source clip to structured artifact pipeline graphic
-- Decision question: what most clearly teaches the ingestion idea to a
-  non-expert reader in one glance?
-
-### Evidence loop case study
-
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- question -> artifact -> harness -> result graphic
-- screenshot pair showing before and after measured correction
-- release-note excerpt plus chart plus artifact collage
-- Decision question: which single case study best shows how AI-assisted work is
-  kept honest by rerunnable evidence?
-
-### Milestone gallery
-
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- one screenshot per milestone release
-- one diagram per maturity phase
-- one mixed gallery of game, platform, and dashboard surfaces
-- Decision question: should the gallery feel product-led, architecture-led, or
-  release-led?
+- Should the Stage 3 contact sheet stay in the main paper after the next hosted
+  `/dev` review, or should it move to a linked project-guide section once the
+  method is familiar?
+- Would a release-dashboard screenshot teach lane discipline better than the
+  current release-lane copy and progression diagram?
+- Should Galaxy Guardians get one concrete proof image in the main paper once
+  its v1 slice has a stronger runtime-facing artifact?
 
 ## Likely Next Additions
 
-- Add one screenshot from the hosted conformance dashboard.
-- Add one screenshot from the hosted release dashboard.
-- Add one architectural illustration that shows ingestion, games, Platinum, and
-  release lanes on a single page.
-- Add one progression visual based on preserved historical release surfaces.
+- Consider one screenshot from the hosted conformance dashboard after the next
+  meaningful runtime change, if the dashboard itself is the clearest proof.
+- Consider one screenshot from the hosted release dashboard if the lane
+  discipline section needs a stronger visual anchor.
+- Add a Guardians-specific proof image only after the v1 slice has an artifact
+  that is more instructive than the current pack-card diagram.

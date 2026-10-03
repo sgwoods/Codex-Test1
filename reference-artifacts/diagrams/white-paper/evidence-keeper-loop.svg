@@ -1,0 +1,65 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#101C35"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M2 2L10 6L2 10Z" fill="#82D9FF"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#07111F"/>
+  <text x="90" y="100" fill="#F2F8FF" font-family="Menlo, Monaco, monospace" font-size="54" font-weight="700">Evidence Keeper Loop</text>
+  <text x="94" y="148" fill="#A9BCD8" font-family="Menlo, Monaco, monospace" font-size="24">A candidate becomes useful only after source evidence, browser proof, guardrails, and documentation agree.</text>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <path d="M304 356C384 248 520 190 696 190C936 190 1110 302 1110 450C1110 598 936 710 696 710C520 710 384 652 304 544" stroke="#31566E" stroke-width="10" stroke-linecap="round"/>
+    <path d="M304 544C260 486 260 414 304 356" stroke="#31566E" stroke-width="10" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g transform="translate(152 300)">
+      <rect width="270" height="132" rx="22" fill="#10223B" stroke="#58D6FF" stroke-width="2"/>
+      <text x="28" y="48" fill="#8BE8FF" font-size="26" font-weight="700">Question</text>
+      <text x="28" y="86" fill="#EAF3FF" font-size="19">Which visible gap is</text>
+      <text x="28" y="114" fill="#EAF3FF" font-size="19">worth changing now?</text>
+    </g>
+    <g transform="translate(522 138)">
+      <rect width="300" height="132" rx="22" fill="#122B26" stroke="#79E6C0" stroke-width="2"/>
+      <text x="28" y="48" fill="#9AF7C5" font-size="26" font-weight="700">Evidence</text>
+      <text x="28" y="86" fill="#EAF3FF" font-size="19">Reference window, RED,</text>
+      <text x="28" y="114" fill="#EAF3FF" font-size="19">contact sheet, or cue.</text>
+    </g>
+    <g transform="translate(930 300)">
+      <rect width="300" height="132" rx="22" fill="#251B1F" stroke="#FFB066" stroke-width="2"/>
+      <text x="28" y="48" fill="#FFC982" font-size="26" font-weight="700">Candidate</text>
+      <text x="28" y="86" fill="#FFF2E8" font-size="19">One narrow runtime</text>
+      <text x="28" y="114" fill="#FFF2E8" font-size="19">or data source edit.</text>
+    </g>
+    <g transform="translate(910 570)">
+      <rect width="310" height="132" rx="22" fill="#201B2B" stroke="#B38BFF" stroke-width="2"/>
+      <text x="28" y="48" fill="#E3C7FF" font-size="26" font-weight="700">Gate</text>
+      <text x="28" y="86" fill="#F4EDFF" font-size="19">Before/after proof,</text>
+      <text x="28" y="114" fill="#F4EDFF" font-size="19">safety, spacing, score.</text>
+    </g>
+    <g transform="translate(508 630)">
+      <rect width="330" height="132" rx="22" fill="#10241F" stroke="#79E6C0" stroke-width="2"/>
+      <text x="28" y="48" fill="#9AF7C5" font-size="26" font-weight="700">Keeper Or Blocker</text>
+      <text x="28" y="86" fill="#EAF3FF" font-size="19">Promote, document, or</text>
+      <text x="28" y="114" fill="#EAF3FF" font-size="19">preserve the rejection.</text>
+    </g>
+  </g>
+
+  <g font-family="Menlo, Monaco, monospace">
+    <rect x="1180" y="184" width="320" height="500" rx="26" fill="#0D1B2D" stroke="#335B7A" stroke-width="2"/>
+    <text x="1212" y="236" fill="#F2F8FF" font-size="28" font-weight="700">Current example</text>
+    <text x="1212" y="288" fill="#9AF7C5" font-size="22" font-weight="700">Stage 3 challenge</text>
+    <text x="1212" y="326" fill="#D8E8FF" font-size="19">G4 source attempt:</text>
+    <text x="1212" y="354" fill="#D8E8FF" font-size="19">dev-visible keeper.</text>
+    <text x="1212" y="404" fill="#D8E8FF" font-size="19">G2, G3, G5 fast lanes:</text>
+    <text x="1212" y="432" fill="#D8E8FF" font-size="19">keeper-class results.</text>
+    <text x="1212" y="482" fill="#D8E8FF" font-size="19">G1 attempt:</text>
+    <text x="1212" y="510" fill="#FFB6B6" font-size="19">blocked by guardrails.</text>
+    <text x="1212" y="584" fill="#A9BCD8" font-size="18">Meaning: visible progress,</text>
+    <text x="1212" y="612" fill="#A9BCD8" font-size="18">not beta justification by</text>
+    <text x="1212" y="640" fill="#A9BCD8" font-size="18">itself.</text>
+  </g>
+</svg>

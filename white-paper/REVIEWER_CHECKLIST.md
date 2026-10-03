@@ -37,6 +37,8 @@ same seriousness as other user-visible documentation and release artifacts.
 - Does it reflect the current white-paper version and updated date?
 - Are current conformance, ingestion, economics, review, and go-forward claims
   consistent with the white paper and dashboard artifacts?
+- Does each slide fit as a talk-over frame, with the title, claim, proof object,
+  and footer all visible without crowding or clipping?
 - Are the source-artifact links useful for a reader who wants to drill down?
 
 ## PDF Review
@@ -46,6 +48,8 @@ same seriousness as other user-visible documentation and release artifacts.
 - Are any sections visually repetitive or too sparse when printed?
 - Is the print styling readable and professional rather than a dark-theme dump?
 - Do diagrams and screenshots stay large enough to be useful?
+- Does `project-overview-slides.pdf` render as one 16:9 slide per page for
+  presenting live, without web-page chrome, clipped copy, or missing visuals?
 
 ## Release Review
 
@@ -59,8 +63,11 @@ same seriousness as other user-visible documentation and release artifacts.
 - Commit the refreshed review packet before the clean-tree publish step.
 - Confirm the generated PDF metadata matches the white-paper version/date.
 - Confirm the generated slide metadata matches the white-paper version/date.
+- Confirm the generated slide PDF metadata matches the white-paper version/date
+  and 20-slide count.
 - Verify the live lane carries `white-paper.html`, `white-paper.pdf`,
-  `project-overview-slides.html`, and `project-overview-slides.json` after
+  `project-overview-slides.html`, `project-overview-slides.json`,
+  `project-overview-slides.pdf`, and `project-overview-slides-pdf.json` after
   publish.
 
 ## Related Work Review

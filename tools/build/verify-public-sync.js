@@ -147,6 +147,7 @@ async function main(){
   ensureIncludes(projectHtml, 'project-guide.html', `public/${CANONICAL_PROJECT_SLUG}.html project guide link`);
   ensureIncludes(projectHtml, 'white-paper.html', `public/${CANONICAL_PROJECT_SLUG}.html white paper link`);
   ensureIncludes(projectHtml, 'project-overview-slides.html', `public/${CANONICAL_PROJECT_SLUG}.html overview slides link`);
+  ensureIncludes(projectHtml, 'project-overview-slides.pdf', `public/${CANONICAL_PROJECT_SLUG}.html overview slides PDF link`);
   ensureIncludes(projectHtml, expectedMarker, `public/${CANONICAL_PROJECT_SLUG}.html provenance marker`);
   ensureIncludes(legacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `public/${LEGACY_PROJECT_SLUG}.html release version`);
   ensureIncludes(legacyProjectHtml, expectedFocus, `public/${LEGACY_PROJECT_SLUG}.html current focus`);
@@ -161,6 +162,7 @@ async function main(){
   ensureIncludes(renderedProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `rendered ${CANONICAL_PROJECT_SLUG}.html release version`);
   ensureIncludes(renderedProjectHtml, expectedFocus, `rendered ${CANONICAL_PROJECT_SLUG}.html current focus`);
   ensureIncludes(renderedProjectHtml, 'project-overview-slides.html', `rendered ${CANONICAL_PROJECT_SLUG}.html overview slides link`);
+  ensureIncludes(renderedProjectHtml, 'project-overview-slides.pdf', `rendered ${CANONICAL_PROJECT_SLUG}.html overview slides PDF link`);
   ensureIncludes(renderedProjectHtml, expectedMarker, `rendered ${CANONICAL_PROJECT_SLUG}.html provenance marker`);
   ensureIncludes(renderedLegacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `rendered ${LEGACY_PROJECT_SLUG}.html release version`);
   ensureIncludes(renderedLegacyProjectHtml, expectedMarker, `rendered ${LEGACY_PROJECT_SLUG}.html provenance marker`);

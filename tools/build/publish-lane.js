@@ -86,7 +86,9 @@ function ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir){
     '          cp white-paper.pdf _site/',
     '          cp white-paper-pdf.json _site/',
     '          cp project-overview-slides.html _site/',
-    '          cp project-overview-slides.json _site/'
+    '          cp project-overview-slides.json _site/',
+    '          cp project-overview-slides.pdf _site/',
+    '          cp project-overview-slides-pdf.json _site/'
   ];
   let text = fs.readFileSync(workflowPath, 'utf8');
   const missing = requiredCopies.filter(line => !text.includes(line));

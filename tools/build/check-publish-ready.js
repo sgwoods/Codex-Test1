@@ -75,6 +75,8 @@ const USER_VISIBLE_DOC_FILES = [
   'white-paper-pdf.json',
   'project-overview-slides.html',
   'project-overview-slides.json',
+  'project-overview-slides.pdf',
+  'project-overview-slides-pdf.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -93,7 +95,8 @@ const USER_VISIBLE_SECTIONS = [
       'Game conformance catalog',
       'live conformance dashboard game profiles',
       'Open generated game conformance catalog',
-      'Open Aurora catalog tables'
+      'Open Aurora catalog tables',
+      'Open slide PDF'
     ]
   },
   {
@@ -125,6 +128,7 @@ const USER_VISIBLE_SECTIONS = [
       'V1 Release Path',
       'Open current lane PDF',
       'Open 20-slide overview',
+      'Open slide PDF',
       'Open slide metadata',
       'Related Work',
       'Reviewer Checklist'
@@ -136,6 +140,7 @@ const USER_VISIBLE_SECTIONS = [
     requiredText: [
       '20-slide public overview',
       'Open white paper',
+      'Open slide PDF',
       'Open slide metadata',
       'Slide Index',
       'Source Artifacts'
@@ -149,6 +154,17 @@ const USER_VISIBLE_SECTIONS = [
       '"sourceArtifact": "white-paper/project-overview-slides.json"',
       '"slideCount": 20',
       '"whitePaperVersion":'
+    ]
+  },
+  {
+    id: 'project-overview-slides-pdf-meta',
+    file: 'project-overview-slides-pdf.json',
+    requiredText: [
+      '"artifactType": "project-overview-slides-pdf"',
+      '"whitePaperVersion":',
+      '"updatedDate":',
+      '"slideCount": 20',
+      '"pdfFile": "project-overview-slides.pdf"'
     ]
   },
   {

@@ -1,8 +1,8 @@
 # Platinum, Aurora, and the Conformance Project
 
 Status: living white paper
-Current draft: `v0.4.1-draft`
-Date: `2026-06-07`
+Current draft: `v0.4.2-draft`
+Date: `2026-06-10`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
 
@@ -65,19 +65,21 @@ The larger point is that we are building a system in which:
   it.
 - `7. Release discipline`: how dev, beta, and production remain explicit and
   professional.
-- `8. Generative AI role`: how model work accelerates the project without
+- `8. Launch risk, security, and trust`: what can fail if the as-built system
+  is exposed to roughly a thousand real users before hardening.
+- `9. Generative AI role`: how model work accelerates the project without
   replacing evidence.
-- `9. Working loop`: how the project turns a gap into evidence, implementation,
+- `10. Working loop`: how the project turns a gap into evidence, implementation,
   measurement, and release learning.
-- `10. Historical evolution`: how the project moved from launch to platform to
+- `11. Historical evolution`: how the project moved from launch to platform to
   multi-game conformance.
-- `11. Citation program`: how outside ideas and source recovery work should be
+- `12. Citation program`: how outside ideas and source recovery work should be
   tracked explicitly.
-- `12. Related work`: how outside agent/evaluator work informs the project.
-- `13. Internal canonical docs`: how this paper stays short without losing
+- `13. Related work`: how outside agent/evaluator work informs the project.
+- `14. Internal canonical docs`: how this paper stays short without losing
   traceability.
-- `14. Why this project matters`: why the project is larger than a game repo.
-- `15. Living-paper policy`: how this white paper should be maintained and
+- `15. Why this project matters`: why the project is larger than a game repo.
+- `16. Living-paper policy`: how this white paper should be maintained and
   released over time.
 
 ## How To Read This Paper
@@ -137,7 +139,7 @@ Further detail:
 
 ### 2. Program Snapshot
 
-As of `2026-06-07`, the project can be described in one page:
+As of `2026-06-09`, the project can be described in one page:
 
 | Area | Current role | Why it matters |
 | --- | --- | --- |
@@ -172,6 +174,10 @@ The evidence program also became more concrete in the latest pass:
   release-schedule spine, and review packet
 - the current cross-thread priority map is preserved in
   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+- the June 8-9 Stage 3 challenge work has produced dev-visible gameplay
+  keepers for several focused group paths, while preserving the larger truth:
+  these are useful `/dev` improvements, not a beta or production justification
+  by themselves
 - the June 1 preserved-source expansion added richer Galaga, Galaxian, and
   Space Invaders evidence lanes, including manuals, strategy/walkthrough
   bundles, sprite/cue packages, challenge-stage videos, and cabinet/spec
@@ -179,6 +185,12 @@ The evidence program also became more concrete in the latest pass:
 - the public/private artifact boundary is now explicit: source metadata and
   summaries stay in this repo, while copied or derived source bytes belong in
   the companion private artifact store
+
+> Current release posture:
+> The June 9 visual and evidence refresh improves the dev-lane story, but it
+> does not change the beta or production recommendation. Production should
+> remain conservative until a broader player-visible quality lift can defend a
+> new public claim.
 
 ![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
 
@@ -188,13 +200,6 @@ These pack views help a broad reader understand one of the project’s central
 claims: `Aurora Galactica` and `Galaxy Guardians` are not supposed to be two
 skins on one game. They are meant to be separate applications living on one
 host platform.
-
-> TODO illustration:
-> Choose a small three-panel progression strip that shows how the public face
-> of the project evolved from `1.0.0` launch to `1.2.0` Platinum framing to
-> `1.4.0` multi-game posture. The most illustrative version may be gameplay
-> first, shell first, or docs/release-surface first, and we should pick that
-> deliberately rather than guessing.
 
 Further detail:
 
@@ -276,14 +281,13 @@ In short:
 - the application implements against that evidence
 - Platinum stays the host rather than the hidden author of the game
 
-![Galaga stage-opening reference contact sheet](reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png)
+![Source to metric pipeline](reference-artifacts/diagrams/white-paper/source-to-metric-pipeline.svg)
 
-![Galaxian reference contact sheet](reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg)
-
-These reference contact sheets are useful because they show the project’s
-ingestion claim in a form a non-expert can understand quickly. We are not only
-describing classic arcade behavior; we are collecting windows, studying them,
-and turning them into reusable evidence.
+This diagram is the best first-pass visual for the ingestion section because it
+teaches the method without requiring the reader to already know the underlying
+source clips. We are not only describing classic arcade behavior; we are
+collecting windows, studying them, turning them into contracts, measuring them
+against runtime, and deciding what can honestly become a release claim.
 
 That claim is now easier to defend concretely because the repo carries
 preserved-source lanes as well as derived analyses. The current reference
@@ -308,12 +312,6 @@ only nice-to-have research notes. A serious game line should maintain:
 
 That makes the second and third games less likely to inherit Aurora-specific
 assumptions by accident.
-
-> TODO illustration:
-> Pick the single best “ingestion in action” image for v1. The strongest option
-> might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged
-> comparison between raw source footage and the structured artifact family that
-> comes out of it.
 
 Further detail:
 
@@ -363,11 +361,19 @@ guessy.
 
 On the negative side, the same evidence makes the gameplay gap harder to hide.
 The strict challenge-stage score is still only about `4.3/10`: movement
-`4.2/10`, graphics `4.5/10`, alien novelty `3.9/10`, target-video object-track
-fit `3.6/10`, and zero release-ready challenge contracts. The no-shot and
+`4.4/10`, graphics `4.5/10`, alien novelty `3.9/10`, target-video object-track
+fit `3.5/10`, and zero release-ready challenge contracts. The no-shot and
 no-ship-loss safety rule is strong, but safety is now treated as a guardrail,
 not as proof of conformance. A safe challenge stage can still be boring,
 visually weak, or badly paced.
+
+![Challenge path visual comparison](reference-artifacts/analyses/challenge-path-visuals/latest.svg)
+
+The path visual is deliberately more diagnostic than decorative. It shows why
+the challenge work is no longer a vague request to "feel more Galaga-like":
+candidate routes can now be compared for group coherence, bunching, lower-field
+travel, and scoreable-route readability before a runtime source change is
+allowed to make a larger release claim.
 
 That distinction matters for the project's AI-assisted method. This work is a
 success as ingestion, annotation, and evaluator-building. It is not yet a
@@ -393,6 +399,14 @@ The next-work categories are therefore specific:
 6. Generalize the same grammar to normal-stage entry behavior, not only
    challenge stages, so the platform can support game-specific variation
    without hard-coding Aurora's current patterns into Platinum.
+
+The newest Stage 3 work shows the process beginning to pay off. A first source
+attempt moved group 4 from a center-exit read to a right-exit read while
+preserving safety and protected groups, and later group 2, group 3, and group 5
+fast-lane attempts also landed as dev-visible gameplay keepers. One group 1
+attempt was blocked by the gate. That combination is exactly the intended
+shape: focused improvements can land, but rejected candidates still leave
+evidence and prevent overclaiming.
 
 The reason this should speed quality improvement is that it changes the shape
 of the work. Instead of asking the model or a human to "make the stage feel more
@@ -449,7 +463,7 @@ This is the deeper quality claim of the project: bugs, polish, and release
 readiness should increasingly move from memory and opinion into explicit checks,
 artifacts, and dashboards.
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/score-trends.svg)
 
 ![Persona performance distribution](reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg)
 
@@ -460,8 +474,8 @@ inspected, debated, and rerun.
 The newest dashboard makes the current prioritization uncomfortable in the
 right way. Basic challenge timing, combat response, capture/rescue rules, and
 several shell surfaces pass as guardrails. But the strict challenge-stage
-set-piece scorer is only `4.3/10`, with movement `4.2/10`, graphics `4.5/10`,
-novelty `3.9/10`, target-video object-track fit `3.6/10`, and zero release-ready
+set-piece scorer is only `4.3/10`, with movement `4.4/10`, graphics `4.5/10`,
+novelty `3.9/10`, target-video object-track fit `3.5/10`, and zero release-ready
 challenge contracts. That score is not a failure of the process. It is the
 process doing its job: replacing a too-generous broad proxy with a more honest
 stage-by-stage conformance read.
@@ -534,7 +548,50 @@ Further detail:
 - [white-paper/REVIEWER_CHECKLIST.md](white-paper/REVIEWER_CHECKLIST.md)
 - [white-paper/REVIEW_CADENCE.md](white-paper/REVIEW_CADENCE.md)
 
-### 8. How Generative AI Fits
+### 8. Launch Risk, Security, And Trust
+
+The project should not treat a thousand-user launch as a larger version of the
+current reviewer flow.
+
+The as-built system is credible as a disciplined development and review program.
+It is not yet documented here as a broad public-scale service posture. If the
+audience suddenly expanded from a small review group to roughly `1,000` real
+users, the risk model would change in several ways:
+
+| Risk area | What could go wrong | Required posture before broad launch |
+| --- | --- | --- |
+| Public/private evidence boundary | Source packages, private-boundary captures, raw contact sheets, generated prompts, local paths, or private review notes could leak into hosted docs, PDFs, dashboards, or public bundles. | Treat artifact publication as a security gate: allowlist public assets, audit generated HTML/PDF outputs, and keep private source bytes behind the companion artifact boundary. |
+| Pilot, account, leaderboard, and feedback data | Player handles, auth/session state, score rows, feedback text, or profile metadata could be exposed, enumerated, spoofed, or retained longer than expected. | Review auth/session behavior, Supabase grants/RLS or equivalent storage policy, row-level access, retention, and user-facing privacy language before scale. |
+| Score integrity and abuse | A browser-game client is not a trusted authority. At scale, forged score submissions, bot traffic, replay spam, or feedback abuse could pollute leaderboards and support queues. | Add server-side validation, rate limits, anti-abuse logging, moderation paths, and conservative leaderboard trust language before treating scores as public truth. |
+| Replay, video, telemetry, and local exports | Replay video and session logs are currently browser-local or explicit downloads. A future hosted replay path could accidentally publish user video, identifiers, diagnostics, or build/session details. | Keep hosted replay/video upload disabled until a server-owned upload policy exists with authorization, consent, moderation, storage rules, and score/user/build linkage. |
+| Operational scale and incident response | Static hosting, Supabase quotas, feedback endpoints, browser support, and build-publish paths may behave very differently with real user concurrency and repeated submissions. | Define launch limits, monitoring, alert ownership, rollback, support triage, quota budgets, and an incident playbook before inviting a broad audience. |
+| IP, reference, and brand exposure | The conformance program uses reference material and classic-arcade comparison language. Public pages could overexpose copied assets, imply affiliation, or overclaim source-derived fidelity. | Keep public materials focused on analysis, transformed diagrams, metadata, and careful wording; review source usage and marketing copy before paid or broad public promotion. |
+| AI-assisted content governance | Model-generated code, docs, slide copy, and summaries can accidentally launder private details, overstated claims, or stale assumptions into polished public artifacts. | Require human review of generated release copy, a source-to-public boundary check, and explicit negative-result preservation before public claims move. |
+| Product trust and support burden | Current weak spots such as challenge-stage quality, sprite-motion maturity, preview-game boundaries, local-storage continuity, accessibility, and browser compatibility become reputational issues at scale. | Keep the launch story conservative, document preview limits, and ensure support, compatibility, accessibility, and data-loss expectations are clear. |
+
+The current recommendation is therefore conservative:
+
+- `dev` can continue to support fast internal and invited review.
+- `beta` can support authority-gated candidate review when auth, score,
+  storage, and public/private artifact boundaries are freshly checked.
+- `production` should not be marketed as a thousand-user launch until the
+  security, data, support, and operational gates above have owners and evidence.
+
+The important point is not that the project is unsafe by default. The important
+point is that the current architecture deliberately contains browser-local
+state, generated public artifacts, external-service paths, and private-boundary
+evidence. Those are manageable risks only if the release process treats them as
+first-class product requirements rather than cleanup work after traffic arrives.
+
+Further detail:
+
+- [ARTIFACT_POLICY.md](ARTIFACT_POLICY.md)
+- [ARCHITECTURE.md](ARCHITECTURE.md)
+- [ARCHITECT_REVIEW_RESPONSE.md](ARCHITECT_REVIEW_RESPONSE.md)
+- [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+- [release-dashboard.html](release-dashboard.html)
+
+### 9. How Generative AI Fits
 
 The project does use generative AI heavily, but not as a substitute for
 engineering structure.
@@ -566,9 +623,9 @@ to ask a model for code. The point is to build a system in which model help
 leaves behind better evaluators, better artifacts, and cheaper future
 decisions.
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cost-per-positive-score-point.svg)
 
 These charts help keep the AI story grounded. The point is not only that model
 assistance exists; it is that the project is trying to compare that assistance
@@ -594,7 +651,7 @@ Further detail:
 - [project-guide.html#conformance-economics-doc](project-guide.html#conformance-economics-doc)
 - [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
 
-### 9. Working Loop
+### 10. Working Loop
 
 The operating loop of this project is more important than any single feature.
 
@@ -614,17 +671,23 @@ The aggressiveness comes from fast iteration and model-assisted leverage. The
 control comes from evidence, harnesses, explicit ownership boundaries, and
 release discipline.
 
-> TODO illustration:
-> Add one compact “question -> evidence -> harness -> change -> rerun” visual
-> from a real case study. Audio cue alignment, stage-opening timing, or a
-> Galaxy Guardians reference-promotion slice are the strongest current
-> candidates, but we should choose the one that is most legible to a broad
-> reader.
+![Evidence keeper loop](reference-artifacts/diagrams/white-paper/evidence-keeper-loop.svg)
 
-### 10. Historical Evolution So Far
+![Stage 3 source-attempt contact sheet](reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt-contact-sheet.svg)
+
+The Stage 3 contact sheet is a useful first case-study image because it shows
+the method in one concrete before/after artifact. The claim is not simply that
+a model or a human picked better numbers. The claim is that a target-language
+description, a runtime-expressibility proof, a source attempt, guardrails, and
+reviewable path evidence all had to line up before the change could be called a
+dev-visible keeper.
+
+### 11. Historical Evolution So Far
 
 The release notes already show a clear arc, and the white paper should make it
 easy to retell.
+
+![Release progression gallery](reference-artifacts/diagrams/white-paper/release-progression-gallery.svg)
 
 | Release | Meaning | Strategic shift |
 | --- | --- | --- |
@@ -648,18 +711,13 @@ The next phase should be to prove that this method scales:
 - a third-game intake path, currently represented by Space Invaders / Windigo
   Invaders preserved-source and planning lanes
 
-> TODO illustration:
-> Build a release-history gallery with one screenshot or architectural surface
-> per milestone. The current paper names the milestones clearly, but a short
-> visual strip would make the progression easier to absorb at a glance.
-
 Further detail:
 
 - [release-notes.html](release-notes.html)
 - [project-guide.html#release-note-140-beta-1-doc](project-guide.html#release-note-140-beta-1-doc)
 - [project-guide.html#release-note-130-production-refresh-doc](project-guide.html#release-note-130-production-refresh-doc)
 
-### 11. Citation Program
+### 12. Citation Program
 
 This white paper should not quietly absorb ideas or source recovery work
 without naming them.
@@ -695,7 +753,7 @@ Further detail:
 
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
 
-### 12. Related Work
+### 13. Related Work
 
 This project should periodically stop and look outward.
 
@@ -716,7 +774,7 @@ Maintained deeper log:
 
 - [white-paper/RELATED_WORK.md](white-paper/RELATED_WORK.md)
 
-### 13. Internal Canonical Docs
+### 14. Internal Canonical Docs
 
 This paper should stay readable because the repo already has deeper canonical
 surfaces nearby.
@@ -739,7 +797,7 @@ The shortest list of internal references that best supports the claims here is:
 If the main paper starts to feel long, that is usually a sign that one of these
 surfaces should carry more of the detail instead.
 
-### 14. Why This Project Matters
+### 15. Why This Project Matters
 
 The project matters because it is trying to demonstrate a concrete alternative
 to two weak extremes.
@@ -767,7 +825,7 @@ This is also why the paper should remain readable. A broad technical reader
 does not need every source artifact inline. They need a coherent narrative,
 selected visual proof, and obvious places to go next if they want more depth.
 
-### 15. Living White Paper Policy
+### 16. Living White Paper Policy
 
 This document should evolve the same way the project evolves: intentionally,
 versioned, and with historical memory preserved.
@@ -804,12 +862,12 @@ Good triggers for a new white paper release:
 
 - Recover and link the earlier Karpathy-style assessment if it exists outside
   this repo.
-- Add one deliberate progression gallery for milestone history and one deliberate
-  “evidence in action” case-study image once we decide which examples explain
-  the project most clearly.
-- Add a compact public diagram that shows the new source-to-metric pipeline:
-  preserved source package -> extracted window -> semantic event/crop/path
-  target -> runtime capture -> conformance score -> release gate.
+- Take a second visual pass after the next hosted `/dev` review and decide
+  whether the private-boundary Stage 3 contact sheet should stay in the main
+  paper or move to a linked guide once the section has served its orientation
+  purpose.
+- Add one hosted-dashboard screenshot or dashboard-native chart if it teaches a
+  current decision better than the existing conformance-economics charts.
 - Add a deeper table that compares Aurora, Galaxy Guardians, and Windigo by
   ingestion maturity, not only by current playability.
 - Decide which evidence families should be summarized publicly and which should

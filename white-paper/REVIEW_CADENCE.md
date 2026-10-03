@@ -15,7 +15,8 @@ instead of leaving it as a good intention.
 - run `npm run white-paper:review:beta` or
   `npm run white-paper:review:production`
 - verify the lane carries `white-paper.html`, `white-paper.pdf`,
-  `project-overview-slides.html`, and `project-overview-slides.json`
+  `project-overview-slides.html`, `project-overview-slides.json`,
+  `project-overview-slides.pdf`, and `project-overview-slides-pdf.json`
 
 ### During active fast-moving project periods
 
@@ -38,6 +39,7 @@ instead of leaving it as a good intention.
 - repeated or softened claims that can be tightened
 - diagrams, tables, or screenshots that create awkward whitespace
 - PDF page breaks that weaken readability
+- slide text or proof objects that overrun the 16:9 talk-over frame
 - stale machine-specific source paths in active evidence docs
 - preserved-source drift that would make analysis less rerunnable
 - related-work references that have gone stale or no longer feel central
@@ -45,9 +47,9 @@ instead of leaving it as a good intention.
 ## Current Review Spine
 
 - `npm run white-paper:review`
-  - refresh the dev-lane PDF
+  - refresh the dev-lane white-paper PDF and slide PDF
   - refresh and check the generated 20-slide overview deck
   - refresh the code-review packet
   - pass the code-review gate
   - verify the preserved-source integrity check
-  - verify the hosted white-paper presentation check
+  - verify the hosted white-paper presentation and rendered fit check

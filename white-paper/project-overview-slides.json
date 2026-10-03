@@ -4,7 +4,7 @@
   "title": "Platinum, Aurora, And The Conformance Project",
   "subtitle": "A browser-arcade platform, evidence-led game ingestion program, and release discipline for AI-assisted software.",
   "status": "living overview deck",
-  "lastSourceReviewDate": "2026-06-04",
+  "lastSourceReviewDate": "2026-06-10",
   "sourceWhitePaper": "WHITE_PAPER.md",
   "canonicalDeckHref": "project-overview-slides.html",
   "intent": "Keep a public, talkable slide overview next to the white paper so the high-level project story, latest conformance data, ingestion process, release discipline, and forward plan stay visible during dev/beta/production review.",
@@ -15,6 +15,9 @@
     "RELEASE_CONFORMANCE_DASHBOARD.md",
     "CONFORMANCE_ECONOMICS.md",
     "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+    "ARTIFACT_POLICY.md",
+    "ARCHITECTURE.md",
+    "ARCHITECT_REVIEW_RESPONSE.md",
     "GALAGA_TARGET_ARTIFACT_COVERAGE.md",
     "LEVEL_VISUAL_TIMING_ALIGNMENT.md",
     "AURORA_SPRITE_MOTION_CORRESPONDENCE.md",
@@ -22,7 +25,22 @@
     "reference-artifacts/analyses/conformance-economics/latest.json",
     "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
     "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
-    "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+    "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+    "reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt.json",
+    "reference-artifacts/diagrams/platinum/platinum-hero.svg",
+    "reference-artifacts/diagrams/platinum/platinum-platform-stack.svg",
+    "reference-artifacts/diagrams/platinum/platinum-pack-separation.svg",
+    "reference-artifacts/diagrams/platinum/aurora-pack-card.svg",
+    "reference-artifacts/diagrams/platinum/galaxy-guardians-pack-card.svg",
+    "reference-artifacts/diagrams/white-paper/source-to-metric-pipeline.svg",
+    "reference-artifacts/diagrams/white-paper/evidence-keeper-loop.svg",
+    "reference-artifacts/diagrams/white-paper/release-progression-gallery.svg",
+    "reference-artifacts/analyses/challenge-path-visuals/latest.svg",
+    "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/score-trends.svg",
+    "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/compute-minutes-by-resource.svg",
+    "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cost-per-positive-score-point.svg",
+    "reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg",
+    "reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt-contact-sheet.svg"
   ],
   "slides": [
     {
@@ -30,123 +48,304 @@
       "kicker": "Project overview",
       "claim": "A real game platform, a playable first game, and an evidence program for making AI-assisted software accountable.",
       "proof": ["Aurora release gate: 8.8/10", "Challenge set pieces: 4.3/10", "Measured runs: 904", "Artifact growth: 1.48GB"],
-      "visual": "hero"
+      "speakerNotes": [
+        "Open with product identity first: Platinum is the host, Aurora is the shipped first game, and the conformance program is the governance system around AI-assisted work.",
+        "Use the numbers as orientation, not victory laps. The same story contains an 8.8/10 release gate, a 4.3/10 challenge-stage blocker, 904 measured runs, and 1.48GB of evidence.",
+        "Set the expectation that this presentation is not a demo script. It is a product review of what is real, what is still weak, and what deserves the next investment."
+      ],
+      "visual": "hero",
+      "images": [
+        {
+          "src": "reference-artifacts/diagrams/platinum/platinum-hero.svg",
+          "alt": "Platinum hero illustration showing Aurora and platform framing",
+          "caption": "The deck should open with the actual platform/game identity, not only metrics."
+        }
+      ]
     },
     {
-      "title": "The Claim: Fast AI-Assisted Work Can Still Be Accountable",
+      "title": "Fast AI Work Can Still Be Accountable",
       "kicker": "Thesis",
       "claim": "The project forces model-assisted iteration to leave evidence, checks, and public release artifacts behind.",
-      "proof": ["Real releases, not only demos", "Reference-driven fidelity work", "Visible platform boundaries", "Local CPU/browser harnesses for repeated measurement"]
+      "proof": ["Real releases, not only demos", "Reference-driven fidelity work", "Visible platform boundaries", "Local CPU/browser harnesses for repeated measurement"],
+      "visual": "accountability-loop",
+      "speakerNotes": [
+        "The core claim is that speed is acceptable only when every meaningful change leaves a reviewable trail.",
+        "Draw a hard line between an impressive demo and a release-governed product. This work is about evidence, source comparison, reproducible checks, and honest public claims.",
+        "From a product-management lens, the important behavior is not that the model produced code quickly; it is that the process can explain whether the result is better."
+      ]
     },
     {
-      "title": "The Arc Moved From One Game To A Conformance Program",
+      "title": "From One Game To A Conformance Program",
       "kicker": "History",
       "claim": "Each release family made the project harder to fake and easier to review.",
-      "proof": ["1.0.0: first public Aurora", "1.2.0: Platinum platform framing", "1.4.0: multi-game and conformance baseline", "Next: conformance scale across games"]
+      "proof": ["1.0.0: first public Aurora", "1.2.0: Platinum platform framing", "1.4.0: multi-game and conformance baseline", "Next: conformance scale across games"],
+      "speakerNotes": [
+        "Tell this as a maturity arc. Version 1.0.0 proved the game could ship; 1.2.0 made the platform boundary explicit; 1.4.0 turned conformance into the governing story.",
+        "The product is no longer only Aurora. The larger asset is a repeatable way to ingest reference material, measure gaps, and publish defensible progress.",
+        "Emphasize that the process has become more demanding over time. That is good: it reduces the chance of flattering ourselves with weak evidence."
+      ],
+      "visual": "release-progression",
+      "images": [
+        {
+          "src": "reference-artifacts/diagrams/white-paper/release-progression-gallery.svg",
+          "alt": "Release progression gallery from Aurora launch to Platinum conformance posture",
+          "caption": "A visual memory of the 1.0.0 -> 1.2.0 -> 1.4.0+ arc."
+        }
+      ]
     },
     {
-      "title": "The Operating Model Is Five Layers, Not One Blob",
+      "title": "Five Owned Layers, Not One Blob",
       "kicker": "System model",
       "claim": "Quality improves when reference evidence, ingestion, games, harnesses, and release claims have separate ownership.",
       "proof": ["Reference artifacts", "Ingestion framework", "Game-owned truth", "Harnesses and scorecards", "Release lanes and docs"],
-      "visual": "flow"
+      "speakerNotes": [
+        "Use this slide to explain why the system is intentionally separated into layers. When something fails, we need to know whether the problem is the source, the extraction, the game implementation, the scorer, or the release claim.",
+        "The key product decision is ownership clarity. A platform that treats all evidence as one blob cannot scale beyond the first game.",
+        "This is also the reason the build and document pipeline matters: the evidence, scorecards, and public materials have to move together."
+      ],
+      "visual": "operating-stack"
     },
     {
-      "title": "Platinum Hosts; Game Packs Carry Game-Specific Authority",
+      "title": "Platinum Hosts; Game Packs Own Truth",
       "kicker": "Architecture",
       "claim": "The platform scale bet only works if Aurora-specific truth does not leak into Platinum or the next game.",
-      "proof": ["Platform owns shell, services, and lane model", "Aurora owns Galaga-like conformance", "Guardians owns Galaxian-like preview truth", "Architecture review says dev/beta separation is good but still worth hardening"]
+      "proof": ["Platform owns shell, services, and lane model", "Aurora owns Galaga-like conformance", "Guardians owns Galaxian-like preview truth", "Architecture review says dev/beta separation is good but still worth hardening"],
+      "speakerNotes": [
+        "Make the boundary concrete: Platinum should host and orchestrate, while each game pack carries its own reference truth, score logic, and release readiness.",
+        "This protects the second and third games from inheriting Aurora assumptions by accident.",
+        "The PM takeaway is that platform reuse is only valuable if game-specific authority stays game-specific."
+      ],
+      "visual": "pack-boundary"
     },
     {
-      "title": "Current Game Portfolio: First Game, Second Proof, Third Intake",
+      "title": "Current Portfolio: Aurora, Guardians, Intake",
       "kicker": "Portfolio",
       "claim": "The platform matters because it can host genuinely different game instances, not just skins.",
-      "proof": ["Aurora: first shipped application", "Galaxy Guardians: second-game proof", "Windigo / third game: intake lane", "Conformant reference modes first, unique public themes later"]
+      "proof": ["Aurora: first shipped application", "Galaxy Guardians: second-game proof", "Windigo / third game: intake lane", "Conformant reference modes first, unique public themes later"],
+      "speakerNotes": [
+        "Position Aurora as the active product and current conformance investment target.",
+        "Position Guardians as the second proof, not as a fully promised product. It is there to validate whether the platform can host a different reference family.",
+        "Keep Windigo conservative: it belongs in intake until the first two games prove the ingestion and conformance path can hold."
+      ],
+      "visual": "portfolio"
     },
     {
-      "title": "Ingestion Turns Examples Into Implementation Contracts",
+      "title": "Ingestion Converts Examples Into Contracts",
       "kicker": "Ingestion",
       "claim": "External examples become source manifests, windows, annotations, runtime captures, scores, and release gates.",
-      "proof": ["Preserved source package", "Extracted clip or frame window", "Semantic annotation", "Runtime capture", "Score and gate"]
+      "proof": ["Preserved source package", "Extracted clip or frame window", "Semantic annotation", "Runtime capture", "Score and gate"],
+      "speakerNotes": [
+        "Walk the audience from source to decision: a video, manual, audio cue, sprite, or preserved-source package becomes a manifest, a window, a contract, a runtime capture, and then a score.",
+        "The product value is not the diagram itself. It is the conversion of ambiguous examples into implementation contracts that can be checked repeatedly.",
+        "This is where private-boundary materials can legitimately support the public story, because they strengthen the review trail without needing to be marketed as public assets."
+      ],
+      "visual": "pipeline"
     },
     {
-      "title": "The Reference Corpus Expanded Beyond One Remembered Target",
+      "title": "The Source Corpus Is Now Broader",
       "kicker": "Evidence",
       "claim": "Recent source recovery makes claims more defensible and exposes gaps more sharply.",
-      "proof": ["Galaga challenge videos, audio cues, sprite/walkthrough bundles", "Galaxian no-voiceover and full-session gameplay", "Space Invaders early preserved-source lane", "Cabinet, manual, rule, and history sources"]
+      "proof": ["Galaga challenge videos, audio cues, sprite/walkthrough bundles", "Galaxian no-voiceover and full-session gameplay", "Space Invaders early preserved-source lane", "Cabinet, manual, rule, and history sources"],
+      "visual": "source-corpus",
+      "speakerNotes": [
+        "The project is moving away from memory-based approximation toward a broader source base.",
+        "That improves credibility but also raises the bar. Better sources often make scores harsher because they reveal the exact ways runtime behavior is wrong.",
+        "Frame this as a strength: a serious conformance program should become less comfortable as the evidence gets better."
+      ]
     },
     {
-      "title": "The Score Is A Measurement Surface, Not A Trophy",
+      "title": "The Score Is A Measurement Surface",
       "kicker": "Conformance",
       "claim": "Scores carry confidence and resolution; a better scorer can lower a score while improving honesty.",
-      "proof": ["Overall quality gate: 8.8/10", "Audio identity: 7.3/10", "Challenge set pieces: 4.3/10", "Runtime sprite conformance: 6.2/10", "Visual look and feel: 8.6/10"]
+      "proof": ["Overall quality gate: 8.7/10", "Audio identity: 7/10", "Challenge set pieces: 4.3/10", "Runtime sprite conformance: 6.2/10", "Visual look and feel: 8.6/10"],
+      "speakerNotes": [
+        "Do not let the audience treat the 8.7/10 as the whole story. The score surface is useful because it separates strengths from blockers.",
+        "A better evaluator can lower a score and still be progress, because it gives the team a truer target.",
+        "Call out the important PM discipline: the deck must preserve weak rows instead of hiding them inside a flattering aggregate."
+      ],
+      "visual": "score",
+      "images": [
+        {
+          "src": "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/score-trends.svg",
+          "alt": "Conformance score trend chart",
+          "caption": "The score story is trend and tradeoff, not a single trophy number."
+        }
+      ]
     },
     {
-      "title": "Aurora Is Playable And Much More Honest Than It Was",
+      "title": "Aurora Is Playable; The Promise Stays Honest",
       "kicker": "Aurora state",
       "claim": "The candidate is strong enough for review, but not yet for an easy 1.4.1 production promise.",
-      "proof": ["Good overall roll-up", "Audio near the next gate", "Challenge-stage scorer now strict", "Highest-value next gameplay step is movement grammar"]
+      "proof": ["Good overall roll-up", "Stage 3 now has dev-visible challenge keepers", "Challenge-stage scorer remains strict", "Highest-value next gameplay step is broader movement grammar"],
+      "speakerNotes": [
+        "Anchor this slide in the actual game surface. Aurora is playable, shippable enough for review, and much more honestly measured than earlier versions.",
+        "The caution is intentional. A production promise should wait until the next improvement is visible to players and defensible in release notes.",
+        "The best next gameplay investment is not more scattered tuning; it is reusable movement grammar that improves challenge stages and normal arrivals together."
+      ],
+      "images": [
+        {
+          "src": "export.mov.png",
+          "alt": "Current Aurora gameplay surface",
+          "caption": "The deck needs the actual game surface in the story, not only system claims."
+        }
+      ]
     },
     {
-      "title": "Challenge-Stage Work Improved The Process Before It Improved The Game",
+      "title": "Challenge Work Improved The Process First",
       "kicker": "Case study",
       "claim": "This is a measurement and ingestion success, but still a gameplay blocker.",
-      "proof": ["8 tracked challenge windows", "40 reference-backed groups", "Target controls: 8.6/10", "Strict conformance: 4.3/10", "Release-ready contracts: 0"],
-      "visual": "challenge"
+      "proof": ["8 tracked challenge windows", "40 reference-backed groups", "Target controls: 8.6/10", "Strict conformance: 4.3/10", "Target-video object fit: 3.5/10", "Release-ready contracts: 0"],
+      "speakerNotes": [
+        "This slide is the clearest example of honest product review: the process improved before the game did.",
+        "The team now has tracked windows, reference-backed groups, and better route controls, but the strict conformance score is still not release-ready.",
+        "Make the blocker plain: zero release-ready challenge contracts means the case study is a strong evidence win and a gameplay work item, not a victory slide."
+      ],
+      "visual": "challenge",
+      "images": [
+        {
+          "src": "reference-artifacts/analyses/challenge-path-visuals/latest.svg",
+          "alt": "Challenge path visual comparison",
+          "caption": "The blocker is visible as route readability and source-to-runtime path fit."
+        }
+      ]
     },
     {
-      "title": "The Next Unlock Is A Reusable Movement Grammar",
+      "title": "The Next Unlock Is Movement Grammar",
       "kicker": "Gameplay grammar",
       "claim": "Challenge stages and normal-stage entries should use the same contract language for group arrivals, paths, timing, and player opportunity.",
-      "proof": ["Group contracts", "Path primitives", "Timing contracts", "Human-perfect guard", "Motion identity", "Game-specific variation"]
+      "proof": ["Group contracts", "Path primitives", "Timing contracts", "Human-perfect guard", "Motion identity", "Game-specific variation"],
+      "visual": "movement-grammar",
+      "speakerNotes": [
+        "The product ask is to stop treating challenge-stage movement as a one-off fix.",
+        "Define a shared language for groups, paths, timing, player opportunity, and motion identity so improvements carry across stages and games.",
+        "The human-perfect guard matters because conformance work should not make the game technically accurate but unpleasant or unfair to play."
+      ]
     },
     {
-      "title": "Audio Is Valuable, But The Economics Tell Us To Be Disciplined",
+      "title": "Audio Matters, But Economics Set The Pace",
       "kicker": "Audio",
       "claim": "Audio clarity matters, but current tuning loops are expensive for modest score movement.",
-      "proof": ["Audio identity: 7.3/10", "Audio consumed large local-compute blocks", "Audio loop around 39 minutes per positive score point", "Next gain should come from better evaluators or more stable cue windows"]
+      "proof": ["Audio identity: 7.3/10", "Audio consumed large local-compute blocks", "Audio loop around 39 minutes per positive score point", "Next gain should come from better evaluators or more stable cue windows"],
+      "visual": "audio-roi",
+      "speakerNotes": [
+        "Audio is a meaningful part of arcade identity, but this slide is about prioritization.",
+        "The economics data says current audio tuning loops are expensive relative to the measured gain.",
+        "A tier-one product response is not to ignore audio; it is to improve the evaluator, stabilize cue windows, and then spend tuning time where the return is clearer."
+      ]
     },
     {
       "title": "Sprites Need Three Separate Conformance Concepts",
       "kicker": "Sprites",
       "claim": "One static sprite score hides the work players actually perceive.",
-      "proof": ["Catalog proxy score", "Runtime canvas crop score", "Active motion planning", "Scale and formation context", "Frame-labeled motion windows needed"]
+      "proof": ["Catalog proxy score", "Runtime canvas crop score", "Active motion planning", "Scale and formation context", "Frame-labeled motion windows needed"],
+      "visual": "sprite-model",
+      "speakerNotes": [
+        "Explain why a single sprite score is misleading. Static catalog similarity, runtime rendering, and motion behavior are different product questions.",
+        "Players perceive scale, cadence, formation context, and motion, not a static sprite sheet in isolation.",
+        "The next maturity step is frame-labeled motion windows so sprite quality is evaluated where it actually shows up."
+      ]
     },
     {
-      "title": "Personas Turn Gameplay Assessment Into Repeatable Evidence",
+      "title": "Personas Make Gameplay Assessment Repeatable",
       "kicker": "Personas",
       "claim": "Beginner, intermediate, professional, and expert runs help expose score, survival, and learnability changes.",
-      "proof": ["Generic across games", "Distribution matters more than one run", "Challenge-tour/watch mode accelerates human review", "Capture/rescue persona behavior still needs richer strategy"]
+      "proof": ["Generic across games", "Distribution matters more than one run", "Challenge-tour/watch mode accelerates human review", "Capture/rescue persona behavior still needs richer strategy"],
+      "speakerNotes": [
+        "Personas turn gameplay judgment into repeatable evidence. They help detect whether a change helps only one path or improves the experience across skill levels.",
+        "Do not overclaim them as human replacements. Their value is consistency, distribution, and early warning.",
+        "The next improvement is richer strategy, especially around capture, rescue, challenge-stage handling, and survival tradeoffs."
+      ],
+      "images": [
+        {
+          "src": "reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg",
+          "alt": "Persona performance distribution chart",
+          "caption": "Persona evidence turns player-skill assumptions into repeatable traces."
+        }
+      ]
     },
     {
-      "title": "The Economics Ledger Keeps Us Honest About Spend Versus Return",
+      "title": "The Economics Ledger Shows Spend Versus Return",
       "kicker": "Economics",
       "claim": "The project tracks CPU, browser, Codex/GPU-equivalent time, artifact growth, and score movement.",
-      "proof": ["904 measured runs", "971.3 tracked wall minutes", "576.5 CPU wall minutes", "429.6 browser wall minutes", "630.8 GPU/Codex-equivalent wall minutes", "1.48GB artifact evidence"]
+      "proof": ["904 measured runs", "971.3 tracked wall minutes", "576.5 CPU wall minutes", "429.6 browser wall minutes", "630.8 GPU/Codex-equivalent wall minutes", "1.48GB artifact evidence"],
+      "speakerNotes": [
+        "This is the operating review slide. The project is tracking not just output quality, but the cost of pursuing quality.",
+        "Use the resource numbers to make prioritization real: where did repeated work pay off, and where did it create artifact weight without enough score movement?",
+        "The target is not to minimize evidence. The target is to make evidence growth proportional to learning, release confidence, and player-visible improvement."
+      ],
+      "visual": "economics",
+      "images": [
+        {
+          "src": "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/compute-minutes-by-resource.svg",
+          "alt": "Compute minutes by resource chart",
+          "caption": "Resource use is tracked as a product-management constraint."
+        },
+        {
+          "src": "reference-artifacts/analyses/conformance-economics/2026-06-07-41688d988/cost-per-positive-score-point.svg",
+          "alt": "Cost per positive score point chart",
+          "caption": "Improvement claims are judged against measured cost."
+        }
+      ]
     },
     {
       "title": "Release Discipline Is Part Of The Product",
       "kicker": "Release",
       "claim": "The lane model prevents a passing build from becoming an exaggerated public promise.",
-      "proof": ["Local: fast iteration", "Dev: hosted review", "Beta: authority-published candidate lineage", "Production: stable public claim", "MacBook is release authority but production remains conservative"]
+      "proof": ["Local: fast iteration", "Dev: hosted review", "Beta: authority-published candidate lineage", "Production: stable public claim", "MacBook is release authority but production remains conservative"],
+      "speakerNotes": [
+        "Make this a governance slide, not a DevOps slide. A passing build is not the same thing as a public product claim.",
+        "Local and dev lanes are for speed and review. Beta and production require stronger authority, cleaner lineage, and more conservative language.",
+        "This matters because the white paper and deck are part of the product surface. They must not outrun the evidence."
+      ],
+      "visual": "release-track"
     },
     {
-      "title": "Professionalism Also Means Review Records And Issue Closure",
+      "title": "1,000 Users Change The Risk Model",
+      "kicker": "Launch risk",
+      "claim": "As-built, the system should stay controlled until data, score, replay, artifact, and service boundaries are hardened.",
+      "proof": ["Public/private evidence leakage", "Pilot, auth, leaderboard, and feedback data", "Client-side score spoofing and spam", "Replay/video upload consent and moderation", "Operational quotas, support, and rollback", "Reference/IP and AI-generated claim governance"],
+      "speakerNotes": [
+        "Frame this as a product launch-readiness slide, not a fear slide. The same system that is disciplined for review can still be under-prepared for a thousand real users.",
+        "Call out the biggest trust surfaces: public/private artifact boundaries, auth and score data, replay exports, leaderboard integrity, abuse handling, quotas, support, rollback, and careful source/brand language.",
+        "The recommendation is conservative: keep dev and beta useful for controlled review, but do not market this as a broad thousand-user production launch until security, data, moderation, and operational gates have owners and evidence."
+      ],
+      "visual": "launch-risk"
+    },
+    {
+      "title": "Review Records Make Professionalism Concrete",
       "kicker": "Review",
       "claim": "Code, architecture, documentation, security, and storage reviews are now artifacts rather than vibes.",
-      "proof": ["Code review packets", "Architecture review", "Security/auth/storage gates", "Documentation freshness", "Review learning ledger"]
+      "proof": ["Code review packets", "Architecture review", "Security/auth/storage gates", "Documentation freshness", "Review learning ledger"],
+      "speakerNotes": [
+        "This slide translates professionalism into review records. The point is not bureaucracy; it is memory, accountability, and issue closure.",
+        "Use the evidence loop to explain how candidates become keepers, blockers, or explicit deferrals.",
+        "The private-boundary proof object is useful here because it makes the process concrete: the team can show how source attempts, review notes, and issue closure stay connected."
+      ],
+      "visual": "evidence-loop"
     },
     {
-      "title": "Next 90 Days: Make Quality Movement Visible And Release-Worthy",
+      "title": "Next 90 Days: Convert Evidence Into Quality",
       "kicker": "Near-term path",
       "claim": "The near-term plan is quality conversion, not just more artifacts.",
-      "proof": ["Challenge movement grammar", "Sprite motion windows", "Guardians first-class evidence", "1.4.1 candidate only when improvements are player-visible", "Production story only when release notes can defend the claim"]
+      "proof": ["Challenge movement grammar", "Sprite motion windows", "Guardians first-class evidence", "1.4.1 candidate only when improvements are player-visible", "Production story only when release notes can defend the claim"],
+      "visual": "ninety-day-roadmap",
+      "speakerNotes": [
+        "The next 90 days should be judged by quality conversion: source material and artifacts need to become player-visible improvements.",
+        "The highest-priority themes are movement grammar, sprite motion windows, and first-class Guardians evidence.",
+        "Hold the 1.4.1 story to a strict PM bar: release only when the improvement is visible, explainable, and defensible in the notes."
+      ]
     },
     {
-      "title": "The Longer Goal: A Conformance Factory, Then Original Variations",
+      "title": "Longer Goal: A Conformance Factory",
       "kicker": "Longer path",
       "claim": "First prove true-to-reference modes; then make public games unique with confidence.",
-      "proof": ["Ingest examples", "Conform reference mode", "Vary themes and movement", "Scale across games", "Publish an honest AI-assisted software story"]
+      "proof": ["Ingest examples", "Conform reference mode", "Vary themes and movement", "Scale across games", "Publish an honest AI-assisted software story"],
+      "visual": "conformance-factory",
+      "speakerNotes": [
+        "Close by separating the near-term conformance mission from the longer creative opportunity.",
+        "The responsible order is reference mode first, then original variation. That sequence lets the team know what it is intentionally changing.",
+        "The broader story is an honest AI-assisted software factory: fast enough to explore, disciplined enough to explain, and careful enough to publish."
+      ]
     }
   ]
 }
