@@ -717,7 +717,9 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   || 'advanced'
  ).trim().toLowerCase();
  const developerWatchPersona=cfg.watchMode?requestedWatchPersona:'';
- const watchPersona=armedWatchPersona||developerWatchPersona;
+ const watchPersona=cfg.stageFiveReview
+  ? developerWatchPersona
+  : (armedWatchPersona||developerWatchPersona);
  const watchScope=watchPersona
   ? String(
    armedWatchPersona
