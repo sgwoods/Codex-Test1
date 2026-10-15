@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 14, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 15, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,38 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 15: human authorized steps6/7/8, including gated beta publication if
+acceptance passes. Production is NOT authorized. Source baseline b7ce2898;
+frozen/published gameplay source stays8e93394b. No src/ changes in this task.
+Step6 exact frozen-package runtime/security/channel tests PASS: both games
+start/end/restart, 13 HTML policies, settings37/46 persistence, public controls
+and disabled dev-only launchers, no local missing assets/private-audio requests.
+All six tracked security observations are false against the exact frozen root.
+Step7 automated checks PASS: 600 browser seconds of ordinary Professional
+Challenge Tour reached Stage159; 120 real seconds advanced Stage3->27, no runtime
+faults, nonblank/changing canvas and measurable effects audio. This is one
+unseeded tour, not all-seed/perfect-route/original-speed proof. Live sign-in and
+human listening remain unverified and block publication acceptance.
+Online music check now confirms a blocker: both automated and Codex built-in
+browsers show "This video is unavailable" in the default playlist iframe while
+Aurora reports playing. Root cause (provider/embed/auth/network) is unresolved.
+Do not accept the playing label or publish this beta until resolved/accepted.
+
+Step8 preparation repairs two delivery hazards without changing package bytes:
+explicit read-only account-check mode avoids hidden freshness rebuilds, and
+publish:beta:frozen keeps full release/code-review gates then verifies inventory,
+beta-only changes and committed Git blob/mode equality before push. The outer
+wrapper verifies live identity, smoke and every expected HTTP file hash. No
+build/promotion/PDF generation is part of frozen delivery. Twelve contract
+fixtures and five isolated publisher sequencing fixtures pass; these substitute
+gate/network boundaries and do not replace the real release gates. Normal
+publish:beta still rebuilds and must not be used for this freeze.
+Initial code gate correctly blocked stale review evidence; refresh is required,
+not bypassed. No beta/production publication or beta approval has occurred.
+Full current packet: analyses/beta-acceptance-oct15/REVIEW.md. Raw reports and
+test scripts remain owner-only private-artifacts/beta-acceptance-oct15.
+Frozen beta review surface: http://127.0.0.1:8001/ (port8000 remains DEV).
 
 October 14 steps 4 and 5 COMPLETE. DEV publication passed preflight, PDF,
 review/publish gates, hosted identity verification and public-safe browser smoke.

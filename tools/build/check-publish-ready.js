@@ -540,7 +540,9 @@ function checkAudioThemeAndMixReleaseGates(){
 
 function checkBetaAccountBoundary(cfg){
   if(cfg.lane !== 'beta') return;
-  runPreflightNodeCheck('beta account boundary check', 'tools/harness/check-beta-account-boundary.js');
+  const info = loadJson(cfg.buildInfo);
+  runPreflightNodeCheck('beta account boundary check', 'tools/harness/check-beta-account-boundary.js',
+    ['--root', cfg.dir, '--expected-sha', info.commit]);
 }
 
 function checkReleaseConformanceDocs(){

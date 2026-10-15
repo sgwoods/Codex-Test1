@@ -40,6 +40,7 @@
     "leaderboard:reset:production": "node tools/build/reset-production-leaderboard.js --execute --confirm 1.0-reset",
     "publish:dev:raw": "node tools/build/publish-lane.js --lane dev",
     "publish:beta:raw": "node tools/build/publish-lane.js --lane beta",
+    "publish:beta:frozen": "node tools/build/publish-frozen-beta.js",
     "publish:production:raw": "node tools/build/publish-lane.js --lane production",
     "publish:dev": "npm run build && npm run white-paper:pdf:dev && npm run review:code:check && npm run publish:check:dev && npm run publish:dev:raw && npm run publish:verify:dev && npm run harness:check:hosted-smoke:dev",
     "publish:beta": "npm run build && npm run promote:beta && npm run white-paper:pdf:beta && npm run review:code:check && npm run publish:check:beta && npm run publish:beta:raw && npm run publish:verify:beta && npm run harness:check:hosted-smoke:beta",

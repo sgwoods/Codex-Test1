@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "sourceCommit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+  "betaLabel": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+  "step6": "pass-bounded-exact-package",
+  "step7": "blocked-on-music-playback-and-live-auth-acceptance",
+  "step8": "delivery-repair-tested-real-gates-pending",
+  "virtualBrowserSeconds": 600,
+  "virtualMaxStage": 159,
+  "realSeconds": 120,
+  "realStages": [
+    3,
+    7,
+    11,
+    15,
+    19,
+    23,
+    27
+  ],
+  "audio": {
+    "peak": 0.18006853759288788,
+    "nonzero": 1015,
+    "samples": 2412,
+    "context": "running",
+    "contexts": [
+      "running"
+    ],
+    "mix": {
+      "gameSoundVolume": 0.4,
+      "arcadeMusicVolume": 0.6,
+      "muted": false,
+      "soundEffectsMuted": false,
+      "arcadeMusicMuted": false,
+      "arcadeMusicEffectiveMuted": false,
+      "arcadeMusicWarming": false,
+      "musicState": "off",
+      "releaseChannel": "production beta",
+      "pack": "aurora-galactica",
+      "gameSoundPercent": 40,
+      "arcadeMusicPercent": 60
+    }
+  },
+  "errors": [],
+  "missing": [],
+  "files": 599,
+  "contractFixtures": 12,
+  "publisherFixtures": 5,
+  "betaPublished": false,
+  "productionPublished": false,
+  "limitations": [
+    "No live account credentials used; authentication not proved.",
+    "Audio energy proves signal generation, not human audibility or soundtrack quality.",
+    "One unseeded professional tour; not all-seed or perfect-route acceptance."
+  ],
+  "music": {
+    "acceptance": "failed",
+    "gameState": "playing",
+    "iframeState": "This video is unavailable",
+    "surfaces": [
+      "headless Chromium",
+      "Codex built-in browser"
+    ],
+    "cause": "unresolved-provider-embed-auth-or-network"
+  }
+}

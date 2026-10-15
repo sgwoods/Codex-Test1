@@ -1,55 +1,29 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-10-15T03:27:26.922Z",
+  "generatedAt": "2026-10-15T04:30:29.999Z",
   "branch": "main",
   "baseRef": "origin/main",
-  "baseCommit": "7dab1d79b752479853c2778bb1d1f60988818f12",
-  "headCommit": "7dab1d79",
+  "baseCommit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+  "headCommit": "b7ce2898",
   "dirty": true,
   "statusShort": [
     "M ACTIVE_WORK.md",
     " M BETA_READINESS_OCT06.md",
-    " M CHALLENGE_SETPIECE_CONTRACTS.md",
-    " M CONFORMANCE_ECONOMICS.md",
-    " M RELEASE_CONFORMANCE_DASHBOARD.md",
-    " M package-lock.json",
+    " M RELEASE_POLICY.md",
     " M package.json",
-    " M reference-artifacts/analyses/application-artifact-conformance/latest.json",
-    " M reference-artifacts/analyses/challenge-motion-primitives/latest.json",
-    " M reference-artifacts/analyses/challenge-movement-grammar/latest.json",
-    " M reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
-    " M reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
     " M reference-artifacts/analyses/code-review/latest.json",
-    " M reference-artifacts/analyses/conformance-economics/latest.json",
-    " M reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    " M reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
-    " M reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
-    " M release-dashboard.json",
-    " M release-manifest.json",
-    " M release-notes.json",
-    "?? RELEASE_NOTE_1.4.1.2_DEV.md",
-    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-15T03-25-03-7dab1d79/",
-    "?? reference-artifacts/analyses/code-review/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/code-review/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/",
-    "?? reference-artifacts/analyses/dev-beta-oct14/",
-    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-10-15-7dab1d79-dirty/"
+    " M tools/build/check-publish-ready.js",
+    " M tools/build/publish-lane.js",
+    " M tools/harness/check-beta-account-boundary.js",
+    "?? reference-artifacts/analyses/beta-acceptance-oct15/",
+    "?? reference-artifacts/analyses/beta-acceptance-oct15/",
+    "?? reference-artifacts/analyses/code-review/2026-10-15-b7ce2898/",
+    "?? reference-artifacts/analyses/code-review/2026-10-15-b7ce2898/",
+    "?? tools/build/frozen-beta-contract.js",
+    "?? tools/build/publish-frozen-beta.js",
+    "?? tools/harness/check-frozen-beta-contract.js",
+    "?? tools/harness/check-frozen-beta-publisher.js"
   ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
@@ -71,12 +45,12 @@
     ]
   },
   "summary": {
-    "changedFileCount": 39,
+    "changedFileCount": 15,
     "p0": 0,
     "p1": 0,
     "p2": 1,
     "p3": 0,
-    "riskTaggedFileCount": 9,
+    "riskTaggedFileCount": 8,
     "securityOpenP0": 0,
     "securityOpenP1": 0,
     "securityOpenP2": 0,
@@ -86,35 +60,14 @@
     {
       "status": "M",
       "file": "ACTIVE_WORK.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "M",
       "file": "BETA_READINESS_OCT06.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "CHALLENGE_SETPIECE_CONTRACTS.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "CONFORMANCE_ECONOMICS.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "package-lock.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -128,249 +81,108 @@
       ]
     },
     {
-      "status": "M",
-      "file": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+      "status": "??",
+      "file": "reference-artifacts/analyses/beta-acceptance-oct15/REVIEW.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-15T03-25-03-7dab1d79/README.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-15T03-25-03-7dab1d79/report.json",
+      "file": "reference-artifacts/analyses/beta-acceptance-oct15/summary.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "M",
-      "file": "reference-artifacts/analyses/challenge-motion-primitives/latest.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-15T03-25-03-7dab1d79/README.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-15T03-25-03-7dab1d79/report.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/analyses/challenge-movement-grammar/latest.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-15T03-25-03-7dab1d79/README.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-15T03-25-03-7dab1d79/report.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-15T03-25-03-7dab1d79/README.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-15T03-25-03-7dab1d79/report.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/compute-minutes-by-resource.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/cost-per-positive-score-point.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": [
-        "score-trust"
-      ]
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/cpu-use-by-purpose.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/gameplay-improvement-by-project-part.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/gpu-equivalent-use-by-purpose.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/largest-score-deltas.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": [
-        "score-trust"
-      ]
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/README.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/report.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-15-7dab1d79/score-trends.svg",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": [
-        "score-trust"
-      ]
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/analyses/conformance-economics/latest.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "??",
       "file": "reference-artifacts/analyses/dev-beta-oct14/REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/dev-beta-oct14/summary.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_POLICY.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "tools/build/check-publish-ready.js",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-10-15-7dab1d79-dirty/report.json",
+      "file": "tools/build/frozen-beta-contract.js",
       "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
+        "browser-safety",
         "release-lane"
       ]
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-      "source": "working-tree",
-      "area": "release-tooling",
-      "riskTags": [
-        "release-lane"
-      ]
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
     },
     {
       "status": "??",
-      "file": "RELEASE_NOTE_1.4.1.2_DEV.md",
-      "source": "working-tree",
-      "area": "docs-artifact",
-      "riskTags": []
-    },
-    {
-      "status": "M",
-      "file": "release-dashboard.json",
+      "file": "tools/build/publish-frozen-beta.js",
       "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
+        "browser-safety",
         "release-lane"
       ]
     },
     {
       "status": "M",
-      "file": "release-manifest.json",
+      "file": "tools/build/publish-lane.js",
       "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
+        "browser-safety",
         "release-lane"
       ]
     },
     {
       "status": "M",
-      "file": "release-notes.json",
+      "file": "tools/harness/check-beta-account-boundary.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/harness/check-frozen-beta-contract.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/harness/check-frozen-beta-publisher.js",
       "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
+        "browser-safety",
+        "harness",
         "release-lane"
       ]
     }
@@ -402,9 +214,6 @@
   },
   "recommendedChecks": [
     "npm run build",
-    "npm run harness:check:supabase-data-api-contract",
-    "npm run harness:check:remote-score-submit",
-    "npm run harness:check:signed-in-game-over-lock",
     "npm run publish:check:dev",
     "npm run security:review:dev",
     "npm run review:code:check"

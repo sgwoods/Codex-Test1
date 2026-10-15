@@ -20,6 +20,7 @@ const {
   checkBuildInfo
 } = require('./check-publish-ready');
 const { devFiles, betaFiles, productionFiles } = require('./lane-files');
+const { loadFrozenCandidate, verifyInventory, verifyBetaOnlyPaths, verifyGitTree } = require('./frozen-beta-contract');
 
 const OWNER = process.env.AURORA_PUBLIC_OWNER || 'sgwoods';
 const REPO = process.env.AURORA_PUBLIC_REPO || 'Aurora-Galactica';
@@ -211,6 +212,20 @@ function main(){
   const dryRun = !!args['dry-run'];
   const keepTemp = !!args['keep-temp'];
   const cfg = laneConfig(lane);
+  if(args['require-frozen'] && !args['frozen-candidate']){
+    throw new Error('Frozen beta publication requires --frozen-candidate.');
+  }
+  if(args['frozen-candidate'] && lane !== 'beta'){
+    throw new Error('Frozen publication is supported for beta only.');
+  }
+  const frozen = args['frozen-candidate'] ? loadFrozenCandidate(path.resolve(args['frozen-candidate'])) : null;
+  if(frozen){
+    verifyInventory(DIST_BETA, frozen.files);
+    // Never rebuild or re-promote the accepted artifact during delivery.
+    run(process.execPath, [path.join(ROOT, 'tools/review/check-code-review-gate.js')], { stdio: 'inherit' });
+    run(process.execPath, [path.join(ROOT, 'tools/build/check-publish-ready.js'), '--lane', 'beta'], { stdio: 'inherit' });
+    verifyInventory(DIST_BETA, frozen.files);
+  }
   const preflightCfg = preflightLaneConfig(lane);
   checkGitClean();
   checkSourceDocs();
@@ -225,9 +240,13 @@ function main(){
   try{
     run('gh', ['repo', 'clone', repoRef, repoDir], { stdio: ['ignore', 'inherit', 'inherit'] });
     configureCommitIdentity(repoDir);
+    const publicBase = run('git', ['-C', repoDir, 'rev-parse', 'HEAD']);
+    if(frozen) removeEntry(path.join(repoDir, 'beta'));
     stageArtifacts(repoDir, cfg);
+    if(frozen) verifyInventory(path.join(repoDir, 'beta'), frozen.files);
     const status = gitStatus(repoDir);
     if(!status){
+      if(frozen) verifyGitTree(run('git', ['-C', repoDir, 'ls-tree', '-r', '-z', 'HEAD', '--', 'beta/']), DIST_BETA, frozen.files);
       console.log(JSON.stringify({
         ok: true,
         changed: false,
@@ -243,6 +262,12 @@ function main(){
     const message = `${cfg.commitPrefix} ${short}`;
     run('git', ['-C', repoDir, 'add', '-A', '.'], { stdio: ['ignore', 'inherit', 'inherit'] });
     run('git', ['-C', repoDir, 'commit', '-m', message], { stdio: ['ignore', 'inherit', 'inherit'] });
+    if(frozen){
+      const changed = run('git', ['-C', repoDir, 'diff', '--no-renames', '--name-only', '-z', publicBase, 'HEAD']).split('\0').filter(Boolean);
+      verifyBetaOnlyPaths(changed);
+      verifyGitTree(run('git', ['-C', repoDir, 'ls-tree', '-r', '-z', 'HEAD', '--', 'beta/']), DIST_BETA, frozen.files);
+      verifyInventory(DIST_BETA, frozen.files);
+    }
     if(!dryRun){
       run('git', ['-C', repoDir, 'push', 'origin', branch], { stdio: ['ignore', 'inherit', 'inherit'] });
     }

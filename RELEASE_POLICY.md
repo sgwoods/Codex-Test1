@@ -501,6 +501,32 @@ Create a dedicated `/dev` archive only when:
 Otherwise, move `/dev` forward and keep the record in git and committed release
 artifacts.
 
+## Exact Frozen Beta Delivery
+
+After exact-package validation and the human's beta authorization, use
+`npm run publish:beta:frozen -- --frozen-candidate PATH` for a retained freeze.
+PATH contains beta/, inventory.json and freeze-receipt.json. Keep private DEV
+input and raw account observations outside public source/artifacts.
+The normal publish:beta wrapper rebuilds and is not interchangeable with this
+route. Frozen delivery requires canonical dist/beta to match every frozen file;
+it does not copy, repair, re-promote, relabel or regenerate accepted content.
+
+The frozen route runs code-review and complete beta release gates, including
+authority, clean/current main, hosted-DEV correspondence, documentation,
+security/audio and account checks. Exact-mode account checks never rebuild.
+Then it verifies beta-only publication changes (rename detection disabled) and
+committed Git blob/mode equality before pushing. The temporary public clone's
+beta subtree is replaced exactly; no non-beta change is permitted.
+Following push, live identity, hosted smoke and every expected HTTP file's
+size/SHA256 must pass. Verification failure is not rollback; report the actual
+published state and stop. A dry run performs gates and staged-tree checks but
+does not push or run post-publication checks. Use canonical public owner/repo/
+branch settings. Do not run this route to waive missing player acceptance.
+
+Fixtures: node tools/harness/check-frozen-beta-contract.js and
+node tools/harness/check-frozen-beta-publisher.js. The latter substitutes gate
+and network boundaries; it is sequencing coverage, not a real preflight pass.
+
 ## Policy Intention
 
 The goal is not to create ceremony for its own sake.

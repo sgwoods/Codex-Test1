@@ -2,12 +2,23 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
+const assert = require('assert/strict');
+const { createHash } = require('crypto');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_BETA } = require('../build/paths');
 const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
 const { ensureLaneBuildFresh } = require('./browser-check-util');
 
-const APP_ROOT = DIST_BETA;
+const args = process.argv.slice(2);
+const exactPackage = args.includes('--root') || args.includes('--expected-sha');
+const rootIndex = args.indexOf('--root');
+const shaIndex = args.indexOf('--expected-sha');
+if(exactPackage){
+  assert(rootIndex >= 0 && shaIndex >= 0, 'Exact package requires --root and --expected-sha');
+  assert(args[rootIndex + 1] && !args[rootIndex + 1].startsWith('--'), 'Missing package root');
+  assert(/^[a-f0-9]{40}$/.test(args[shaIndex + 1] || ''), 'Expected SHA must be a full source commit');
+}
+const APP_ROOT = exactPackage ? fs.realpathSync(args[rootIndex + 1]) : DIST_BETA;
 
 function fail(message, payload){
   console.error(message);
@@ -43,13 +54,20 @@ function serve(root = APP_ROOT){
 }
 
 async function main(){
-  ensureLaneBuildFresh(APP_ROOT, { lane: 'beta', releaseChannel: 'production beta' });
+  if(!exactPackage) ensureLaneBuildFresh(APP_ROOT, { lane: 'beta', releaseChannel: 'production beta' });
+  else{
+    const info = JSON.parse(fs.readFileSync(path.join(APP_ROOT, 'build-info.json'), 'utf8'));
+    assert.equal(info.commit, args[shaIndex + 1], 'Exact-package source mismatch');
+    assert.equal(info.releaseChannel, 'production beta', 'Exact package must be beta');
+    assert.equal(info.dirty, false, 'Exact package must come from a clean source');
+  }
   const indexPath = path.join(APP_ROOT, 'index.html');
   if(!fs.existsSync(indexPath)){
     throw new Error(`Built beta app not found at ${APP_ROOT}. Run "npm run promote:beta" first.`);
   }
 
   const html = fs.readFileSync(indexPath, 'utf8');
+  const bundleHash = createHash('sha256').update(html).digest('hex');
   const remoteSubmitBlocked = html.includes('Remote score submit disabled in public lanes pending server-side validation');
   const { server, port } = await serve(APP_ROOT);
   const browser = await launchHarnessBrowser();
@@ -99,7 +117,9 @@ async function main(){
       fail('beta artifact should keep public score writes disabled pending server-side validation', result);
     }
 
-    console.log(JSON.stringify({ ok: true, ...result }, null, 2));
+    assert.equal(createHash('sha256').update(fs.readFileSync(indexPath)).digest('hex'), bundleHash,
+      'Account check changed the package');
+    console.log(JSON.stringify({ ok: true, exactPackage, bundleHash, ...result }, null, 2));
     await context.close();
   } finally {
     await browser.close();

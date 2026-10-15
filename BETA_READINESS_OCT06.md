@@ -1,10 +1,30 @@
 # Beta Candidate Readiness
 
-Updated October 14, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
+Updated October 15, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
 Scope: Aurora correctness and release hardening. No beta or production publication
 is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
+
+October15: step6 exact frozen beta checks PASS. Both games, 13 page policies,
+public channel/account surfaces, ordinary results/restart, settings persistence
+and six tracked security observations checked. Step7 automated longer-play
+checks PASS: 600 browser seconds toStage159, 120 real seconds Stage3->27, no
+runtime fault and measured effects signal. One unseeded tour is not all-seed,
+perfect-route or original-speed acceptance. Live login and human listening are
+still unverified; publication acceptance is held. Human authorized step8 subject
+to checks, not production. No beta or production was published.
+Music playback acceptance FAILED in two browser surfaces: default YouTube
+playlist reports unavailable while Aurora says playing. This is a confirmed
+state mismatch, not yet a diagnosed provider/source defect. Investigate before
+publication; changing runtime/playlist source requires a new validated freeze.
+
+Frozen delivery now has a guarded no-rebuild route, with full preflight plus
+inventory/Git-path/blob/mode checks and mandatory post-push hosted-byte checks.
+Real beta preflight/dry-run results will be recorded in
+analyses/beta-acceptance-oct15/REVIEW.md. Use publish:beta:frozen only after
+acceptance; normal publish:beta would replace the freeze. Beta is NOT READY
+until remaining acceptance and real gates pass. No gameplay source changed.
 
 October 14 steps 4 and 5 COMPLETE. Hosted DEV is
 1.4.1.2+build.1195.sha.8e93394b. Preflight, publish gates, hosted identity and
