@@ -1,0 +1,1586 @@
+{
+  "commit": "19db19d0cae38719e7f626569aba7b22961c8402",
+  "generatedAt": "2026-10-04T14:12:49.496Z",
+  "buildInfo": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "versionScheme": "hosted-dev-increment",
+    "label": "1.4.1.1+build.1208.sha.19db19d0.dirty",
+    "buildNumber": "1208",
+    "commit": "19db19d0cae38719e7f626569aba7b22961c8402",
+    "shortCommit": "19db19d0",
+    "branch": "codex/oct03-local-integration",
+    "state": "codex/oct03-local-integration@19db19d0 dirty",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "dirty": true,
+    "dirtyFiles": [
+      "M ACTIVE_WORK.md",
+      "M OCTOBER_GO_FORWARD_PLAN.md",
+      "M PROJECT_DIRECTION_REVIEW.md",
+      "?? reference-artifacts/analyses/challenge-contact-review/",
+      "?? tools/harness/capture-challenge-contact-review.js"
+    ],
+    "builtAtUtc": "2026-10-04T14:12:45.995Z",
+    "builtAtEt": "Oct 04 2026, 10:12 AM EDT",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ],
+    "development": {
+      "baseVersion": "1.4.1",
+      "iteration": 1,
+      "versionLine": "1.4.1.1",
+      "releaseTrack": "hosted-dev-increment",
+      "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+    },
+    "supabaseConfigured": true,
+    "latestReleaseNote": {
+      "version": "1.4.1",
+      "date": "2026-06-11",
+      "title": "1.4.1 production quality release",
+      "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+      "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+    }
+  },
+  "method": "Stationary human/no-fire, one seed per stage, 60Hz controlled clock; advanceFor draws before capturing the first logged contact for each target.",
+  "methodHash": "40a3e5ff5af0ed9936962685580ae0a4a7f6ef27f872116dbe49f6a97823e13d",
+  "bundleHash": "e71b91072a452b7c090feeb3303d969eb90ea3bf52c83cdee4298309d607470f",
+  "sourceHashes": {
+    "05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f",
+    "06-enemy-behavior.js": "1456799e1fadd17e9fc65ce387abd64811a67231ed1bdc866b914ac40f2d8815",
+    "90-harness.js": "ad6535ae97a302db467e99dae08274b329723aa2f460df5966a42bdf3bd8ad2b"
+  },
+  "limitations": [
+    "First contact frame only; not complete moving-player or multi-seed coverage.",
+    "Rendered canvas is visual evidence, not an automated pixel-overlap or readability verdict.",
+    "No contact is accepted automatically; no release-readiness verdict."
+  ],
+  "results": [
+    {
+      "stage": 31,
+      "seed": 9131,
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 31,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386107,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "final": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 31,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 11.733,
+        "stageClock": 11.733,
+        "rngState": 496386107,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 87.267,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "completed": true,
+      "contacts": [
+        {
+          "event": {
+            "t": 7.967,
+            "type": "challenge_enemy_contact",
+            "stage": 31,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 139.77,
+            "enemyY": 324.33,
+            "enemyLane": 4,
+            "enemyForm": true,
+            "id": 51406268,
+            "enemyType": "but",
+            "enemyFamily": "stingray",
+            "column": 4,
+            "row": 0,
+            "lane": 4,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 477,
+          "simT": 7.967,
+          "diagnostic": {
+            "id": 51406268,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666667997,
+            "u": 12.264000000000214,
+            "phase": "exit",
+            "x": 139.7666860202781,
+            "y": 324.3311609264378,
+            "preBiasY": 276.3311609264378,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1.08,
+              "pulseY": 0.78,
+              "entryX": 1.06,
+              "entryY": 0.82,
+              "weave": 1.28,
+              "steer": 1.06,
+              "jitter": 1.16,
+              "diveVy": 1.04,
+              "diveAccel": 1.03,
+              "challengeSweep": 1.2,
+              "challengeDrop": 1.05
+            },
+            "enemyHitbox": {
+              "w": 6.12,
+              "h": 4.859999999999999
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-31-target-51406268-frame-477.png",
+            "sha256": "a46bac67302b8c0d44a813bfa097e0380204c0daa724c7813225413cc8d3c4f5"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 8.667,
+            "type": "challenge_enemy_contact",
+            "stage": 31,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 144.94,
+            "enemyY": 324.35,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 372665405,
+            "enemyType": "boss",
+            "enemyFamily": "mosquito",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 519,
+          "simT": 8.667,
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.535366666666828,
+            "phase": "exit",
+            "x": 144.93892245969704,
+            "y": 324.349933038823,
+            "preBiasY": 276.349933038823,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-31-target-372665405-frame-519.png",
+            "sha256": "a8d778b3fc2edd0e7a978cd016ea130b28ad8b0c72a8b3a096db6541103640af"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.167,
+            "type": "challenge_enemy_contact",
+            "stage": 31,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 128.91,
+            "enemyY": 325.83,
+            "enemyLane": 4,
+            "enemyForm": true,
+            "id": 942182592,
+            "enemyType": "rogue",
+            "enemyFamily": "galboss",
+            "column": 5,
+            "row": 0,
+            "lane": 4,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 669,
+          "simT": 11.167,
+          "diagnostic": {
+            "id": 942182592,
+            "wave": 4,
+            "lane": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.013333333333321828,
+            "u": 11.896333333333393,
+            "phase": "exit",
+            "x": 128.90899263977747,
+            "y": 325.831471034025,
+            "preBiasY": 277.831471034025,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.3,
+              "h": 5.04
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-31-target-942182592-frame-669.png",
+            "sha256": "c736e5ecfb538df25760711bdbcfb2d97ee888ae9be0b7577774866ef35b8881"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.367,
+            "type": "challenge_enemy_contact",
+            "stage": 31,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 151.77,
+            "enemyY": 342.87,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 709114509,
+            "enemyType": "boss",
+            "enemyFamily": "galboss",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 681,
+          "simT": 11.367,
+          "diagnostic": {
+            "id": 709114509,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 12.015000000000063,
+            "phase": "exit",
+            "x": 151.77350818614752,
+            "y": 342.86758024996516,
+            "preBiasY": 294.86758024996516,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-31-target-709114509-frame-681.png",
+            "sha256": "5e9306f98dc08bc58cb34298f3ffd8c799dcbb4d085ef622a58f46cfd05b781a"
+          },
+          "disposition": "pending-visual-review"
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "seed": 9135,
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 35,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386111,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "final": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 35,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 11.733,
+        "stageClock": 11.733,
+        "rngState": 496386111,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 87.267,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "completed": true,
+      "contacts": [
+        {
+          "event": {
+            "t": 8.083,
+            "type": "challenge_enemy_contact",
+            "stage": 35,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 150.36,
+            "enemyY": 331.52,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 287155051,
+            "enemyType": "bee",
+            "enemyFamily": "stingray",
+            "column": 5,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 484,
+          "simT": 8.083,
+          "diagnostic": {
+            "id": 287155051,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.0033333333333346975,
+            "u": 12.351600000000218,
+            "phase": "exit",
+            "x": 150.35649545660738,
+            "y": 331.51994332483355,
+            "preBiasY": 283.51994332483355,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1.08,
+              "pulseY": 0.78,
+              "entryX": 1.06,
+              "entryY": 0.82,
+              "weave": 1.28,
+              "steer": 1.06,
+              "jitter": 1.16,
+              "diveVy": 1.04,
+              "diveAccel": 1.03,
+              "challengeSweep": 1.2,
+              "challengeDrop": 1.05
+            },
+            "enemyHitbox": {
+              "w": 5.76,
+              "h": 4.68
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-35-target-287155051-frame-484.png",
+            "sha256": "dddf0762bf8a91950ee4dd73fe8284f900e2888deffd8ef16582115d0aaab142"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 8.667,
+            "type": "challenge_enemy_contact",
+            "stage": 35,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 144.94,
+            "enemyY": 324.35,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 571262010,
+            "enemyType": "boss",
+            "enemyFamily": "mosquito",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 519,
+          "simT": 8.667,
+          "diagnostic": {
+            "id": 571262010,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.535366666666828,
+            "phase": "exit",
+            "x": 144.93892245969704,
+            "y": 324.349933038823,
+            "preBiasY": 276.349933038823,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-35-target-571262010-frame-519.png",
+            "sha256": "4778d59ae1345d6425ec0e6b5c633ac30472de202928c6fa0c2e6a75090b0d2d"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.167,
+            "type": "challenge_enemy_contact",
+            "stage": 35,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 149.3,
+            "enemyY": 326.84,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 305218756,
+            "enemyType": "rogue",
+            "enemyFamily": "galboss",
+            "column": 5,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 669,
+          "simT": 11.167,
+          "diagnostic": {
+            "id": 305218756,
+            "wave": 4,
+            "lane": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.013333333333321828,
+            "u": 11.896333333333393,
+            "phase": "exit",
+            "x": 149.29843090288756,
+            "y": 326.8368810688394,
+            "preBiasY": 278.8368810688394,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.3,
+              "h": 5.04
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-35-target-305218756-frame-669.png",
+            "sha256": "9c3778ff82db5756a0cdd1bce948716c061aca1b40cecf4044f962037622fccd"
+          },
+          "disposition": "pending-visual-review"
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "seed": 9139,
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 39,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386115,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "final": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 39,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 11.717,
+        "stageClock": 11.717,
+        "rngState": 496386115,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 87.283,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "completed": true,
+      "contacts": [
+        {
+          "event": {
+            "t": 8.133,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 127.79,
+            "enemyY": 341.65,
+            "enemyLane": 4,
+            "enemyForm": true,
+            "id": 247206774,
+            "enemyType": "bee",
+            "enemyFamily": "stingray",
+            "column": 5,
+            "row": 0,
+            "lane": 4,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 487,
+          "simT": 8.133,
+          "diagnostic": {
+            "id": 247206774,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.0033333333333346975,
+            "u": 12.439200000000222,
+            "phase": "exit",
+            "x": 127.79187868753723,
+            "y": 341.648423830651,
+            "preBiasY": 293.648423830651,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1.08,
+              "pulseY": 0.78,
+              "entryX": 1.06,
+              "entryY": 0.82,
+              "weave": 1.28,
+              "steer": 1.06,
+              "jitter": 1.16,
+              "diveVy": 1.04,
+              "diveAccel": 1.03,
+              "challengeSweep": 1.2,
+              "challengeDrop": 1.05
+            },
+            "enemyHitbox": {
+              "w": 5.76,
+              "h": 4.68
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-247206774-frame-487.png",
+            "sha256": "dac4ef709490c7c57f12c2b82acc3fc339067934f84974ac1f939b6dfc3b0e37"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 8.667,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 144.94,
+            "enemyY": 324.35,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 401784013,
+            "enemyType": "boss",
+            "enemyFamily": "mosquito",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 519,
+          "simT": 8.667,
+          "diagnostic": {
+            "id": 401784013,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.535366666666828,
+            "phase": "exit",
+            "x": 144.93892245969704,
+            "y": 324.349933038823,
+            "preBiasY": 276.349933038823,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-401784013-frame-519.png",
+            "sha256": "7161387619e06283a463b4fa19e21d874922d738090a9f8b9c6c855db06be938"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 9.467,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 151.93,
+            "enemyY": 327.69,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 973487328,
+            "enemyType": "rogue",
+            "enemyFamily": "stingray",
+            "column": 4,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 567,
+          "simT": 9.467,
+          "diagnostic": {
+            "id": 973487328,
+            "wave": 2,
+            "lane": 4,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.0033333333333291464,
+            "u": 11.979366666666692,
+            "phase": "exit",
+            "x": 151.9262159904767,
+            "y": 327.69117361929233,
+            "preBiasY": 279.69117361929233,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1.08,
+              "pulseY": 0.78,
+              "entryX": 1.06,
+              "entryY": 0.82,
+              "weave": 1.28,
+              "steer": 1.06,
+              "jitter": 1.16,
+              "diveVy": 1.04,
+              "diveAccel": 1.03,
+              "challengeSweep": 1.2,
+              "challengeDrop": 1.05
+            },
+            "enemyHitbox": {
+              "w": 6.3,
+              "h": 5.04
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-973487328-frame-567.png",
+            "sha256": "35a6adce64d6d2b06e55f88b501d4c51ecd01867e6ad4c4c87e229f907c892b9"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 9.567,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 129.9,
+            "enemyY": 330.56,
+            "enemyLane": 4,
+            "enemyForm": true,
+            "id": 371428430,
+            "enemyType": "but",
+            "enemyFamily": "stingray",
+            "column": 6,
+            "row": 0,
+            "lane": 4,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 573,
+          "simT": 9.567,
+          "diagnostic": {
+            "id": 371428430,
+            "wave": 2,
+            "lane": 6,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.013333333333328489,
+            "u": 11.891066666666692,
+            "phase": "exit",
+            "x": 129.89544007741677,
+            "y": 330.5555641994294,
+            "preBiasY": 282.5555641994294,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1.08,
+              "pulseY": 0.78,
+              "entryX": 1.06,
+              "entryY": 0.82,
+              "weave": 1.28,
+              "steer": 1.06,
+              "jitter": 1.16,
+              "diveVy": 1.04,
+              "diveAccel": 1.03,
+              "challengeSweep": 1.2,
+              "challengeDrop": 1.05
+            },
+            "enemyHitbox": {
+              "w": 6.12,
+              "h": 4.859999999999999
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-371428430-frame-573.png",
+            "sha256": "08b47df14588ea334fc4ea2499c0bdacfda74c2a20110c9c0dfc1f074649baf5"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.15,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 151.01,
+            "enemyY": 335.63,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 119292102,
+            "enemyType": "bee",
+            "enemyFamily": "galboss",
+            "column": 4,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 668,
+          "simT": 11.15,
+          "diagnostic": {
+            "id": 119292102,
+            "wave": 4,
+            "lane": 4,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.016666666666655682,
+            "u": 11.985333333333395,
+            "phase": "exit",
+            "x": 151.01432849603611,
+            "y": 335.632636648939,
+            "preBiasY": 287.632636648939,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 5.76,
+              "h": 4.68
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-119292102-frame-668.png",
+            "sha256": "91657907c430775e685a65152b0fec7d387712d0dafaf591a222d1c80c9867b3"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.15,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 127.33,
+            "enemyY": 330.31,
+            "enemyLane": 4,
+            "enemyForm": true,
+            "id": 925598473,
+            "enemyType": "rogue",
+            "enemyFamily": "galboss",
+            "column": 5,
+            "row": 0,
+            "lane": 4,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 668,
+          "simT": 11.15,
+          "diagnostic": {
+            "id": 925598473,
+            "wave": 4,
+            "lane": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.013333333333321828,
+            "u": 11.866666666666726,
+            "phase": "exit",
+            "x": 127.32750268672675,
+            "y": 330.31043757670517,
+            "preBiasY": 282.31043757670517,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.3,
+              "h": 5.04
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-925598473-frame-668.png",
+            "sha256": "91657907c430775e685a65152b0fec7d387712d0dafaf591a222d1c80c9867b3"
+          },
+          "disposition": "pending-visual-review"
+        },
+        {
+          "event": {
+            "t": 11.183,
+            "type": "challenge_enemy_contact",
+            "stage": 39,
+            "challenge": 1,
+            "nonLethal": 1,
+            "playerX": 140,
+            "playerY": 335,
+            "playerLane": 5,
+            "enemyX": 152.69,
+            "enemyY": 323.91,
+            "enemyLane": 5,
+            "enemyForm": true,
+            "id": 10852263,
+            "enemyType": "boss",
+            "enemyFamily": "galboss",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "dive": 9,
+            "carry": false
+          },
+          "frame": 670,
+          "simT": 11.183,
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.688666666666721,
+            "phase": "exit",
+            "x": 152.6865315015446,
+            "y": 323.909939172269,
+            "preBiasY": 275.909939172269,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "capture": {
+            "file": "stage-39-target-10852263-frame-670.png",
+            "sha256": "ad280294a79231b06fc546efb6c73226ed061ea6012ca0ca8ab452ef7a2ca2b9"
+          },
+          "disposition": "pending-visual-review"
+        }
+      ]
+    }
+  ]
+}

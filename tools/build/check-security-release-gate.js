@@ -142,12 +142,14 @@ function publicAccountLaneHardDisabled(texts){
 }
 
 function publicSecurityMeta(texts){
-  const csp = includesAny(texts, ['http-equiv="Content-Security-Policy"']);
-  const referrer = includesAny(texts, ['name="referrer" content="strict-origin-when-cross-origin"']);
+  const pages = texts.filter(entry => !entry.rel.includes('/') && /\.html$/i.test(entry.rel));
+  const missingCspFiles = pages.filter(entry => !entry.text.includes('http-equiv="Content-Security-Policy"')).map(entry => entry.rel);
+  const missingReferrerFiles = pages.filter(entry => !entry.text.includes('name="referrer" content="strict-origin-when-cross-origin"')).map(entry => entry.rel);
   return {
-    observed: csp.observed && referrer.observed,
-    cspFile: csp.file || '',
-    referrerFile: referrer.file || ''
+    observed: pages.length > 0 && !missingCspFiles.length && !missingReferrerFiles.length,
+    checkedHtmlFiles: pages.map(entry => entry.rel),
+    missingCspFiles,
+    missingReferrerFiles
   };
 }
 
@@ -202,8 +204,10 @@ function observeIssues(dir){
     observed: !securityMeta.observed,
     evidence: securityMeta.observed
       ? ''
-      : 'Public artifact is missing the generated meta CSP/referrer policy; manual host-header review also remains required for GitHub Pages.',
-    details: { manualReviewRequired: true, metaPolicyPresent: securityMeta.observed, cspFile: securityMeta.cspFile, referrerFile: securityMeta.referrerFile }
+      : `Public top-level HTML is missing generated meta CSP/referrer policy: ${[...new Set([...securityMeta.missingCspFiles, ...securityMeta.missingReferrerFiles])].join(', ') || '(no HTML pages)'}. Manual host-header review also remains required for GitHub Pages.`,
+    details: { manualReviewRequired: true, metaPolicyPresent: securityMeta.observed,
+      checkedHtmlFiles: securityMeta.checkedHtmlFiles, missingCspFiles: securityMeta.missingCspFiles,
+      missingReferrerFiles: securityMeta.missingReferrerFiles }
   });
 
   const testPilotText = publicTextEmails(texts);

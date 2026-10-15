@@ -48,7 +48,12 @@ Parallel-work rules:
 - keep beta and production gated by `release-authority.json`, not by informal
   machine habit
 
-## Release Family Schedule
+## Historical Release Family Schedule
+
+October 4: this June table is not a current deployment schedule. Version and
+milestone reconciliation is pending in PROJECT_DIRECTION_REVIEW.md; current
+execution is ACTIVE_WORK.md and OCTOBER_GO_FORWARD_PLAN.md. Preserve existing
+release authorization and candidate gates; do not infer approval from this table.
 
 | Family | Working Title | Primary Goal | Required Proof Before Beta / Production |
 | --- | --- | --- | --- |

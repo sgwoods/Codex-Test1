@@ -1,0 +1,367 @@
+{
+  "baselineSource": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "artifactHash": "d86e64702c5174e791409385c81901817af4e750d56a68e7a39c3eb311ff24b5",
+  "disposition": "Do not replace approved controller:37/40 unchanged. Retain candidate as meaningful diagnostic only; restore approved tool/tests.",
+  "generalChange": "Only gate Space by12px predicted interception-column alignment; original greedy ranking/movement and velocity/arrival estimator unchanged.",
+  "baseline": {
+    "toolHash": "bc520d6708f68b049ed424971c384dce042b91e0ab108e7c9f1fc99c24c3dd6b",
+    "rawPath": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-47-25-469Z/report.json",
+    "rawHash": "a8581180e39885c02c22d55a2dc8b3b2a5f460b2c71cd9b2e969582dc8ab0e6f",
+    "audit": {
+      "errors": [],
+      "clear": {
+        "t": 19.533,
+        "type": "challenge_clear",
+        "stage": 31,
+        "hits": 37,
+        "total": 40,
+        "upperBandY": 144,
+        "upperBandTime": 70.017,
+        "avgUpperBandTime": 1.75
+      },
+      "kills": 37,
+      "uniqueKills": 37,
+      "misses": 3,
+      "shots": 80,
+      "shipLossEvents": [],
+      "lives": 3,
+      "maxMovementPerTick": 7.329999999999998,
+      "maxPlayerBullets": 2,
+      "minShotGap": 0.09999999999999787,
+      "perfect": false
+    }
+  },
+  "candidate": {
+    "toolHash": "465bc592426b7798f5d3fb1132132bd1fc9fd902c6823d1f5b64991ad5777dfb",
+    "toolPath": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/candidate-tool.js",
+    "testHash": "0885e558055f17857c2be0faa4f30d9f7131e60deb0b1c50a64e91c0ca9f647b",
+    "rawPath": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-57-08-887Z/report.json",
+    "rawHash": "d7f3e4183f5b6d48348ca6fbc1294cbe5b21b6804f5c6eef03c31cf34e387f20",
+    "audit": {
+      "errors": [],
+      "clear": {
+        "t": 18.217,
+        "type": "challenge_clear",
+        "stage": 31,
+        "hits": 37,
+        "total": 40,
+        "upperBandY": 144,
+        "upperBandTime": 81.083,
+        "avgUpperBandTime": 2.027
+      },
+      "kills": 37,
+      "uniqueKills": 37,
+      "misses": 3,
+      "shots": 53,
+      "shipLossEvents": [],
+      "lives": 3,
+      "maxMovementPerTick": 7.330000000000005,
+      "maxPlayerBullets": 2,
+      "minShotGap": 0.09999999999999787,
+      "perfect": false
+    },
+    "replayAudit": {
+      "errors": [],
+      "clear": {
+        "t": 18.217,
+        "type": "challenge_clear",
+        "stage": 31,
+        "hits": 37,
+        "total": 40,
+        "upperBandY": 144,
+        "upperBandTime": 81.083,
+        "avgUpperBandTime": 2.027
+      },
+      "kills": 37,
+      "uniqueKills": 37,
+      "misses": 3,
+      "shots": 53,
+      "shipLossEvents": [],
+      "lives": 3,
+      "maxMovementPerTick": 7.330000000000005,
+      "maxPlayerBullets": 2,
+      "minShotGap": 0.09999999999999787,
+      "perfect": false
+    },
+    "exactRecordedProjectionReplay": true,
+    "orderedEventsExact": true
+  },
+  "recoveredIds": [
+    353909248
+  ],
+  "lostIds": [
+    72239387
+  ],
+  "missingIds": [
+    218173522,
+    72239387,
+    352310587
+  ],
+  "diagnosis": [
+    {
+      "id": 218173522,
+      "baselineCenterInViewport": [
+        1.783,
+        3.6
+      ],
+      "baselineFirstRemoval": {
+        "frame": 229,
+        "t": 3.833,
+        "id": 218173522,
+        "x": 336.9568002080676,
+        "y": 97.66187183055287,
+        "hp": 0,
+        "miss": 1,
+        "player": {
+          "x": 208.91926761953007,
+          "y": 335,
+          "vx": 353.69475778071876
+        },
+        "cd": 0.04500000000000001,
+        "bullets": [
+          {
+            "x": 249.00219221539163,
+            "y": 93,
+            "v": 560
+          },
+          {
+            "x": 192.40324655221357,
+            "y": 279.66666666666674,
+            "v": 560
+          }
+        ]
+      },
+      "candidateKill": null,
+      "candidateSelectedTicks": 26,
+      "candidateFireEnabledTicks": 0,
+      "candidateSelectedWithTwoBulletSlots": 0,
+      "diagnosis": "Actual unscored boundary expiry after prior visible opportunity. Prediction/occupied-ammo evidence supports controller limitations; occlusion or physical unreachability not established."
+    },
+    {
+      "id": 352310587,
+      "baselineCenterInViewport": [
+        8.367,
+        11.133
+      ],
+      "baselineFirstRemoval": {
+        "frame": 682,
+        "t": 11.383,
+        "id": 352310587,
+        "x": 336.7669744696225,
+        "y": 142.49245208488813,
+        "hp": 0,
+        "miss": 1,
+        "player": {
+          "x": 104.9255170039571,
+          "y": 335,
+          "vx": -438.4277097874095
+        },
+        "cd": 0.04500000000000001,
+        "bullets": [
+          {
+            "x": 214.4806091576068,
+            "y": -19,
+            "v": 560
+          },
+          {
+            "x": 126.82561106336541,
+            "y": 279.66666666666674,
+            "v": 560
+          }
+        ]
+      },
+      "candidateKill": null,
+      "candidateSelectedTicks": 11,
+      "candidateFireEnabledTicks": 0,
+      "candidateSelectedWithTwoBulletSlots": 0,
+      "diagnosis": "Actual unscored boundary expiry after prior visible opportunity. Prediction/occupied-ammo evidence supports controller limitations; occlusion or physical unreachability not established."
+    },
+    {
+      "id": 353909248,
+      "baselineCenterInViewport": [
+        8.683,
+        10.2
+      ],
+      "baselineFirstRemoval": {
+        "frame": 625,
+        "t": 10.433,
+        "id": 353909248,
+        "x": 335.0847584441347,
+        "y": 97.55741042356348,
+        "hp": 0,
+        "miss": 1,
+        "player": {
+          "x": 141.6017026725898,
+          "y": 335,
+          "vx": -430.63388312988866
+        },
+        "cd": 0,
+        "bullets": [
+          {
+            "x": 229.19890831119804,
+            "y": 102.33333333333333,
+            "v": 560
+          },
+          {
+            "x": 237.37602278280468,
+            "y": 158.33333333333334,
+            "v": 560
+          }
+        ]
+      },
+      "candidateKill": {
+        "t": 9.95,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 353909248,
+        "enemyType": "bee",
+        "enemyFamily": "stingray",
+        "column": 7,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      "candidateSelectedTicks": 4,
+      "candidateFireEnabledTicks": 1,
+      "candidateSelectedWithTwoBulletSlots": 3,
+      "diagnosis": "Actual unscored boundary expiry after prior visible opportunity. Prediction/occupied-ammo evidence supports controller limitations; occlusion or physical unreachability not established."
+    }
+  ],
+  "examples": [
+    {
+      "id": 218173522,
+      "shot": {
+        "t": 3.15,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 155.97,
+        "y": 317,
+        "shotXs": [
+          155.97
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      "arrival": 3.55,
+      "enemy": {
+        "id": 218173522,
+        "x": 260.08097717569774,
+        "y": 84.4855241580866,
+        "hp": 1,
+        "miss": 0
+      },
+      "player": {
+        "x": 221.38391057948948,
+        "y": 335,
+        "vx": -352.69903926705075
+      },
+      "bullets": [
+        {
+          "x": 155.97284058149344,
+          "y": 83.66666666666667,
+          "v": 560
+        },
+        {
+          "x": 249.00219221539163,
+          "y": 251.66666666666677,
+          "v": 560
+        }
+      ],
+      "cd": 0,
+      "horizontalArrivalError": 104.11097717569774,
+      "verticalArrivalError": 0.8188574914199336
+    },
+    {
+      "id": 352310587,
+      "shot": {
+        "t": 10.167,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 237.38,
+        "y": 317,
+        "shotXs": [
+          237.38
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      "arrival": 10.567,
+      "enemy": {
+        "id": 352310587,
+        "x": 176.52072968248305,
+        "y": 82.98458358457736,
+        "hp": 1,
+        "miss": 0
+      },
+      "player": {
+        "x": 128.84747715474,
+        "y": 335,
+        "vx": 172.74288795084715
+      },
+      "bullets": [
+        {
+          "x": 229.19890831119804,
+          "y": 27.66666666666667,
+          "v": 560
+        },
+        {
+          "x": 237.37602278280468,
+          "y": 83.66666666666667,
+          "v": 560
+        }
+      ],
+      "cd": 0,
+      "horizontalArrivalError": -60.859270317516945,
+      "verticalArrivalError": -0.6820830820893065
+    },
+    {
+      "id": 353909248,
+      "arrival": 10,
+      "enemy": {
+        "id": 353909248,
+        "x": 200.15643262725925,
+        "y": 96.99573070211872,
+        "hp": 1,
+        "miss": 0
+      },
+      "player": {
+        "x": 200.30683437490248,
+        "y": 335,
+        "vx": 428.7891413354223
+      },
+      "bullets": [
+        {
+          "x": 94.35852242688208,
+          "y": -9.666666666666666,
+          "v": 560
+        },
+        {
+          "x": 124.07350466077008,
+          "y": 65.00000000000001,
+          "v": 560
+        }
+      ],
+      "cd": 0,
+      "shot": null,
+      "horizontalArrivalError": null,
+      "verticalArrivalError": null
+    }
+  ],
+  "limits": [
+    "One candidate, one stage/seed and fresh replay; no optional control seed or optimization sweep.",
+    "12px alignment threshold is experimental diagnostic policy, not reference-derived.",
+    "Immediate single-frame velocity with existing clamp remains a limited curved-path predictor.",
+    "No occlusion attribution, physical impossibility, all-target perfect route or human-play proof.",
+    "Recorded projection: snapshot excluding effect count, raw player/enemy poses and hp/miss, player bullets, stats, challenge counters, RNG, elapsed clock; ordered shot/kill/clear/loss events. Not complete runtime equivalence; enemy bullets, AI timers and audio are not compared. Raw effect counts retained."
+  ]
+}

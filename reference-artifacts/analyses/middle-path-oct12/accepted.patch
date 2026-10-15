@@ -1,0 +1,42 @@
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -692,6 +692,11 @@
+    e.x=previousGreenExitPose.x+80*elapsed+(previousGreenExitPose.dx-80)*ease;
+    e.y=previousGreenExitPose.y-400*elapsed+(previousGreenExitPose.dy+400)*ease;
+   }
++ }
++ // Provisional sprite-row clearance, preserving lateral motion and path time.
++ if(genericChallengePath&&S.stage>=31&&u>=entryDuration
++  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')&&e.y>300){
++  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+  }
+  if(e.y<=enemyChallengeUpperBandY(e)){
+   e.ub+=dt;
+@@ -703,7 +708,26 @@
+  // Entry curves may begin outside the exit-removal boundary.
+  const stage31GreenUpperExit=S.stage===31&&pathFamily==='green-ladder-split'
+   &&u>=9.7&&!!previousGreenExitPose&&Math.round(e.y)+enemyDims(e).h<0;
+- if(stage31GreenUpperExit||e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
++ let laterEnvelopeSideExit=false;
++ if(genericChallengePath&&S.stage>=35&&u>=9.7&&e.dive===9&&!e.hitT&&!e.carry
++  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')){
++  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
++  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
++  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
++  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
++  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
++  // With saturated fields and no oscillation, these generic exits cannot return.
++  const direction=pathFamily==='green-ladder-split'
++   ? sweep*(72*fm.challengeSweep+(slot%2?-38:38))*arcAmp
++   : (wave%2?-1:1)*186*fm.challengeSweep*arcAmp;
++  if(!curveX&&!laneBias&&spacingSettled&&Number.isFinite(direction)&&direction!==0){
++   const extent=enemyDims(e).w/2+1;
++   laterEnvelopeSideExit=direction<0
++    ? Math.round(e.x)+extent<0
++    : Math.round(e.x)-extent>PLAY_W;
++  }
++ }
++ if(stage31GreenUpperExit||laterEnvelopeSideExit||e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
+   e.hp=0;
+   e.miss=1;
+  }

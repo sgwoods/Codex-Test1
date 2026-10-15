@@ -1,0 +1,113 @@
+# Dev Readiness And Path To Beta
+
+Date: October 14, 2026, America/New_York. UTC-generated directories use October 15.
+Lead baseline: f8c1b48d79c70f21cc91c1ad108ae8790cc0360a.
+Frozen gameplay source: 5d76dc73c8bbc4f43651fc1b96afc50b84eaca18.
+Verdict: dev-readiness-blocked. No push, merge, publish or gameplay tuning.
+
+## Gate Result
+
+npm run release:preflight:dev exited 1 after generating stale release-conformance/
+documentation and code-review outputs. The final clean-tree guard blocked it.
+The refreshed automated review reports 1740 changed files against its origin/main
+base, zero P0/P1 and two P2 prompts: platform/game boundaries and release tooling.
+These prompts are not independently reproduced defects or a full release pass.
+No repeated preflight attempt or freshness-gate bypass was made.
+
+Generated motion grammar/primitives and setpiece contract edits contain generation
+date/commit metadata only. Economics/dashboard links now point at the refreshed
+packets. Gameplay source diff is empty. This refresh is documentation/evidence
+maintenance, not new measurement of every gameplay conformance score.
+Generated outputs are preserved with their original f8c1b48d/dirty provenance.
+Raw command log: private-artifacts/dev-readiness-oct14/preflight.log.
+
+The MacBook-Pro matches configured release authority. Existing publish policy
+requires clean main equal to fetched origin/main. Current work remains on the
+local feature branch; do not bypass that policy or infer main integration.
+
+## Delivery Audit
+
+gh repo view confirms sgwoods/Codex-Test1 is public. Lead screened 475 changed
+evidence files (252,802,095 bytes) from cf0e7a66 through source checkpoint 5d76dc73.
+Common private-key, credential-prefix and JWT-like patterns did not match in the
+screened text extensions. Nine JSON files contain configured test-pilot emails
+under build metadata platform.auth.nonProductionTestPilotEmails. Values are not
+reproduced here. These are identifiers, not passwords, but they need a public
+delivery disposition. Do not characterize the evidence as free of personal data.
+
+Independent read-only reviewer Hypatia examined 144 changed checkpoint text files
+and publishing selection. No blocking credential or automatic raw-report website
+distribution found in that scope. Reviewer identified 37 changed text files with
+local filesystem paths, for example beta-package-security-oct12/hashscan.json:2.
+Paths expose usernames/storage layout. No exhaustive image, secret or media-rights
+certification is claimed. Reviewer's wider evidence inventory includes 478 files,
+253,154,960 bytes; the lead's narrower count excludes the follow-up freeze reports.
+
+Three retained raw contact reports account for 205,787,330 bytes:
+
+| Historical run suffix | Original bytes | Gzip bytes, level 6 | Original SHA256 |
+| --- | ---: | ---: | --- |
+| 2026-10-12T16-35-15-815Z-cf0e7a66 | 69054010 | 3715123 | 43ed95a669ffa34a015ebbb470b1ba95e3e2d581cbf76695203f555c2f293b99 |
+| 2026-10-12T18-12-46-744Z-cf0e7a66 | 68749132 | 3701254 | 012028510ef91dca663d568b57bb5aaa43a5a4742c3abbb4b341162dbb260286 |
+| 2026-10-12T18-32-28-186Z-cf0e7a66 | 67984188 | 3667399 | acb2700a28b1f233e31e2fb41a3cb726e9a9d374deaffa53d0fca0284c3a2c53 |
+
+Paths: reference-artifacts/analyses/late-challenge-contacts/<run suffix>/report.json.
+Compression was measured in memory; original files and Git history are unchanged.
+Compression reduces these reports to about 11.1 MB but a later compression or
+deletion commit cannot remove their original blobs from pushed history.
+
+lane-files.js selects named documents and dist assets, excluding reference audio.
+Current dev selection contains 597 paths, zero analysis/private-artifact paths and
+zero reference-audio paths. This is a manifest-boundary check, not a complete
+packaged-byte security audit. publish-lane.js prunes source/reference trees from
+the public artifact repository. All dist assets remain eligible; do not copy raw
+evidence into assets. Website packaging and source repository privacy differ.
+
+Recommendation: keep this local preservation branch unchanged. Prepare a separate
+reviewed delivery branch carrying the accepted source and sanitized compact
+evidence, with original reports retained privately and SHA256/provenance/retrieval
+manifests. This avoids rewriting the preserved branch. Do not publicly push its
+existing history until the human explicitly accepts the metadata/storage costs
+or approves the separate sanitized-delivery path. No force push is proposed.
+
+## Inspection Identity
+
+Preflight rebuilt development index as 1.4.1.1+build.1228.sha.f8c1b48d.dirty,
+SHA256 4c2a6c5bd034acc159a342025acbd92a3d1a691a7500159202d8a7bbf29f426a.
+Localhost serves this preflight build, not frozen build 1227. Gameplay source
+remains unchanged. The exact accepted clean 1227 index 6074264c...45d04b is
+preserved under private-artifacts/candidate-freeze-oct14/build. Do not relabel it
+as current HEAD or claim fresh acceptance for the regenerated bytes.
+
+## Ordered Path To Beta
+
+1. Resolve public-source delivery privacy/storage. Approve a sanitized delivery
+   branch with durable original evidence, or explicitly accept existing exposure.
+   Outcome: review evidence can travel without unintended personal-data release.
+2. Prepare and review that delivery range; inspect/commit generated freshness
+   evidence. Integrate accepted source into current clean main under normal Git
+   coordination, without discarding either Mac's work. Outcome: one release source.
+3. Rerun dev preflight; repair documented blockers, not gate bypasses. Confirm
+   review, security, documentation, source/main/remote freshness and machine
+   authority. Stop recursive artifact refresh after a bounded retry and classify
+   sequencing debt if it repeats. Outcome: reproducible release readiness.
+4. Push the approved source range and publish DEV ONLY through existing gates;
+   verify hosted version/SHA/lane and public-safe browser smoke. Outcome: local
+   gameplay improvements survive real hosting. Beta/production remain unchanged.
+5. Assign the beta candidate version and package the reviewed source using the
+   existing promotion process. Freeze the exact package inventory and hashes.
+   Outcome: testers receive the reviewed build, not a stale or dirty rehearsal.
+6. Run exact-package security/public-runtime and scoped gameplay regressions,
+   including contacts, full entry, retained shots, cadence, theme/audio assets and
+   channel restrictions. Outcome: safe packaging preserves fair readable play.
+7. Run bounded sustained/repeated play plus live sign-in/reset/settings and audible
+   audio checks. Automate browser flows where possible; report any account or
+   audibility limitation. Outcome: dependable sessions, settings and sound.
+8. Review remaining issues, candidate identity and evidence; obtain explicit BETA
+   publication approval. Publish/verify beta through its gates only after approval.
+   Outcome: a traceable candidate for broader testing. Production is a later choice.
+
+Public delivery disposition is the next decision. No new gameplay improvement was
+made during this attempt. The prior local 34-blue/10-clearance/37-33-37-hit passes
+remain tied to their frozen artifact. Beta is not ready. Earlier effort estimates
+remain conditional; privacy/delivery reconciliation adds unestimated work.

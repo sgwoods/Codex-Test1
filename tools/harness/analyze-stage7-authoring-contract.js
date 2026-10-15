@@ -149,6 +149,10 @@ function main(){
     stage,
     challengeNumber,
     humanName: `Challenging Stage ${challengeNumber}`,
+    referenceEvidenceContract: target.evidenceContract || null,
+    scoreInterpretation: 'heuristic-diagnostic-proposed-cluster-mapping',
+    acceptedFullPathConformance: false,
+    acceptedGroupMappingConformance: false,
     sourceArtifacts: {
       sweep: 'reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json',
       objectTracks: 'reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json',

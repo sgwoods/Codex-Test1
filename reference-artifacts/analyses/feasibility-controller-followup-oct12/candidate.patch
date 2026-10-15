@@ -1,0 +1,75 @@
+--- /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/approved-tool.js	2026-10-12 12:56:41
++++ /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/candidate-tool.js	2026-10-12 12:58:44
+@@ -15,6 +15,9 @@
+  else assert(!(stage>=3&&(stage-3)%4===0),'Normal launch must use a non-challenge display stage');
+  return {stage,seed,seconds,mode};
+ }
++function alignedFire(error,hasTarget){
++ return !!hasTarget&&Number.isFinite(error)&&Math.abs(error)<=12;
++}
+ async function run(root,cfg,replay){
+  return withHarnessPage({root,skipStart:true},async({page})=>{
+   // Freezes performance.now/keyHeldMs as well as Date; RAF never advances gameplay.
+@@ -35,11 +38,12 @@
+    const before=await page.evaluate(()=>{
+     const s=currentAuroraRuntimeState();
+     return {snapshot:window.__galagaHarness__.snapshot(),speed:s.p.s,
+-     enemies:s.e.filter(e=>e.hp>0&&e.spawn<=0).map(e=>({id:e.id,x:e.x,y:e.y,hp:e.hp})),
++     enemies:s.e.filter(e=>e.hp>0&&e.spawn<=0).map(e=>({id:e.id,x:e.x,y:e.y,hp:e.hp,pathFamily:e.pathFamily,
++      u:e.tm+(e.phaseOffsetS||0)+(e.lanePhaseOffsetS||0)})),
+      bullets:s.pb.map(b=>({x:b.x,y:b.y,v:b.v})),cd:s.p.cd};
+    });
+-   let keys;
+-   if(replay)keys=replay[frame].keys;
++   let keys,decision;
++   if(replay){keys=replay[frame].keys;decision=replay[frame].decision;}
+    else{
+     const p=before.snapshot.player;
+     const candidates=before.enemies.map(e=>{
+@@ -50,7 +54,10 @@
+     }).filter(e=>e.aim>=13&&e.aim<=267&&e.y>-32&&e.y<p.y+4).sort((a,b)=>a.cost-b.cost||a.id-b.id);
+     const target=candidates[0];targetId=target?.id??null;
+     const error=target?target.aim-p.x:0,axis=Math.abs(error)>6?Math.sign(error):0;
+-    keys=['Space',...(axis<0?['ArrowLeft']:axis>0?['ArrowRight']:[])];
++    const fire=alignedFire(error,!!target);
++    keys=[...(fire?['Space']:[]),...(axis<0?['ArrowLeft']:axis>0?['ArrowRight']:[])];
++    decision={targetId,aim:target?.aim??null,error:target?error:null,fire,axis,
++     playerBullets:before.bullets.length,cd:before.cd,candidates:candidates.map(e=>({id:e.id,aim:e.aim,cost:e.cost,u:e.u,pathFamily:e.pathFamily}))};
+    }
+    for(const e of before.enemies)previous.set(e.id,e);
+    const released=held.filter(k=>!keys.includes(k)),pressed=keys.filter(k=>!held.includes(k));
+@@ -58,7 +65,7 @@
+     for(const code of released)window.dispatchEvent(new KeyboardEvent('keyup',{code,key:code==='Space'?' ':code,bubbles:true}));
+     for(const code of pressed)window.dispatchEvent(new KeyboardEvent('keydown',{code,key:code==='Space'?' ':code,bubbles:true}));
+    },{released,pressed});held=[...keys];
+-   trace.push({frame,keys:[...keys]});
++   trace.push({frame,keys:[...keys],decision});
+    await page.clock.runFor((frame%3===2)?16:17);
+    const after=await page.evaluate(()=>{
+     const h=window.__galagaHarness__;h.advanceFor(1/60,{step:1/60,stopOnGameOver:false});
+@@ -130,6 +137,7 @@
+   exactReplay:exact,orderedEventsExact,effectCountDifferenceFrames:first.frames.filter((f,i)=>f.snapshot.counts.effects!==replay.frames[i].snapshot.counts.effects).length,
+   comparisonScope:'Recorded projection: snapshot excluding effect count, raw player/enemy poses and hp/miss, player bullets, stats, challenge counters, RNG, elapsed clock; ordered shot/kill/clear/loss events. Not complete runtime equivalence; enemy bullets, AI timers and audio are not compared. Raw effect counts retained.',
+   differences,firstAudit,replayAudit,first,replay,
++  controller:'Original greedy targeting/movement, aligned-fire gating at12px predicted-column error; no target means no fire. Decision telemetry is not replay control.',
+   limits:['Greedy target-leading controller with read-only omniscient current state, not human reaction or public flow.',
+    'Nonperfect outcomes are inconclusive, not impossibility. No all-level proof or canonical fidelity/audio acceptance.',
+    'Professional direct-control persona is deliberately not used as normal-input proof.']};
+@@ -138,4 +146,4 @@
+  assert.equal(firstAudit.errors.length,0);assert.equal(replayAudit.errors.length,0);assert(exact,'Input replay diverged; evidence saved, cannot claim reproducibility');
+ }
+ if(require.main===module)main().catch(e=>{console.error(e.stack||e);process.exitCode=1;});
+-module.exports={options,audit};
++module.exports={options,audit,alignedFire};
+--- /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/approved-tests.js	2026-10-12 12:56:41
++++ /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/candidate-tests.js	2026-10-12 12:58:44
+@@ -1,5 +1,8 @@
+ const assert=require('assert/strict');
+-const {options,audit}=require('./feasibility-pilot');
++const {options,audit,alignedFire}=require('./feasibility-pilot');
++assert.equal(alignedFire(0,false),false);
++for(const error of [-12,0,12])assert.equal(alignedFire(error,true),true);
++for(const error of [-12.001,12.001,Infinity,NaN])assert.equal(alignedFire(error,true),false);
+ assert.deepEqual(options([]),{stage:31,seed:9131,seconds:45,mode:'challenge'});
+ for(const args of [['--stage=32'],['--seed=0'],['--seconds=46'],['--mode=other'],['--mode=normal','--stage=31']])assert.throws(()=>options(args));
+ assert.equal(options(['--mode=normal','--stage=1']).stage,1);

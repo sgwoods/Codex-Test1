@@ -1,0 +1,4270 @@
+{
+  "commit": "5b4c7854e33bb195a343884094e16b2e82a1fc0e",
+  "method": "Normal challenge launch, 60Hz stationary human/no-fire. Every active target sampled throughout its runtime trajectory; no ship-band sampling filter.",
+  "limitations": [
+    "Same-frame bias subtraction is a diagnostic, not a simulated alternate trajectory.",
+    "Drawn pose union is an unrotated geometric estimate, not a pixel-overlap proof.",
+    "Crowding means centers within 16px on both axes, not reference-derived readability or a scoreable shooting window.",
+    "Zero-bias overlap remains same-frame subtraction, not a simulated candidate or accepted repair.",
+    "Single seed per stage; primary Challenge 8 tracks censor the lower field; no separate reference for Challenges 9/10."
+  ],
+  "results": [
+    {
+      "stage": 31,
+      "completed": true,
+      "contacts": 4,
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "activeSamples": 13566,
+      "fullEntry": 40,
+      "minimumContinuousFullSeconds": 0.6166666666666667,
+      "sameFrameZeroBiasOverlapIDs": [
+        372665405,
+        42471394
+      ],
+      "phaseJumps": [
+        {
+          "id": 929885849,
+          "family": "blue-purple-finale",
+          "distance": 103.00770116840779,
+          "from": {
+            "t": 2.75,
+            "x": 61.73,
+            "y": 54.18,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.767,
+            "x": 164.41,
+            "y": 45.97,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 929885849,
+          "family": "blue-purple-finale",
+          "distance": 80.28672679839426,
+          "from": {
+            "t": 6.5,
+            "x": 109.16,
+            "y": 161.42,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 151.07,
+            "y": 92.94,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 789939609,
+          "family": "blue-purple-finale",
+          "distance": 51.54191013146486,
+          "from": {
+            "t": 2.883,
+            "x": 28.65,
+            "y": 69.75,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.9,
+            "x": 79.63,
+            "y": 62.16,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 154781671,
+          "family": "blue-purple-finale",
+          "distance": 52.946663728699654,
+          "from": {
+            "t": 2.967,
+            "x": 36.05,
+            "y": 67.92,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.983,
+            "x": 88.41,
+            "y": 60.06,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 51406268,
+          "family": "blue-purple-finale",
+          "distance": 103.32390865622536,
+          "from": {
+            "t": 2.75,
+            "x": 164.31,
+            "y": 50.7,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.767,
+            "x": 267.3,
+            "y": 42.4,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 51406268,
+          "family": "blue-purple-finale",
+          "distance": 82.91686981549653,
+          "from": {
+            "t": 6.5,
+            "x": 212.36,
+            "y": 164.97,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 251.83,
+            "y": 92.05,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 809515661,
+          "family": "blue-purple-finale",
+          "distance": 43.01866571617487,
+          "from": {
+            "t": 2.817,
+            "x": 181.08,
+            "y": 54.71,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.833,
+            "x": 138.58,
+            "y": 48.05,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 809515661,
+          "family": "blue-purple-finale",
+          "distance": 106.40066400168752,
+          "from": {
+            "t": 6.567,
+            "x": 83.16,
+            "y": 174.82,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.583,
+            "x": 152.13,
+            "y": 93.8,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 218173522,
+          "family": "blue-purple-finale",
+          "distance": 75.47530258303044,
+          "from": {
+            "t": 2.883,
+            "x": 228.46,
+            "y": 43.77,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.9,
+            "x": 153.28,
+            "y": 37.1,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 925024101,
+          "family": "green-ladder-split",
+          "distance": 62.8684276883079,
+          "from": {
+            "t": 3.633,
+            "x": 58.92,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 3.65,
+            "x": 100.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 925024101,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": -20.97,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 12.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 362828100,
+          "family": "green-ladder-split",
+          "distance": 90.63462693694945,
+          "from": {
+            "t": 3.7,
+            "x": 88.28,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 161.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 362828100,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 95.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 35.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 775953348,
+          "family": "green-ladder-split",
+          "distance": 76.76171246135667,
+          "from": {
+            "t": 3.767,
+            "x": 27.12,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 68.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 775953348,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": -52.97,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": -19.92,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 261787956,
+          "family": "green-ladder-split",
+          "distance": 101.78360624383477,
+          "from": {
+            "t": 3.833,
+            "x": 56.48,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 129.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 261787956,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 63.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 3.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 387665891,
+          "family": "green-ladder-split",
+          "distance": 61.75410998468037,
+          "from": {
+            "t": 3.633,
+            "x": 156.63,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.65,
+            "x": 196.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 387665891,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": 75.03,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 108.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 783339713,
+          "family": "green-ladder-split",
+          "distance": 89.42020185618013,
+          "from": {
+            "t": 3.7,
+            "x": 217.79,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 289.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 783339713,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 223.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 163.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 551507219,
+          "family": "green-ladder-split",
+          "distance": 76.06559932058643,
+          "from": {
+            "t": 3.767,
+            "x": 188.43,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 228.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 551507219,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": 107.03,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": 140.08,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 372665405,
+          "family": "green-ladder-split",
+          "distance": 100.99802225786404,
+          "from": {
+            "t": 3.833,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 321.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 372665405,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 255.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 195.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 521982333,
+          "family": "blue-purple-finale",
+          "distance": 73.8820851086378,
+          "from": {
+            "t": 4.467,
+            "x": 91.24,
+            "y": 79.23,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.483,
+            "x": 17.64,
+            "y": 72.78,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 521982333,
+          "family": "blue-purple-finale",
+          "distance": 100.68902323490877,
+          "from": {
+            "t": 8.167,
+            "x": -40.33,
+            "y": 191.94,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.183,
+            "x": 29.8,
+            "y": 119.69,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 753126167,
+          "family": "blue-purple-finale",
+          "distance": 88.28156432687405,
+          "from": {
+            "t": 4.55,
+            "x": 89.18,
+            "y": 67.14,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.567,
+            "x": 1.13,
+            "y": 60.75,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 753126167,
+          "family": "blue-purple-finale",
+          "distance": 121.79911658136112,
+          "from": {
+            "t": 8.25,
+            "x": -51.55,
+            "y": 219.09,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.267,
+            "x": 14.43,
+            "y": 116.71,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 132766890,
+          "family": "blue-purple-finale",
+          "distance": 137.79256765152468,
+          "from": {
+            "t": 8.317,
+            "x": 11.17,
+            "y": 251.25,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.333,
+            "x": 59.63,
+            "y": 122.26,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 214629079,
+          "family": "blue-purple-finale",
+          "distance": 51.2502965845077,
+          "from": {
+            "t": 4.467,
+            "x": 226.09,
+            "y": 57.81,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.483,
+            "x": 175.32,
+            "y": 50.81,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 214629079,
+          "family": "blue-purple-finale",
+          "distance": 111.06417694288291,
+          "from": {
+            "t": 8.167,
+            "x": 126.79,
+            "y": 213.05,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.183,
+            "x": 177.62,
+            "y": 114.3,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 212535042,
+          "family": "blue-purple-finale",
+          "distance": 82.6522655466866,
+          "from": {
+            "t": 4.55,
+            "x": 204.47,
+            "y": 75.09,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.567,
+            "x": 286.76,
+            "y": 67.36,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 212535042,
+          "family": "blue-purple-finale",
+          "distance": 99.84126251204961,
+          "from": {
+            "t": 8.25,
+            "x": 230.79,
+            "y": 210.46,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.267,
+            "x": 269.48,
+            "y": 118.42,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 81344958,
+          "family": "blue-purple-finale",
+          "distance": 50.718053984749844,
+          "from": {
+            "t": 6.183,
+            "x": 95.06,
+            "y": 95.58,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.2,
+            "x": 145.17,
+            "y": 87.75,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 81344958,
+          "family": "blue-purple-finale",
+          "distance": 91.21420338960374,
+          "from": {
+            "t": 9.85,
+            "x": 107.84,
+            "y": 230.48,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 9.867,
+            "x": 135.34,
+            "y": 143.51,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 130880279,
+          "family": "blue-purple-finale",
+          "distance": 88.10750762562745,
+          "from": {
+            "t": 9.917,
+            "x": 16.54,
+            "y": 224.42,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 61.99,
+            "y": 148.94,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 457557075,
+          "family": "blue-purple-finale",
+          "distance": 45.77697783821033,
+          "from": {
+            "t": 6.317,
+            "x": 47.82,
+            "y": 107.31,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.333,
+            "x": 2.48,
+            "y": 101,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 457557075,
+          "family": "blue-purple-finale",
+          "distance": 123.5776719314618,
+          "from": {
+            "t": 9.983,
+            "x": -36.3,
+            "y": 265.8,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 13.11,
+            "y": 152.53,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 467592646,
+          "family": "blue-purple-finale",
+          "distance": 121.76271391522118,
+          "from": {
+            "t": 10.05,
+            "x": 59.97,
+            "y": 272.44,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 89.33,
+            "y": 154.27,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 8900304,
+          "family": "blue-purple-finale",
+          "distance": 80.71971568334465,
+          "from": {
+            "t": 6.183,
+            "x": 214.98,
+            "y": 94.91,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.2,
+            "x": 134.52,
+            "y": 88.44,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 8900304,
+          "family": "blue-purple-finale",
+          "distance": 100.57220341625214,
+          "from": {
+            "t": 9.85,
+            "x": 97.36,
+            "y": 232.04,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 9.867,
+            "x": 144.95,
+            "y": 143.44,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 942182592,
+          "family": "blue-purple-finale",
+          "distance": 66.21477856188903,
+          "from": {
+            "t": 6.25,
+            "x": 233.64,
+            "y": 88.76,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.267,
+            "x": 167.76,
+            "y": 82.11,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 942182592,
+          "family": "blue-purple-finale",
+          "distance": 119.15164665249071,
+          "from": {
+            "t": 9.917,
+            "x": 132.88,
+            "y": 253.09,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 175.73,
+            "y": 141.91,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 42471394,
+          "family": "blue-purple-finale",
+          "distance": 119.84082526418116,
+          "from": {
+            "t": 9.983,
+            "x": 236.29,
+            "y": 268.24,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 263.76,
+            "y": 151.59,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 709114509,
+          "family": "blue-purple-finale",
+          "distance": 148.87021092213175,
+          "from": {
+            "t": 10.05,
+            "x": 175.02,
+            "y": 292.71,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 215.68,
+            "y": 149.5,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "completed": true,
+      "contacts": 3,
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "activeSamples": 13187,
+      "fullEntry": 40,
+      "minimumContinuousFullSeconds": 0.6333333333333333,
+      "sameFrameZeroBiasOverlapIDs": [
+        571262010,
+        686087268
+      ],
+      "phaseJumps": [
+        {
+          "id": 590869804,
+          "family": "blue-purple-finale",
+          "distance": 94.39825104312052,
+          "from": {
+            "t": 2.75,
+            "x": 79.49,
+            "y": 45.46,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.767,
+            "x": 173.52,
+            "y": 37.13,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 590869804,
+          "family": "blue-purple-finale",
+          "distance": 87.85789662858997,
+          "from": {
+            "t": 6.5,
+            "x": 119.05,
+            "y": 170.24,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 156.45,
+            "y": 90.74,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 988646380,
+          "family": "blue-purple-finale",
+          "distance": 70.28083237981747,
+          "from": {
+            "t": 2.817,
+            "x": 40.58,
+            "y": 60.9,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.833,
+            "x": 110.43,
+            "y": 53.13,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 988646380,
+          "family": "blue-purple-finale",
+          "distance": 90.67605692794542,
+          "from": {
+            "t": 6.567,
+            "x": 54.55,
+            "y": 169.48,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.583,
+            "x": 105.98,
+            "y": 94.8,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 932701535,
+          "family": "blue-purple-finale",
+          "distance": 73.37027190899593,
+          "from": {
+            "t": 2.883,
+            "x": 53.73,
+            "y": 49.22,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.9,
+            "x": -19.35,
+            "y": 42.7,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 148033681,
+          "family": "blue-purple-finale",
+          "distance": 59.951747263945514,
+          "from": {
+            "t": 2.967,
+            "x": 63.58,
+            "y": 58.95,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.983,
+            "x": 122.96,
+            "y": 50.69,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 709952769,
+          "family": "blue-purple-finale",
+          "distance": 63.01972548337544,
+          "from": {
+            "t": 2.75,
+            "x": 181.89,
+            "y": 53.7,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.767,
+            "x": 119.22,
+            "y": 47.07,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 709952769,
+          "family": "blue-purple-finale",
+          "distance": 96.48996320861563,
+          "from": {
+            "t": 6.5,
+            "x": 63.89,
+            "y": 160.7,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 133.2,
+            "y": 93.57,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 287155051,
+          "family": "blue-purple-finale",
+          "distance": 91.04365161833084,
+          "from": {
+            "t": 2.817,
+            "x": 189.28,
+            "y": 52.7,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.833,
+            "x": 279.95,
+            "y": 44.46,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 287155051,
+          "family": "blue-purple-finale",
+          "distance": 94.6963193582517,
+          "from": {
+            "t": 6.567,
+            "x": 224.83,
+            "y": 178.04,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.583,
+            "x": 265.58,
+            "y": 92.56,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 586962780,
+          "family": "blue-purple-finale",
+          "distance": 40.51124411814576,
+          "from": {
+            "t": 2.883,
+            "x": 189.26,
+            "y": 61.05,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.9,
+            "x": 149.29,
+            "y": 54.45,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 431564581,
+          "family": "green-ladder-split",
+          "distance": 62.8684276883079,
+          "from": {
+            "t": 3.633,
+            "x": 58.92,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.65,
+            "x": 100.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 431564581,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": -20.97,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 12.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 779747950,
+          "family": "green-ladder-split",
+          "distance": 90.63462693694945,
+          "from": {
+            "t": 3.7,
+            "x": 88.28,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 161.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 779747950,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 95.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 35.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 689370884,
+          "family": "green-ladder-split",
+          "distance": 76.76171246135667,
+          "from": {
+            "t": 3.767,
+            "x": 27.12,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 68.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 689370884,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": -52.97,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": -19.92,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 252040650,
+          "family": "green-ladder-split",
+          "distance": 101.78360624383477,
+          "from": {
+            "t": 3.833,
+            "x": 56.48,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 129.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 252040650,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 63.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 3.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 334352564,
+          "family": "green-ladder-split",
+          "distance": 61.75410998468037,
+          "from": {
+            "t": 3.633,
+            "x": 156.63,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 3.65,
+            "x": 196.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 334352564,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": 75.03,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 108.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 394296605,
+          "family": "green-ladder-split",
+          "distance": 89.42020185618013,
+          "from": {
+            "t": 3.7,
+            "x": 217.79,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 289.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 394296605,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 223.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 163.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 406576795,
+          "family": "green-ladder-split",
+          "distance": 76.06559932058643,
+          "from": {
+            "t": 3.767,
+            "x": 188.43,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 228.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 406576795,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": 107.03,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": 140.08,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 571262010,
+          "family": "green-ladder-split",
+          "distance": 100.99802225786404,
+          "from": {
+            "t": 3.833,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 321.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 571262010,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 255.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 195.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 956999236,
+          "family": "blue-purple-finale",
+          "distance": 46.91298860656823,
+          "from": {
+            "t": 4.467,
+            "x": 106.45,
+            "y": 63.52,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.483,
+            "x": 152.74,
+            "y": 55.9,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 956999236,
+          "family": "blue-purple-finale",
+          "distance": 99.32464598477057,
+          "from": {
+            "t": 8.167,
+            "x": 101.79,
+            "y": 207.02,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.183,
+            "x": 140.62,
+            "y": 115.6,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 645579711,
+          "family": "blue-purple-finale",
+          "distance": 73.76817538749349,
+          "from": {
+            "t": 4.617,
+            "x": 48.18,
+            "y": 93.46,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.633,
+            "x": 121.57,
+            "y": 86,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 686087268,
+          "family": "blue-purple-finale",
+          "distance": 83.77192906934876,
+          "from": {
+            "t": 4.467,
+            "x": 149.9,
+            "y": 88,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.483,
+            "x": 233.34,
+            "y": 80.55,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 686087268,
+          "family": "blue-purple-finale",
+          "distance": 79.09296618536948,
+          "from": {
+            "t": 8.167,
+            "x": 171.67,
+            "y": 182.65,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.183,
+            "x": 222.04,
+            "y": 121.67,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 330155255,
+          "family": "blue-purple-finale",
+          "distance": 76.3718226835002,
+          "from": {
+            "t": 4.55,
+            "x": 235.63,
+            "y": 59.98,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.567,
+            "x": 159.55,
+            "y": 53.31,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 703682651,
+          "family": "blue-purple-finale",
+          "distance": 75.48357437217716,
+          "from": {
+            "t": 4.617,
+            "x": 221.72,
+            "y": 88.82,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.633,
+            "x": 296.82,
+            "y": 81.22,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 264896063,
+          "family": "blue-purple-finale",
+          "distance": 53.371592631286546,
+          "from": {
+            "t": 6.183,
+            "x": 53.51,
+            "y": 117.83,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.2,
+            "x": 106.38,
+            "y": 110.53,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 264896063,
+          "family": "blue-purple-finale",
+          "distance": 71.83466572623556,
+          "from": {
+            "t": 9.85,
+            "x": 60.85,
+            "y": 208.6,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 9.867,
+            "x": 101.01,
+            "y": 149.04,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 88731134,
+          "family": "blue-purple-finale",
+          "distance": 69.6867634490224,
+          "from": {
+            "t": 6.25,
+            "x": 49.79,
+            "y": 113.71,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.267,
+            "x": 119.06,
+            "y": 106.1,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 88731134,
+          "family": "blue-purple-finale",
+          "distance": 86.38181521593536,
+          "from": {
+            "t": 9.917,
+            "x": 75.07,
+            "y": 227.52,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 108.81,
+            "y": 148,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 179187367,
+          "family": "blue-purple-finale",
+          "distance": 56.331861321990765,
+          "from": {
+            "t": 6.317,
+            "x": 53.68,
+            "y": 119.59,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.333,
+            "x": 109.49,
+            "y": 111.94,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 179187367,
+          "family": "blue-purple-finale",
+          "distance": 102.30664201311662,
+          "from": {
+            "t": 9.983,
+            "x": 66.28,
+            "y": 252.64,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 98.29,
+            "y": 155.47,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 367045610,
+          "family": "blue-purple-finale",
+          "distance": 132.94835275399242,
+          "from": {
+            "t": 10.05,
+            "x": 61.7,
+            "y": 282,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 89.12,
+            "y": 151.91,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 602898383,
+          "family": "blue-purple-finale",
+          "distance": 77.17617313653221,
+          "from": {
+            "t": 6.183,
+            "x": 223.42,
+            "y": 90,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.2,
+            "x": 146.53,
+            "y": 83.36,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 602898383,
+          "family": "blue-purple-finale",
+          "distance": 104.40921415277485,
+          "from": {
+            "t": 9.85,
+            "x": 111.19,
+            "y": 236.84,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.867,
+            "x": 155.33,
+            "y": 142.22,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 305218756,
+          "family": "blue-purple-finale",
+          "distance": 51.56911478782627,
+          "from": {
+            "t": 6.25,
+            "x": 241.49,
+            "y": 85.98,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.267,
+            "x": 190.39,
+            "y": 79.04,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 305218756,
+          "family": "blue-purple-finale",
+          "distance": 120.57791257108408,
+          "from": {
+            "t": 9.917,
+            "x": 156.54,
+            "y": 255.67,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 194.43,
+            "y": 141.2,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 953984622,
+          "family": "blue-purple-finale",
+          "distance": 120.2461945343802,
+          "from": {
+            "t": 9.983,
+            "x": 122.49,
+            "y": 262.6,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 172.66,
+            "y": 153.32,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 606647624,
+          "family": "blue-purple-finale",
+          "distance": 123.02505639096451,
+          "from": {
+            "t": 10.05,
+            "x": 253.29,
+            "y": 273.57,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 282.2,
+            "y": 153.99,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "completed": true,
+      "contacts": 7,
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "activeSamples": 14067,
+      "fullEntry": 40,
+      "minimumContinuousFullSeconds": 0.7,
+      "sameFrameZeroBiasOverlapIDs": [
+        247206774,
+        674838603,
+        401784013,
+        371428430,
+        19854677,
+        925598473
+      ],
+      "phaseJumps": [
+        {
+          "id": 667910812,
+          "family": "blue-purple-finale",
+          "distance": 95.97986507596266,
+          "from": {
+            "t": 2.75,
+            "x": 56.43,
+            "y": 57.5,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.767,
+            "x": 152.07,
+            "y": 49.43,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 667910812,
+          "family": "blue-purple-finale",
+          "distance": 78.58319476834725,
+          "from": {
+            "t": 6.5,
+            "x": 96.51,
+            "y": 158,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 141.87,
+            "y": 93.83,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 466647747,
+          "family": "blue-purple-finale",
+          "distance": 79.40707336251602,
+          "from": {
+            "t": 2.817,
+            "x": 78.59,
+            "y": 45.55,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.833,
+            "x": 157.56,
+            "y": 37.23,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 466647747,
+          "family": "blue-purple-finale",
+          "distance": 101.62980123959703,
+          "from": {
+            "t": 6.567,
+            "x": 103.08,
+            "y": 185.25,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.583,
+            "x": 140.5,
+            "y": 90.76,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 611714652,
+          "family": "blue-purple-finale",
+          "distance": 53.109415361120305,
+          "from": {
+            "t": 2.883,
+            "x": 85.28,
+            "y": 49.69,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.9,
+            "x": 137.74,
+            "y": 41.41,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 611714652,
+          "family": "blue-purple-finale",
+          "distance": 120.1876054341711,
+          "from": {
+            "t": 6.633,
+            "x": 83.61,
+            "y": 212.2,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.65,
+            "x": 120.55,
+            "y": 97.83,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 495289271,
+          "family": "blue-purple-finale",
+          "distance": 54.98162056542168,
+          "from": {
+            "t": 2.967,
+            "x": 71.44,
+            "y": 54.9,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.983,
+            "x": 125.79,
+            "y": 46.59,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 121974012,
+          "family": "blue-purple-finale",
+          "distance": 91.72131813270018,
+          "from": {
+            "t": 2.75,
+            "x": 198.67,
+            "y": 46.99,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 2.767,
+            "x": 107.18,
+            "y": 40.48,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 121974012,
+          "family": "blue-purple-finale",
+          "distance": 102.5344727396596,
+          "from": {
+            "t": 6.5,
+            "x": 52.44,
+            "y": 167.31,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.517,
+            "x": 121.99,
+            "y": 91.97,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 247206774,
+          "family": "blue-purple-finale",
+          "distance": 95.16469145644301,
+          "from": {
+            "t": 6.567,
+            "x": 134.99,
+            "y": 168.34,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.583,
+            "x": 195.91,
+            "y": 95.23,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 674838603,
+          "family": "blue-purple-finale",
+          "distance": 69.99182237947518,
+          "from": {
+            "t": 2.883,
+            "x": 200.81,
+            "y": 67.15,
+            "u": 3.1243999999999925,
+            "phase": "entry",
+            "bias": 0.32526158677685285,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 2.9,
+            "x": 270.35,
+            "y": 59.21,
+            "u": 3.1535999999999924,
+            "phase": "middle",
+            "bias": 0.3520121652892491,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 674838603,
+          "family": "blue-purple-finale",
+          "distance": 103.82716792824506,
+          "from": {
+            "t": 6.633,
+            "x": 214.64,
+            "y": 194.47,
+            "u": 9.694400000000106,
+            "phase": "middle",
+            "bias": 32.98033348760426,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.65,
+            "x": 262.42,
+            "y": 102.29,
+            "u": 9.723600000000108,
+            "phase": "exit",
+            "bias": 33.24490720661254,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 250439138,
+          "family": "green-ladder-split",
+          "distance": 62.8684276883079,
+          "from": {
+            "t": 3.633,
+            "x": 58.92,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.65,
+            "x": 100.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 250439138,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": -20.97,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 12.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 896635325,
+          "family": "green-ladder-split",
+          "distance": 90.63462693694945,
+          "from": {
+            "t": 3.7,
+            "x": 88.28,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 161.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 896635325,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 95.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 35.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 746099811,
+          "family": "green-ladder-split",
+          "distance": 76.76171246135667,
+          "from": {
+            "t": 3.767,
+            "x": 27.12,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 68.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 746099811,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": -52.97,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": -19.92,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 830237054,
+          "family": "green-ladder-split",
+          "distance": 101.78360624383477,
+          "from": {
+            "t": 3.833,
+            "x": 56.48,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 129.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 830237054,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 63.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 3.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 557181699,
+          "family": "green-ladder-split",
+          "distance": 61.75410998468037,
+          "from": {
+            "t": 3.633,
+            "x": 156.63,
+            "y": 99.91,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.65,
+            "x": 196.38,
+            "y": 52.65,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 557181699,
+          "family": "green-ladder-split",
+          "distance": 161.64478154273957,
+          "from": {
+            "t": 7.4,
+            "x": 75.03,
+            "y": 268.33,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.417,
+            "x": 108.08,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 109237687,
+          "family": "green-ladder-split",
+          "distance": 89.42020185618013,
+          "from": {
+            "t": 3.7,
+            "x": 217.79,
+            "y": 106.17,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.717,
+            "x": 289.44,
+            "y": 52.67,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 109237687,
+          "family": "green-ladder-split",
+          "distance": 185.81789284135155,
+          "from": {
+            "t": 7.467,
+            "x": 223.44,
+            "y": 285.92,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.483,
+            "x": 163.31,
+            "y": 110.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 9444121,
+          "family": "green-ladder-split",
+          "distance": 76.06559932058643,
+          "from": {
+            "t": 3.767,
+            "x": 188.43,
+            "y": 125.43,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.783,
+            "x": 228.38,
+            "y": 60.7,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 9444121,
+          "family": "green-ladder-split",
+          "distance": 196.20362509393144,
+          "from": {
+            "t": 7.533,
+            "x": 107.03,
+            "y": 311.5,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.55,
+            "x": 140.08,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 401784013,
+          "family": "green-ladder-split",
+          "distance": 100.99802225786404,
+          "from": {
+            "t": 3.833,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 3.85,
+            "x": 321.44,
+            "y": 60.72,
+            "u": 3.159183333333327,
+            "phase": "middle",
+            "bias": 0.35724752083332717,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 401784013,
+          "family": "green-ladder-split",
+          "distance": 219.39096836469818,
+          "from": {
+            "t": 7.6,
+            "x": 255.44,
+            "y": 329.09,
+            "u": 9.680433333333422,
+            "phase": "middle",
+            "bias": 32.85415879407793,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 7.617,
+            "x": 195.31,
+            "y": 118.1,
+            "u": 9.709416666666757,
+            "phase": "exit",
+            "bias": 33.11626364066885,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 857667800,
+          "family": "blue-purple-finale",
+          "distance": 103.77828770990587,
+          "from": {
+            "t": 4.467,
+            "x": 65.32,
+            "y": 80.82,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.483,
+            "x": 168.81,
+            "y": 73.09,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 857667800,
+          "family": "blue-purple-finale",
+          "distance": 81.40181140490671,
+          "from": {
+            "t": 8.167,
+            "x": 110.31,
+            "y": 189.67,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.183,
+            "x": 152.16,
+            "y": 119.85,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 478450995,
+          "family": "blue-purple-finale",
+          "distance": 66.75271530057785,
+          "from": {
+            "t": 4.55,
+            "x": 64.77,
+            "y": 77.25,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.567,
+            "x": -1.68,
+            "y": 70.9,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 670183648,
+          "family": "blue-purple-finale",
+          "distance": 64.18697141943993,
+          "from": {
+            "t": 4.617,
+            "x": 43.37,
+            "y": 81.21,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.633,
+            "x": -20.51,
+            "y": 74.94,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 77129161,
+          "family": "blue-purple-finale",
+          "distance": 58.95751181995387,
+          "from": {
+            "t": 4.683,
+            "x": 48.68,
+            "y": 93.12,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.7,
+            "x": 107.17,
+            "y": 85.71,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 973487328,
+          "family": "blue-purple-finale",
+          "distance": 62.127760300851016,
+          "from": {
+            "t": 4.467,
+            "x": 195.92,
+            "y": 65.85,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 4.483,
+            "x": 257.57,
+            "y": 58.16,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 973487328,
+          "family": "blue-purple-finale",
+          "distance": 96.29226864084157,
+          "from": {
+            "t": 8.167,
+            "x": 205.61,
+            "y": 204.65,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 8.183,
+            "x": 243.58,
+            "y": 116.16,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 970977392,
+          "family": "blue-purple-finale",
+          "distance": 88.12703387723882,
+          "from": {
+            "t": 4.55,
+            "x": 197.35,
+            "y": 78.02,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.567,
+            "x": 285.14,
+            "y": 70.32,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 970977392,
+          "family": "blue-purple-finale",
+          "distance": 97.02280814324023,
+          "from": {
+            "t": 8.25,
+            "x": 227.88,
+            "y": 207.53,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.267,
+            "x": 267.91,
+            "y": 119.15,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 371428430,
+          "family": "blue-purple-finale",
+          "distance": 70.30839779144452,
+          "from": {
+            "t": 4.617,
+            "x": 202.8,
+            "y": 95.02,
+            "u": 3.149366666666667,
+            "phase": "entry",
+            "bias": 0.3480684304407715,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 4.633,
+            "x": 272.72,
+            "y": 87.64,
+            "u": 3.1788000000000003,
+            "phase": "middle",
+            "bias": 0.37594800000000034,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 371428430,
+          "family": "blue-purple-finale",
+          "distance": 104.35328312995237,
+          "from": {
+            "t": 8.317,
+            "x": 211.49,
+            "y": 221.76,
+            "u": 9.683566666666685,
+            "phase": "middle",
+            "bias": 32.882444248622754,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 8.333,
+            "x": 260.1,
+            "y": 129.42,
+            "u": 9.713000000000019,
+            "phase": "exit",
+            "bias": 33.14874111570264,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 685448346,
+          "family": "blue-purple-finale",
+          "distance": 56.53762110312035,
+          "from": {
+            "t": 6.183,
+            "x": 91.39,
+            "y": 97.01,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.2,
+            "x": 147.38,
+            "y": 89.16,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 685448346,
+          "family": "blue-purple-finale",
+          "distance": 89.47811911299878,
+          "from": {
+            "t": 9.85,
+            "x": 109.52,
+            "y": 229.03,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.867,
+            "x": 136.95,
+            "y": 143.86,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 595595412,
+          "family": "blue-purple-finale",
+          "distance": 51.0576654382082,
+          "from": {
+            "t": 6.25,
+            "x": 69.47,
+            "y": 103.35,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.267,
+            "x": 18.81,
+            "y": 96.99,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 595595412,
+          "family": "blue-purple-finale",
+          "distance": 105.88957644640949,
+          "from": {
+            "t": 9.917,
+            "x": -21.45,
+            "y": 238.71,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 28.85,
+            "y": 145.53,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 949947016,
+          "family": "blue-purple-finale",
+          "distance": 119.47025152731538,
+          "from": {
+            "t": 9.983,
+            "x": -37.47,
+            "y": 261.87,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 12.82,
+            "y": 153.5,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 186346262,
+          "family": "blue-purple-finale",
+          "distance": 149.4588324589751,
+          "from": {
+            "t": 10.05,
+            "x": -3.95,
+            "y": 293.76,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 34.04,
+            "y": 149.21,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 119292102,
+          "family": "blue-purple-finale",
+          "distance": 100.94180600722378,
+          "from": {
+            "t": 9.85,
+            "x": 182.61,
+            "y": 238.01,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 9.867,
+            "x": 212.9,
+            "y": 141.72,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 925598473,
+          "family": "blue-purple-finale",
+          "distance": 61.805806361538565,
+          "from": {
+            "t": 6.25,
+            "x": 169.66,
+            "y": 116.75,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.267,
+            "x": 231.02,
+            "y": 109.34,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        },
+        {
+          "id": 925598473,
+          "family": "blue-purple-finale",
+          "distance": 84.61809853689695,
+          "from": {
+            "t": 9.917,
+            "x": 185.89,
+            "y": 224.62,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 9.933,
+            "x": 223.4,
+            "y": 148.77,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 19854677,
+          "family": "blue-purple-finale",
+          "distance": 40.02344313024557,
+          "from": {
+            "t": 6.317,
+            "x": 239.6,
+            "y": 109.08,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          },
+          "to": {
+            "t": 6.333,
+            "x": 278.86,
+            "y": 101.3,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 19854677,
+          "family": "blue-purple-finale",
+          "distance": 113.60625775017856,
+          "from": {
+            "t": 9.983,
+            "x": 239.51,
+            "y": 263.04,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10,
+            "x": 267.24,
+            "y": 152.87,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 10852263,
+          "family": "blue-purple-finale",
+          "distance": 40.74137945627272,
+          "from": {
+            "t": 6.383,
+            "x": 232.57,
+            "y": 123.22,
+            "u": 3.1446666666666565,
+            "phase": "entry",
+            "bias": 0.34371597796142317,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 6.4,
+            "x": 272.63,
+            "y": 115.8,
+            "u": 3.174333333333323,
+            "phase": "middle",
+            "bias": 0.371648002754811,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          }
+        },
+        {
+          "id": 10852263,
+          "family": "blue-purple-finale",
+          "distance": 113.43871649485465,
+          "from": {
+            "t": 10.05,
+            "x": 228.07,
+            "y": 264.18,
+            "u": 9.671333333333338,
+            "phase": "middle",
+            "bias": 32.77207961432511,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false
+          },
+          "to": {
+            "t": 10.067,
+            "x": 263.39,
+            "y": 156.38,
+            "u": 9.701000000000006,
+            "phase": "exit",
+            "bias": 33.04004194214881,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": true
+          }
+        }
+      ]
+    }
+  ]
+}

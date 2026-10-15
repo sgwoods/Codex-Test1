@@ -76,7 +76,7 @@ function runStage1Script(state,dt,p,T){
   const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.c===c).sort((a,b)=>b.y-a.y)[0];
   if(cand){
    const aim=cl((p.x-cand.x)*T.aimMul,-T.aimClamp,T.aimClamp);
-   fireEnemyBullet(S,cand,aim,T.bulletVy+S.stage*T.bulletVyStage,'script');
+   fireEnemyBullet(S,cand,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'script');
   }
   S.scriptShotT=1.35;
  }
@@ -387,8 +387,22 @@ function updateChallengeEnemy(state,e,dt){
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
 		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
+ const previousGreenExitPose=e.stage31GreenExitPose;
+ const laterGreenJoinDuration=.66;
+ const laterBlueJoinDuration=.9;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
-	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+	 const genericChallengePath=!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
+ const stage31Group3CurveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+ const stage31Group3CurveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+ const stage31Group3LaneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+ const stage31Group3YBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+ const stage31Group3GateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+ const stage31Group3Phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+ const stage31Group3PolicyEligible=genericChallengePath&&S.stage===31&&wave===2&&pathFamily==='blue-purple-finale'
+  &&!stage31Group3CurveX&&!stage31Group3CurveY&&!stage31Group3LaneBias&&!stage31Group3YBias
+  &&(!stage31Group3GateS||9.7+stage31Group3Phase+stage31Group3GateS*.28>=stage31Group3GateS);
+ let stage31Group3ExitDx=0,stage31Group3ExitDy=0;
+	 if(genericChallengePath){
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){
@@ -441,7 +455,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(28+slot*5)*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   // End entry at the interior lane, not an outward fan offset.
+	   e.x=startX+(laneX-startX)*q+fanDir*(1-q)*(slot-1.5)*14*arcAmp;
 	   e.y=topY+q*(48+slot*8)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
@@ -524,8 +539,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+q*(78+slot*8)*dropAmp+Math.sin(q*Math.PI*1.4+p)*6;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(188+slot*27)*dropAmp;
+	   e.x=laneX+fanDir*q*202*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+q*(188+slot*27))*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*((q-.12)*116+(slot-1.5)*18)*fm.challengeSweep*arcAmp+Math.sin(q*Math.PI*1.6+p)*9;
@@ -594,6 +609,17 @@ function updateChallengeEnemy(state,e,dt){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
 	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
+	   if(S.stage>=35&&u-9.7<laterGreenJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterGreenJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),rung=slot%2?-1:1;
+	    const middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*((middleQ-.5)*44+rung*(18+middleQ*13))*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(44+rung*13)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(146+slot*14)*dropAmp+(wave%2?Math.sin(middleQ*Math.PI)*7:0);
+	    const middleDy=((146+slot*14)*dropAmp+(wave%2?Math.PI*Math.cos(middleQ*Math.PI)*7:0))/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='green-ladder-deep-drop'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*64)*fm.challengeSweep*arcAmp+Math.sin(q*5.6+p)*3;
@@ -608,8 +634,8 @@ function updateChallengeEnemy(state,e,dt){
 	   e.y=topY+36+q*176*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
-	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
+	   e.x=laneX+fanDir*(202+q*186)*fm.challengeSweep*arcAmp;
+	   e.y=topY+((48+slot*8)+(188+slot*27)+q*344*fm.challengeDrop)*dropAmp;
 	  }else if(pathFamily==='yellow-fan-low-drift'){
 	   const fanDir=wave%2?-1:1;
 	   e.x=laneX+fanDir*(68+q*142+(slot-1.5)*16)*fm.challengeSweep*arcAmp;
@@ -625,6 +651,39 @@ function updateChallengeEnemy(state,e,dt){
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
 	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
+	   if(stage31Group3PolicyEligible){
+	    const middleQ=(9.7-entryDuration)/6.55,elapsed=u-9.7;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*10*arcAmp*Math.PI*3)/6.55;
+	    if(elapsed<.9){
+	     const joinQ=elapsed/.9,blend=joinQ*joinQ*(3-2*joinQ);
+	     e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	     e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	    }else if(u>=11.05){
+	     const pivotQ=(11.05-9.7)/3.35,departure=u-11.05;
+	     const pivotX=laneX+sweep*(Math.sin(pivotQ*Math.PI*2.8+p)*34-pivotQ*76)*fm.challengeSweep*arcAmp;
+	     const pivotDx=sweep*(Math.cos(pivotQ*Math.PI*2.8+p)*34*Math.PI*2.8-76)*fm.challengeSweep*arcAmp/3.35;
+	     const pivotY=topY+18+pivotQ*216*fm.challengeDrop*dropAmp+Math.cos(pivotQ*8+p)*4;
+	     const pivotDy=(216*fm.challengeDrop*dropAmp-Math.sin(pivotQ*8+p)*32)/3.35;
+	     const turn=.12*(1-Math.exp(-departure/.12));
+	     e.x=pivotX-100*departure+(pivotDx+100)*turn;
+	     e.y=pivotY-260*departure+(pivotDy+260)*turn;
+	     stage31Group3ExitDx=-100+(pivotDx+100)*Math.exp(-departure/.12);
+	     stage31Group3ExitDy=-260+(pivotDy+260)*Math.exp(-departure/.12);
+	    }
+	   }
+	   if(S.stage>=35&&u-9.7<laterBlueJoinDuration){
+	    const elapsed=u-9.7,joinQ=elapsed/laterBlueJoinDuration;
+	    const blend=joinQ*joinQ*(3-2*joinQ),middleQ=(9.7-entryDuration)/6.55;
+	    const middleX=laneX+sweep*(Math.sin(middleQ*Math.PI*4+p)*42+Math.sin(middleQ*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	    const middleDx=sweep*(Math.cos(middleQ*Math.PI*4+p)*42*Math.PI*4+Math.cos(middleQ*Math.PI*1.5)*28*Math.PI*1.5)*fm.challengeSweep*arcAmp/6.55;
+	    const middleY=topY+middleQ*(78+slot*12)*dropAmp+Math.cos(middleQ*Math.PI*3+p)*10*arcAmp;
+	    const middleDy=((78+slot*12)*dropAmp-Math.sin(middleQ*Math.PI*3+p)*30*Math.PI*arcAmp)/6.55;
+	    e.x=(middleX+middleDx*elapsed)*(1-blend)+e.x*blend;
+	    e.y=(middleY+middleDy*elapsed)*(1-blend)+e.y*blend;
+	   }
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;
@@ -645,6 +704,59 @@ function updateChallengeEnemy(state,e,dt){
   const lowerQ=cl((u-2.4)/8.8,0,1);
   e.y+=lowerFieldBias*lowerQ*lowerQ;
  }
+ // Experimental group1 side departure; final composed pose owns the exit bias.
+ if(genericChallengePath&&S.stage===31&&wave===0&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup1ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup1ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Experimental group5 departure, scoped to the selected generic evaluator.
+ if(genericChallengePath&&S.stage===31&&wave===4&&pathFamily==='blue-purple-finale'){
+  const previous=e.stage31BlueGroup5ExitPose;
+  if(u<9.7){
+   const span=previous?u-previous.u:0;
+   const validSpan=Number.isFinite(span)&&span>0;
+   e.stage31BlueGroup5ExitPose={x:e.x,y:e.y,u,
+    dx:validSpan?(e.x-previous.x)/span:0,
+    dy:validSpan?(e.y-previous.y)/span:0};
+  }else if(previous){
+   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
+   const outward=side*120,drop=300-previous.y;
+   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
+   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+  }
+ }
+ // Provisional departure for local review; exact lane-reference fidelity is open.
+ if(S.stage===31&&pathFamily==='green-ladder-split'){
+  if(u<9.7){
+   e.stage31GreenExitPose={x:e.x,y:e.y,u,
+    dx:previousGreenExitPose?(e.x-previousGreenExitPose.x)/(u-previousGreenExitPose.u):0,
+    dy:previousGreenExitPose?(e.y-previousGreenExitPose.y)/(u-previousGreenExitPose.u):0};
+  }else if(previousGreenExitPose){
+   const elapsed=u-previousGreenExitPose.u;
+   const ease=.08*(1-Math.exp(-elapsed/.08));
+   e.x=previousGreenExitPose.x+80*elapsed+(previousGreenExitPose.dx-80)*ease;
+   e.y=previousGreenExitPose.y-400*elapsed+(previousGreenExitPose.dy+400)*ease;
+  }
+ }
+ // Provisional sprite-row clearance, preserving lateral motion and path time.
+ if(genericChallengePath&&S.stage>=31&&u>=entryDuration
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'&&u>=9.7&&e.y>300){
+  e.y=300+14*(1-Math.exp(-(e.y-300)/14));
+ }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){
@@ -652,7 +764,73 @@ function updateChallengeEnemy(state,e,dt){
    S.ch.upperBandSamples++;
   }
  }
- if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){
+ // Entry curves may begin outside the exit-removal boundary.
+ const stage31GreenUpperExit=S.stage===31&&pathFamily==='green-ladder-split'
+  &&u>=9.7&&!!previousGreenExitPose&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterEnvelopeSideExit=false;
+ const laterGreenJoinSettled=pathFamily!=='green-ladder-split'||u-9.7>=laterGreenJoinDuration;
+ if(genericChallengePath&&S.stage>=35&&u>=9.7&&laterGreenJoinSettled&&e.dive===9&&!e.hitT&&!e.carry
+  &&(pathFamily==='green-ladder-split'||pathFamily==='yellow-diagonal-fan')){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // With saturated fields and no oscillation, these generic exits cannot return.
+  const direction=pathFamily==='green-ladder-split'
+   ? sweep*(72*fm.challengeSweep+(slot%2?-38:38))*arcAmp
+   : (wave%2?-1:1)*186*fm.challengeSweep*arcAmp;
+  if(!curveX&&!laneBias&&spacingSettled&&Number.isFinite(direction)&&direction!==0){
+   const extent=enemyDims(e).w/2+1;
+   laterEnvelopeSideExit=direction<0
+    ? Math.round(e.x)+extent<0
+    : Math.round(e.x)-extent>PLAY_W;
+  }
+ }
+ const scopedStage31Group3=stage31Group3PolicyEligible;
+ let stage31Group3ExitNoReturn=false;
+ if(scopedStage31Group3&&u>=11.65&&e.dive===9&&!e.hitT&&!e.carry&&1+pathTimeSpeed>0){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const curveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const yBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const spacingSettled=!gateS||u+phase+gateS*.28>=gateS;
+  // Future derivatives interpolate between current values and negative terminals.
+  stage31Group3ExitNoReturn=!curveX&&!curveY&&!laneBias&&!yBias&&spacingSettled&&u>=11.2
+   &&Number.isFinite(stage31Group3ExitDx)&&Number.isFinite(stage31Group3ExitDy)
+   &&stage31Group3ExitDx<0&&stage31Group3ExitDy<0;
+ }
+ const stage31Group3UpperExit=stage31Group3ExitNoReturn&&Math.round(e.y)+enemyDims(e).h<0;
+ let laterBlueSideExit=false,laterBlueProofEligible=false;
+ if(genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale'
+  &&u>=9.7+laterBlueJoinDuration&&e.dive===9&&!e.hitT&&!e.carry){
+  const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+  const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+  const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+  const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+  const amplitude=fm.challengeSweep*arcAmp,k=2.8*Math.PI,q=(u-9.7)/3.35;
+  if(!curveX&&!laneBias&&(!gateS||u+phase+gateS*.28>=gateS)
+   &&Number.isFinite(amplitude)&&amplitude>0&&(sweep===1||sweep===-1)){
+   const rawOscPart=sweep*amplitude*(34*Math.sin(k*q+p)-76*q);
+   const constantFold=sweep*(e.x-rawOscPart);
+   const critical=Math.acos(76/(34*k));
+   const theta=critical+2*Math.PI*Math.ceil((k*q+p-critical)/(2*Math.PI));
+   const qMax=(theta-p)/k;
+   const futureFoldMax=Math.max(sweep*e.x,constantFold+amplitude*(34*Math.sin(k*qMax+p)-76*qMax));
+   laterBlueProofEligible=Number.isFinite(futureFoldMax);
+   // Future local maxima decrease; include center rounding and sprite extent.
+   laterBlueSideExit=laterBlueProofEligible&&futureFoldMax+enemyUnrotatedCullExtent(e)+.5<(sweep>0?0:-PLAY_W);
+  }
+ }
+ const scopedLaterBlue=genericChallengePath&&S.stage>=35&&pathFamily==='blue-purple-finale';
+ const legacyHorizontalExit=u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54);
+ const blueBridgeActive=scopedLaterBlue&&u>=9.7&&u<9.7+laterBlueJoinDuration;
+ const allowedLegacyHorizontalExit=legacyHorizontalExit
+  &&(!scopedStage31Group3||u<9.7||(stage31Group3ExitNoReturn&&e.x<-54))
+  &&!blueBridgeActive&&(!scopedLaterBlue||!laterBlueProofEligible||laterBlueSideExit);
+ if(stage31GreenUpperExit||stage31Group3UpperExit||laterEnvelopeSideExit||laterBlueSideExit||e.y>PLAY_H+34||allowedLegacyHorizontalExit){
   e.hp=0;
   e.miss=1;
  }
@@ -746,7 +924,7 @@ function updateEnemy(state,e,dt,t,T,p){
   e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&randUnit()<dt*T.diveShotRate*.55){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'escort');
    e.shot--;
   }
   return;
@@ -801,7 +979,7 @@ function updateEnemy(state,e,dt,t,T,p){
   }
   if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');
+   fireEnemyBullet(S,e,aim,T.bulletVy+combatEffectiveStage(S.stage)*T.bulletVyStage,'dive');
    e.shot--;
   }
   if(e.y>PLAY_H+30){
@@ -840,7 +1018,7 @@ function updateEnemy(state,e,dt,t,T,p){
  // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
  const harnessDiveRateBoost=Math.max(1,+e.stage4Lane2ProbeDiveRateBoost||1);
  if(e.cool<=0&&randUnit()<dt*diveRate*harnessDiveRateBoost&&S.att<attackCap&&S.recoverT<=0&&(!stageAttackGap||S.attackGapT<=0)&&!(S.stage===2&&S.stageClock<3.85)&&!(S.stage===4&&S.stageClock<3.7)&&!(S.stage===5&&S.stageClock<1.9)){
-  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-S.stage*.02;
+  e.cool=cleanup?rnd(1.4,.6):rnd(T.coolA,T.coolB)-combatEffectiveStage(S.stage)*.02;
   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
    ? currentGamePackReferenceTiming('enemyDiveCharge')
    : null;

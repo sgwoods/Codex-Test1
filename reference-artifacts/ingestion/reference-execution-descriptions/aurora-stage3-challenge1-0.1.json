@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "reference-execution-description",
-  "generatedAt": "2026-06-08T18:07:40.348Z",
-  "commit": "a0807fa11",
-  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "generatedAt": "2026-10-04T21:44:35.725Z",
+  "commit": "c996b804",
+  "branch": "codex/oct03-local-integration",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
   "scope": {
@@ -15,6 +15,29 @@
   },
   "sourceReferenceWindow": {
     "sourceVideo": "challenge-all2.mp4",
+    "referenceEvidenceContract": {
+      "schema": "reference-evidence-contract-1",
+      "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+      "timing": "resampled-8fps-relative-time-not-native-pts",
+      "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+      "analyzedNormalizedY": {
+        "min": 0.105,
+        "max": 0.875
+      },
+      "observationUnit": "connected-component-tracklet-not-identified-alien",
+      "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+      "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+      "shootingCensoring": "not-resolved-per-target",
+      "capabilities": {
+        "descriptive": true,
+        "full-entry": false,
+        "full-path": false,
+        "wave-identity": false
+      }
+    },
+    "scoreInterpretation": "heuristic-diagnostic",
+    "acceptedFullPathConformance": false,
+    "acceptedGroupMappingConformance": false,
     "sourceWindowId": "challenge-01-classic-column-lesson",
     "sourceId": "challenge-all2-single-ship-all-perfects",
     "sourceStartSeconds": 5,
@@ -24,12 +47,12 @@
       36
     ],
     "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
-    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
-    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
-    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+    "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+    "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+    "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
     "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json",
-    "objectTrackOverlay": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-    "objectTrackContactSheet": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg"
+    "objectTrackOverlay": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+    "objectTrackContactSheet": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg"
   },
   "sourceArtifacts": {
     "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
@@ -289,9 +312,9 @@
         ],
         "sourceEvidence": [
           "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/tracks/challenge-01.json"
         ]
       },
       "precisionNotes": [
@@ -541,9 +564,9 @@
           "human upper-band read and CPU lower-field occupancy differ"
         ],
         "sourceEvidence": [
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/tracks/challenge-01.json"
         ]
       },
       "precisionNotes": [
@@ -796,9 +819,9 @@
           "human upper-band read and CPU lower-field occupancy differ"
         ],
         "sourceEvidence": [
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/tracks/challenge-01.json"
         ]
       },
       "precisionNotes": [
@@ -1059,9 +1082,9 @@
         ],
         "sourceEvidence": [
           "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/tracks/challenge-01.json"
         ]
       },
       "precisionNotes": [
@@ -1267,9 +1290,9 @@
           "primary object track is short and should not be treated as a complete phrase"
         ],
         "sourceEvidence": [
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-04_18-55-31-c996b804/tracks/challenge-01.json"
         ]
       },
       "precisionNotes": [

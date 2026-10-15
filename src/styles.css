@@ -288,6 +288,12 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #testRow input{width:auto;transform:translateY(1px)}
 #testHint,.settingsHint{font-size:11px;line-height:1.25}
 #testHint{margin-top:8px;color:#9fd0af}
+#guardiansStageFiveReview{display:flex;flex-direction:column;gap:9px;margin-top:10px;padding:11px;border:1px solid rgba(123,214,255,.28);background:rgba(6,19,31,.72)}
+#guardiansStageFiveReview[hidden]{display:none}
+#guardiansStageFiveReview h4{color:#9eefff}
+#guardiansStageFiveLaunch{min-height:36px;border:1px solid rgba(123,214,255,.5);background:#0a2940;color:#e8fbff;font:700 12px/1 "Courier New",Consolas,monospace;cursor:pointer}
+#guardiansStageFiveLaunch:hover{border-color:#9eefff;background:#103b58}
+#guardiansStageFiveLaunch:disabled{opacity:.48;cursor:not-allowed}
 .settingsHint{color:#d7c38b}
 #settingsMeta{margin-top:10px;padding-top:9px;border-top:1px solid rgba(136,245,255,.12);display:flex;flex-direction:column;gap:2px;font-size:10px;line-height:1.35;color:rgba(218,236,255,.58);letter-spacing:.03em;overflow-wrap:anywhere;word-break:break-word}
 #settingsChannel,#settingsVersion,#settingsRelease,#settingsState{display:block}

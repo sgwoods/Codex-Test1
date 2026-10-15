@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { assessReferenceClaim, requireReferenceClaim } = require('./reference-evidence-contract');
+const claim = process.argv.find(arg => arg.startsWith('--claim='))?.slice(8) || 'descriptive';
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
@@ -33,6 +35,7 @@ const challenges = Array.isArray(report.challenges) ? report.challenges : [];
 for(const challengeNumber of REQUIRED_CHALLENGES){
   const row = challenges.find(item => +item.challengeNumber === challengeNumber);
   if(!row) fail(`Missing Galaga object-track row for challenge ${challengeNumber}.`, { challenges: challenges.map(item => item.challengeNumber) });
+  if(claim !== 'descriptive')requireReferenceClaim(row, claim);
   if(!row.sourceVideo && !row.sourceWindow){
     fail(`Challenge ${challengeNumber} source video reference is missing.`, row);
   }
@@ -73,7 +76,7 @@ for(const field of ['challengeCount', 'trackedChallengeCount', 'averageTrackCoun
   }
 }
 if(+report.summary.targetTrackReadinessScore10 < 6.5){
-  fail('Target object-track readiness is too low for strict challenge scoring.', report.summary);
+  fail('Target object-track artifact availability is too low for descriptive comparison.', report.summary);
 }
 
 console.log(JSON.stringify({
@@ -82,5 +85,8 @@ console.log(JSON.stringify({
   challengeCount: challenges.length,
   averageTrackCount: report.summary.averageTrackCount,
   averageGroupCount: report.summary.averageGroupCount,
-  targetTrackReadinessScore10: report.summary.targetTrackReadinessScore10
+  targetTrackReadinessScore10: report.summary.targetTrackReadinessScore10,
+  claim, conformanceAcceptance: false,
+  evidenceQualifications: challenges.map(row => ({ challenge: row.challengeNumber, ...assessReferenceClaim(row, claim) })),
+  limitations: ['Structural/descriptive artifact check, not full-entry, complete-path, verified-wave or gameplay conformance acceptance.']
 }, null, 2));

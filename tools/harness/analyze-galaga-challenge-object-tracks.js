@@ -2,6 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync, execFileSync } = require('child_process');
+const { createHash } = require('crypto');
+const { trackletEvidenceContract } = require('./reference-evidence-contract');
+const { resolveReferenceWindow } = require('./reviewed-reference-windows');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
@@ -38,7 +41,7 @@ function writeJson(file, value){
 
 function writeText(file, value){
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(value).replace(/\r\n/g, '\n').trimEnd()}\n`);
+  fs.writeFileSync(file, `${String(value).replace(/\r\n/g, '\n').replace(/[ \t]+$/gm, '').trimEnd()}\n`);
 }
 
 function rel(file){
@@ -547,6 +550,10 @@ function safeSourceLabel(file){
 function analyzeChallenge(input, outputDirs){
   const challengeNumber = input.challengeNumber;
   const file = input.file;
+  const sourceSha256 = createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  if(input.expectedSha256 && sourceSha256 !== input.expectedSha256){
+    throw new Error('Reference source hash mismatch: ' + file);
+  }
   const decoded = decodeVideoFrames(file, SAMPLE_FPS, {
     startSeconds: input.startSeconds || 0,
     durationSeconds: input.durationSeconds || ACTIVE_WINDOW_SECONDS
@@ -573,6 +580,9 @@ function analyzeChallenge(input, outputDirs){
     sourceVideo: safeSourceLabel(file),
     sourceWindow: input.sourceWindow || null,
     sourceStartSeconds: input.startSeconds || 0,
+    evidenceContract: { ...trackletEvidenceContract(sourceSha256),
+      windowBoundaryStatus: input.windowCoverage?.status || 'coarse-source-window-not-event-labeled',
+      windowCoverage: input.windowCoverage || null },
     frameSize: { width: decoded.width, height: decoded.height },
     sampleFps: decoded.sampleFps,
     sampledFrameCount: decoded.frameCount,
@@ -622,7 +632,9 @@ function analyzeChallenge(input, outputDirs){
     measurementLimits: [
       'CPU connected-component target tracking is not final sprite identity recognition.',
       'The tracker intentionally ignores score text, player ship, lives, and most stars so it can focus on challenge-stage alien/object movement.',
-      'Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity.'
+      'Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity.',
+      'Top10.5% and bottom12.5% are excluded; centroid tracklets cannot establish full-sprite entry/dwell or complete exits.',
+      'Confidence/readiness are uncalibrated artifact heuristics, not conformance probabilities or release acceptance.'
     ]
   };
   writeText(overlayFile, renderTrackOverlay(result));
@@ -722,14 +734,21 @@ function challengeInputs(){
     .filter(window => Number.isFinite(+window.challengeNumber))
     .map(window => {
       const source = sourceById.get(window.sourceId) || sources[0] || {};
-      const localPath = source.localPath || '';
+      const coverage = resolveReferenceWindow(+window.challengeNumber, source.sha256,
+        +window.start || +window.startSeconds || 0,
+        +window.duration || +window.durationSeconds || ACTIVE_WINDOW_SECONDS, ACTIVE_WINDOW_SECONDS);
+      const persisted = path.join(ROOT, 'private-artifacts/repo-mirror/reference-artifacts/analyses/challenge-visibility-oct03/challenge-all2.mp4');
+      const localPath = source.localPath && fs.existsSync(source.localPath) ? source.localPath
+        : source.sha256 === '8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840' && fs.existsSync(persisted) ? persisted : '';
       const exists = localPath && fs.existsSync(localPath);
       return exists ? {
         sourceMode: 'galaga-challenge-reference-source-window',
         challengeNumber: +window.challengeNumber,
         file: localPath,
-        startSeconds: +window.start || +window.startSeconds || 0,
-        durationSeconds: Math.min(ACTIVE_WINDOW_SECONDS, +window.duration || +window.durationSeconds || ACTIVE_WINDOW_SECONDS),
+        expectedSha256: source.sha256 || null,
+        startSeconds: coverage.startSeconds,
+        durationSeconds: coverage.durationSeconds,
+        windowCoverage: coverage,
         sourceWindow: {
           id: window.id,
           sourceId: window.sourceId,
@@ -807,7 +826,8 @@ function main(){
       sourceMode: inputs[0]?.sourceMode || 'unknown',
       challengeCount: challenges.length,
       sampleFps: SAMPLE_FPS,
-      activeWindowSeconds: ACTIVE_WINDOW_SECONDS
+      activeWindowSeconds: ACTIVE_WINDOW_SECONDS,
+      activeWindowMeaning: 'default coarse-window cap; reviewed per-row windows may differ'
     },
     summary: {
       challengeCount: challenges.length,
@@ -817,7 +837,10 @@ function main(){
       averageGroupConfidence: round(average(challenges.flatMap(item => item.targetGroups.map(group => group.confidence))), 3),
       targetTrackReadinessScore10: scoreReadiness(challenges),
       weakestChallengeNumber: challenges.slice().sort((a, b) => a.targetGroups.length - b.targetGroups.length || a.trackRead.trackCount - b.trackRead.trackCount)[0]?.challengeNumber || null,
-      read: 'CPU object tracking now converts ingested Galaga challenge reference clips into per-challenge group target vectors. This makes challenge movement conformance comparable against source video instead of relying only on first-pass descriptive contracts.'
+      scoreInterpretation: 'heuristic-diagnostic',
+      acceptedFullPathConformance: false,
+      acceptedGroupMappingConformance: false,
+      read: 'Cropped centroid tracklets support descriptive comparisons only. Five temporal clusters are requested, not verified waves; readiness is not gameplay conformance acceptance.'
     },
     measurementLimits: [
       'This is connected-component object tracking, not perfect sprite identity segmentation.',

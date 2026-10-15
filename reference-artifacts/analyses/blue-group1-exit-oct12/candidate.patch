@@ -1,0 +1,37 @@
+diff --git a/private/tmp/aurora-blue-group1-exit-oct12/private-artifacts/blue-group1-exit/06-enemy-behavior.js b/private/tmp/aurora-blue-group1-exit-oct12/src/js/06-enemy-behavior.js
+index a0bd17f6..3f6f7854 100644
+--- a/private/tmp/aurora-blue-group1-exit-oct12/private-artifacts/blue-group1-exit/06-enemy-behavior.js
++++ b/private/tmp/aurora-blue-group1-exit-oct12/src/js/06-enemy-behavior.js
+@@ -389,7 +389,8 @@ function updateChallengeEnemy(state,e,dt){
+ 		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
+  const previousGreenExitPose=e.stage31GreenExitPose;
+ 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
+-	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
++	 const genericChallengePath=!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
++	 if(genericChallengePath){
+ 	 if(u<entryDuration){
+ 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
+ 	  if(pathFamily==='hook-arc'){
+@@ -647,6 +648,22 @@ function updateChallengeEnemy(state,e,dt){
+   const lowerQ=cl((u-2.4)/8.8,0,1);
+   e.y+=lowerFieldBias*lowerQ*lowerQ;
+  }
++ // Experimental group1 side departure; final composed pose owns the exit bias.
++ if(genericChallengePath&&S.stage===31&&wave===0&&pathFamily==='blue-purple-finale'){
++  const previous=e.stage31BlueGroup1ExitPose;
++  if(u<9.7){
++   const span=previous?u-previous.u:0;
++   const validSpan=Number.isFinite(span)&&span>0;
++   e.stage31BlueGroup1ExitPose={x:e.x,y:e.y,u,
++    dx:validSpan?(e.x-previous.x)/span:0,
++    dy:validSpan?(e.y-previous.y)/span:0};
++  }else if(previous){
++   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
++   const outward=side*120,drop=300-previous.y;
++   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
++   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
++  }
++ }
+  // Provisional departure for local review; exact lane-reference fidelity is open.
+  if(S.stage===31&&pathFamily==='green-ladder-split'){
+   if(u<9.7){

@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "reference-execution-description-analysis",
+  "generatedAt": "2026-10-04T21:44:35.856Z",
+  "commit": "c996b804",
+  "branch": "codex/oct03-local-integration",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2",
+    "descriptionId": "aurora-stage7-challenge2-0.1"
+  },
+  "sourceDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageTargetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    "challengeMotionSpec": "reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "currentRuntimeRead": {
+    "challengeConformanceScore10": 4.2,
+    "movementScore10": 4.4,
+    "graphicsScore10": 4.1,
+    "alienNoveltyScore10": 3.9,
+    "shotOpportunityScore10": 5.5,
+    "targetContractFitScore10": 7.2,
+    "targetVideoObjectTrackFitScore10": 4.7,
+    "targetVideoObjectTrackCoverage": 0.503,
+    "safety": {
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      }
+    },
+    "shotOpportunity": {
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Shot-opportunity probe found scoreable targets in 47 sampled windows; 74% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.36."
+    }
+  },
+  "groupReads": [
+    {
+      "groupIndex": 1,
+      "runtimePathFamily": "cross-sweep",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "canonicalComparisonPathFamily": "cross-sweep",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": true,
+      "canonicalComparisonPathFamilyMatch": true,
+      "aggregateObjectTrackScore10": 3.5,
+      "aggregateObjectTrackCoverage": 0.343,
+      "primaryObjectTrackScore10": 3.7,
+      "primaryObjectTrackCoverage": 0.371,
+      "runtimeVector": {
+        "visibleStartS": 0.5,
+        "visibleEndS": 2.25,
+        "xRange": 0.6282142857142857,
+        "yRange": 0.007444444444444464,
+        "pathLength": 0.5081323937732437,
+        "turnCount": 1,
+        "reversalCount": 1,
+        "lowerFieldShare": 1
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.5,
+        "visibleEndDeltaS": 0.37,
+        "aggregatePathLengthRatio": 4.32,
+        "primaryPathLengthRatio": 2.45,
+        "aggregateLowerFieldDelta": 0.018,
+        "primaryLowerFieldDelta": 0,
+        "aggregateYRangeDelta": -0.17
+      },
+      "candidateGate": {
+        "canonicalPathFamily": "cross-sweep",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.1176,
+          "primaryPathLength": 0.2078,
+          "aggregateLowerFieldShare": 0.9815,
+          "primaryLowerFieldShare": 1
+        }
+      },
+      "candidateFocus": [
+        "raise aggregate object-track fit to first promotion floor",
+        "raise primary object-track fit to first promotion floor",
+        "reduce aggregate path-length ratio below first promotion floor"
+      ],
+      "issues": []
+    },
+    {
+      "groupIndex": 2,
+      "runtimePathFamily": "cross-sweep",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": false,
+      "canonicalComparisonPathFamilyMatch": false,
+      "aggregateObjectTrackScore10": 5.2,
+      "aggregateObjectTrackCoverage": 0.563,
+      "primaryObjectTrackScore10": 2.6,
+      "primaryObjectTrackCoverage": 0.213,
+      "runtimeVector": {
+        "visibleStartS": 3.25,
+        "visibleEndS": 6,
+        "xRange": 0.18874999999999997,
+        "yRange": 0.7669444444444445,
+        "pathLength": 0.9676117831203694,
+        "turnCount": 4,
+        "reversalCount": 2,
+        "lowerFieldShare": 0.6666666666666666
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.37,
+        "visibleEndDeltaS": -0.38,
+        "aggregatePathLengthRatio": 5.74,
+        "primaryPathLengthRatio": 2.8,
+        "aggregateLowerFieldDelta": 0.354,
+        "primaryLowerFieldDelta": -0.143,
+        "aggregateYRangeDelta": 0.09
+      },
+      "candidateGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": false,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Use aggregate and primary object-track fit together; neither should regress during promotion.",
+        "targetVector": {
+          "aggregatePathLength": 0.1686,
+          "primaryPathLength": 0.3454,
+          "aggregateLowerFieldShare": 0.3122,
+          "primaryLowerFieldShare": 0.8095
+        }
+      },
+      "candidateFocus": [
+        "legacy semantic label differs from canonical object-track execution family",
+        "raise primary object-track fit to first promotion floor",
+        "reduce lower-field overstay against aggregate target",
+        "reduce aggregate path-length ratio below first promotion floor"
+      ],
+      "issues": [
+        "runtime misses canonical comparison path family"
+      ]
+    },
+    {
+      "groupIndex": 3,
+      "runtimePathFamily": "hook-arc",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": true,
+      "canonicalComparisonPathFamilyMatch": true,
+      "aggregateObjectTrackScore10": 5,
+      "aggregateObjectTrackCoverage": 0.534,
+      "primaryObjectTrackScore10": 4.6,
+      "primaryObjectTrackCoverage": 0.486,
+      "runtimeVector": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5.75,
+        "xRange": 0.0499642857142857,
+        "yRange": 0.4844444444444444,
+        "pathLength": 0.6006934850277399,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 1
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0.75,
+        "aggregatePathLengthRatio": 3.9,
+        "primaryPathLengthRatio": 3.31,
+        "aggregateLowerFieldDelta": 0,
+        "primaryLowerFieldDelta": 0,
+        "aggregateYRangeDelta": 0.4
+      },
+      "candidateGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": false,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Use aggregate and primary object-track fit together; neither should regress during promotion.",
+        "targetVector": {
+          "aggregatePathLength": 0.154,
+          "primaryPathLength": 0.1813,
+          "aggregateLowerFieldShare": 1,
+          "primaryLowerFieldShare": 1
+        }
+      },
+      "candidateFocus": [
+        "raise primary object-track fit to first promotion floor",
+        "reduce aggregate path-length ratio below first promotion floor",
+        "reduce primary path-length ratio below first promotion floor"
+      ],
+      "issues": []
+    },
+    {
+      "groupIndex": 4,
+      "runtimePathFamily": "hook-arc",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "canonicalComparisonPathFamily": "cross-sweep",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": false,
+      "canonicalComparisonPathFamilyMatch": false,
+      "aggregateObjectTrackScore10": 5,
+      "aggregateObjectTrackCoverage": 0.547,
+      "primaryObjectTrackScore10": 1.8,
+      "primaryObjectTrackCoverage": 0.109,
+      "runtimeVector": {
+        "visibleStartS": 7.5,
+        "visibleEndS": 10.25,
+        "xRange": 0.6754285714285715,
+        "yRange": 0.7521666666666668,
+        "pathLength": 1.3593467532013574,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.25
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.37,
+        "visibleEndDeltaS": -0.13,
+        "aggregatePathLengthRatio": 9.23,
+        "primaryPathLengthRatio": 7.23,
+        "aggregateLowerFieldDelta": -0.266,
+        "primaryLowerFieldDelta": 0.25,
+        "aggregateYRangeDelta": 0.072
+      },
+      "candidateGate": {
+        "canonicalPathFamily": "cross-sweep",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.1472,
+          "primaryPathLength": 0.1879,
+          "aggregateLowerFieldShare": 0.5156,
+          "primaryLowerFieldShare": 0
+        }
+      },
+      "candidateFocus": [
+        "legacy semantic label differs from canonical object-track execution family",
+        "raise primary object-track fit to first promotion floor",
+        "avoid lower-field undershoot against aggregate target",
+        "reduce aggregate path-length ratio below first promotion floor",
+        "reduce primary path-length ratio below first promotion floor"
+      ],
+      "issues": [
+        "runtime misses canonical comparison path family"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "runtimePathFamily": "boss-led-loop",
+      "semanticPathFamily": "boss-led-loop",
+      "objectTrackExecutionFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": false,
+      "canonicalComparisonPathFamilyMatch": false,
+      "aggregateObjectTrackScore10": 4.9,
+      "aggregateObjectTrackCoverage": 0.53,
+      "primaryObjectTrackScore10": 3,
+      "primaryObjectTrackCoverage": 0.27,
+      "runtimeVector": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16,
+        "xRange": 0.15567857142857144,
+        "yRange": 0.7693333333333333,
+        "pathLength": 0.9252591915274645,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 0.2727272727272727
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.12,
+        "visibleEndDeltaS": 0.12,
+        "aggregatePathLengthRatio": 3.83,
+        "primaryPathLengthRatio": 1.5,
+        "aggregateLowerFieldDelta": -0.163,
+        "primaryLowerFieldDelta": 0.21,
+        "aggregateYRangeDelta": 0.09
+      },
+      "candidateGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.2417,
+          "primaryPathLength": 0.6187,
+          "aggregateLowerFieldShare": 0.4362,
+          "primaryLowerFieldShare": 0.0625
+        }
+      },
+      "candidateFocus": [
+        "legacy semantic label differs from canonical object-track execution family",
+        "raise aggregate object-track fit to first promotion floor",
+        "raise primary object-track fit to first promotion floor",
+        "reduce aggregate path-length ratio below first promotion floor"
+      ],
+      "issues": [
+        "runtime misses canonical comparison path family"
+      ]
+    }
+  ],
+  "comparisonProtocol": {
+    "phaseOrder": "Runtime group visible starts should follow the reference group order and stay within roughly 0.5s of each object-track window unless a candidate explicitly widens a score window.",
+    "pathFamily": "Use canonicalComparisonPathFamily for candidate gates. Preserve semanticPathFamily and objectTrackExecutionFamily as inspectable source context so legacy label drift remains visible.",
+    "objectTrackFit": "Compare each runtime group against both aggregate group object-track targets and the selected primary object track.",
+    "lowerFieldOverstay": "Flag positive lower-field deltas above 0.18, and separately flag under-field deltas below -0.25 when the target expects a lower pass.",
+    "spacing": "Use npm run harness:check:challenge-motion-profile for spacing and bunching risk after any runtime candidate.",
+    "scoreableWindows": "Use shot-opportunity probes and group scoreWindowRead values; promotion requires clear multi-target lanes and no center-lane-only collapse.",
+    "safety": "No enemy shots, no enemy attack starts, and no ship losses remain hard blockers."
+  },
+  "guardrailCommands": [
+    "npm run harness:check:challenge-stage-conformance",
+    "npm run harness:check:challenge-motion-profile",
+    "npm run harness:check:challenge-outcomes",
+    "npm run harness:check:sprite-render-mode-guard",
+    "npm run harness:check:aurora-runtime-sprite-conformance"
+  ],
+  "summary": {
+    "measurementKeeperRecommendation": "accept-measurement-keeper",
+    "runtimeCandidateRecommendation": "ready-for-one-measured-runtime-candidate",
+    "runtimeCandidateReady": true,
+    "runtimePromotionReady": false,
+    "precisionBlockerCount": 0,
+    "candidateReadinessBlockerCount": 0,
+    "runtimePromotionBlockerCount": 9,
+    "precisionBlockers": [],
+    "candidateReadinessBlockers": [],
+    "runtimePromotionBlockers": [
+      "Stage 7 target-video object-track fit is 4.7/10, below the first promotion floor of 5.0/10.",
+      "Group 1: raise aggregate object-track fit to first promotion floor; raise primary object-track fit to first promotion floor; reduce aggregate path-length ratio below first promotion floor.",
+      "Group 2: runtime misses canonical comparison path family.",
+      "Group 2: legacy semantic label differs from canonical object-track execution family; raise primary object-track fit to first promotion floor; reduce lower-field overstay against aggregate target; reduce aggregate path-length ratio below first promotion floor.",
+      "Group 3: raise primary object-track fit to first promotion floor; reduce aggregate path-length ratio below first promotion floor; reduce primary path-length ratio below first promotion floor.",
+      "Group 4: runtime misses canonical comparison path family.",
+      "Group 4: legacy semantic label differs from canonical object-track execution family; raise primary object-track fit to first promotion floor; avoid lower-field undershoot against aggregate target; reduce aggregate path-length ratio below first promotion floor; reduce primary path-length ratio below first promotion floor.",
+      "Group 5: runtime misses canonical comparison path family.",
+      "Group 5: legacy semantic label differs from canonical object-track execution family; raise aggregate object-track fit to first promotion floor; raise primary object-track fit to first promotion floor; reduce aggregate path-length ratio below first promotion floor."
+    ],
+    "pathFamilyResolutions": [
+      "Group 2: canonical hook-arc from object-track-and-motion-spec; legacy semantic label remains cross-sweep.",
+      "Group 4: canonical cross-sweep from object-track-and-motion-spec; legacy semantic label remains hook-arc.",
+      "Group 5: canonical hook-arc from object-track-and-motion-spec; legacy semantic label remains boss-led-loop."
+    ],
+    "primaryTrackGateResolutions": [
+      "Group 1: primary track target-track-10 is the candidate tuning gate; aggregate track remains a guardrail.",
+      "Group 4: primary track target-track-110 is the candidate tuning gate; aggregate track remains a guardrail.",
+      "Group 5: primary track target-track-142 is the candidate tuning gate; aggregate track remains a guardrail."
+    ],
+    "read": "The Stage 7 execution description is precise enough for one measured runtime candidate; the current runtime is still not promotable without a player-visible improvement."
+  },
+  "nextBestStep": "Run one timing-aware Stage 7 candidate against this description, focused on groups 1, 4, and 5 path length/lower-field/late-loop shape, then produce before/after evidence and guardrail results."
+}

@@ -1,0 +1,945 @@
+{
+  "generatedAt": "2026-10-03T19:47:54.704Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "label": "1.4.1.1+build.1199.sha.85010e73.dirty",
+    "commit": "85010e73f05154389144c278eea79ad767397497",
+    "branch": "codex/oct03-local-integration",
+    "dirty": true,
+    "released": "Oct 03 2026, 3:46 PM EDT",
+    "state": "codex/oct03-local-integration@85010e73 dirty",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ]
+  },
+  "location": "http://localhost:55911/index.html",
+  "game": {
+    "stage": 4,
+    "score": 19000,
+    "lives": 0,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "aurora-application",
+    "lastCue": {
+      "cue": "gameOver",
+      "atmosphereId": "aurora-crown",
+      "audioTheme": "aurora-crown",
+      "phase": "results",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 4,
+      "challenge": false,
+      "at": 2.32,
+      "recAt": 25.233
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-death.m4a",
+      "lastLoaded": "assets/reference-audio/galaga3-death.m4a",
+      "lastStarted": "assets/reference-audio/galaga3-death.m4a",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: aurora-application · last cue gameOver (aurora-crown) · requested galaga3-death.m4a · loaded galaga3-boss-damage-flagship-fighter-shot.m4a · started galaga3-boss-damage-flagship-fighter-shot.m4a · active 1"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+19.667s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 19.667,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 30,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+19.817s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 19.817,
+        "type": "enemy_bullet_fired",
+        "stage": 4,
+        "kind": "formation",
+        "x": 159.4,
+        "y": 108.28,
+        "vx": 1.21,
+        "vy": 170,
+        "bulletLane": 5,
+        "playerLane": 5,
+        "id": 560839113,
+        "enemyType": "bee",
+        "enemyFamily": "scorpion",
+        "column": 6,
+        "row": 3,
+        "lane": 5,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+19.817s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 19.817,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+20.050s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 20.05,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 31,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+20.167s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 20.167,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "dive",
+        "x": 138.89,
+        "y": 27.4,
+        "originLane": 4,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 356510286,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 140,
+        "scripted": 0,
+        "pattern": "standard-dive"
+      }
+    },
+    {
+      "at": "+20.167s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 20.167,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "escort",
+        "x": 127.3,
+        "y": 45.92,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 5,
+        "id": 750477565,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 3,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 356510286,
+        "offset": -28,
+        "pattern": "standard-escort"
+      }
+    },
+    {
+      "at": "+20.167s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 20.167,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "escort",
+        "x": 117.44,
+        "y": 28.17,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 5,
+        "id": 915961663,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 2,
+        "row": 0,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 356510286,
+        "offset": 28,
+        "pattern": "standard-escort"
+      }
+    },
+    {
+      "at": "+20.433s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 20.433,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 32,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+20.450s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 20.45,
+        "type": "enemy_lower_field",
+        "stage": 4,
+        "y": 224.65,
+        "stageClock": 14.8,
+        "playerLane": 5,
+        "id": 968254789,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 5,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+20.800s",
+      "level": "info",
+      "action": "ship_lost",
+      "message": "ship_lost",
+      "data": {
+        "t": 20.8,
+        "type": "ship_lost",
+        "stage": 4,
+        "score": 19000,
+        "livesBefore": 2,
+        "stageClock": 15.15,
+        "attackers": 4,
+        "enemyBullets": 1,
+        "enemies": 39,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 968254789,
+        "enemyType": "but",
+        "enemyDive": 1,
+        "enemyX": 135.85,
+        "enemyY": 329.17,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+20.800s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 20.8,
+        "type": "audio_cue",
+        "cue": "playerHit",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-death.m4a",
+        "referenceClipStart": 0.02,
+        "referenceClipDuration": 0.968,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+20.817s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 20.817,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 33,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+21.200s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 21.2,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 34,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+21.250s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 21.25,
+        "type": "enemy_lower_field",
+        "stage": 4,
+        "y": 224.57,
+        "stageClock": 15.6,
+        "playerLane": 5,
+        "id": 356510286,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+21.583s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 21.583,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 35,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+21.800s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 21.8,
+        "type": "enemy_lower_field",
+        "stage": 4,
+        "y": 370.89,
+        "stageClock": 16.15,
+        "playerLane": 5,
+        "id": 750477565,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 3,
+        "row": 1,
+        "lane": 4,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+21.817s",
+      "level": "info",
+      "action": "enemy_lower_field",
+      "message": "enemy_lower_field",
+      "data": {
+        "t": 21.817,
+        "type": "enemy_lower_field",
+        "stage": 4,
+        "y": 370.89,
+        "stageClock": 16.167,
+        "playerLane": 5,
+        "id": 915961663,
+        "enemyType": "but",
+        "enemyFamily": "scorpion",
+        "column": 2,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      }
+    },
+    {
+      "at": "+21.967s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 21.967,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 36,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+22.350s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 22.35,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 37,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+22.733s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 22.733,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 38,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+23.117s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 23.117,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 39,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+23.500s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 23.5,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 40,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+23.567s",
+      "level": "info",
+      "action": "enemy_bullet_fired",
+      "message": "enemy_bullet_fired",
+      "data": {
+        "t": 23.567,
+        "type": "enemy_bullet_fired",
+        "stage": 4,
+        "kind": "formation",
+        "x": 79.27,
+        "y": 106.16,
+        "vx": -1.59,
+        "vy": 170,
+        "bulletLane": 3,
+        "playerLane": 5,
+        "id": 943886301,
+        "enemyType": "bee",
+        "enemyFamily": "scorpion",
+        "column": 2,
+        "row": 3,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      }
+    },
+    {
+      "at": "+23.567s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 23.567,
+        "type": "audio_cue",
+        "cue": "enemyShot",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+23.583s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 23.583,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 178.82,
+        "y": 28.97,
+        "originLane": 6,
+        "targetLane": 4,
+        "playerLane": 5,
+        "id": 246164225,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 6,
+        "dive": 4,
+        "carry": false,
+        "targetX": 138.09,
+        "targetY": 138,
+        "scripted": 0
+      }
+    },
+    {
+      "at": "+23.883s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 23.883,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 41,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+24.267s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 24.267,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 42,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+24.467s",
+      "level": "info",
+      "action": "capture_started",
+      "message": "capture_started",
+      "data": {
+        "t": 24.467,
+        "type": "capture_started",
+        "stage": 4,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "id": 246164225,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false
+      }
+    },
+    {
+      "at": "+24.467s",
+      "level": "info",
+      "action": "commentator_callout",
+      "message": "commentator_callout",
+      "data": {
+        "t": 24.467,
+        "type": "commentator_callout",
+        "key": "capture_started",
+        "title": "TRACTOR BEAM",
+        "lines": [
+          "Break away or prepare a rescue."
+        ],
+        "duration": 2.35,
+        "minGap": 4.5,
+        "stage": 4,
+        "score": 19000,
+        "watchMode": false,
+        "persona": ""
+      }
+    },
+    {
+      "at": "+24.467s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 24.467,
+        "type": "audio_cue",
+        "cue": "captureBeam",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+24.650s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 24.65,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 43,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.033s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 25.033,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 44,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "fighter_captured",
+      "message": "fighter_captured",
+      "data": {
+        "t": 25.233,
+        "type": "fighter_captured",
+        "stage": 4,
+        "stageClock": 19.583,
+        "captureCountStage": 1,
+        "livesAfter": 0,
+        "playerLane": 4,
+        "timeSinceCaptureStart": 0.767,
+        "id": 246164225,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 4,
+        "dive": 3,
+        "carry": true
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "capture_retreat_phase",
+      "message": "capture_retreat_phase",
+      "data": {
+        "t": 25.233,
+        "type": "capture_retreat_phase",
+        "stage": 4,
+        "duration": 1.45,
+        "bossId": 246164225
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 25.233,
+        "type": "audio_cue",
+        "cue": "captureSuccess",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 25.233,
+        "type": "audio_cue",
+        "cue": "captureRetreat",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "aurora-rise",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "game_over",
+      "message": "game_over",
+      "data": {
+        "t": 25.233,
+        "type": "game_over",
+        "score": 19000,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "top_score_signin_prompt",
+      "message": "top_score_signin_prompt",
+      "data": {
+        "t": 25.233,
+        "type": "top_score_signin_prompt",
+        "rank": 1,
+        "score": 19000,
+        "stage": 3,
+        "canPostVideo": false,
+        "verifiedScore": false,
+        "reason": "sign_in_required"
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 25.233,
+        "type": "audio_cue",
+        "cue": "gameOver",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "aurora-crown",
+        "phase": "results",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+25.233s",
+      "level": "info",
+      "action": "capture_export_reset",
+      "message": "capture_export_reset",
+      "data": {
+        "t": 25.233,
+        "type": "capture_export_reset",
+        "reason": "stage3-perfect-transition_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 19000,
+        "lives": 0
+      }
+    }
+  ]
+}

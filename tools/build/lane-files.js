@@ -60,7 +60,9 @@ function listFilesRecursive(rootDir, prefix = ''){
 }
 
 function assetFilesForDist(distDir){
-  return listFilesRecursive(distDir, 'assets');
+  // Locally provisioned reference audio must never enter a public lane manifest.
+  return listFilesRecursive(distDir, 'assets')
+    .filter(file => !file.startsWith('assets/reference-audio/'));
 }
 
 function uniqueFiles(files){

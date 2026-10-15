@@ -551,6 +551,16 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.fillStyle='#7bd6ff';
  ctx.shadowColor='rgba(123,214,255,.34)';
  ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
+ if(state.reviewConfig){
+  ctx.fillStyle='rgba(1,8,18,.82)';
+  ctx.fillRect(69,20,142,10);
+  ctx.textAlign='center';
+  ctx.fillStyle='#9eefff';
+  ctx.shadowColor='rgba(158,239,255,.34)';
+  ctx.font='6px "Courier New", Consolas, monospace';
+  ctx.fillText(`REVIEW S5 · ${state.reviewConfig.mode==='professional-watch'?'PRO WATCH':'MANUAL'} · SEED ${state.reviewConfig.seed}`,PLAY_W*.5,22);
+  ctx.textAlign='left';
+ }
  ctx.shadowBlur=0;
  ctx.fillStyle='rgba(216,236,255,.84)';
  ctx.fillText('CREDIT 0',12,PLAY_H-20);
@@ -657,6 +667,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
    summary.stage||state.stage||1
   ).core)).size,
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
+  reviewConfig:state.reviewConfig||null,
   starfieldCount:S.st.length,
   starfieldLeadSample:[...(window.__platinumRenderDebug.starfieldLeadSample||[])]
  });

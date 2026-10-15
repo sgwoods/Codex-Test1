@@ -1,0 +1,3624 @@
+{
+  "baseline": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "targetId": 372665405,
+  "seed": 9131,
+  "generatedAt": "2026-10-11T14:43:15.854Z",
+  "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+  "sourceIdentity": {
+    "candidateTestedEnemySourceHash": "9472948c0959952d1f79d2a3f6998f94081a29054f7b7a06ed3f4739f7301c88",
+    "candidateSourceBinding": "Prior hash-bound diagnosis and preserved candidate bundle; current checkout source is restored baseline.",
+    "currentCandidateCheckoutEnemySourceHash": "1456799e1fadd17e9fc65ce387abd64811a67231ed1bdc866b914ac40f2d8815",
+    "baselineEnemySourceHash": "1456799e1fadd17e9fc65ce387abd64811a67231ed1bdc866b914ac40f2d8815",
+    "candidatePatchHash": "7d57374a8017c7f6fa30ecf90a54807a534edb8eb5f39025708cd455276fee99"
+  },
+  "preservedCandidateBundleHash": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba",
+  "conclusions": [
+    "Earlier real target interceptions found in both candidate and separately built baseline.",
+    "Earlier witnesses qualify the prior9-12s sampled absence; they do not accept the rejected exit or fix its completion defect."
+  ],
+  "limitations": [
+    "One seed, two reachable far-right columns; independent one-shot restarts, not a full route.",
+    "Movement release is partly wall-clock dependent; compare actual shipX and shotX, not move labels alone.",
+    "Some early/late hits occur near clipped target boundaries; matched no-fire poses are diagnostic only.",
+    "No audio/readability/perfect feasibility acceptance; no gameplay path edits or candidate rebuild."
+  ],
+  "rows": [
+    {
+      "variant": "candidate",
+      "move": "right30",
+      "trials": 11,
+      "firstFrame": 330,
+      "lastFrame": 390,
+      "originalPath": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-41-36-568Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/candidate-2026-10-11T14-41-36-568Z-cf0e7a66.json",
+      "rawHash": "08c129f4347b5e3a24a08446f930f36c9459614131c889f60ad9d968c7b310d4",
+      "bundleHash": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-stage31-exit-trial-oct08",
+        "state": "codex/aurora-stage31-exit-trial-oct08@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M src/js/06-enemy-behavior.js",
+          "M tools/harness/measure-challenge-shot-witnesses.js",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-14-21-468Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-06-915Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-56-157Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-06-357Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-10-337Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-14-328Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-08T20-20-12-894Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-24-25-159Z-cf0e7a66/"
+        ],
+        "builtAtUtc": "2026-10-11T14:26:40.765Z",
+        "builtAtEt": "Oct 11 2026, 10:26 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 8,
+        "551507219": 1,
+        "783339713": 2
+      },
+      "misses": 0,
+      "targetHits": 8,
+      "otherFirstHits": 3,
+      "shipXs": [
+        256.73,
+        259.93
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    },
+    {
+      "variant": "candidate",
+      "move": "right40",
+      "trials": 11,
+      "firstFrame": 330,
+      "lastFrame": 390,
+      "originalPath": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-41-38-254Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/candidate-2026-10-11T14-41-38-254Z-cf0e7a66.json",
+      "rawHash": "5ee120f65ed74726018b93ef71e7444f82cbb4720f8de113360108d65b2fdd9e",
+      "bundleHash": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-stage31-exit-trial-oct08",
+        "state": "codex/aurora-stage31-exit-trial-oct08@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M src/js/06-enemy-behavior.js",
+          "M tools/harness/measure-challenge-shot-witnesses.js",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-14-21-468Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-06-915Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-56-157Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-06-357Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-10-337Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-14-328Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-08T20-20-12-894Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-24-25-159Z-cf0e7a66/"
+        ],
+        "builtAtUtc": "2026-10-11T14:26:40.765Z",
+        "builtAtEt": "Oct 11 2026, 10:26 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 9,
+        "783339713": 2
+      },
+      "misses": 0,
+      "targetHits": 9,
+      "otherFirstHits": 2,
+      "shipXs": [
+        267
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.5,
+          "killTime": 5.817,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.817,
+            "x": 290.72,
+            "y": 103.71,
+            "u": 1.825950000000001,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    },
+    {
+      "variant": "candidate",
+      "move": "right30",
+      "trials": 41,
+      "firstFrame": 300,
+      "lastFrame": 540,
+      "originalPath": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-41-58-020Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/candidate-2026-10-11T14-41-58-020Z-cf0e7a66.json",
+      "rawHash": "53d0b599e4e06d22c5011bdc0f3827b8d23576e95379acb46d19f14fb0ae7381",
+      "bundleHash": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-stage31-exit-trial-oct08",
+        "state": "codex/aurora-stage31-exit-trial-oct08@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M src/js/06-enemy-behavior.js",
+          "M tools/harness/measure-challenge-shot-witnesses.js",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-14-21-468Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-06-915Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-56-157Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-06-357Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-10-337Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-14-328Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-08T20-20-12-894Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-24-25-159Z-cf0e7a66/"
+        ],
+        "builtAtUtc": "2026-10-11T14:26:40.765Z",
+        "builtAtEt": "Oct 11 2026, 10:26 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 14,
+        "551507219": 1,
+        "783339713": 21,
+        "809515661": 5
+      },
+      "misses": 0,
+      "targetHits": 14,
+      "otherFirstHits": 27,
+      "shipXs": [
+        259.93,
+        256.73
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.5,
+          "killTime": 8.633,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.633,
+            "x": 285.36,
+            "y": 207.78,
+            "u": 6.724133333333345,
+            "phase": "middle",
+            "bias": 11.589749432506945,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.6,
+          "killTime": 8.733,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.733,
+            "x": 283.6,
+            "y": 214.91,
+            "u": 6.898033333333347,
+            "phase": "middle",
+            "bias": 12.540684215564806,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.7,
+          "killTime": 8.817,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.817,
+            "x": 282.14,
+            "y": 220.84,
+            "u": 7.0429500000000145,
+            "phase": "middle",
+            "bias": 13.361767377582726,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.8,
+          "killTime": 8.9,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.9,
+            "x": 280.67,
+            "y": 226.77,
+            "u": 7.187866666666682,
+            "phase": "middle",
+            "bias": 14.208884639118548,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.9,
+          "killTime": 9,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9,
+            "x": 278.91,
+            "y": 233.88,
+            "u": 7.361766666666684,
+            "phase": "middle",
+            "bias": 15.259790364325168,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 9,
+          "killTime": 9.083,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 9.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9.083,
+            "x": 277.44,
+            "y": 239.8,
+            "u": 7.506683333333352,
+            "phase": "middle",
+            "bias": 16.16418264480039,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    },
+    {
+      "variant": "candidate",
+      "move": "right40",
+      "trials": 41,
+      "firstFrame": 300,
+      "lastFrame": 540,
+      "originalPath": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-42-01-796Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/candidate-2026-10-11T14-42-01-796Z-cf0e7a66.json",
+      "rawHash": "52fccb4e8cf18b297c1bf222aeee7c0acbc96d47d32865fe112d097adcb2e3a6",
+      "bundleHash": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-stage31-exit-trial-oct08",
+        "state": "codex/aurora-stage31-exit-trial-oct08@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M src/js/06-enemy-behavior.js",
+          "M tools/harness/measure-challenge-shot-witnesses.js",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-14-21-468Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-06-915Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-56-157Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-06-357Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-10-337Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-14-328Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-08T20-20-12-894Z-cf0e7a66/",
+          "?? reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-24-25-159Z-cf0e7a66/"
+        ],
+        "builtAtUtc": "2026-10-11T14:26:40.765Z",
+        "builtAtEt": "Oct 11 2026, 10:26 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 20,
+        "783339713": 16,
+        "809515661": 5
+      },
+      "misses": 0,
+      "targetHits": 20,
+      "otherFirstHits": 21,
+      "shipXs": [
+        267
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.5,
+          "killTime": 5.817,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.817,
+            "x": 290.72,
+            "y": 103.71,
+            "u": 1.825950000000001,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8,
+          "killTime": 8.2,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.2,
+            "x": 292.99,
+            "y": 176.74,
+            "u": 5.970566666666672,
+            "phase": "middle",
+            "bias": 7.902239455234182,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.1,
+          "killTime": 8.283,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.283,
+            "x": 291.52,
+            "y": 182.73,
+            "u": 6.11548333333334,
+            "phase": "middle",
+            "bias": 8.556704380337493,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.2,
+          "killTime": 8.367,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.367,
+            "x": 290.06,
+            "y": 188.7,
+            "u": 6.260400000000008,
+            "phase": "middle",
+            "bias": 9.237203404958715,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.3,
+          "killTime": 8.467,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.467,
+            "x": 288.3,
+            "y": 195.86,
+            "u": 6.434300000000009,
+            "phase": "middle",
+            "bias": 10.088167245867812,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.4,
+          "killTime": 8.55,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.417,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.55,
+            "x": 286.83,
+            "y": 201.82,
+            "u": 6.579216666666677,
+            "phase": "middle",
+            "bias": 10.825941289428428,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.5,
+          "killTime": 8.633,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.633,
+            "x": 285.36,
+            "y": 207.78,
+            "u": 6.724133333333345,
+            "phase": "middle",
+            "bias": 11.589749432506945,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.6,
+          "killTime": 8.733,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.733,
+            "x": 283.6,
+            "y": 214.91,
+            "u": 6.898033333333347,
+            "phase": "middle",
+            "bias": 12.540684215564806,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.7,
+          "killTime": 8.817,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.817,
+            "x": 282.14,
+            "y": 220.84,
+            "u": 7.0429500000000145,
+            "phase": "middle",
+            "bias": 13.361767377582726,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.8,
+          "killTime": 8.9,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.9,
+            "x": 280.67,
+            "y": 226.77,
+            "u": 7.187866666666682,
+            "phase": "middle",
+            "bias": 14.208884639118548,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.9,
+          "killTime": 9,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9,
+            "x": 278.91,
+            "y": 233.88,
+            "u": 7.361766666666684,
+            "phase": "middle",
+            "bias": 15.259790364325168,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 9,
+          "killTime": 9.083,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 9.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9.083,
+            "x": 277.44,
+            "y": 239.8,
+            "u": 7.506683333333352,
+            "phase": "middle",
+            "bias": 16.16418264480039,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    },
+    {
+      "variant": "baseline",
+      "move": "right30",
+      "trials": 41,
+      "firstFrame": 300,
+      "lastFrame": 540,
+      "originalPath": "/private/tmp/aurora-earlier-shots-baseline-oct11/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-42-05-610Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/baseline-2026-10-11T14-42-05-610Z-cf0e7a66.json",
+      "rawHash": "8b4c725734e4715ea3cb214765e8f2dc820665b0431da221719d9ba150b8b5ee",
+      "bundleHash": "58cc0c3436c8b4a30500eefb91850a80cb862f8e263a5715f96cee0470188f83",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-earlier-shots-baseline-oct11",
+        "state": "codex/aurora-earlier-shots-baseline-oct11@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M tools/harness/measure-challenge-shot-witnesses.js"
+        ],
+        "builtAtUtc": "2026-10-11T14:41:31.924Z",
+        "builtAtEt": "Oct 11 2026, 10:41 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 14,
+        "551507219": 1,
+        "783339713": 21,
+        "809515661": 5
+      },
+      "misses": 0,
+      "targetHits": 14,
+      "otherFirstHits": 27,
+      "shipXs": [
+        259.93,
+        256.73
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.5,
+          "killTime": 8.633,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.633,
+            "x": 285.36,
+            "y": 207.78,
+            "u": 6.724133333333345,
+            "phase": "middle",
+            "bias": 11.589749432506945,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.6,
+          "killTime": 8.75,
+          "shipX": 256.73,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 256.73,
+            "y": 317,
+            "shotXs": [
+              256.73
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.75,
+            "x": 283.31,
+            "y": 216.1,
+            "u": 6.92701666666668,
+            "phase": "middle",
+            "bias": 12.702818120006965,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.7,
+          "killTime": 8.817,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.817,
+            "x": 282.14,
+            "y": 220.84,
+            "u": 7.0429500000000145,
+            "phase": "middle",
+            "bias": 13.361767377582726,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.8,
+          "killTime": 8.9,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.9,
+            "x": 280.67,
+            "y": 226.77,
+            "u": 7.187866666666682,
+            "phase": "middle",
+            "bias": 14.208884639118548,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.9,
+          "killTime": 9,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9,
+            "x": 278.91,
+            "y": 233.88,
+            "u": 7.361766666666684,
+            "phase": "middle",
+            "bias": 15.259790364325168,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 9,
+          "killTime": 9.083,
+          "shipX": 259.93,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 9.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 259.93,
+            "y": 317,
+            "shotXs": [
+              259.93
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9.083,
+            "x": 277.44,
+            "y": 239.8,
+            "u": 7.506683333333352,
+            "phase": "middle",
+            "bias": 16.16418264480039,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    },
+    {
+      "variant": "baseline",
+      "move": "right40",
+      "trials": 41,
+      "firstFrame": 300,
+      "lastFrame": 540,
+      "originalPath": "/private/tmp/aurora-earlier-shots-baseline-oct11/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-42-09-301Z-cf0e7a66/report.json",
+      "rawPrivatePath": "/private/tmp/aurora-stage31-exit-trial-oct08/private-artifacts/repo-mirror/reference-artifacts/analyses/earlier-shots-oct11/baseline-2026-10-11T14-42-09-301Z-cf0e7a66.json",
+      "rawHash": "eb7670fd6f694308014be0ef32ecd9d1fe3c3b6e2dd33249e3c82efb8a47fb3e",
+      "bundleHash": "58cc0c3436c8b4a30500eefb91850a80cb862f8e263a5715f96cee0470188f83",
+      "methodHash": "8a56549a637a55d22736eb773ec87f5e8f10f62a2095167c625728fef95eac55",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "versionScheme": "hosted-dev-increment",
+        "label": "1.4.1.1+build.1226.sha.cf0e7a66.dirty",
+        "buildNumber": "1226",
+        "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+        "shortCommit": "cf0e7a66",
+        "branch": "codex/aurora-earlier-shots-baseline-oct11",
+        "state": "codex/aurora-earlier-shots-baseline-oct11@cf0e7a66 dirty",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "dirty": true,
+        "dirtyFiles": [
+          "M tools/harness/measure-challenge-shot-witnesses.js"
+        ],
+        "builtAtUtc": "2026-10-11T14:41:31.924Z",
+        "builtAtEt": "Oct 11 2026, 10:41 AM EDT",
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ],
+        "development": {
+          "baseVersion": "1.4.1",
+          "iteration": 1,
+          "versionLine": "1.4.1.1",
+          "releaseTrack": "hosted-dev-increment",
+          "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+        },
+        "supabaseConfigured": true,
+        "latestReleaseNote": {
+          "version": "1.4.1",
+          "date": "2026-06-11",
+          "title": "1.4.1 production quality release",
+          "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+          "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+        }
+      },
+      "firstHitCounts": {
+        "372665405": 20,
+        "783339713": 16,
+        "809515661": 5
+      },
+      "misses": 0,
+      "targetHits": 20,
+      "otherFirstHits": 21,
+      "shipXs": [
+        267
+      ],
+      "witnesses": [
+        {
+          "launchTime": 5.5,
+          "killTime": 5.817,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.817,
+            "x": 290.72,
+            "y": 103.71,
+            "u": 1.825950000000001,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.6,
+          "killTime": 5.917,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 5.917,
+            "x": 285.23,
+            "y": 107.4,
+            "u": 1.9998500000000012,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.7,
+          "killTime": 6.017,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.017,
+            "x": 279.75,
+            "y": 111.08,
+            "u": 2.17375,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.8,
+          "killTime": 6.1,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.1,
+            "x": 275.18,
+            "y": 114.16,
+            "u": 2.3186666666666658,
+            "phase": "entry",
+            "bias": 0,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 5.9,
+          "killTime": 6.2,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 5.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.2,
+            "x": 269.69,
+            "y": 117.85,
+            "u": 2.4925666666666646,
+            "phase": "entry",
+            "bias": 0.005311108126721535,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6,
+          "killTime": 6.3,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.3,
+            "x": 264.21,
+            "y": 121.57,
+            "u": 2.6664666666666634,
+            "phase": "entry",
+            "bias": 0.044011044077133944,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.1,
+          "killTime": 6.383,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.383,
+            "x": 259.64,
+            "y": 124.71,
+            "u": 2.811383333333329,
+            "phase": "entry",
+            "bias": 0.10489850017217418,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.2,
+          "killTime": 6.483,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.483,
+            "x": 254.15,
+            "y": 128.5,
+            "u": 2.985283333333328,
+            "phase": "entry",
+            "bias": 0.21232845884985843,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 6.3,
+          "killTime": 6.567,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 6.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 6.567,
+            "x": 249.58,
+            "y": 131.69,
+            "u": 3.1301999999999937,
+            "phase": "entry",
+            "bias": 0.3304909338842918,
+            "full": true,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8,
+          "killTime": 8.2,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.2,
+            "x": 292.99,
+            "y": 176.74,
+            "u": 5.970566666666672,
+            "phase": "middle",
+            "bias": 7.902239455234182,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.1,
+          "killTime": 8.283,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.117,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.283,
+            "x": 291.52,
+            "y": 182.73,
+            "u": 6.11548333333334,
+            "phase": "middle",
+            "bias": 8.556704380337493,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.2,
+          "killTime": 8.367,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.217,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.367,
+            "x": 290.06,
+            "y": 188.7,
+            "u": 6.260400000000008,
+            "phase": "middle",
+            "bias": 9.237203404958715,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.3,
+          "killTime": 8.467,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.317,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.467,
+            "x": 288.3,
+            "y": 195.86,
+            "u": 6.434300000000009,
+            "phase": "middle",
+            "bias": 10.088167245867812,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.4,
+          "killTime": 8.55,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.417,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.55,
+            "x": 286.83,
+            "y": 201.82,
+            "u": 6.579216666666677,
+            "phase": "middle",
+            "bias": 10.825941289428428,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.5,
+          "killTime": 8.633,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.517,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.633,
+            "x": 285.36,
+            "y": 207.78,
+            "u": 6.724133333333345,
+            "phase": "middle",
+            "bias": 11.589749432506945,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.6,
+          "killTime": 8.733,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.617,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.733,
+            "x": 283.6,
+            "y": 214.91,
+            "u": 6.898033333333347,
+            "phase": "middle",
+            "bias": 12.540684215564806,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.7,
+          "killTime": 8.817,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.717,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.817,
+            "x": 282.14,
+            "y": 220.84,
+            "u": 7.0429500000000145,
+            "phase": "middle",
+            "bias": 13.361767377582726,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.8,
+          "killTime": 8.9,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.817,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 8.9,
+            "x": 280.67,
+            "y": 226.77,
+            "u": 7.187866666666682,
+            "phase": "middle",
+            "bias": 14.208884639118548,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 8.9,
+          "killTime": 9,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 8.917,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9,
+            "x": 278.91,
+            "y": 233.88,
+            "u": 7.361766666666684,
+            "phase": "middle",
+            "bias": 15.259790364325168,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        },
+        {
+          "launchTime": 9,
+          "killTime": 9.083,
+          "shipX": 267,
+          "shipVx": 0,
+          "targetId": 372665405,
+          "shot": {
+            "t": 9.017,
+            "type": "player_shot",
+            "dual": false,
+            "shots": 1,
+            "x": 267,
+            "y": 317,
+            "shotXs": [
+              267
+            ],
+            "spread": 0,
+            "activeBullets": 1,
+            "captureWindow": false
+          },
+          "closestNoFirePose": {
+            "t": 9.083,
+            "x": 277.44,
+            "y": 239.8,
+            "u": 7.506683333333352,
+            "phase": "middle",
+            "bias": 16.16418264480039,
+            "full": false,
+            "bodyOverlap": false,
+            "zeroBiasOverlap": false,
+            "crowded": false,
+            "timeDifference": 0
+          },
+          "poseQualification": "Matched no-fire trace sample, not a direct shot-run sprite measurement."
+        }
+      ]
+    }
+  ]
+}

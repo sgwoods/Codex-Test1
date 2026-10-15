@@ -1,0 +1,286 @@
+{
+  "baseline": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "artifactHash": "d86e64702c5174e791409385c81901817af4e750d56a68e7a39c3eb311ff24b5",
+  "toolHash": "bc520d6708f68b049ed424971c384dce042b91e0ab108e7c9f1fc99c24c3dd6b",
+  "testHash": "98515e555f5756fa0633842fc5ecdbea49cebf8240a281c00e56c0863acba5f4",
+  "archivedLeadEnemySourceHash": "f5cfea660e80d062a70f2d410a5723eaf6dc76d0743582bccd331b3a4f325dcb",
+  "verdict": "Working bounded developer-only instrument. Stage31 perfect feasibility inconclusive; normal internal1 stage-clear witness reproduced with two losses.",
+  "reports": [
+    {
+      "cfg": {
+        "stage": 31,
+        "seed": 9131,
+        "seconds": 25,
+        "mode": "challenge"
+      },
+      "verdict": "INCONCLUSIVE: no reproducible perfect witness",
+      "rawReport": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-47-25-469Z/report.json",
+      "rawReportHash": "a8581180e39885c02c22d55a2dc8b3b2a5f460b2c71cd9b2e969582dc8ab0e6f",
+      "executedTool": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-47-25-469Z/executed-tool.js",
+      "toolHash": "bc520d6708f68b049ed424971c384dce042b91e0ab108e7c9f1fc99c24c3dd6b",
+      "frames": 1172,
+      "exactRecordedProjectionReplay": true,
+      "orderedEventsExact": true,
+      "effectCountDifferenceFrames": 251,
+      "comparisonScope": "Recorded projection: snapshot excluding effect count, raw player/enemy poses and hp/miss, player bullets, stats, challenge counters, RNG, elapsed clock; ordered shot/kill/clear/loss events. Not complete runtime equivalence; enemy bullets, AI timers and audio are not compared. Raw effect counts retained.",
+      "clockMethod": "Playwright installed clock, paused before human launch;17/17/16ms wall-time cycle, exactly1/60 game update each tick. Elapsed performance clock compared; absolute origin retained. No runtime/global dt scaling.",
+      "firstAudit": {
+        "errors": [],
+        "clear": {
+          "t": 19.533,
+          "type": "challenge_clear",
+          "stage": 31,
+          "hits": 37,
+          "total": 40,
+          "upperBandY": 144,
+          "upperBandTime": 70.017,
+          "avgUpperBandTime": 1.75
+        },
+        "kills": 37,
+        "uniqueKills": 37,
+        "misses": 3,
+        "shots": 80,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.329999999999998,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999787,
+        "perfect": false
+      },
+      "replayAudit": {
+        "errors": [],
+        "clear": {
+          "t": 19.533,
+          "type": "challenge_clear",
+          "stage": 31,
+          "hits": 37,
+          "total": 40,
+          "upperBandY": 144,
+          "upperBandTime": 70.017,
+          "avgUpperBandTime": 1.75
+        },
+        "kills": 37,
+        "uniqueKills": 37,
+        "misses": 3,
+        "shots": 80,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.329999999999998,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999787,
+        "perfect": false
+      },
+      "missingInitialIds": [
+        218173522,
+        352310587,
+        353909248
+      ],
+      "actualMovement": {
+        "maxAbsVx": 439.7362134748868,
+        "maxRawDeltaX": 7.328936891248112
+      }
+    },
+    {
+      "cfg": {
+        "stage": 1,
+        "seed": 9131,
+        "seconds": 25,
+        "mode": "normal"
+      },
+      "verdict": "FEASIBLE normal stage-clear witness, this artifact/stage/seed only",
+      "rawReport": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-48-27-883Z/report.json",
+      "rawReportHash": "761d54416f38dd78833d83ec72124f0972b17a349a4547dcc4bda7a43f451161",
+      "executedTool": "/private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/2026-10-12T16-48-27-883Z/executed-tool.js",
+      "toolHash": "bc520d6708f68b049ed424971c384dce042b91e0ab108e7c9f1fc99c24c3dd6b",
+      "frames": 1377,
+      "exactRecordedProjectionReplay": true,
+      "orderedEventsExact": true,
+      "effectCountDifferenceFrames": 290,
+      "comparisonScope": "Recorded projection: snapshot excluding effect count, raw player/enemy poses and hp/miss, player bullets, stats, challenge counters, RNG, elapsed clock; ordered shot/kill/clear/loss events. Not complete runtime equivalence; enemy bullets, AI timers and audio are not compared. Raw effect counts retained.",
+      "clockMethod": "Playwright installed clock, paused before human launch;17/17/16ms wall-time cycle, exactly1/60 game update each tick. Elapsed performance clock compared; absolute origin retained. No runtime/global dt scaling.",
+      "firstAudit": {
+        "errors": [],
+        "clear": {
+          "t": 22.95,
+          "type": "stage_clear",
+          "stage": 1,
+          "score": 3170
+        },
+        "kills": 40,
+        "uniqueKills": 40,
+        "misses": null,
+        "shots": 73,
+        "shipLossEvents": [
+          {
+            "t": 15.05,
+            "type": "ship_lost",
+            "stage": 1,
+            "score": 2390,
+            "livesBefore": 3,
+            "stageClock": 15.05,
+            "attackers": 1,
+            "enemyBullets": 0,
+            "enemies": 11,
+            "playerX": 120.14,
+            "playerY": 335,
+            "playerLane": 4,
+            "dual": false,
+            "pending": false,
+            "carriedEnemies": 0,
+            "timeSinceCaptureStart": null,
+            "timeSinceFighterCaptured": null,
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "cause": "enemy_bullet",
+            "bulletKind": "script",
+            "sourceId": 846875839,
+            "sourceType": "bee",
+            "sourceDive": 0,
+            "bulletX": 125.19,
+            "bulletY": 337.72,
+            "bulletLane": 4,
+            "bulletVx": -1.53,
+            "bulletVy": 156
+          },
+          {
+            "t": 19.117,
+            "type": "ship_lost",
+            "stage": 1,
+            "score": 2830,
+            "livesBefore": 2,
+            "stageClock": 19.117,
+            "attackers": 0,
+            "enemyBullets": 0,
+            "enemies": 5,
+            "playerX": 84.46,
+            "playerY": 335,
+            "playerLane": 3,
+            "dual": false,
+            "pending": false,
+            "carriedEnemies": 0,
+            "timeSinceCaptureStart": null,
+            "timeSinceFighterCaptured": null,
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "cause": "enemy_bullet",
+            "bulletKind": "dive",
+            "sourceId": 920385788,
+            "sourceType": "but",
+            "sourceDive": 1,
+            "bulletX": 85.49,
+            "bulletY": 331.2,
+            "bulletLane": 3,
+            "bulletVx": 10.06,
+            "bulletVy": 156
+          }
+        ],
+        "lives": 1,
+        "maxMovementPerTick": 7.280000000000001,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.24999999999999978,
+        "perfect": false
+      },
+      "replayAudit": {
+        "errors": [],
+        "clear": {
+          "t": 22.95,
+          "type": "stage_clear",
+          "stage": 1,
+          "score": 3170
+        },
+        "kills": 40,
+        "uniqueKills": 40,
+        "misses": null,
+        "shots": 73,
+        "shipLossEvents": [
+          {
+            "t": 15.05,
+            "type": "ship_lost",
+            "stage": 1,
+            "score": 2390,
+            "livesBefore": 3,
+            "stageClock": 15.05,
+            "attackers": 1,
+            "enemyBullets": 0,
+            "enemies": 11,
+            "playerX": 120.14,
+            "playerY": 335,
+            "playerLane": 4,
+            "dual": false,
+            "pending": false,
+            "carriedEnemies": 0,
+            "timeSinceCaptureStart": null,
+            "timeSinceFighterCaptured": null,
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "cause": "enemy_bullet",
+            "bulletKind": "script",
+            "sourceId": 846875839,
+            "sourceType": "bee",
+            "sourceDive": 0,
+            "bulletX": 125.19,
+            "bulletY": 337.72,
+            "bulletLane": 4,
+            "bulletVx": -1.53,
+            "bulletVy": 156
+          },
+          {
+            "t": 19.117,
+            "type": "ship_lost",
+            "stage": 1,
+            "score": 2830,
+            "livesBefore": 2,
+            "stageClock": 19.117,
+            "attackers": 0,
+            "enemyBullets": 0,
+            "enemies": 5,
+            "playerX": 84.46,
+            "playerY": 335,
+            "playerLane": 3,
+            "dual": false,
+            "pending": false,
+            "carriedEnemies": 0,
+            "timeSinceCaptureStart": null,
+            "timeSinceFighterCaptured": null,
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "cause": "enemy_bullet",
+            "bulletKind": "dive",
+            "sourceId": 920385788,
+            "sourceType": "but",
+            "sourceDive": 1,
+            "bulletX": 85.49,
+            "bulletY": 331.2,
+            "bulletLane": 3,
+            "bulletVx": 10.06,
+            "bulletVy": 156
+          }
+        ],
+        "lives": 1,
+        "maxMovementPerTick": 7.280000000000001,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.24999999999999978,
+        "perfect": false
+      },
+      "missingInitialIds": [],
+      "actualMovement": {
+        "maxAbsVx": 436.85223338860766,
+        "maxRawDeltaX": 7.280870556476799
+      }
+    }
+  ],
+  "limits": [
+    "Only one challenge and one normal stage, seed9131, no optimization/search.",
+    "Recorded projection and ordered event reproducibility, not complete runtime/render/audio equivalence.",
+    "Omniscient target-reading diagnostic controller; normal keys and real engine rules, not human reaction proof.",
+    "Copied lead artifact authoritative; baseline source checkout was not built. No release/whole-game acceptance."
+  ]
+}

@@ -215,7 +215,7 @@ function stepAuroraRuntime(state,dt,input={}){
   const list=Object.values(bottoms);
   if(list.length){
    let pool=list;
-   let bulletVx=rnd(2,-2),bulletVy=154+S.stage*4;
+   let bulletVx=rnd(2,-2),bulletVy=154+combatEffectiveStage(S.stage)*4;
    if(S.stage===4&&S.stageClock<12){
     // Early Stage 4 formation shots should pressure movement without coming
     // straight down the player's current lane while dive pressure is already active.

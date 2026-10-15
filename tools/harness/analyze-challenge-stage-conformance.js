@@ -259,9 +259,13 @@ function challengeTargetContractForStage(stage){
     sourceWindowId: `challenge-${String(intent.challengeNumber).padStart(2, '0')}-target-video-object-tracks`,
     targetRead: intent.target,
     targetVideoOnly: true,
+    referenceEvidenceContract: directTarget.evidenceContract || null,
+    scoreInterpretation: 'heuristic-diagnostic',
+    acceptedFullPathConformance: false,
+    acceptedGroupMappingConformance: false,
     groups: directTarget.targetGroups.map(group => ({
       groupIndex: group.groupIndex,
-      role: `target-video group ${group.groupIndex}`,
+      role: `target-video heuristic temporal cluster ${group.groupIndex}`,
       expectedTypes: [],
       expectedFamilies: [],
       pathFamily: '',
@@ -271,7 +275,7 @@ function challengeTargetContractForStage(stage){
       targetVideoConfidence: group.confidence,
       targetVideoTrackCount: group.trackCount
     })),
-    successRead: 'Runtime challenge waves should match the source-video movement envelope: group count, first/last visibility, entry and exit side, x/y range, lower-field travel, turns, and path length.',
+    successRead: 'Compare observed movement envelopes diagnostically; cropped tracklets and inferred clusters do not establish complete paths, full entry or verified wave correspondence.',
     nextPromotion: 'Add exact group labels and sprite identity recognition so the target-video object tracks are joined to alien type/family scoring.'
   };
 }
@@ -1878,6 +1882,10 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     targetContractDeclaredPathFamilyFit: score.strictAxisReads.targetContractFit?.declaredPathFamilyFit ?? null,
     targetVideoObjectTrackRead: score.strictAxisReads.targetContractFit?.objectTrackRead || 'Target-video object-track comparison pending.',
     targetVideoObjectTrackFitScore10: score.strictAxisReads.targetContractFit?.directTargetVideoObjectFitScore10 ?? null,
+    referenceEvidenceContract: galagaChallengeObjectTrackForStage(stage)?.evidenceContract || null,
+    scoreInterpretation: 'heuristic-diagnostic',
+    acceptedFullPathConformance: false,
+    acceptedGroupMappingConformance: false,
     targetVideoObjectTrackCoverage: score.strictAxisReads.targetContractFit?.directTargetVideoTrackCoverage ?? null,
     targetVideoObjectTrackEvidence: score.strictAxisReads.targetContractFit?.directTargetVideoEvidence || null,
     criticalGaps: criticalGaps(stage, runtime, match, score),
@@ -2003,7 +2011,7 @@ ${stageSections}
 
 ## Plan To Improve
 
-1. Treat the current strict scores as the release-facing truth: the broad coverage score is diagnostic only.
+1. Treat reference-derived scores as heuristic diagnostics, not release acceptance. Validate complete paths and wave identity independently; retain separately measured runtime safety checks.
 2. Build the challenge-stage target grammar: per-challenge group order, first-visible frame, entry side, exit side, path length, turn count, featured alien family, scoring window, perfect-bonus expectation, and result feedback.
 3. Implement Stage 3 / Challenging Stage 1 first: top-right bee line, late top-left butterfly line, visibly longer upper-band sweep, clear peel-off exits, no combat grammar, and reference-matched duration/turn count.
 4. Implement Stage 7 / Challenging Stage 2 as a different authored set piece, not just wider Stage 3: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
@@ -2082,7 +2090,7 @@ function trajectoryDiagramSvg(row){
   <rect class="bg" x="0" y="0" width="760" height="300"/>
   <text class="text" x="24" y="34">${svgEsc(label)}</text>
   <rect class="pill" x="560" y="14" width="176" height="32" rx="16"/>
-  <text class="small" x="576" y="35">${svgEsc(row.conformanceScore10)}/10 strict score</text>
+  <text class="small" x="576" y="35">${svgEsc(row.conformanceScore10)}/10 diagnostic</text>
   <rect class="panel" x="40" y="56" width="268" height="190" rx="10"/>
   <rect class="panel" x="328" y="56" width="268" height="190" rx="10"/>
   <text class="small" x="58" y="82">Galaga target vector</text>
@@ -2226,6 +2234,11 @@ async function buildReport(options = {}){
     targetContractFitScore10: round(average(rows.map(row => row.targetContractFitScore10)), 1),
     targetVideoObjectTrackFitScore10: round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1),
     targetTrackReadinessScore10: targetObjectTracks?.summary?.targetTrackReadinessScore10 ?? null,
+    referenceEvidenceContracts: (targetObjectTracks?.challenges || []).map(row => ({ challengeNumber: row.challengeNumber, contract: row.evidenceContract || null })),
+    scoreInterpretation: 'heuristic-diagnostic',
+    acceptedFullPathConformance: false,
+    acceptedGroupMappingConformance: false,
+    referenceLimitations: 'Cropped-field centroid tracklets; heuristic five-cluster grouping; 8fps resampling without native PTS; shot censoring unknown; complete paths and individual/group identities not established.',
     spriteMotionCorrespondenceScore10: spriteMotionCorrespondence.averageScore10 ?? null,
     spriteMotionCorrespondenceTimingStatus: spriteMotionCorrespondence.targetTimingStatus,
     safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
@@ -2308,7 +2321,7 @@ async function buildReport(options = {}){
     },
     spriteMotionCorrespondence,
     improvementPlan: [
-      'Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.',
+      'Use reference-derived scores as heuristic diagnostics; require independent path and wave-identity acceptance before release claims.',
       'Define a challenge-stage target grammar for group order, entry/exit side, path length, turn count, featured alien, scoring window, perfect bonus, animation phases, and result feedback.',
       'Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.',
       'Stage 7: rebuild Challenging Stage 2 as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.',

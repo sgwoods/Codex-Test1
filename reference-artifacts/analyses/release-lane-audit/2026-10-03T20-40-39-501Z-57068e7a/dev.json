@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-03T20:40:39.680Z",
+  "url": "https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json",
+  "httpDate": "Sat, 03 Oct 2026 20:40:39 GMT",
+  "lastModified": "Fri, 12 Jun 2026 11:27:02 GMT",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "versionScheme": "hosted-dev-increment",
+    "label": "1.4.1.1+build.1177.sha.1d9966d1",
+    "buildNumber": "1177",
+    "commit": "1d9966d1ac60b9ef82012f5dc9c9926be90a7bf6",
+    "shortCommit": "1d9966d1",
+    "branch": "main",
+    "state": "main@1d9966d1 clean",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "dirty": false,
+    "dirtyFiles": [],
+    "builtAtUtc": "2026-06-12T11:26:03.441Z",
+    "builtAtEt": "Jun 12 2026, 7:26 AM EDT",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ],
+    "development": {
+      "baseVersion": "1.4.1",
+      "iteration": 1,
+      "versionLine": "1.4.1.1",
+      "releaseTrack": "hosted-dev-increment",
+      "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+    },
+    "supabaseConfigured": true,
+    "latestReleaseNote": {
+      "version": "1.4.1",
+      "date": "2026-06-11",
+      "title": "1.4.1 production quality release",
+      "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+      "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+    }
+  }
+}

@@ -1,0 +1,2682 @@
+{
+  "commit": "85010e73f05154389144c278eea79ad767397497",
+  "generatedAt": "2026-10-03T19:51:36.179Z",
+  "methodHash": "57494343d035deb0fb13f15a069a0f117cb734a2cfd8ba6dcc9145581c1a482d",
+  "bundleHash": "0ef629972aa5510cc0f2545ff58ba09aa48c0853d6d1bf8d9b3e7172b2d5282d",
+  "sourceHash": "78d48d9fa4f0b8fb2689407ca04f87c1d95414f105ba4a6cb97258e16e6f7f39",
+  "method": "Normal development challenge launch; original spawn delays; 60Hz no-input runtime; rendered sprite bounds and phase-boundary displacement.",
+  "limitations": [
+    "Single seed per stage, not full playthrough or professional routeability.",
+    "12px join threshold catches teleport-scale jumps; it is not a reference-derived speed limit.",
+    "Exit joins may be unobserved when targets leave the playfield earlier."
+  ],
+  "results": [
+    {
+      "stage": 27,
+      "actualStage": 27,
+      "expectedTargets": 40,
+      "initialSpawnDelays": [
+        0.96,
+        1.03,
+        1.11,
+        1.19,
+        0.96,
+        1.03,
+        1.11,
+        1.19,
+        1.96,
+        2.04,
+        2.11,
+        2.19,
+        1.96,
+        2.04,
+        2.11,
+        2.19,
+        2.96,
+        3.04,
+        3.11,
+        3.19,
+        2.96,
+        3.04,
+        3.11,
+        3.19,
+        3.96,
+        4.04,
+        4.11,
+        4.18,
+        3.96,
+        4.04,
+        4.11,
+        4.18,
+        4.96,
+        5.04,
+        5.11,
+        5.18,
+        4.96,
+        5.04,
+        5.11,
+        5.18
+      ],
+      "completed": true,
+      "elapsedSeconds": 9.183333333333334,
+      "missing": [
+        794394974,
+        965811426,
+        124369960,
+        416138261,
+        803393046
+      ],
+      "targets": [
+        {
+          "id": 885203156,
+          "wave": 0,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 68,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 712752287,
+          "wave": 0,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 77,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 373540630,
+          "wave": 0,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 190,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 199.57,
+                "y": 147.77,
+                "u": 3.131
+              },
+              "to": {
+                "x": -17.21,
+                "y": 46.6,
+                "u": 3.16
+              },
+              "distance": 239.22570367751035
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 684524079,
+          "wave": 0,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 185,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 209.99,
+                "y": 160.49,
+                "u": 3.131
+              },
+              "to": {
+                "x": 54.62,
+                "y": 46.66,
+                "u": 3.16
+              },
+              "distance": 192.60608972719427
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 794394974,
+          "wave": 0,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 0,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 155527128,
+          "wave": 0,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 92,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 318.63,
+                "y": 127.05,
+                "u": 3.131
+              },
+              "to": {
+                "x": 38.96,
+                "y": 38.53,
+                "u": 3.16
+              },
+              "distance": 293.3446766177972
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 990527838,
+          "wave": 0,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 51,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 360.85,
+                "y": 147.77,
+                "u": 3.131
+              },
+              "to": {
+                "x": 142.79,
+                "y": 46.6,
+                "u": 3.16
+              },
+              "distance": 240.38621528698357
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 168237070,
+          "wave": 0,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 9,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 403.07,
+                "y": 160.49,
+                "u": 3.131
+              },
+              "to": {
+                "x": 246.62,
+                "y": 46.66,
+                "u": 3.16
+              },
+              "distance": 193.47834865948178
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 965811426,
+          "wave": 1,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 0,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 816606595,
+          "wave": 1,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 92,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -38.66,
+                "y": 141.4,
+                "u": 3.143
+              },
+              "to": {
+                "x": 239.99,
+                "y": 53.18,
+                "u": 3.173
+              },
+              "distance": 292.2816978532867
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 812825082,
+          "wave": 1,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 50,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -80.95,
+                "y": 162.17,
+                "u": 3.143
+              },
+              "to": {
+                "x": 136.15,
+                "y": 61.33,
+                "u": 3.173
+              },
+              "distance": 239.37651430330422
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 231590116,
+          "wave": 1,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 9,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -123.23,
+                "y": 174.94,
+                "u": 3.143
+              },
+              "to": {
+                "x": 32.32,
+                "y": 61.48,
+                "u": 3.173
+              },
+              "distance": 192.53304677379413
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 166116445,
+          "wave": 1,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 68,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 636736043,
+          "wave": 1,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 77,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 655619335,
+          "wave": 1,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 189,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 79.52,
+                "y": 162.17,
+                "u": 3.143
+              },
+              "to": {
+                "x": 296.15,
+                "y": 61.33,
+                "u": 3.173
+              },
+              "distance": 238.95033479784036
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 556881431,
+          "wave": 1,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 184,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 69.17,
+                "y": 174.94,
+                "u": 3.143
+              },
+              "to": {
+                "x": 224.32,
+                "y": 61.48,
+                "u": 3.173
+              },
+              "distance": 192.21002601321294
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 589429222,
+          "wave": 2,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 67,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 665571013,
+          "wave": 2,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 76,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 79676902,
+          "wave": 2,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 188,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 199.2,
+                "y": 175.6,
+                "u": 3.126
+              },
+              "to": {
+                "x": -17.62,
+                "y": 74.31,
+                "u": 3.155
+              },
+              "distance": 239.31271696255507
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 268815340,
+          "wave": 2,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 184,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 209.64,
+                "y": 188.3,
+                "u": 3.126
+              },
+              "to": {
+                "x": 54.22,
+                "y": 74.35,
+                "u": 3.155
+              },
+              "distance": 192.7173549527909
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 124369960,
+          "wave": 2,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 0,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 881664663,
+          "wave": 2,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 92,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 318.62,
+                "y": 154.9,
+                "u": 3.126
+              },
+              "to": {
+                "x": 38.55,
+                "y": 66.28,
+                "u": 3.155
+              },
+              "distance": 293.75620725356595
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 133918253,
+          "wave": 2,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 51,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 360.81,
+                "y": 175.6,
+                "u": 3.126
+              },
+              "to": {
+                "x": 142.38,
+                "y": 74.31,
+                "u": 3.155
+              },
+              "distance": 240.77235929400203
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 266362824,
+          "wave": 2,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 9,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 403.01,
+                "y": 188.3,
+                "u": 3.126
+              },
+              "to": {
+                "x": 246.22,
+                "y": 74.35,
+                "u": 3.155
+              },
+              "distance": 193.82390616226883
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 416138261,
+          "wave": 3,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 0,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 178868739,
+          "wave": 3,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 91,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -38.65,
+                "y": 169.25,
+                "u": 3.138
+              },
+              "to": {
+                "x": 240.4,
+                "y": 80.93,
+                "u": 3.168
+              },
+              "distance": 292.69322660423836
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 883489415,
+          "wave": 3,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 50,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -80.91,
+                "y": 190,
+                "u": 3.138
+              },
+              "to": {
+                "x": 136.57,
+                "y": 89.04,
+                "u": 3.168
+              },
+              "distance": 239.77170808917384
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 964081835,
+          "wave": 3,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 9,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -123.17,
+                "y": 202.75,
+                "u": 3.138
+              },
+              "to": {
+                "x": 32.74,
+                "y": 89.16,
+                "u": 3.168
+              },
+              "distance": 192.90053447308017
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 397971689,
+          "wave": 3,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 68,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 570793388,
+          "wave": 3,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 76,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 342711088,
+          "wave": 3,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 187,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 79.9,
+                "y": 190,
+                "u": 3.138
+              },
+              "to": {
+                "x": 296.57,
+                "y": 89.04,
+                "u": 3.168
+              },
+              "distance": 239.03725755622278
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 347500894,
+          "wave": 3,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 183,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 69.52,
+                "y": 202.75,
+                "u": 3.138
+              },
+              "to": {
+                "x": 224.74,
+                "y": 89.16,
+                "u": 3.168
+              },
+              "distance": 192.34327776140245
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 708168081,
+          "wave": 4,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 68,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 177.85,
+                "y": 170.07,
+                "u": 3.12
+              },
+              "to": {
+                "x": 180.36,
+                "y": 170.8,
+                "u": 3.15
+              },
+              "distance": 2.6140007651108523
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 289233995,
+          "wave": 4,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 76,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 188.32,
+                "y": 182.75,
+                "u": 3.12
+              },
+              "to": {
+                "x": 190.68,
+                "y": 183.6,
+                "u": 3.15
+              },
+              "distance": 2.508405868275717
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 597928519,
+          "wave": 4,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 187,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 198.79,
+                "y": 203.42,
+                "u": 3.12
+              },
+              "to": {
+                "x": 201,
+                "y": 204.4,
+                "u": 3.15
+              },
+              "distance": 2.4175400720567324
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 459034746,
+          "wave": 4,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 182,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 209.26,
+                "y": 216.1,
+                "u": 3.12
+              },
+              "to": {
+                "x": 211.32,
+                "y": 217.2,
+                "u": 3.15
+              },
+              "distance": 2.335294413987238
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 803393046,
+          "wave": 4,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 0,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 276.44,
+                "y": 170.07,
+                "u": 3.12
+              },
+              "to": {
+                "x": 276.36,
+                "y": 170.8,
+                "u": 3.15
+              },
+              "distance": 0.7343704787095026
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 253623116,
+          "wave": 4,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 90,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 318.61,
+                "y": 182.75,
+                "u": 3.12
+              },
+              "to": {
+                "x": 318.68,
+                "y": 183.6,
+                "u": 3.15
+              },
+              "distance": 0.8528774824088097
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 604019513,
+          "wave": 4,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 49,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 360.77,
+                "y": 203.42,
+                "u": 3.12
+              },
+              "to": {
+                "x": 361,
+                "y": 204.4,
+                "u": 3.15
+              },
+              "distance": 1.0066280345788328
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 256379974,
+          "wave": 4,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 8,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 402.94,
+                "y": 216.1,
+                "u": 3.12
+              },
+              "to": {
+                "x": 403.32,
+                "y": 217.2,
+                "u": 3.15
+              },
+              "distance": 1.1637869220780857
+            }
+          ],
+          "exitJoinSteps": []
+        }
+      ],
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "shipLoss": false,
+      "forbiddenEvents": []
+    },
+    {
+      "stage": 31,
+      "actualStage": 31,
+      "expectedTargets": 40,
+      "initialSpawnDelays": [
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        4.4,
+        4.47,
+        4.54,
+        4.61,
+        4.4,
+        4.47,
+        4.54,
+        4.61
+      ],
+      "completed": true,
+      "elapsedSeconds": 11.733333333333333,
+      "missing": [],
+      "targets": [
+        {
+          "id": 929885849,
+          "wave": 0,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 327,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 216141938,
+          "wave": 0,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 264,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 789939609,
+          "wave": 0,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 229,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 154781671,
+          "wave": 0,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 212,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 51406268,
+          "wave": 0,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 361,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 809515661,
+          "wave": 0,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 332,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 218173522,
+          "wave": 0,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 106,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 72239387,
+          "wave": 0,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 112,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 925024101,
+          "wave": 1,
+          "lane": 0,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 214,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 362828100,
+          "wave": 1,
+          "lane": 1,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 333,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 775953348,
+          "wave": 1,
+          "lane": 2,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 129,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 261787956,
+          "wave": 1,
+          "lane": 3,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 290,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 387665891,
+          "wave": 1,
+          "lane": 4,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 353,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 783339713,
+          "wave": 1,
+          "lane": 5,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 272,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 551507219,
+          "wave": 1,
+          "lane": 6,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 362,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 372665405,
+          "wave": 1,
+          "lane": 7,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 139,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 521982333,
+          "wave": 2,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 345,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 753126167,
+          "wave": 2,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 328,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 132766890,
+          "wave": 2,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 290,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 642159901,
+          "wave": 2,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 224,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 214629079,
+          "wave": 2,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 356,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 212535042,
+          "wave": 2,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 337,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 352310587,
+          "wave": 2,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 133,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 353909248,
+          "wave": 2,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 65,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 736941153,
+          "wave": 3,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 148,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 15.76,
+                "y": 140.58,
+                "u": 3.138
+              },
+              "to": {
+                "x": 288.51,
+                "y": 81,
+                "u": 3.168
+              },
+              "distance": 279.1815518618664
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 299802082,
+          "wave": 3,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 98,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -22.86,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 204.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 237.3524478491848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 678871190,
+          "wave": 3,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 55,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -61.48,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 119.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.79675882076532
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 132646712,
+          "wave": 3,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 13,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -100.09,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 35.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 162.1873376685122
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 943960524,
+          "wave": 3,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 67,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 286630114,
+          "wave": 3,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 205,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 106.08,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 332.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 236.45384517913848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 416539529,
+          "wave": 3,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 215,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 99.33,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 279.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.05527980746925
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 725696614,
+          "wave": 3,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 204,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 92.59,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 227.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 161.62046064777812
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 81344958,
+          "wave": 4,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 369,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 130880279,
+          "wave": 4,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 312,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 457557075,
+          "wave": 4,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 316,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 467592646,
+          "wave": 4,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 255,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 8900304,
+          "wave": 4,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 351,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 942182592,
+          "wave": 4,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 335,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 42471394,
+          "wave": 4,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 322,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 709114509,
+          "wave": 4,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 296,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        }
+      ],
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "shipLoss": false,
+      "forbiddenEvents": [
+        {
+          "t": 7.967,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 139.77,
+          "enemyY": 324.33,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 51406268,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 372665405,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.167,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 128.91,
+          "enemyY": 325.83,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 942182592,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.367,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.77,
+          "enemyY": 342.87,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 709114509,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "actualStage": 35,
+      "expectedTargets": 40,
+      "initialSpawnDelays": [
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        4.4,
+        4.47,
+        4.54,
+        4.61,
+        4.4,
+        4.47,
+        4.54,
+        4.61
+      ],
+      "completed": true,
+      "elapsedSeconds": 11.733333333333333,
+      "missing": [],
+      "targets": [
+        {
+          "id": 590869804,
+          "wave": 0,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 328,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 988646380,
+          "wave": 0,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 290,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 932701535,
+          "wave": 0,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 256,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 148033681,
+          "wave": 0,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 205,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 709952769,
+          "wave": 0,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 355,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 287155051,
+          "wave": 0,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 345,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 586962780,
+          "wave": 0,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 97,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 656749144,
+          "wave": 0,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 74,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 431564581,
+          "wave": 1,
+          "lane": 0,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 214,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 779747950,
+          "wave": 1,
+          "lane": 1,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 333,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 689370884,
+          "wave": 1,
+          "lane": 2,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 129,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 252040650,
+          "wave": 1,
+          "lane": 3,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 290,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 334352564,
+          "wave": 1,
+          "lane": 4,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 353,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 394296605,
+          "wave": 1,
+          "lane": 5,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 272,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 406576795,
+          "wave": 1,
+          "lane": 6,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 362,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 571262010,
+          "wave": 1,
+          "lane": 7,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 139,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 956999236,
+          "wave": 2,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 335,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 566298320,
+          "wave": 2,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 267,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 645579711,
+          "wave": 2,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 224,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 930836321,
+          "wave": 2,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 222,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 686087268,
+          "wave": 2,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 336,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 330155255,
+          "wave": 2,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 118,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 703682651,
+          "wave": 2,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 130,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 245066296,
+          "wave": 2,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 68,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 325749239,
+          "wave": 3,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 148,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 15.76,
+                "y": 140.58,
+                "u": 3.138
+              },
+              "to": {
+                "x": 288.51,
+                "y": 81,
+                "u": 3.168
+              },
+              "distance": 279.1815518618664
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 305177289,
+          "wave": 3,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 98,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -22.86,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 204.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 237.3524478491848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 543407057,
+          "wave": 3,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 55,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -61.48,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 119.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.79675882076532
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 493740440,
+          "wave": 3,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 13,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -100.09,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 35.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 162.1873376685122
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 787774087,
+          "wave": 3,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 67,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 742013676,
+          "wave": 3,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 205,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 106.08,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 332.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 236.45384517913848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 631715015,
+          "wave": 3,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 215,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 99.33,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 279.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.05527980746925
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 608057538,
+          "wave": 3,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 204,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 92.59,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 227.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 161.62046064777812
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 264896063,
+          "wave": 4,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 342,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 88731134,
+          "wave": 4,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 302,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 179187367,
+          "wave": 4,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 284,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 367045610,
+          "wave": 4,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 270,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 602898383,
+          "wave": 4,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 357,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 305218756,
+          "wave": 4,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 343,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 953984622,
+          "wave": 4,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 325,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 606647624,
+          "wave": 4,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 275,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        }
+      ],
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "shipLoss": false,
+      "forbiddenEvents": [
+        {
+          "t": 8.083,
+          "type": "challenge_enemy_contact",
+          "stage": 35,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 150.36,
+          "enemyY": 331.52,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 287155051,
+          "enemyType": "bee",
+          "enemyFamily": "stingray",
+          "column": 5,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 35,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 571262010,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.167,
+          "type": "challenge_enemy_contact",
+          "stage": 35,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 149.3,
+          "enemyY": 326.84,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 305218756,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "actualStage": 39,
+      "expectedTargets": 40,
+      "initialSpawnDelays": [
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        0.96,
+        1.03,
+        1.1,
+        1.17,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        1.82,
+        1.89,
+        1.96,
+        2.03,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        2.68,
+        2.75,
+        2.82,
+        2.89,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        3.54,
+        3.61,
+        3.68,
+        3.75,
+        4.4,
+        4.47,
+        4.54,
+        4.61,
+        4.4,
+        4.47,
+        4.54,
+        4.61
+      ],
+      "completed": true,
+      "elapsedSeconds": 11.716666666666667,
+      "missing": [],
+      "targets": [
+        {
+          "id": 667910812,
+          "wave": 0,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 332,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 466647747,
+          "wave": 0,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 310,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 611714652,
+          "wave": 0,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 276,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 495289271,
+          "wave": 0,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 203,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 121974012,
+          "wave": 0,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 352,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 247206774,
+          "wave": 0,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 330,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 674838603,
+          "wave": 0,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 293,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 359386892,
+          "wave": 0,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 75,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 250439138,
+          "wave": 1,
+          "lane": 0,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 214,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 896635325,
+          "wave": 1,
+          "lane": 1,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 333,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 746099811,
+          "wave": 1,
+          "lane": 2,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 129,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 830237054,
+          "wave": 1,
+          "lane": 3,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 290,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 557181699,
+          "wave": 1,
+          "lane": 4,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 353,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 109237687,
+          "wave": 1,
+          "lane": 5,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 272,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 9444121,
+          "wave": 1,
+          "lane": 6,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 362,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 401784013,
+          "wave": 1,
+          "lane": 7,
+          "pathFamily": "green-ladder-split",
+          "fullFrames": 139,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 857667800,
+          "wave": 2,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 315,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 478450995,
+          "wave": 2,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 275,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 670183648,
+          "wave": 2,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 256,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 77129161,
+          "wave": 2,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 208,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 973487328,
+          "wave": 2,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 365,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 970977392,
+          "wave": 2,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 334,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 371428430,
+          "wave": 2,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 282,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 427317973,
+          "wave": 2,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 79,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 815555704,
+          "wave": 3,
+          "lane": 0,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 148,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 15.76,
+                "y": 140.58,
+                "u": 3.138
+              },
+              "to": {
+                "x": 288.51,
+                "y": 81,
+                "u": 3.168
+              },
+              "distance": 279.1815518618664
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 994073351,
+          "wave": 3,
+          "lane": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 98,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -22.86,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 204.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 237.3524478491848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 872920498,
+          "wave": 3,
+          "lane": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 55,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -61.48,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 119.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.79675882076532
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 273588950,
+          "wave": 3,
+          "lane": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 13,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": -100.09,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 35.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 162.1873376685122
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 300041900,
+          "wave": 3,
+          "lane": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 67,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 512159128,
+          "wave": 3,
+          "lane": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 205,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 106.08,
+                "y": 150.62,
+                "u": 3.138
+              },
+              "to": {
+                "x": 332.08,
+                "y": 81.09,
+                "u": 3.168
+              },
+              "distance": 236.45384517913848
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 531541460,
+          "wave": 3,
+          "lane": 6,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 215,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 99.33,
+                "y": 168.66,
+                "u": 3.138
+              },
+              "to": {
+                "x": 279.65,
+                "y": 89.19,
+                "u": 3.168
+              },
+              "distance": 197.05527980746925
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 17863740,
+          "wave": 3,
+          "lane": 7,
+          "pathFamily": "yellow-diagonal-fan",
+          "fullFrames": 204,
+          "entryJoinSteps": [
+            {
+              "from": {
+                "x": 92.59,
+                "y": 178.7,
+                "u": 3.138
+              },
+              "to": {
+                "x": 227.22,
+                "y": 89.28,
+                "u": 3.168
+              },
+              "distance": 161.62046064777812
+            }
+          ],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 685448346,
+          "wave": 4,
+          "lane": 0,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 366,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 595595412,
+          "wave": 4,
+          "lane": 1,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 347,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 949947016,
+          "wave": 4,
+          "lane": 2,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 321,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 186346262,
+          "wave": 4,
+          "lane": 3,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 263,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 119292102,
+          "wave": 4,
+          "lane": 4,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 376,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 925598473,
+          "wave": 4,
+          "lane": 5,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 343,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 19854677,
+          "wave": 4,
+          "lane": 6,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 317,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        },
+        {
+          "id": 10852263,
+          "wave": 4,
+          "lane": 7,
+          "pathFamily": "blue-purple-finale",
+          "fullFrames": 260,
+          "entryJoinSteps": [],
+          "exitJoinSteps": []
+        }
+      ],
+      "maximumEnemyBullets": 0,
+      "maximumAttackers": 0,
+      "shipLoss": false,
+      "forbiddenEvents": [
+        {
+          "t": 8.133,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.79,
+          "enemyY": 341.65,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 247206774,
+          "enemyType": "bee",
+          "enemyFamily": "stingray",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 401784013,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.467,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.93,
+          "enemyY": 327.69,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 973487328,
+          "enemyType": "rogue",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.567,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 129.9,
+          "enemyY": 330.56,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 371428430,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 6,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.01,
+          "enemyY": 335.63,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 119292102,
+          "enemyType": "bee",
+          "enemyFamily": "galboss",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.33,
+          "enemyY": 330.31,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 925598473,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.183,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 152.69,
+          "enemyY": 323.91,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 10852263,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+diff --git a/src/js/06-enemy-behavior.js b/src/js/06-enemy-behavior.js
+index 6c507a07..1208ae1a 100644
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -509,8 +509,10 @@ function updateChallengeEnemy(state,e,dt){
+ 	   e.y=topY+84+q*(84+slot*7)*dropAmp;
+ 	  }else if(pathFamily==='green-ladder-split'){
+ 	   const rung=slot%2?-1:1;
+-	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp;
+-	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0);
++	   // Blend out the entry offset while retaining the authored middle endpoint.
++	   const entryOffset=sweep*((6+rung*14)-(-22+rung*18)*fm.challengeSweep)*arcAmp;
++	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp+(1-q)*entryOffset;
++	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0)+(1-q)*((38+slot*5)*dropAmp+row*5);
+ 	  }else if(pathFamily==='green-ladder-deep-drop'){
+ 	   const rung=slot%2?-1:1;
+ 	   e.x=laneX+sweep*((q-.5)*30+rung*(14+q*10)+Math.sin(q*Math.PI*1.7+p)*8)*fm.challengeSweep*arcAmp;
+@@ -540,8 +542,10 @@ function updateChallengeEnemy(state,e,dt){
+ 	   e.x=laneX+fanDir*((q-.45)*126+(slot-1.5)*18)*fm.challengeSweep*arcAmp+Math.sin(q*Math.PI*2.6+p)*12;
+ 	   e.y=topY+q*(76+slot*9)*dropAmp-Math.sin(q*Math.PI)*28;
+ 	  }else if(pathFamily==='blue-purple-finale'){
+-	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+-	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp;
++	   const entryX=laneX+sweep*Math.sin(Math.PI*3.4+p+slot*.4)*24*arcAmp;
++	   const entryOffset=entryX-laneX-sweep*Math.sin(p)*42*fm.challengeSweep*arcAmp;
++	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp+(1-q)*entryOffset;
++	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp+(1-q)*6*dropAmp;
+ 	  }else if(pathFamily==='boss-led-loop'){
+ 	   const leader=e.t==='boss'?1:.72;
+ 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.05+p*.35)*34+Math.sin(q*Math.PI)*18)*fm.challengeSweep*arcAmp*leader;
+@@ -592,9 +596,10 @@ function updateChallengeEnemy(state,e,dt){
+ 	   e.x=laneX+sweep*(18-q*68)*fm.challengeSweep*arcAmp+Math.sin(q*5.8+p)*2.5;
+ 	   e.y=topY+96+q*178*fm.challengeDrop*dropAmp;
+ 	  }else if(pathFamily==='green-ladder-split'){
+-	   const exit=sweep*(slot%2?-1:1);
+-	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
+-	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
++	   const rung=slot%2?-1:1,exit=sweep*rung;
++	   const middleX=laneX+sweep*(22+rung*31)*fm.challengeSweep*arcAmp;
++	   e.x=middleX+q*(sweep*72*fm.challengeSweep+exit*38)*arcAmp;
++	   e.y=topY+(146+slot*14)*dropAmp+q*258*fm.challengeDrop*dropAmp;
+ 	  }else if(pathFamily==='green-ladder-deep-drop'){
+ 	   const exit=sweep*(slot%2?-1:1);
+ 	   e.x=laneX+exit*(22+q*64)*fm.challengeSweep*arcAmp+Math.sin(q*5.6+p)*3;
+@@ -624,8 +629,9 @@ function updateChallengeEnemy(state,e,dt){
+ 	   e.x=laneX+fanDir*(54+q*164+(slot-1.5)*18)*fm.challengeSweep*arcAmp;
+ 	   e.y=topY+20+q*198*fm.challengeDrop*dropAmp;
+ 	  }else if(pathFamily==='blue-purple-finale'){
+-	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
+-	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
++	   const middleX=laneX+sweep*(Math.sin(p)*42-28)*fm.challengeSweep*arcAmp;
++	   e.x=middleX+sweep*((Math.sin(q*Math.PI*2.8+p)-Math.sin(p))*34-q*76)*fm.challengeSweep*arcAmp;
++	   e.y=topY+(78+slot*12)*dropAmp-Math.cos(p)*10*arcAmp+q*216*fm.challengeDrop*dropAmp+(Math.cos(q*8+p)-Math.cos(p))*4;
+ 	  }else if(pathFamily==='boss-led-loop'){
+ 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
+ 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;

@@ -1,5 +1,10 @@
 # Long-Term Aurora / Platinum Release Roadmap
 
+October 4 execution note: retain this document for strategic background.
+Its version-family mappings conflict with other roadmap tables; use
+PROJECT_DIRECTION_REVIEW.md for the pending reconciliation and ACTIVE_WORK.md
+for current execution. No new numbering or milestone approval is implied.
+
 This is the working release-family roadmap for Aurora Galactica and Platinum
 after the `1.4.0` production release.
 

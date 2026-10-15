@@ -42,6 +42,7 @@ const fbType=document.getElementById('fbType'),fbSummary=document.getElementById
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
 const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),themeSetSelect=document.getElementById('themeSetSelect'),themeSetSummary=document.getElementById('themeSetSummary'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const guardiansStageFiveReview=document.getElementById('guardiansStageFiveReview'),guardiansStageFiveSeed=document.getElementById('guardiansStageFiveSeed'),guardiansStageFiveMode=document.getElementById('guardiansStageFiveMode'),guardiansStageFiveLaunch=document.getElementById('guardiansStageFiveLaunch'),guardiansStageFiveReviewStatus=document.getElementById('guardiansStageFiveReviewStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1713,6 +1714,8 @@ function advanceSharedStarfield(dt,opts={}){
 }
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
+// Combat pressure stops increasing after Stage 30; progression keeps its actual stage.
+const combatEffectiveStage=stage=>Math.min(stage,30);
 const CHALLENGE_STAGE_TUNE={shotCap:0,attackCap:0,diveRate:0,coolA:99,coolB:99,globalA:99,globalB:99,capChance:0,diveShotRate:0,aimMul:.08,aimClamp:10,aimRnd:1,bulletVy:170,bulletVyStage:2};
 const STAGE_RULES={
  opening:{maxStage:1,tune:{shotCap:1,attackCap:1,diveRate:.34,coolA:7.6,coolB:5.7,globalA:3.4,globalB:2.65,capChance:.11,diveShotRate:.24,aimMul:.08,aimClamp:11,aimRnd:1.4,bulletVy:154,bulletVyStage:2},flight:{scriptedDiveVy:80,randomDiveVy:82,diveAccel:150}},
@@ -1720,7 +1723,7 @@ const STAGE_RULES={
  stage3:{maxStage:3,tune:{shotCap:2,attackCap:2,diveRate:.82,coolA:5.3,coolB:3.2,globalA:1.8,globalB:1.28,capChance:.2,diveShotRate:.58,aimMul:.11,aimClamp:15,aimRnd:2.2,bulletVy:174,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:162}},
  stage4:{maxStage:4,tune:{shotCap:1,attackCap:1,diveRate:.49,coolA:7.2,coolB:4.9,globalA:2.82,globalB:1.98,capChance:.14,diveShotRate:.28,aimMul:.11,aimClamp:15,aimRnd:2,bulletVy:166,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:88,diveAccel:172}},
  stage5:{maxStage:5,tune:{shotCap:1,attackCap:2,diveRate:.67,coolA:6.5,coolB:4.2,globalA:2.24,globalB:1.56,capChance:.17,diveShotRate:.42,aimMul:.12,aimClamp:16,aimRnd:2.2,bulletVy:171,bulletVyStage:3},flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}},
- endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+s*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
+ endless:{maxStage:Infinity,tune:s=>({shotCap:2+(s>8),attackCap:2+(s>8)+(s>12),diveRate:.9+combatEffectiveStage(s)*.035,coolA:4.8,coolB:2.5,globalA:1.34,globalB:.96,capChance:.24,diveShotRate:.66,aimMul:.16,aimClamp:20,aimRnd:3.3,bulletVy:181,bulletVyStage:4}),flight:{scriptedDiveVy:92,randomDiveVy:94,diveAccel:172}}
 };
 function stageRuleSet(stage){
  for(const key of Object.keys(STAGE_RULES)){
@@ -2247,7 +2250,39 @@ function syncDeveloperToolsUi(){
  if(recordBtn)recordBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(playAudioTestBtn)playAudioTestBtn.hidden=PRODUCTION_RELEASE_LANE;
  if(resetTestPilotScoresControl)resetTestPilotScoresControl.hidden=1;
+ let activePackKey='';
+ try{if(typeof currentGamePackKey==='function')activePackKey=currentGamePackKey();}catch{}
+ const guardiansReviewAvailable=String(BUILD_INFO?.releaseChannel||'').toLowerCase()==='development'&&activePackKey==='galaxy-guardians-preview';
+ if(guardiansStageFiveReview)guardiansStageFiveReview.hidden=!guardiansReviewAvailable;
+ if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.disabled=!guardiansReviewAvailable;
  syncChallengeStartControls();
+}
+
+function launchGuardiansStageFiveReview(){
+ if(String(BUILD_INFO?.releaseChannel||'').toLowerCase()!=='development'||typeof currentGamePackKey!=='function'||currentGamePackKey()!=='galaxy-guardians-preview')return false;
+ if(typeof startGalaxyGuardiansDevPreview!=='function')return false;
+ const seed=(+guardiansStageFiveSeed?.value>>>0)||12553;
+ const mode=String(guardiansStageFiveMode?.value||'manual');
+ const watchMode=mode==='professional';
+ if(testStartKind)testStartKind.value='level';
+ if(testStage)testStage.value='5';
+ if(testShips)testShips.value='5';
+ if(testExpertPlays)testExpertPlays.value=watchMode?'professional':'human';
+ saveTestCfg();
+ const startedReview=startGalaxyGuardiansDevPreview({
+  stage:5,
+  ships:5,
+  seed,
+  maxPlayableStage:9,
+  watchMode,
+  watchPersona:watchMode?'professional':'',
+  stageFiveReview:true
+ });
+ if(startedReview){
+  if(guardiansStageFiveReviewStatus)guardiansStageFiveReviewStatus.textContent=`Active: Stage 5 · seed ${seed} · ${watchMode?'Professional Watch':'Manual Play'}`;
+  showToast(`Stage 5 review · seed ${seed} · ${watchMode?'watch':'manual'}`);
+ }
+ return startedReview;
 }
 function syncChallengeStartControls(){
  const cfg=testCfgCache||loadTestCfg();
@@ -2470,8 +2505,9 @@ function stopReferenceCueSet(names=[]){
 function holdReferenceGameplayCadence(seconds=0){
  S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,Math.max(0,+seconds||0));
 }
-function clearReferenceTransitionCueWindow(extra=[]){
- stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])]);
+function clearReferenceTransitionCueWindow(extra=[],preserve=[]){
+ const retained=new Set(preserve);
+ stopReferenceCueSet([...REFERENCE_TRANSITION_SENSITIVE_CUES,...(extra||[])].filter(name=>!retained.has(name)));
 }
 function clearReferenceBossMomentCueWindow(){
  stopReferenceCueSet(REFERENCE_BOSS_MOMENT_CUES);
@@ -3208,6 +3244,7 @@ recordBtn.addEventListener('click',()=>{
  syncRecordUi();
 });
 if(playAudioTestBtn)playAudioTestBtn.addEventListener('click',playCurrentAudioThemeTest);
+if(guardiansStageFiveLaunch)guardiansStageFiveLaunch.addEventListener('click',launchGuardiansStageFiveReview);
 if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));

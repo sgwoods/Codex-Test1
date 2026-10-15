@@ -12,7 +12,7 @@ Use it for the fast answer to:
 
 For the canonical full platform guide, use:
 
-- `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
+- `<user-home>/Documents/Codex-Test1/PLATINUM.md`
 
 ## Diagram
 
@@ -34,8 +34,8 @@ flowchart TB
         A5["Aurora Harnesses\n- challenge profile\n- capture lifecycle\n- scoring and outcome checks"]
     end
 
-    subgraph "Future Applications"
-        G1["Galaxy Guardians\n- future sibling title\n- currently preview only"]
+    subgraph "Other Applications"
+        G1["Galaxy Guardians\n- hosted playable preview\n- owned runtime and rules"]
         G2["Other Future Packs\n- their own rules\n- their own content\n- their own harnesses"]
     end
 
@@ -61,7 +61,9 @@ Today the architecture is in this state:
 
 - `Platinum` is real and visible in the shipped product
 - `Aurora Galactica` is the first playable application on Platinum
-- `Galaxy Guardians` exists as a preview-only sibling application shell
+- `Galaxy Guardians` has a hosted playable-preview runtime with an owned
+  gameplay adapter, not merely a sibling shell. It remains preview status;
+  public adapter registration and Rival parity are not enabled.
 - hosted docs now need to describe the platform separately from the applications it hosts
 
 ## Boundary Principle
@@ -75,16 +77,16 @@ cues, and event vocabulary stay with the owning application.
 ## Related Docs
 
 - canonical platform guide:
-  - `/Users/steven/Documents/Codex-Test1/PLATINUM.md`
+  - `<user-home>/Documents/Codex-Test1/PLATINUM.md`
 - application-layer guide:
-  - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+  - `<user-home>/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
 - game boundary audit:
-  - `/Users/steven/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
+  - `<user-home>/Documents/Codex-Test1/PLATINUM_GAME_BOUNDARY_AUDIT.md`
 - repo technical map:
-  - `/Users/steven/Documents/Codex-Test1/ARCHITECTURE.md`
+  - `<user-home>/Documents/Codex-Test1/ARCHITECTURE.md`
 - release and testing discipline:
-  - `/Users/steven/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
+  - `<user-home>/Documents/Codex-Test1/TESTING_AND_RELEASE_GATES.md`
 - launch art direction:
-  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
+  - `<user-home>/Documents/Codex-Test1/PLATINUM_LAUNCH_ART_DIRECTION.md`
 - forward-looking review:
-  - `/Users/steven/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`
+  - `<user-home>/Documents/Codex-Test1/PLATINUM_LUECK_REVIEW.md`

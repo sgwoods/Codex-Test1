@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-trajectory-controls",
-  "generatedAt": "2026-06-12T11:22:59.575Z",
-  "commit": "dab57ac7",
-  "branch": "main",
+  "generatedAt": "2026-10-15T02:34:58.785Z",
+  "commit": "f8c1b48d",
+  "branch": "codex/oct03-local-integration",
   "sourceArtifacts": {
     "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
     "challengeStageCandidateSweepIndex": "reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json"
@@ -21,10 +21,10 @@
       31
     ],
     "groupCount": 40,
-    "averageConfidence": 0.685,
-    "averageTargetXRange": 0.4025,
-    "averageTargetYRange": 0.4892,
-    "averageLowerFieldShare": 0.5683,
+    "averageConfidence": 0.688,
+    "averageTargetXRange": 0.4009,
+    "averageTargetYRange": 0.4931,
+    "averageLowerFieldShare": 0.569,
     "controlReadinessScore10": 8.6,
     "runtimeReadyCount": 0,
     "referencePathGroupCount": 40,
@@ -43,15 +43,45 @@
       "stage": 3,
       "label": "Challenging Stage 3-4",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 5,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 31,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-01-classic-column-lesson",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 3,
         "family": "classic-column-and-side-arc",
         "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json"
       },
       "groupCount": 5,
@@ -837,15 +867,45 @@
       "stage": 7,
       "label": "Challenging Stage 7-8",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 36,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 39,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-02-cross-and-column",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 7,
         "family": "red-column-blue-side-cross",
         "motionRead": "Adds side-crossing and vertical red-column trains; groups arrive through visible route commitments rather than appearing in place.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json"
       },
       "groupCount": 5,
@@ -1741,15 +1801,45 @@
       "stage": 11,
       "label": "Challenging Stage 11-12",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 75,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 38,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-03-blue-hook-and-green-novelty",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 11,
         "family": "blue-hook-green-novelty",
         "motionRead": "Blue side hooks and green novelty shapes make the third challenge visually distinct and less column-like.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/frame-index.json"
       },
       "groupCount": 5,
@@ -2675,15 +2765,45 @@
       "stage": 15,
       "label": "Challenging Stage 15-16",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 113,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 35,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-04-pink-serpentine",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 15,
         "family": "pink-serpentine-and-green-entry",
         "motionRead": "Late challenge starts showing long pink serpentine arcs and separate green specialty entries.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/frame-index.json"
       },
       "groupCount": 5,
@@ -3569,15 +3689,45 @@
       "stage": 19,
       "label": "Challenging Stage 19-20",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 142,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 35,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-05-pink-and-green-cascade",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 19,
         "family": "pink-green-cascade",
         "motionRead": "Continues specialty novelty with pink arcs, green lower-field entries, and a clearer split between group identities.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/frame-index.json"
       },
       "groupCount": 5,
@@ -4443,15 +4593,45 @@
       "stage": 23,
       "label": "Challenging Stage 23-24",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 175,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 38,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-06-green-ladder-split",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 23,
         "family": "green-ladder-and-split",
         "motionRead": "Green ladder and split entries emphasize staggered group timing and route separation.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/frame-index.json"
       },
       "groupCount": 5,
@@ -5377,15 +5557,45 @@
       "stage": 27,
       "label": "Challenging Stage 27-28",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "startSeconds": 215,
+          "durationSeconds": 16,
+          "declaredDurationSeconds": 34,
+          "capped": true,
+          "status": "coarse-source-window-not-event-labeled"
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-07-yellow-diagonal-fan",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 27,
         "family": "yellow-diagonal-fan",
         "motionRead": "Yellow diagonal trains create a memorable late-stage fan/diagonal score lane.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/frame-index.json"
       },
       "groupCount": 5,
@@ -6301,74 +6511,107 @@
       "stage": 31,
       "label": "Challenging Stage 31-32",
       "sourceVideo": "challenge-all2.mp4",
+      "referenceEvidenceContract": {
+        "schema": "reference-evidence-contract-1",
+        "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+        "timing": "resampled-8fps-relative-time-not-native-pts",
+        "windowBoundaryStatus": "reviewed-preview-observation-window-not-complete-target-lifetimes",
+        "analyzedNormalizedY": {
+          "min": 0.105,
+          "max": 0.875
+        },
+        "observationUnit": "connected-component-tracklet-not-identified-alien",
+        "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+        "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+        "shootingCensoring": "not-resolved-per-target",
+        "capabilities": {
+          "descriptive": true,
+          "full-entry": false,
+          "full-path": false,
+          "wave-identity": false
+        },
+        "windowCoverage": {
+          "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+          "challengeNumber": 8,
+          "startSeconds": 242,
+          "endSeconds": 258.8,
+          "previewSpacingSeconds": 0.2,
+          "review": "reference-artifacts/analyses/reference-wave-previews/2026-10-05T12-08-15-502Z-d686a350/REVIEW.md",
+          "status": "reviewed-preview-observation-window-not-complete-target-lifetimes",
+          "durationSeconds": 16.80000000000001
+        }
+      },
+      "scoreInterpretation": "heuristic-candidate-input-readiness-not-path-acceptance",
+      "acceptedFullPathConformance": false,
+      "acceptedGroupMappingConformance": false,
       "sourceWindow": {
         "id": "challenge-08-blue-purple-finale",
         "sourceId": "challenge-all2-single-ship-all-perfects",
         "stageMarker": 31,
         "family": "blue-purple-finale",
         "motionRead": "Final visible challenge window emphasizes blue/purple clustered arcs and a compact all-perfect finish.",
-        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
-        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
-        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
+        "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+        "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+        "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
         "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/frame-index.json"
       },
       "groupCount": 5,
-      "averageConfidence": 0.711,
-      "averageTargetXRange": 0.4429,
-      "averageTargetYRange": 0.5622,
-      "averageLowerFieldShare": 0.4854,
+      "averageConfidence": 0.732,
+      "averageTargetXRange": 0.4303,
+      "averageTargetYRange": 0.5937,
+      "averageLowerFieldShare": 0.4912,
       "controlReadiness10": 8.7,
       "currentSweepDecision": "no-runtime-keeper-yet",
       "currentSweepBestExpectedScore10": 6,
       "currentSweepBestTargetVideoObjectFitScore10": 2.9,
       "runtimeLayoutSeed": {
         "groupSpawnOffsets": [
-          1,
-          2.38,
-          5.38,
-          10.75,
-          13.5
+          0,
+          4.38,
+          9.75,
+          11.75,
+          13.88
         ],
         "groupSpeedScales": [
-          3.4,
-          2.86,
+          1.93,
           1.73,
-          1.77,
-          3.4
+          3.28,
+          2.98,
+          2.98
         ],
         "groupSoftSpeedScales": [
-          2.65,
-          2.4,
+          1.62,
           1.45,
-          1.49,
-          2.65
+          2.65,
+          2.51,
+          2.51
         ],
         "groupArcAmps": [
-          1.59,
-          1.67,
+          1.66,
           1.84,
-          1.6,
-          1.37
+          1.58,
+          1.25,
+          1.62
         ],
         "groupDropAmps": [
-          1.22,
-          1.57,
+          1.55,
           1.4,
-          1.57,
-          1.6
+          1.54,
+          1.49,
+          1.55
         ],
         "groupLowerFieldBiases": [
           0,
-          106,
           177,
-          17,
-          28
+          0,
+          147,
+          0
         ],
         "groupYOffsets": [
           0,
-          34,
           68,
           0,
+          54,
           0
         ],
         "groupPathFamilies": [
@@ -6380,81 +6623,16 @@
         ],
         "groupReferencePaths": [
           {
-            "sourceTrackId": "target-track-7",
-            "sourceSampleCount": 11,
-            "durationS": 1.62,
-            "laneSpreadX": 11.81,
-            "rowSpreadY": 7.96,
-            "pathScaleX": 4.114,
-            "pathScaleY": 2.884,
-            "sourceCenterX": 0.5632,
-            "sourceCenterY": 0.2362,
-            "exitVy": 146.1,
-            "points": [
-              {
-                "t": 0,
-                "x": 0.5738,
-                "y": 0.1605
-              },
-              {
-                "t": 0.12,
-                "x": 0.5737,
-                "y": 0.2131
-              },
-              {
-                "t": 0.25,
-                "x": 0.5742,
-                "y": 0.1821
-              },
-              {
-                "t": 0.37,
-                "x": 0.5734,
-                "y": 0.1831
-              },
-              {
-                "t": 0.5,
-                "x": 0.5734,
-                "y": 0.2553
-              },
-              {
-                "t": 0.87,
-                "x": 0.4732,
-                "y": 0.2836
-              },
-              {
-                "t": 1.25,
-                "x": 0.5694,
-                "y": 0.2618
-              },
-              {
-                "t": 1.37,
-                "x": 0.5722,
-                "y": 0.3028
-              },
-              {
-                "t": 1.5,
-                "x": 0.5704,
-                "y": 0.2727
-              },
-              {
-                "t": 1.62,
-                "x": 0.5779,
-                "y": 0.2474
-              }
-            ],
-            "read": "Representative target path target-track-7 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
-          },
-          {
-            "sourceTrackId": "target-track-23",
+            "sourceTrackId": "target-track-20",
             "sourceSampleCount": 18,
             "durationS": 2.37,
-            "laneSpreadX": 12.18,
-            "rowSpreadY": 9.21,
-            "pathScaleX": 3.318,
-            "pathScaleY": 2.464,
+            "laneSpreadX": 12.22,
+            "rowSpreadY": 9.52,
+            "pathScaleX": 3.351,
+            "pathScaleY": 2.674,
             "sourceCenterX": 0.4739,
             "sourceCenterY": 0.5548,
-            "exitVy": 191.3,
+            "exitVy": 165.9,
             "points": [
               {
                 "t": 0,
@@ -6507,10 +6685,10 @@
                 "y": 0.6248
               }
             ],
-            "read": "Representative target path target-track-23 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-20 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           {
-            "sourceTrackId": "target-track-45",
+            "sourceTrackId": "target-track-42",
             "sourceSampleCount": 20,
             "durationS": 2.5,
             "laneSpreadX": 13.25,
@@ -6572,19 +6750,84 @@
                 "y": 0.5276
               }
             ],
-            "read": "Representative target path target-track-45 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-42 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           {
-            "sourceTrackId": "target-track-89",
+            "sourceTrackId": "target-track-71",
+            "sourceSampleCount": 14,
+            "durationS": 2,
+            "laneSpreadX": 11.85,
+            "rowSpreadY": 9.52,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.471,
+            "sourceCenterX": 0.5781,
+            "sourceCenterY": 0.2678,
+            "exitVy": 160.5,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5735,
+                "y": 0.1522
+              },
+              {
+                "t": 0.13,
+                "x": 0.5736,
+                "y": 0.2251
+              },
+              {
+                "t": 0.38,
+                "x": 0.5735,
+                "y": 0.2186
+              },
+              {
+                "t": 0.5,
+                "x": 0.5734,
+                "y": 0.2184
+              },
+              {
+                "t": 0.75,
+                "x": 0.6024,
+                "y": 0.3448
+              },
+              {
+                "t": 1.25,
+                "x": 0.582,
+                "y": 0.2441
+              },
+              {
+                "t": 1.5,
+                "x": 0.5817,
+                "y": 0.2448
+              },
+              {
+                "t": 1.63,
+                "x": 0.5861,
+                "y": 0.2366
+              },
+              {
+                "t": 1.88,
+                "x": 0.5741,
+                "y": 0.3697
+              },
+              {
+                "t": 2,
+                "x": 0.5608,
+                "y": 0.4236
+              }
+            ],
+            "read": "Representative target path target-track-71 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-86",
             "sourceSampleCount": 19,
             "durationS": 2.5,
-            "laneSpreadX": 11.87,
-            "rowSpreadY": 9.53,
-            "pathScaleX": 3.094,
-            "pathScaleY": 2.934,
+            "laneSpreadX": 9.45,
+            "rowSpreadY": 8.6,
+            "pathScaleX": 1.377,
+            "pathScaleY": 2.258,
             "sourceCenterX": 0.4745,
             "sourceCenterY": 0.5786,
-            "exitVy": 171.1,
+            "exitVy": 200.7,
             "points": [
               {
                 "t": 0,
@@ -6637,219 +6880,100 @@
                 "y": 0.6509
               }
             ],
-            "read": "Representative target path target-track-89 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-86 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           {
-            "sourceTrackId": "target-track-93",
-            "sourceSampleCount": 13,
-            "durationS": 1.75,
-            "laneSpreadX": 10.53,
+            "sourceTrackId": "target-track-116",
+            "sourceSampleCount": 7,
+            "durationS": 0.87,
+            "laneSpreadX": 12.24,
             "rowSpreadY": 9.67,
-            "pathScaleX": 3.516,
-            "pathScaleY": 5.6,
-            "sourceCenterX": 0.3967,
-            "sourceCenterY": 0.6412,
-            "exitVy": 173.4,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.831,
+            "sourceCenterX": 0.557,
+            "sourceCenterY": 0.3744,
+            "exitVy": 157,
             "points": [
               {
                 "t": 0,
-                "x": 0.4659,
-                "y": 0.6401
+                "x": 0.569,
+                "y": 0.2724
               },
               {
-                "t": 0.13,
-                "x": 0.4647,
-                "y": 0.6443
+                "t": 0.12,
+                "x": 0.5713,
+                "y": 0.296
               },
               {
-                "t": 0.63,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.25,
+                "x": 0.5692,
+                "y": 0.3577
               },
               {
-                "t": 0.75,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.37,
+                "x": 0.5734,
+                "y": 0.3267
               },
               {
-                "t": 0.88,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.5,
+                "x": 0.5652,
+                "y": 0.3981
               },
               {
-                "t": 1.13,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.62,
+                "x": 0.5466,
+                "y": 0.4525
               },
               {
-                "t": 1.25,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.38,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.63,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.75,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.87,
+                "x": 0.5044,
+                "y": 0.5177
               }
             ],
-            "read": "Representative target path target-track-93 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-116 with 7 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           }
         ]
       },
       "groups": [
         {
           "groupIndex": 1,
-          "confidence": 0.697,
-          "trackCount": 9,
+          "confidence": 0.734,
+          "trackCount": 16,
           "target": {
-            "visibleStartS": 1,
-            "visibleEndS": 3,
+            "visibleStartS": 0,
+            "visibleEndS": 4.25,
             "entrySide": "center",
             "exitSide": "center",
-            "xRange": 0.4307,
-            "yRange": 0.4104,
-            "pathLength": 0.1636,
-            "turnCount": 1.89,
-            "reversalCount": 2.11,
-            "lowerFieldShare": 0.0556
-          },
-          "controlIntent": "blue-purple-compact-capstone",
-          "runtimePathFamilyHint": "blue-purple-finale",
-          "runtimeControl": {
-            "spawnOffsetS": 1,
-            "durationS": 2,
-            "speedScale": 3.4,
-            "softSpeedScale": 2.65,
-            "arcAmp": 1.59,
-            "dropAmp": 1.22,
-            "lowerFieldBias": 0,
-            "yOffset": 0
-          },
-          "referencePath": {
-            "sourceTrackId": "target-track-7",
-            "sourceSampleCount": 11,
-            "durationS": 1.62,
-            "laneSpreadX": 11.81,
-            "rowSpreadY": 7.96,
-            "pathScaleX": 4.114,
-            "pathScaleY": 2.884,
-            "sourceCenterX": 0.5632,
-            "sourceCenterY": 0.2362,
-            "exitVy": 146.1,
-            "points": [
-              {
-                "t": 0,
-                "x": 0.5738,
-                "y": 0.1605
-              },
-              {
-                "t": 0.12,
-                "x": 0.5737,
-                "y": 0.2131
-              },
-              {
-                "t": 0.25,
-                "x": 0.5742,
-                "y": 0.1821
-              },
-              {
-                "t": 0.37,
-                "x": 0.5734,
-                "y": 0.1831
-              },
-              {
-                "t": 0.5,
-                "x": 0.5734,
-                "y": 0.2553
-              },
-              {
-                "t": 0.87,
-                "x": 0.4732,
-                "y": 0.2836
-              },
-              {
-                "t": 1.25,
-                "x": 0.5694,
-                "y": 0.2618
-              },
-              {
-                "t": 1.37,
-                "x": 0.5722,
-                "y": 0.3028
-              },
-              {
-                "t": 1.5,
-                "x": 0.5704,
-                "y": 0.2727
-              },
-              {
-                "t": 1.62,
-                "x": 0.5779,
-                "y": 0.2474
-              }
-            ],
-            "read": "Representative target path target-track-7 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
-          },
-          "comparisonTargets": {
-            "xRange": 0.4307,
-            "yRange": 0.4104,
-            "pathLength": 0.1636,
-            "turnCount": 1.89,
-            "reversalCount": 2.11,
-            "lowerFieldShare": 0.0556,
-            "entrySide": "center",
-            "exitSide": "center"
-          }
-        },
-        {
-          "groupIndex": 2,
-          "confidence": 0.655,
-          "trackCount": 7,
-          "target": {
-            "visibleStartS": 2.38,
-            "visibleEndS": 5.25,
-            "entrySide": "right",
-            "exitSide": "center",
-            "xRange": 0.4679,
-            "yRange": 0.6175,
-            "pathLength": 0.1554,
-            "turnCount": 4.86,
-            "reversalCount": 2.71,
-            "lowerFieldShare": 0.6667
+            "xRange": 0.4725,
+            "yRange": 0.6701,
+            "pathLength": 0.16,
+            "turnCount": 3.19,
+            "reversalCount": 2.38,
+            "lowerFieldShare": 0.3229
           },
           "controlIntent": "blue-purple-finale-weave",
           "runtimePathFamilyHint": "blue-purple-finale",
           "runtimeControl": {
-            "spawnOffsetS": 2.38,
-            "durationS": 2.87,
-            "speedScale": 2.86,
-            "softSpeedScale": 2.4,
-            "arcAmp": 1.67,
-            "dropAmp": 1.57,
-            "lowerFieldBias": 106,
-            "yOffset": 34
+            "spawnOffsetS": 0,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "softSpeedScale": 1.62,
+            "arcAmp": 1.66,
+            "dropAmp": 1.55,
+            "lowerFieldBias": 0,
+            "yOffset": 0
           },
           "referencePath": {
-            "sourceTrackId": "target-track-23",
+            "sourceTrackId": "target-track-20",
             "sourceSampleCount": 18,
             "durationS": 2.37,
-            "laneSpreadX": 12.18,
-            "rowSpreadY": 9.21,
-            "pathScaleX": 3.318,
-            "pathScaleY": 2.464,
+            "laneSpreadX": 12.22,
+            "rowSpreadY": 9.52,
+            "pathScaleX": 3.351,
+            "pathScaleY": 2.674,
             "sourceCenterX": 0.4739,
             "sourceCenterY": 0.5548,
-            "exitVy": 191.3,
+            "exitVy": 165.9,
             "points": [
               {
                 "t": 0,
@@ -6902,26 +7026,26 @@
                 "y": 0.6248
               }
             ],
-            "read": "Representative target path target-track-23 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-20 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           "comparisonTargets": {
-            "xRange": 0.4679,
-            "yRange": 0.6175,
-            "pathLength": 0.1554,
-            "turnCount": 4.86,
-            "reversalCount": 2.71,
-            "lowerFieldShare": 0.6667,
-            "entrySide": "right",
+            "xRange": 0.4725,
+            "yRange": 0.6701,
+            "pathLength": 0.16,
+            "turnCount": 3.19,
+            "reversalCount": 2.38,
+            "lowerFieldShare": 0.3229,
+            "entrySide": "center",
             "exitSide": "center"
           }
         },
         {
-          "groupIndex": 3,
+          "groupIndex": 2,
           "confidence": 0.75,
           "trackCount": 17,
           "target": {
-            "visibleStartS": 5.38,
-            "visibleEndS": 10.13,
+            "visibleStartS": 4.38,
+            "visibleEndS": 9.13,
             "entrySide": "left",
             "exitSide": "center",
             "xRange": 0.5754,
@@ -6934,7 +7058,7 @@
           "controlIntent": "blue-purple-finale-weave",
           "runtimePathFamilyHint": "blue-purple-finale",
           "runtimeControl": {
-            "spawnOffsetS": 5.38,
+            "spawnOffsetS": 4.38,
             "durationS": 4.75,
             "speedScale": 1.73,
             "softSpeedScale": 1.45,
@@ -6944,7 +7068,7 @@
             "yOffset": 68
           },
           "referencePath": {
-            "sourceTrackId": "target-track-45",
+            "sourceTrackId": "target-track-42",
             "sourceSampleCount": 20,
             "durationS": 2.5,
             "laneSpreadX": 13.25,
@@ -7006,7 +7130,7 @@
                 "y": 0.5276
               }
             ],
-            "read": "Representative target path target-track-45 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-42 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           "comparisonTargets": {
             "xRange": 0.5754,
@@ -7020,44 +7144,148 @@
           }
         },
         {
-          "groupIndex": 4,
-          "confidence": 0.73,
-          "trackCount": 17,
+          "groupIndex": 3,
+          "confidence": 0.719,
+          "trackCount": 12,
           "target": {
-            "visibleStartS": 10.75,
-            "visibleEndS": 15.38,
+            "visibleStartS": 9.75,
+            "visibleEndS": 12.25,
             "entrySide": "center",
             "exitSide": "center",
-            "xRange": 0.4372,
-            "yRange": 0.6713,
-            "pathLength": 0.1542,
-            "turnCount": 2.76,
-            "reversalCount": 2.24,
-            "lowerFieldShare": 0.393
+            "xRange": 0.4351,
+            "yRange": 0.6707,
+            "pathLength": 0.1392,
+            "turnCount": 1.83,
+            "reversalCount": 1.75,
+            "lowerFieldShare": 0.25
           },
           "controlIntent": "blue-purple-finale-weave",
           "runtimePathFamilyHint": "blue-purple-finale",
           "runtimeControl": {
-            "spawnOffsetS": 10.75,
-            "durationS": 4.63,
-            "speedScale": 1.77,
-            "softSpeedScale": 1.49,
-            "arcAmp": 1.6,
-            "dropAmp": 1.57,
-            "lowerFieldBias": 17,
+            "spawnOffsetS": 9.75,
+            "durationS": 2.5,
+            "speedScale": 3.28,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.58,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 0,
             "yOffset": 0
           },
           "referencePath": {
-            "sourceTrackId": "target-track-89",
+            "sourceTrackId": "target-track-71",
+            "sourceSampleCount": 14,
+            "durationS": 2,
+            "laneSpreadX": 11.85,
+            "rowSpreadY": 9.52,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.471,
+            "sourceCenterX": 0.5781,
+            "sourceCenterY": 0.2678,
+            "exitVy": 160.5,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5735,
+                "y": 0.1522
+              },
+              {
+                "t": 0.13,
+                "x": 0.5736,
+                "y": 0.2251
+              },
+              {
+                "t": 0.38,
+                "x": 0.5735,
+                "y": 0.2186
+              },
+              {
+                "t": 0.5,
+                "x": 0.5734,
+                "y": 0.2184
+              },
+              {
+                "t": 0.75,
+                "x": 0.6024,
+                "y": 0.3448
+              },
+              {
+                "t": 1.25,
+                "x": 0.582,
+                "y": 0.2441
+              },
+              {
+                "t": 1.5,
+                "x": 0.5817,
+                "y": 0.2448
+              },
+              {
+                "t": 1.63,
+                "x": 0.5861,
+                "y": 0.2366
+              },
+              {
+                "t": 1.88,
+                "x": 0.5741,
+                "y": 0.3697
+              },
+              {
+                "t": 2,
+                "x": 0.5608,
+                "y": 0.4236
+              }
+            ],
+            "read": "Representative target path target-track-71 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          "comparisonTargets": {
+            "xRange": 0.4351,
+            "yRange": 0.6707,
+            "pathLength": 0.1392,
+            "turnCount": 1.83,
+            "reversalCount": 1.75,
+            "lowerFieldShare": 0.25,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.744,
+          "trackCount": 10,
+          "target": {
+            "visibleStartS": 11.75,
+            "visibleEndS": 14.5,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.1945,
+            "yRange": 0.5167,
+            "pathLength": 0.1414,
+            "turnCount": 3.4,
+            "reversalCount": 2.1,
+            "lowerFieldShare": 0.7931
+          },
+          "controlIntent": "blue-purple-compact-capstone",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 11.75,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.25,
+            "dropAmp": 1.49,
+            "lowerFieldBias": 147,
+            "yOffset": 54
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-86",
             "sourceSampleCount": 19,
             "durationS": 2.5,
-            "laneSpreadX": 11.87,
-            "rowSpreadY": 9.53,
-            "pathScaleX": 3.094,
-            "pathScaleY": 2.934,
+            "laneSpreadX": 9.45,
+            "rowSpreadY": 8.6,
+            "pathScaleX": 1.377,
+            "pathScaleY": 2.258,
             "sourceCenterX": 0.4745,
             "sourceCenterY": 0.5786,
-            "exitVy": 171.1,
+            "exitVy": 200.7,
             "points": [
               {
                 "t": 0,
@@ -7110,119 +7338,104 @@
                 "y": 0.6509
               }
             ],
-            "read": "Representative target path target-track-89 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-86 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           "comparisonTargets": {
-            "xRange": 0.4372,
-            "yRange": 0.6713,
-            "pathLength": 0.1542,
-            "turnCount": 2.76,
-            "reversalCount": 2.24,
-            "lowerFieldShare": 0.393,
+            "xRange": 0.1945,
+            "yRange": 0.5167,
+            "pathLength": 0.1414,
+            "turnCount": 3.4,
+            "reversalCount": 2.1,
+            "lowerFieldShare": 0.7931,
             "entrySide": "center",
             "exitSide": "center"
           }
         },
         {
           "groupIndex": 5,
-          "confidence": 0.722,
-          "trackCount": 10,
+          "confidence": 0.712,
+          "trackCount": 16,
           "target": {
-            "visibleStartS": 13.5,
-            "visibleEndS": 15.88,
+            "visibleStartS": 13.88,
+            "visibleEndS": 16.63,
             "entrySide": "center",
             "exitSide": "center",
-            "xRange": 0.3034,
-            "yRange": 0.6951,
-            "pathLength": 0.1095,
-            "turnCount": 1.8,
-            "reversalCount": 1.4,
-            "lowerFieldShare": 0.425
+            "xRange": 0.4739,
+            "yRange": 0.6944,
+            "pathLength": 0.1242,
+            "turnCount": 1.81,
+            "reversalCount": 1.5,
+            "lowerFieldShare": 0.2031
           },
           "controlIntent": "blue-purple-finale-weave",
           "runtimePathFamilyHint": "blue-purple-finale",
           "runtimeControl": {
-            "spawnOffsetS": 13.5,
-            "durationS": 2.38,
-            "speedScale": 3.4,
-            "softSpeedScale": 2.65,
-            "arcAmp": 1.37,
-            "dropAmp": 1.6,
-            "lowerFieldBias": 28,
+            "spawnOffsetS": 13.88,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.62,
+            "dropAmp": 1.55,
+            "lowerFieldBias": 0,
             "yOffset": 0
           },
           "referencePath": {
-            "sourceTrackId": "target-track-93",
-            "sourceSampleCount": 13,
-            "durationS": 1.75,
-            "laneSpreadX": 10.53,
+            "sourceTrackId": "target-track-116",
+            "sourceSampleCount": 7,
+            "durationS": 0.87,
+            "laneSpreadX": 12.24,
             "rowSpreadY": 9.67,
-            "pathScaleX": 3.516,
-            "pathScaleY": 5.6,
-            "sourceCenterX": 0.3967,
-            "sourceCenterY": 0.6412,
-            "exitVy": 173.4,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.831,
+            "sourceCenterX": 0.557,
+            "sourceCenterY": 0.3744,
+            "exitVy": 157,
             "points": [
               {
                 "t": 0,
-                "x": 0.4659,
-                "y": 0.6401
+                "x": 0.569,
+                "y": 0.2724
               },
               {
-                "t": 0.13,
-                "x": 0.4647,
-                "y": 0.6443
+                "t": 0.12,
+                "x": 0.5713,
+                "y": 0.296
               },
               {
-                "t": 0.63,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.25,
+                "x": 0.5692,
+                "y": 0.3577
               },
               {
-                "t": 0.75,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.37,
+                "x": 0.5734,
+                "y": 0.3267
               },
               {
-                "t": 0.88,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.5,
+                "x": 0.5652,
+                "y": 0.3981
               },
               {
-                "t": 1.13,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.62,
+                "x": 0.5466,
+                "y": 0.4525
               },
               {
-                "t": 1.25,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.38,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.63,
-                "x": 0.3796,
-                "y": 0.6409
-              },
-              {
-                "t": 1.75,
-                "x": 0.3796,
-                "y": 0.6409
+                "t": 0.87,
+                "x": 0.5044,
+                "y": 0.5177
               }
             ],
-            "read": "Representative target path target-track-93 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+            "read": "Representative target path target-track-116 with 7 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
           },
           "comparisonTargets": {
-            "xRange": 0.3034,
-            "yRange": 0.6951,
-            "pathLength": 0.1095,
-            "turnCount": 1.8,
-            "reversalCount": 1.4,
-            "lowerFieldShare": 0.425,
+            "xRange": 0.4739,
+            "yRange": 0.6944,
+            "pathLength": 0.1242,
+            "turnCount": 1.81,
+            "reversalCount": 1.5,
+            "lowerFieldShare": 0.2031,
             "entrySide": "center",
             "exitSide": "center"
           }

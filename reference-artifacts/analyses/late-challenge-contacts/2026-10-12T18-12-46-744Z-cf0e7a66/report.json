@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "private-evidence-archive-manifest",
+  "isMeasurementReport": false,
+  "historicalPath": "reference-artifacts/analyses/late-challenge-contacts/2026-10-12T18-12-46-744Z-cf0e7a66/report.json",
+  "originalCommit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "originalGeneratedAt": "2026-10-12T18:12:46.744Z",
+  "originalBundleHash": "cda9e24b6800462f43a03d37637d29852746b85b3757a67a04482d63ddecf8a6",
+  "originalMethodHash": "58592f60d04a0e883851c3c4aa3f05df2512a6d50bde78185da72cd7bdd636e9",
+  "originalSourceHashes": {
+    "06-enemy-behavior.js": "86e6734ad04f8147e68f3a08d56c2e1db054c7fca902aa93dce545937854a3b4",
+    "90-harness.js": "ad6535ae97a302db467e99dae08274b329723aa2f460df5966a42bdf3bd8ad2b",
+    "05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f"
+  },
+  "archive": {
+    "id": "sha256:012028510ef91dca663d568b57bb5aaa43a5a4742c3abbb4b341162dbb260286",
+    "relativePath": "originals/012028510ef91dca663d568b57bb5aaa43a5a4742c3abbb4b341162dbb260286.gz",
+    "compression": "gzip",
+    "originalSha256": "012028510ef91dca663d568b57bb5aaa43a5a4742c3abbb4b341162dbb260286",
+    "originalBytes": 68749132,
+    "compressedSha256": "e653f94494c008180b9bca530f22e1dcabdbdb85fdac1ad75ce2c425a6a7ec48",
+    "compressedBytes": 3701254,
+    "roundTripVerified": true
+  },
+  "findingsPath": "reference-artifacts/analyses/late-challenge-contacts/2026-10-12T18-12-46-744Z-cf0e7a66/delivery-summary.json",
+  "recovery": "Set AURORA_PRIVATE_ARCHIVE_ROOT to the private sanitized-delivery-oct14 archive directory. Gunzip archive.relativePath and verify originalSha256 before analysis. This pointer is not a metric report."
+}

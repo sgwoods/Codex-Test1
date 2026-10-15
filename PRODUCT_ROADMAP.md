@@ -1,6 +1,11 @@
 # Product Roadmap
 
-## Current Shipped State
+October 4 execution note: ACTIVE_WORK.md and OCTOBER_GO_FORWARD_PLAN.md own
+current execution. PROJECT_DIRECTION_REVIEW.md records verified state and
+pending investment/acceptance/version choices. Earlier version assignments below
+are historical proposals until reconciled; this is not release authorization.
+
+## Historical Shipped State
 
 Verified June 11, 2026:
 

@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "build": "1.4.1+build.1206.sha.032cd18d.dirty",
+  "commit": "032cd18d3e288795658ba701afce4e498c93dd8e",
+  "results": [
+    {
+      "game": "galaxy-guardians-preview",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 454792
+      }
+    },
+    {
+      "game": "aurora-galactica",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 103144
+      }
+    }
+  ],
+  "externalOriginsBlocked": [
+    "https://www.youtube.com",
+    "https://iddyodcknmxupavnuuwg.supabase.co"
+  ],
+  "errors": [],
+  "missing": [],
+  "privateRequests": [],
+  "limitations": [
+    "Local public-package smoke only; not hosted auth, audible audio, playlist availability, beta promotion or long-run gameplay.",
+    "Nonblank canvas is a weak rendering check, not identified enemy pixels or visual conformance.",
+    "Pair runtime checks with static package-byte exclusion; unused private files are not detected by request monitoring."
+  ],
+  "methodSha256": "9d2d44b06184c02d867ef249e79bb6cad69e58a6be976f07a6c96091f1c71550",
+  "bundleSha256": "68c03e2c82b86883c7d60a5795c8f9cc5abb48cd16bee22627c0d2b8ceb7eeb8"
+}

@@ -1,5 +1,10 @@
 # Current Project State Index
 
+October 3, 2026 restart: read [ACTIVE_WORK.md](ACTIVE_WORK.md) for verified
+restart facts and unresolved historical findings, and
+[AGENT_WORKFLOW.md](AGENT_WORKFLOW.md) for cycle ownership and delegation.
+The June material below remains a documentation map, not a fresh measurement.
+
 Updated: June 8, 2026
 
 This file is a map, not another competing plan. Use it to decide which document

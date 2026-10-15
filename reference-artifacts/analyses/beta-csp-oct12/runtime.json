@@ -1,0 +1,473 @@
+{
+  "ok": true,
+  "build": "1.4.1-beta.1+build.1226.sha.cf0e7a66.beta",
+  "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "bundleHash": "e932228979b5f0faa8bb5a2135f4a2f565370e81427732b97dac3220d1ccf0d3",
+  "methodHash": "43aedcbc307d01abcd44982727bb62be8a57a8bf993c7b2fc1a62c1fe9fa7587",
+  "flows": true,
+  "results": [
+    {
+      "game": "galaxy-guardians-preview",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 454838
+      },
+      "flow": {
+        "endState": {
+          "reached": true,
+          "outcome": "enemy_shot",
+          "browserSeconds": 68,
+          "simulationSeconds": 68.28299999999618,
+          "input": "held fire with one-second alternating arrows",
+          "text": "GAME OVERRESULTSGALAXY GUARDIANS RUN SUMMARYSHOTS FIRED51NUMBER OF HITS32HIT-MISS RATIO63%SCORE001660STAGE01Enter to continue"
+        },
+        "restart": {
+          "passed": true,
+          "stage": 1,
+          "score": 0,
+          "resetTime": 0.128,
+          "advancedTime": 0.6430000000000005,
+          "prompts": [
+            "GAME OVERRESULTSGALAXY GUARDIANS RUN SUMMARYSHOTS FIRED51NUMBER OF HITS32HIT-MISS RATIO63%SCORE001660STAGE01Enter to continue",
+            "GAME OVERGALAXY GUARDIANS TOP 10 PILOTSYOUR RANK 01Top-10 Galaxy Guardians run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InENTER INITIALSYOUNOIDSCORESTG01YOU001660 1Left/Right select, Up/Down changetype letters or press Enter to save",
+            "GAME OVERGALAXY GUARDIANS TOP 10 PILOTSYOUR RANK 01Top-10 Galaxy Guardians run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InNOIDSCORESTG01YOU001660 1Enter to play again"
+          ]
+        },
+        "settingsPersisted": true
+      }
+    },
+    {
+      "game": "aurora-galactica",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 103438
+      },
+      "flow": {
+        "endState": {
+          "reached": true,
+          "outcome": "ship-loss",
+          "browserSeconds": 32,
+          "simulationSeconds": 31.326999999998325,
+          "input": "idle human",
+          "text": "GAME OVERRESULTSAURORA GALACTICA RUN SUMMARYSHOTS FIRED0NUMBER OF HITS0HIT-MISS RATIO0%SCORE000000STAGE01Enter to continue"
+        },
+        "restart": {
+          "passed": true,
+          "stage": 1,
+          "score": 0,
+          "resetTime": 0.112,
+          "advancedTime": 0.6240000000000004,
+          "prompts": [
+            "GAME OVERRESULTSAURORA GALACTICA RUN SUMMARYSHOTS FIRED0NUMBER OF HITS0HIT-MISS RATIO0%SCORE000000STAGE01Enter to continue",
+            "GAME OVERAURORA GALACTICA TOP 10 PILOTSYOUR RANK 01Top-10 Aurora Galactica run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InENTER INITIALSYOUNOIDSCORESTG01YOU000000 1Left/Right select, Up/Down changetype letters or press Enter to save",
+            "GAME OVERAURORA GALACTICA TOP 10 PILOTSYOUR RANK 01Top-10 Aurora Galactica run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InNOIDSCORESTG01YOU000000 1Enter to play again"
+          ]
+        },
+        "settingsPersisted": true,
+        "watch": {
+          "start": {
+            "started": true,
+            "stage": 3,
+            "watchMode": true,
+            "persona": "professional",
+            "scope": "challenges",
+            "pilotMode": "watch"
+          },
+          "resultSeen": true,
+          "visibleResultSeen": true,
+          "nextSeen": true,
+          "transitions": [
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 1.1040000000000008,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL PILOTCHALLENGE TOUR",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 2.0960000000000014,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "CHALLENGING STAGE 1LEVELS 3-4",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 3.1040000000000023,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL pilot flying now.",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 4.096000000000003,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL pilot flying now.",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 5.104000000000004,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 6.0960000000000045,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 7.104000000000005,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 8.096000000000005,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 9.104000000000006,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 10.096000000000007,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 11.104000000000008,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 12.096000000000009,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 13.10400000000001,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 14.09600000000001,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 15.104000000000012,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 16.096,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 17.10399999999989,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": true,
+              "pendingStage": 7,
+              "time": 18.09599999999978,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "PERFECT BONUSHITS 40/40BONUS 15000",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 19.10399999999967,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 20.09599999999956,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 21.10399999999945,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 7,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 22.09599999999934,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "CHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "securityPages": [
+    {
+      "file": "application-guide.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "conformance-dashboard.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "index.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "ingestion-dashboard.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "platinum-guide.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "player-guide.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "project-guide.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "project-overview-slides.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "public-project-page.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "release-dashboard.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "release-notes.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "releases.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    },
+    {
+      "file": "white-paper.html",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; worker-src 'self' blob:; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests",
+      "referrer": "strict-origin-when-cross-origin"
+    }
+  ],
+  "externalOriginsBlocked": [
+    "https://www.youtube.com",
+    "https://iddyodcknmxupavnuuwg.supabase.co"
+  ],
+  "errors": [],
+  "missing": [],
+  "privateRequests": [],
+  "limitations": [
+    "Local public-package smoke only; not hosted auth, audible audio, playlist availability, beta promotion or long-run gameplay.",
+    "Nonblank canvas is a weak rendering check, not identified enemy pixels or visual conformance.",
+    "Pair runtime checks with static package-byte exclusion; unused private files are not detected by request monitoring.",
+    "Optional flows use browser-clock RAF/timer advancement and ordinary UI; not real-time audio audibility, late-stage or perfect-route acceptance."
+  ]
+}

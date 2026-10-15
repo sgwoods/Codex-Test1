@@ -1,0 +1,330 @@
+{
+  "baseline": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "verdict": "REJECT one experimental pacing candidate: reduced continuous full view and right-edge departure for target372665405.",
+  "candidateSourceHash": "56762bc80bea81f115d81c51b7197a325116ff97490063f560e61da63227c311",
+  "candidateBundleHash": "2423f01595337565a71a3d0887ef61f9d66228d4cfb36f0f66bbd134cbc467e9",
+  "baselineBundleHash": "58cc0c3436c8b4a30500eefb91850a80cb862f8e263a5715f96cee0470188f83",
+  "methodHashes": {
+    "entry": "9d406f9675b1e93110474b2d9b4524389fbe184eb891953ecb5806cda9264697",
+    "shots": "30dbec0019b6b448a183d3d1294b544917499aa3d8a88076a81f0bb17fdc597d",
+    "contacts": "1397e00aca25c5996718b729aa6cf1af8065376bc29efd4d277c980d8251ab5b",
+    "summary": "32a07c41cf6bbd7fc34f0e17311d5e6b1a62107e7d48a19713314deafc0500fd"
+  },
+  "shots": [
+    {
+      "variant": "candidate",
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-shots.json",
+      "rawHash": "72ef17bd02ddfe56901179d18efe5955c37dca59e98f58434b5bdc24e8096aa7",
+      "targetHits": 20,
+      "otherFirstHits": 21
+    },
+    {
+      "variant": "baseline",
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/baseline-shots.json",
+      "rawHash": "ff203cb301c4938d1c5b2b4a9eea78da29286d04b98adfc987298507b9e49602",
+      "targetHits": 20,
+      "otherFirstHits": 21
+    }
+  ],
+  "all41Right40OutcomesExact": true,
+  "entryPassed": true,
+  "preExitGreenAndAllOtherStage31TargetsExact": true,
+  "stage3TargetsExact": true,
+  "runs": [
+    {
+      "variant": "baseline",
+      "stage": 31,
+      "frames": 1325,
+      "completed": true,
+      "fullEntry": 40,
+      "contacts": 4,
+      "missPhases": {
+        "exit": 24,
+        "middle": 16
+      }
+    },
+    {
+      "variant": "baseline",
+      "stage": 3,
+      "frames": 1368,
+      "completed": true,
+      "fullEntry": 40,
+      "contacts": 6,
+      "missPhases": {
+        "exit": 40
+      }
+    },
+    {
+      "variant": "candidate",
+      "stage": 31,
+      "frames": 1325,
+      "completed": true,
+      "fullEntry": 40,
+      "contacts": 3,
+      "missPhases": {
+        "exit": 24,
+        "middle": 16
+      }
+    },
+    {
+      "variant": "candidate",
+      "stage": 3,
+      "frames": 1368,
+      "completed": true,
+      "fullEntry": 40,
+      "contacts": 6,
+      "missPhases": {
+        "exit": 40
+      }
+    }
+  ],
+  "greens": [
+    {
+      "id": 925024101,
+      "baselineLongestFullSeconds": 3.55,
+      "candidateLongestFullSeconds": 3.55,
+      "firstExit": {
+        "t": 10.15,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": -21.04996231002714,
+        "y": 267.28268379164365,
+        "full": false
+      },
+      "removal": {
+        "t": 10.617,
+        "u": 10.520950000000122,
+        "phase": "exit",
+        "miss": 1,
+        "x": 38.381746646186386,
+        "y": -33.17843128327189,
+        "spawn": -0.013666666666655568,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822316120527724,
+      "finalUpperBandCenterSeconds": 0.13333333333333333
+    },
+    {
+      "id": 362828100,
+      "baselineLongestFullSeconds": 5.55,
+      "candidateLongestFullSeconds": 5.5,
+      "firstExit": {
+        "t": 10.217,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 95.571131574645,
+        "y": 284.93546804668733,
+        "full": true
+      },
+      "removal": {
+        "t": 10.717,
+        "u": 10.57891666666679,
+        "phase": "exit",
+        "miss": 1,
+        "x": 160.11273630984633,
+        "y": -38.56185664085643,
+        "spawn": -0.010333333333321714,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822630146335973,
+      "finalUpperBandCenterSeconds": 0.13333333333333333
+    },
+    {
+      "id": 775953348,
+      "baselineLongestFullSeconds": 2.15,
+      "candidateLongestFullSeconds": 2.15,
+      "firstExit": {
+        "t": 10.283,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": -53.04996231002714,
+        "y": 310.58825230173096,
+        "full": false
+      },
+      "removal": {
+        "t": 10.817,
+        "u": 10.63688333333346,
+        "phase": "exit",
+        "miss": 1,
+        "x": 15.65624815322079,
+        "y": -35.94553130407605,
+        "spawn": -0.006999999999988748,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822781561764048,
+      "finalUpperBandCenterSeconds": 0.05
+    },
+    {
+      "id": 261787956,
+      "baselineLongestFullSeconds": 4.833333333333333,
+      "candidateLongestFullSeconds": 5.333333333333333,
+      "firstExit": {
+        "t": 10.35,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 63.571131574644994,
+        "y": 328.24103655677453,
+        "full": true
+      },
+      "removal": {
+        "t": 10.9,
+        "u": 10.665866666666794,
+        "phase": "exit",
+        "miss": 1,
+        "x": 135.06867297067294,
+        "y": -29.736042215274338,
+        "spawn": -0.0036666666666548935,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822825416457919,
+      "finalUpperBandCenterSeconds": 0.13333333333333333
+    },
+    {
+      "id": 387665891,
+      "baselineLongestFullSeconds": 5.883333333333334,
+      "candidateLongestFullSeconds": 5.433333333333334,
+      "firstExit": {
+        "t": 10.15,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 74.95003768997286,
+        "y": 267.28268379164365,
+        "full": true
+      },
+      "removal": {
+        "t": 10.617,
+        "u": 10.520950000000122,
+        "phase": "exit",
+        "miss": 1,
+        "x": 134.38174664618637,
+        "y": -33.17843128327189,
+        "spawn": -0.013666666666655568,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822316120527725,
+      "finalUpperBandCenterSeconds": 0.13333333333333333
+    },
+    {
+      "id": 783339713,
+      "baselineLongestFullSeconds": 3.8333333333333335,
+      "candidateLongestFullSeconds": 2.933333333333333,
+      "firstExit": {
+        "t": 10.217,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 223.571131574645,
+        "y": 284.93546804668733,
+        "full": true
+      },
+      "removal": {
+        "t": 10.717,
+        "u": 10.57891666666679,
+        "phase": "exit",
+        "miss": 1,
+        "x": 288.11273630984635,
+        "y": -38.56185664085643,
+        "spawn": -0.010333333333321714,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822630146335955,
+      "finalUpperBandCenterSeconds": 0.13333333333333333
+    },
+    {
+      "id": 551507219,
+      "baselineLongestFullSeconds": 6.033333333333333,
+      "candidateLongestFullSeconds": 5.366666666666666,
+      "firstExit": {
+        "t": 10.283,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 106.95003768997286,
+        "y": 310.58825230173096,
+        "full": true
+      },
+      "removal": {
+        "t": 10.817,
+        "u": 10.63688333333346,
+        "phase": "exit",
+        "miss": 1,
+        "x": 175.6562481532208,
+        "y": -35.94553130407605,
+        "spawn": -0.006999999999988748,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.822781561764044,
+      "finalUpperBandCenterSeconds": 0.11666666666666667
+    },
+    {
+      "id": 372665405,
+      "baselineLongestFullSeconds": 1.9666666666666666,
+      "candidateLongestFullSeconds": 0.8833333333333333,
+      "firstExit": {
+        "t": 10.35,
+        "u": 9.709416666666757,
+        "phase": "exit",
+        "x": 255.571131574645,
+        "y": 328.24103655677453,
+        "full": true
+      },
+      "removal": {
+        "t": 10.917,
+        "u": 10.694850000000129,
+        "phase": "exit",
+        "miss": 1,
+        "x": 329.3873298408287,
+        "y": -41.32932752135372,
+        "spawn": -0.0036666666666548935,
+        "hadFullEntry": true
+      },
+      "maxExitFrameStep": 11.82285616180162,
+      "finalUpperBandCenterSeconds": 0
+    }
+  ],
+  "rawEntry": {
+    "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/entry-cull-report.json",
+    "hash": "01262476634b3a71e6412b0fb5abf17d4db8e7edc5c093e7301fa82127c4952a"
+  },
+  "rawContacts": {
+    "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/contacts.json",
+    "hash": "433d7f9e621f5687bb89b6f235a7bd77c0c0351f3661815940d70fadad052aa1"
+  },
+  "captures": [
+    {
+      "frame": 600,
+      "t": 10,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame600.png"
+    },
+    {
+      "frame": 615,
+      "t": 10.25,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame615.png"
+    },
+    {
+      "frame": 630,
+      "t": 10.5,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame630.png"
+    },
+    {
+      "frame": 660,
+      "t": 11,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame660.png"
+    },
+    {
+      "frame": 720,
+      "t": 12,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame720.png"
+    },
+    {
+      "frame": 960,
+      "t": 16,
+      "path": "/private/tmp/aurora-green-paced-exit-oct12/private-artifacts/repo-mirror/reference-artifacts/analyses/green-paced-exit-oct12/candidate-stage31-frame960.png"
+    }
+  ],
+  "limits": [
+    "Single seed per stage; 60Hz development harness, not public flow or complete perfect route.",
+    "Reference supports direction/final half-second bracket only; rates are experimental, not canonical.",
+    "Upper-band center duration is a diagnostic threshold, not reference sprite-bound calibration.",
+    "Sparse rendered frames confirm later wave without lingering green; not every-frame pixel verification.",
+    "Existing pre-exit jumps and three blue contacts remain; no audio/release acceptance."
+  ]
+}

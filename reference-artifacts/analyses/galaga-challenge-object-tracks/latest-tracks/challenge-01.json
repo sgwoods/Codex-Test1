@@ -7,12 +7,39 @@
     "stageMarker": 3,
     "family": "classic-column-and-side-arc",
     "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
-    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
-    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
-    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+    "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+    "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+    "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
     "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json"
   },
   "sourceStartSeconds": 5,
+  "evidenceContract": {
+    "schema": "reference-evidence-contract-1",
+    "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+    "timing": "resampled-8fps-relative-time-not-native-pts",
+    "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+    "analyzedNormalizedY": {
+      "min": 0.105,
+      "max": 0.875
+    },
+    "observationUnit": "connected-component-tracklet-not-identified-alien",
+    "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+    "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+    "shootingCensoring": "not-resolved-per-target",
+    "capabilities": {
+      "descriptive": true,
+      "full-entry": false,
+      "full-path": false,
+      "wave-identity": false
+    },
+    "windowCoverage": {
+      "startSeconds": 5,
+      "durationSeconds": 16,
+      "declaredDurationSeconds": 31,
+      "capped": true,
+      "status": "coarse-source-window-not-event-labeled"
+    }
+  },
   "frameSize": {
     "width": 480,
     "height": 360
@@ -3398,13 +3425,15 @@
     }
   ],
   "evidence": {
-    "overlaySvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
-    "contactSheetSvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
-    "perChallengeJson": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+    "overlaySvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/overlays/challenge-01-target-tracks.svg",
+    "contactSheetSvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/contact-sheets/challenge-01-target-samples.svg",
+    "perChallengeJson": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/tracks/challenge-01.json"
   },
   "measurementLimits": [
     "CPU connected-component target tracking is not final sprite identity recognition.",
     "The tracker intentionally ignores score text, player ship, lives, and most stars so it can focus on challenge-stage alien/object movement.",
-    "Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity."
+    "Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity.",
+    "Top10.5% and bottom12.5% are excluded; centroid tracklets cannot establish full-sprite entry/dwell or complete exits.",
+    "Confidence/readiness are uncalibrated artifact heuristics, not conformance probabilities or release acceptance."
   ]
 }

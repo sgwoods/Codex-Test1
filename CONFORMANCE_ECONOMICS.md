@@ -2,15 +2,15 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-06-12T11:23:00.426Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/report.json`
+Generated: `2026-10-15T02:34:59.657Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/report.json`
 
 ## Current Local-Vs-Cloud Read
 
 | Read | Current value | Interpretation |
 | --- | --- | --- |
-| Overall quality | 8.8/10 | Current release-quality conformance roll-up. |
-| Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
+| Overall quality | 8.7/10 | Current release-quality conformance roll-up. |
+| Level arc | 8.6/10 | Current long-play/gameplay-shape roll-up. |
 | Measured runs | 984 | Commands or manual entries logged in the economics ledger. |
 | Local CPU tracked wall | 585.6 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
 | Browser-backed local wall | 434.2 min | Subset of local work that exercised Chromium/gameplay runtime. |
@@ -81,10 +81,10 @@ These tables answer the practical question behind the economics work: when we sp
 
 | Project part | Positive score movement | Share | Player/designer meaning |
 | --- | --- | --- | --- |
-| Gameplay complexity and stage arc | +47.4 | 74.2% | Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve. |
-| Core mechanics and control feel | +7.9 | 12.4% | Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes. |
-| Audio feedback and event clarity | +5.8 | 9.1% | Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity. |
-| Overall release-quality rollup | +2.8 | 4.4% | Composite release score movement that reflects several subsystems at once. |
+| Gameplay complexity and stage arc | +49.6 | 68.3% | Player-perceived variety, pressure, alien choreography, challenge-stage novelty, and long-play learning curve. |
+| Core mechanics and control feel | +13.2 | 18.2% | Player-perceived fairness, responsiveness, collision quality, and trust in combat outcomes. |
+| Audio feedback and event clarity | +6.5 | 9% | Player-perceived clarity from sounds that explain danger, reward, loss, and arcade identity. |
+| Overall release-quality rollup | +3.3 | 4.5% | Composite release score movement that reflects several subsystems at once. |
 
 ## Spend By Conformance Axis
 
@@ -108,33 +108,33 @@ These tables answer the practical question behind the economics work: when we sp
 | Axis | Runs | Wall min | Positive score gain | Wall min / +1 score | Attribution |
 | --- | --- | --- | --- | --- | --- |
 | formation-boss-grammar | 4 | 0.139 | 2.5 | 0.06 | tracked-spend-and-score-movement |
-| overall-quality | 2 | 2.178 | 2.8 | 0.78 | tracked-spend-and-score-movement |
+| overall-quality | 2 | 2.178 | 3.3 | 0.66 | tracked-spend-and-score-movement |
 | stage4-pressure | 28 | 12.824 | 10 | 1.28 | tracked-spend-and-score-movement |
-| level-arc | 97 | 8.811 | 3.4 | 2.59 | tracked-spend-and-score-movement |
-| audio | 317 | 254.312 | 5.8 | 43.85 | tracked-spend-and-score-movement |
-| movement | 0 | 0 | 7.9 | n/a | historical-score-movement-without-tracked-spend |
+| challenge-set-piece | 14 | 4.352 | 2 | 2.18 | tracked-spend-and-score-movement |
+| level-arc | 97 | 8.811 | 3.6 | 2.45 | tracked-spend-and-score-movement |
+| audio | 317 | 254.312 | 6.5 | 39.12 | tracked-spend-and-score-movement |
+| movement | 0 | 0 | 13.2 | n/a | historical-score-movement-without-tracked-spend |
 | challenge-timing | 0 | 0 | 6.5 | n/a | historical-score-movement-without-tracked-spend |
 | stage1-timing | 0 | 0 | 6.4 | n/a | historical-score-movement-without-tracked-spend |
 | stage-signature-distance | 0 | 0 | 4.3 | n/a | historical-score-movement-without-tracked-spend |
 | movement-grammar-expansion | 0 | 0 | 3.4 | n/a | historical-score-movement-without-tracked-spend |
 | stage-distinctiveness | 0 | 0 | 3.3 | n/a | historical-score-movement-without-tracked-spend |
-| long-run-non-repetition | 0 | 0 | 2.5 | n/a | historical-score-movement-without-tracked-spend |
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/cost-per-positive-score-point.svg)
 
-![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/gpu-equivalent-use-by-purpose.svg)
+![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/gpu-equivalent-use-by-purpose.svg)
 
-![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/cpu-use-by-purpose.svg)
+![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/cpu-use-by-purpose.svg)
 
-![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-06-12-dab57ac7/gameplay-improvement-by-project-part.svg)
+![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-10-15-f8c1b48d/gameplay-improvement-by-project-part.svg)
 
 ## Codex / OpenAI Accounting
 

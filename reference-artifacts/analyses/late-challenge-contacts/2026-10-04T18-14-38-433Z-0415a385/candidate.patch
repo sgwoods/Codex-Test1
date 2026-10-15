@@ -1,0 +1,17 @@
+diff --git a/src/js/06-enemy-behavior.js b/src/js/06-enemy-behavior.js
+index 6c507a07..067508bd 100644
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -511,6 +511,12 @@ function updateChallengeEnemy(state,e,dt){
+ 	   const rung=slot%2?-1:1;
+ 	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp;
+ 	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0);
++	   if(S.stage>=31){
++	    // Meet the retained exit start without resetting position or extending its clock.
++	    const exit=sweep*rung;
++	    e.x+=q*(sweep*(28-22-rung*31)*fm.challengeSweep*arcAmp+exit*12*arcAmp);
++	    e.y+=q*(24-(146+slot*14)*dropAmp);
++	   }
+ 	  }else if(pathFamily==='green-ladder-deep-drop'){
+ 	   const rung=slot%2?-1:1;
+ 	   e.x=laneX+sweep*((q-.5)*30+rung*(14+q*10)+Math.sin(q*Math.PI*1.7+p)*8)*fm.challengeSweep*arcAmp;

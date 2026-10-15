@@ -472,6 +472,8 @@ function pickGuardiansEscortAliens(state,count=0,leader=null){
 function startGuardiansDive(state,alien,escortCount=0){
  if(!alien||alien.hp<=0)return null;
  const rules=guardiansRuntimeRules(state);
+ const policy=guardiansStageBehaviorPolicy(state)?.diveSelection;
+ if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(alien))return null;
  alien.mode='diving';
  alien.diveT=0;
  alien.diveStartX=alien.x;
@@ -480,7 +482,22 @@ function startGuardiansDive(state,alien,escortCount=0){
  alien.escorts=escortCount;
  alien.linkedTo='';
  alien.escortSlot=0;
- const escorts=alien.role==='flagship'?pickGuardiansEscortAliens(state,escortCount,alien):[];
+ const candidates=alien.role==='flagship'?pickGuardiansEscortAliens(state,policy?state.aliens.length:escortCount,alien):[];
+ const escorts=[];
+ // Recheck after each activation: the leader and accepted escorts consume capacity.
+ for(const escort of candidates){
+  if(escorts.length>=Math.max(0,escortCount|0))break;
+  if(policy&&!guardiansFairDivePredicate(state,rules,guardiansPressureSnapshot(state,rules))(escort))continue;
+  escort.mode='diving';
+  escort.diveT=-rules.escortLag*(escorts.length+1);
+  escort.diveStartX=escort.x;
+  escort.diveStartY=escort.y;
+  escort.diveSide=alien.diveSide;
+  escort.linkedTo=alien.id;
+  escort.escortSlot=escorts.length===0?-1:1;
+  escort.escorts=0;
+  escorts.push(escort);
+ }
  alien.escorts=escorts.length;
  guardiansRuntimeEvent(state,alien.role==='flagship'?'flagship_dive_start':'alien_dive_start',{
   id:alien.id,
@@ -488,16 +505,6 @@ function startGuardiansDive(state,alien,escortCount=0){
   visualId:alien.visualId,
   audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.diveAudioCue||'',
   escorts:escorts.length
- });
- escorts.forEach((escort,index)=>{
-  escort.mode='diving';
-  escort.diveT=-rules.escortLag*(index+1);
-  escort.diveStartX=escort.x;
-  escort.diveStartY=escort.y;
-  escort.diveSide=alien.diveSide;
-  escort.linkedTo=alien.id;
-  escort.escortSlot=index===0?-1:1;
-  escort.escorts=0;
  });
  if(escorts.length>0)guardiansRuntimeEvent(state,'escort_join',{
   flagship:alien.id,

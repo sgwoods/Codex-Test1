@@ -426,6 +426,23 @@ function enemyDims(e){
  return{w:32,h:26};
 }
 
+function enemyUnrotatedCullExtent(e,mode=currentSpriteRenderMode()){
+ const fallback=enemyDims(e).w/2+1;
+ if(!['auto','aurora-themed'].includes(mode)||e.dive!==9||e.hitT>0||e.carry
+  ||!['stingray','galboss'].includes(e.fam)||!['bee','but','rogue','boss'].includes(e.t))return fallback;
+ const model=e.t==='bee'?P.but:e.t==='but'?AURORA_CONFORMANCE_PIXELS.butterfly:e.t==='rogue'?P.rogue:P.boss;
+ const origin=e.t==='boss'?-9:-8,ps=2;
+ const patterns=[model.a,model.b,FAMILY_PIXELS[e.fam]];
+ if(patterns.some(p=>!Array.isArray(p)||p.some(point=>!Number.isFinite(point?.[0]))))return fallback;
+ let extent=0;
+ for(const pattern of patterns)for(const [x] of pattern){
+  extent=Math.max(extent,Math.abs(origin+ps*x),Math.abs(origin+ps*x+ps));
+ }
+ // Union of both flap poses, including the shared family accent rectangles.
+ extent=Math.max(extent,ps*5.7,ps*4.7+ps,ps*5.2,ps*4.2+ps);
+ return Math.ceil(extent);
+}
+
 function enemyHitbox(e){
  const d=enemyDims(e),stage1=e&&!S.challenge&&S.stage===1,scale=S.challenge?(S.stage===3?0.74:0.7):(stage1?(e&&!e.form?0.14:(e?.dive===1||e?.dive===4?0.28:(S.scriptMode?0.18:0.22))):0.22);
  return{w:d.w*scale,h:d.h*scale};

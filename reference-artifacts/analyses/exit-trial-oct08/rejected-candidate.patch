@@ -1,0 +1,39 @@
+diff --git a/src/js/06-enemy-behavior.js b/src/js/06-enemy-behavior.js
+index 6c507a07..ab749544 100644
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -386,7 +386,8 @@ function updateChallengeEnemy(state,e,dt){
+ 		  : referencePlaybackScale-1;
+ 		 e.tm+=dt*pathTimeSpeed;
+ 		 e.referenceLeadIn=0;
+-		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
++ const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
++ const previousExitPose=e.stage31ExitPose;
+ 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
+ 	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+ 	 if(u<entryDuration){
+@@ -646,6 +647,24 @@ function updateChallengeEnemy(state,e,dt){
+   const lowerQ=cl((u-2.4)/8.8,0,1);
+   e.y+=lowerFieldBias*lowerQ*lowerQ;
+  }
++ // Experimental Stage 31 departure: retain the complete pre-exit trajectory.
++ if(S.stage===31&&(pathFamily==='green-ladder-split'||pathFamily==='blue-purple-finale')){
++  if(u<9.7){
++   e.stage31ExitPose={x:e.x,y:e.y,u,
++    vx:previousExitPose?(e.x-previousExitPose.x)/dt:0,
++    vy:previousExitPose?(e.y-previousExitPose.y)/dt:0};
++  }else if(previousExitPose){
++   const duration=3.35/(1+pathTimeSpeed);
++   const q=cl((u-previousExitPose.u)/3.35,0,1);
++   const q2=q*q,q3=q2*q;
++   const h00=2*q3-3*q2+1,h10=q3-2*q2+q,h01=-2*q3+3*q2;
++   const direction=pathFamily==='green-ladder-split'?1:-1;
++   const endX=direction>0?PLAY_W+70:-70;
++   const endY=Math.max(-40,previousExitPose.y-200);
++   e.x=h00*previousExitPose.x+h10*duration*previousExitPose.vx+h01*endX;
++   e.y=h00*previousExitPose.y+h10*duration*previousExitPose.vy+h01*endY;
++  }
++ }
+  if(e.y<=enemyChallengeUpperBandY(e)){
+   e.ub+=dt;
+   if(S.ch){

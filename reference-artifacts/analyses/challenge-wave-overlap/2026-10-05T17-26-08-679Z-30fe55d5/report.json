@@ -1,0 +1,2412 @@
+{
+  "commit": "30fe55d51ba289ad10ad823331c214fe7cedc0ae",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "versionScheme": "hosted-dev-increment",
+    "label": "1.4.1.1+build.1216.sha.30fe55d5",
+    "buildNumber": "1216",
+    "commit": "30fe55d51ba289ad10ad823331c214fe7cedc0ae",
+    "shortCommit": "30fe55d5",
+    "branch": "codex/oct03-local-integration",
+    "state": "codex/oct03-local-integration@30fe55d5 clean",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "dirty": false,
+    "dirtyFiles": [],
+    "builtAtUtc": "2026-10-05T17:18:24.614Z",
+    "builtAtEt": "Oct 05 2026, 1:18 PM EDT",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ],
+    "development": {
+      "baseVersion": "1.4.1",
+      "iteration": 1,
+      "versionLine": "1.4.1.1",
+      "releaseTrack": "hosted-dev-increment",
+      "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+    },
+    "supabaseConfigured": true,
+    "latestReleaseNote": {
+      "version": "1.4.1",
+      "date": "2026-06-11",
+      "title": "1.4.1 production quality release",
+      "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+      "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+    }
+  },
+  "bundleHash": "d3fab83c789169a83d4d5cbe8616381934bfdb987d03f892ddd183a3f5e1ce2a",
+  "methodHash": "821340aa5d3ad7f4f6e796d80ddbd557e4c0ebcdcf6010c2f8e1eb1f4bdf8487",
+  "result": {
+    "initial": {
+      "gameKey": "aurora-galactica",
+      "started": true,
+      "paused": false,
+      "attract": {
+        "active": false,
+        "phase": ""
+      },
+      "stage": 31,
+      "score": 0,
+      "lives": 3,
+      "challenge": true,
+      "scriptMode": false,
+      "watchMode": false,
+      "watchPersona": "",
+      "watchScope": "game",
+      "profile": "crown",
+      "theme": "crown-aurora",
+      "simT": 0,
+      "stageClock": 0,
+      "rngState": 496386107,
+      "playerTwo": {
+        "enabled": false
+      },
+      "player": {
+        "x": 140,
+        "y": 335,
+        "vx": 0,
+        "cd": 0,
+        "inv": 0,
+        "spawn": 0,
+        "dual": false,
+        "captured": false,
+        "pending": false,
+        "hNoShotT": 0,
+        "hDebugT": 0,
+        "demoTargetId": null,
+        "demoTargetT": 0
+      },
+      "timers": {
+        "fireCD": 99,
+        "recoverT": 0,
+        "attackGapT": 0,
+        "nextStageT": 0,
+        "postChallengeT": 0,
+        "sequenceT": 0
+      },
+      "counts": {
+        "enemies": 40,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "effects": 0,
+        "attackers": 0
+      }
+    },
+    "final": {
+      "gameKey": "aurora-galactica",
+      "started": true,
+      "paused": false,
+      "attract": {
+        "active": false,
+        "phase": ""
+      },
+      "stage": 31,
+      "score": 0,
+      "lives": 3,
+      "challenge": true,
+      "scriptMode": false,
+      "watchMode": false,
+      "watchPersona": "",
+      "watchScope": "game",
+      "profile": "crown",
+      "theme": "crown-aurora",
+      "simT": 11.733,
+      "stageClock": 11.733,
+      "rngState": 496386107,
+      "playerTwo": {
+        "enabled": false
+      },
+      "player": {
+        "x": 140,
+        "y": 335,
+        "vx": 0,
+        "cd": 0,
+        "inv": 0,
+        "spawn": 0,
+        "dual": false,
+        "captured": false,
+        "pending": false,
+        "hNoShotT": 0,
+        "hDebugT": 0,
+        "demoTargetId": null,
+        "demoTargetT": 0
+      },
+      "timers": {
+        "fireCD": 87.267,
+        "recoverT": 0,
+        "attackGapT": 0,
+        "nextStageT": 0,
+        "postChallengeT": 0,
+        "sequenceT": 0
+      },
+      "counts": {
+        "enemies": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "effects": 0,
+        "attackers": 0
+      }
+    },
+    "layout": {
+      "fromStage": 31,
+      "id": "blue-purple-finale",
+      "pathFamily": "blue-purple-finale",
+      "groups": 5,
+      "enemiesPerGroup": 8,
+      "upperBandRatio": 0.4,
+      "spawnOffsetX": 86,
+      "waveSpacingY": 8,
+      "rowSpacingY": 7,
+      "waveDelay": 0.86,
+      "slotDelay": 0.07,
+      "arcAmp": 1.62,
+      "dropAmp": 1.26,
+      "lowerFieldBias": 48,
+      "laneTypes": [
+        "rogue",
+        "boss",
+        "bee",
+        "but",
+        "but",
+        "bee",
+        "boss",
+        "rogue"
+      ],
+      "groupLaneTypes": [
+        [
+          "rogue",
+          "boss",
+          "bee",
+          "but",
+          "but",
+          "bee",
+          "boss",
+          "rogue"
+        ],
+        [
+          "boss",
+          "rogue",
+          "but",
+          "bee",
+          "bee",
+          "but",
+          "rogue",
+          "boss"
+        ],
+        [
+          "bee",
+          "but",
+          "boss",
+          "rogue",
+          "rogue",
+          "boss",
+          "but",
+          "bee"
+        ],
+        [
+          "but",
+          "bee",
+          "rogue",
+          "boss",
+          "boss",
+          "rogue",
+          "bee",
+          "but"
+        ],
+        [
+          "boss",
+          "but",
+          "rogue",
+          "bee",
+          "bee",
+          "rogue",
+          "but",
+          "boss"
+        ]
+      ],
+      "groupVisualFamilies": [
+        "stingray",
+        "mosquito",
+        "stingray",
+        "mosquito",
+        "galboss"
+      ],
+      "groupPathFamilies": [
+        "blue-purple-finale",
+        "green-ladder-split",
+        "blue-purple-finale",
+        "yellow-diagonal-fan",
+        "blue-purple-finale"
+      ]
+    },
+    "targets": [
+      {
+        "id": 929885849,
+        "wave": 0,
+        "lane": 0,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 394,
+        "fullFrames": 327,
+        "firstVisible": 0.9833333333333333,
+        "lastVisible": 8.216666666666667,
+        "firstFull": 1.1,
+        "longestFullFrames": 229,
+        "run": 0
+      },
+      {
+        "id": 216141938,
+        "wave": 0,
+        "lane": 1,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 290,
+        "fullFrames": 264,
+        "firstVisible": 1.15,
+        "lastVisible": 5.966666666666667,
+        "firstFull": 1.2333333333333334,
+        "longestFullFrames": 239,
+        "run": 0
+      },
+      {
+        "id": 789939609,
+        "wave": 0,
+        "lane": 2,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 263,
+        "fullFrames": 229,
+        "firstVisible": 1.1166666666666667,
+        "lastVisible": 5.8,
+        "firstFull": 1.9166666666666667,
+        "longestFullFrames": 229,
+        "run": 0
+      },
+      {
+        "id": 154781671,
+        "wave": 0,
+        "lane": 3,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 243,
+        "fullFrames": 212,
+        "firstVisible": 1.2,
+        "lastVisible": 5.75,
+        "firstFull": 1.9333333333333333,
+        "longestFullFrames": 171,
+        "run": 0
+      },
+      {
+        "id": 51406268,
+        "wave": 0,
+        "lane": 4,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 402,
+        "fullFrames": 361,
+        "firstVisible": 1.25,
+        "lastVisible": 8.283333333333333,
+        "firstFull": 1.3166666666666667,
+        "longestFullFrames": 195,
+        "run": 0
+      },
+      {
+        "id": 809515661,
+        "wave": 0,
+        "lane": 5,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 370,
+        "fullFrames": 332,
+        "firstVisible": 1.55,
+        "lastVisible": 8.3,
+        "firstFull": 1.6166666666666667,
+        "longestFullFrames": 161,
+        "run": 0
+      },
+      {
+        "id": 218173522,
+        "wave": 0,
+        "lane": 6,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 126,
+        "fullFrames": 106,
+        "firstVisible": 1.1166666666666667,
+        "lastVisible": 3.65,
+        "firstFull": 1.8166666666666667,
+        "longestFullFrames": 106,
+        "run": 0
+      },
+      {
+        "id": 72239387,
+        "wave": 0,
+        "lane": 7,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 153,
+        "fullFrames": 112,
+        "firstVisible": 1.25,
+        "lastVisible": 4.15,
+        "firstFull": 1.3666666666666667,
+        "longestFullFrames": 57,
+        "run": 0
+      },
+      {
+        "id": 925024101,
+        "wave": 1,
+        "lane": 0,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 292,
+        "fullFrames": 214,
+        "firstVisible": 2.466666666666667,
+        "lastVisible": 7.616666666666666,
+        "firstFull": 2.85,
+        "longestFullFrames": 213,
+        "run": 0
+      },
+      {
+        "id": 362828100,
+        "wave": 1,
+        "lane": 1,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 385,
+        "fullFrames": 333,
+        "firstVisible": 2.05,
+        "lastVisible": 8.45,
+        "firstFull": 2.433333333333333,
+        "longestFullFrames": 333,
+        "run": 0
+      },
+      {
+        "id": 775953348,
+        "wave": 1,
+        "lane": 2,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 204,
+        "fullFrames": 129,
+        "firstVisible": 2.8666666666666667,
+        "lastVisible": 6.25,
+        "firstFull": 3.4,
+        "longestFullFrames": 129,
+        "run": 0
+      },
+      {
+        "id": 261787956,
+        "wave": 1,
+        "lane": 3,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 342,
+        "fullFrames": 290,
+        "firstVisible": 2.2333333333333334,
+        "lastVisible": 7.916666666666667,
+        "firstFull": 2.783333333333333,
+        "longestFullFrames": 290,
+        "run": 0
+      },
+      {
+        "id": 387665891,
+        "wave": 1,
+        "lane": 4,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 381,
+        "fullFrames": 353,
+        "firstVisible": 2.15,
+        "lastVisible": 8.483333333333333,
+        "firstFull": 2.4,
+        "longestFullFrames": 353,
+        "run": 0
+      },
+      {
+        "id": 783339713,
+        "wave": 1,
+        "lane": 5,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 367,
+        "fullFrames": 272,
+        "firstVisible": 2.7,
+        "lastVisible": 8.8,
+        "firstFull": 3.0166666666666666,
+        "longestFullFrames": 230,
+        "run": 0
+      },
+      {
+        "id": 551507219,
+        "wave": 1,
+        "lane": 6,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 390,
+        "fullFrames": 362,
+        "firstVisible": 2.35,
+        "lastVisible": 8.833333333333334,
+        "firstFull": 2.6666666666666665,
+        "longestFullFrames": 362,
+        "run": 0
+      },
+      {
+        "id": 372665405,
+        "wave": 1,
+        "lane": 7,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 247,
+        "fullFrames": 139,
+        "firstVisible": 3.0833333333333335,
+        "lastVisible": 8.9,
+        "firstFull": 3.5,
+        "longestFullFrames": 118,
+        "run": 0
+      },
+      {
+        "id": 521982333,
+        "wave": 2,
+        "lane": 0,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 357,
+        "fullFrames": 345,
+        "firstVisible": 2.9,
+        "lastVisible": 9.183333333333334,
+        "firstFull": 2.966666666666667,
+        "longestFullFrames": 287,
+        "run": 0
+      },
+      {
+        "id": 753126167,
+        "wave": 2,
+        "lane": 1,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 369,
+        "fullFrames": 328,
+        "firstVisible": 3.033333333333333,
+        "lastVisible": 9.366666666666667,
+        "firstFull": 3.1,
+        "longestFullFrames": 193,
+        "run": 0
+      },
+      {
+        "id": 132766890,
+        "wave": 2,
+        "lane": 2,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 350,
+        "fullFrames": 290,
+        "firstVisible": 3.216666666666667,
+        "lastVisible": 9.583333333333334,
+        "firstFull": 3.283333333333333,
+        "longestFullFrames": 99,
+        "run": 0
+      },
+      {
+        "id": 642159901,
+        "wave": 2,
+        "lane": 3,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 264,
+        "fullFrames": 224,
+        "firstVisible": 2.95,
+        "lastVisible": 7.7,
+        "firstFull": 3.0833333333333335,
+        "longestFullFrames": 175,
+        "run": 0
+      },
+      {
+        "id": 214629079,
+        "wave": 2,
+        "lane": 4,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 389,
+        "fullFrames": 356,
+        "firstVisible": 2.7666666666666666,
+        "lastVisible": 9.75,
+        "firstFull": 2.85,
+        "longestFullFrames": 211,
+        "run": 0
+      },
+      {
+        "id": 212535042,
+        "wave": 2,
+        "lane": 5,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 378,
+        "fullFrames": 337,
+        "firstVisible": 3,
+        "lastVisible": 9.816666666666666,
+        "firstFull": 3.066666666666667,
+        "longestFullFrames": 92,
+        "run": 0
+      },
+      {
+        "id": 352310587,
+        "wave": 2,
+        "lane": 6,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 162,
+        "fullFrames": 133,
+        "firstVisible": 2.9166666666666665,
+        "lastVisible": 5.766666666666667,
+        "firstFull": 3.0166666666666666,
+        "longestFullFrames": 117,
+        "run": 0
+      },
+      {
+        "id": 353909248,
+        "wave": 2,
+        "lane": 7,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 96,
+        "fullFrames": 65,
+        "firstVisible": 3.2333333333333334,
+        "lastVisible": 4.816666666666666,
+        "firstFull": 3.316666666666667,
+        "longestFullFrames": 37,
+        "run": 0
+      },
+      {
+        "id": 736941153,
+        "wave": 3,
+        "lane": 0,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 157,
+        "fullFrames": 124,
+        "firstVisible": 3.566666666666667,
+        "lastVisible": 6.166666666666667,
+        "firstFull": 3.933333333333333,
+        "longestFullFrames": 124,
+        "run": 0
+      },
+      {
+        "id": 299802082,
+        "wave": 3,
+        "lane": 1,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 129,
+        "fullFrames": 96,
+        "firstVisible": 3.966666666666667,
+        "lastVisible": 6.1,
+        "firstFull": 4.333333333333333,
+        "longestFullFrames": 96,
+        "run": 0
+      },
+      {
+        "id": 678871190,
+        "wave": 3,
+        "lane": 2,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 101,
+        "fullFrames": 69,
+        "firstVisible": 4.366666666666666,
+        "lastVisible": 6.033333333333333,
+        "firstFull": 4.716666666666667,
+        "longestFullFrames": 69,
+        "run": 0
+      },
+      {
+        "id": 132646712,
+        "wave": 3,
+        "lane": 3,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 76,
+        "fullFrames": 44,
+        "firstVisible": 4.733333333333333,
+        "lastVisible": 5.983333333333333,
+        "firstFull": 5.066666666666666,
+        "longestFullFrames": 44,
+        "run": 0
+      },
+      {
+        "id": 943960524,
+        "wave": 3,
+        "lane": 4,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 165,
+        "fullFrames": 139,
+        "firstVisible": 4.25,
+        "lastVisible": 6.983333333333333,
+        "firstFull": 4.483333333333333,
+        "longestFullFrames": 139,
+        "run": 0
+      },
+      {
+        "id": 286630114,
+        "wave": 3,
+        "lane": 5,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 179,
+        "fullFrames": 150,
+        "firstVisible": 4.216666666666667,
+        "lastVisible": 7.183333333333334,
+        "firstFull": 4.516666666666667,
+        "longestFullFrames": 150,
+        "run": 0
+      },
+      {
+        "id": 416539529,
+        "wave": 3,
+        "lane": 6,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 198,
+        "fullFrames": 161,
+        "firstVisible": 4.1,
+        "lastVisible": 7.383333333333334,
+        "firstFull": 4.533333333333333,
+        "longestFullFrames": 161,
+        "run": 0
+      },
+      {
+        "id": 725696614,
+        "wave": 3,
+        "lane": 7,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 220,
+        "fullFrames": 171,
+        "firstVisible": 3.783333333333333,
+        "lastVisible": 7.433333333333334,
+        "firstFull": 4.466666666666667,
+        "longestFullFrames": 171,
+        "run": 0
+      },
+      {
+        "id": 81344958,
+        "wave": 4,
+        "lane": 0,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 395,
+        "fullFrames": 369,
+        "firstVisible": 4.433333333333334,
+        "lastVisible": 11.383333333333333,
+        "firstFull": 5.033333333333333,
+        "longestFullFrames": 326,
+        "run": 0
+      },
+      {
+        "id": 130880279,
+        "wave": 4,
+        "lane": 1,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 369,
+        "fullFrames": 312,
+        "firstVisible": 4.566666666666666,
+        "lastVisible": 11.4,
+        "firstFull": 4.65,
+        "longestFullFrames": 238,
+        "run": 0
+      },
+      {
+        "id": 457557075,
+        "wave": 4,
+        "lane": 2,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 367,
+        "fullFrames": 316,
+        "firstVisible": 4.75,
+        "lastVisible": 11.083333333333334,
+        "firstFull": 4.833333333333333,
+        "longestFullFrames": 192,
+        "run": 0
+      },
+      {
+        "id": 467592646,
+        "wave": 4,
+        "lane": 3,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 314,
+        "fullFrames": 255,
+        "firstVisible": 5.183333333333334,
+        "lastVisible": 11.5,
+        "firstFull": 5.266666666666667,
+        "longestFullFrames": 167,
+        "run": 0
+      },
+      {
+        "id": 8900304,
+        "wave": 4,
+        "lane": 4,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 418,
+        "fullFrames": 351,
+        "firstVisible": 4.433333333333334,
+        "lastVisible": 11.383333333333333,
+        "firstFull": 4.55,
+        "longestFullFrames": 230,
+        "run": 0
+      },
+      {
+        "id": 942182592,
+        "wave": 4,
+        "lane": 5,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 387,
+        "fullFrames": 335,
+        "firstVisible": 4.5,
+        "lastVisible": 11.45,
+        "firstFull": 4.633333333333334,
+        "longestFullFrames": 217,
+        "run": 0
+      },
+      {
+        "id": 42471394,
+        "wave": 4,
+        "lane": 6,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 378,
+        "fullFrames": 322,
+        "firstVisible": 4.7,
+        "lastVisible": 11.45,
+        "firstFull": 4.783333333333333,
+        "longestFullFrames": 179,
+        "run": 0
+      },
+      {
+        "id": 709114509,
+        "wave": 4,
+        "lane": 7,
+        "bounds": {
+          "left": -11.4,
+          "top": -7.6,
+          "right": 11.4,
+          "bottom": 7
+        },
+        "visibleFrames": 342,
+        "fullFrames": 296,
+        "firstVisible": 4.633333333333334,
+        "lastVisible": 11.533333333333333,
+        "firstFull": 5.383333333333334,
+        "longestFullFrames": 201,
+        "run": 0
+      }
+    ],
+    "waves": [
+      {
+        "wave": 0,
+        "firstVisible": 0.9833333333333333,
+        "lastVisible": 8.3,
+        "visibleFrames": 440,
+        "peakVisibleTargets": 8
+      },
+      {
+        "wave": 1,
+        "firstVisible": 2.05,
+        "lastVisible": 8.9,
+        "visibleFrames": 412,
+        "peakVisibleTargets": 8
+      },
+      {
+        "wave": 2,
+        "firstVisible": 2.7666666666666666,
+        "lastVisible": 9.816666666666666,
+        "visibleFrames": 424,
+        "peakVisibleTargets": 8
+      },
+      {
+        "wave": 3,
+        "firstVisible": 3.566666666666667,
+        "lastVisible": 7.433333333333334,
+        "visibleFrames": 233,
+        "peakVisibleTargets": 8
+      },
+      {
+        "wave": 4,
+        "firstVisible": 4.433333333333334,
+        "lastVisible": 11.533333333333333,
+        "visibleFrames": 427,
+        "peakVisibleTargets": 8
+      }
+    ],
+    "overlapFrames": [
+      70,
+      167,
+      98,
+      84,
+      104,
+      181
+    ],
+    "samples": [
+      {
+        "seconds": 0,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.1,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.2,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.3,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.4,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.5,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.6,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.7,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.8,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 0.9,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1,
+        "visibleByWave": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.1,
+        "visibleByWave": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.2,
+        "visibleByWave": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.3,
+        "visibleByWave": [
+          6,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.4,
+        "visibleByWave": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.5,
+        "visibleByWave": [
+          4,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.6,
+        "visibleByWave": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.7,
+        "visibleByWave": [
+          4,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.8,
+        "visibleByWave": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 1.9,
+        "visibleByWave": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2,
+        "visibleByWave": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.1,
+        "visibleByWave": [
+          8,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.2,
+        "visibleByWave": [
+          8,
+          2,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.3,
+        "visibleByWave": [
+          8,
+          3,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.4,
+        "visibleByWave": [
+          8,
+          4,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.5,
+        "visibleByWave": [
+          8,
+          5,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.6,
+        "visibleByWave": [
+          8,
+          5,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.7,
+        "visibleByWave": [
+          8,
+          6,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.8,
+        "visibleByWave": [
+          8,
+          6,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 2.9,
+        "visibleByWave": [
+          8,
+          7,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3,
+        "visibleByWave": [
+          8,
+          7,
+          5,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.1,
+        "visibleByWave": [
+          8,
+          8,
+          6,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.2,
+        "visibleByWave": [
+          8,
+          8,
+          6,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.3,
+        "visibleByWave": [
+          8,
+          8,
+          8,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.4,
+        "visibleByWave": [
+          7,
+          8,
+          7,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.5,
+        "visibleByWave": [
+          7,
+          8,
+          6,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 3.6,
+        "visibleByWave": [
+          7,
+          8,
+          6,
+          1,
+          0
+        ]
+      },
+      {
+        "seconds": 3.7,
+        "visibleByWave": [
+          6,
+          8,
+          7,
+          1,
+          0
+        ]
+      },
+      {
+        "seconds": 3.8,
+        "visibleByWave": [
+          6,
+          8,
+          8,
+          2,
+          0
+        ]
+      },
+      {
+        "seconds": 3.9,
+        "visibleByWave": [
+          6,
+          7,
+          8,
+          2,
+          0
+        ]
+      },
+      {
+        "seconds": 4,
+        "visibleByWave": [
+          7,
+          7,
+          8,
+          3,
+          0
+        ]
+      },
+      {
+        "seconds": 4.1,
+        "visibleByWave": [
+          7,
+          7,
+          8,
+          4,
+          0
+        ]
+      },
+      {
+        "seconds": 4.2,
+        "visibleByWave": [
+          6,
+          7,
+          8,
+          4,
+          0
+        ]
+      },
+      {
+        "seconds": 4.3,
+        "visibleByWave": [
+          6,
+          7,
+          8,
+          6,
+          0
+        ]
+      },
+      {
+        "seconds": 4.4,
+        "visibleByWave": [
+          6,
+          7,
+          8,
+          7,
+          0
+        ]
+      },
+      {
+        "seconds": 4.5,
+        "visibleByWave": [
+          5,
+          7,
+          8,
+          7,
+          3
+        ]
+      },
+      {
+        "seconds": 4.6,
+        "visibleByWave": [
+          5,
+          7,
+          8,
+          7,
+          3
+        ]
+      },
+      {
+        "seconds": 4.7,
+        "visibleByWave": [
+          5,
+          7,
+          8,
+          7,
+          5
+        ]
+      },
+      {
+        "seconds": 4.8,
+        "visibleByWave": [
+          5,
+          7,
+          8,
+          8,
+          5
+        ]
+      },
+      {
+        "seconds": 4.9,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          5
+        ]
+      },
+      {
+        "seconds": 5,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          5
+        ]
+      },
+      {
+        "seconds": 5.1,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          5
+        ]
+      },
+      {
+        "seconds": 5.2,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          7
+        ]
+      },
+      {
+        "seconds": 5.3,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.4,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.5,
+        "visibleByWave": [
+          6,
+          7,
+          7,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.6,
+        "visibleByWave": [
+          6,
+          8,
+          6,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.7,
+        "visibleByWave": [
+          5,
+          8,
+          6,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.8,
+        "visibleByWave": [
+          4,
+          8,
+          5,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 5.9,
+        "visibleByWave": [
+          3,
+          8,
+          5,
+          8,
+          8
+        ]
+      },
+      {
+        "seconds": 6,
+        "visibleByWave": [
+          3,
+          8,
+          5,
+          7,
+          8
+        ]
+      },
+      {
+        "seconds": 6.1,
+        "visibleByWave": [
+          3,
+          8,
+          6,
+          6,
+          8
+        ]
+      },
+      {
+        "seconds": 6.2,
+        "visibleByWave": [
+          3,
+          8,
+          5,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.3,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.4,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.5,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.6,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.7,
+        "visibleByWave": [
+          3,
+          7,
+          6,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.8,
+        "visibleByWave": [
+          3,
+          7,
+          6,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 6.9,
+        "visibleByWave": [
+          3,
+          7,
+          6,
+          4,
+          8
+        ]
+      },
+      {
+        "seconds": 7,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          3,
+          8
+        ]
+      },
+      {
+        "seconds": 7.1,
+        "visibleByWave": [
+          3,
+          7,
+          5,
+          3,
+          8
+        ]
+      },
+      {
+        "seconds": 7.2,
+        "visibleByWave": [
+          2,
+          6,
+          6,
+          2,
+          8
+        ]
+      },
+      {
+        "seconds": 7.3,
+        "visibleByWave": [
+          2,
+          6,
+          6,
+          2,
+          6
+        ]
+      },
+      {
+        "seconds": 7.4,
+        "visibleByWave": [
+          2,
+          6,
+          6,
+          1,
+          6
+        ]
+      },
+      {
+        "seconds": 7.5,
+        "visibleByWave": [
+          2,
+          7,
+          6,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 7.6,
+        "visibleByWave": [
+          3,
+          7,
+          6,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 7.7,
+        "visibleByWave": [
+          3,
+          6,
+          6,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 7.8,
+        "visibleByWave": [
+          3,
+          6,
+          5,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 7.9,
+        "visibleByWave": [
+          3,
+          6,
+          4,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 8,
+        "visibleByWave": [
+          3,
+          5,
+          4,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 8.1,
+        "visibleByWave": [
+          3,
+          5,
+          3,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 8.2,
+        "visibleByWave": [
+          3,
+          5,
+          4,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 8.3,
+        "visibleByWave": [
+          1,
+          5,
+          5,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.4,
+        "visibleByWave": [
+          0,
+          5,
+          5,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.5,
+        "visibleByWave": [
+          0,
+          3,
+          5,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.6,
+        "visibleByWave": [
+          0,
+          3,
+          4,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.7,
+        "visibleByWave": [
+          0,
+          3,
+          4,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.8,
+        "visibleByWave": [
+          0,
+          3,
+          4,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 8.9,
+        "visibleByWave": [
+          0,
+          1,
+          4,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 9,
+        "visibleByWave": [
+          0,
+          0,
+          5,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 9.1,
+        "visibleByWave": [
+          0,
+          0,
+          5,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.2,
+        "visibleByWave": [
+          0,
+          0,
+          4,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.3,
+        "visibleByWave": [
+          0,
+          0,
+          4,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.4,
+        "visibleByWave": [
+          0,
+          0,
+          3,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.5,
+        "visibleByWave": [
+          0,
+          0,
+          3,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 9.6,
+        "visibleByWave": [
+          0,
+          0,
+          2,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.7,
+        "visibleByWave": [
+          0,
+          0,
+          2,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.8,
+        "visibleByWave": [
+          0,
+          0,
+          1,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 9.9,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 10,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.1,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.2,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.3,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.4,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.5,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          8
+        ]
+      },
+      {
+        "seconds": 10.6,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 10.7,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 10.8,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 10.9,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 11,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 11.1,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          5
+        ]
+      },
+      {
+        "seconds": 11.2,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          6
+        ]
+      },
+      {
+        "seconds": 11.3,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      },
+      {
+        "seconds": 11.4,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          5
+        ]
+      },
+      {
+        "seconds": 11.5,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "seconds": 11.6,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "seconds": 11.7,
+        "visibleByWave": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "completed": true,
+    "maxEnemyBullets": 0,
+    "maxAttackers": 0,
+    "events": [
+      {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "watchMode": false,
+        "watchScope": "game",
+        "developerExpertPlay": "",
+        "requestedStage": 8,
+        "stage": 31,
+        "startStageMode": "display",
+        "startKind": "challenge",
+        "challengeStage": 8,
+        "displayLabel": "Challenging Stage 31-32",
+        "forceChallenge": 1,
+        "playerTwo": null
+      },
+      {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 31,
+        "challenge": true,
+        "persona": null
+      },
+      {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 31,
+        "challenge": true,
+        "band": "crown",
+        "challengeFamily": "mosquito",
+        "beeFamily": "crown",
+        "butFamily": "crown",
+        "bossFamily": "crown",
+        "themeId": "crown-aurora",
+        "backgroundMode": "aurora-borealis",
+        "frameAccent": "aurora-crown",
+        "bossArchetype": "super-partner-pair"
+      },
+      {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "aurora-crown",
+        "audioTheme": "aurora-crown",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": true,
+        "stage": 31
+      },
+      {
+        "t": 7.967,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 139.77,
+        "enemyY": 324.33,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 51406268,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 4,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 8.667,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 144.94,
+        "enemyY": 324.35,
+        "enemyLane": 5,
+        "enemyForm": true,
+        "id": 372665405,
+        "enemyType": "boss",
+        "enemyFamily": "mosquito",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 11.167,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 128.91,
+        "enemyY": 325.83,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 942182592,
+        "enemyType": "rogue",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 11.367,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 151.77,
+        "enemyY": 342.87,
+        "enemyLane": 5,
+        "enemyForm": true,
+        "id": 709114509,
+        "enemyType": "boss",
+        "enemyFamily": "galboss",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 9,
+        "carry": false
+      }
+    ]
+  },
+  "proposal": [
+    {
+      "wave": 0,
+      "currentOffset": 0,
+      "desiredFirstVisible": 0.9833333333333333,
+      "proposedOffset": 0
+    },
+    {
+      "wave": 1,
+      "currentOffset": 0.86,
+      "desiredFirstVisible": 4.783333333333333,
+      "proposedOffset": 3.593
+    },
+    {
+      "wave": 2,
+      "currentOffset": 1.72,
+      "desiredFirstVisible": 8.183333333333334,
+      "proposedOffset": 7.137
+    },
+    {
+      "wave": 3,
+      "currentOffset": 2.58,
+      "desiredFirstVisible": 10.983333333333333,
+      "proposedOffset": 9.997
+    },
+    {
+      "wave": 4,
+      "currentOffset": 3.44,
+      "desiredFirstVisible": 14.783333333333333,
+      "proposedOffset": 13.79
+    }
+  ],
+  "method": "Natural Stage31 challenge launch, stationary/no-fire, seed9131,60Hz; conservative open/closed pose union translated into280x360 playfield.",
+  "limitations": [
+    "Geometry is not perceptual readability, pixel occlusion or routeability.",
+    "Reference arrivals are provisional preview brackets, not authenticated wave correspondence.",
+    "Proposal is analytical and unexecuted; scheduling may couple with global challenge time.",
+    "No source gameplay edits or release acceptance."
+  ]
+}

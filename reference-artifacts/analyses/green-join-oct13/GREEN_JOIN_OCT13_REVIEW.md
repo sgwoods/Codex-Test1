@@ -1,0 +1,37 @@
+# Later green join diagnosis and beta critical path
+
+2026-10-13 independent source/evidence review. HEAD verified cf0e7a666067ede385865ba02e73d1454eb132d1; dirty lead enemy independently hashed5ec66e40d512d27fb22f4826ac4321328bd9d0979719b49dfea68ccb47713c89. Read ACTIVE_WORK.md and AGENT_WORKFLOW.md. No game edits/builds/browser runs/releases. Nash owns candidate; lead owns integration. Reviewer wrote only this isolated report.
+
+## Concrete defect and provenance
+
+Lead src/js/06-enemy-behavior.js:475,512-516 computes middle green with q=(u-entryDuration)/6.55; at u9.7 its q tends1. Exit branch:596-600 restarts q=(u-9.7)/3.35 at0 and supplies a different x/y origin. Final300/14 envelope at697-700 cannot make these different poses continuous. Stage31 already has a separate continuation at684-694 and must remain unchanged.
+
+Parsed retained private-artifacts/middle-path-oct12/revision-b/runtime.json SHA cf01d1045c05f1af0f79e8c97efff964d82a01820f84c96abd8924da55d793a8 in lead checkout. Stage35 ID571262010 (39 equivalent401784013): t7.600,u9.680433,x255.44,y312.25 ->t7.617,u9.709417,x195.31,y118.10. About203.248px per16.7ms, not ordinary fast continuous travel. Stage35 ID431564581 goes(-20.97,268.33)->(12.08,110.10), about161.645px; it reappears from a clipped/offscreen pose. ID779747950 goes(95.44,285.92)->(35.31,110.10),185.818px. Both axes jump; y-only patch insufficient. ID689370884 has no retained crossing because it departed earlier: null join metrics do not prove continuity for every lane.
+
+Reference constraints are retained in lead reference-artifacts/analyses/middle-path-oct12/REFERENCE_CONSTRAINTS.md:15-23, with primary green/mixed provisional Stage31 samples in private-artifacts/repo-mirror/reference-artifacts/analyses/challenge-visibility-oct03/galaga-stage31-group2-screening.png and group2-exit-03.png. These support qualitative above-ship/up-right survivors for that qualified group only. No independently authenticated Stage35/39 original survivor track, exact tangent or numeric duration is available. Later correction must be labeled provisional continuity/readability, not exact reference fidelity. No new reference crawl is needed to demonstrate this current defect.
+
+## Minimum bounded correction
+
+Scope only generic green-ladder-split stage>=35 at the9.7 middle/exit transition. Preserve pre-transition composed trajectory, Stage3/27/31, blue/yellow and clock/physics. Construct a position-and-tangent continuous continuation from the actual RAW composed middle endpoint (with all route/spacing/deconflict offsets accounted once), then apply the retained300/14 envelope ONCE. A finite smooth bridge or anchored continuation is eligible; no particular rate/duration is justified by archived reference. Correct x and y; merely freezing y, moving the switch clock, or interpolating from the already-discontinuous first exit sample is insufficient.
+
+Use finite analytic endpoint/tangent where practical rather than frame-sensitive cache estimates. If caching, distinguish raw vs mapped pose and guard zero/repeated/backward clock spans; no division-by-zero, double-offset or double-envelope recurrence. Continuous position alone is insufficient: bound seam velocity and acceleration/max step, and inspect a few actual Crown/Classic join frames. No automatic approval for mathematically smooth but abrupt/high-speed traversal.
+
+CRITICAL compatibility: current laterEnvelopeSideExit at712-729 derives direction from the original LINEAR generic exit slope and assumes saturated offsets/no x oscillation. A curved/blended/anchored new continuation may initially reverse or return even when that old direction is outward. Do not reuse this proof silently. Either maintain and demonstrate truly monotonic outward x for the revised curve, or guard retirement using the actual new continuation's no-return proof. Position-only fully-offscreen detection cannot establish future nonreturn. Stage31 exclusion stays essential. Preserve the conservative rounded extent and no-hit/no-carry guards.
+
+## Acceptance and effort bound
+
+One candidate, one bounded validation packet, independent review; if actual baseline shots are lost or lifetime fails, reject/restore and report cause rather than sweep thresholds. Require hash-bound baseline/candidate: Stage3/27/31 and blue/yellow trajectories/removals exact,40 at-least-once-full entries, finite repeated-clock behavior, per-target seam/max step and visibility/dwell/removal metrics. Retain identical matched input/shot/kill/loss events31/35/39 (37/33/37 kills), not just aggregate counts; distinguish fixed replay horizon from natural completion.
+
+Run existing strengthened ten-case late-clearance gate, plus natural no-fire lifecycle35/39/63/127, empty tail<=.4, clear-relative cadence4.401+/-.1. Do NOT require unchanged absolute clear if motion necessarily changes; explicitly disposition visible opportunity/dwell and total perceived wait. Preserve previous demonstrated early/late shots and disclose any full-view loss; more full-view time alone is not proof of shootability. Actual rendered few join frames supplement telemetry, not blanket pixel conformance. This is not all-seed, every-column, dual-ship or perfect-route proof.
+
+## Beta critical path
+
+Current BETA_READINESS_OCT06.md:9-29 correctly says NOT BETA-READY and prioritizes green joins then blue exits. ACTIVE_WORK.md:41-50 confirms these remain visibly defective. They are gameplay blockers, not optional research. Earlier CSP/root-page repair is closed; do not reopen its two-page fix. Existing rehearsal precedes current gameplay bytes and is not current-candidate package acceptance.
+
+Ordered bounded work: (1) finish this ONE green packet; (2) separate blue visible-contact/exit packet with retained primary evidence and shots; (3) explicit gameplay disposition, source/version freeze and local-range review; (4) authorized source/dev integration and identity-bound gates; (5) exact frozen beta package security/private-byte/harness/launcher/schedule-trial and normal-flow checks; (6) bounded soak/live auth/public-audio review, then independent preflight and explicit beta approval. Hosted headers/RLS remain separate coverage limitations; file/cue presence is not audibility. No release authority inferred from this audit.
+
+Keep off critical path: full-reference census, exact endless-stage uniqueness, broad controller optimization, perfect heuristic pilot, full-route/all-seed proof. Missing perfect pilot is not impossibility evidence. Stage7 remains paused. Limit validation to the existing representative stages/two themes/retained witnesses plus a few join frames; no broad refactor or benchmark campaign. Remaining auth/audio/soak must be executed against the exact frozen package, not claimed from old rehearsals.
+
+Historical lower sections of BETA_READINESS include superseded Stage31-only blockers, absent-package claims and already-closed CSP advice. Use the current top status; reconcile these during freeze rather than acting on them as new tasks. Header still says Updated October12, appropriate historical timestamp but requires Oct13 milestone update by lead after result. No current localhost verification was run by reviewer; documented b2177360/build1226 identity is lead evidence, not a new serving assertion.
+
+Verdict: source diagnosis firm; candidate acceptance pending. Smallest justified repair is the scoped two-axis tangent-continuous splice with compatible retirement proof. No new gameplay or beta-readiness approval.

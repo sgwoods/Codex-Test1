@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "reference-execution-description",
-  "generatedAt": "2026-06-08T13:42:07.631Z",
-  "commit": "089f16b0f",
-  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "generatedAt": "2026-10-04T21:44:35.834Z",
+  "commit": "c996b804",
+  "branch": "codex/oct03-local-integration",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
   "scope": {
@@ -14,14 +14,37 @@
   },
   "sourceReferenceWindow": {
     "sourceVideo": "challenge-all2.mp4",
+    "referenceEvidenceContract": {
+      "schema": "reference-evidence-contract-1",
+      "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+      "timing": "resampled-8fps-relative-time-not-native-pts",
+      "windowBoundaryStatus": "coarse-source-window-not-event-labeled",
+      "analyzedNormalizedY": {
+        "min": 0.105,
+        "max": 0.875
+      },
+      "observationUnit": "connected-component-tracklet-not-identified-alien",
+      "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+      "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+      "shootingCensoring": "not-resolved-per-target",
+      "capabilities": {
+        "descriptive": true,
+        "full-entry": false,
+        "full-path": false,
+        "wave-identity": false
+      }
+    },
+    "scoreInterpretation": "heuristic-diagnostic",
+    "acceptedFullPathConformance": false,
+    "acceptedGroupMappingConformance": false,
     "sourceWindowId": "challenge-02-cross-and-column",
     "sourceId": "challenge-all2-single-ship-all-perfects",
     "sourceStartSeconds": 36,
     "durationSeconds": 16,
     "motionRead": "Adds side-crossing and vertical red-column trains; groups arrive through visible route commitments rather than appearing in place.",
-    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
-    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
-    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
+    "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+    "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
+    "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
     "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json"
   },
   "sourceArtifacts": {

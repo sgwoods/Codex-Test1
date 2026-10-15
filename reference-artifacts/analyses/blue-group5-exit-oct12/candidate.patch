@@ -1,0 +1,27 @@
+diff --git a/private/tmp/aurora-blue-group5-exit-oct12/private-artifacts/blue-group5-exit/06-enemy-behavior.js b/private/tmp/aurora-blue-group5-exit-oct12/src/js/06-enemy-behavior.js
+index 3f6f7854..15c97b2a 100644
+--- a/private/tmp/aurora-blue-group5-exit-oct12/private-artifacts/blue-group5-exit/06-enemy-behavior.js
++++ b/private/tmp/aurora-blue-group5-exit-oct12/src/js/06-enemy-behavior.js
+@@ -664,6 +664,22 @@ function updateChallengeEnemy(state,e,dt){
+    e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
+   }
+  }
++ // Experimental group5 departure, scoped to the selected generic evaluator.
++ if(genericChallengePath&&S.stage===31&&wave===4&&pathFamily==='blue-purple-finale'){
++  const previous=e.stage31BlueGroup5ExitPose;
++  if(u<9.7){
++   const span=previous?u-previous.u:0;
++   const validSpan=Number.isFinite(span)&&span>0;
++   e.stage31BlueGroup5ExitPose={x:e.x,y:e.y,u,
++    dx:validSpan?(e.x-previous.x)/span:0,
++    dy:validSpan?(e.y-previous.y)/span:0};
++  }else if(previous){
++   const elapsed=u-previous.u,ease=.12*(1-Math.exp(-elapsed/.12));
++   const outward=side*120,drop=300-previous.y;
++   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
++   e.y=previous.y+drop*(1-Math.exp(-elapsed/1.2))+(previous.dy-drop/1.2)*ease;
++  }
++ }
+  // Provisional departure for local review; exact lane-reference fidelity is open.
+  if(S.stage===31&&pathFamily==='green-ladder-split'){
+   if(u<9.7){

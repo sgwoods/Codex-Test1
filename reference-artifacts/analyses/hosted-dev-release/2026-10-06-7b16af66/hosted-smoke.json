@@ -1,0 +1,632 @@
+{
+  "artifactType": "hosted-lane-smoke",
+  "generatedAt": "2026-10-06T15:17:59.295Z",
+  "generatedBy": "tools/harness/check-hosted-lane-smoke.js",
+  "lane": "dev",
+  "url": "https://sgwoods.github.io/Aurora-Galactica/dev/",
+  "options": {
+    "allowDirty": false
+  },
+  "buildInfo": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "versionScheme": "hosted-dev-increment",
+    "label": "1.4.1.1+build.1224.sha.7b16af66",
+    "buildNumber": "1224",
+    "commit": "7b16af661867c1391b6dbcb42bd85c4610dcf3b2",
+    "shortCommit": "7b16af66",
+    "branch": "codex/oct03-local-integration",
+    "state": "codex/oct03-local-integration@7b16af66 clean",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "dirty": false,
+    "dirtyFiles": [],
+    "builtAtUtc": "2026-10-06T15:16:27.708Z",
+    "builtAtEt": "Oct 06 2026, 11:16 AM EDT",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ],
+    "development": {
+      "baseVersion": "1.4.1",
+      "iteration": 1,
+      "versionLine": "1.4.1.1",
+      "releaseTrack": "hosted-dev-increment",
+      "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+    },
+    "supabaseConfigured": true,
+    "latestReleaseNote": {
+      "version": "1.4.1",
+      "date": "2026-06-11",
+      "title": "1.4.1 production quality release",
+      "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+      "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+    }
+  },
+  "firstLoad": {
+    "canvas": {
+      "present": true,
+      "width": 1440,
+      "height": 1600,
+      "nonTransparentSamples": 4100,
+      "hash": "6ebc466a"
+    }
+  },
+  "account": {
+    "panelVisible": true,
+    "emailVisible": true,
+    "passwordVisible": true,
+    "emailDisabled": false,
+    "passwordDisabled": false,
+    "signupDisabled": false,
+    "loginDisabled": false,
+    "resetDisabled": false,
+    "emailValue": "<redacted-account-347ef29f5d3d>",
+    "passwordValueLength": 12,
+    "activeElementId": "accountPassword",
+    "pilotStatus": "Sign in for synced Aurora Galactica records, or keep flying locally.",
+    "accountSummary": "Local Aurora Galactica score path is available now. Sign in when you want synced records and verified posting."
+  },
+  "settings": {
+    "panelVisible": true,
+    "title": "Settings",
+    "subtitle": "Audio, display, playlist, and build information for this lane.",
+    "themeSetValue": "aurora-public",
+    "themeSetLabel": "Aurora Public Mix",
+    "themeSetSummary": "Aurora visuals with the public-safe Aurora application audio and Aurora arcade music.",
+    "themeSetOptions": [
+      {
+        "value": "aurora-public",
+        "label": "Aurora Public Mix",
+        "disabled": false,
+        "selected": true
+      },
+      {
+        "value": "aurora-classic-synth",
+        "label": "Galaga-Style Synth",
+        "disabled": false,
+        "selected": false
+      },
+      {
+        "value": "aurora-local-reference",
+        "label": "Local Galaga Reference (localhost only) - unavailable on this lane",
+        "disabled": true,
+        "selected": false
+      },
+      {
+        "value": "custom",
+        "label": "Custom",
+        "disabled": false,
+        "selected": false
+      }
+    ],
+    "audioThemeValue": "aurora-application",
+    "audioThemeLabel": "Aurora Application Mix",
+    "audioThemeOptions": [
+      {
+        "value": "auto",
+        "label": "Auto",
+        "disabled": false,
+        "selected": false
+      },
+      {
+        "value": "aurora-application",
+        "label": "Aurora Application Mix",
+        "disabled": false,
+        "selected": true
+      },
+      {
+        "value": "galaga-original-reference",
+        "label": "Galaga Synth Approximation",
+        "disabled": false,
+        "selected": false
+      },
+      {
+        "value": "galaga-reference-assets",
+        "label": "Galaga Reference Audio (localhost private only)",
+        "disabled": true,
+        "selected": false
+      }
+    ],
+    "musicVolumeValue": 60,
+    "musicVolumeLabel": "60%",
+    "gameSoundVolumeValue": 40,
+    "gameSoundVolumeLabel": "40%",
+    "playlistValue": "__DEFAULT__",
+    "playlistLabel": "Platform default (Default)",
+    "playlistOptions": [
+      {
+        "value": "__DEFAULT__",
+        "label": "Platform default (Default)",
+        "disabled": false,
+        "selected": true
+      },
+      {
+        "value": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH",
+        "label": "Aurora Original Playlist",
+        "disabled": false,
+        "selected": false
+      },
+      {
+        "value": "PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-",
+        "label": "Galaxy Guardians Original Playlist",
+        "disabled": false,
+        "selected": false
+      },
+      {
+        "value": "PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo",
+        "label": "Embeddable Arcade Jukebox",
+        "disabled": false,
+        "selected": false
+      }
+    ],
+    "playAudioTestHidden": false
+  },
+  "gameplay": {
+    "status": {
+      "generatedAt": "2026-10-06T15:17:59.237Z",
+      "build": {
+        "product": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1.1",
+        "label": "1.4.1.1+build.1224.sha.7b16af66",
+        "commit": "7b16af661867c1391b6dbcb42bd85c4610dcf3b2",
+        "branch": "codex/oct03-local-integration",
+        "dirty": false,
+        "released": "Oct 06 2026, 11:16 AM EDT",
+        "state": "codex/oct03-local-integration@7b16af66 clean",
+        "releaseChannel": "development",
+        "publicArtifactBoundaryEnabled": true,
+        "platform": {
+          "key": "platinum",
+          "name": "Platinum",
+          "version": "1.4.1",
+          "releaseTrack": "production-family",
+          "compatibility": "platinum-1.4",
+          "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+          "media": {
+            "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+          },
+          "auth": {
+            "nonProductionTestPilotEmails": [],
+            "nonProductionTestPilotUserIds": []
+          }
+        },
+        "applications": [
+          {
+            "gameKey": "aurora-galactica",
+            "title": "Aurora Galactica",
+            "version": "1.4.1",
+            "versionLine": "1.4.1",
+            "releaseTrack": "production-family",
+            "runtimeStatus": "playable",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-capable"
+          },
+          {
+            "gameKey": "galaxy-guardians-preview",
+            "title": "Galaxy Guardians",
+            "version": "0.1.0-preview",
+            "versionLine": "0.1.0 preview",
+            "releaseTrack": "playable-preview",
+            "runtimeStatus": "production-playable-preview",
+            "platformCompatibility": "platinum-1.4",
+            "launchPolicy": "production-preview-playable"
+          }
+        ]
+      },
+      "location": "https://sgwoods.github.io/Aurora-Galactica/dev/",
+      "game": {
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "started": true,
+        "paused": false,
+        "challenge": false,
+        "attract": false
+      },
+      "audioDebug": {
+        "theme": "aurora-application",
+        "lastCue": {
+          "cue": "gameStart",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 4.537,
+          "recAt": 0.002
+        },
+        "reference": {
+          "lastRequested": "",
+          "lastLoaded": "",
+          "lastStarted": "",
+          "lastError": "",
+          "activeCount": 0
+        },
+        "statusLine": "Theme: aurora-application · last cue gameStart (classic-arcade) · active 0"
+      },
+      "systemLog": [],
+      "sessionEvents": [
+        {
+          "at": "+0.001s",
+          "level": "info",
+          "action": "game_start",
+          "message": "game_start",
+          "data": {
+            "t": 0.001,
+            "type": "game_start",
+            "persona": null,
+            "watchMode": false,
+            "watchScope": "game",
+            "developerExpertPlay": "",
+            "requestedStage": 1,
+            "stage": 1,
+            "startStageMode": "display",
+            "startKind": "level",
+            "challengeStage": 1,
+            "displayLabel": "",
+            "forceChallenge": false,
+            "playerTwo": null
+          }
+        },
+        {
+          "at": "+0.001s",
+          "level": "info",
+          "action": "stage_spawn",
+          "message": "stage_spawn",
+          "data": {
+            "t": 0.001,
+            "type": "stage_spawn",
+            "stage": 1,
+            "challenge": false,
+            "persona": null
+          }
+        },
+        {
+          "at": "+0.001s",
+          "level": "info",
+          "action": "stage_profile",
+          "message": "stage_profile",
+          "data": {
+            "t": 0.001,
+            "type": "stage_profile",
+            "stage": 1,
+            "challenge": false,
+            "band": "classic",
+            "challengeFamily": "classic",
+            "beeFamily": "classic",
+            "butFamily": "classic",
+            "bossFamily": "classic",
+            "themeId": "quiet-skies",
+            "backgroundMode": "classic-stars",
+            "frameAccent": "classic-blue",
+            "bossArchetype": "command-core"
+          }
+        },
+        {
+          "at": "+0.002s",
+          "level": "info",
+          "action": "audio_cue",
+          "message": "audio_cue",
+          "data": {
+            "t": 0.002,
+            "type": "audio_cue",
+            "cue": "gameStart",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "challenge": false,
+            "stage": 1
+          }
+        },
+        {
+          "at": "+0.018s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 0.018,
+            "type": "key_up",
+            "code": "Enter",
+            "key": "Enter"
+          }
+        },
+        {
+          "at": "+0.730s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 0.73,
+            "type": "key_down",
+            "code": "Space",
+            "key": " ",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+0.731s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 0.731,
+            "type": "key_up",
+            "code": "Space",
+            "key": " "
+          }
+        },
+        {
+          "at": "+0.854s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 0.854,
+            "type": "key_down",
+            "code": "Space",
+            "key": " ",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+0.854s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 0.854,
+            "type": "key_up",
+            "code": "Space",
+            "key": " "
+          }
+        },
+        {
+          "at": "+0.980s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 0.98,
+            "type": "key_down",
+            "code": "Space",
+            "key": " ",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+0.980s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 0.98,
+            "type": "key_up",
+            "code": "Space",
+            "key": " "
+          }
+        },
+        {
+          "at": "+1.104s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 1.104,
+            "type": "key_down",
+            "code": "Space",
+            "key": " ",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+1.105s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 1.105,
+            "type": "key_up",
+            "code": "Space",
+            "key": " "
+          }
+        },
+        {
+          "at": "+1.230s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 1.23,
+            "type": "key_down",
+            "code": "Space",
+            "key": " ",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+1.230s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 1.23,
+            "type": "key_up",
+            "code": "Space",
+            "key": " "
+          }
+        },
+        {
+          "at": "+1.354s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 1.354,
+            "type": "key_down",
+            "code": "ArrowLeft",
+            "key": "ArrowLeft",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+1.537s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 1.537,
+            "type": "key_up",
+            "code": "ArrowLeft",
+            "key": "ArrowLeft"
+          }
+        },
+        {
+          "at": "+1.538s",
+          "level": "info",
+          "action": "key_down",
+          "message": "key_down",
+          "data": {
+            "t": 1.538,
+            "type": "key_down",
+            "code": "ArrowRight",
+            "key": "ArrowRight",
+            "repeat": false,
+            "alreadyDown": false
+          }
+        },
+        {
+          "at": "+1.720s",
+          "level": "info",
+          "action": "key_up",
+          "message": "key_up",
+          "data": {
+            "t": 1.72,
+            "type": "key_up",
+            "code": "ArrowRight",
+            "key": "ArrowRight"
+          }
+        }
+      ]
+    },
+    "audioDebugAvailable": true,
+    "interactionUnlocked": true,
+    "audioContextState": "running",
+    "cueNames": [
+      "gameStart"
+    ],
+    "audioHistory": [
+      {
+        "cue": "gameStart",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0
+      }
+    ],
+    "referenceStartedHistory": [],
+    "referenceBlockedHistory": []
+  },
+  "gameplayCanvas": {
+    "before": {
+      "present": true,
+      "width": 1440,
+      "height": 1600,
+      "nonTransparentSamples": 4100,
+      "hash": "7d92dcc3"
+    },
+    "after": {
+      "present": true,
+      "width": 1440,
+      "height": 1600,
+      "nonTransparentSamples": 4100,
+      "hash": "a6e2976c"
+    },
+    "changed": true
+  },
+  "browser": {
+    "pageErrors": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 400 ()",
+      "Failed to load resource: the server responded with a status of 400 ()"
+    ],
+    "failedRequests": [
+      {
+        "url": "https://www.youtube.com/api/stats/qoe?fmt=397&afmt=251&cpn=k57L2Kcn4xyCYjs5&el=embedded&ns=yt&fexp=v1%2C100673025%2C-76668381%2C27058999%2C34656%2C124674%2C117689%2C9252%2C16509%2C23206%2C100702%2C15105%2C25059%2C4174%2C30447%2C18705%2C26008%2C9671%2C3344%2C11424%2C4664%2C6621%2C896%2C1887%2C23826%2C9500%2C1840%2C18113%2C38532%2C38193%2C20588%2C4199%2C30114%2C9181%2C32875%2C20108%2C6032%2C1168%2C372%2C3793%2C3965%2C34321%2C11462%2C26846%2C15075%2C4367%2C9717%2C586%2C3027%2C10449%2C1440%2C12357%2C2293%2C3843%2C13972%2C3188%2C1340%2C10904%2C3242%2C3%2C17339%2C9038%2C1537%2C1810%2C4014%2C20490%2C2062%2C5450%2C10445%2C15389%2C9177%2C2795%2C3593%2C1651%2C1656%2C4594%2C9279%2C3638%2C11%2C5315%2C1327%2C940%2C1745%2C3038%2C5469%2C3423%2C12240%2C12165%2C1126%2C590%2C7182%2C2787&cl=992552249&seq=1&docid=OZGRW-T2Vgk&ei=IBHFat2yLui1kucP-_W1iAg&event=streamingstats&plid=AAZdLYCahnuJL_1q&cbrand=apple&cbr=HeadlessChrome&cbrver=145.0.0.0&c=WEB_EMBEDDED_PLAYER&cver=2.20261005.01.00&cplayer=UNIPLAYER&cos=Macintosh&cosver=10_15_7&cplatform=DESKTOP&vps=0.000:N,0.016:B,0.666:B,0.666:B&cat=streaming,sabr&cmt=0.016:0.000,0.666:0.000&afs=0.640:251::i:fl.-10.88;tl.-14;vg.-3.119999999999999;nm.1;sms.2:CAEoAQ&vfs=0.666:397:396::a:sms.2:CAEoAQ&view=0.666:240:240&bwm=0.666:33782:0.229&bwe=0.666:634817&bat=0.666:0.71:0&vis=0.666:0&bh=0.666:0.000&qclc=ChBrNTdMMktjbjR4eUNZanM1EAE",
+        "resourceType": "fetch",
+        "failure": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.youtube.com/api/stats/playback?ns=yt&el=embedded&cpn=k57L2Kcn4xyCYjs5&ver=2&cmt=0.05&fmt=397&fs=0&rt=0.873&euri=https%3A%2F%2Fsgwoods.github.io%2F&lact=884&cl=992552249&mos=1&volume=60&cbrand=apple&cbr=HeadlessChrome&cbrver=145.0.0.0&c=WEB_EMBEDDED_PLAYER&cver=2.20261005.01.00&cplayer=UNIPLAYER&cos=Macintosh&cosver=10_15_7&cplatform=DESKTOP&autoplay=1&epm=1&splay=1&delay=4&hl=en_US&cr=CA&len=260.101&fexp=v1%2C100673025%2C-76668381%2C27058999%2C34656%2C124674%2C117689%2C9252%2C16509%2C23206%2C100702%2C15105%2C25059%2C4174%2C30447%2C18705%2C26008%2C9671%2C3344%2C11424%2C4664%2C6621%2C896%2C1887%2C23826%2C9500%2C1840%2C18113%2C38532%2C38193%2C20588%2C4199%2C30114%2C9181%2C32875%2C20108%2C6032%2C1168%2C372%2C3793%2C3965%2C34321%2C11462%2C26846%2C15075%2C4367%2C9717%2C586%2C3027%2C10449%2C1440%2C12357%2C2293%2C3843%2C13972%2C3188%2C1340%2C10904%2C3242%2C3%2C17339%2C9038%2C1537%2C1810%2C4014%2C20490%2C2062%2C5450%2C10445%2C15389%2C9177%2C2795%2C3593%2C1651%2C1656%2C4594%2C9279%2C3638%2C11%2C5315%2C1327%2C940%2C1745%2C3038%2C5469%2C3423%2C12240%2C12165%2C1126%2C590%2C7182%2C2787&rtn=5&afmt=251&size=240%3A240&inview=0&muted=1&docid=OZGRW-T2Vgk&ei=IBHFat2yLui1kucP-_W1iAg&plid=AAZdLYCahnuJL_1q&referrer=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fvideoseries%3Flist%3DPLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH%26listType%3Dplaylist%26autoplay%3D1%26playsinline%3D1%26enablejsapi%3D1%26rel%3D0%26origin%3Dhttps%253A%252F%252Fsgwoods.github.io%26mute%3D1&list=PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH&of=uvbhXUzQ_wO5kZn4KLGzzg&vm=CAMQARgBOjJBSHFpSlRJMDZvNHF0ejNGSkJTRzRpZWxNcGN5Q3FMeF91V3FaY2pfY3EzejJxalZ5Z2JbQUNPdTRMU0R2bW4zU1lZbWxGbE40cEI5a1JLek9makdseDV4UTFRLUNMc1JaLTFjSVlsR1E5ZElZelRqYTZKcWNWODVQVHZnQU41M19WVDUyTjg5NFNSeFR1c7gBAQ",
+        "resourceType": "fetch",
+        "failure": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.youtube.com/ptracking?html5=1&video_id=OZGRW-T2Vgk&cpn=k57L2Kcn4xyCYjs5&ei=IBHFat2yLui1kucP-_W1iAg&ptk=youtube_single&oid=YbGWGCIUCoaUePqGy_acMw&ptchn=lWBvmriAFpqxngoC7DPhJg&pltype=content",
+        "resourceType": "fetch",
+        "failure": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.youtube.com/api/stats/watchtime?ns=yt&el=embedded&cpn=k57L2Kcn4xyCYjs5&ver=2&cmt=4.18&fmt=397&fs=0&rt=5.001&euri=https%3A%2F%2Fsgwoods.github.io%2F&lact=5012&cl=992552249&state=playing&volume=60%2C60&cbrand=apple&cbr=HeadlessChrome&cbrver=145.0.0.0&c=WEB_EMBEDDED_PLAYER&cver=2.20261005.01.00&cplayer=UNIPLAYER&cos=Macintosh&cosver=10_15_7&cplatform=DESKTOP&autoplay=1&splay=1&delay=4&hl=en_US&cr=CA&len=261&rtn=15&afmt=251&idpj=-6&ldpj=-18&dtm=1&rti=5&size=240%3A240&inview=0&st=0%2C2.152&et=2.053%2C4.18&muted=1%2C1&docid=OZGRW-T2Vgk&ei=IBHFat2yLui1kucP-_W1iAg&plid=AAZdLYCahnuJL_1q&referrer=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fvideoseries%3Flist%3DPLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH%26listType%3Dplaylist%26autoplay%3D1%26playsinline%3D1%26enablejsapi%3D1%26rel%3D0%26origin%3Dhttps%253A%252F%252Fsgwoods.github.io%26mute%3D1&list=PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH&of=uvbhXUzQ_wO5kZn4KLGzzg&vm=CAMQARgBOjJBSHFpSlRJMDZvNHF0ejNGSkJTRzRpZWxNcGN5Q3FMeF91V3FaY2pfY3EzejJxalZ5Z2JbQUNPdTRMU0R2bW4zU1lZbWxGbE40cEI5a1JLek9makdseDV4UTFRLUNMc1JaLTFjSVlsR1E5ZElZelRqYTZKcWNWODVQVHZnQU41M19WVDUyTjg5NFNSeFR1c7gBAQ",
+        "resourceType": "fetch",
+        "failure": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "artifacts": {
+    "screenshot": "harness-artifacts/hosted-lane-smoke/latest-dev.png"
+  },
+  "issues": [],
+  "ok": true
+}

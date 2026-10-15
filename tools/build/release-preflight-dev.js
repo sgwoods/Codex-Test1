@@ -54,6 +54,16 @@ function printBlocker(label, result){
   if(detail) console.error(`[release-preflight:dev] ${label}\n${detail}`);
 }
 
+function catalogFreshnessFailure(result){
+  for(const output of [result.stderr,result.stdout]){
+    try{
+      const details=JSON.parse(output || '');
+      if(Array.isArray(details.missingCatalogText) && details.missingCatalogText.length)return details;
+    }catch{}
+  }
+  return null;
+}
+
 function assertClean(reason){
   const status = statusShort();
   if(status){
@@ -79,6 +89,13 @@ function main(){
     docs = tryRun(process.execPath, checkDocsArgs);
   }
   if(!docs.ok){
+    const catalogFailure=catalogFreshnessFailure(docs);
+    if(catalogFailure){
+      fail('Catalog freshness requires a source-document repair; generated conformance refresh cannot repair it.', {
+        ...catalogFailure,
+        nextAction:'Reconcile GAME_CONFORMANCE_CATALOG.md with the dated dashboard evidence, commit the repair, then rerun preflight.'
+      });
+    }
     printBlocker('Release conformance/documentation freshness is stale; refreshing release conformance docs now.', docs);
     run('npm', ['run', 'harness:refresh:release-conformance-docs']);
     run('npm', ['run', 'build']);
@@ -113,4 +130,5 @@ function main(){
   }, null, 2));
 }
 
-main();
+if(require.main===module)main();
+module.exports={catalogFreshnessFailure};

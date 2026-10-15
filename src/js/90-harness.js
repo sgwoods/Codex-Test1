@@ -1278,6 +1278,38 @@ window.__galagaHarness__={
    recoverT:+(+S.recoverT||0).toFixed(3)
   };
  },
+ challengeContactDiagnostics(id){
+  const e=S.e.find(enemy=>enemy.id===id&&enemy.hp>0&&enemy.ch);
+  if(!e)return null;
+  const u=e.tm+(+e.phaseOffsetS||0)+(+e.lanePhaseOffsetS||0);
+  const lowerQ=u>2.4?cl((u-2.4)/8.8,0,1):0;
+  const bias=(+e.lowerFieldBias||0)*lowerQ*lowerQ;
+  const he=enemyCollisionHitbox(e),hp=playerHitbox(),p=S.p;
+  const overlap=(x,y)=>Math.abs(x-p.x)<he.w+hp.w&&Math.abs(y-p.y)<he.h+hp.h;
+  return {
+   id:e.id,wave:e.wave,lane:e.c,pathFamily:e.pathFamily,spawn:e.spawn,
+   u,phase:u<3.15?'entry':u<9.7?'middle':'exit',
+   x:e.x,y:e.y,preBiasY:e.y-bias,lowerFieldBias:+e.lowerFieldBias||0,appliedBias:bias,
+   family:familyMotion(e),enemyHitbox:he,playerHitbox:hp,
+   player:{x:p.x,y:p.y,spawn:p.spawn,captured:!!p.captured,returning:!!p.returning},
+   bodyOverlap:overlap(e.x,e.y),sameFrameZeroBiasOverlap:overlap(e.x,e.y-bias),
+   drawnPoseUnion:this.challengeSpriteBounds(id)
+  };
+ },
+ challengeSpriteBounds(id){
+  const enemy=S.e.find(e=>e.id===id);
+  if(!enemy)return null;
+  const bounds={left:Infinity,top:Infinity,right:-Infinity,bottom:-Infinity};
+  const original=ctx.fillRect;
+  ctx.fillRect=(x,y,w,h)=>{
+   bounds.left=Math.min(bounds.left,x);bounds.top=Math.min(bounds.top,y);
+   bounds.right=Math.max(bounds.right,x+w);bounds.bottom=Math.max(bounds.bottom,y+h);
+  };
+  try{
+   for(const tm of [0,Math.PI/22])drawEnemy({...enemy,tm,ph:0,hitT:0,dive:0,carry:0});
+  }finally{ctx.fillRect=original;}
+  return Number.isFinite(bounds.left)?bounds:null;
+ },
  challengeFormationState(){
   const active=S.e.filter(e=>e.hp>0&&e.ch).sort((a,b)=>(a.wave-b.wave)||(a.c-b.c));
   return {

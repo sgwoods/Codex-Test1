@@ -7,19 +7,49 @@
     "stageMarker": 31,
     "family": "blue-purple-finale",
     "motionRead": "Final visible challenge window emphasizes blue/purple clustered arcs and a compact all-perfect finish.",
-    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
-    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
-    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
+    "contactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+    "denseContactSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+    "focusedSheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
     "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/frame-index.json"
   },
-  "sourceStartSeconds": 241,
+  "sourceStartSeconds": 242,
+  "evidenceContract": {
+    "schema": "reference-evidence-contract-1",
+    "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+    "timing": "resampled-8fps-relative-time-not-native-pts",
+    "windowBoundaryStatus": "reviewed-preview-observation-window-not-complete-target-lifetimes",
+    "analyzedNormalizedY": {
+      "min": 0.105,
+      "max": 0.875
+    },
+    "observationUnit": "connected-component-tracklet-not-identified-alien",
+    "groupIdentity": "five-requested-temporal-clusters-not-verified-waves",
+    "confidenceMeaning": "uncalibrated-heuristic-not-probability",
+    "shootingCensoring": "not-resolved-per-target",
+    "capabilities": {
+      "descriptive": true,
+      "full-entry": false,
+      "full-path": false,
+      "wave-identity": false
+    },
+    "windowCoverage": {
+      "sourceSha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+      "challengeNumber": 8,
+      "startSeconds": 242,
+      "endSeconds": 258.8,
+      "previewSpacingSeconds": 0.2,
+      "review": "reference-artifacts/analyses/reference-wave-previews/2026-10-05T12-08-15-502Z-d686a350/REVIEW.md",
+      "status": "reviewed-preview-observation-window-not-complete-target-lifetimes",
+      "durationSeconds": 16.80000000000001
+    }
+  },
   "frameSize": {
     "width": 480,
     "height": 360
   },
   "sampleFps": 8,
-  "sampledFrameCount": 128,
-  "durationSeconds": 16,
+  "sampledFrameCount": 134,
+  "durationSeconds": 16.75,
   "playfieldRoi": {
     "x": 103,
     "y": 0,
@@ -35,83 +65,62 @@
   "componentRead": {
     "medianComponentCount": 4,
     "p90ComponentCount": 7,
-    "activeFrameShare": 0.961
+    "activeFrameShare": 0.993
   },
   "trackRead": {
-    "trackCount": 60,
+    "trackCount": 71,
     "groupCount": 5,
-    "medianTrackDurationSeconds": 0.88,
-    "medianPathLength": 0.1323,
-    "medianYRange": 0.0659,
-    "medianXRange": 0.0439,
-    "lowerFieldShare": 0.5195
+    "medianTrackDurationSeconds": 0.75,
+    "medianPathLength": 0.12,
+    "medianYRange": 0.0612,
+    "medianXRange": 0.0518,
+    "lowerFieldShare": 0.4848
   },
   "targetGroups": [
     {
       "groupIndex": 1,
-      "trackCount": 9,
-      "sampleCount": 47,
+      "trackCount": 16,
+      "sampleCount": 98,
       "objectTrackTarget": {
-        "visibleStartS": 1,
-        "visibleEndS": 3,
+        "visibleStartS": 0,
+        "visibleEndS": 4.25,
         "entrySide": "center",
         "exitSide": "center",
-        "xRange": 0.4307,
-        "yRange": 0.4104,
-        "pathLength": 0.1636,
-        "turnCount": 1.89,
-        "reversalCount": 2.11,
-        "lowerFieldShare": 0.0556
+        "xRange": 0.4725,
+        "yRange": 0.6701,
+        "pathLength": 0.16,
+        "turnCount": 3.19,
+        "reversalCount": 2.38,
+        "lowerFieldShare": 0.3229
       },
-      "confidence": 0.697,
+      "confidence": 0.734,
       "trackIds": [
+        "target-track-20",
+        "target-track-4",
+        "target-track-24",
+        "target-track-22",
         "target-track-7",
-        "target-track-10",
-        "target-track-17",
-        "target-track-9",
-        "target-track-5",
-        "target-track-16",
-        "target-track-15",
+        "target-track-25",
+        "target-track-14",
         "target-track-6",
-        "target-track-13"
+        "target-track-1",
+        "target-track-26",
+        "target-track-13",
+        "target-track-12",
+        "target-track-3",
+        "target-track-10",
+        "target-track-18",
+        "target-track-19"
       ],
-      "read": "Target group 1 tracks 9 object trace(s), visible 1-3s, path 0.16, x/y range 0.43/0.41."
+      "read": "Target group 1 tracks 16 object trace(s), visible 0-4.25s, path 0.16, x/y range 0.47/0.67."
     },
     {
       "groupIndex": 2,
-      "trackCount": 7,
-      "sampleCount": 51,
-      "objectTrackTarget": {
-        "visibleStartS": 2.38,
-        "visibleEndS": 5.25,
-        "entrySide": "right",
-        "exitSide": "center",
-        "xRange": 0.4679,
-        "yRange": 0.6175,
-        "pathLength": 0.1554,
-        "turnCount": 4.86,
-        "reversalCount": 2.71,
-        "lowerFieldShare": 0.6667
-      },
-      "confidence": 0.655,
-      "trackIds": [
-        "target-track-23",
-        "target-track-27",
-        "target-track-25",
-        "target-track-28",
-        "target-track-29",
-        "target-track-21",
-        "target-track-22"
-      ],
-      "read": "Target group 2 tracks 7 object trace(s), visible 2.38-5.25s, path 0.16, x/y range 0.47/0.62."
-    },
-    {
-      "groupIndex": 3,
       "trackCount": 17,
       "sampleCount": 126,
       "objectTrackTarget": {
-        "visibleStartS": 5.38,
-        "visibleEndS": 10.13,
+        "visibleStartS": 4.38,
+        "visibleEndS": 9.13,
         "entrySide": "left",
         "exitSide": "center",
         "xRange": 0.5754,
@@ -123,100 +132,133 @@
       },
       "confidence": 0.75,
       "trackIds": [
-        "target-track-34",
-        "target-track-44",
-        "target-track-45",
-        "target-track-35",
+        "target-track-31",
+        "target-track-41",
         "target-track-42",
-        "target-track-53",
-        "target-track-59",
-        "target-track-43",
-        "target-track-36",
-        "target-track-52",
+        "target-track-32",
+        "target-track-39",
+        "target-track-50",
+        "target-track-56",
         "target-track-40",
-        "target-track-55",
+        "target-track-33",
+        "target-track-49",
         "target-track-37",
-        "target-track-60",
-        "target-track-58",
-        "target-track-38"
+        "target-track-52",
+        "target-track-34",
+        "target-track-57",
+        "target-track-55",
+        "target-track-35"
       ],
-      "read": "Target group 3 tracks 17 object trace(s), visible 5.38-10.13s, path 0.21, x/y range 0.58/0.42."
+      "read": "Target group 2 tracks 17 object trace(s), visible 4.38-9.13s, path 0.21, x/y range 0.58/0.42."
+    },
+    {
+      "groupIndex": 3,
+      "trackCount": 12,
+      "sampleCount": 57,
+      "objectTrackTarget": {
+        "visibleStartS": 9.75,
+        "visibleEndS": 12.25,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.4351,
+        "yRange": 0.6707,
+        "pathLength": 0.1392,
+        "turnCount": 1.83,
+        "reversalCount": 1.75,
+        "lowerFieldShare": 0.25
+      },
+      "confidence": 0.719,
+      "trackIds": [
+        "target-track-71",
+        "target-track-74",
+        "target-track-83",
+        "target-track-82",
+        "target-track-70",
+        "target-track-66",
+        "target-track-72",
+        "target-track-68",
+        "target-track-81",
+        "target-track-79",
+        "target-track-69",
+        "target-track-84"
+      ],
+      "read": "Target group 3 tracks 12 object trace(s), visible 9.75-12.25s, path 0.14, x/y range 0.44/0.67."
     },
     {
       "groupIndex": 4,
-      "trackCount": 17,
-      "sampleCount": 95,
+      "trackCount": 10,
+      "sampleCount": 69,
       "objectTrackTarget": {
-        "visibleStartS": 10.75,
-        "visibleEndS": 15.38,
+        "visibleStartS": 11.75,
+        "visibleEndS": 14.5,
         "entrySide": "center",
         "exitSide": "center",
-        "xRange": 0.4372,
-        "yRange": 0.6713,
-        "pathLength": 0.1542,
-        "turnCount": 2.76,
-        "reversalCount": 2.24,
-        "lowerFieldShare": 0.393
+        "xRange": 0.1945,
+        "yRange": 0.5167,
+        "pathLength": 0.1414,
+        "turnCount": 3.4,
+        "reversalCount": 2.1,
+        "lowerFieldShare": 0.7931
       },
-      "confidence": 0.73,
+      "confidence": 0.744,
       "trackIds": [
-        "target-track-74",
-        "target-track-89",
+        "target-track-86",
+        "target-track-87",
+        "target-track-88",
         "target-track-90",
         "target-track-91",
-        "target-track-77",
-        "target-track-86",
-        "target-track-92",
+        "target-track-101",
+        "target-track-89",
+        "target-track-100",
         "target-track-85",
-        "target-track-73",
-        "target-track-69",
-        "target-track-75",
-        "target-track-71",
-        "target-track-88",
-        "target-track-84",
-        "target-track-82",
-        "target-track-72"
+        "target-track-99"
       ],
-      "read": "Target group 4 tracks 17 object trace(s), visible 10.75-15.38s, path 0.15, x/y range 0.44/0.67."
+      "read": "Target group 4 tracks 10 object trace(s), visible 11.75-14.5s, path 0.14, x/y range 0.19/0.52."
     },
     {
       "groupIndex": 5,
-      "trackCount": 10,
-      "sampleCount": 55,
+      "trackCount": 16,
+      "sampleCount": 79,
       "objectTrackTarget": {
-        "visibleStartS": 13.5,
-        "visibleEndS": 15.88,
+        "visibleStartS": 13.88,
+        "visibleEndS": 16.63,
         "entrySide": "center",
         "exitSide": "center",
-        "xRange": 0.3034,
-        "yRange": 0.6951,
-        "pathLength": 0.1095,
-        "turnCount": 1.8,
-        "reversalCount": 1.4,
-        "lowerFieldShare": 0.425
+        "xRange": 0.4739,
+        "yRange": 0.6944,
+        "pathLength": 0.1242,
+        "turnCount": 1.81,
+        "reversalCount": 1.5,
+        "lowerFieldShare": 0.2031
       },
-      "confidence": 0.722,
+      "confidence": 0.712,
       "trackIds": [
-        "target-track-107",
-        "target-track-109",
-        "target-track-93",
-        "target-track-94",
+        "target-track-116",
+        "target-track-115",
+        "target-track-106",
         "target-track-104",
-        "target-track-105",
-        "target-track-103",
+        "target-track-118",
+        "target-track-117",
+        "target-track-114",
+        "target-track-113",
         "target-track-102",
+        "target-track-109",
+        "target-track-107",
+        "target-track-120",
+        "target-track-103",
         "target-track-110",
-        "target-track-106"
+        "target-track-119",
+        "target-track-112"
       ],
-      "read": "Target group 5 tracks 10 object trace(s), visible 13.5-15.88s, path 0.11, x/y range 0.3/0.7."
+      "read": "Target group 5 tracks 16 object trace(s), visible 13.88-16.63s, path 0.12, x/y range 0.47/0.69."
     }
   ],
   "candidateTracks": [
     {
-      "id": "target-track-74",
+      "id": "target-track-71",
       "sampleCount": 14,
-      "visibleStartS": 11.25,
-      "visibleEndS": 13.25,
+      "visibleStartS": 10.25,
+      "visibleEndS": 12.25,
       "durationSeconds": 2,
       "entrySide": "center",
       "exitSide": "center",
@@ -238,62 +280,62 @@
       },
       "sampledPoints": [
         {
-          "t": 11.25,
+          "t": 10.25,
           "x": 0.5735,
           "y": 0.1522
         },
         {
-          "t": 11.38,
+          "t": 10.38,
           "x": 0.5736,
           "y": 0.2251
         },
         {
-          "t": 11.63,
+          "t": 10.63,
           "x": 0.5735,
           "y": 0.2186
         },
         {
-          "t": 11.75,
+          "t": 10.75,
           "x": 0.5734,
           "y": 0.2184
         },
         {
-          "t": 12,
+          "t": 11,
           "x": 0.6024,
           "y": 0.3448
         },
         {
-          "t": 12.5,
+          "t": 11.5,
           "x": 0.582,
           "y": 0.2441
         },
         {
-          "t": 12.75,
+          "t": 11.75,
           "x": 0.5817,
           "y": 0.2448
         },
         {
-          "t": 12.88,
+          "t": 11.88,
           "x": 0.5861,
           "y": 0.2366
         },
         {
-          "t": 13.13,
+          "t": 12.13,
           "x": 0.5741,
           "y": 0.3697
         },
         {
-          "t": 13.25,
+          "t": 12.25,
           "x": 0.5608,
           "y": 0.4236
         }
       ]
     },
     {
-      "id": "target-track-23",
+      "id": "target-track-20",
       "sampleCount": 18,
-      "visibleStartS": 2.88,
-      "visibleEndS": 5.25,
+      "visibleStartS": 1.88,
+      "visibleEndS": 4.25,
       "durationSeconds": 2.37,
       "entrySide": "center",
       "exitSide": "center",
@@ -315,62 +357,62 @@
       },
       "sampledPoints": [
         {
-          "t": 2.88,
+          "t": 1.88,
           "x": 0.5697,
           "y": 0.3753
         },
         {
-          "t": 3.13,
+          "t": 2.13,
           "x": 0.5649,
           "y": 0.3989
         },
         {
-          "t": 3.38,
+          "t": 2.38,
           "x": 0.5465,
           "y": 0.4531
         },
         {
-          "t": 3.88,
+          "t": 2.88,
           "x": 0.4287,
           "y": 0.5678
         },
         {
-          "t": 4.13,
+          "t": 3.13,
           "x": 0.4382,
           "y": 0.6259
         },
         {
-          "t": 4.25,
+          "t": 3.25,
           "x": 0.4382,
           "y": 0.6259
         },
         {
-          "t": 4.5,
+          "t": 3.5,
           "x": 0.4382,
           "y": 0.6259
         },
         {
-          "t": 4.75,
+          "t": 3.75,
           "x": 0.4382,
           "y": 0.6259
         },
         {
-          "t": 5,
+          "t": 4,
           "x": 0.438,
           "y": 0.6248
         },
         {
-          "t": 5.25,
+          "t": 4.25,
           "x": 0.438,
           "y": 0.6248
         }
       ]
     },
     {
-      "id": "target-track-89",
+      "id": "target-track-86",
       "sampleCount": 19,
-      "visibleStartS": 12.88,
-      "visibleEndS": 15.38,
+      "visibleStartS": 11.88,
+      "visibleEndS": 14.38,
       "durationSeconds": 2.5,
       "entrySide": "center",
       "exitSide": "center",
@@ -392,62 +434,62 @@
       },
       "sampledPoints": [
         {
-          "t": 12.88,
+          "t": 11.88,
           "x": 0.556,
           "y": 0.4221
         },
         {
-          "t": 13.13,
+          "t": 12.13,
           "x": 0.5512,
           "y": 0.4418
         },
         {
-          "t": 13.38,
+          "t": 12.38,
           "x": 0.523,
           "y": 0.4957
         },
         {
-          "t": 13.88,
+          "t": 12.88,
           "x": 0.4365,
           "y": 0.6177
         },
         {
+          "t": 13.13,
+          "x": 0.4526,
+          "y": 0.6315
+        },
+        {
+          "t": 13.38,
+          "x": 0.4526,
+          "y": 0.6315
+        },
+        {
+          "t": 13.63,
+          "x": 0.4526,
+          "y": 0.6315
+        },
+        {
+          "t": 13.88,
+          "x": 0.4526,
+          "y": 0.6315
+        },
+        {
           "t": 14.13,
-          "x": 0.4526,
-          "y": 0.6315
-        },
-        {
-          "t": 14.38,
-          "x": 0.4526,
-          "y": 0.6315
-        },
-        {
-          "t": 14.63,
-          "x": 0.4526,
-          "y": 0.6315
-        },
-        {
-          "t": 14.88,
-          "x": 0.4526,
-          "y": 0.6315
-        },
-        {
-          "t": 15.13,
           "x": 0.4532,
           "y": 0.6322
         },
         {
-          "t": 15.38,
+          "t": 14.38,
           "x": 0.4147,
           "y": 0.6509
         }
       ]
     },
     {
-      "id": "target-track-7",
+      "id": "target-track-4",
       "sampleCount": 11,
-      "visibleStartS": 1.38,
-      "visibleEndS": 3,
+      "visibleStartS": 0.38,
+      "visibleEndS": 2,
       "durationSeconds": 1.62,
       "entrySide": "center",
       "exitSide": "center",
@@ -469,62 +511,62 @@
       },
       "sampledPoints": [
         {
-          "t": 1.38,
+          "t": 0.38,
           "x": 0.5738,
           "y": 0.1605
         },
         {
-          "t": 1.5,
+          "t": 0.5,
           "x": 0.5737,
           "y": 0.2131
         },
         {
-          "t": 1.63,
+          "t": 0.63,
           "x": 0.5742,
           "y": 0.1821
         },
         {
-          "t": 1.75,
+          "t": 0.75,
           "x": 0.5734,
           "y": 0.1831
         },
         {
-          "t": 1.88,
+          "t": 0.88,
           "x": 0.5734,
           "y": 0.2553
         },
         {
-          "t": 2.25,
+          "t": 1.25,
           "x": 0.4732,
           "y": 0.2836
         },
         {
-          "t": 2.63,
+          "t": 1.63,
           "x": 0.5694,
           "y": 0.2618
         },
         {
-          "t": 2.75,
+          "t": 1.75,
           "x": 0.5722,
           "y": 0.3028
         },
         {
-          "t": 2.88,
+          "t": 1.88,
           "x": 0.5704,
           "y": 0.2727
         },
         {
-          "t": 3,
+          "t": 2,
           "x": 0.5779,
           "y": 0.2474
         }
       ]
     },
     {
-      "id": "target-track-34",
+      "id": "target-track-31",
       "sampleCount": 15,
-      "visibleStartS": 5.38,
-      "visibleEndS": 7.63,
+      "visibleStartS": 4.38,
+      "visibleEndS": 6.63,
       "durationSeconds": 2.25,
       "entrySide": "left",
       "exitSide": "center",
@@ -546,62 +588,62 @@
       },
       "sampledPoints": [
         {
-          "t": 5.38,
+          "t": 4.38,
           "x": 0.2592,
           "y": 0.853
         },
         {
-          "t": 5.63,
+          "t": 4.63,
           "x": 0.2378,
           "y": 0.8568
         },
         {
-          "t": 5.75,
+          "t": 4.75,
           "x": 0.235,
           "y": 0.8562
         },
         {
-          "t": 6,
+          "t": 5,
           "x": 0.2044,
           "y": 0.8591
         },
         {
-          "t": 6.25,
+          "t": 5.25,
           "x": 0.2911,
           "y": 0.8424
         },
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.3573,
           "y": 0.8447
         },
         {
-          "t": 6.75,
+          "t": 5.75,
           "x": 0.4098,
           "y": 0.7965
         },
         {
-          "t": 7,
+          "t": 6,
           "x": 0.4282,
           "y": 0.7791
         },
         {
-          "t": 7.25,
+          "t": 6.25,
           "x": 0.4287,
           "y": 0.8017
         },
         {
-          "t": 7.63,
+          "t": 6.63,
           "x": 0.4281,
           "y": 0.8442
         }
       ]
     },
     {
-      "id": "target-track-44",
+      "id": "target-track-41",
       "sampleCount": 19,
-      "visibleStartS": 6.38,
-      "visibleEndS": 9.13,
+      "visibleStartS": 5.38,
+      "visibleEndS": 8.13,
       "durationSeconds": 2.75,
       "entrySide": "center",
       "exitSide": "center",
@@ -623,62 +665,186 @@
       },
       "sampledPoints": [
         {
-          "t": 6.38,
+          "t": 5.38,
           "x": 0.5627,
           "y": 0.4452
         },
         {
-          "t": 6.88,
+          "t": 5.88,
           "x": 0.423,
           "y": 0.5117
         },
         {
-          "t": 7.38,
+          "t": 6.38,
           "x": 0.4385,
           "y": 0.4963
         },
         {
-          "t": 7.63,
+          "t": 6.63,
           "x": 0.4111,
           "y": 0.5264
         },
         {
-          "t": 7.88,
+          "t": 6.88,
           "x": 0.4151,
           "y": 0.5268
         },
         {
-          "t": 8.13,
+          "t": 7.13,
           "x": 0.413,
           "y": 0.5309
         },
         {
-          "t": 8.38,
+          "t": 7.38,
           "x": 0.4139,
           "y": 0.5309
         },
         {
-          "t": 8.63,
+          "t": 7.63,
           "x": 0.413,
           "y": 0.5309
         },
         {
-          "t": 8.88,
+          "t": 7.88,
           "x": 0.428,
           "y": 0.5276
         },
         {
-          "t": 9.13,
+          "t": 8.13,
           "x": 0.4283,
           "y": 0.5279
         }
       ]
     },
     {
-      "id": "target-track-45",
+      "id": "target-track-116",
+      "sampleCount": 7,
+      "visibleStartS": 15.38,
+      "visibleEndS": 16.25,
+      "durationSeconds": 0.87,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.069,
+      "yRange": 0.2453,
+      "pathLength": 0.3238,
+      "turnCount": 2,
+      "reversalCount": 3,
+      "lowerFieldShare": 0,
+      "meanArea": 339.9,
+      "areaStability": 0.668,
+      "first": {
+        "x": 0.569,
+        "y": 0.2724
+      },
+      "last": {
+        "x": 0.5044,
+        "y": 0.5177
+      },
+      "sampledPoints": [
+        {
+          "t": 15.38,
+          "x": 0.569,
+          "y": 0.2724
+        },
+        {
+          "t": 15.5,
+          "x": 0.5713,
+          "y": 0.296
+        },
+        {
+          "t": 15.63,
+          "x": 0.5692,
+          "y": 0.3577
+        },
+        {
+          "t": 15.75,
+          "x": 0.5734,
+          "y": 0.3267
+        },
+        {
+          "t": 15.88,
+          "x": 0.5652,
+          "y": 0.3981
+        },
+        {
+          "t": 16,
+          "x": 0.5466,
+          "y": 0.4525
+        },
+        {
+          "t": 16.25,
+          "x": 0.5044,
+          "y": 0.5177
+        }
+      ]
+    },
+    {
+      "id": "target-track-115",
+      "sampleCount": 7,
+      "visibleStartS": 15.25,
+      "visibleEndS": 16.13,
+      "durationSeconds": 0.88,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0687,
+      "yRange": 0.2355,
+      "pathLength": 0.2581,
+      "turnCount": 1,
+      "reversalCount": 2,
+      "lowerFieldShare": 0,
+      "meanArea": 274.3,
+      "areaStability": 0.975,
+      "first": {
+        "x": 0.619,
+        "y": 0.2103
+      },
+      "last": {
+        "x": 0.5503,
+        "y": 0.4458
+      },
+      "sampledPoints": [
+        {
+          "t": 15.25,
+          "x": 0.619,
+          "y": 0.2103
+        },
+        {
+          "t": 15.38,
+          "x": 0.6136,
+          "y": 0.2143
+        },
+        {
+          "t": 15.63,
+          "x": 0.5725,
+          "y": 0.2543
+        },
+        {
+          "t": 15.75,
+          "x": 0.573,
+          "y": 0.2552
+        },
+        {
+          "t": 15.88,
+          "x": 0.5737,
+          "y": 0.327
+        },
+        {
+          "t": 16,
+          "x": 0.5656,
+          "y": 0.3816
+        },
+        {
+          "t": 16.13,
+          "x": 0.5503,
+          "y": 0.4458
+        }
+      ]
+    },
+    {
+      "id": "target-track-42",
       "sampleCount": 20,
-      "visibleStartS": 6.63,
-      "visibleEndS": 9.13,
+      "visibleStartS": 5.63,
+      "visibleEndS": 8.13,
       "durationSeconds": 2.5,
       "entrySide": "center",
       "exitSide": "center",
@@ -700,62 +866,62 @@
       },
       "sampledPoints": [
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.4131,
           "y": 0.523
         },
         {
-          "t": 6.88,
+          "t": 5.88,
           "x": 0.4505,
           "y": 0.62
         },
         {
-          "t": 7.13,
+          "t": 6.13,
           "x": 0.4212,
           "y": 0.5873
         },
         {
-          "t": 7.38,
+          "t": 6.38,
           "x": 0.4458,
           "y": 0.6192
         },
         {
-          "t": 7.63,
+          "t": 6.63,
           "x": 0.4441,
           "y": 0.6172
         },
         {
-          "t": 8,
+          "t": 7,
           "x": 0.4441,
           "y": 0.6174
         },
         {
-          "t": 8.25,
+          "t": 7.25,
           "x": 0.4438,
           "y": 0.6175
         },
         {
-          "t": 8.5,
+          "t": 7.5,
           "x": 0.4435,
           "y": 0.6174
         },
         {
-          "t": 8.88,
+          "t": 7.88,
           "x": 0.3834,
           "y": 0.5276
         },
         {
-          "t": 9.13,
+          "t": 8.13,
           "x": 0.3834,
           "y": 0.5276
         }
       ]
     },
     {
-      "id": "target-track-90",
+      "id": "target-track-87",
       "sampleCount": 18,
-      "visibleStartS": 13,
-      "visibleEndS": 15.25,
+      "visibleStartS": 12,
+      "visibleEndS": 14.25,
       "durationSeconds": 2.25,
       "entrySide": "center",
       "exitSide": "center",
@@ -777,27 +943,47 @@
       },
       "sampledPoints": [
         {
-          "t": 13,
+          "t": 12,
           "x": 0.5089,
           "y": 0.5136
         },
         {
-          "t": 13.25,
+          "t": 12.25,
           "x": 0.4536,
           "y": 0.5798
         },
         {
-          "t": 13.5,
+          "t": 12.5,
           "x": 0.4214,
           "y": 0.6216
         },
         {
-          "t": 13.75,
+          "t": 12.75,
           "x": 0.4145,
           "y": 0.6343
         },
         {
-          "t": 14.13,
+          "t": 13.13,
+          "x": 0.4307,
+          "y": 0.6315
+        },
+        {
+          "t": 13.25,
+          "x": 0.4307,
+          "y": 0.6315
+        },
+        {
+          "t": 13.5,
+          "x": 0.4307,
+          "y": 0.6315
+        },
+        {
+          "t": 13.75,
+          "x": 0.4307,
+          "y": 0.6315
+        },
+        {
+          "t": 14,
           "x": 0.4307,
           "y": 0.6315
         },
@@ -805,34 +991,14 @@
           "t": 14.25,
           "x": 0.4307,
           "y": 0.6315
-        },
-        {
-          "t": 14.5,
-          "x": 0.4307,
-          "y": 0.6315
-        },
-        {
-          "t": 14.75,
-          "x": 0.4307,
-          "y": 0.6315
-        },
-        {
-          "t": 15,
-          "x": 0.4307,
-          "y": 0.6315
-        },
-        {
-          "t": 15.25,
-          "x": 0.4307,
-          "y": 0.6315
         }
       ]
     },
     {
-      "id": "target-track-35",
+      "id": "target-track-32",
       "sampleCount": 10,
-      "visibleStartS": 5.5,
-      "visibleEndS": 6.88,
+      "visibleStartS": 4.5,
+      "visibleEndS": 5.88,
       "durationSeconds": 1.38,
       "entrySide": "left",
       "exitSide": "center",
@@ -854,62 +1020,62 @@
       },
       "sampledPoints": [
         {
-          "t": 5.5,
+          "t": 4.5,
           "x": 0.3266,
           "y": 0.831
         },
         {
-          "t": 5.63,
+          "t": 4.63,
           "x": 0.3293,
           "y": 0.8296
         },
         {
-          "t": 5.75,
+          "t": 4.75,
           "x": 0.3138,
           "y": 0.8344
         },
         {
-          "t": 5.88,
+          "t": 4.88,
           "x": 0.3247,
           "y": 0.8297
         },
         {
-          "t": 6,
+          "t": 5,
           "x": 0.2908,
           "y": 0.8419
         },
         {
-          "t": 6.13,
+          "t": 5.13,
           "x": 0.2929,
           "y": 0.8409
         },
         {
-          "t": 6.38,
+          "t": 5.38,
           "x": 0.3572,
           "y": 0.8451
         },
         {
-          "t": 6.5,
+          "t": 5.5,
           "x": 0.3995,
           "y": 0.7957
         },
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.4147,
           "y": 0.7942
         },
         {
-          "t": 6.88,
+          "t": 5.88,
           "x": 0.4308,
           "y": 0.7699
         }
       ]
     },
     {
-      "id": "target-track-27",
+      "id": "target-track-24",
       "sampleCount": 16,
-      "visibleStartS": 3.13,
-      "visibleEndS": 5.25,
+      "visibleStartS": 2.13,
+      "visibleEndS": 4.25,
       "durationSeconds": 2.12,
       "entrySide": "center",
       "exitSide": "center",
@@ -931,62 +1097,62 @@
       },
       "sampledPoints": [
         {
-          "t": 3.13,
+          "t": 2.13,
           "x": 0.4287,
           "y": 0.8237
         },
         {
-          "t": 3.5,
+          "t": 2.5,
           "x": 0.4286,
           "y": 0.7577
         },
         {
-          "t": 3.63,
+          "t": 2.63,
           "x": 0.4285,
           "y": 0.7595
         },
         {
-          "t": 4,
+          "t": 3,
           "x": 0.4106,
           "y": 0.6506
         },
         {
-          "t": 4.25,
+          "t": 3.25,
           "x": 0.4165,
           "y": 0.6263
         },
         {
-          "t": 4.38,
+          "t": 3.38,
           "x": 0.4165,
           "y": 0.6263
         },
         {
-          "t": 4.63,
+          "t": 3.63,
           "x": 0.4165,
           "y": 0.6263
         },
         {
-          "t": 4.88,
+          "t": 3.88,
           "x": 0.4165,
           "y": 0.6263
         },
         {
-          "t": 5,
+          "t": 4,
           "x": 0.4163,
           "y": 0.6261
         },
         {
-          "t": 5.25,
+          "t": 4.25,
           "x": 0.4163,
           "y": 0.6261
         }
       ]
     },
     {
-      "id": "target-track-42",
+      "id": "target-track-39",
       "sampleCount": 6,
-      "visibleStartS": 6.13,
-      "visibleEndS": 7.13,
+      "visibleStartS": 5.13,
+      "visibleEndS": 6.13,
       "durationSeconds": 1,
       "entrySide": "right",
       "exitSide": "center",
@@ -1008,42 +1174,94 @@
       },
       "sampledPoints": [
         {
-          "t": 6.13,
+          "t": 5.13,
           "x": 0.6773,
           "y": 0.5687
         },
         {
-          "t": 6.38,
+          "t": 5.38,
           "x": 0.6775,
           "y": 0.5682
         },
         {
-          "t": 6.5,
+          "t": 5.5,
           "x": 0.6671,
           "y": 0.5149
         },
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.6727,
           "y": 0.5799
         },
         {
-          "t": 6.75,
+          "t": 5.75,
           "x": 0.6668,
           "y": 0.5178
         },
         {
-          "t": 7.13,
+          "t": 6.13,
           "x": 0.6067,
           "y": 0.4617
         }
       ]
     },
     {
-      "id": "target-track-53",
+      "id": "target-track-106",
+      "sampleCount": 5,
+      "visibleStartS": 14.38,
+      "visibleEndS": 15,
+      "durationSeconds": 0.62,
+      "entrySide": "center",
+      "exitSide": "right",
+      "xRange": 0.1389,
+      "yRange": 0.0963,
+      "pathLength": 0.2101,
+      "turnCount": 3,
+      "reversalCount": 2,
+      "lowerFieldShare": 0,
+      "meanArea": 323.4,
+      "areaStability": 0.647,
+      "first": {
+        "x": 0.581,
+        "y": 0.2972
+      },
+      "last": {
+        "x": 0.7124,
+        "y": 0.3935
+      },
+      "sampledPoints": [
+        {
+          "t": 14.38,
+          "x": 0.581,
+          "y": 0.2972
+        },
+        {
+          "t": 14.5,
+          "x": 0.5839,
+          "y": 0.3199
+        },
+        {
+          "t": 14.63,
+          "x": 0.5735,
+          "y": 0.3084
+        },
+        {
+          "t": 14.88,
+          "x": 0.6445,
+          "y": 0.383
+        },
+        {
+          "t": 15,
+          "x": 0.7124,
+          "y": 0.3935
+        }
+      ]
+    },
+    {
+      "id": "target-track-50",
       "sampleCount": 9,
-      "visibleStartS": 7.13,
-      "visibleEndS": 8.5,
+      "visibleStartS": 6.13,
+      "visibleEndS": 7.5,
       "durationSeconds": 1.37,
       "entrySide": "center",
       "exitSide": "center",
@@ -1065,57 +1283,57 @@
       },
       "sampledPoints": [
         {
-          "t": 7.13,
+          "t": 6.13,
           "x": 0.4287,
           "y": 0.6328
         },
         {
-          "t": 7.38,
+          "t": 6.38,
           "x": 0.4018,
           "y": 0.5383
         },
         {
-          "t": 7.5,
+          "t": 6.5,
           "x": 0.4082,
           "y": 0.5461
         },
         {
-          "t": 7.75,
+          "t": 6.75,
           "x": 0.3909,
           "y": 0.5058
         },
         {
-          "t": 8,
+          "t": 7,
           "x": 0.436,
           "y": 0.5808
         },
         {
-          "t": 8.13,
+          "t": 7.13,
           "x": 0.4358,
           "y": 0.5811
         },
         {
-          "t": 8.25,
+          "t": 7.25,
           "x": 0.436,
           "y": 0.5808
         },
         {
-          "t": 8.38,
+          "t": 7.38,
           "x": 0.4357,
           "y": 0.5806
         },
         {
-          "t": 8.5,
+          "t": 7.5,
           "x": 0.436,
           "y": 0.5808
         }
       ]
     },
     {
-      "id": "target-track-25",
+      "id": "target-track-22",
       "sampleCount": 17,
-      "visibleStartS": 3.13,
-      "visibleEndS": 5.25,
+      "visibleStartS": 2.13,
+      "visibleEndS": 4.25,
       "durationSeconds": 2.12,
       "entrySide": "center",
       "exitSide": "center",
@@ -1137,62 +1355,62 @@
       },
       "sampledPoints": [
         {
-          "t": 3.13,
+          "t": 2.13,
           "x": 0.4906,
           "y": 0.5318
         },
         {
-          "t": 3.38,
+          "t": 2.38,
           "x": 0.5002,
           "y": 0.525
         },
         {
-          "t": 3.75,
+          "t": 2.75,
           "x": 0.4186,
           "y": 0.6259
         },
         {
-          "t": 3.88,
+          "t": 2.88,
           "x": 0.422,
           "y": 0.6245
         },
         {
-          "t": 4.13,
+          "t": 3.13,
           "x": 0.4633,
           "y": 0.625
         },
         {
-          "t": 4.38,
+          "t": 3.38,
           "x": 0.4633,
           "y": 0.6247
         },
         {
-          "t": 4.63,
+          "t": 3.63,
           "x": 0.4633,
           "y": 0.625
         },
         {
-          "t": 4.75,
+          "t": 3.75,
           "x": 0.4633,
           "y": 0.625
         },
         {
-          "t": 5,
+          "t": 4,
           "x": 0.4623,
           "y": 0.6254
         },
         {
-          "t": 5.25,
+          "t": 4.25,
           "x": 0.4623,
           "y": 0.6254
         }
       ]
     },
     {
-      "id": "target-track-59",
+      "id": "target-track-56",
       "sampleCount": 9,
-      "visibleStartS": 8.75,
-      "visibleEndS": 10.13,
+      "visibleStartS": 7.75,
+      "visibleEndS": 9.13,
       "durationSeconds": 1.38,
       "entrySide": "right",
       "exitSide": "center",
@@ -1214,57 +1432,57 @@
       },
       "sampledPoints": [
         {
-          "t": 8.75,
+          "t": 7.75,
           "x": 0.6906,
           "y": 0.8407
         },
         {
-          "t": 8.88,
+          "t": 7.88,
           "x": 0.6916,
           "y": 0.8407
         },
         {
-          "t": 9.13,
+          "t": 8.13,
           "x": 0.6022,
           "y": 0.8023
         },
         {
-          "t": 9.25,
+          "t": 8.25,
           "x": 0.5938,
           "y": 0.7982
         },
         {
-          "t": 9.38,
+          "t": 8.38,
           "x": 0.6178,
           "y": 0.8049
         },
         {
-          "t": 9.5,
+          "t": 8.5,
           "x": 0.6577,
           "y": 0.8249
         },
         {
-          "t": 9.63,
+          "t": 8.63,
           "x": 0.667,
           "y": 0.8297
         },
         {
-          "t": 9.75,
+          "t": 8.75,
           "x": 0.6675,
           "y": 0.8294
         },
         {
-          "t": 10.13,
+          "t": 9.13,
           "x": 0.6172,
           "y": 0.8238
         }
       ]
     },
     {
-      "id": "target-track-43",
+      "id": "target-track-40",
       "sampleCount": 5,
-      "visibleStartS": 6.25,
-      "visibleEndS": 7.25,
+      "visibleStartS": 5.25,
+      "visibleEndS": 6.25,
       "durationSeconds": 1,
       "entrySide": "center",
       "exitSide": "center",
@@ -1286,37 +1504,37 @@
       },
       "sampledPoints": [
         {
-          "t": 6.25,
+          "t": 5.25,
           "x": 0.6509,
           "y": 0.4944
         },
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.5831,
           "y": 0.4506
         },
         {
-          "t": 6.75,
+          "t": 5.75,
           "x": 0.5085,
           "y": 0.4487
         },
         {
-          "t": 7,
+          "t": 6,
           "x": 0.5037,
           "y": 0.4526
         },
         {
-          "t": 7.25,
+          "t": 6.25,
           "x": 0.5299,
           "y": 0.4433
         }
       ]
     },
     {
-      "id": "target-track-107",
+      "id": "target-track-104",
       "sampleCount": 6,
-      "visibleStartS": 15.13,
-      "visibleEndS": 15.75,
+      "visibleStartS": 14.13,
+      "visibleEndS": 14.75,
       "durationSeconds": 0.62,
       "entrySide": "center",
       "exitSide": "center",
@@ -1338,42 +1556,104 @@
       },
       "sampledPoints": [
         {
-          "t": 15.13,
+          "t": 14.13,
           "x": 0.5735,
           "y": 0.1607
         },
         {
-          "t": 15.25,
+          "t": 14.25,
           "x": 0.5734,
           "y": 0.224
         },
         {
-          "t": 15.38,
+          "t": 14.38,
           "x": 0.574,
           "y": 0.1937
         },
         {
-          "t": 15.5,
+          "t": 14.5,
           "x": 0.5736,
           "y": 0.1755
         },
         {
-          "t": 15.63,
+          "t": 14.63,
           "x": 0.5735,
           "y": 0.2365
         },
         {
-          "t": 15.75,
+          "t": 14.75,
           "x": 0.5738,
           "y": 0.3081
         }
       ]
     },
     {
-      "id": "target-track-36",
+      "id": "target-track-118",
+      "sampleCount": 7,
+      "visibleStartS": 15.88,
+      "visibleEndS": 16.63,
+      "durationSeconds": 0.75,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0961,
+      "yRange": 0.1223,
+      "pathLength": 0.1581,
+      "turnCount": 3,
+      "reversalCount": 0,
+      "lowerFieldShare": 1,
+      "meanArea": 384.1,
+      "areaStability": 0.742,
+      "first": {
+        "x": 0.4912,
+        "y": 0.5322
+      },
+      "last": {
+        "x": 0.3951,
+        "y": 0.6545
+      },
+      "sampledPoints": [
+        {
+          "t": 15.88,
+          "x": 0.4912,
+          "y": 0.5322
+        },
+        {
+          "t": 16,
+          "x": 0.4499,
+          "y": 0.5861
+        },
+        {
+          "t": 16.13,
+          "x": 0.4453,
+          "y": 0.5901
+        },
+        {
+          "t": 16.25,
+          "x": 0.4449,
+          "y": 0.5898
+        },
+        {
+          "t": 16.38,
+          "x": 0.4165,
+          "y": 0.6264
+        },
+        {
+          "t": 16.5,
+          "x": 0.4042,
+          "y": 0.651
+        },
+        {
+          "t": 16.63,
+          "x": 0.3951,
+          "y": 0.6545
+        }
+      ]
+    },
+    {
+      "id": "target-track-33",
       "sampleCount": 9,
-      "visibleStartS": 5.63,
-      "visibleEndS": 6.88,
+      "visibleStartS": 4.63,
+      "visibleEndS": 5.88,
       "durationSeconds": 1.25,
       "entrySide": "center",
       "exitSide": "center",
@@ -1395,57 +1675,57 @@
       },
       "sampledPoints": [
         {
-          "t": 5.63,
+          "t": 4.63,
           "x": 0.4228,
           "y": 0.785
         },
         {
-          "t": 5.75,
+          "t": 4.75,
           "x": 0.4079,
           "y": 0.7924
         },
         {
-          "t": 5.88,
+          "t": 4.88,
           "x": 0.4073,
           "y": 0.7932
         },
         {
-          "t": 6,
+          "t": 5,
           "x": 0.3862,
           "y": 0.8028
         },
         {
-          "t": 6.13,
+          "t": 5.13,
           "x": 0.389,
           "y": 0.802
         },
         {
-          "t": 6.25,
+          "t": 5.25,
           "x": 0.3981,
           "y": 0.7995
         },
         {
-          "t": 6.38,
+          "t": 5.38,
           "x": 0.4002,
           "y": 0.7987
         },
         {
-          "t": 6.75,
+          "t": 5.75,
           "x": 0.4283,
           "y": 0.7147
         },
         {
-          "t": 6.88,
+          "t": 5.88,
           "x": 0.3856,
           "y": 0.7736
         }
       ]
     },
     {
-      "id": "target-track-10",
+      "id": "target-track-7",
       "sampleCount": 5,
-      "visibleStartS": 1.63,
-      "visibleEndS": 2.13,
+      "visibleStartS": 0.63,
+      "visibleEndS": 1.13,
       "durationSeconds": 0.5,
       "entrySide": "center",
       "exitSide": "center",
@@ -1467,37 +1747,37 @@
       },
       "sampledPoints": [
         {
-          "t": 1.63,
+          "t": 0.63,
           "x": 0.5756,
           "y": 0.2853
         },
         {
-          "t": 1.75,
+          "t": 0.75,
           "x": 0.5735,
           "y": 0.2544
         },
         {
-          "t": 1.88,
+          "t": 0.88,
           "x": 0.5885,
           "y": 0.3273
         },
         {
-          "t": 2,
+          "t": 1,
           "x": 0.6394,
           "y": 0.3763
         },
         {
-          "t": 2.13,
+          "t": 1.13,
           "x": 0.6394,
           "y": 0.3763
         }
       ]
     },
     {
-      "id": "target-track-52",
+      "id": "target-track-49",
       "sampleCount": 11,
-      "visibleStartS": 7.13,
-      "visibleEndS": 8.63,
+      "visibleStartS": 6.13,
+      "visibleEndS": 7.63,
       "durationSeconds": 1.5,
       "entrySide": "center",
       "exitSide": "center",
@@ -1519,62 +1799,62 @@
       },
       "sampledPoints": [
         {
-          "t": 7.13,
+          "t": 6.13,
           "x": 0.4792,
           "y": 0.6119
         },
         {
-          "t": 7.5,
+          "t": 6.5,
           "x": 0.4526,
           "y": 0.5544
         },
         {
-          "t": 7.63,
+          "t": 6.63,
           "x": 0.4136,
           "y": 0.5808
         },
         {
-          "t": 7.75,
+          "t": 6.75,
           "x": 0.4109,
           "y": 0.5529
         },
         {
-          "t": 7.88,
+          "t": 6.88,
           "x": 0.4002,
           "y": 0.5811
         },
         {
-          "t": 8.13,
+          "t": 7.13,
           "x": 0.3999,
           "y": 0.5806
         },
         {
-          "t": 8.25,
+          "t": 7.25,
           "x": 0.3999,
           "y": 0.5808
         },
         {
-          "t": 8.38,
+          "t": 7.38,
           "x": 0.3999,
           "y": 0.5808
         },
         {
-          "t": 8.5,
+          "t": 7.5,
           "x": 0.3999,
           "y": 0.5808
         },
         {
-          "t": 8.63,
+          "t": 7.63,
           "x": 0.4002,
           "y": 0.5812
         }
       ]
     },
     {
-      "id": "target-track-91",
+      "id": "target-track-88",
       "sampleCount": 16,
-      "visibleStartS": 13.13,
-      "visibleEndS": 15.25,
+      "visibleStartS": 12.13,
+      "visibleEndS": 14.25,
       "durationSeconds": 2.12,
       "entrySide": "center",
       "exitSide": "center",
@@ -1596,62 +1876,62 @@
       },
       "sampledPoints": [
         {
-          "t": 13.13,
+          "t": 12.13,
           "x": 0.4504,
           "y": 0.5863
         },
         {
-          "t": 13.38,
+          "t": 12.38,
           "x": 0.4184,
           "y": 0.6253
         },
         {
-          "t": 13.5,
+          "t": 12.5,
           "x": 0.4507,
           "y": 0.6524
         },
         {
-          "t": 13.88,
+          "t": 12.88,
           "x": 0.4584,
           "y": 0.6408
         },
         {
+          "t": 13.25,
+          "x": 0.4065,
+          "y": 0.6308
+        },
+        {
+          "t": 13.38,
+          "x": 0.4065,
+          "y": 0.6308
+        },
+        {
+          "t": 13.63,
+          "x": 0.4065,
+          "y": 0.6308
+        },
+        {
+          "t": 13.88,
+          "x": 0.4065,
+          "y": 0.6308
+        },
+        {
+          "t": 14,
+          "x": 0.4065,
+          "y": 0.6308
+        },
+        {
           "t": 14.25,
-          "x": 0.4065,
-          "y": 0.6308
-        },
-        {
-          "t": 14.38,
-          "x": 0.4065,
-          "y": 0.6308
-        },
-        {
-          "t": 14.63,
-          "x": 0.4065,
-          "y": 0.6308
-        },
-        {
-          "t": 14.88,
-          "x": 0.4065,
-          "y": 0.6308
-        },
-        {
-          "t": 15,
-          "x": 0.4065,
-          "y": 0.6308
-        },
-        {
-          "t": 15.25,
           "x": 0.4068,
           "y": 0.6313
         }
       ]
     },
     {
-      "id": "target-track-40",
+      "id": "target-track-37",
       "sampleCount": 5,
-      "visibleStartS": 6,
-      "visibleEndS": 7,
+      "visibleStartS": 5,
+      "visibleEndS": 6,
       "durationSeconds": 1,
       "entrySide": "center",
       "exitSide": "right",
@@ -1673,37 +1953,37 @@
       },
       "sampledPoints": [
         {
-          "t": 6,
+          "t": 5,
           "x": 0.6441,
           "y": 0.6383
         },
         {
-          "t": 6.25,
+          "t": 5.25,
           "x": 0.6435,
           "y": 0.6376
         },
         {
-          "t": 6.5,
+          "t": 5.5,
           "x": 0.63,
           "y": 0.6497
         },
         {
-          "t": 6.88,
+          "t": 5.88,
           "x": 0.6685,
           "y": 0.5898
         },
         {
-          "t": 7,
+          "t": 6,
           "x": 0.6714,
           "y": 0.5252
         }
       ]
     },
     {
-      "id": "target-track-55",
+      "id": "target-track-52",
       "sampleCount": 4,
-      "visibleStartS": 7.13,
-      "visibleEndS": 7.88,
+      "visibleStartS": 6.13,
+      "visibleEndS": 6.88,
       "durationSeconds": 0.75,
       "entrySide": "center",
       "exitSide": "center",
@@ -1725,32 +2005,32 @@
       },
       "sampledPoints": [
         {
-          "t": 7.13,
+          "t": 6.13,
           "x": 0.4573,
           "y": 0.6409
         },
         {
-          "t": 7.5,
+          "t": 6.5,
           "x": 0.4556,
           "y": 0.5394
         },
         {
-          "t": 7.75,
+          "t": 6.75,
           "x": 0.4615,
           "y": 0.5295
         },
         {
-          "t": 7.88,
+          "t": 6.88,
           "x": 0.436,
           "y": 0.5808
         }
       ]
     },
     {
-      "id": "target-track-28",
+      "id": "target-track-25",
       "sampleCount": 14,
-      "visibleStartS": 3.25,
-      "visibleEndS": 5.25,
+      "visibleStartS": 2.25,
+      "visibleEndS": 4.25,
       "durationSeconds": 2,
       "entrySide": "center",
       "exitSide": "center",
@@ -1772,109 +2052,62 @@
       },
       "sampledPoints": [
         {
-          "t": 3.25,
+          "t": 2.25,
           "x": 0.4404,
           "y": 0.5968
         },
         {
-          "t": 3.38,
+          "t": 2.38,
           "x": 0.4383,
           "y": 0.5983
         },
         {
-          "t": 3.88,
+          "t": 2.88,
           "x": 0.4691,
           "y": 0.6263
         },
         {
-          "t": 4,
+          "t": 3,
           "x": 0.4692,
           "y": 0.6268
         },
         {
-          "t": 4.38,
+          "t": 3.38,
           "x": 0.3932,
           "y": 0.6213
         },
         {
-          "t": 4.5,
+          "t": 3.5,
           "x": 0.3932,
           "y": 0.6213
         },
         {
-          "t": 4.75,
+          "t": 3.75,
           "x": 0.3939,
           "y": 0.6163
         },
         {
-          "t": 4.88,
+          "t": 3.88,
           "x": 0.3932,
           "y": 0.6213
         },
         {
-          "t": 5.13,
+          "t": 4.13,
           "x": 0.3932,
           "y": 0.6213
         },
         {
-          "t": 5.25,
+          "t": 4.25,
           "x": 0.3932,
           "y": 0.6213
         }
       ]
     },
     {
-      "id": "target-track-109",
+      "id": "target-track-34",
       "sampleCount": 4,
-      "visibleStartS": 15.38,
-      "visibleEndS": 15.88,
-      "durationSeconds": 0.5,
-      "entrySide": "center",
-      "exitSide": "center",
-      "xRange": 0.071,
-      "yRange": 0.0858,
-      "pathLength": 0.1414,
-      "turnCount": 2,
-      "reversalCount": 2,
-      "lowerFieldShare": 0,
-      "meanArea": 336.8,
-      "areaStability": 0.648,
-      "first": {
-        "x": 0.581,
-        "y": 0.2972
-      },
-      "last": {
-        "x": 0.6445,
-        "y": 0.383
-      },
-      "sampledPoints": [
-        {
-          "t": 15.38,
-          "x": 0.581,
-          "y": 0.2972
-        },
-        {
-          "t": 15.5,
-          "x": 0.5839,
-          "y": 0.3199
-        },
-        {
-          "t": 15.63,
-          "x": 0.5735,
-          "y": 0.3084
-        },
-        {
-          "t": 15.88,
-          "x": 0.6445,
-          "y": 0.383
-        }
-      ]
-    },
-    {
-      "id": "target-track-37",
-      "sampleCount": 4,
-      "visibleStartS": 5.75,
-      "visibleEndS": 6.63,
+      "visibleStartS": 4.75,
+      "visibleEndS": 5.63,
       "durationSeconds": 0.88,
       "entrySide": "center",
       "exitSide": "center",
@@ -1896,32 +2129,32 @@
       },
       "sampledPoints": [
         {
-          "t": 5.75,
+          "t": 4.75,
           "x": 0.5011,
           "y": 0.7456
         },
         {
-          "t": 6,
+          "t": 5,
           "x": 0.4633,
           "y": 0.7665
         },
         {
-          "t": 6.25,
+          "t": 5.25,
           "x": 0.4776,
           "y": 0.7569
         },
         {
-          "t": 6.63,
+          "t": 5.63,
           "x": 0.5467,
           "y": 0.7139
         }
       ]
     },
     {
-      "id": "target-track-60",
+      "id": "target-track-57",
       "sampleCount": 9,
-      "visibleStartS": 8.88,
-      "visibleEndS": 10.13,
+      "visibleStartS": 7.88,
+      "visibleEndS": 9.13,
       "durationSeconds": 1.25,
       "entrySide": "center",
       "exitSide": "center",
@@ -1943,57 +2176,57 @@
       },
       "sampledPoints": [
         {
-          "t": 8.88,
+          "t": 7.88,
           "x": 0.5997,
           "y": 0.8004
         },
         {
-          "t": 9,
+          "t": 8,
           "x": 0.6216,
           "y": 0.8104
         },
         {
-          "t": 9.38,
+          "t": 8.38,
           "x": 0.5512,
           "y": 0.7894
         },
         {
-          "t": 9.5,
+          "t": 8.5,
           "x": 0.5648,
           "y": 0.7898
         },
         {
-          "t": 9.63,
+          "t": 8.63,
           "x": 0.5606,
           "y": 0.7869
         },
         {
-          "t": 9.75,
+          "t": 8.75,
           "x": 0.5672,
           "y": 0.7856
         },
         {
-          "t": 9.88,
+          "t": 8.88,
           "x": 0.5625,
           "y": 0.7853
         },
         {
-          "t": 10,
+          "t": 9,
           "x": 0.5525,
           "y": 0.7795
         },
         {
-          "t": 10.13,
+          "t": 9.13,
           "x": 0.55,
           "y": 0.793
         }
       ]
     },
     {
-      "id": "target-track-17",
+      "id": "target-track-14",
       "sampleCount": 5,
-      "visibleStartS": 2.25,
-      "visibleEndS": 2.75,
+      "visibleStartS": 1.25,
+      "visibleEndS": 1.75,
       "durationSeconds": 0.5,
       "entrySide": "right",
       "exitSide": "right",
@@ -2015,37 +2248,37 @@
       },
       "sampledPoints": [
         {
-          "t": 2.25,
+          "t": 1.25,
           "x": 0.7871,
           "y": 0.2049
         },
         {
-          "t": 2.38,
+          "t": 1.38,
           "x": 0.7371,
           "y": 0.1915
         },
         {
-          "t": 2.5,
+          "t": 1.5,
           "x": 0.6824,
           "y": 0.1887
         },
         {
-          "t": 2.63,
+          "t": 1.63,
           "x": 0.7224,
           "y": 0.181
         },
         {
-          "t": 2.75,
+          "t": 1.75,
           "x": 0.723,
           "y": 0.1812
         }
       ]
     },
     {
-      "id": "target-track-77",
+      "id": "target-track-74",
       "sampleCount": 5,
-      "visibleStartS": 11.63,
-      "visibleEndS": 12.13,
+      "visibleStartS": 10.63,
+      "visibleEndS": 11.13,
       "durationSeconds": 0.5,
       "entrySide": "center",
       "exitSide": "right",
@@ -2067,37 +2300,37 @@
       },
       "sampledPoints": [
         {
-          "t": 11.63,
+          "t": 10.63,
           "x": 0.6251,
           "y": 0.3657
         },
         {
-          "t": 11.75,
+          "t": 10.75,
           "x": 0.6755,
           "y": 0.3846
         },
         {
-          "t": 11.88,
+          "t": 10.88,
           "x": 0.6261,
           "y": 0.3654
         },
         {
-          "t": 12,
+          "t": 11,
           "x": 0.6907,
           "y": 0.396
         },
         {
-          "t": 12.13,
+          "t": 11.13,
           "x": 0.6907,
           "y": 0.3964
         }
       ]
     },
     {
-      "id": "target-track-9",
+      "id": "target-track-6",
       "sampleCount": 3,
-      "visibleStartS": 1.63,
-      "visibleEndS": 2.25,
+      "visibleStartS": 0.63,
+      "visibleEndS": 1.25,
       "durationSeconds": 0.62,
       "entrySide": "center",
       "exitSide": "center",
@@ -2119,220 +2352,19 @@
       },
       "sampledPoints": [
         {
-          "t": 1.63,
+          "t": 0.63,
           "x": 0.4289,
           "y": 0.1536
         },
         {
-          "t": 1.75,
+          "t": 0.75,
           "x": 0.4282,
           "y": 0.1822
         },
         {
-          "t": 2.25,
+          "t": 1.25,
           "x": 0.4507,
           "y": 0.2708
-        }
-      ]
-    },
-    {
-      "id": "target-track-93",
-      "sampleCount": 13,
-      "visibleStartS": 13.5,
-      "visibleEndS": 15.25,
-      "durationSeconds": 1.75,
-      "entrySide": "center",
-      "exitSide": "center",
-      "xRange": 0.0863,
-      "yRange": 0.0209,
-      "pathLength": 0.0971,
-      "turnCount": 3,
-      "reversalCount": 0,
-      "lowerFieldShare": 1,
-      "meanArea": 9.2,
-      "areaStability": 0.958,
-      "first": {
-        "x": 0.4659,
-        "y": 0.6401
-      },
-      "last": {
-        "x": 0.3796,
-        "y": 0.6409
-      },
-      "sampledPoints": [
-        {
-          "t": 13.5,
-          "x": 0.4659,
-          "y": 0.6401
-        },
-        {
-          "t": 13.63,
-          "x": 0.4647,
-          "y": 0.6443
-        },
-        {
-          "t": 14.13,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 14.25,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 14.38,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 14.63,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 14.75,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 14.88,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 15.13,
-          "x": 0.3796,
-          "y": 0.6409
-        },
-        {
-          "t": 15.25,
-          "x": 0.3796,
-          "y": 0.6409
-        }
-      ]
-    },
-    {
-      "id": "target-track-94",
-      "sampleCount": 12,
-      "visibleStartS": 13.63,
-      "visibleEndS": 15.25,
-      "durationSeconds": 1.62,
-      "entrySide": "center",
-      "exitSide": "center",
-      "xRange": 0.088,
-      "yRange": 0.0165,
-      "pathLength": 0.0984,
-      "turnCount": 5,
-      "reversalCount": 1,
-      "lowerFieldShare": 1,
-      "meanArea": 13.9,
-      "areaStability": 0.889,
-      "first": {
-        "x": 0.47,
-        "y": 0.6263
-      },
-      "last": {
-        "x": 0.3835,
-        "y": 0.6242
-      },
-      "sampledPoints": [
-        {
-          "t": 13.63,
-          "x": 0.47,
-          "y": 0.6263
-        },
-        {
-          "t": 13.88,
-          "x": 0.4088,
-          "y": 0.6098
-        },
-        {
-          "t": 14.13,
-          "x": 0.3832,
-          "y": 0.6243
-        },
-        {
-          "t": 14.38,
-          "x": 0.382,
-          "y": 0.6218
-        },
-        {
-          "t": 14.5,
-          "x": 0.382,
-          "y": 0.6218
-        },
-        {
-          "t": 14.63,
-          "x": 0.382,
-          "y": 0.6218
-        },
-        {
-          "t": 14.75,
-          "x": 0.382,
-          "y": 0.6218
-        },
-        {
-          "t": 15,
-          "x": 0.382,
-          "y": 0.6218
-        },
-        {
-          "t": 15.13,
-          "x": 0.3835,
-          "y": 0.6242
-        },
-        {
-          "t": 15.25,
-          "x": 0.3835,
-          "y": 0.6242
-        }
-      ]
-    },
-    {
-      "id": "target-track-5",
-      "sampleCount": 4,
-      "visibleStartS": 1,
-      "visibleEndS": 1.75,
-      "durationSeconds": 0.75,
-      "entrySide": "center",
-      "exitSide": "center",
-      "xRange": 0.0006,
-      "yRange": 0.1077,
-      "pathLength": 0.1289,
-      "turnCount": 1,
-      "reversalCount": 2,
-      "lowerFieldShare": 0.5,
-      "meanArea": 28.5,
-      "areaStability": 0.905,
-      "first": {
-        "x": 0.4279,
-        "y": 0.4563
-      },
-      "last": {
-        "x": 0.4283,
-        "y": 0.5428
-      },
-      "sampledPoints": [
-        {
-          "t": 1,
-          "x": 0.4279,
-          "y": 0.4563
-        },
-        {
-          "t": 1.13,
-          "x": 0.4281,
-          "y": 0.4764
-        },
-        {
-          "t": 1.63,
-          "x": 0.4277,
-          "y": 0.564
-        },
-        {
-          "t": 1.75,
-          "x": 0.4283,
-          "y": 0.5428
         }
       ]
     }
@@ -2344,160 +2376,102 @@
       "componentCount": 2,
       "largestComponents": [
         {
-          "area": 29,
-          "x": 0.4283,
-          "y": 0.3479,
+          "area": 28,
+          "x": 0.4279,
+          "y": 0.4563,
           "box": {
             "x": 0.4197,
-            "y": 0.3343,
+            "y": 0.4438,
             "w": 0.0182,
             "h": 0.0317
           },
-          "density": 0.527,
+          "density": 0.509,
           "meanColor": {
-            "r": 109.8,
-            "g": 94.3,
-            "b": 132.9
+            "r": 102.8,
+            "g": 98.2,
+            "b": 149.9
           }
         },
         {
-          "area": 21,
-          "x": 0.4277,
-          "y": 0.1131,
+          "area": 27,
+          "x": 0.4282,
+          "y": 0.6291,
           "box": {
             "x": 0.4197,
-            "y": 0.1066,
+            "y": 0.6167,
             "w": 0.0182,
-            "h": 0.0202
+            "h": 0.0288
           },
-          "density": 0.6,
+          "density": 0.54,
           "meanColor": {
-            "r": 117.3,
-            "g": 85.4,
-            "b": 119.9
+            "r": 107.3,
+            "g": 94.1,
+            "b": 112.7
           }
         }
       ]
     },
     {
-      "index": 10,
-      "t": 1.25,
+      "index": 11,
+      "t": 1.38,
       "componentCount": 3,
       "largestComponents": [
         {
-          "area": 259,
-          "x": 0.428,
-          "y": 0.1295,
+          "area": 540,
+          "x": 0.7371,
+          "y": 0.1915,
           "box": {
-            "x": 0.3978,
-            "y": 0.1066,
-            "w": 0.0657,
-            "h": 0.0548
-          },
-          "density": 0.757,
-          "meanColor": {
-            "r": 87.7,
-            "g": 104.9,
-            "b": 170.9
-          }
-        },
-        {
-          "area": 202,
-          "x": 0.5739,
-          "y": 0.1238,
-          "box": {
-            "x": 0.5438,
-            "y": 0.1066,
-            "w": 0.0657,
-            "h": 0.0432
-          },
-          "density": 0.748,
-          "meanColor": {
-            "r": 85.6,
-            "g": 109.1,
-            "b": 175.3
-          }
-        },
-        {
-          "area": 32,
-          "x": 0.428,
-          "y": 0.3036,
-          "box": {
-            "x": 0.4197,
-            "y": 0.2882,
-            "w": 0.0182,
-            "h": 0.0346
-          },
-          "density": 0.533,
-          "meanColor": {
-            "r": 117.3,
-            "g": 82.2,
-            "b": 131.3
-          }
-        }
-      ]
-    },
-    {
-      "index": 20,
-      "t": 2.5,
-      "componentCount": 3,
-      "largestComponents": [
-        {
-          "area": 546,
-          "x": 0.6824,
-          "y": 0.1887,
-          "box": {
-            "x": 0.6095,
+            "x": 0.6642,
             "y": 0.1556,
             "w": 0.1533,
-            "h": 0.0692
+            "h": 0.0807
           },
-          "density": 0.542,
+          "density": 0.459,
           "meanColor": {
-            "r": 94.7,
-            "g": 105.4,
-            "b": 176
+            "r": 89.3,
+            "g": 107.4,
+            "b": 178.8
           }
         },
         {
-          "area": 286,
-          "x": 0.8103,
-          "y": 0.2295,
+          "area": 270,
+          "x": 0.8165,
+          "y": 0.3422,
           "box": {
             "x": 0.7774,
-            "y": 0.1988,
+            "y": 0.317,
             "w": 0.073,
-            "h": 0.0634
+            "h": 0.0576
           },
-          "density": 0.65,
+          "density": 0.675,
           "meanColor": {
-            "r": 96,
-            "g": 105.2,
-            "b": 172.3
+            "r": 92.7,
+            "g": 108.2,
+            "b": 175
           }
         },
         {
-          "area": 266,
-          "x": 0.8431,
-          "y": 0.3013,
+          "area": 269,
+          "x": 0.8385,
+          "y": 0.2726,
           "box": {
-            "x": 0.8102,
-            "y": 0.2709,
+            "x": 0.8066,
+            "y": 0.2421,
             "w": 0.0657,
             "h": 0.0634
           },
-          "density": 0.672,
+          "density": 0.679,
           "meanColor": {
-            "r": 91.2,
-            "g": 106.5,
-            "b": 174.1
+            "r": 86.8,
+            "g": 106.4,
+            "b": 171.2
           }
         }
       ]
     },
     {
-      "index": 30,
-      "t": 3.75,
+      "index": 22,
+      "t": 2.75,
       "componentCount": 3,
       "largestComponents": [
         {
@@ -2554,8 +2528,8 @@
       ]
     },
     {
-      "index": 40,
-      "t": 5,
+      "index": 33,
+      "t": 4.13,
       "componentCount": 4,
       "largestComponents": [
         {
@@ -2629,485 +2603,399 @@
       ]
     },
     {
-      "index": 50,
-      "t": 6.25,
-      "componentCount": 7,
+      "index": 44,
+      "t": 5.5,
+      "componentCount": 4,
       "largestComponents": [
         {
-          "area": 406,
-          "x": 0.3981,
-          "y": 0.7995,
+          "area": 617,
+          "x": 0.3995,
+          "y": 0.7957,
           "box": {
-            "x": 0.3467,
-            "y": 0.7637,
-            "w": 0.1095,
-            "h": 0.072
+            "x": 0.3175,
+            "y": 0.7464,
+            "w": 0.1679,
+            "h": 0.1037
           },
-          "density": 0.541,
+          "density": 0.373,
           "meanColor": {
-            "r": 114.2,
-            "g": 110,
-            "b": 138.3
+            "r": 112.8,
+            "g": 105.4,
+            "b": 157.4
           }
         },
         {
-          "area": 200,
-          "x": 0.4776,
-          "y": 0.7569,
+          "area": 216,
+          "x": 0.6671,
+          "y": 0.5149,
           "box": {
-            "x": 0.4416,
-            "y": 0.732,
-            "w": 0.0693,
-            "h": 0.0576
+            "x": 0.6387,
+            "y": 0.487,
+            "w": 0.0584,
+            "h": 0.0605
           },
-          "density": 0.526,
+          "density": 0.643,
           "meanColor": {
-            "r": 85.7,
-            "g": 95,
-            "b": 206.6
-          }
-        },
-        {
-          "area": 197,
-          "x": 0.6509,
-          "y": 0.4944,
-          "box": {
-            "x": 0.6241,
-            "y": 0.4726,
-            "w": 0.0657,
-            "h": 0.0548
-          },
-          "density": 0.576,
-          "meanColor": {
-            "r": 83.4,
-            "g": 95.8,
-            "b": 204.8
-          }
-        },
-        {
-          "area": 193,
-          "x": 0.2911,
-          "y": 0.8424,
-          "box": {
-            "x": 0.2591,
-            "y": 0.8184,
-            "w": 0.0657,
-            "h": 0.049
-          },
-          "density": 0.631,
-          "meanColor": {
-            "r": 81.5,
-            "g": 153.3,
-            "b": 106.4
-          }
-        },
-        {
-          "area": 191,
-          "x": 0.6435,
-          "y": 0.6376,
-          "box": {
-            "x": 0.6058,
-            "y": 0.6138,
-            "w": 0.0693,
-            "h": 0.0548
-          },
-          "density": 0.529,
-          "meanColor": {
-            "r": 87.1,
-            "g": 95,
-            "b": 213.9
-          }
-        },
-        {
-          "area": 124,
-          "x": 0.1956,
-          "y": 0.8611,
-          "box": {
-            "x": 0.1606,
-            "y": 0.8473,
-            "w": 0.073,
-            "h": 0.0259
-          },
-          "density": 0.689,
-          "meanColor": {
-            "r": 93.8,
-            "g": 108.9,
-            "b": 176.4
-          }
-        },
-        {
-          "area": 19,
-          "x": 0.4272,
-          "y": 0.8617,
-          "box": {
-            "x": 0.4197,
-            "y": 0.853,
-            "w": 0.0182,
-            "h": 0.0202
-          },
-          "density": 0.543,
-          "meanColor": {
-            "r": 89.9,
+            "r": 86.4,
             "g": 93.9,
-            "b": 162.2
+            "b": 202.5
+          }
+        },
+        {
+          "area": 209,
+          "x": 0.494,
+          "y": 0.4572,
+          "box": {
+            "x": 0.4635,
+            "y": 0.4323,
+            "w": 0.0657,
+            "h": 0.0519
+          },
+          "density": 0.645,
+          "meanColor": {
+            "r": 76.9,
+            "g": 92.5,
+            "b": 201
+          }
+        },
+        {
+          "area": 182,
+          "x": 0.63,
+          "y": 0.6497,
+          "box": {
+            "x": 0.5949,
+            "y": 0.6282,
+            "w": 0.0657,
+            "h": 0.0548
+          },
+          "density": 0.532,
+          "meanColor": {
+            "r": 92.3,
+            "g": 94.3,
+            "b": 207.2
           }
         }
       ]
     },
     {
-      "index": 60,
-      "t": 7.5,
-      "componentCount": 6,
+      "index": 55,
+      "t": 6.88,
+      "componentCount": 5,
       "largestComponents": [
         {
-          "area": 483,
-          "x": 0.4082,
-          "y": 0.5461,
+          "area": 227,
+          "x": 0.4151,
+          "y": 0.5268,
           "box": {
-            "x": 0.3613,
-            "y": 0.4957,
-            "w": 0.0876,
-            "h": 0.1037
+            "x": 0.3723,
+            "y": 0.487,
+            "w": 0.0912,
+            "h": 0.0634
           },
-          "density": 0.559,
+          "density": 0.413,
           "meanColor": {
-            "r": 180.2,
-            "g": 128.1,
-            "b": 59.3
+            "r": 182.6,
+            "g": 96.1,
+            "b": 93.6
           }
         },
         {
-          "area": 130,
-          "x": 0.444,
-          "y": 0.6171,
+          "area": 131,
+          "x": 0.4441,
+          "y": 0.6174,
           "box": {
             "x": 0.4088,
             "y": 0.6052,
             "w": 0.0693,
             "h": 0.0288
           },
-          "density": 0.684,
+          "density": 0.689,
           "meanColor": {
-            "r": 185.7,
-            "g": 43.6,
-            "b": 32.6
+            "r": 183.4,
+            "g": 42.9,
+            "b": 32.3
           }
         },
         {
-          "area": 27,
-          "x": 0.4288,
-          "y": 0.6725,
+          "area": 84,
+          "x": 0.4002,
+          "y": 0.5811,
           "box": {
-            "x": 0.4234,
-            "y": 0.6599,
-            "w": 0.0146,
+            "x": 0.3759,
+            "y": 0.5677,
+            "w": 0.0474,
             "h": 0.0317
           },
-          "density": 0.614,
+          "density": 0.587,
           "meanColor": {
-            "r": 110.5,
-            "g": 92,
-            "b": 135.7
+            "r": 175.4,
+            "g": 43.8,
+            "b": 31.7
           }
         },
         {
-          "area": 12,
-          "x": 0.4556,
-          "y": 0.5394,
+          "area": 44,
+          "x": 0.436,
+          "y": 0.5808,
           "box": {
-            "x": 0.4489,
-            "y": 0.536,
-            "w": 0.0146,
-            "h": 0.0115
+            "x": 0.427,
+            "y": 0.5677,
+            "w": 0.0219,
+            "h": 0.0288
           },
-          "density": 0.75,
+          "density": 0.733,
           "meanColor": {
-            "r": 143.3,
-            "g": 113,
-            "b": 51.7
+            "r": 178.3,
+            "g": 46.4,
+            "b": 34.6
           }
         },
         {
-          "area": 9,
-          "x": 0.4615,
-          "y": 0.5258,
+          "area": 32,
+          "x": 0.428,
+          "y": 0.1532,
           "box": {
-            "x": 0.4526,
-            "y": 0.5187,
+            "x": 0.4197,
+            "y": 0.1383,
             "w": 0.0182,
-            "h": 0.0144
-          },
-          "density": 0.36,
-          "meanColor": {
-            "r": 130.7,
-            "g": 110.4,
-            "b": 77.8
-          }
-        },
-        {
-          "area": 8,
-          "x": 0.4526,
-          "y": 0.5544,
-          "box": {
-            "x": 0.4453,
-            "y": 0.5504,
-            "w": 0.0182,
-            "h": 0.0086
+            "h": 0.0346
           },
           "density": 0.533,
           "meanColor": {
-            "r": 163.4,
-            "g": 159.8,
-            "b": 97.9
+            "r": 99.3,
+            "g": 85.9,
+            "b": 136.3
           }
         }
       ]
     },
     {
-      "index": 70,
-      "t": 8.75,
+      "index": 66,
+      "t": 8.25,
       "componentCount": 3,
       "largestComponents": [
         {
-          "area": 267,
-          "x": 0.6906,
-          "y": 0.8407,
+          "area": 479,
+          "x": 0.5938,
+          "y": 0.7982,
+          "box": {
+            "x": 0.5328,
+            "y": 0.7522,
+            "w": 0.1204,
+            "h": 0.0893
+          },
+          "density": 0.468,
+          "meanColor": {
+            "r": 123.3,
+            "g": 115.7,
+            "b": 138.2
+          }
+        },
+        {
+          "area": 268,
+          "x": 0.7045,
+          "y": 0.8442,
+          "box": {
+            "x": 0.6679,
+            "y": 0.8184,
+            "w": 0.0766,
+            "h": 0.0548
+          },
+          "density": 0.672,
+          "meanColor": {
+            "r": 95.8,
+            "g": 107.4,
+            "b": 174.9
+          }
+        },
+        {
+          "area": 129,
+          "x": 0.7936,
+          "y": 0.861,
+          "box": {
+            "x": 0.7591,
+            "y": 0.8473,
+            "w": 0.0693,
+            "h": 0.0259
+          },
+          "density": 0.754,
+          "meanColor": {
+            "r": 95.7,
+            "g": 109.1,
+            "b": 178.9
+          }
+        }
+      ]
+    },
+    {
+      "index": 77,
+      "t": 9.63,
+      "componentCount": 0,
+      "largestComponents": []
+    },
+    {
+      "index": 88,
+      "t": 11,
+      "componentCount": 5,
+      "largestComponents": [
+        {
+          "area": 283,
+          "x": 0.6907,
+          "y": 0.396,
           "box": {
             "x": 0.6533,
-            "y": 0.8156,
+            "y": 0.3689,
             "w": 0.0766,
             "h": 0.0576
           },
-          "density": 0.636,
+          "density": 0.674,
           "meanColor": {
-            "r": 99.2,
-            "g": 104.6,
-            "b": 170.8
+            "r": 91.5,
+            "g": 104,
+            "b": 167.1
           }
         },
         {
-          "area": 195,
-          "x": 0.413,
-          "y": 0.5309,
+          "area": 279,
+          "x": 0.7989,
+          "y": 0.3602,
+          "box": {
+            "x": 0.7591,
+            "y": 0.3343,
+            "w": 0.0766,
+            "h": 0.0605
+          },
+          "density": 0.633,
+          "meanColor": {
+            "r": 90.5,
+            "g": 106.8,
+            "b": 175.5
+          }
+        },
+        {
+          "area": 278,
+          "x": 0.6024,
+          "y": 0.3448,
+          "box": {
+            "x": 0.5657,
+            "y": 0.317,
+            "w": 0.073,
+            "h": 0.0605
+          },
+          "density": 0.662,
+          "meanColor": {
+            "r": 95.4,
+            "g": 106.7,
+            "b": 177.7
+          }
+        },
+        {
+          "area": 267,
+          "x": 0.8437,
+          "y": 0.298,
+          "box": {
+            "x": 0.8102,
+            "y": 0.268,
+            "w": 0.0657,
+            "h": 0.0605
+          },
+          "density": 0.706,
+          "meanColor": {
+            "r": 93.3,
+            "g": 106.2,
+            "b": 170.4
+          }
+        },
+        {
+          "area": 236,
+          "x": 0.4086,
+          "y": 0.3274,
           "box": {
             "x": 0.3723,
-            "y": 0.513,
-            "w": 0.0912,
-            "h": 0.0375
-          },
-          "density": 0.6,
-          "meanColor": {
-            "r": 191.9,
-            "g": 96.4,
-            "b": 86.8
-          }
-        },
-        {
-          "area": 153,
-          "x": 0.7789,
-          "y": 0.8598,
-          "box": {
-            "x": 0.7445,
-            "y": 0.8444,
+            "y": 0.2997,
             "w": 0.0766,
-            "h": 0.0288
+            "h": 0.0576
           },
-          "density": 0.729,
+          "density": 0.562,
           "meanColor": {
-            "r": 94.9,
-            "g": 107.4,
-            "b": 174.3
+            "r": 167.6,
+            "g": 129.3,
+            "b": 90.9
           }
         }
       ]
     },
     {
-      "index": 80,
-      "t": 10,
-      "componentCount": 2,
-      "largestComponents": [
-        {
-          "area": 255,
-          "x": 0.5525,
-          "y": 0.7795,
-          "box": {
-            "x": 0.5146,
-            "y": 0.7435,
-            "w": 0.073,
-            "h": 0.072
-          },
-          "density": 0.51,
-          "meanColor": {
-            "r": 155.6,
-            "g": 119.2,
-            "b": 74.5
-          }
-        },
-        {
-          "area": 18,
-          "x": 0.5501,
-          "y": 0.8617,
-          "box": {
-            "x": 0.5438,
-            "y": 0.853,
-            "w": 0.0146,
-            "h": 0.0202
-          },
-          "density": 0.643,
-          "meanColor": {
-            "r": 79.7,
-            "g": 98.1,
-            "b": 163.6
-          }
-        }
-      ]
-    },
-    {
-      "index": 90,
-      "t": 11.25,
+      "index": 99,
+      "t": 12.38,
       "componentCount": 4,
       "largestComponents": [
         {
-          "area": 430,
-          "x": 0.5735,
-          "y": 0.1522,
+          "area": 315,
+          "x": 0.4604,
+          "y": 0.573,
           "box": {
-            "x": 0.5438,
-            "y": 0.1066,
+            "x": 0.427,
+            "y": 0.536,
+            "w": 0.0766,
+            "h": 0.0807
+          },
+          "density": 0.536,
+          "meanColor": {
+            "r": 106.9,
+            "g": 106.9,
+            "b": 165.3
+          }
+        },
+        {
+          "area": 278,
+          "x": 0.523,
+          "y": 0.4957,
+          "box": {
+            "x": 0.4927,
+            "y": 0.4669,
+            "w": 0.0693,
+            "h": 0.0634
+          },
+          "density": 0.665,
+          "meanColor": {
+            "r": 95.3,
+            "g": 107.5,
+            "b": 176.7
+          }
+        },
+        {
+          "area": 165,
+          "x": 0.4184,
+          "y": 0.6253,
+          "box": {
+            "x": 0.3905,
+            "y": 0.5937,
             "w": 0.0657,
-            "h": 0.098
+            "h": 0.0576
           },
-          "density": 0.703,
+          "density": 0.458,
           "meanColor": {
-            "r": 86.7,
-            "g": 110.1,
-            "b": 175.2
-          }
-        },
-        {
-          "area": 259,
-          "x": 0.4273,
-          "y": 0.1819,
-          "box": {
-            "x": 0.3978,
-            "y": 0.1527,
-            "w": 0.062,
-            "h": 0.0605
-          },
-          "density": 0.725,
-          "meanColor": {
-            "r": 92.7,
-            "g": 107.9,
-            "b": 168.2
-          }
-        },
-        {
-          "area": 151,
-          "x": 0.4279,
-          "y": 0.12,
-          "box": {
-            "x": 0.3978,
-            "y": 0.1066,
-            "w": 0.062,
-            "h": 0.0346
-          },
-          "density": 0.74,
-          "meanColor": {
-            "r": 79.4,
-            "g": 115,
-            "b": 184.6
+            "r": 171.5,
+            "g": 136.4,
+            "b": 96.7
           }
         },
         {
           "area": 24,
-          "x": 0.4148,
-          "y": 0.3704,
+          "x": 0.415,
+          "y": 0.7818,
           "box": {
             "x": 0.4124,
-            "y": 0.3573,
+            "y": 0.7666,
             "w": 0.0109,
-            "h": 0.0317
+            "h": 0.0346
           },
-          "density": 0.727,
+          "density": 0.667,
           "meanColor": {
-            "r": 118.9,
-            "g": 87.3,
-            "b": 143.2
-          }
-        }
-      ]
-    },
-    {
-      "index": 100,
-      "t": 12.5,
-      "componentCount": 4,
-      "largestComponents": [
-        {
-          "area": 288,
-          "x": 0.7589,
-          "y": 0.1873,
-          "box": {
-            "x": 0.7226,
-            "y": 0.1614,
-            "w": 0.0766,
-            "h": 0.0576
-          },
-          "density": 0.686,
-          "meanColor": {
-            "r": 90.7,
-            "g": 106.6,
-            "b": 176.2
-          }
-        },
-        {
-          "area": 282,
-          "x": 0.582,
-          "y": 0.2441,
-          "box": {
-            "x": 0.5511,
-            "y": 0.2161,
-            "w": 0.073,
-            "h": 0.0605
-          },
-          "density": 0.671,
-          "meanColor": {
-            "r": 89.1,
-            "g": 108.5,
-            "b": 179.9
-          }
-        },
-        {
-          "area": 270,
-          "x": 0.6536,
-          "y": 0.1914,
-          "box": {
-            "x": 0.6168,
-            "y": 0.1643,
-            "w": 0.0766,
-            "h": 0.0548
-          },
-          "density": 0.677,
-          "meanColor": {
-            "r": 99.7,
-            "g": 106.8,
-            "b": 170.7
-          }
-        },
-        {
-          "area": 265,
-          "x": 0.8343,
-          "y": 0.2547,
-          "box": {
-            "x": 0.8066,
-            "y": 0.2248,
-            "w": 0.0657,
-            "h": 0.0634
-          },
-          "density": 0.669,
-          "meanColor": {
-            "r": 92.2,
-            "g": 106.2,
-            "b": 173.1
+            "r": 108.1,
+            "g": 83.8,
+            "b": 116.7
           }
         }
       ]
@@ -3115,36 +3003,215 @@
     {
       "index": 110,
       "t": 13.75,
-      "componentCount": 1,
+      "componentCount": 7,
       "largestComponents": [
         {
-          "area": 299,
-          "x": 0.4145,
-          "y": 0.6343,
+          "area": 26,
+          "x": 0.4148,
+          "y": 0.4124,
           "box": {
-            "x": 0.3686,
-            "y": 0.6023,
-            "w": 0.0985,
-            "h": 0.072
+            "x": 0.4124,
+            "y": 0.3977,
+            "w": 0.0109,
+            "h": 0.0346
           },
-          "density": 0.443,
+          "density": 0.722,
           "meanColor": {
-            "r": 169.5,
-            "g": 131.6,
-            "b": 87.4
+            "r": 120.4,
+            "g": 88.7,
+            "b": 141.1
+          }
+        },
+        {
+          "area": 22,
+          "x": 0.4307,
+          "y": 0.6315,
+          "box": {
+            "x": 0.4234,
+            "y": 0.6196,
+            "w": 0.0182,
+            "h": 0.0259
+          },
+          "density": 0.489,
+          "meanColor": {
+            "r": 191.5,
+            "g": 192.8,
+            "b": 193.4
+          }
+        },
+        {
+          "area": 21,
+          "x": 0.415,
+          "y": 0.5871,
+          "box": {
+            "x": 0.4124,
+            "y": 0.5764,
+            "w": 0.0109,
+            "h": 0.0259
+          },
+          "density": 0.778,
+          "meanColor": {
+            "r": 116.5,
+            "g": 95.9,
+            "b": 132.1
+          }
+        },
+        {
+          "area": 21,
+          "x": 0.4526,
+          "y": 0.6315,
+          "box": {
+            "x": 0.4453,
+            "y": 0.6196,
+            "w": 0.0182,
+            "h": 0.0259
+          },
+          "density": 0.467,
+          "meanColor": {
+            "r": 200.3,
+            "g": 200.3,
+            "b": 200.3
+          }
+        },
+        {
+          "area": 19,
+          "x": 0.4065,
+          "y": 0.6308,
+          "box": {
+            "x": 0.3978,
+            "y": 0.6196,
+            "w": 0.0182,
+            "h": 0.0259
+          },
+          "density": 0.422,
+          "meanColor": {
+            "r": 196.7,
+            "g": 196.7,
+            "b": 196.7
+          }
+        },
+        {
+          "area": 12,
+          "x": 0.382,
+          "y": 0.6218,
+          "box": {
+            "x": 0.3723,
+            "y": 0.6196,
+            "w": 0.0219,
+            "h": 0.0115
+          },
+          "density": 0.5,
+          "meanColor": {
+            "r": 192.8,
+            "g": 193.4,
+            "b": 184.8
+          }
+        },
+        {
+          "area": 8,
+          "x": 0.3796,
+          "y": 0.6409,
+          "box": {
+            "x": 0.3723,
+            "y": 0.6369,
+            "w": 0.0182,
+            "h": 0.0086
+          },
+          "density": 0.533,
+          "meanColor": {
+            "r": 190.5,
+            "g": 190.5,
+            "b": 188.9
+          }
+        }
+      ]
+    },
+    {
+      "index": 121,
+      "t": 15.13,
+      "componentCount": 4,
+      "largestComponents": [
+        {
+          "area": 290,
+          "x": 0.7871,
+          "y": 0.2085,
+          "box": {
+            "x": 0.7555,
+            "y": 0.1787,
+            "w": 0.0766,
+            "h": 0.0634
+          },
+          "density": 0.628,
+          "meanColor": {
+            "r": 88.6,
+            "g": 106.7,
+            "b": 173.4
+          }
+        },
+        {
+          "area": 284,
+          "x": 0.8033,
+          "y": 0.3527,
+          "box": {
+            "x": 0.7628,
+            "y": 0.3256,
+            "w": 0.0766,
+            "h": 0.0605
+          },
+          "density": 0.644,
+          "meanColor": {
+            "r": 90,
+            "g": 104.5,
+            "b": 170.7
+          }
+        },
+        {
+          "area": 267,
+          "x": 0.7126,
+          "y": 0.178,
+          "box": {
+            "x": 0.6752,
+            "y": 0.1527,
+            "w": 0.0766,
+            "h": 0.0519
+          },
+          "density": 0.706,
+          "meanColor": {
+            "r": 93,
+            "g": 105.7,
+            "b": 174.1
+          }
+        },
+        {
+          "area": 263,
+          "x": 0.839,
+          "y": 0.2834,
+          "box": {
+            "x": 0.8102,
+            "y": 0.2536,
+            "w": 0.062,
+            "h": 0.0605
+          },
+          "density": 0.737,
+          "meanColor": {
+            "r": 93.7,
+            "g": 107,
+            "b": 169.2
           }
         }
       ]
     }
   ],
   "evidence": {
-    "overlaySvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-08-target-tracks.svg",
-    "contactSheetSvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-08-target-samples.svg",
-    "perChallengeJson": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-08.json"
+    "overlaySvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/overlays/challenge-08-target-tracks.svg",
+    "contactSheetSvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/contact-sheets/challenge-08-target-samples.svg",
+    "perChallengeJson": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-10-05_17-16-32-b73ee491/tracks/challenge-08.json"
   },
   "measurementLimits": [
     "CPU connected-component target tracking is not final sprite identity recognition.",
     "The tracker intentionally ignores score text, player ship, lives, and most stars so it can focus on challenge-stage alien/object movement.",
-    "Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity."
+    "Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity.",
+    "Top10.5% and bottom12.5% are excluded; centroid tracklets cannot establish full-sprite entry/dwell or complete exits.",
+    "Confidence/readiness are uncalibrated artifact heuristics, not conformance probabilities or release acceptance."
   ]
 }

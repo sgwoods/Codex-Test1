@@ -1,0 +1,71 @@
+--- /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/controller-followup/candidate-tool.js	2026-10-12 12:58:44
++++ /private/tmp/aurora-feasibility-pilot-oct12/private-artifacts/feasibility-pilot/predictor-followup/candidate-tool.js	2026-10-12 13:11:10
+@@ -2,6 +2,7 @@
+ const fs=require('fs'),path=require('path'),assert=require('assert/strict');
+ const {createHash}=require('crypto');
+ const {ROOT,withHarnessPage}=require('./browser-check-util');
++const {observe,predict}=require('./observed-interception');
+ const hash=f=>createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+ const expected='d86e64702c5174e791409385c81901817af4e750d56a68e7a39c3eb311ff24b5';
+ function options(args){
+@@ -32,7 +33,7 @@
+   },cfg);
+   assert.equal(initial.simT,0);assert.equal(initial.stage,cfg.stage);assert.equal(initial.watchMode,false);
+   assert.equal(initial.challenge,cfg.mode==='challenge');assert.equal(initial.score,0);
+-  const frames=[],trace=[],events=[],seen=new Set(),previous=new Map();let held=[],targetId=null;
++  const frames=[],trace=[],events=[],seen=new Set(),histories=new Map();let held=[],targetId=null;
+   const maxFrames=replay?replay.length:Math.ceil(cfg.seconds*60);
+   for(let frame=0;frame<maxFrames;frame++){
+    const before=await page.evaluate(()=>{
+@@ -42,24 +43,22 @@
+       u:e.tm+(e.phaseOffsetS||0)+(e.lanePhaseOffsetS||0)})),
+      bullets:s.pb.map(b=>({x:b.x,y:b.y,v:b.v})),cd:s.p.cd};
+    });
++   for(const e of before.enemies)observe(histories,e,frame/60);
+    let keys,decision;
+    if(replay){keys=replay[frame].keys;decision=replay[frame].decision;}
+    else{
+     const p=before.snapshot.player;
+     const candidates=before.enemies.map(e=>{
+-     const prev=previous.get(e.id),vx=prev?(e.x-prev.x)*60:0,vy=prev?(e.y-prev.y)*60:0;
+-     const flight=Math.max(0,Math.min(.6,(p.y-18-e.y)/Math.max(120,560+vy)));
+-     const aim=e.x+Math.max(-180,Math.min(180,vx))*flight;
+-     return {...e,aim,cost:Math.abs(aim-p.x)/440+flight+(e.id===targetId?-.12:0)};
++     const prediction=predict(histories.get(e.id)||[],e,p,frame/60),{aim,flight}=prediction;
++     return {...e,aim,prediction,cost:Math.abs(aim-p.x)/440+flight+(e.id===targetId?-.12:0)};
+     }).filter(e=>e.aim>=13&&e.aim<=267&&e.y>-32&&e.y<p.y+4).sort((a,b)=>a.cost-b.cost||a.id-b.id);
+     const target=candidates[0];targetId=target?.id??null;
+     const error=target?target.aim-p.x:0,axis=Math.abs(error)>6?Math.sign(error):0;
+     const fire=alignedFire(error,!!target);
+     keys=[...(fire?['Space']:[]),...(axis<0?['ArrowLeft']:axis>0?['ArrowRight']:[])];
+     decision={targetId,aim:target?.aim??null,error:target?error:null,fire,axis,
+-     playerBullets:before.bullets.length,cd:before.cd,candidates:candidates.map(e=>({id:e.id,aim:e.aim,cost:e.cost,u:e.u,pathFamily:e.pathFamily}))};
++     playerBullets:before.bullets.length,cd:before.cd,candidates:candidates.map(e=>({id:e.id,aim:e.aim,cost:e.cost,u:e.u,pathFamily:e.pathFamily,prediction:e.prediction}))};
+    }
+-   for(const e of before.enemies)previous.set(e.id,e);
+    const released=held.filter(k=>!keys.includes(k)),pressed=keys.filter(k=>!held.includes(k));
+    await page.evaluate(({released,pressed})=>{
+     for(const code of released)window.dispatchEvent(new KeyboardEvent('keyup',{code,key:code==='Space'?' ':code,bubbles:true}));
+@@ -118,6 +117,7 @@
+ }
+ async function main(){
+  const executedSource=fs.readFileSync(__filename),toolHash=createHash('sha256').update(executedSource).digest('hex');
++ const predictorFile=path.join(__dirname,'observed-interception.js'),executedPredictor=fs.readFileSync(predictorFile),predictorHash=hash(predictorFile);
+  const cfg=options(process.argv.slice(2)),root=path.join(ROOT,'private-artifacts/feasibility-pilot/artifact');
+  const build=JSON.parse(fs.readFileSync(path.join(root,'build-info.json')));assert.equal(build.releaseChannel,'development');assert.equal(hash(path.join(root,'index.html')),expected);
+  const first=await run(root,cfg),replay=await run(root,cfg,first.trace);
+@@ -137,11 +137,13 @@
+   exactReplay:exact,orderedEventsExact,effectCountDifferenceFrames:first.frames.filter((f,i)=>f.snapshot.counts.effects!==replay.frames[i].snapshot.counts.effects).length,
+   comparisonScope:'Recorded projection: snapshot excluding effect count, raw player/enemy poses and hp/miss, player bullets, stats, challenge counters, RNG, elapsed clock; ordered shot/kill/clear/loss events. Not complete runtime equivalence; enemy bullets, AI timers and audio are not compared. Raw effect counts retained.',
+   differences,firstAudit,replayAudit,first,replay,
+-  controller:'Original greedy targeting/movement, aligned-fire gating at12px predicted-column error; no target means no fire. Decision telemetry is not replay control.',
++  predictorHash,controller:'Seven past observations quadratic fit with damped acceleration; original ranking/movement and12px aligned-fire gate fixed. No future engine simulation.',
+   limits:['Greedy target-leading controller with read-only omniscient current state, not human reaction or public flow.',
+    'Nonperfect outcomes are inconclusive, not impossibility. No all-level proof or canonical fidelity/audio acceptance.',
+    'Professional direct-control persona is deliberately not used as normal-input proof.']};
++ assert.equal(hash(predictorFile),predictorHash,'Predictor changed during run');
+  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');fs.writeFileSync(path.join(out,'executed-tool.js'),executedSource);
++ fs.writeFileSync(path.join(out,'executed-predictor.js'),executedPredictor);
+  console.log(JSON.stringify({out,verdict:report.verdict,exactReplay:exact,differences:differences.length,firstAudit,replayAudit},null,2));
+  assert.equal(firstAudit.errors.length,0);assert.equal(replayAudit.errors.length,0);assert(exact,'Input replay diverged; evidence saved, cannot claim reproducibility');
+ }

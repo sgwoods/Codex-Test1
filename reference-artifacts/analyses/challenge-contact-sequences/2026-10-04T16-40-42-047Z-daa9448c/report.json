@@ -1,0 +1,3911 @@
+{
+  "commit": "daa9448c5da84d37dfe268cecb702f3292e681b7",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.1",
+    "versionLine": "1.4.1.1",
+    "versionScheme": "hosted-dev-increment",
+    "label": "1.4.1.1+build.1210.sha.daa9448c",
+    "buildNumber": "1210",
+    "commit": "daa9448c5da84d37dfe268cecb702f3292e681b7",
+    "shortCommit": "daa9448c",
+    "branch": "codex/oct03-local-integration",
+    "state": "codex/oct03-local-integration@daa9448c clean",
+    "releaseChannel": "development",
+    "publicArtifactBoundaryEnabled": true,
+    "dirty": false,
+    "dirtyFiles": [],
+    "builtAtUtc": "2026-10-04T14:22:46.708Z",
+    "builtAtEt": "Oct 04 2026, 10:22 AM EDT",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.1",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.1",
+        "versionLine": "1.4.1",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ],
+    "development": {
+      "baseVersion": "1.4.1",
+      "iteration": 1,
+      "versionLine": "1.4.1.1",
+      "releaseTrack": "hosted-dev-increment",
+      "notes": "Hosted /dev uses a fourth visible segment to count accumulated production-quality follow-through increments while package.json remains SemVer."
+    },
+    "supabaseConfigured": true,
+    "latestReleaseNote": {
+      "version": "1.4.1",
+      "date": "2026-06-11",
+      "title": "1.4.1 production quality release",
+      "summary": "Promotes the accepted 1.4.1 beta review as a production quality release with Stage 3 challenge-stage gameplay keepers, beta sign-in repair, audio/theme lane clarity, public-safe foreground audio balance, refreshed security evidence, and stronger release gates while keeping score submission guarded pending server-side validation.",
+      "sourceDoc": "RELEASE_NOTE_1.4.1_PRODUCTION.md"
+    }
+  },
+  "bundleHash": "f1ca24661517d0e49524e29f4e3064ce7b514b1efacb2552c016df5a68849471",
+  "sourceHashes": {
+    "05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f",
+    "06-enemy-behavior.js": "1456799e1fadd17e9fc65ce387abd64811a67231ed1bdc866b914ac40f2d8815",
+    "90-harness.js": "ad6535ae97a302db467e99dae08274b329723aa2f460df5966a42bdf3bd8ad2b"
+  },
+  "methodHash": "55a84d06b14082b3c0ffa312bae3725a688ceb07d4d89812a842ab2403f574d6",
+  "method": "Natural developer challenge launch, stationary/no-fire, 60Hz; frames -4 through +8 relative to previously observed first contact, every two frames.",
+  "limitations": [
+    "Fixed baseline target IDs and seeds; not a general release gate.",
+    "Graphics selection is captured in snapshots; no automatic pixel-overlap or original-fidelity verdict."
+  ],
+  "results": [
+    {
+      "stage": 31,
+      "id": 372665405,
+      "contactFrame": 519,
+      "graphicsTheme": "classic-arcade",
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 31,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386107,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "visualAtmosphere": {
+        "id": "classic-arcade",
+        "group": "classic",
+        "phase": "challenge",
+        "backgroundMode": "classic-stars",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "classic-arcade",
+        "starfield": {
+          "id": "classic-arcade-stars",
+          "count": 108,
+          "alphaMin": 0.52,
+          "alphaMax": 0.96
+        }
+      },
+      "firstContactFrame": 519,
+      "captures": [
+        {
+          "frame": 515,
+          "offset": -4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.6,
+            "stageClock": 8.6,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.4,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.41943333333349,
+            "phase": "exit",
+            "x": 148.13677215521952,
+            "y": 312.19989822091213,
+            "preBiasY": 264.19989822091213,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-515.png",
+          "sha256": "87c6c2194951ac725e69d971aaa50630ba5f3e5f2909fbc8c8037c0c32ad8e3e"
+        },
+        {
+          "frame": 517,
+          "offset": -2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.633,
+            "stageClock": 8.633,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.367,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.47740000000016,
+            "phase": "exit",
+            "x": 146.53784730745826,
+            "y": 318.2749156298675,
+            "preBiasY": 270.2749156298675,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-517.png",
+          "sha256": "0ada715403cb0348c23e9b581cd0ca6d5c4cfbb472f206a2faefe13626eb53e0"
+        },
+        {
+          "frame": 519,
+          "offset": 0,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.667,
+            "stageClock": 8.667,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.333,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.535366666666828,
+            "phase": "exit",
+            "x": 144.93892245969704,
+            "y": 324.349933038823,
+            "preBiasY": 276.349933038823,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-519.png",
+          "sha256": "d063fe0483655aae54917f3f03476b48cc903bafdb2b05054a7515d71ed11ee7"
+        },
+        {
+          "frame": 521,
+          "offset": 2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.7,
+            "stageClock": 8.7,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.3,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.593333333333497,
+            "phase": "exit",
+            "x": 143.33999761193576,
+            "y": 330.42495044777843,
+            "preBiasY": 282.42495044777843,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-521.png",
+          "sha256": "c88a74252db2b151c256620928c6e911c6f59ff315f3753c2770e6549dc6f221"
+        },
+        {
+          "frame": 523,
+          "offset": 4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.733,
+            "stageClock": 8.733,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.267,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.651300000000166,
+            "phase": "exit",
+            "x": 141.74107276417448,
+            "y": 336.4999678567339,
+            "preBiasY": 288.4999678567339,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-523.png",
+          "sha256": "c37649ab36eda84e74e50bd372aaf7095bad630c4dc5fc7921bfeddbaaa97ace"
+        },
+        {
+          "frame": 525,
+          "offset": 6,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.767,
+            "stageClock": 8.767,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.233,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.709266666666835,
+            "phase": "exit",
+            "x": 140.14214791641322,
+            "y": 342.5749852656894,
+            "preBiasY": 294.5749852656894,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-525.png",
+          "sha256": "db1a8ac4fc4a168e2f6280f986671655adbea48c570605725e11760ca9b35ca6"
+        },
+        {
+          "frame": 527,
+          "offset": 8,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.8,
+            "stageClock": 8.8,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.2,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.767233333333504,
+            "phase": "exit",
+            "x": 138.54322306865197,
+            "y": 348.65000267464484,
+            "preBiasY": 300.65000267464484,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-31-frame-527.png",
+          "sha256": "c539ef8351eb7f8208424a61aa3160bf56f63c3718b4873340d6ad6d5873efc2"
+        }
+      ],
+      "contacts": [
+        {
+          "t": 7.967,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 139.77,
+          "enemyY": 324.33,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 51406268,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 372665405,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "id": 10852263,
+      "contactFrame": 670,
+      "graphicsTheme": "classic-arcade",
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 39,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386115,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "visualAtmosphere": {
+        "id": "classic-arcade",
+        "group": "classic",
+        "phase": "challenge",
+        "backgroundMode": "classic-stars",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "classic-arcade",
+        "starfield": {
+          "id": "classic-arcade-stars",
+          "count": 108,
+          "alphaMin": 0.52,
+          "alphaMax": 0.96
+        }
+      },
+      "firstContactFrame": 670,
+      "captures": [
+        {
+          "frame": 666,
+          "offset": -4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.117,
+            "stageClock": 11.117,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.883,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.570000000000052,
+            "phase": "exit",
+            "x": 144.32432628481783,
+            "y": 313.76514990752764,
+            "preBiasY": 265.76514990752764,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-666.png",
+          "sha256": "ad3d117ece62829c68089603311efee1d36db4b6a82426d43a4f3e63b6c5c93a"
+        },
+        {
+          "frame": 668,
+          "offset": -2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.15,
+            "stageClock": 11.15,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.85,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.629333333333387,
+            "phase": "exit",
+            "x": 148.1803512475563,
+            "y": 318.8571037608983,
+            "preBiasY": 270.8571037608983,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-668.png",
+          "sha256": "c79f265b243e3c099577b21bf81530b6f8fa34d44d9929274eaf140acbe46b1d"
+        },
+        {
+          "frame": 670,
+          "offset": 0,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.183,
+            "stageClock": 11.183,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.817,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.688666666666721,
+            "phase": "exit",
+            "x": 152.6865315015446,
+            "y": 323.909939172269,
+            "preBiasY": 275.909939172269,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-670.png",
+          "sha256": "6d1de17d9f409294c97074583627fb648dd15573b805d8992eeb0259b30d6527"
+        },
+        {
+          "frame": 672,
+          "offset": 2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.217,
+            "stageClock": 11.217,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.783,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.748000000000056,
+            "phase": "exit",
+            "x": 157.68828128793595,
+            "y": 328.91416568638624,
+            "preBiasY": 280.91416568638624,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-672.png",
+          "sha256": "e86d101389c35331b09a205e20a575bff690f5cad4b2c3ae693693f3faab5e68"
+        },
+        {
+          "frame": 674,
+          "offset": 4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.25,
+            "stageClock": 11.25,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.75,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.807333333333391,
+            "phase": "exit",
+            "x": 163.0190101940874,
+            "y": 333.8612671125679,
+            "preBiasY": 285.8612671125679,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-674.png",
+          "sha256": "81cf7c66d5edb21f59d97f16812511aa743563d33d1ad77580504ed78823d3ee"
+        },
+        {
+          "frame": 676,
+          "offset": 6,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.283,
+            "stageClock": 11.283,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.717,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.866666666666726,
+            "phase": "exit",
+            "x": 168.50415863213294,
+            "y": 338.74387221408904,
+            "preBiasY": 290.74387221408904,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-676.png",
+          "sha256": "d430d33df5fa8059b10edf92cd2cf79d0d585998ec3e81f6db9453f2e4121935"
+        },
+        {
+          "frame": 678,
+          "offset": 8,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.317,
+            "stageClock": 11.317,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.683,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.92600000000006,
+            "phase": "exit",
+            "x": 173.96542636249478,
+            "y": 343.55590244934075,
+            "preBiasY": 295.55590244934075,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "classic-arcade-stage-39-frame-678.png",
+          "sha256": "57b86f5d5536d840722dcffaf85db059417dea1d74be0ab84ad81ddb7ec9a015"
+        }
+      ],
+      "contacts": [
+        {
+          "t": 8.133,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.79,
+          "enemyY": 341.65,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 247206774,
+          "enemyType": "bee",
+          "enemyFamily": "stingray",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 401784013,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.467,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.93,
+          "enemyY": 327.69,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 973487328,
+          "enemyType": "rogue",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.567,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 129.9,
+          "enemyY": 330.56,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 371428430,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 6,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.01,
+          "enemyY": 335.63,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 119292102,
+          "enemyType": "bee",
+          "enemyFamily": "galboss",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.33,
+          "enemyY": 330.31,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 925598473,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.183,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 152.69,
+          "enemyY": 323.91,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 10852263,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    },
+    {
+      "stage": 31,
+      "id": 372665405,
+      "contactFrame": 519,
+      "graphicsTheme": "aurora-crown",
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 31,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386107,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "visualAtmosphere": {
+        "id": "aurora-crown",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-crown",
+        "starfield": {
+          "id": "aurora-crown-stars",
+          "count": 84,
+          "alphaMin": 0.3,
+          "alphaMax": 0.68
+        }
+      },
+      "firstContactFrame": 519,
+      "captures": [
+        {
+          "frame": 515,
+          "offset": -4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.6,
+            "stageClock": 8.6,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.4,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.41943333333349,
+            "phase": "exit",
+            "x": 148.13677215521952,
+            "y": 312.19989822091213,
+            "preBiasY": 264.19989822091213,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-515.png",
+          "sha256": "4a78a20d57ac38b69ab9f4c395e103536023512e59fa52f93108676ba27ea00a"
+        },
+        {
+          "frame": 517,
+          "offset": -2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.633,
+            "stageClock": 8.633,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.367,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.47740000000016,
+            "phase": "exit",
+            "x": 146.53784730745826,
+            "y": 318.2749156298675,
+            "preBiasY": 270.2749156298675,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-517.png",
+          "sha256": "f77109cce39aa1466d4b26c564060fdaa796f61f534b2d67ddb67468c8583bdd"
+        },
+        {
+          "frame": 519,
+          "offset": 0,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.667,
+            "stageClock": 8.667,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.333,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.535366666666828,
+            "phase": "exit",
+            "x": 144.93892245969704,
+            "y": 324.349933038823,
+            "preBiasY": 276.349933038823,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-519.png",
+          "sha256": "49572061e8a8443a36ce84eb6b73e03ff4502b73f8e687745428b22960300d7c"
+        },
+        {
+          "frame": 521,
+          "offset": 2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.7,
+            "stageClock": 8.7,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.3,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.593333333333497,
+            "phase": "exit",
+            "x": 143.33999761193576,
+            "y": 330.42495044777843,
+            "preBiasY": 282.42495044777843,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-521.png",
+          "sha256": "4cb7eb2755aa76da6aef44706a9cad4307ee7ffa9b22b467a0e7a28b8539e60c"
+        },
+        {
+          "frame": 523,
+          "offset": 4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.733,
+            "stageClock": 8.733,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.267,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.651300000000166,
+            "phase": "exit",
+            "x": 141.74107276417448,
+            "y": 336.4999678567339,
+            "preBiasY": 288.4999678567339,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-523.png",
+          "sha256": "11ad7e18cc346a89e26d943127fabcbcbe4eae5c43b51d5748c991ac55fe8c49"
+        },
+        {
+          "frame": 525,
+          "offset": 6,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.767,
+            "stageClock": 8.767,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.233,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.709266666666835,
+            "phase": "exit",
+            "x": 140.14214791641322,
+            "y": 342.5749852656894,
+            "preBiasY": 294.5749852656894,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-525.png",
+          "sha256": "26c095e8ab63eec7db7832a9621887452cd537f5a87a38058f955665e558522d"
+        },
+        {
+          "frame": 527,
+          "offset": 8,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 31,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 8.8,
+            "stageClock": 8.8,
+            "rngState": 496386107,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 90.2,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 19,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 372665405,
+            "wave": 1,
+            "lane": 7,
+            "pathFamily": "green-ladder-split",
+            "spawn": -0.003333333333331367,
+            "u": 11.767233333333504,
+            "phase": "exit",
+            "x": 138.54322306865197,
+            "y": 348.65000267464484,
+            "preBiasY": 300.65000267464484,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 1,
+              "pulseY": 1,
+              "entryX": 1,
+              "entryY": 1,
+              "weave": 1.22,
+              "steer": 1,
+              "jitter": 1,
+              "diveVy": 1,
+              "diveAccel": 1,
+              "challengeSweep": 1.32,
+              "challengeDrop": 1.08
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-31-frame-527.png",
+          "sha256": "3bc332570bc39b12ed24d157b4811a903a3ef8172b2f62c458c36ab8acb8bbe7"
+        }
+      ],
+      "contacts": [
+        {
+          "t": 7.967,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 139.77,
+          "enemyY": 324.33,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 51406268,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 31,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 372665405,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "id": 10852263,
+      "contactFrame": 670,
+      "graphicsTheme": "aurora-crown",
+      "initial": {
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 39,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "watchMode": false,
+        "watchPersona": "",
+        "watchScope": "game",
+        "profile": "crown",
+        "theme": "crown-aurora",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 496386115,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 335,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": null,
+          "demoTargetT": 0
+        },
+        "timers": {
+          "fireCD": 99,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      "visualAtmosphere": {
+        "id": "aurora-crown",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-crown",
+        "overrideThemeId": "aurora-crown",
+        "starfield": {
+          "id": "aurora-crown-stars",
+          "count": 84,
+          "alphaMin": 0.3,
+          "alphaMax": 0.68
+        }
+      },
+      "firstContactFrame": 670,
+      "captures": [
+        {
+          "frame": 666,
+          "offset": -4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.117,
+            "stageClock": 11.117,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.883,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.570000000000052,
+            "phase": "exit",
+            "x": 144.32432628481783,
+            "y": 313.76514990752764,
+            "preBiasY": 265.76514990752764,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-666.png",
+          "sha256": "ff1b7e7a5467d608beaafde19edbc7466d30cc37c40313ebf562e97db6c77d76"
+        },
+        {
+          "frame": 668,
+          "offset": -2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.15,
+            "stageClock": 11.15,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.85,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.629333333333387,
+            "phase": "exit",
+            "x": 148.1803512475563,
+            "y": 318.8571037608983,
+            "preBiasY": 270.8571037608983,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-668.png",
+          "sha256": "ebd37132502a94289ca6dfe43e0af64e747c91237a6948ce95101c2b3e4ab4da"
+        },
+        {
+          "frame": 670,
+          "offset": 0,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.183,
+            "stageClock": 11.183,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.817,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.688666666666721,
+            "phase": "exit",
+            "x": 152.6865315015446,
+            "y": 323.909939172269,
+            "preBiasY": 275.909939172269,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": true,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-670.png",
+          "sha256": "5f7b9f2a0ec1aec84a51ab9f4f8aee67787fd05bc043cfe2071fd515fe717984"
+        },
+        {
+          "frame": 672,
+          "offset": 2,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.217,
+            "stageClock": 11.217,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.783,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 8,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.748000000000056,
+            "phase": "exit",
+            "x": 157.68828128793595,
+            "y": 328.91416568638624,
+            "preBiasY": 280.91416568638624,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-672.png",
+          "sha256": "63d47a62279f6d137fef05e939399a7ebb784dc4fae6bfa1e5a1a5abb7a6c4c3"
+        },
+        {
+          "frame": 674,
+          "offset": 4,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.25,
+            "stageClock": 11.25,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.75,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.807333333333391,
+            "phase": "exit",
+            "x": 163.0190101940874,
+            "y": 333.8612671125679,
+            "preBiasY": 285.8612671125679,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-674.png",
+          "sha256": "87af9c2a09c0f50fc78771c76f0e3515ec0e110f8b7f0dffbb611aafae163fb5"
+        },
+        {
+          "frame": 676,
+          "offset": 6,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.283,
+            "stageClock": 11.283,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.717,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.866666666666726,
+            "phase": "exit",
+            "x": 168.50415863213294,
+            "y": 338.74387221408904,
+            "preBiasY": 290.74387221408904,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-676.png",
+          "sha256": "2c750995b7e34b6e6ec1242c76da51ecc316d46783aaea419facd466213424db"
+        },
+        {
+          "frame": 678,
+          "offset": 8,
+          "snapshot": {
+            "gameKey": "aurora-galactica",
+            "started": true,
+            "paused": false,
+            "attract": {
+              "active": false,
+              "phase": ""
+            },
+            "stage": 39,
+            "score": 0,
+            "lives": 3,
+            "challenge": true,
+            "scriptMode": false,
+            "watchMode": false,
+            "watchPersona": "",
+            "watchScope": "game",
+            "profile": "crown",
+            "theme": "crown-aurora",
+            "simT": 11.317,
+            "stageClock": 11.317,
+            "rngState": 496386115,
+            "playerTwo": {
+              "enabled": false
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "vx": 0,
+              "cd": 0,
+              "inv": 0,
+              "spawn": 0,
+              "dual": false,
+              "captured": false,
+              "pending": false,
+              "hNoShotT": 0,
+              "hDebugT": 0,
+              "demoTargetId": null,
+              "demoTargetT": 0
+            },
+            "timers": {
+              "fireCD": 87.683,
+              "recoverT": 0,
+              "attackGapT": 0,
+              "nextStageT": 0,
+              "postChallengeT": 0,
+              "sequenceT": 0
+            },
+            "counts": {
+              "enemies": 7,
+              "playerBullets": 0,
+              "enemyBullets": 0,
+              "effects": 0,
+              "attackers": 0
+            }
+          },
+          "diagnostic": {
+            "id": 10852263,
+            "wave": 4,
+            "lane": 7,
+            "pathFamily": "blue-purple-finale",
+            "spawn": -0.006666666666655007,
+            "u": 11.92600000000006,
+            "phase": "exit",
+            "x": 173.96542636249478,
+            "y": 343.55590244934075,
+            "preBiasY": 295.55590244934075,
+            "lowerFieldBias": 48,
+            "appliedBias": 48,
+            "family": {
+              "pulseX": 0.9,
+              "pulseY": 0.72,
+              "entryX": 0.88,
+              "entryY": 0.76,
+              "weave": 0.9,
+              "steer": 0.9,
+              "jitter": 0.92,
+              "diveVy": 1.02,
+              "diveAccel": 0.98,
+              "challengeSweep": 0.86,
+              "challengeDrop": 0.95
+            },
+            "enemyHitbox": {
+              "w": 6.84,
+              "h": 5.3999999999999995
+            },
+            "playerHitbox": {
+              "w": 7,
+              "h": 6
+            },
+            "player": {
+              "x": 140,
+              "y": 335,
+              "spawn": 0,
+              "captured": false,
+              "returning": false
+            },
+            "bodyOverlap": false,
+            "sameFrameZeroBiasOverlap": false,
+            "drawnPoseUnion": {
+              "left": -11.4,
+              "top": -7.6,
+              "right": 11.4,
+              "bottom": 7
+            }
+          },
+          "file": "aurora-crown-stage-39-frame-678.png",
+          "sha256": "73656e27d3daf3514b5e2f1f075d4f88f0e465a601921dcfdc87f29cfcc4095a"
+        }
+      ],
+      "contacts": [
+        {
+          "t": 8.133,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.79,
+          "enemyY": 341.65,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 247206774,
+          "enemyType": "bee",
+          "enemyFamily": "stingray",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 8.667,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 144.94,
+          "enemyY": 324.35,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 401784013,
+          "enemyType": "boss",
+          "enemyFamily": "mosquito",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.467,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.93,
+          "enemyY": 327.69,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 973487328,
+          "enemyType": "rogue",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 9.567,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 129.9,
+          "enemyY": 330.56,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 371428430,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 6,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 151.01,
+          "enemyY": 335.63,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 119292102,
+          "enemyType": "bee",
+          "enemyFamily": "galboss",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.15,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 127.33,
+          "enemyY": 330.31,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "id": 925598473,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 4,
+          "dive": 9,
+          "carry": false
+        },
+        {
+          "t": 11.183,
+          "type": "challenge_enemy_contact",
+          "stage": 39,
+          "challenge": 1,
+          "nonLethal": 1,
+          "playerX": 140,
+          "playerY": 335,
+          "playerLane": 5,
+          "enemyX": 152.69,
+          "enemyY": 323.91,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "id": 10852263,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 5,
+          "dive": 9,
+          "carry": false
+        }
+      ]
+    }
+  ]
+}

@@ -328,6 +328,10 @@ function buildDescription(){
     },
     sourceReferenceWindow: {
       sourceVideo: objectTracks.sourceVideo,
+      referenceEvidenceContract: objectTracks.evidenceContract || null,
+      scoreInterpretation: 'heuristic-diagnostic',
+      acceptedFullPathConformance: false,
+      acceptedGroupMappingConformance: false,
       sourceWindowId: objectTracks.sourceWindow?.id || null,
       sourceId: objectTracks.sourceWindow?.sourceId || null,
       sourceStartSeconds: round(objectTracks.sourceStartSeconds, 2),

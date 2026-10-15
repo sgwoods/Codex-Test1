@@ -1,0 +1,31 @@
+{
+  "observed": true,
+  "evidence": "Public top-level HTML is missing generated meta CSP/referrer policy: project-overview-slides.html, releases.html. Manual host-header review also remains required for GitHub Pages.",
+  "details": {
+    "manualReviewRequired": true,
+    "metaPolicyPresent": false,
+    "checkedHtmlFiles": [
+      "application-guide.html",
+      "conformance-dashboard.html",
+      "index.html",
+      "ingestion-dashboard.html",
+      "platinum-guide.html",
+      "player-guide.html",
+      "project-guide.html",
+      "project-overview-slides.html",
+      "public-project-page.html",
+      "release-dashboard.html",
+      "release-notes.html",
+      "releases.html",
+      "white-paper.html"
+    ],
+    "missingCspFiles": [
+      "project-overview-slides.html",
+      "releases.html"
+    ],
+    "missingReferrerFiles": [
+      "project-overview-slides.html",
+      "releases.html"
+    ]
+  }
+}

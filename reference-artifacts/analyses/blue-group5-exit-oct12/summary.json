@@ -1,0 +1,564 @@
+{
+  "verdict": "Bounded functional candidate passes saved-report checks; independent review/lead acceptance pending",
+  "bundles": {
+    "baseline": "cda9e24b6800462f43a03d37637d29852746b85b3757a67a04482d63ddecf8a6",
+    "candidate": "ee8c7c37825a15c47ece7db55f7846811a80c7ac724565e132cb880b5fdbc447"
+  },
+  "sourceHashes": {
+    "00-boot.js": {
+      "baseline": "50588cf75fe7fb02228dcb58a29a2f4bebbc6cb18a89f0a938e26ee0ac615a26",
+      "candidate": "50588cf75fe7fb02228dcb58a29a2f4bebbc6cb18a89f0a938e26ee0ac615a26"
+    },
+    "06-enemy-behavior.js": {
+      "baseline": "86e6734ad04f8147e68f3a08d56c2e1db054c7fca902aa93dce545937854a3b4",
+      "candidate": "1b442dfae869fe3f8a7cc39edaaa2d05860b3a7cdf33c5e796ebae13167ce532"
+    },
+    "10-gameplay.js": {
+      "baseline": "6f7d6ca2a87eb217c6bba5b19f427074a0d2922e8340c860557df96efb37dc88",
+      "candidate": "6f7d6ca2a87eb217c6bba5b19f427074a0d2922e8340c860557df96efb37dc88"
+    }
+  },
+  "reportHashes": {
+    "nofire.json": "1f4532ae4205cf294ecaa8366db7d4a4107dc085770631018e88a7c128b2831e",
+    "pilot-replay.json": "ee2689039384c91d6d94a2054806b340b181f204e79cddf546e09b6291765b61",
+    "lifecycle.json": "804415b650d088fc808e6ead3aa8baaaed5da57fcd607ff813e4a596b98860ae"
+  },
+  "referenceHashes": {
+    "capture-metadata.json": "a10be3cfe7b3d0cc41f0edf52b1da1beb8a1be5b4ba2e073cb7577ff547b001a",
+    "group5-01.png": "4780713d8aee9f9730c93161db3707359e969bcacc364d41b371275eedd05e5c",
+    "group5-02.png": "fda5d475d98d7fa530df8dd625aea62596c51bf2e09b6c15a33b25e25b6dfcec",
+    "settled-01.png": "e5a1ad21af2721e1972834e096bbe088455ec5a66decc73df65bb561f1dbaab9",
+    "settled-02.png": "c6720127c4d0407f76c5d73f175ddd0bf832c4ab65c59818aced0e6248e88cd3",
+    "settled-03.png": "a3c3a6ea3c705c075421a3304fb9d0c5bc01dfc649aee30cb171873d62004b2c",
+    "settled-04.png": "cc0cac4c6fffbb84db57ac261f52f652e0dbc5afafd1781526ab25f3aa790494",
+    "settled-05.png": "43d5a30139c0d9f2b57eb10dd67a8bae8cef81613dabb1a03f1ef45ec6f1e20b",
+    "settled-06.png": "0d1aa916cd5c4165e7823fa4b6af58d84f87f4887b241b08e08ab397d2f83ecf",
+    "settled-07.png": "15934df70d521b517d573aba6b44a3e3ba3a2a25a7f2a7c29b694587f570305c",
+    "settled-08.png": "2a32ec05185c08aff5844410bdfe37fda27e641746f5b53bd9d084c82cc55603"
+  },
+  "excludedReferenceFrames": [
+    "group5-01.png",
+    "group5-02.png"
+  ],
+  "validatorHash": "8cb94b7460363f8b2b6b5af82e0caf94a83978e1bd0003c092336ae2ef88d036",
+  "checks": [
+    {
+      "stage": 3,
+      "preExitExact": 0,
+      "unaffectedExact": 40,
+      "baselineContacts": [
+        16264713,
+        149876999,
+        961053214,
+        741360978,
+        890253568,
+        623029286
+      ],
+      "candidateContacts": [
+        16264713,
+        149876999,
+        961053214,
+        741360978,
+        890253568,
+        623029286
+      ],
+      "baselineClear": 22.8,
+      "candidateClear": 22.8,
+      "dwell": []
+    },
+    {
+      "stage": 31,
+      "preExitExact": 8,
+      "unaffectedExact": 32,
+      "baselineContacts": [
+        942182592,
+        709114509
+      ],
+      "candidateContacts": [],
+      "baselineClear": 22.083,
+      "candidateClear": 21.4,
+      "dwell": [
+        {
+          "id": 81344958,
+          "baselineFullSeconds": 6.15,
+          "candidateFullSeconds": 5.316666666666666
+        },
+        {
+          "id": 130880279,
+          "baselineFullSeconds": 5.2,
+          "candidateFullSeconds": 4.483333333333333
+        },
+        {
+          "id": 457557075,
+          "baselineFullSeconds": 5.266666666666667,
+          "candidateFullSeconds": 4.383333333333334
+        },
+        {
+          "id": 467592646,
+          "baselineFullSeconds": 4.25,
+          "candidateFullSeconds": 4.066666666666666
+        },
+        {
+          "id": 8900304,
+          "baselineFullSeconds": 5.85,
+          "candidateFullSeconds": 5.316666666666666
+        },
+        {
+          "id": 942182592,
+          "baselineFullSeconds": 5.583333333333333,
+          "candidateFullSeconds": 4.883333333333334
+        },
+        {
+          "id": 42471394,
+          "baselineFullSeconds": 5.366666666666666,
+          "candidateFullSeconds": 4.25
+        },
+        {
+          "id": 709114509,
+          "baselineFullSeconds": 4.933333333333334,
+          "candidateFullSeconds": 4.1
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "preExitExact": 0,
+      "unaffectedExact": 40,
+      "baselineContacts": [
+        287155051,
+        571262010,
+        305218756
+      ],
+      "candidateContacts": [
+        287155051,
+        571262010,
+        305218756
+      ],
+      "baselineClear": 11.733,
+      "candidateClear": 11.733,
+      "dwell": []
+    },
+    {
+      "stage": 39,
+      "preExitExact": 0,
+      "unaffectedExact": 40,
+      "baselineContacts": [
+        247206774,
+        401784013,
+        973487328,
+        371428430,
+        119292102,
+        925598473,
+        10852263
+      ],
+      "candidateContacts": [
+        247206774,
+        401784013,
+        973487328,
+        371428430,
+        119292102,
+        925598473,
+        10852263
+      ],
+      "baselineClear": 11.717,
+      "candidateClear": 11.717,
+      "dwell": []
+    }
+  ],
+  "metrics": [
+    {
+      "id": 81344958,
+      "anchor": {
+        "t": 20.183,
+        "u": 9.671333333333338,
+        "x": 107.84,
+        "y": 230.48,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -37.07865168539215,
+        "dy": 45.84269662921186
+      },
+      "joinStep": 1.951614716074895,
+      "maxExitStep": 3.7040113390755165,
+      "maxY": 277.34,
+      "conservativeRowGap": 44.08000000000004,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 298.5491235955054,
+      "last": {
+        "t": 20.983,
+        "u": 11.095333333333373,
+        "x": -53.08,
+        "y": 277.34,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 130880279,
+      "anchor": {
+        "t": 20.267,
+        "u": 9.671333333333338,
+        "x": 16.54,
+        "y": 224.42,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": 103.14606741572776,
+        "dy": 17.865168539325442
+      },
+      "joinStep": 2.40243626346258,
+      "maxExitStep": 3.6944553049130247,
+      "maxY": 255.84,
+      "conservativeRowGap": 65.58000000000001,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 294.58582022471904,
+      "last": {
+        "t": 20.717,
+        "u": 10.472333333333358,
+        "x": -52.84,
+        "y": 255.84,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 457557075,
+      "anchor": {
+        "t": 20.333,
+        "u": 9.671333333333338,
+        "x": -36.3,
+        "y": 265.8,
+        "phase": "middle",
+        "full": false,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -26.629213483145385,
+        "dy": 6.067415730337159
+      },
+      "joinStep": 1.1356495938448634,
+      "maxExitStep": 3.0555523232306108,
+      "maxY": 268.99,
+      "conservativeRowGap": 52.43000000000001,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 297.30808988764045,
+      "last": {
+        "t": 20.45,
+        "u": 9.87900000000001,
+        "x": -52.01,
+        "y": 268.99,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 467592646,
+      "anchor": {
+        "t": 20.4,
+        "u": 9.671333333333338,
+        "x": 59.97,
+        "y": 272.44,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": 40.78651685393161,
+        "dy": 52.92134831460521
+      },
+      "joinStep": 1.6022484201895613,
+      "maxExitStep": 3.577163680906986,
+      "maxY": 292.53,
+      "conservativeRowGap": 28.890000000000043,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 303.59456179775265,
+      "last": {
+        "t": 21.017,
+        "u": 10.769000000000032,
+        "x": -52.48,
+        "y": 292.53,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 8900304,
+      "anchor": {
+        "t": 20.183,
+        "u": 9.671333333333338,
+        "x": 97.36,
+        "y": 232.04,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -56.29213483145935,
+        "dy": 3.370786516853658
+      },
+      "joinStep": 1.1132385189167693,
+      "maxExitStep": 3.6723425766123903,
+      "maxY": 282.17,
+      "conservativeRowGap": 39.25,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 293.60849438202246,
+      "last": {
+        "t": 21.383,
+        "u": 11.807333333333391,
+        "x": 332.5,
+        "y": 282.17,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 942182592,
+      "anchor": {
+        "t": 20.267,
+        "u": 9.671333333333338,
+        "x": 132.88,
+        "y": 253.09,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -96.40449438202056,
+        "dy": 13.483146067415591
+      },
+      "joinStep": 2.183414756751445,
+      "maxExitStep": 3.6085592692929485,
+      "maxY": 287.07,
+      "conservativeRowGap": 34.35000000000002,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 296.9269775280899,
+      "last": {
+        "t": 21.317,
+        "u": 11.540333333333384,
+        "x": 331.19,
+        "y": 287.07,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 42471394,
+      "anchor": {
+        "t": 20.333,
+        "u": 9.671333333333338,
+        "x": 236.29,
+        "y": 268.24,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -34.382022471909615,
+        "dy": 50.56179775280775
+      },
+      "joinStep": 1.5088074761214685,
+      "maxExitStep": 3.583531777450842,
+      "maxY": 288.51,
+      "conservativeRowGap": 32.910000000000025,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 302.8914157303369,
+      "last": {
+        "t": 20.867,
+        "u": 10.620666666666695,
+        "x": 331.66,
+        "y": 288.51,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    },
+    {
+      "id": 709114509,
+      "anchor": {
+        "t": 20.4,
+        "u": 9.671333333333338,
+        "x": 175.02,
+        "y": 292.71,
+        "phase": "middle",
+        "full": true,
+        "overlap": false
+      },
+      "initialDerivative": {
+        "dx": -106.1797752808955,
+        "dy": 22.247191011234335
+      },
+      "joinStep": 2.4569289774025074,
+      "maxExitStep": 3.5611374587342204,
+      "maxY": 299.94,
+      "conservativeRowGap": 21.480000000000018,
+      "nominalHeight": 300,
+      "approximateAnalyticAsymptote": 301.9406629213481,
+      "last": {
+        "t": 21.267,
+        "u": 11.214000000000043,
+        "x": 333.01,
+        "y": 299.94,
+        "phase": "exit",
+        "full": false,
+        "overlap": false
+      }
+    }
+  ],
+  "pilot": {
+    "baselineKills": 37,
+    "candidateKills": 37,
+    "gained": [],
+    "lost": [],
+    "witnesses": [
+      {
+        "id": 51406268,
+        "baseline": {
+          "t": 2.683,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 51406268,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "carry": false
+        },
+        "candidate": {
+          "t": 2.683,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 51406268,
+          "enemyType": "but",
+          "enemyFamily": "stingray",
+          "column": 4,
+          "row": 0,
+          "lane": 5,
+          "carry": false
+        }
+      },
+      {
+        "id": 942182592,
+        "baseline": {
+          "t": 16.033,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 942182592,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 6,
+          "carry": false
+        },
+        "candidate": {
+          "t": 16.033,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 942182592,
+          "enemyType": "rogue",
+          "enemyFamily": "galboss",
+          "column": 5,
+          "row": 0,
+          "lane": 6,
+          "carry": false
+        }
+      },
+      {
+        "id": 709114509,
+        "baseline": {
+          "t": 15.9,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 709114509,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 7,
+          "carry": false
+        },
+        "candidate": {
+          "t": 15.9,
+          "type": "enemy_killed",
+          "points": 100,
+          "dive": 9,
+          "challenge": 1,
+          "rescued": 0,
+          "turnedHostile": 0,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "id": 709114509,
+          "enemyType": "boss",
+          "enemyFamily": "galboss",
+          "column": 7,
+          "row": 0,
+          "lane": 7,
+          "carry": false
+        }
+      }
+    ]
+  },
+  "orderedEventsExact": true,
+  "projectionExact": true,
+  "lifecycle": {
+    "baseline": {
+      "clear": 22.1,
+      "spawn": 26.533,
+      "cadence": 4.433
+    },
+    "candidate": {
+      "clear": 21.417,
+      "spawn": 25.85,
+      "cadence": 4.433
+    }
+  },
+  "limitations": [
+    "One seed per stage, controlled60Hz; no wallclock, beta, canonical pixel, all-route or perfect feasibility acceptance.",
+    "Sparse reference has firing censorship, unknown original settings, no individual target correspondence; disputed group5-01/02 excluded.",
+    "300 is nominal, not exact endpoint/asymptote. Derivatives/analytic estimates use rounded persisted positions.",
+    "Conservative estimated sprite union/row bounds are not exhaustive pixel/rotation clearance proof. Rendered PNGs require independent inspection.",
+    "Full-view losses are disclosed; one saved37/40 route cannot prove every later opportunity remains."
+  ]
+}

@@ -1,0 +1,119 @@
+diff --git a/tools/harness/trace-shot-interception.js b/tools/harness/trace-shot-interception.js
+new file mode 100644
+index 00000000..6c4a68a0
+--- /dev/null
++++ b/tools/harness/trace-shot-interception.js
+@@ -0,0 +1,113 @@
++#!/usr/bin/env node
++const fs = require('fs');
++const path = require('path');
++const assert = require('assert/strict');
++const crypto = require('crypto');
++const { withHarnessPage } = require('./browser-check-util');
++const ROOT = path.resolve(__dirname, '../..');
++const LEAD = '<workspace>';
++const RETAINED = '/private/tmp/aurora-stage31-exit-trial-oct08/dist/dev';
++const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
++async function main(){
++  const out = path.join(ROOT, 'reference-artifacts/analyses/shot-interception-oct11');
++  fs.mkdirSync(out, { recursive: true });
++  const patch = fs.readFileSync(path.join(LEAD, 'reference-artifacts/analyses/green-exit-trial-oct11/candidate.patch'), 'utf8');
++  const baselineSource = fs.readFileSync(path.join(ROOT, 'src/js/06-enemy-behavior.js'), 'utf8');
++  const additions = patch.split('\n').filter(line => line.startsWith('+') && !line.startsWith('+++')).map(line => line.slice(1));
++  const first = additions[0] + '\n';
++  const block = additions.slice(1).join('\n') + '\n';
++  const candidateSource = baselineSource.replace('\t const entryDuration=', first + '\t const entryDuration=')
++    .replace(' if(e.y<=enemyChallengeUpperBandY(e)){', block + ' if(e.y<=enemyChallengeUpperBandY(e)){');
++  assert.equal(sha(candidateSource), '9472948c0959952d1f79d2a3f6998f94081a29054f7b7a06ed3f4739f7301c88');
++  const original = fs.readFileSync(path.join(RETAINED, 'index.html'), 'utf8');
++  assert.equal(sha(original), '98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba');
++  assert.equal(original.split(candidateSource).length, 2, 'Exact candidate source must occur once');
++  const traceScenario = launchFrame => {
++          const h = window.__galagaHarness__, targetId = 372665405, records = [];
++          const realResolve = resolvePlayerBulletHit, realPredicate = segmentHitsTarget;
++          let active = null;
++          segmentHitsTarget = function(...args){
++            const hit = realPredicate(...args);
++            if(active)active.actualPredicates.push({ args: args.slice(1), hit });
++            return hit;
++          };
++          resolvePlayerBulletHit = function(state, i, seg){
++            const intended = state.e.find(e => e.id === targetId);
++            const alive = state.e.filter(e => e.hp > 0);
++            const rows = alive.map((e, order) => {
++              const box = enemyHitbox(e), cf = carriedFighterTarget(e);
++              return { id: e.id, order, x: e.x, y: e.y, hp: e.hp, box,
++                carrySkip: !!(e.carry && seg.top >= e.y + 8),
++                bodyHit: realPredicate(seg, e.x, e.y, box.w, box.h),
++                carriedHit: !!(cf && realPredicate(seg, cf.x, cf.y, cf.w, cf.h)) };
++            });
++            const record = { t: state.simT, segment: { ...seg }, rows,
++              intended: intended ? { x: intended.x, y: intended.y, hp: intended.hp } : null,
++              intendedOrder: rows.findIndex(e => e.id === targetId), actualPredicates: [] };
++            active = record;
++            let resolved;
++            try{ resolved = realResolve(state, i, seg); }
++            finally{ active = null; }
++            record.resolved = resolved;
++            const selected = rows.find(e => e.carriedHit || (!e.carrySkip && e.bodyHit));
++            record.expectedFirstId = selected?.id ?? null;
++            record.hpChangedIds = rows.filter(row => state.e.find(e => e.id === row.id)?.hp !== row.hp).map(row => row.id);
++            records.push(record);
++            return resolved;
++          };
++          h.start({ controlledClock: true, stageMode: 'display', startKind: 'challenge',
++            challengeStage: 8, stage: 31, ships: 3, persona: null, expertPlays: 'human',
++            playerTwo: false, autoVideo: false, seed: 9131 });
++          for(let frame = 0; frame < launchFrame; frame++)h.advanceFor(1/60, { step: 1/60 });
++          const before = h.snapshot();
++          window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', key: ' ', bubbles: true }));
++          h.advanceFor(1/60, { step: 1/60 });
++          window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', key: ' ', bubbles: true }));
++          for(let frame = 0; frame < 90 && h.snapshot().counts.playerBullets; frame++)h.advanceFor(1/60, { step: 1/60 });
++          return { launchFrame, before, final: h.snapshot(), records,
++            events: h.recentEvents({ count: 200 }) };
++  };
++  const variants = { baseline: original.replace(candidateSource, baselineSource), candidate: original };
++  const results = [];
++  for(const [variant, html] of Object.entries(variants)){
++    const root = path.join(out, variant);
++    fs.cpSync(RETAINED, root, { recursive: true });
++    const instrumented = html.replace('window.__galagaHarness__={',
++      'window.__shotTrace=' + traceScenario.toString() + ';\nwindow.__galagaHarness__={');
++    assert.notEqual(instrumented, html);
++    fs.writeFileSync(path.join(root, 'index.html'), instrumented);
++    for(const launchFrame of [672, 678, 684]){
++      const trial = await withHarnessPage({ root, skipStart: true }, async ({ page, context }) => {
++        await context.route('**/*', route => {
++          const url = new URL(route.request().url());
++          return ['127.0.0.1', 'localhost'].includes(url.hostname) ? route.continue() : route.abort();
++        });
++        return page.evaluate(launchFrame => window.__shotTrace(launchFrame), launchFrame);
++      });
++      const shots = trial.events.filter(e => e.type === 'player_shot');
++      assert.equal(shots.length, 1); assert.equal(shots[0].shots, 1);
++      assert.equal(trial.final.counts.playerBullets, 0);
++      for(const r of trial.records){
++        assert.equal(r.resolved, r.expectedFirstId !== null);
++        if(r.resolved){
++          assert.equal(r.actualPredicates.at(-1).hit, true);
++          assert.deepEqual(r.hpChangedIds, [r.expectedFirstId]);
++        }else assert(r.actualPredicates.every(p => !p.hit));
++      }
++      results.push({ variant, inputBundleHash: sha(html), instrumentedBundleHash: sha(instrumented), sourceHash: sha(variant === 'baseline' ? baselineSource : candidateSource), ...trial });
++    }
++    assert.equal(sha(fs.readFileSync(path.join(root, 'index.html'))), sha(instrumented));
++  }
++  const report = { baseline: 'cf0e7a666067ede385865ba02e73d1454eb132d1',
++    methodHash: sha(fs.readFileSync(__filename)), patchHash: sha(patch), results,
++    limitations: ['Three center shots per variant, one seed; not routeability or impossibility.',
++      'Baseline HTML reconstructed by exact candidate-source reversal; retained metadata describes the candidate build, not a fresh baseline build.',
++      'Function wrappers only; original predicate and resolver perform gameplay mutations unchanged.',
++      'External requests blocked after boot; no account operations performed.'] };
++  fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2) + '\n');
++  console.log(JSON.stringify({ out, results: results.map(t => ({ variant: t.variant, time: t.before.simT,
++    chosen: t.records.filter(r => r.resolved).map(r => r.expectedFirstId),
++    intendedIntersections: t.records.filter(r => r.rows.some(e => e.id === 372665405 && e.bodyHit)).length,
++    segments: t.records.length })) }, null, 2));
++}
++main().catch(error => { console.error(error); process.exitCode = 1; });

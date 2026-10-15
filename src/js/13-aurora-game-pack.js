@@ -138,12 +138,10 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  resultHoldWindow:4.25,
-  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  resultBannerWindow:4.25,
-  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
-  nextStageWindow:7.35,
-  nextCueLeadBeforeSpawn:3.15,
+  resultHoldWindow:1.45,
+  resultBannerWindow:1.15,
+  nextStageWindow:2.95,
+  nextCueLeadBeforeSpawn:1.55,
   cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
@@ -245,7 +243,7 @@ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-s
   cooldownMs:2400,
   clipStart:0,
   clipDuration:3.35,
-  stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect'])
+  stopCueNames:Object.freeze(['stagePulse'])
  }),
  attractEnter:Object.freeze({
   byPhase:Object.freeze({
@@ -1066,8 +1064,13 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
 const AURORA_CHALLENGE_LAYOUT=AURORA_CHALLENGE_LAYOUTS[0];
 
 const AURORA_CHALLENGE_DEFAULT_LAYOUT=AURORA_CHALLENGE_LAYOUT;
+const AURORA_CHALLENGE_STAGE31_LAYOUT=Object.freeze({
+ ...AURORA_CHALLENGE_LAYOUTS[AURORA_CHALLENGE_LAYOUTS.length-1],
+ groupSpawnOffsets:Object.freeze([0,3.593,7.137,9.997,13.79])
+});
 
 function auroraChallengeLayoutForStage(stage){
+ if(stage===31)return AURORA_CHALLENGE_STAGE31_LAYOUT;
  let layout=AURORA_CHALLENGE_DEFAULT_LAYOUT;
  for(const candidate of AURORA_CHALLENGE_LAYOUTS){
   if(stage>=candidate.fromStage)layout=candidate;

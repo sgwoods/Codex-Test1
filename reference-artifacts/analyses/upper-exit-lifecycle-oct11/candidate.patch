@@ -1,0 +1,68 @@
+diff --git a/src/js/06-enemy-behavior.js b/src/js/06-enemy-behavior.js
+index 6c507a07..2fe54138 100644
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -387,6 +387,7 @@ function updateChallengeEnemy(state,e,dt){
+ 		 e.tm+=dt*pathTimeSpeed;
+ 		 e.referenceLeadIn=0;
+ 		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
++ const previousGreenExitPose=e.stage31GreenExitPose;
+ 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
+ 	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+ 	 if(u<entryDuration){
+@@ -646,6 +647,19 @@ function updateChallengeEnemy(state,e,dt){
+   const lowerQ=cl((u-2.4)/8.8,0,1);
+   e.y+=lowerFieldBias*lowerQ*lowerQ;
+  }
++ // Experimental measured-direction departure, restricted to one Stage 31 family.
++ if(S.stage===31&&pathFamily==='green-ladder-split'){
++  if(u<9.7){
++   e.stage31GreenExitPose={x:e.x,y:e.y,u,
++    dx:previousGreenExitPose?(e.x-previousGreenExitPose.x)/(u-previousGreenExitPose.u):0,
++    dy:previousGreenExitPose?(e.y-previousGreenExitPose.y)/(u-previousGreenExitPose.u):0};
++  }else if(previousGreenExitPose){
++   const elapsed=u-previousGreenExitPose.u;
++   const ease=.35*(1-Math.exp(-elapsed/.35));
++   e.x=previousGreenExitPose.x+3*elapsed+(previousGreenExitPose.dx-3)*ease;
++   e.y=previousGreenExitPose.y-30*elapsed+(previousGreenExitPose.dy+30)*ease;
++  }
++ }
+  if(e.y<=enemyChallengeUpperBandY(e)){
+   e.ub+=dt;
+   if(S.ch){
+@@ -654,7 +668,9 @@ function updateChallengeEnemy(state,e,dt){
+   }
+  }
+  // Entry curves may begin outside the exit-removal boundary.
+- if(e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
++ const stage31GreenUpperExit=S.stage===31&&pathFamily==='green-ladder-split'
++  &&u>=9.7&&!!previousGreenExitPose&&Math.round(e.y)+enemyDims(e).h<0;
++ if(stage31GreenUpperExit||e.y>PLAY_H+34||(u>=entryDuration&&(e.x<-54||e.x>PLAY_W+54))){
+   e.hp=0;
+   e.miss=1;
+  }
+diff --git a/tools/harness/diagnose-late-challenge-contacts.js b/tools/harness/diagnose-late-challenge-contacts.js
+index bba9ab6e..8897c750 100644
+--- a/tools/harness/diagnose-late-challenge-contacts.js
++++ b/tools/harness/diagnose-late-challenge-contacts.js
+@@ -11,7 +11,7 @@ async function main(){
+   const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
+   const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+   const results = [];
+-  for(const stage of [31, 35, 39]){
++  for(const stage of (process.env.AURORA_UPPER_EXIT_STAGE31_ONLY === '1' ? [31] : [31, 35, 39])){
+     results.push(await withHarnessPage({ skipStart: true, stage }, async ({ page }) => page.evaluate(stage => {
+       const h = window.__galagaHarness__;
+       h.start({ controlledClock: true, stageMode: 'display', startKind: 'challenge',
+@@ -57,7 +57,10 @@ async function main(){
+         }
+         if(!formation.enemies.length){ completed = true; break; }
+       }
+-      return { stage, initial, final: h.snapshot(), completed, maximumEnemyBullets,
++      return { stage, initial, final: h.snapshot(), completed,
++        remainingTargets: h.challengeFormationState().enemies,
++        clearEvents: h.recentEvents({ count: 200 }).filter(e => e.type === 'challenge_clear'),
++        maximumEnemyBullets,
+         maximumAttackers, contacts: [...contacts.values()], samples,
+         targets: [...rows.values()].map(({ previous, currentFullFrames, bounds, ...row }) => ({ ...row,
+           fullSeconds: row.fullFrames / 60, longestFullSeconds: row.longestFullFrames / 60 })) };

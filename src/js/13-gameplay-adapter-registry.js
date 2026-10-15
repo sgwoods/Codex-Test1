@@ -17,9 +17,28 @@ function createAuroraGameplayAdapterState(opts={}){
  return state;
 }
 
-function startAuroraGameplayAdapter(){
+function startAuroraGameplayAdapter(cfg={}){
+ const trial=cfg.challengeScheduleTrial;
+ if(trial!==undefined){
+  const channel=typeof BUILD_INFO!=='undefined'?String(BUILD_INFO.releaseChannel||'').toLowerCase():'';
+  const launch=window.__platinumHarnessLaunchCfg;
+  const offsets=trial?.groupSpawnOffsets;
+  if(channel!=='development'||launch?.challengeScheduleTrial!==trial||
+   trial?.stage!==31||cfg.stage!==31||cfg.stageMode!=='display'||cfg.startKind!=='challenge'||cfg.challengeStage!==8||
+   !Array.isArray(offsets)||offsets.length!==5||offsets.some(value=>!Number.isFinite(value)||value<0||value>30)){
+   throw new Error('Challenge schedule trial requires a valid development harness Stage 31 launch.');
+  }
+ }
  const state=createAuroraGameplayAdapterState();
- return startAuroraGameplay(state);
+ if(trial)state.harnessChallengeLayoutOverride={stage:31,layout:{groupSpawnOffsets:[...trial.groupSpawnOffsets]}};
+ try{
+  const result=startAuroraGameplay(state);
+  if(trial)state.harnessChallengeLayoutSnapshot=currentGamePackChallengeLayout(state.stage);
+  return result;
+ }
+ finally{
+  if(trial)state.harnessChallengeLayoutOverride=null;
+ }
 }
 
 function updateAuroraGameplayAdapter(dt,input={}){

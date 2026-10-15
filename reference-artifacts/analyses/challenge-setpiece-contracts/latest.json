@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-setpiece-contracts",
-  "generatedAt": "2026-06-12T11:23:00.115Z",
-  "commit": "dab57ac7",
-  "branch": "main",
+  "generatedAt": "2026-10-15T02:34:59.236Z",
+  "commit": "f8c1b48d",
+  "branch": "codex/oct03-local-integration",
   "gameKey": "aurora-galactica",
   "sourceArtifacts": {
     "challengeTrajectoryControls": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
@@ -15,11 +15,11 @@
     "expectedGroupCount": 40,
     "referenceBackedGroupCount": 40,
     "averageCurrentScore10": 4.3,
-    "averageMovementScore10": 4.4,
+    "averageMovementScore10": 4.3,
     "averageGraphicsScore10": 4.5,
     "averageNoveltyScore10": 3.9,
-    "averageTargetContractFitScore10": 5.3,
-    "averageTargetVideoObjectTrackFitScore10": 3.5,
+    "averageTargetContractFitScore10": 5.4,
+    "averageTargetVideoObjectTrackFitScore10": 3.6,
     "challengeSpecialtyAuthorityScore10": 3.2,
     "releaseReadyCount": 0,
     "highestPriorityStages": [
@@ -541,16 +541,16 @@
         "averageLowerFieldShare": 0.729
       },
       "runtimeRead": {
-        "currentScore10": 4.2,
+        "currentScore10": 4.3,
         "movementScore10": 4.3,
-        "graphicsScore10": 4.6,
+        "graphicsScore10": 4.7,
         "alienNoveltyScore10": 3.9,
-        "shotOpportunityScore10": 5.2,
-        "targetContractFitScore10": 4.4,
-        "targetVideoObjectTrackFitScore10": 3.4,
+        "shotOpportunityScore10": 5.6,
+        "targetContractFitScore10": 4.7,
+        "targetVideoObjectTrackFitScore10": 3.7,
         "safetyPass": true,
         "bestReferenceMatch": "challenge-4-pink-serpentine-group-1",
-        "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.2/10, target-contract fit 4.4/10."
+        "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 4.7/10."
       },
       "targetAuthority": {
         "roleKey": "challenge-specialty-aliens",
@@ -569,7 +569,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Target-contract fit is only 4.4/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 4.7/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity."
       ],
       "nextActions": [
@@ -681,12 +681,12 @@
         "movementScore10": 4.6,
         "graphicsScore10": 4.7,
         "alienNoveltyScore10": 3.9,
-        "shotOpportunityScore10": 5.2,
-        "targetContractFitScore10": 3.9,
-        "targetVideoObjectTrackFitScore10": 2.7,
+        "shotOpportunityScore10": 5.4,
+        "targetContractFitScore10": 4.1,
+        "targetVideoObjectTrackFitScore10": 3,
         "safetyPass": true,
-        "bestReferenceMatch": "challenge-5-pink-green-cascade-group-2",
-        "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.2/10, target-contract fit 3.9/10."
+        "bestReferenceMatch": "challenge-5-pink-green-cascade-group-5",
+        "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.4/10, target-contract fit 4.1/10."
       },
       "targetAuthority": {
         "roleKey": "challenge-specialty-aliens",
@@ -705,7 +705,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Target-contract fit is only 3.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 4.1/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability."
       ],
       "nextActions": [
@@ -817,12 +817,12 @@
         "movementScore10": 4.3,
         "graphicsScore10": 4.5,
         "alienNoveltyScore10": 3.9,
-        "shotOpportunityScore10": 5.5,
+        "shotOpportunityScore10": 5.7,
         "targetContractFitScore10": 4.6,
-        "targetVideoObjectTrackFitScore10": 3.6,
+        "targetVideoObjectTrackFitScore10": 3.7,
         "safetyPass": true,
         "bestReferenceMatch": "challenge-6-green-ladder-split-group-1",
-        "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.3/10, graphics 4.5/10, alien novelty 3.9/10, shot opportunity 5.5/10, target-contract fit 4.6/10."
+        "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.3/10, graphics 4.5/10, alien novelty 3.9/10, shot opportunity 5.7/10, target-contract fit 4.6/10."
       },
       "targetAuthority": {
         "roleKey": "challenge-specialty-aliens",
@@ -950,15 +950,15 @@
       },
       "runtimeRead": {
         "currentScore10": 4.2,
-        "movementScore10": 4.5,
+        "movementScore10": 4.2,
         "graphicsScore10": 4.6,
         "alienNoveltyScore10": 3.9,
-        "shotOpportunityScore10": 5.1,
-        "targetContractFitScore10": 4.2,
-        "targetVideoObjectTrackFitScore10": 3.2,
+        "shotOpportunityScore10": 5.6,
+        "targetContractFitScore10": 3.9,
+        "targetVideoObjectTrackFitScore10": 2.6,
         "safetyPass": true,
-        "bestReferenceMatch": "challenge-7-yellow-diagonal-fan-group-5",
-        "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.5/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.1/10, target-contract fit 4.2/10."
+        "bestReferenceMatch": "challenge-7-yellow-diagonal-fan-group-4",
+        "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.2/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 3.9/10."
       },
       "targetAuthority": {
         "roleKey": "challenge-specialty-aliens",
@@ -977,7 +977,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 3.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing."
       ],
       "nextActions": [
@@ -1009,91 +1009,91 @@
           {
             "groupIndex": 1,
             "pathFamily": "blue-purple-finale",
-            "spawnOffsetS": 1,
-            "durationS": 2,
-            "speedScale": 3.4,
-            "arcAmp": 1.59,
-            "dropAmp": 1.22,
+            "spawnOffsetS": 0,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "arcAmp": 1.66,
+            "dropAmp": 1.55,
             "lowerFieldBias": 0,
             "yOffset": 0,
-            "referencePathId": "target-track-7",
-            "targetTrackConfidence": 0.697,
-            "controlIntent": "blue-purple-compact-capstone"
+            "referencePathId": "target-track-20",
+            "targetTrackConfidence": 0.734,
+            "controlIntent": "blue-purple-finale-weave"
           },
           {
             "groupIndex": 2,
             "pathFamily": "blue-purple-finale",
-            "spawnOffsetS": 2.38,
-            "durationS": 2.87,
-            "speedScale": 2.86,
-            "arcAmp": 1.67,
-            "dropAmp": 1.57,
-            "lowerFieldBias": 106,
-            "yOffset": 34,
-            "referencePathId": "target-track-23",
-            "targetTrackConfidence": 0.655,
-            "controlIntent": "blue-purple-finale-weave"
-          },
-          {
-            "groupIndex": 3,
-            "pathFamily": "blue-purple-finale",
-            "spawnOffsetS": 5.38,
+            "spawnOffsetS": 4.38,
             "durationS": 4.75,
             "speedScale": 1.73,
             "arcAmp": 1.84,
             "dropAmp": 1.4,
             "lowerFieldBias": 177,
             "yOffset": 68,
-            "referencePathId": "target-track-45",
+            "referencePathId": "target-track-42",
             "targetTrackConfidence": 0.75,
+            "controlIntent": "blue-purple-finale-weave"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 9.75,
+            "durationS": 2.5,
+            "speedScale": 3.28,
+            "arcAmp": 1.58,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-71",
+            "targetTrackConfidence": 0.719,
             "controlIntent": "blue-purple-finale-weave"
           },
           {
             "groupIndex": 4,
             "pathFamily": "blue-purple-finale",
-            "spawnOffsetS": 10.75,
-            "durationS": 4.63,
-            "speedScale": 1.77,
-            "arcAmp": 1.6,
-            "dropAmp": 1.57,
-            "lowerFieldBias": 17,
-            "yOffset": 0,
-            "referencePathId": "target-track-89",
-            "targetTrackConfidence": 0.73,
-            "controlIntent": "blue-purple-finale-weave"
+            "spawnOffsetS": 11.75,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "arcAmp": 1.25,
+            "dropAmp": 1.49,
+            "lowerFieldBias": 147,
+            "yOffset": 54,
+            "referencePathId": "target-track-86",
+            "targetTrackConfidence": 0.744,
+            "controlIntent": "blue-purple-compact-capstone"
           },
           {
             "groupIndex": 5,
             "pathFamily": "blue-purple-finale",
-            "spawnOffsetS": 13.5,
-            "durationS": 2.38,
-            "speedScale": 3.4,
-            "arcAmp": 1.37,
-            "dropAmp": 1.6,
-            "lowerFieldBias": 28,
+            "spawnOffsetS": 13.88,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "arcAmp": 1.62,
+            "dropAmp": 1.55,
+            "lowerFieldBias": 0,
             "yOffset": 0,
-            "referencePathId": "target-track-93",
-            "targetTrackConfidence": 0.722,
+            "referencePathId": "target-track-116",
+            "targetTrackConfidence": 0.712,
             "controlIntent": "blue-purple-finale-weave"
           }
         ],
         "referencePathCount": 5,
-        "averageTargetConfidence": 0.711,
-        "averageTargetXRange": 0.4429,
-        "averageTargetYRange": 0.5622,
-        "averageLowerFieldShare": 0.4854
+        "averageTargetConfidence": 0.732,
+        "averageTargetXRange": 0.4303,
+        "averageTargetYRange": 0.5937,
+        "averageLowerFieldShare": 0.4912
       },
       "runtimeRead": {
-        "currentScore10": 4.4,
-        "movementScore10": 4.5,
+        "currentScore10": 4.3,
+        "movementScore10": 4.3,
         "graphicsScore10": 4.7,
         "alienNoveltyScore10": 3.9,
-        "shotOpportunityScore10": 5.5,
-        "targetContractFitScore10": 4.2,
-        "targetVideoObjectTrackFitScore10": 3.1,
+        "shotOpportunityScore10": 5.6,
+        "targetContractFitScore10": 4.4,
+        "targetVideoObjectTrackFitScore10": 3.4,
         "safetyPass": true,
         "bestReferenceMatch": "challenge-8-blue-purple-finale-group-4",
-        "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.5/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.5/10, target-contract fit 4.2/10."
+        "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 4.4/10."
       },
       "targetAuthority": {
         "roleKey": "challenge-specialty-aliens",
@@ -1112,7 +1112,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 4.4/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone."
       ],
       "nextActions": [

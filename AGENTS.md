@@ -1,4 +1,10 @@
 # Engineering Instructions
+- Read `ACTIVE_WORK.md` and `AGENT_WORKFLOW.md` before starting a project cycle. Treat dated plans and chat summaries as historical until verified against current source and evidence.
+- Use one Codex lead per cycle. Delegate independent research, exploration, and review to subagents when available; report unavailable delegation rather than implying workers ran.
+- Give every delegated assignment a baseline SHA, bounded scope, deliverable, and acceptance criteria. Separate concurrent editing tasks into isolated worktrees; only the lead integrates results.
+- Persist primary reference artifacts and accepted conformance evidence with provenance. Record artifact paths, measured results, limitations, and next steps in the active work packet.
+- Keep localhost available for human inspection during implementation. Verify its build identity and serving checkout before describing it as current.
+- Update the active work packet at meaningful milestones. Publishing requires the existing release gates and the user's authorized lane; a workflow restart does not authorize deployment.
 - When I ask you to "Check Modem for what's next," use the GitHub/Linear tool to find the latest issue tagged 'triage'.
 - Read the 'Context' section of the issue (which contains the Modem summary).
 - Implement the fix in a new branch named `modem/issue-number`.

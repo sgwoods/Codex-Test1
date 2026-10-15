@@ -265,7 +265,8 @@ function queueStageTransition(state,mode='normal'){
   enemies:S.e.filter(e=>e.hp>0).length
  });
  if(usesReferenceTimingModel()){
-  clearReferenceTransitionCueWindow();
+  // Result audio continues across the gameplay handoff.
+  clearReferenceTransitionCueWindow([],mode==='challengeResult'?['challengeResults','challengePerfect']:[]);
   S.transitionCueKind=nextIsChallenge?1:0;
   S.transitionCueT=mode==='challengeResult'
    ? (nextIsChallenge

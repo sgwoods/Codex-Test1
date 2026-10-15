@@ -5,6 +5,10 @@ one machine.
 
 ## Core Model
 
+Cycle ownership and bounded delegation follow [AGENT_WORKFLOW.md](AGENT_WORKFLOW.md).
+Read [ACTIVE_WORK.md](ACTIVE_WORK.md) before using historical machine or branch
+instructions. Concurrent writers need separate worktrees and one integration owner.
+
 - `main` is the only integration branch
 - either machine may develop and push topic branches
 - only one machine is the release authority at a time

@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "commit": "c3fe5803c65b369484993eccd31d42893f4bbc22",
+  "results": [
+    {
+      "kind": "valid",
+      "rejected": false,
+      "started": true,
+      "stage": 31,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.593,
+        7.137,
+        9.997,
+        13.79
+      ],
+      "overrideCleared": true
+    },
+    {
+      "kind": "ordinary",
+      "rejected": false,
+      "started": true,
+      "stage": 31,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.593,
+        7.137,
+        9.997,
+        13.79
+      ],
+      "overrideCleared": true
+    },
+    {
+      "kind": "invalid",
+      "rejected": true,
+      "started": false,
+      "stage": 1,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "overrideCleared": true
+    },
+    {
+      "kind": "stage3",
+      "rejected": true,
+      "started": false,
+      "stage": 1,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "overrideCleared": true
+    },
+    {
+      "kind": "direct",
+      "rejected": true,
+      "started": false,
+      "stage": 1,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "overrideCleared": true
+    },
+    {
+      "kind": "nondevelopment",
+      "rejected": true,
+      "started": false,
+      "stage": 1,
+      "otherStagesUnchanged": true,
+      "offsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "overrideCleared": true
+    }
+  ],
+  "methodHash": "bf73418c4bdd342c850850cde30ee67f482645dca665edf07d316c0a0dad0ca9",
+  "limitation": "Nondevelopment check is a temporary channel fixture, not a full packaged beta build; ordinary is a fresh-launch control, not a UI restart test."
+}

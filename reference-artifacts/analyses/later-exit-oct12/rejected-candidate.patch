@@ -1,0 +1,26 @@
+--- a/src/js/06-enemy-behavior.js
++++ b/src/js/06-enemy-behavior.js
+@@ -648,6 +648,23 @@
+   const lowerQ=cl((u-2.4)/8.8,0,1);
+   e.y+=lowerFieldBias*lowerQ*lowerQ;
+  }
++ // Experimental later-stage continuation from the final composed middle pose.
++ if(genericChallengePath&&S.stage>=35
++  &&(pathFamily==='blue-purple-finale'||pathFamily==='green-ladder-split')){
++  const previous=e.laterChallengeExitPose;
++  if(u<9.7){
++   const span=previous?u-previous.u:0;
++   const validSpan=Number.isFinite(span)&&span>0;
++   e.laterChallengeExitPose={x:e.x,y:e.y,u,
++    dx:validSpan?(e.x-previous.x)/span:0,
++    dy:validSpan?(e.y-previous.y)/span:0};
++  }else if(previous){
++   const elapsed=u-previous.u,ease=.08*(1-Math.exp(-elapsed/.08));
++   const outward=(previous.x<PLAY_W/2?-1:1)*100,rise=-100;
++   e.x=previous.x+outward*elapsed+(previous.dx-outward)*ease;
++   e.y=previous.y+rise*elapsed+(previous.dy-rise)*ease;
++  }
++ }
+  // Experimental group1 side departure; final composed pose owns the exit bias.
+  if(genericChallengePath&&S.stage===31&&wave===0&&pathFamily==='blue-purple-finale'){
+   const previous=e.stage31BlueGroup1ExitPose;

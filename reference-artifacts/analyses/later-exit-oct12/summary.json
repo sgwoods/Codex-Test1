@@ -1,0 +1,417 @@
+{
+  "verdict": "REJECT: matched real-key baseline kills lost; inherited side-column contacts remain",
+  "provenance": {
+    "baselineSource": "1b442dfae869fe3f8a7cc39edaaa2d05860b3a7cdf33c5e796ebae13167ce532",
+    "candidateSource": "226b49fc631960f9f8fc6f35821bb93c5aee421659071590c2ecb3e0e9697638",
+    "restoredSource": "1b442dfae869fe3f8a7cc39edaaa2d05860b3a7cdf33c5e796ebae13167ce532",
+    "bundles": {
+      "baseline": "9c320d50301a46f93f8f27bcc2f28af412b88043ba00e411f4a329c8585ef4fa",
+      "candidate": "d57a44f591667ccc85dd27ecd6a0164c61f8da7da1e42a94bf7a17be4f148e85"
+    },
+    "method": "00439e1ba527df16f5bb46402e09c30c4f7d3c75cc686a26e273565ea7f89923",
+    "dependency": "7d2ed679da11bf1c4c669a1f18a00bffdd0f71f66cb22bc0422af710fa6a2db2",
+    "report": "035b061204c3a938dc1ebd3010ef20417314c8f5bbadfadb2d2ff7360dc97a9d",
+    "columns": "5010e16779a1b7de015265f4500bc559b059b9e4bea18d1f14a503aeaa63f74c"
+  },
+  "stages": [
+    {
+      "stage": 3,
+      "baselineContacts": [
+        16264713,
+        149876999,
+        961053214,
+        741360978,
+        890253568,
+        623029286
+      ],
+      "candidateContacts": [
+        16264713,
+        149876999,
+        961053214,
+        741360978,
+        890253568,
+        623029286
+      ],
+      "fullEntries": 40,
+      "cadence": [
+        4.433,
+        4.433
+      ],
+      "maxScopedJoin": 0,
+      "maxFullViewLoss": 0,
+      "rowExposures": []
+    },
+    {
+      "stage": 31,
+      "baselineContacts": [],
+      "candidateContacts": [],
+      "fullEntries": 40,
+      "cadence": [
+        4.433,
+        4.433
+      ],
+      "maxScopedJoin": 0,
+      "maxFullViewLoss": 0,
+      "rowExposures": []
+    },
+    {
+      "stage": 35,
+      "baselineContacts": [
+        287155051,
+        571262010,
+        305218756
+      ],
+      "candidateContacts": [],
+      "fullEntries": 40,
+      "cadence": [
+        4.433,
+        4.433
+      ],
+      "maxScopedJoin": 3.9374230151204395,
+      "maxFullViewLoss": 1.416666666666667,
+      "rowExposures": [
+        {
+          "id": 252040650,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.8981091247727159,
+          "baselineFullSeconds": 4.833333333333333,
+          "candidateFullSeconds": 5.166666666666667,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        },
+        {
+          "id": 571262010,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.5923681287848056,
+          "baselineFullSeconds": 2.316666666666667,
+          "candidateFullSeconds": 1.2166666666666666,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "baselineContacts": [
+        247206774,
+        401784013,
+        973487328,
+        371428430,
+        119292102,
+        925598473,
+        10852263
+      ],
+      "candidateContacts": [],
+      "fullEntries": 40,
+      "cadence": [
+        4.434000000000001,
+        4.433999999999999
+      ],
+      "maxScopedJoin": 3.749093223700881,
+      "maxFullViewLoss": 1.3666666666666663,
+      "rowExposures": [
+        {
+          "id": 830237054,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.8981091247727159,
+          "baselineFullSeconds": 4.833333333333333,
+          "candidateFullSeconds": 5.166666666666667,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        },
+        {
+          "id": 401784013,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.5923681287848056,
+          "baselineFullSeconds": 2.316666666666667,
+          "candidateFullSeconds": 1.2166666666666666,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        }
+      ]
+    },
+    {
+      "stage": 63,
+      "baselineContacts": [
+        236403084,
+        834290815,
+        937365596,
+        707341086,
+        226158230
+      ],
+      "candidateContacts": [],
+      "fullEntries": 40,
+      "cadence": [
+        4.433,
+        4.433
+      ],
+      "maxScopedJoin": 4.327817001676503,
+      "maxFullViewLoss": 1.3166666666666664,
+      "rowExposures": [
+        {
+          "id": 77581147,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.8981091247727159,
+          "baselineFullSeconds": 4.833333333333333,
+          "candidateFullSeconds": 5.166666666666667,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        },
+        {
+          "id": 937365596,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.5923681287848056,
+          "baselineFullSeconds": 2.316666666666667,
+          "candidateFullSeconds": 1.2166666666666666,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        }
+      ]
+    },
+    {
+      "stage": 127,
+      "baselineContacts": [
+        756103147,
+        607782138
+      ],
+      "candidateContacts": [],
+      "fullEntries": 40,
+      "cadence": [
+        4.433,
+        4.433
+      ],
+      "maxScopedJoin": 4.264692251499533,
+      "maxFullViewLoss": 1.1499999999999995,
+      "rowExposures": [
+        {
+          "id": 753664663,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.8981091247727159,
+          "baselineFullSeconds": 4.833333333333333,
+          "candidateFullSeconds": 5.166666666666667,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        },
+        {
+          "id": 756103147,
+          "family": "green-ladder-split",
+          "wave": 1,
+          "scoped": true,
+          "fullEntry": true,
+          "joinStep": 0.5923681287848056,
+          "baselineFullSeconds": 2.316666666666667,
+          "candidateFullSeconds": 1.2166666666666666,
+          "preExitRowSeconds": 0.18333333333333332,
+          "postExitRowSeconds": 0.13333333333333333
+        }
+      ]
+    }
+  ],
+  "shooting": {
+    "35": {
+      "baseline": {
+        "errors": [],
+        "clear": {
+          "t": 9.217,
+          "type": "challenge_clear",
+          "stage": 35,
+          "hits": 33,
+          "total": 40,
+          "upperBandY": 144,
+          "upperBandTime": 88.85,
+          "avgUpperBandTime": 2.221
+        },
+        "kills": 33,
+        "uniqueKills": 33,
+        "misses": 7,
+        "shots": 48,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.320000000000007,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999964,
+        "perfect": false
+      },
+      "candidate": {
+        "errors": [],
+        "clear": {
+          "t": 9.15,
+          "type": "challenge_clear",
+          "stage": 35,
+          "hits": 32,
+          "total": 40,
+          "upperBandY": 144,
+          "upperBandTime": 89.183,
+          "avgUpperBandTime": 2.23
+        },
+        "kills": 32,
+        "uniqueKills": 32,
+        "misses": 8,
+        "shots": 47,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.320000000000007,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999964,
+        "perfect": false
+      },
+      "lost": [
+        709952769
+      ],
+      "gained": [],
+      "lostWitnesses": [
+        {
+          "id": 709952769,
+          "baselineKill": {
+            "t": 7.517,
+            "type": "enemy_killed",
+            "points": 100,
+            "dive": 9,
+            "challenge": 1,
+            "rescued": 0,
+            "turnedHostile": 0,
+            "playerBullets": 1,
+            "enemyBullets": 0,
+            "id": 709952769,
+            "enemyType": "but",
+            "enemyFamily": "stingray",
+            "column": 4,
+            "row": 0,
+            "lane": 2,
+            "carry": false
+          },
+          "candidateLast": {
+            "id": 709952769,
+            "x": -56.24784954208498,
+            "y": 34.68871191822076,
+            "hp": 0,
+            "miss": 1
+          }
+        }
+      ]
+    },
+    "39": {
+      "baseline": {
+        "errors": [],
+        "clear": {
+          "t": 9.283,
+          "type": "challenge_clear",
+          "stage": 39,
+          "hits": 37,
+          "total": 40,
+          "upperBandY": 144,
+          "upperBandTime": 84.767,
+          "avgUpperBandTime": 2.119
+        },
+        "kills": 37,
+        "uniqueKills": 37,
+        "misses": 3,
+        "shots": 50,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.299999999999997,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999964,
+        "perfect": false
+      },
+      "candidate": {
+        "errors": [],
+        "clear": null,
+        "kills": 35,
+        "uniqueKills": 35,
+        "misses": null,
+        "shots": 48,
+        "shipLossEvents": [],
+        "lives": 3,
+        "maxMovementPerTick": 7.299999999999997,
+        "maxPlayerBullets": 2,
+        "minShotGap": 0.09999999999999964,
+        "perfect": false
+      },
+      "lost": [
+        674838603,
+        401784013
+      ],
+      "gained": [],
+      "lostWitnesses": [
+        {
+          "id": 674838603,
+          "baselineKill": {
+            "t": 7.367,
+            "type": "enemy_killed",
+            "points": 100,
+            "dive": 9,
+            "challenge": 1,
+            "rescued": 0,
+            "turnedHostile": 0,
+            "playerBullets": 1,
+            "enemyBullets": 0,
+            "id": 674838603,
+            "enemyType": "boss",
+            "enemyFamily": "stingray",
+            "column": 6,
+            "row": 0,
+            "lane": 4,
+            "carry": false
+          },
+          "candidateLast": {
+            "id": 674838603,
+            "x": 336.5342428482275,
+            "y": 86.13354716027072,
+            "hp": 0,
+            "miss": 1
+          }
+        },
+        {
+          "id": 401784013,
+          "baselineKill": {
+            "t": 8.383,
+            "type": "enemy_killed",
+            "points": 100,
+            "dive": 9,
+            "challenge": 1,
+            "rescued": 0,
+            "turnedHostile": 0,
+            "playerBullets": 1,
+            "enemyBullets": 0,
+            "id": 401784013,
+            "enemyType": "boss",
+            "enemyFamily": "mosquito",
+            "column": 7,
+            "row": 0,
+            "lane": 5,
+            "carry": false
+          },
+          "candidateLast": {
+            "id": 401784013,
+            "x": 336.4824241865084,
+            "y": 250.58896541526948,
+            "hp": 0,
+            "miss": 1
+          }
+        }
+      ]
+    }
+  }
+}

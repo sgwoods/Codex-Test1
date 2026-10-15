@@ -1,0 +1,406 @@
+{
+  "ok": true,
+  "build": "1.4.1-beta.1+build.1226.sha.cf0e7a66.beta",
+  "commit": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "bundleHash": "e932228979b5f0faa8bb5a2135f4a2f565370e81427732b97dac3220d1ccf0d3",
+  "methodHash": "688fb32a471bdac014ac726cfcde97eca04f966058d93daa52553a4c619747c5",
+  "flows": true,
+  "results": [
+    {
+      "game": "galaxy-guardians-preview",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 454869
+      },
+      "flow": {
+        "endState": {
+          "reached": true,
+          "outcome": "enemy_shot",
+          "browserSeconds": 37,
+          "simulationSeconds": 37.32799999999768,
+          "input": "held fire with one-second alternating arrows",
+          "text": "GAME OVERRESULTSGALAXY GUARDIANS RUN SUMMARYSHOTS FIRED33NUMBER OF HITS28HIT-MISS RATIO85%SCORE002590STAGE01Enter to continue"
+        },
+        "restart": {
+          "passed": true,
+          "stage": 1,
+          "score": 0,
+          "resetTime": 0.144,
+          "advancedTime": 0.6870000000000004,
+          "prompts": [
+            "GAME OVERRESULTSGALAXY GUARDIANS RUN SUMMARYSHOTS FIRED33NUMBER OF HITS28HIT-MISS RATIO85%SCORE002590STAGE01Enter to continue",
+            "GAME OVERGALAXY GUARDIANS TOP 10 PILOTSYOUR RANK 01Top-10 Galaxy Guardians run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InENTER INITIALSYOUNOIDSCORESTG01YOU002590 1Left/Right select, Up/Down changetype letters or press Enter to save",
+            "GAME OVERGALAXY GUARDIANS TOP 10 PILOTSYOUR RANK 01Top-10 Galaxy Guardians run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InNOIDSCORESTG01YOU002590 1Enter to play again"
+          ]
+        },
+        "settingsPersisted": true
+      }
+    },
+    {
+      "game": "aurora-galactica",
+      "gates": {
+        "harnessAbsent": true,
+        "reviewHidden": true,
+        "reviewDisabled": true,
+        "referenceDisabled": true,
+        "started": false,
+        "guardiansRuntimeAbsent": true
+      },
+      "stage": 1,
+      "clockAdvanced": true,
+      "pixels": {
+        "width": 1440,
+        "height": 1000,
+        "colored": 104511
+      },
+      "flow": {
+        "endState": {
+          "reached": true,
+          "outcome": "ship-loss",
+          "browserSeconds": 36,
+          "simulationSeconds": 35.3989999999979,
+          "input": "idle human",
+          "text": "GAME OVERRESULTSAURORA GALACTICA RUN SUMMARYSHOTS FIRED0NUMBER OF HITS0HIT-MISS RATIO0%SCORE000000STAGE01Enter to continue"
+        },
+        "restart": {
+          "passed": true,
+          "stage": 1,
+          "score": 0,
+          "resetTime": 0.125,
+          "advancedTime": 0.6540000000000005,
+          "prompts": [
+            "GAME OVERRESULTSAURORA GALACTICA RUN SUMMARYSHOTS FIRED0NUMBER OF HITS0HIT-MISS RATIO0%SCORE000000STAGE01Enter to continue",
+            "GAME OVERAURORA GALACTICA TOP 10 PILOTSYOUR RANK 01Top-10 Aurora Galactica run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InENTER INITIALSYOUNOIDSCORESTG01YOU000000 1Left/Right select, Up/Down changetype letters or press Enter to save",
+            "GAME OVERAURORA GALACTICA TOP 10 PILOTSYOUR RANK 01Top-10 Aurora Galactica run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting. Pilot Sign InNOIDSCORESTG01YOU000000 1Enter to play again"
+          ]
+        },
+        "settingsPersisted": true,
+        "watch": {
+          "start": {
+            "started": true,
+            "stage": 3,
+            "watchMode": true,
+            "persona": "professional",
+            "scope": "challenges",
+            "pilotMode": "watch"
+          },
+          "resultSeen": true,
+          "visibleResultSeen": true,
+          "nextSeen": true,
+          "transitions": [
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 1.0880000000000007,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL PILOTCHALLENGE TOUR",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 2.0960000000000014,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "CHALLENGING STAGE 1LEVELS 3-4",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 3.0880000000000023,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL pilot flying now.",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 4.096000000000003,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "WATCH MODEPROFESSIONAL pilot flying now.",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 5.088000000000004,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 6.0960000000000045,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 7.088000000000005,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 8.096000000000005,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 9.088000000000006,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 10.096000000000007,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 11.088000000000008,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 12.096000000000009,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 13.08800000000001,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 14.09600000000001,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 15.088000000000012,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 16.096,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": true,
+              "pendingStage": 7,
+              "time": 17.08799999999989,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "PERFECT BONUSHITS 40/40BONUS 15000",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "",
+              "result": true,
+              "pendingStage": 7,
+              "time": 18.09599999999978,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "PERFECT BONUSHITS 40/40BONUS 15000",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 19.08799999999967,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 20.09599999999956,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 3,
+              "mode": "challengeResult",
+              "result": false,
+              "pendingStage": 7,
+              "time": 21.08799999999945,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "GET READYCHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            },
+            {
+              "stage": 7,
+              "mode": "",
+              "result": false,
+              "pendingStage": 0,
+              "time": 22.09599999999934,
+              "watchMode": true,
+              "persona": "professional",
+              "scope": "challenges",
+              "started": true,
+              "resultText": "CHALLENGING STAGE 2LEVELS 7-8",
+              "resultVisible": true
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "externalOriginsBlocked": [
+    "https://www.youtube.com",
+    "https://iddyodcknmxupavnuuwg.supabase.co"
+  ],
+  "errors": [],
+  "missing": [],
+  "privateRequests": [],
+  "limitations": [
+    "Local public-package smoke only; not hosted auth, audible audio, playlist availability, beta promotion or long-run gameplay.",
+    "Nonblank canvas is a weak rendering check, not identified enemy pixels or visual conformance.",
+    "Pair runtime checks with static package-byte exclusion; unused private files are not detected by request monitoring.",
+    "Optional flows use browser-clock RAF/timer advancement and ordinary UI; not real-time audio audibility, late-stage or perfect-route acceptance."
+  ]
+}

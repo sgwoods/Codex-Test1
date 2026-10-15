@@ -1,0 +1,1871 @@
+{
+  "verdict": "REJECTED; source restored",
+  "baseline": "cf0e7a666067ede385865ba02e73d1454eb132d1",
+  "contacts": {
+    "before": [
+      {
+        "t": 7.967,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 139.77,
+        "enemyY": 324.33,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 51406268,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 4,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 11.4,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 144.94,
+        "enemyY": 324.35,
+        "enemyLane": 5,
+        "enemyForm": true,
+        "id": 372665405,
+        "enemyType": "boss",
+        "enemyFamily": "mosquito",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 21.517,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 128.91,
+        "enemyY": 325.83,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 942182592,
+        "enemyType": "rogue",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 21.717,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 151.77,
+        "enemyY": 342.87,
+        "enemyLane": 5,
+        "enemyForm": true,
+        "id": 709114509,
+        "enemyType": "boss",
+        "enemyFamily": "galboss",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 9,
+        "carry": false
+      }
+    ],
+    "after": [
+      {
+        "t": 7.967,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 139.77,
+        "enemyY": 324.33,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 51406268,
+        "enemyType": "but",
+        "enemyFamily": "stingray",
+        "column": 4,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 21.517,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 128.91,
+        "enemyY": 325.83,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "id": 942182592,
+        "enemyType": "rogue",
+        "enemyFamily": "galboss",
+        "column": 5,
+        "row": 0,
+        "lane": 4,
+        "dive": 9,
+        "carry": false
+      },
+      {
+        "t": 21.717,
+        "type": "challenge_enemy_contact",
+        "stage": 31,
+        "challenge": 1,
+        "nonLethal": 1,
+        "playerX": 140,
+        "playerY": 335,
+        "playerLane": 5,
+        "enemyX": 151.77,
+        "enemyY": 342.87,
+        "enemyLane": 5,
+        "enemyForm": true,
+        "id": 709114509,
+        "enemyType": "boss",
+        "enemyFamily": "galboss",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 9,
+        "carry": false
+      }
+    ]
+  },
+  "completed": {
+    "before": true,
+    "after": false
+  },
+  "fullEntry": {
+    "before": 40,
+    "after": 40
+  },
+  "combat": {
+    "before": [
+      0,
+      0
+    ],
+    "after": [
+      0,
+      0
+    ]
+  },
+  "preservedSamples": 13000,
+  "visibilityLosses": 0,
+  "targetRows": [
+    {
+      "id": 929885849,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.816666666666667,
+      "afterLongest": 3.816666666666667,
+      "beforeJump": 103.00770116840779,
+      "afterJump": 103.00770116840779,
+      "beforeExitJump": 80.28672679839426,
+      "afterExitJump": 80.28672679839426
+    },
+    {
+      "id": 216141938,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.9833333333333334,
+      "afterLongest": 3.9833333333333334,
+      "beforeJump": 46.162532426200364,
+      "afterJump": 46.162532426200364,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 789939609,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.816666666666667,
+      "afterLongest": 3.816666666666667,
+      "beforeJump": 81.76241985166534,
+      "afterJump": 81.76241985166534,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 154781671,
+      "family": "blue-purple-finale",
+      "beforeLongest": 2.85,
+      "afterLongest": 2.85,
+      "beforeJump": 82.85585676341775,
+      "afterJump": 82.85585676341775,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 51406268,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.25,
+      "afterLongest": 3.25,
+      "beforeJump": 103.32390865622536,
+      "afterJump": 103.32390865622536,
+      "beforeExitJump": 82.91686981549653,
+      "afterExitJump": 82.91686981549653
+    },
+    {
+      "id": 809515661,
+      "family": "blue-purple-finale",
+      "beforeLongest": 2.683333333333333,
+      "afterLongest": 2.683333333333333,
+      "beforeJump": 106.40066400168752,
+      "afterJump": 106.40066400168752,
+      "beforeExitJump": 106.40066400168752,
+      "afterExitJump": 106.40066400168752
+    },
+    {
+      "id": 218173522,
+      "family": "blue-purple-finale",
+      "beforeLongest": 1.7666666666666666,
+      "afterLongest": 1.7666666666666666,
+      "beforeJump": 81.35705255231409,
+      "afterJump": 81.35705255231409,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 72239387,
+      "family": "blue-purple-finale",
+      "beforeLongest": 0.95,
+      "afterLongest": 0.95,
+      "beforeJump": 63.38006390025181,
+      "afterJump": 63.38006390025181,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 925024101,
+      "family": "green-ladder-split",
+      "beforeLongest": 3.55,
+      "afterLongest": 3.55,
+      "beforeJump": 161.64478154273957,
+      "afterJump": 62.8684276883079,
+      "beforeExitJump": 161.64478154273957,
+      "afterExitJump": 1.0394229168149318
+    },
+    {
+      "id": 362828100,
+      "family": "green-ladder-split",
+      "beforeLongest": 5.55,
+      "afterLongest": 10.816666666666666,
+      "beforeJump": 185.81789284135155,
+      "afterJump": 90.63462693694945,
+      "beforeExitJump": 185.81789284135155,
+      "afterExitJump": 1.0165136496869691
+    },
+    {
+      "id": 775953348,
+      "family": "green-ladder-split",
+      "beforeLongest": 2.15,
+      "afterLongest": 2.15,
+      "beforeJump": 196.20362509393144,
+      "afterJump": 76.76171246135667,
+      "beforeExitJump": 196.20362509393144,
+      "afterExitJump": 1.1806777714516388
+    },
+    {
+      "id": 261787956,
+      "family": "green-ladder-split",
+      "beforeLongest": 4.833333333333333,
+      "afterLongest": 11.466666666666667,
+      "beforeJump": 219.39096836469818,
+      "afterJump": 101.78360624383477,
+      "beforeExitJump": 219.39096836469818,
+      "afterExitJump": 1.1618089343778157
+    },
+    {
+      "id": 387665891,
+      "family": "green-ladder-split",
+      "beforeLongest": 5.883333333333334,
+      "afterLongest": 10.433333333333334,
+      "beforeJump": 161.64478154273957,
+      "afterJump": 61.75410998468037,
+      "beforeExitJump": 161.64478154273957,
+      "afterExitJump": 1.03942291681493
+    },
+    {
+      "id": 783339713,
+      "family": "green-ladder-split",
+      "beforeLongest": 3.8333333333333335,
+      "afterLongest": 8.333333333333334,
+      "beforeJump": 185.81789284135155,
+      "afterJump": 89.42020185618013,
+      "beforeExitJump": 185.81789284135155,
+      "afterExitJump": 1.0165136496869729
+    },
+    {
+      "id": 551507219,
+      "family": "green-ladder-split",
+      "beforeLongest": 6.033333333333333,
+      "afterLongest": 11.166666666666666,
+      "beforeJump": 196.20362509393144,
+      "afterJump": 76.06559932058643,
+      "beforeExitJump": 196.20362509393144,
+      "afterExitJump": 1.1806777714516357
+    },
+    {
+      "id": 372665405,
+      "family": "green-ladder-split",
+      "beforeLongest": 1.9666666666666666,
+      "afterLongest": 4.116666666666666,
+      "beforeJump": 219.39096836469818,
+      "afterJump": 100.99802225786404,
+      "beforeExitJump": 219.39096836469818,
+      "afterExitJump": 1.161808934377819
+    },
+    {
+      "id": 521982333,
+      "family": "blue-purple-finale",
+      "beforeLongest": 4.783333333333333,
+      "afterLongest": 4.783333333333333,
+      "beforeJump": 100.68902323490877,
+      "afterJump": 100.68902323490877,
+      "beforeExitJump": 100.68902323490877,
+      "afterExitJump": 100.68902323490877
+    },
+    {
+      "id": 753126167,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.216666666666667,
+      "afterLongest": 3.216666666666667,
+      "beforeJump": 121.79911658136112,
+      "afterJump": 121.79911658136112,
+      "beforeExitJump": 121.79911658136112,
+      "afterExitJump": 121.79911658136112
+    },
+    {
+      "id": 132766890,
+      "family": "blue-purple-finale",
+      "beforeLongest": 1.65,
+      "afterLongest": 1.65,
+      "beforeJump": 137.79256765152468,
+      "afterJump": 137.79256765152468,
+      "beforeExitJump": 137.79256765152468,
+      "afterExitJump": 137.79256765152468
+    },
+    {
+      "id": 642159901,
+      "family": "blue-purple-finale",
+      "beforeLongest": 2.9166666666666665,
+      "afterLongest": 2.9166666666666665,
+      "beforeJump": 76.45286456372972,
+      "afterJump": 76.45286456372972,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 214629079,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.5166666666666666,
+      "afterLongest": 3.5166666666666666,
+      "beforeJump": 111.06417694288291,
+      "afterJump": 111.06417694288291,
+      "beforeExitJump": 111.06417694288291,
+      "afterExitJump": 111.06417694288291
+    },
+    {
+      "id": 212535042,
+      "family": "blue-purple-finale",
+      "beforeLongest": 1.5333333333333334,
+      "afterLongest": 1.5333333333333334,
+      "beforeJump": 99.84126251204961,
+      "afterJump": 99.84126251204961,
+      "beforeExitJump": 99.84126251204961,
+      "afterExitJump": 99.84126251204961
+    },
+    {
+      "id": 352310587,
+      "family": "blue-purple-finale",
+      "beforeLongest": 1.95,
+      "afterLongest": 1.95,
+      "beforeJump": 57.26849046377945,
+      "afterJump": 57.26849046377945,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 353909248,
+      "family": "blue-purple-finale",
+      "beforeLongest": 0.6166666666666667,
+      "afterLongest": 0.6166666666666667,
+      "beforeJump": 35.68921966084437,
+      "afterJump": 35.68921966084437,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 736941153,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 2.066666666666667,
+      "afterLongest": 2.066666666666667,
+      "beforeJump": 80.23007540816599,
+      "afterJump": 80.23007540816599,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 299802082,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 1.6,
+      "afterLongest": 1.6,
+      "beforeJump": 58.906924890033096,
+      "afterJump": 58.906924890033096,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 678871190,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 1.15,
+      "afterLongest": 1.15,
+      "beforeJump": 39.66201457314038,
+      "afterJump": 39.66201457314038,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 132646712,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 0.7333333333333333,
+      "afterLongest": 0.7333333333333333,
+      "beforeJump": 25.55071818951475,
+      "afterJump": 25.55071818951475,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 943960524,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 2.316666666666667,
+      "afterLongest": 2.316666666666667,
+      "beforeJump": 24.522907657942994,
+      "afterJump": 24.522907657942994,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 286630114,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 2.5,
+      "afterLongest": 2.5,
+      "beforeJump": 39.143032585633954,
+      "afterJump": 39.143032585633954,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 416539529,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 2.683333333333333,
+      "afterLongest": 2.683333333333333,
+      "beforeJump": 59.201531230197105,
+      "afterJump": 59.201531230197105,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 725696614,
+      "family": "yellow-diagonal-fan",
+      "beforeLongest": 2.85,
+      "afterLongest": 2.85,
+      "beforeJump": 80.16321163725912,
+      "afterJump": 80.16321163725912,
+      "beforeExitJump": 0,
+      "afterExitJump": 0
+    },
+    {
+      "id": 81344958,
+      "family": "blue-purple-finale",
+      "beforeLongest": 5.433333333333334,
+      "afterLongest": 5.433333333333334,
+      "beforeJump": 91.21420338960374,
+      "afterJump": 91.21420338960374,
+      "beforeExitJump": 91.21420338960374,
+      "afterExitJump": 91.21420338960374
+    },
+    {
+      "id": 130880279,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.966666666666667,
+      "afterLongest": 3.966666666666667,
+      "beforeJump": 88.10750762562745,
+      "afterJump": 88.10750762562745,
+      "beforeExitJump": 88.10750762562745,
+      "afterExitJump": 88.10750762562745
+    },
+    {
+      "id": 457557075,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.2,
+      "afterLongest": 3.2,
+      "beforeJump": 123.5776719314618,
+      "afterJump": 123.5776719314618,
+      "beforeExitJump": 123.5776719314618,
+      "afterExitJump": 123.5776719314618
+    },
+    {
+      "id": 467592646,
+      "family": "blue-purple-finale",
+      "beforeLongest": 2.783333333333333,
+      "afterLongest": 2.783333333333333,
+      "beforeJump": 121.76271391522118,
+      "afterJump": 121.76271391522118,
+      "beforeExitJump": 121.76271391522118,
+      "afterExitJump": 121.76271391522118
+    },
+    {
+      "id": 8900304,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.8333333333333335,
+      "afterLongest": 3.8333333333333335,
+      "beforeJump": 100.57220341625214,
+      "afterJump": 100.57220341625214,
+      "beforeExitJump": 100.57220341625214,
+      "afterExitJump": 100.57220341625214
+    },
+    {
+      "id": 942182592,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.6166666666666667,
+      "afterLongest": 3.6166666666666667,
+      "beforeJump": 119.15164665249071,
+      "afterJump": 119.15164665249071,
+      "beforeExitJump": 119.15164665249071,
+      "afterExitJump": 119.15164665249071
+    },
+    {
+      "id": 42471394,
+      "family": "blue-purple-finale",
+      "beforeLongest": 2.9833333333333334,
+      "afterLongest": 2.9833333333333334,
+      "beforeJump": 119.84082526418116,
+      "afterJump": 119.84082526418116,
+      "beforeExitJump": 119.84082526418116,
+      "afterExitJump": 119.84082526418116
+    },
+    {
+      "id": 709114509,
+      "family": "blue-purple-finale",
+      "beforeLongest": 3.35,
+      "afterLongest": 3.35,
+      "beforeJump": 148.87021092213175,
+      "afterJump": 148.87021092213175,
+      "beforeExitJump": 148.87021092213175,
+      "afterExitJump": 148.87021092213175
+    }
+  ],
+  "unchangedStages": [
+    35,
+    39
+  ],
+  "sourceHashes": {
+    "baseline": {
+      "06-enemy-behavior.js": "1456799e1fadd17e9fc65ce387abd64811a67231ed1bdc866b914ac40f2d8815",
+      "90-harness.js": "ad6535ae97a302db467e99dae08274b329723aa2f460df5966a42bdf3bd8ad2b",
+      "05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f"
+    },
+    "candidate": {
+      "06-enemy-behavior.js": "9472948c0959952d1f79d2a3f6998f94081a29054f7b7a06ed3f4739f7301c88",
+      "90-harness.js": "ad6535ae97a302db467e99dae08274b329723aa2f460df5966a42bdf3bd8ad2b",
+      "05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f"
+    }
+  },
+  "bundleHashes": {
+    "baseline": "71a4838313883112a33df97cd9424f0f43088402a228a0b8221c0e6ef4643e1d",
+    "candidate": "98ee41bbc9f798a82efa0a67a0b2339d2f7e269f6701b2691e892c66b68dd6ba"
+  },
+  "contactReports": [
+    {
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-24-25-159Z-cf0e7a66/report.json",
+      "hash": "f579fcfb957a434a1a43ca4e4db2c792b597cec6c9f2eab1cba82c871f304963"
+    },
+    {
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/late-challenge-contacts/2026-10-11T14-26-52-905Z-cf0e7a66/report.json",
+      "hash": "267db631d2d69909781108091bf227eb6740b0e6d33e7db13fede811c74dc9f3"
+    }
+  ],
+  "patchHash": "7d57374a8017c7f6fa30ecf90a54807a534edb8eb5f39025708cd455276fee99",
+  "shots": [
+    {
+      "variant": "baseline",
+      "move": "right20",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-06-915Z-cf0e7a66/report.json",
+      "hash": "eedbce97b356e1c512a36ec30a690c54831619d7eecb292bda6bd7652a52ac62",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        215.47,
+        218.66
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 783339713,
+          "time": 9.1,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.2,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.3,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.4,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 9.5,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.6,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 9.7,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.8,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.9,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 10,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.1,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.2,
+          "x": 218.66
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "baseline",
+      "move": "none",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-25-56-157Z-cf0e7a66/report.json",
+      "hash": "31ef8e5ba22074440aa138e7a2cb5be94583eea452abdc9c16892e7116438eea",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        140
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 551507219,
+          "time": 9,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.1,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.2,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.3,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.4,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.5,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.6,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.7,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.8,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.9,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 10,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.1,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.2,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.3,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.4,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.5,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.6,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.7,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.8,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 10.9,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 11,
+          "x": 140
+        },
+        {
+          "id": 783339713,
+          "time": 11.1,
+          "x": 140
+        },
+        {
+          "id": 372665405,
+          "time": 11.2,
+          "x": 140
+        },
+        {
+          "id": 372665405,
+          "time": 11.3,
+          "x": 140
+        },
+        {
+          "id": 372665405,
+          "time": 11.4,
+          "x": 140
+        }
+      ],
+      "targetWitnesses": [
+        {
+          "time": 11.2,
+          "x": 140
+        },
+        {
+          "time": 11.3,
+          "x": 140
+        },
+        {
+          "time": 11.4,
+          "x": 140
+        }
+      ]
+    },
+    {
+      "variant": "baseline",
+      "move": "left10",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-06-357Z-cf0e7a66/report.json",
+      "hash": "e7875066348aa45684ecfff142ac6c71c7fd9b5f8a1df78e7642178f1ee57fb7",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        105.16,
+        102.11
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 261787956,
+          "time": 9,
+          "x": 105.16
+        },
+        {
+          "id": 261787956,
+          "time": 9.1,
+          "x": 102.11
+        },
+        {
+          "id": 261787956,
+          "time": 9.2,
+          "x": 102.11
+        },
+        {
+          "id": 261787956,
+          "time": 9.3,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 9.4,
+          "x": 105.16
+        },
+        {
+          "id": 362828100,
+          "time": 9.5,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 9.6,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.7,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.8,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.9,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.1,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.2,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.3,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.4,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.5,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 10.6,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.7,
+          "x": 102.11
+        },
+        {
+          "id": 783339713,
+          "time": 10.8,
+          "x": 105.16
+        },
+        {
+          "id": 783339713,
+          "time": 10.9,
+          "x": 102.11
+        },
+        {
+          "id": 783339713,
+          "time": 11,
+          "x": 102.11
+        },
+        {
+          "id": 783339713,
+          "time": 11.1,
+          "x": 102.11
+        },
+        {
+          "id": 783339713,
+          "time": 11.2,
+          "x": 102.11
+        },
+        {
+          "id": 783339713,
+          "time": 11.3,
+          "x": 102.11
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "baseline",
+      "move": "left20",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-10-337Z-cf0e7a66/report.json",
+      "hash": "64ee9a5a815d76e1137555f9724c83a6f5552ab899471c163e43b4d28c1a76ae",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        64.53,
+        61.34
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 261787956,
+          "time": 9,
+          "x": 64.53
+        },
+        {
+          "id": 261787956,
+          "time": 9.1,
+          "x": 64.53
+        },
+        {
+          "id": 261787956,
+          "time": 9.2,
+          "x": 64.53
+        },
+        {
+          "id": 261787956,
+          "time": 9.3,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.4,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.5,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.6,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.7,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.8,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.9,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.1,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.2,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.3,
+          "x": 61.34
+        },
+        {
+          "id": 387665891,
+          "time": 10.4,
+          "x": 61.34
+        },
+        {
+          "id": 387665891,
+          "time": 10.5,
+          "x": 61.34
+        },
+        {
+          "id": 387665891,
+          "time": 10.6,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 10.7,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 10.8,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 10.9,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 11,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 11.1,
+          "x": 61.34
+        },
+        {
+          "id": 551507219,
+          "time": 11.2,
+          "x": 61.34
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "baseline",
+      "move": "right10",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-26-14-328Z-cf0e7a66/report.json",
+      "hash": "51cb53619e2dd341e5ed8dbdd83c14726b3d827a2c57b1e2acb9b1348b7f36da",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        174.84,
+        177.89
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 783339713,
+          "time": 9.8,
+          "x": 177.89
+        },
+        {
+          "id": 783339713,
+          "time": 9.9,
+          "x": 177.89
+        },
+        {
+          "id": 783339713,
+          "time": 10,
+          "x": 177.89
+        },
+        {
+          "id": 783339713,
+          "time": 10.1,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.2,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.3,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.4,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.5,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.6,
+          "x": 174.84
+        },
+        {
+          "id": 372665405,
+          "time": 10.7,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.8,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 10.9,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 11,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 11.1,
+          "x": 177.89
+        },
+        {
+          "id": 372665405,
+          "time": 11.2,
+          "x": 177.89
+        }
+      ],
+      "targetWitnesses": [
+        {
+          "time": 10.2,
+          "x": 177.89
+        },
+        {
+          "time": 10.3,
+          "x": 177.89
+        },
+        {
+          "time": 10.4,
+          "x": 177.89
+        },
+        {
+          "time": 10.5,
+          "x": 177.89
+        },
+        {
+          "time": 10.6,
+          "x": 174.84
+        },
+        {
+          "time": 10.7,
+          "x": 177.89
+        },
+        {
+          "time": 10.8,
+          "x": 177.89
+        },
+        {
+          "time": 10.9,
+          "x": 177.89
+        },
+        {
+          "time": 11,
+          "x": 177.89
+        },
+        {
+          "time": 11.1,
+          "x": 177.89
+        },
+        {
+          "time": 11.2,
+          "x": 177.89
+        }
+      ]
+    },
+    {
+      "variant": "candidate",
+      "move": "none",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-27-14-761Z-cf0e7a66/report.json",
+      "hash": "709bf63f6ab01d3fd155420431571e99f9245aaaf8d1a2c6042d4de0b5150f00",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        140
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 551507219,
+          "time": 9,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.1,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.2,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.3,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.4,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.5,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.6,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.7,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.8,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 9.9,
+          "x": 140
+        },
+        {
+          "id": 551507219,
+          "time": 10,
+          "x": 140
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "candidate",
+      "move": "left10",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-27-18-868Z-cf0e7a66/report.json",
+      "hash": "e57ccad7953b298911c3f7d4602686e01119017a7e404ea9fca4e5939e831a27",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        102.11,
+        105.16
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 261787956,
+          "time": 9,
+          "x": 102.11
+        },
+        {
+          "id": 261787956,
+          "time": 9.1,
+          "x": 102.11
+        },
+        {
+          "id": 261787956,
+          "time": 9.2,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 9.3,
+          "x": 105.16
+        },
+        {
+          "id": 362828100,
+          "time": 9.4,
+          "x": 105.16
+        },
+        {
+          "id": 362828100,
+          "time": 9.5,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.6,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 9.7,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.8,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 9.9,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.1,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.2,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.3,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.4,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.5,
+          "x": 102.11
+        },
+        {
+          "id": 362828100,
+          "time": 10.6,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.7,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 10.8,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 10.9,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 11,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.1,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.2,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 11.3,
+          "x": 105.16
+        },
+        {
+          "id": 551507219,
+          "time": 11.4,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.5,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.6,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.7,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.8,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 11.9,
+          "x": 102.11
+        },
+        {
+          "id": 551507219,
+          "time": 12,
+          "x": 102.11
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "candidate",
+      "move": "left20",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-27-22-854Z-cf0e7a66/report.json",
+      "hash": "a9ce60b584631a3ca2a056039e3a4681432db6343812d96affeaa63df809b405",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        64.53,
+        61.34
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 261787956,
+          "time": 9,
+          "x": 64.53
+        },
+        {
+          "id": 261787956,
+          "time": 9.1,
+          "x": 64.53
+        },
+        {
+          "id": 261787956,
+          "time": 9.2,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.3,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.4,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.5,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.6,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.7,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.8,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 9.9,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.1,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.2,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.3,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.4,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.5,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.6,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.7,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.8,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 10.9,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.1,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.2,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.3,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.4,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.5,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.6,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.7,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.8,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 11.9,
+          "x": 61.34
+        },
+        {
+          "id": 261787956,
+          "time": 12,
+          "x": 61.34
+        }
+      ],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "candidate",
+      "move": "right10",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-27-26-918Z-cf0e7a66/report.json",
+      "hash": "d6043a599dc46dc5d760589df3db3e13379c07aadffa199b87a45e94552e3641",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        174.84,
+        177.89
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [],
+      "targetWitnesses": []
+    },
+    {
+      "variant": "candidate",
+      "move": "right20",
+      "path": "/private/tmp/aurora-stage31-exit-trial-oct08/reference-artifacts/analyses/challenge-shot-witnesses/2026-10-11T14-27-30-895Z-cf0e7a66/report.json",
+      "hash": "d498b2c9291fae39ee4882fdfff6c712ffa4ec6dd4508b2526a801ffa537e516",
+      "methodHash": "7b0a4ba43f7c9d7c5c96544df29545fbc2335921146c25222cc52476e4d2564a",
+      "trials": 31,
+      "playerXs": [
+        218.66,
+        215.47
+      ],
+      "playerVxs": [
+        0
+      ],
+      "green": [
+        {
+          "id": 783339713,
+          "time": 9,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.2,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.3,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.4,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.5,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.6,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.7,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.8,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 9.9,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.1,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 10.2,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 10.3,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.4,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.5,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.6,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.7,
+          "x": 215.47
+        },
+        {
+          "id": 783339713,
+          "time": 10.8,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 10.9,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.1,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.2,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.3,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.4,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.5,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.6,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.7,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.8,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 11.9,
+          "x": 218.66
+        },
+        {
+          "id": 783339713,
+          "time": 12,
+          "x": 218.66
+        }
+      ],
+      "targetWitnesses": []
+    }
+  ],
+  "limitations": [
+    "Single seed9131, 60Hz; no canonical coordinate/tolerance claim.",
+    "Five ordinary-input columns,31 independent one-shot trials each; replacement times allowed; no full-route feasibility proof.",
+    "Movement depends partly on wall-clock release; recorded shipX ranges differ, so movement labels alone are not exact column matches.",
+    "Stage3 preservation is source-scoped, not rerun in this packet. Stages35/39 actual reports match exactly.",
+    "Candidate remains in isolated dist for evidence only; restored source is baseline, not that bundle."
+  ]
+}

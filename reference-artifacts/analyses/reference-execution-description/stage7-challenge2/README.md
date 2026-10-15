@@ -1,8 +1,8 @@
 # Stage 7 Reference Execution Description Analysis
 
-Generated: 2026-06-08T13:42:07.675Z
-Commit: 089f16b0f
-Branch: codex/macbook-pro-1.4.1-stage7-object-track-keeper
+Generated: 2026-10-04T21:44:35.856Z
+Commit: c996b804
+Branch: codex/oct03-local-integration
 
 ## Decision
 
@@ -40,5 +40,5 @@ The Stage 7 execution description is precise enough for one measured runtime can
 
 - Description: `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json`
 - Source window: `challenge-02-cross-and-column`
-- Contact sheet: `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg`
-- Focused sheet: `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg`
+- Contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg`
+- Focused sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg`
