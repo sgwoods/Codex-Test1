@@ -14,6 +14,27 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 14 step 3 IN PROGRESS. Human authorized release preparation and the
+sanitized source push, conditional on the outstanding private-backup requirement.
+No hosted publication is authorized. Starting main5ca9e528 is clean/ahead3.
+First preflight refreshed stale conformance/review evidence and stopped on
+generated dirtiness. Changes are being inspected/committed, not bypassed.
+No gameplay source changes. Existing lane-file private-audio exclusion and
+security-meta positive/negative fixtures pass. Dev security review is ADVISORY:
+it observes expected development surfaces and private local assets, not a clean
+beta package. No claim that those observations are resolved by a dev gate pass.
+
+CORRECTION to earlier step2 sequencing: code inspection confirms DEV checks do
+not enforce main/origin equality or release authority; beta/production do. Full
+local dev preflight can run before source push. Our delivery condition still
+requires reviewed main to be pushed/verified before hosted dev publication.
+Do not use the raw publisher's smaller check subset as the full release gate.
+Prepare final source-doc inventory, refresh conformance, then review packet,
+commit reviewed evidence, rebuild/PDF, and rerun full local dev preflight.
+Private iCloud transfer confirmation is pending; no archive transfer or source
+push has occurred. Keep private archive/preservation history intact. Final status
+and gate identity will be recorded in analyses/dev-gates-oct14/REVIEW.md.
+
 October 14 step 2 COMPLETE: sanitized delivery reviewed and integrated locally.
 Current integration source: main at 14607bed5bdb961e9ee8a7695836bc3e7b3a5da9,
 fast-forwarded from freshly fetched origin/main 181d8e29. A documentation/evidence
