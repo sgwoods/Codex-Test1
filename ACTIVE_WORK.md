@@ -14,6 +14,32 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 14 steps 4 and 5 COMPLETE. DEV publication passed preflight, PDF,
+review/publish gates, hosted identity verification and public-safe browser smoke.
+Hosted DEV is 1.4.1.2+build.1195.sha.8e93394b from clean pushed source
+8e93394bbc290d374d005cf13206e42e8c099b78. Hosted index SHA256 matches local:
+0b0298b86f88456312929878ebf5b8a8b689fefa94bb9382807d3d5df5c9cddd.
+Public artifact commit f7be418 changes 22 files, all inside dev/. Every other
+public-repository file is unchanged, including beta and production.
+Localhost :8000 serves this checkout's dist/dev with the same index hash.
+
+Local beta 1.4.2-beta.1+build.1195.sha.8e93394b.beta is frozen read-only,
+with reviewed DEV input, 599-file SHA256 inventory and tool provenance retained
+privately in beta-candidate-1.4.2-beta.1-oct14. Beta index SHA256:
+72f465c5ca9e53cd9cf69ebf34c0cc5be665a129ef4c1fca8b416210c775d313.
+Security scan observes zero of six tracked issues; all beta file hashes were
+compared against 50 private reference-audio files, with zero matches. These are
+bounded checks, not complete package/security/gameplay acceptance or audibility.
+Canonical promotion retains shared DEV-note provenance, as planned.
+
+NEXT step 6: validate the exact frozen beta runtime, package assets, security
+and gameplay. Step 7: sustained play and live login/settings/audible audio.
+Before step 8 approval/publication, resolve exact-byte delivery: publish:beta
+rebuilds/re-promotes and must not silently replace the tested frozen package.
+No beta/production publication, beta approval, new gameplay tuning or tool change
+occurred. Beta remains NOT READY. Current results supersede historical pending
+step4/5 statements below. See analyses/dev-beta-oct14/REVIEW.md and summary.json.
+
 October 14 steps 4 and 5 AUTHORIZED: publish DEV ONLY through existing gates,
 verify hosted identity/smoke and unchanged beta/production, then assign/freeze a
 LOCAL beta package. No beta/production publication or beta approval is authorized.

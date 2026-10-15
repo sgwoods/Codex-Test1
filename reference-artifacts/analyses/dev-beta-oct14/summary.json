@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-14",
+  "sourceCommit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+  "step4": {
+    "status": "pass",
+    "preflight": "pass",
+    "publish": "pass",
+    "hostedSmoke": "pass",
+    "artifactCommit": "f7be418",
+    "dev": {
+      "label": "1.4.1.2+build.1195.sha.8e93394b",
+      "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+      "shortCommit": "8e93394b",
+      "releaseChannel": "development",
+      "indexSha256": "0b0298b86f88456312929878ebf5b8a8b689fefa94bb9382807d3d5df5c9cddd"
+    },
+    "changedFileCount": 22,
+    "nonDevFilesUnchanged": true
+  },
+  "step5": {
+    "status": "frozen-local-only",
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-15T03:34:09.470Z",
+    "sourceCommit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+    "devLabel": "1.4.1.2+build.1195.sha.8e93394b",
+    "betaLabel": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+    "betaVersion": "1.4.2-beta.1",
+    "promotedFromState": "main@8e93394b clean",
+    "betaPublished": false,
+    "fileCount": 599,
+    "totalBytes": 86208738,
+    "inventorySha256": "9c858c85c5557c08590d7cbf05823c957c43dba92626dfda4cb3ae6f46e04946",
+    "indexSha256": "72f465c5ca9e53cd9cf69ebf34c0cc5be665a129ef4c1fca8b416210c775d313",
+    "privateReferenceAudioFilesCompared": 50,
+    "privateReferenceAudioHashMatches": 0,
+    "securityObservations": 0,
+    "toolHashes": [
+      {
+        "path": "tools/build/promote-beta.js",
+        "sha256": "b2a647134f65ea2ee66cf7c3cb3d1fddfcb23afa5fe8f24eef28fb06ac447d21"
+      },
+      {
+        "path": "tools/build/lane-files.js",
+        "sha256": "70ea4390e3bc966d69d3085a20491ac327bba8598714e526b0d92d0d4f4550f9"
+      },
+      {
+        "path": "tools/build/render-white-paper-pdf.js",
+        "sha256": "13c6593c5484db2f4bc726bfaf66331822b1c6ea6572b5239c1361234e2648a8"
+      },
+      {
+        "path": "tools/build/check-security-release-gate.js",
+        "sha256": "653aea5a91c71ced9081353af50f068f30e42ae0889e776684ffa72dca0c773b"
+      },
+      {
+        "path": "tools/harness/check-hosted-lane-smoke.js",
+        "sha256": "c6f17456a27f97deb6e7ad1925847db07f17c08fcb8dda0cb0ca030f3748aece"
+      },
+      {
+        "path": "package.json",
+        "sha256": "0726ca218e948a67cb0420a2473eee358b5acc786ccaf64be92fa0fa23ccbd33"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "cf72d3569dad466b987c05c857cb6269a5b032d563b0359c8ccc1f3da2221cb9"
+      }
+    ],
+    "limitations": [
+      "Not full exact-package runtime/security acceptance or sustained play.",
+      "Canonical promoter retains DEV release-note provenance; shared note describes both boundaries.",
+      "publish:beta rebuilds and re-promotes; exact frozen-byte delivery must be resolved before approval."
+    ]
+  },
+  "hostedUnchanged": {
+    "beta": {
+      "label": "1.4.1-beta.1+build.1168.sha.edd6a736.beta",
+      "commit": "edd6a73600a9b035b80d023475b9d976039b132b",
+      "shortCommit": "edd6a736",
+      "releaseChannel": "production beta"
+    },
+    "production": {
+      "label": "1.4.1+build.1164.sha.54398ff5",
+      "commit": "54398ff5c95bf9a6b3571c42a0efcf46cf43cebb",
+      "shortCommit": "54398ff5",
+      "releaseChannel": "production"
+    }
+  },
+  "betaReady": false,
+  "betaPublicationAuthorized": false,
+  "next": [
+    "Exact frozen-package runtime/assets/security/gameplay validation",
+    "Sustained play and live login/settings/audible public audio",
+    "Resolve gated exact-byte delivery before beta approval"
+  ],
+  "independentReview": {
+    "dev": "approved bounded publication review",
+    "betaFreeze": "approved local freeze only",
+    "exactHttpEvidence": "retained privately by lead; index matches current DEV"
+  }
+}

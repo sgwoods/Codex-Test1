@@ -6,6 +6,27 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October 14 steps 4 and 5 COMPLETE. Hosted DEV is
+1.4.1.2+build.1195.sha.8e93394b. Preflight, publish gates, hosted identity and
+public-theme browser smoke passed. All 22 artifact changes are dev-only;
+hosted beta1.4.1-beta.1 and production1.4.1 are unchanged.
+Local beta1.4.2-beta.1 uses the same clean source and is frozen read-only with
+599-file checksums and tool provenance. Tracked security observations: zero.
+Private reference-audio hash matches: zero across 50 private audio files.
+This is not full beta acceptance. Current packet: analyses/dev-beta-oct14.
+
+Remaining ordered path:
+6. Test the exact frozen beta package: runtime, assets, security and gameplay.
+   Player benefit: detect packaging faults before players receive the candidate.
+7. Test sustained play, live login, settings persistence and audible public audio.
+   Player benefit: verify complete sessions, not only a short startup.
+8. Resolve exact-byte delivery, obtain explicit beta approval, then publish and
+   verify beta through release gates. Current publish:beta rebuilds/re-promotes;
+   it cannot be assumed to publish the frozen bytes. No bypass is authorized.
+   Player benefit: the released candidate is the one that passed testing.
+No beta/production publication is authorized. Beta remains NOT READY.
+These results supersede historical pending step4/5 statements below.
+
 October 14: steps 4 and 5 authorized. Prepare hosted dev1.4.1.2 and verify it,
 then assign/freeze a local beta candidate only. Hosted beta/production must not
 change. Exact-package/security/runtime and sustained-play/live account/audio
