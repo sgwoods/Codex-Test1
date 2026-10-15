@@ -1,0 +1,71 @@
+{
+  "artifactType": "integrated-main-focused-validation",
+  "sourceCommit": "14607bed5bdb961e9ee8a7695836bc3e7b3a5da9",
+  "remoteBase": "181d8e296a9c0324c59b0ff8a8712c35a379e7a3",
+  "buildLabel": "1.4.1.1+build.1191.sha.14607bed",
+  "bundleHash": "7876635a86d75ae280a715b2fb6222300fa9b4be2a602e5cab787b14f0935b13",
+  "blueCases": 34,
+  "clearanceCases": 10,
+  "shots": {
+    "31": {
+      "kills": 37,
+      "shots": 80,
+      "lost": 0,
+      "gained": 0,
+      "orderedEventsExact": true,
+      "changedHitTimes": 0,
+      "clear": 19.533,
+      "errors": []
+    },
+    "35": {
+      "kills": 33,
+      "shots": 48,
+      "lost": 0,
+      "gained": 0,
+      "orderedEventsExact": false,
+      "changedHitTimes": 9,
+      "clear": 9.233,
+      "errors": []
+    },
+    "39": {
+      "kills": 37,
+      "shots": 50,
+      "lost": 0,
+      "gained": 0,
+      "orderedEventsExact": true,
+      "changedHitTimes": 0,
+      "clear": 9.283,
+      "errors": []
+    }
+  },
+  "audio": {
+    "methodHash": "d656b83d8e8fbb60f899fb538d15443c094f19b5b0e831e56505eb14a238f15d",
+    "scope": "Actual Web Audio source completion across normal queue and transition; entire archived four-second clips, not perceptual mix acceptance or challenge-only watch mode",
+    "limitations": [
+      "Forced cue/transition probes, not natural ordinary/perfect outcomes.",
+      "Private canonical assets on development localhost, not public packaged audio or perceptual audibility."
+    ],
+    "results": [
+      {
+        "cue": "challengePerfect",
+        "startedAt": 5.418666666666667,
+        "duration": 4,
+        "stops": [],
+        "played": 4,
+        "fromStage": 3,
+        "stage": 4
+      },
+      {
+        "cue": "challengeResults",
+        "startedAt": 3.6853333333333333,
+        "duration": 4,
+        "stops": [],
+        "played": 4,
+        "fromStage": 3,
+        "stage": 4
+      }
+    ]
+  },
+  "privateArchiveBackupVerified": false,
+  "noPushOrPublish": true
+}

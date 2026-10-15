@@ -14,6 +14,53 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 14 step 2 COMPLETE: sanitized delivery reviewed and integrated locally.
+Current integration source: main at 14607bed5bdb961e9ee8a7695836bc3e7b3a5da9,
+fast-forwarded from freshly fetched origin/main 181d8e29. A documentation/evidence
+follow-up records this result. Preservation history remains on its separate local
+branch and was not merged. No source push or hosted publication occurred.
+Both full-range read-only reviews approve bounded local integration, including
+earlier platform/game ownership, Guardians launcher/capacity and release-tooling
+changes. No new gameplay tuning or version/authority changes in this step.
+
+Clean integrated development build: 1.4.1.1+build.1191.sha.14607bed.
+Index SHA256: 7876635a86d75ae280a715b2fb6222300fa9b4be2a602e5cab787b14f0935b13.
+Localhost HTTP bytes equal this checkout's dist/dev. Lower commit-count build
+number reflects sanitized history, not a rollback; identify by version/SHA/hash.
+Fresh integrated 34 blue cases, ten clearance cases and saved 37/33/37 target
+hits pass, retaining 80/48/50 shots and no lost targets/lives. Stage35 nine timing
+changes remain disclosed. Integrated adapter boundaries, score ownership,
+schedule-trial guard/channel fixture and combat-VM checks pass. Both canonical
+four-second result cues complete unstopped across Stage3->4 on unchanged retry;
+the first attempt timed out in page navigation before audio measurement.
+Pre-integration platform registry/boot/renderer and Guardians policy/runtime/
+launcher checks also pass, but are candidate-build rather than final-byte checks.
+Public package/soak/live-login/audibility and full release gates are still open.
+
+Evidence: reference-artifacts/analyses/main-integration-oct14. Complete clean
+build/raw logs/replay/audio reports remain under owner-only ignored
+private-artifacts/main-integration-oct14. Public evidence omits account-bearing
+build metadata. A docs-only follow-up does not relabel the tested runtime SHA.
+
+Backup disposition: all private originals are locally recoverable; archive and
+integration roots are owner-only. Time Machine inspection could not verify a
+backup. No off-machine backup is verified. Permission to copy the complete archive
+to the existing private iCloud library is pending; no transfer occurred. Preserve
+the original checkout/history and verify an off-machine recovery before first
+source push. This does not block the completed local integration.
+
+Next step 3: prepare/review necessary freshness evidence and local release checks;
+resolve private backup and explicit source-push authorization; push only sanitized
+main, fetch/verify equality with origin/main, THEN run final dev preflight. Existing
+publish policy requires remote equality, so a fully passing preflight cannot be
+claimed before that push. Any further evidence commit needs the same authorized
+push/equality cycle; do not chase recursive refresh or bypass gates.
+Step4: separately authorized dev publication and hosted review. Step5: assign/
+freeze exact beta package. Step6: package/security/gameplay checks. Step7: sustained
+play, login/settings/audible audio. Step8: explicit beta approval and verification.
+Beta is NOT READY. Continue to report accomplishment, limits and next actions
+after every step. No beta or production publication is authorized by integration.
+
 October 14 sanitized-delivery preparation: COMPLETE locally, subject to final
 commit/object verification recorded in analyses/sanitized-delivery-oct14.
 Human approved the sanitized-delivery plan. Delivery branch:
