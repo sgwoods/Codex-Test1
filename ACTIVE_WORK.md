@@ -14,6 +14,44 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 14 step 3 COMPLETE at source5e968bfd: local dev preflight passes,
+private backup condition met and sanitized source pushed/fetch-verified.
+Local/remote main matched 5e968bfd3c077baccfedbe673200d6b21443c399 after source
+push. This documentation follow-up preserves the completed result; rerun the
+same local preflight and push/fetch this docs-only follow-up before closing.
+No gameplay changes or hosted dev/beta/production game-lane publication.
+
+Preflight sequence: one intentional freshness block, inspected evidence commit,
+then environment refusal for sandboxed browser checks, then unchanged full
+preflight PASS outside that macOS sandbox. No gate weakened or bypassed, no
+recursive evidence-refresh chase. Passed build1.4.1.1+build1193.sha5e968bfd,
+index9837ffb52901374fa3539849a983fea029f5fcbf0f24a0a57d711f63542ba5d6.
+Required development PDF rendered. Final run/source identity is retained under
+owner-only private-artifacts/dev-gates-oct14 and reported in this chat.
+
+Human explicitly approved the private iCloud copy. All100 gzip originals pass
+compressed/original hash checks from that copy; recovery helper succeeds there
+and the recovery key matches. macOS Foundation reports all108files uploaded,
+no pending/errors. This is provider-confirmed cloud custody plus local recovery
+from the copied location, NOT an independent second-device restore test.
+Opaque backup location: approved private Artifact Library /02-documentation/
+sanitized-delivery-oct14. Full local path was supplied privately in the chat.
+Keep primary/preservation copies intact; private archive/key never entered Git.
+
+Pre-push audit reconfirmed100private original blobs absent from new main objects,
+no preservation-history ancestor, correct origin and clean main. Source push
+may trigger the source repository's existing redirect-only Pages workflow; it
+does not update Aurora-Galactica game lanes. DEV local security remains advisory
+with expected development observations, not a beta security clearance.
+
+Correction remains: DEV checker does not enforce authority/main-remote equality;
+beta/production do. Our chosen source delivery condition is now satisfied.
+Step4 is NEXT: separately authorize dev publication/hosted identity and smoke
+review; review dev iteration/release notes first. Step5 exact beta package/version,
+step6package/security/gameplay,step7soak/live login/settings/audible audio,
+step8explicitbetaapprovalandpublication remain. Beta is NOT READY. No beta or
+production publication is authorized by step3. Report status/next actions each step.
+
 October 14 step 3 IN PROGRESS. Human authorized release preparation and the
 sanitized source push, conditional on the outstanding private-backup requirement.
 No hosted publication is authorized. Starting main5ca9e528 is clean/ahead3.

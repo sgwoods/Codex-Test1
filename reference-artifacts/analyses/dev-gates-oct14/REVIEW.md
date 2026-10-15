@@ -3,7 +3,49 @@
 Date: October 14, 2026, America/New_York. Starting main: 5ca9e528.
 Authorization: local gates and sanitized source push once private-backup condition
 is resolved. No hosted dev/beta/production publication in this step.
-Status: in progress; final run results are recorded below when completed.
+Status: local gate/backup/source delivery complete at 5e968bfd. A docs-only
+follow-up records this milestone; its final gate/push receipt is retained privately
+and reported in the lead chat rather than guessed in a self-referential SHA field.
+
+## Completed Result
+
+Source 5e968bfd3c077baccfedbe673200d6b21443c399 was pushed to origin/main and
+fetched back; local and remote main matched. No private archive/preservation
+history was pushed. No game lane was published. Before source push, origin/base,
+clean main and exclusion of all100private original blobs were reconfirmed.
+
+The full release:preflight:dev passed on that clean source. Build label:
+1.4.1.1+build.1193.sha.5e968bfd. Index SHA256:
+9837ffb52901374fa3539849a983fea029f5fcbf0f24a0a57d711f63542ba5d6.
+The required development PDF rendered successfully. A prior invocation failed
+only because macOS sandbox prevented the browser-backed audio-mix check from
+launching. An unchanged scoped escalated invocation executed all existing checks
+and passed. No freshness/security/review condition was removed or marked waived.
+
+The user explicitly approved copying the private archive and recovery key to the
+existing private iCloud artifact library. Copy inventory:108files. All100gzip
+archives pass compressed/original hashes and sizes from the copied location;
+the copied key matches and the recovery helper validates a full original report.
+macOS Foundation URL resources confirm all108files are ubiquitous and uploaded,
+with no upload errors/pending files. No independent second-device download/restore
+was performed; do not overstate that verification. Preserve the primary copies.
+
+Backup logical location: approved private Artifact Library,02-documentation/
+sanitized-delivery-oct14. Exact local filesystem path supplied to the user in the
+chat, not public evidence. Local copy/check logs, provider-status receipt and
+recovery receipt are under private-artifacts/dev-gates-oct14. No raw reports or
+key were uploaded to the public source repo. This satisfies the stated private
+backup-before-source-push condition using provider-confirmed upload custody.
+
+Source main push can redeploy the source repository's existing redirect-only
+Pages artifact. Its public-sync job is conditioned on the different artifact
+repository and skips here. No Aurora-Galactica dev/beta/production artifact-lane
+publication command was executed. Step4 remains separately authorized.
+
+The docs-only completion follow-up is rebuilt, checked with the same full local
+preflight, pushed and fetch-verified before closing step3. Raw receipts retain its
+actual SHA and build identity. Game source/tools stay unchanged from integration.
+Do not transfer acceptance to a later beta package without exact-package checks.
 
 ## First Attempt And Freshness
 
@@ -45,10 +87,10 @@ DEV security returns advisory success, not evidence that those surfaces are safe
 for beta/production. The exact public beta package requires its separate security
 and private-byte/runtime checks before beta approval. No gate has been waived.
 
-Private archive originals remain owner-only and recoverable locally. iCloud copy
-confirmation is pending; no transfer has occurred. Do not push source while the
-private-backup condition remains unmet or substitute local copy verification for
-off-machine custody. Preserve the original checkout/history regardless.
+Private archive originals remain owner-only. Initial iCloud-copy confirmation
+was pending during preparation; the completed provider-confirmed copy/recovery
+above supersedes that initial condition. Provider status, not merely the local
+directory name, supplies the cloud-custody evidence. Original history is preserved.
 
 ## Remaining Path
 
