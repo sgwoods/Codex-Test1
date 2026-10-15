@@ -21,7 +21,11 @@ publication; changing runtime/playlist source requires a new validated freeze.
 
 Frozen delivery now has a guarded no-rebuild route, with full preflight plus
 inventory/Git-path/blob/mode checks and mandatory post-push hosted-byte checks.
-Real beta preflight/dry-run results will be recorded in
+Real beta preflight and staged dry run PASS at pushed2412e8fd, without public
+push or package mutation. Music/live-auth acceptance still blocks release.
+The existing alternate playlist also reports unavailable in the automated
+browser; compare HTTPS/provider/browser behavior before changing source IDs.
+Full results are recorded in
 analyses/beta-acceptance-oct15/REVIEW.md. Use publish:beta:frozen only after
 acceptance; normal publish:beta would replace the freeze. Beta is NOT READY
 until remaining acceptance and real gates pass. No gameplay source changed.

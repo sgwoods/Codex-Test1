@@ -5,7 +5,7 @@
   "betaLabel": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
   "step6": "pass-bounded-exact-package",
   "step7": "blocked-on-music-playback-and-live-auth-acceptance",
-  "step8": "delivery-repair-tested-real-gates-pending",
+  "step8": "real-gates-and-frozen-dry-run-pass-publication-held",
   "virtualBrowserSeconds": 600,
   "virtualMaxStage": 159,
   "realSeconds": 120,
@@ -61,6 +61,11 @@
       "headless Chromium",
       "Codex built-in browser"
     ],
-    "cause": "unresolved-provider-embed-auth-or-network"
-  }
+    "cause": "unresolved-provider-embed-auth-or-network",
+    "alternatePlaylist": "also unavailable in isolated automated browser",
+    "recommendedDiagnostic": "Compare HTTPS hostedDEV/provider/ordinary browser behavior; do not assume one bad playlist"
+  },
+  "gateSourceCommit": "2412e8fd",
+  "sourcePushed": true,
+  "publicTreeUnchanged": "f7be418e7ea5ddfb70c649b5db08fe0cb030705c"
 }

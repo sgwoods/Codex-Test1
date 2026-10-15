@@ -42,6 +42,13 @@ gate/network boundaries and do not replace the real release gates. Normal
 publish:beta still rebuilds and must not be used for this freeze.
 Initial code gate correctly blocked stale review evidence; refresh is required,
 not bypassed. No beta/production publication or beta approval has occurred.
+Real full beta preflight and staged frozen dry run PASS at pushed2412e8fd. No
+beta push occurred; staged beta-only and Git blob/mode checks passed. All599
+frozen/dist beta bytes remain exact. This technical pass does not waive the
+music/live-auth acceptance hold. The alternate existing public playlist also
+reported unavailable in the isolated browser, so do not blindly switch IDs.
+Next: compare HTTPS hostedDEV/provider behavior, repair music truthfully, then
+validate any new candidate and complete private live sign-in/listening.
 Full current packet: analyses/beta-acceptance-oct15/REVIEW.md. Raw reports and
 test scripts remain owner-only private-artifacts/beta-acceptance-oct15.
 Frozen beta review surface: http://127.0.0.1:8001/ (port8000 remains DEV).

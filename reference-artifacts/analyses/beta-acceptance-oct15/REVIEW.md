@@ -48,6 +48,11 @@ recorded playlist ID and full player/network evidence remain private in music.js
 Investigate an actually playable public music source and truthful playback
 status next; any source/runtime change requires a new candidate and validation,
 not editing this freeze in place. No music repair is claimed here.
+The existing Embeddable Arcade Jukebox alternative also reported unavailable in
+an isolated automated session. Therefore simply substituting a playlist is not
+an evidence-backed repair. Next diagnostic: compare provider playback on HTTPS
+hostedDEV and an ordinary browser session, then distinguish embed/origin/API
+attachment failure from unavailable content. No external browser was opened.
 
 Initial long-test failure occurred after virtual completion while selecting the
 real-clock front door. Two subsequent setup retries exposed paused-input redraw
@@ -82,12 +87,25 @@ handling is source-reviewed, not yet exercised by publication.
 
 Two independent read-only reviewers found and closed rename/no-change defects.
 Current implementation is approved within that bounded scope, not beta acceptance.
-Initial real code-review gate blocked missing summary.json inventory; refresh
-is required, not bypassed. no-mistakes is installed but repository-unconfigured;
+Initial real code-review gate blocked missing summary.json inventory; it was
+refreshed, inspected and committed, not bypassed. no-mistakes is installed but repository-unconfigured;
 no pipeline success is claimed. Project gates remain authoritative.
 
 No beta/production publication or production-approval receipt has occurred.
-Remaining: real gates/dry-run, live account and audible acceptance, then gated
-beta publication with exact-byte/protected-lane verification. Stop on any gate
+Real code-review, full beta preflight and frozen publication dry run PASS at
+source checkpoint2412e8fd, pushed main. Authority/current-main/hostedDEV,
+documentation, audio, security and exact-root account gates all passed. The
+temporary public clone passed beta-only path and committed blob/mode checks.
+No public push occurred in that dry run. Every599frozen/dist beta file remains
+exact. This validates delivery preparation, not the failed music acceptance.
+Post-test full public Git-tree comparison matches the pre-task tree
+f7be418e7ea5ddfb70c649b5db08fe0cb030705c: DEV, beta and production unchanged.
+The result-documentation follow-up does not relabel the tested runtime8e93394b
+or imply gates were rerun at a later HEAD. The existing four-commit freshness
+window still applies to future attempts; rerun gates and stop if it expires.
+
+Remaining: resolve public music playback/status, verify live account and audible
+acceptance, then rerun gated beta publication with exact-byte/protected-lane
+verification for the accepted candidate. Stop on any gate
 failure; do not relabel, silently rebuild or weaken freshness. Raw test scripts,
 reports, screenshots and logs persist under private-artifacts/beta-acceptance-oct15.
