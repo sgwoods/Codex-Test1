@@ -14,6 +14,19 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 14 steps 4 and 5 AUTHORIZED: publish DEV ONLY through existing gates,
+verify hosted identity/smoke and unchanged beta/production, then assign/freeze a
+LOCAL beta package. No beta/production publication or beta approval is authorized.
+Starting clean pushed main7dab1d79. Live before: dev1.4.1.1/7b16af66,
+beta1.4.1-beta.1/edd6a736,production1.4.1/54398ff5. Prepare development iteration2,
+display1.4.1.2 and dated dev release notes. Platform/application versions remain
+1.4.1. Integrated package/lock version is assigned1.4.2 before publishing the
+shared clean source; the unchanged canonical promoter will produce distinct
+local1.4.2-beta.1 after hosted dev review. This avoids a second source identity
+solely for packaging. Do not relabel an old beta or bypass promotion boundaries.
+Results: analyses/dev-beta-oct14/REVIEW.md; raw pre/post lane identities and
+protected-file inventories remain private. No new gameplay tuning in this task.
+
 October 14 step 3 COMPLETE at source5e968bfd: local dev preflight passes,
 private backup condition met and sanitized source pushed/fetch-verified.
 Local/remote main matched 5e968bfd3c077baccfedbe673200d6b21443c399 after source

@@ -6,6 +6,12 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October 14: steps 4 and 5 authorized. Prepare hosted dev1.4.1.2 and verify it,
+then assign/freeze a local beta candidate only. Hosted beta/production must not
+change. Exact-package/security/runtime and sustained-play/live account/audio
+checks remain later steps. Beta publication is NOT authorized or ready.
+See analyses/dev-beta-oct14/REVIEW.md for the current release packet.
+
 October 14 step 3 COMPLETE at 5e968bfd. Local dev preflight passed. Sanitized
 source was pushed and fetch-verified. The approved private iCloud copy passes
 100 archive checks and recovery. The provider confirms 108 files uploaded with
