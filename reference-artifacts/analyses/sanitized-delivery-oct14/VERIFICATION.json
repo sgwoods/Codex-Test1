@@ -1,0 +1,33 @@
+{
+  "artifactType": "sanitized-delivery-verification",
+  "reviewedCommit": "dd8c469f9864a038b35208d45efd59356ea72fbc",
+  "baseCommit": "181d8e296a9c0324c59b0ff8a8712c35a379e7a3",
+  "preservationCommit": "7ec2c98bf6ae21ca2cbf197ef79308a0b052a696",
+  "linearNewCommitCount": 1,
+  "preservationAncestor": false,
+  "newObjects": 1831,
+  "newBlobBytes": 220076669,
+  "maximumNewBlobBytes": 3892477,
+  "largeNewBlobCount": 0,
+  "unsanitizedOriginalsNewlyReachable": 0,
+  "operationalFilesCompared": 580,
+  "operationalParity": true,
+  "transformedOriginalsVerified": 100,
+  "changedNonOperationalTextFilesScreened": 624,
+  "mediaBytePatternScreen": {
+    "png": 1062,
+    "jpeg": 4,
+    "otherBinary": 9,
+    "extensionMismatches": 1,
+    "rawBytePatternFlags": 3,
+    "metadataFlags": 0
+  },
+  "metadataFindings": [],
+  "archiveRemoteBackupVerified": false,
+  "methodHash": "21f12b96fd794288f247ee7e5f035c06e3f613814e9024d51c729a923193cc32",
+  "limitations": [
+    "Bounded metadata/credential-pattern and media-byte screening, not full secret, pixel, OCR or rights clearance.",
+    "Inherited runtime/configuration contact addresses remain unchanged.",
+    "No new delivery build, browser gameplay acceptance, preflight, source push or hosted publication performed."
+  ]
+}

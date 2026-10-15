@@ -85,3 +85,27 @@ before completion. RECOVERY.md and its helper now provide the documented contrac
 the helper's default checksum-only mode has been exercised by the lead.
 Binary/media rights and inherited existing public source identifiers remain
 outside this sanitation certification.
+
+## Committed Object Audit
+
+Reviewed content commit dd8c469f9864a038b35208d45efd59356ea72fbc has exactly one
+parent, the fetched public base. The preservation commit is not an ancestor.
+All 100 unsanitized original blobs are absent from its newly reachable objects;
+no new blob exceeds 50 MiB. Maximum new blob is 3892477 bytes. New blob payloads
+total 220076669 bytes, so this remains an evidence-rich source range, not a small
+artifact download. This is uncompressed object content, not a measured push size.
+
+Verification compares 580 files across the complete src/tools/shared trees to
+the accepted preservation checkout. All match. Scoped metadata screening passes
+624 changed non-operational text files. Binary screening inspects 1062 PNGs,
+four JPEGs and nine other binary files. Three email-like byte sequences occur in
+compressed PNG image data, not text/EXIF metadata; structural PNG metadata scan
+finds no scoped match. One historical image has a .png name but JPEG content;
+it is retained unchanged, not relabeled or claimed newly validated. No pixel/OCR
+or media-rights certification is implied.
+
+Recovery negative fixtures reject the wrong manifest type, wrong compressed hash,
+path escape and overwrite attempts. Raw verification/recovery methods and local
+fixtures are retained privately with the archive. Fresh generated output in
+VERIFICATION.json records the exact reviewed commit, not its documentation-only
+follow-up. The final branch remains local until the integration/release review.
