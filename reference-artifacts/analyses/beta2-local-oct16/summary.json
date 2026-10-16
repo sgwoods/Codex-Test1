@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "generatedAt": "2026-10-16T20:04:14.117Z",
+  "ok": true,
+  "betaLabel": "1.4.2-beta.2+build.1201.sha.a809a3d5.beta",
+  "sourceCommit": "a809a3d5478449398317babf0ec1c519e4005cd0",
+  "inventorySha256": "269397aabca99a3c5c4c72fb7bcdf48d35b58514f9efda50d766b53387babf8e",
+  "indexSha256": "e024b45be0d1bba988d0f147b2390007b7511071182ca1d9ec463b7567dd1ba6",
+  "files": 599,
+  "virtualMaxStage": 27,
+  "realStages": [
+    3,
+    7,
+    11,
+    15,
+    19,
+    23,
+    27
+  ],
+  "realSimulationDelta": 115.1360000000035,
+  "effectsSignal": {
+    "peak": 0.053157877177000046,
+    "nonzero": 1042,
+    "samples": 2411
+  },
+  "music": {
+    "firstSeconds": 3.122461,
+    "lastSeconds": 15.147545,
+    "playlistMember": "OZGRW-T2Vgk",
+    "indicator": "Mute Arcade Music",
+    "errors": []
+  },
+  "oldBetaAndDistBetaUnchanged": true,
+  "methods": [
+    {
+      "path": "prepare.js",
+      "sha256": "55e47114d410e91ada90b839e2800c8a14cfa9d2d9ee618f97cb9a9c1a551de5"
+    },
+    {
+      "path": "freeze.js",
+      "sha256": "48a589096fb00fe7bd1665b7845c06c172734abcbcf6949fef1aa8e8ee8b5cdf"
+    },
+    {
+      "path": "validate.js",
+      "sha256": "4c76f67aa33a6698a5bc39ac162f4b7f1e211c6599e9bc04555568e3c8fc09c1"
+    },
+    {
+      "path": "acceptance-isolated.js",
+      "sha256": "f6fe157bc43c1e417ebd09d5db4b13aad710017bf474037891326b7f4ff9a0f2"
+    },
+    {
+      "path": "music.js",
+      "sha256": "1f4b3f350a7f875e507897f7f2b67485ff922dc571f02a703ab6cfdd9a671570"
+    },
+    {
+      "path": "postcheck.js",
+      "sha256": "83053e27108c66dd32b3bd2c19a6e12fa51cb51338f5438c445e0c29b6580683"
+    }
+  ],
+  "limitations": [
+    "Not live authentication or human audible approval.",
+    "One unseeded tour; virtual time is not real-time audio or all-seed/perfect-route conformance.",
+    "Tour missing-response monitoring covers virtual page, not every failed real-time network request.",
+    "New source requires main integration, matching hosted DEV and fresh final release gates."
+  ],
+  "totalBytes": 86229332,
+  "privateAudioCompared": 50,
+  "privateAudioMatches": 0,
+  "trackedSecurityObservations": 0,
+  "runtimeChecks": [
+    {
+      "name": "runtime",
+      "status": 0,
+      "method": "tools/harness/check-public-package-runtime.js",
+      "methodSha256": "b39a8da5a5a21dcd52d86b3818e9e3158f67a11b3dcbcc7de5bd785b56569c21"
+    },
+    {
+      "name": "account",
+      "status": 0,
+      "method": "tools/harness/check-beta-account-boundary.js",
+      "methodSha256": "c7f16457dc018b48e5cb16d5fe9ccbcc30b5b6d6efd6f26c20f22948422abf7a"
+    },
+    {
+      "name": "status",
+      "status": 0,
+      "method": "tools/harness/check-arcade-music-playback-status.js",
+      "methodSha256": "67087a147ca11414db50d1c34287b003ae40cdbd5b05a1c32e4e973ee9b160a2"
+    }
+  ],
+  "liveAuthentication": "unverified",
+  "humanAudibility": "unverified",
+  "independentReview": {
+    "freeze": "no blocker",
+    "music": "bounded automated acceptance approved; not independent provider track-ID proof"
+  },
+  "published": false,
+  "mainIntegrated": false,
+  "sourcePushed": false,
+  "initialAttempts": {
+    "tour600": "runner timeout; not pass",
+    "isolatedSetup": "redraw-sensitive control failure; corrected",
+    "music": "non-exported helper and hidden provider title-link assumptions corrected"
+  },
+  "noMistakes": "not initialized; existing repo code-review gate used"
+}

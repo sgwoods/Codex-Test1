@@ -14,6 +14,39 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 16 beta.2 preparation: source `a809a3d5`, clean feature branch build
+`1.4.1.3+build.1201.sha.a809a3d5`; local beta
+`1.4.2-beta.2+build.1201.sha.a809a3d5.beta` at http://localhost:8002/.
+Source metadata assigns distinct beta.2 and DEV iteration3; platform/game
+versions and runtime bytes above `73167405` are unchanged. An unchanged copy of
+the canonical promoter/PDF tool ran in isolated private staging; primary
+dist/beta and the October14 beta.1 freeze were not replaced. New beta/dev input
+are read-only, with inventories, source/tool hashes and preparation methods.
+599 files, index SHA256
+e024b45be0d1bba988d0f147b2390007b7511071182ca1d9ec463b7567dd1ba6.
+All six tracked security observations are false; all50 private-audio hashes
+are excluded. Exact new-beta runtime/flows, account surface and seven status
+fixtures pass. Code review initially blocked stale evidence; refreshed gate
+passes with two advisory P2 tags (fixture-only empty innerHTML, release metadata
+and npm script review). Independent freeze review found no blocker.
+Separate bounded tour PASS:120 browser seconds toStage27,120 real seconds
+Stage3->27, no runtime fault and measurable effects signal. Real online media
+PASS: five monotonic samples3.122->15.148s, same nonempty media source,
+unpaused/unmuted/ready4, no ad/error, correct playing indicator and consistent
+application playlist metadata. Provider track ID was not independently available.
+Initial600-second tour attempt timed out; isolated setup and music probe errors
+were corrected without changing candidate bytes. Failed reports are retained;
+no600-second new-candidate pass is claimed. Live sign-in and human beta listening
+are requested, not verified. No source push, main integration or deployment.
+Hosted DEV remains8e93394b, so this is a provisional local candidate, not a
+publishable or hosted-reviewed beta. New candidate requires matching DEV review,
+current main/authority and final freshness/security/review gates before any
+explicitly approved beta publication. Do not run ordinary promote:beta against
+the preserved dist/beta. Primary private packet:
+private-artifacts/beta-candidate-music-oct16/. Current DEV remains8000; old
+beta.1 remains8001; new beta.2 review is8002.
+Public results: reference-artifacts/analyses/beta2-local-oct16/REVIEW.md.
+
 October 16 local-review/status repair: branch
 `codex/local-review-music-status-oct16`, baseline `24ef849c`. Active browser
 links now use localhost; numeric loopback bindings and hosted URLs are separate.

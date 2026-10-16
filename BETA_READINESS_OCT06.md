@@ -6,6 +6,23 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October 16 replacement preparation: distinct local beta.2 is frozen at
+http://localhost:8002/, full identity
+`1.4.2-beta.2+build.1201.sha.a809a3d5.beta`. Source `a809a3d5` is clean at
+preparation on the feature branch; local DEV is1.4.1.3 build1201. Both beta.1
+freeze and primary dist/beta remain unchanged. Exact beta.2 runtime/flows,
+account-surface, status and bounded static privacy/security checks pass.
+Code-review freshness was repaired, not bypassed. Bounded120-second virtual and
+120-second real-time tours reachStage27 with measurable effects signal and no
+runtime fault. Real media3.122->15.148s matches playing status, unpaused/unmuted,
+with consistent application playlist metadata; not independent provider track-ID
+proof or human listening. Initial tour/probe method failures remain in evidence;
+no new600-second soak pass is claimed. Live sign-in/listening remains unverified.
+Hosted DEV is still8e93394b,
+not this candidate. Main integration, matching authorized DEV review and final
+release gates remain required. No push/deployment/approval. NOT BETA-READY.
+Primary evidence: private-artifacts/beta-candidate-music-oct16/.
+
 October 16 status repair is locally validated on
 `codex/local-review-music-status-oct16` (baseline `24ef849c`). Browser URLs now
 use localhost. Confirmed player state repairs the startup indicator, and
