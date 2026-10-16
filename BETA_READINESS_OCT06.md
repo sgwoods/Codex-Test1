@@ -6,6 +6,18 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October 16 status repair is locally validated on
+`codex/local-review-music-status-oct16` (baseline `24ef849c`). Browser URLs now
+use localhost. Confirmed player state repairs the startup indicator, and
+iframe-only fallback is unconfirmed rather than falsely playing. Seven runtime
+fixtures, browser dock/music checks, viewer/origin checks, build and syntax/diff
+checks pass. Real DEV media advances unpaused/unmuted with the correct indicator.
+All 599 frozen beta and dist/beta files remain exact; its localhost runtime/flows
+pass. The frozen candidate does NOT contain this source repair. To release it,
+prepare and validate a new candidate through existing gates. No beta publication
+or acceptance is implied; live login and human listening remain outstanding.
+See reference-artifacts/analyses/music-status-oct16/REVIEW.md.
+
 October16 correction: local frozen beta music playback is verified at
 http://localhost:8001/ without changing a single frozen file or playlist.
 Actual media clock advances unpaused/unmuted, not merely a playing label,

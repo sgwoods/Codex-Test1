@@ -108,6 +108,9 @@ function arcadeMusicPlaylistId(){
 function arcadeMusicEffectiveMuted(){
  return !!(arcadeMusicMuted||ARCADE_MUSIC.forceMuted);
 }
+function arcadeMusicSessionActive(){
+ return ['playing','loading','unconfirmed','paused','ended'].includes(ARCADE_MUSIC.state);
+}
 function arcadeMusicState(){
  const config=arcadeMusicResolvedConfig();
  const effectiveMuted=arcadeMusicEffectiveMuted();
@@ -140,9 +143,9 @@ function arcadeMusicState(){
 }
 function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  const playing=ARCADE_MUSIC.state==='playing';
- const fallbackPlaying=playing&&ARCADE_MUSIC.fallbackMode==='iframe';
+ const fallbackUnconfirmed=ARCADE_MUSIC.state==='unconfirmed';
  const config=arcadeMusicResolvedConfig();
  const unavailable=ARCADE_MUSIC.state==='unavailable'||!config.playlistId;
  const warming=!!ARCADE_MUSIC.warming;
@@ -166,9 +169,11 @@ function syncArcadeMusicUi(){
     ?'Arcade Music warming until the opening ad finishes'
     :(ARCADE_MUSIC.state==='loading'
     ?'Starting Arcade Music'
-    :(fallbackPlaying
-      ?'Stop Arcade Music'
-      :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'))))));
+    :(fallbackUnconfirmed
+      ?'Stop Arcade Music (playback unconfirmed)'
+      :(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'
+       ?'Resume Arcade Music'
+       :(temporaryMuted?'Enable Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music')))))));
  arcadeMusicToggleBtn.setAttribute('aria-label',label);
  arcadeMusicToggleBtn.title=label;
  arcadeMusicToggleBtn.dataset.actionTip=label;
@@ -227,6 +232,28 @@ function clearArcadeMusicWarmProbe(){
  if(timerId)clearTimeout(timerId);
  ARCADE_MUSIC.warmProbeTimeoutId=0;
 }
+function clearArcadeMusicStateProbe(){
+ if(ARCADE_MUSIC.stateProbeTimeoutId)clearTimeout(ARCADE_MUSIC.stateProbeTimeoutId);
+ ARCADE_MUSIC.stateProbeTimeoutId=0;
+}
+function scheduleArcadeMusicStateProbe(){
+ clearArcadeMusicStateProbe();
+ const player=ARCADE_MUSIC.player;
+ const mountToken=ARCADE_MUSIC.mountToken;
+ if(!ARCADE_MUSIC.requested||!player||ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01')return;
+ ARCADE_MUSIC.stateProbeTimeoutId=setTimeout(()=>{
+  ARCADE_MUSIC.stateProbeTimeoutId=0;
+  if(!ARCADE_MUSIC.requested||player!==ARCADE_MUSIC.player||mountToken!==ARCADE_MUSIC.mountToken)return;
+  // Recover missed provider callbacks without repeatedly issuing playback commands.
+  try{
+   const code=player.getPlayerState?.();
+   if(Number.isFinite(code)&&code!==ARCADE_MUSIC.lastPlayerStateCode){
+    handleArcadeMusicPlayerStateChange({target:player,data:code});
+   }
+  }catch{}
+  if(ARCADE_MUSIC.requested&&player===ARCADE_MUSIC.player&&mountToken===ARCADE_MUSIC.mountToken)scheduleArcadeMusicStateProbe();
+ },1000);
+}
 function resolveArcadeMusicIframe(frameRef=null){
  const candidateFrame=
   (frameRef&&typeof frameRef.tagName==='string'&&String(frameRef.tagName).toLowerCase()==='iframe'&&frameRef.isConnected)
@@ -236,8 +263,6 @@ function resolveArcadeMusicIframe(frameRef=null){
   ARCADE_MUSIC.iframe=candidateFrame;
   return candidateFrame;
  }
- noteArcadeMusicFrame();
- if(ARCADE_MUSIC.iframe)return ARCADE_MUSIC.iframe;
  const domFrame=
   (arcadeMusicFrameHost&&typeof arcadeMusicFrameHost.querySelector==='function'
    ?arcadeMusicFrameHost.querySelector('iframe#arcadeMusicFrame, iframe')
@@ -250,14 +275,14 @@ function activateArcadeMusicIframeFallback(reason='api_attach_timeout',frameRef=
  const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
  if(!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
  if(!resolveArcadeMusicIframe(frameRef))return false;
- if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='playing')return true;
+ if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='unconfirmed')return true;
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  ARCADE_MUSIC.requested=true;
  if(!ARCADE_MUSIC.activePlaylistId)ARCADE_MUSIC.activePlaylistId=playlistId;
  if(!ARCADE_MUSIC.activePlaylistSource)ARCADE_MUSIC.activePlaylistSource=arcadeMusicResolvedConfig().playlistSource;
  ARCADE_MUSIC.fallbackMode='iframe';
- ARCADE_MUSIC.state='playing';
+ ARCADE_MUSIC.state='unconfirmed';
  syncArcadeMusicUi();
  if(typeof console!=='undefined'&&typeof console.warn==='function'){
   console.warn('[Arcade Music] Falling back to iframe-only playlist playback; YouTube player API did not attach.', {
@@ -354,12 +379,15 @@ function mountArcadeMusicPlayer(mountToken,opts={},config=arcadeMusicResolvedCon
  };
  if(useHarnessVideo)playerConfig.videoId='M7lc1UVf-VE';
  ARCADE_MUSIC.player=new window.YT.Player('arcadeMusicFrame',playerConfig);
+ ARCADE_MUSIC.lastPlayerStateCode=null;
+ scheduleArcadeMusicStateProbe();
  return true;
 }
 function destroyArcadeMusicPlayer(){
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
  clearArcadeMusicWarmProbe();
+ clearArcadeMusicStateProbe();
  const player=ARCADE_MUSIC.player;
  if(player&&typeof player.destroy==='function'){
   try{player.destroy()}catch{}
@@ -429,7 +457,8 @@ function loadArcadeMusicPlaylistIndex(player=ARCADE_MUSIC.player,index=0){
 }
 function handleArcadeMusicPlayerReady(event){
  const player=event?.target||null;
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=null;
  noteArcadeMusicFrame();
  const harnessPlaylist=ARCADE_MUSIC.activePlaylistId==='PLarcadeMusicHarness01';
  ARCADE_MUSIC.state=harnessPlaylist?'playing':'loading';
@@ -515,7 +544,9 @@ function scheduleArcadeMusicWarmProbe(delayMs=900){
  const mountToken=+ARCADE_MUSIC.mountToken||0;
  ARCADE_MUSIC.warmProbeTimeoutId=setTimeout(()=>{
   if(!ARCADE_MUSIC.warming||!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken)return;
-  if(currentArcadeMusicTrackInPlaylist()){
+  let playing=false;
+  try{playing=ARCADE_MUSIC.player?.getPlayerState?.()===1}catch{}
+  if(playing&&currentArcadeMusicTrackInPlaylist()){
    completeArcadeMusicWarmup('warm_probe');
    return;
   }
@@ -591,7 +622,8 @@ function skipArcadeMusicBlockedTrack(code=0,eventTarget=null){
 function handleArcadeMusicPlayerStateChange(event){
  const player=event?.target||ARCADE_MUSIC.player||null;
  const stateCode=Number(event?.data);
- if(player)ARCADE_MUSIC.player=player;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
+ ARCADE_MUSIC.lastPlayerStateCode=stateCode;
  noteArcadeMusicFrame();
  if(stateCode===1){
   clearArcadeMusicStartupTimeout();
@@ -628,10 +660,16 @@ function handleArcadeMusicPlayerStateChange(event){
   }
   return;
  }
+ if(stateCode===0||stateCode===2){
+  if(!ARCADE_MUSIC.warming)clearArcadeMusicStartupTimeout();
+  ARCADE_MUSIC.state=stateCode===0?'ended':'paused';
+  syncArcadeMusicUi();
+ }
 }
 function handleArcadeMusicPlayerError(event){
  const code=Number(event?.data)||0;
  const player=event?.target||ARCADE_MUSIC.player||null;
+ if(!ARCADE_MUSIC.requested||!player||player!==ARCADE_MUSIC.player)return;
  if(skipArcadeMusicBlockedTrack(code,player))return;
  clearArcadeMusicStartupTimeout();
  if(ARCADE_MUSIC.warming){
@@ -788,12 +826,16 @@ function setArcadeMusicMuted(next,opts={}){
  ));
 }
 function toggleArcadeMusicMute(){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(!active){
   startArcadeMusic();
   return;
  }
  if(ARCADE_MUSIC.warming)return;
+ if(ARCADE_MUSIC.state==='paused'||ARCADE_MUSIC.state==='ended'){
+  try{ARCADE_MUSIC.player?.playVideo?.()}catch{}
+  return;
+ }
  if(ARCADE_MUSIC.forceMuted){
   ARCADE_MUSIC.forceMuted=false;
   applyArcadeMusicVolume();
@@ -816,7 +858,7 @@ function toggleArcadeMusic(){
  toggleArcadeMusicMute();
 }
 function maybeAutoWarmArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||ARCADE_MUSIC.autoWarmAttempted)return false;
  const config=arcadeMusicResolvedConfig();
  if(!config.playlistId||!arcadeMusicFrameHost||config.playlistId==='PLarcadeMusicHarness01')return false;
@@ -830,7 +872,7 @@ function maybeAutoWarmArcadeMusic(opts={}){
  });
 }
 function maybeResumeRequestedArcadeMusic(opts={}){
- const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
+ const active=arcadeMusicSessionActive();
  if(active||!ARCADE_MUSIC.requested)return false;
  if(opts.requireInteraction!==false&&!aud)return false;
  const config=arcadeMusicResolvedConfig();
@@ -845,7 +887,7 @@ function syncArcadeMusicForGamePackChange(){
  const config=arcadeMusicResolvedConfig();
  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  syncArcadeMusicUi();
- const active=!!(ARCADE_MUSIC.requested&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'||ARCADE_MUSIC.state==='unavailable'));
+ const active=!!(ARCADE_MUSIC.requested&&(arcadeMusicSessionActive()||ARCADE_MUSIC.state==='unavailable'));
  if(!active){
   maybeResumeRequestedArcadeMusic({silent:true,source:'pack_change'});
   return;

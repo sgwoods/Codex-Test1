@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { localUrl } = require('../dev/local-host-config');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const STATIC_ROOT = __dirname;
@@ -225,5 +226,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(JSON.stringify({ ok: true, url: `http://${HOST}:${PORT}/` }, null, 2));
+  console.log(JSON.stringify({ ok: true, url: localUrl(server.address().port, '/', { browser: true }) }, null, 2));
 });

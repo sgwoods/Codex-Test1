@@ -74,9 +74,9 @@ That creates or reuses `./Codex-Test1` in the folder where you run it.
 If it succeeds cleanly, localhost should be ready immediately afterward:
 
 - game:
-  - `http://127.0.0.1:8000/`
+  - `http://localhost:8000/`
 - viewer:
-  - `http://127.0.0.1:4311/`
+  - `http://localhost:4311/`
 
 Preferred rule:
 
@@ -161,7 +161,7 @@ Do not commit that file.
    ```
 4. Open:
    - `http://localhost:8000`
-   - `http://127.0.0.1:4311/`
+   - `http://localhost:4311/`
 
 If you only want the game without the viewer, the lower-level command is:
 
@@ -210,7 +210,7 @@ npm run log-viewer
 
 Open:
 
-- `http://127.0.0.1:4311/`
+- `http://localhost:4311/`
 
 The viewer expects artifacts under:
 

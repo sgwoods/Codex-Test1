@@ -159,8 +159,13 @@ npm run local:resume
 
 Then confirm:
 
-- game: `http://127.0.0.1:8000/`
-- viewer: `http://127.0.0.1:4311/`
+- game: `http://localhost:8000/`
+- local beta: `http://localhost:8001/` when serving the accepted beta package
+- viewer: `http://localhost:4311/`
+
+Use localhost for browser links, including online-media review. Keep servers
+bound to 127.0.0.1; this is separate from the browser hostname. Changing browser
+origin does not migrate saved preferences or sign-in state automatically.
 
 Stop cleanly with:
 

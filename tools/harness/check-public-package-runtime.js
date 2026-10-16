@@ -5,6 +5,7 @@ const http = require('http');
 const path = require('path');
 const { createHash } = require('crypto');
 const { launchHarnessBrowser } = require('./browser-launch');
+const { LOCAL_BIND_HOST, localOrigin } = require('../dev/local-host-config');
 
 async function clickLiveControl(page, selector){
   const target = page.locator(selector);
@@ -174,8 +175,8 @@ async function main(){
   let browser;
   const errors = [], missing = [], privateRequests = [], blocked = [], results = [], securityPages = [];
   try{
-    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-    const origin = `http://127.0.0.1:${server.address().port}`;
+    await new Promise(resolve => server.listen(0, LOCAL_BIND_HOST, resolve));
+    const origin = localOrigin(server.address().port, { browser: true });
     browser = await launchHarnessBrowser();
     const policyContext = await browser.newContext({ serviceWorkers: 'block' });
     try{

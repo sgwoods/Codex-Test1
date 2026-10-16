@@ -14,6 +14,30 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 16 local-review/status repair: branch
+`codex/local-review-music-status-oct16`, baseline `24ef849c`. Active browser
+links now use localhost; numeric loopback bindings and hosted URLs are separate.
+Port 8000 serves this checkout's dist/dev and was restricted from wildcard to
+127.0.0.1. Port 8001 still serves the unchanged frozen beta on loopback.
+Music status now uses a one-second player-state probe to recover missed callbacks.
+Iframe-only playback is explicitly unconfirmed, never proof of playing/audible.
+Paused/end status, resume, warmup playlist membership, forced mute, stale callback
+rejection and timer cleanup have focused actual-runtime fixture coverage.
+Independent review found a paused-metadata warmup defect; it was repaired and
+re-reviewed with no remaining blocker. Seven focused cases, browser dock/music
+checks, localhost/viewer checks, development build and syntax/diff checks pass.
+Real development media advances 3.527 -> 15.551s, unpaused/unmuted, readyState4,
+while the button correctly says Mute Arcade Music; no page errors.
+Frozen beta runtime/flows pass with localhost, and all 599 frozen/dist-beta file
+hashes remain exact. This status repair is NOT in that beta. No publication,
+playlist/audio-source change or gameplay tuning occurred. A future beta that
+includes this repair requires a new reviewed candidate, not mutation of the
+existing freeze. Next: review the current localhost build, then prepare that
+candidate through the existing gates; live sign-in and human beta listening
+remain separate acceptance conditions. Packet:
+reference-artifacts/analyses/music-status-oct16/REVIEW.md. Raw media report,
+method, screenshot and validation logs: private-artifacts/music-origin-oct16/.
+
 October16 music-origin investigation, baseline clean pushed148f82e8. Human
 confirmed sound/music on development localhost. Fresh exact frozen beta at
 http://localhost:8001/ also plays: actual video clock advances, readyState4,

@@ -151,7 +151,7 @@ These are not external services.
 - Local game server:
   - `http://localhost:8000`
 - Local log viewer:
-  - `http://127.0.0.1:4311/`
+  - `http://localhost:4311/`
 - Used for:
   - development
   - artifact review

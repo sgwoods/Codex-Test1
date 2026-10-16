@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "harness:check:arcade-music-playback-status": "node tools/harness/check-arcade-music-playback-status.js",
+    "harness:check:local-browser-origin": "node tools/harness/check-local-browser-origin.js",
     "build:production": "node tools/build/build-index.js --lane production",
     "white-paper:pdf:dev": "node tools/build/render-white-paper-pdf.js --lane dev",
     "white-paper:pdf:beta": "node tools/build/render-white-paper-pdf.js --lane beta",

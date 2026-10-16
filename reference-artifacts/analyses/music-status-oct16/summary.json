@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseline": "24ef849c9869ede45e504f8f0b7c73f2f5bb7277",
+  "branch": "codex/local-review-music-status-oct16",
+  "sourceHashes": [
+    {
+      "path": "src/js/01-runtime-shell.js",
+      "sha256": "7275f14b7591518e95d7a92d15ce9333187e4db3414f3f98eb815cfeaebfca9e"
+    },
+    {
+      "path": "tools/harness/check-arcade-music-playback-status.js",
+      "sha256": "67087a147ca11414db50d1c34287b003ae40cdbd5b05a1c32e4e973ee9b160a2"
+    },
+    {
+      "path": "tools/harness/check-local-browser-origin.js",
+      "sha256": "0335728caa4cb6fb4948e4af693eb45a1d6e598bfa44a7dc793e1574532e321a"
+    },
+    {
+      "path": "tools/harness/check-public-package-runtime.js",
+      "sha256": "b39a8da5a5a21dcd52d86b3818e9e3158f67a11b3dcbcc7de5bd785b56569c21"
+    },
+    {
+      "path": "tools/log-viewer/server.js",
+      "sha256": "68fae8b534c96073213a61f1cc2c6d13d4f7dcfde37e41ce5bb19c434975e9d4"
+    }
+  ],
+  "checks": [
+    {
+      "name": "status",
+      "status": 0,
+      "method": "tools/harness/check-arcade-music-playback-status.js",
+      "methodSha256": "67087a147ca11414db50d1c34287b003ae40cdbd5b05a1c32e4e973ee9b160a2"
+    },
+    {
+      "name": "origin",
+      "status": 0,
+      "method": "tools/harness/check-local-browser-origin.js",
+      "methodSha256": "0335728caa4cb6fb4948e4af693eb45a1d6e598bfa44a7dc793e1574532e321a"
+    },
+    {
+      "name": "dock",
+      "status": 0,
+      "method": "tools/harness/check-dock-button-actions.js",
+      "methodSha256": "cd210cd785c6e3b5075e1b66ef7c0dabdc010a641911e223fa115427c84c13af"
+    },
+    {
+      "name": "product",
+      "status": 0,
+      "method": "tools/harness/check-arcade-music-product-playback.js",
+      "methodSha256": "c9137bdc3fe40444d1d65737f684da3de7fba48beae6b1ed731e19ae8941ccfe"
+    }
+  ],
+  "onlineProbe": {
+    "method": "private-artifacts/music-origin-oct16/repaired-local-probe.js",
+    "methodSha256": "d0f44fcab63d840c852a2a40a94d73cb43a3f26f38dc259732c9d51638d06bd8",
+    "reportSha256": "4ad1004f12a637eb1f575107c599dd810ab1e18d5c64d175ede4f10e53d141f8",
+    "build": "1.4.1.2+build.1199.sha.24ef849c.dirty",
+    "pageErrors": 0,
+    "firstMediaSeconds": 3.526945,
+    "lastMediaSeconds": 15.551164,
+    "paused": false,
+    "muted": false,
+    "readyState": 4,
+    "indicator": "Mute Arcade Music"
+  },
+  "frozenBeta": {
+    "source": "8e93394bbc290d374d005cf13206e42e8c099b78",
+    "files": 599,
+    "unchanged": true,
+    "indexSha256": "72f465c5ca9e53cd9cf69ebf34c0cc5be665a129ef4c1fca8b416210c775d313",
+    "runtimeFlows": "pass",
+    "onlineMusicNotExercisedByFlowTest": true
+  },
+  "independentReview": {
+    "localUrl": "no blocker; historical MacBook prompt excluded",
+    "music": "one P2 fixed; re-review no blocker"
+  },
+  "published": false,
+  "limitations": [
+    "Player-interface fixtures are not real audio or provider acceptance.",
+    "Frozen beta does not include runtime repair.",
+    "Live login and human beta listening remain unverified."
+  ]
+}
