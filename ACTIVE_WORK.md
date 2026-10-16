@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 15, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 16, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,28 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October16 music-origin investigation, baseline clean pushed148f82e8. Human
+confirmed sound/music on development localhost. Fresh exact frozen beta at
+http://localhost:8001/ also plays: actual video clock advances, readyState4,
+unpaused and unmuted after the ordinary Enable Arcade Music button. Reproduced
+in both isolated Chromium and Codex built-in browser. At127.0.0.1:8001 the same
+package showed unavailable/zero media clock in the built-in browser. Initial
+automated IP/hosted probes stopped on a disabled warmup button; those timeouts
+alone are not proof of playback failure. Longer follow-up is recorded separately.
+Use localhost for local browser review, consistent with local-host-config.js;
+the server can still bind127.0.0.1. Earlier IP review links were misleading.
+No frozen package, playlist, game source, beta or production lane was changed.
+All599frozen/dist beta hashes remain exact. Browser beta music was enabled by
+normal UI. Local media playback is established, not human audible approval,
+live login or hosted-beta acceptance. The provider's deeper IP/origin restriction
+is not proved. Longer hostedDEV check also plays unmuted (media1.785->13.810s)
+while its button remains Starting Arcade Music. Startup/fallback status needs
+a separate bounded repair; do not confuse status text with actual media.
+Packet: analyses/music-origin-oct16/REVIEW.md; primary private reports/methods
+and screenshots: private-artifacts/music-origin-oct16. Do not infer release
+approval from this local diagnosis. Historical October15 blocker below is now
+narrowed by these measured local-host results.
 
 October 15: human authorized steps6/7/8, including gated beta publication if
 acceptance passes. Production is NOT authorized. Source baseline b7ce2898;
@@ -51,7 +73,8 @@ Next: compare HTTPS hostedDEV/provider behavior, repair music truthfully, then
 validate any new candidate and complete private live sign-in/listening.
 Full current packet: analyses/beta-acceptance-oct15/REVIEW.md. Raw reports and
 test scripts remain owner-only private-artifacts/beta-acceptance-oct15.
-Frozen beta review surface: http://127.0.0.1:8001/ (port8000 remains DEV).
+Frozen beta review surface (corrected October16): http://localhost:8001/
+(port8000 remains DEV; the earlier IP-host link failed online music review).
 
 October 14 steps 4 and 5 COMPLETE. DEV publication passed preflight, PDF,
 review/publish gates, hosted identity verification and public-safe browser smoke.

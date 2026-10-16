@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseline": "148f82e8",
+  "conclusion": "Use localhost:8001 for frozen beta review; no package or playlist change justified",
+  "initialMethodSha256": "ff38fe3e0b3277d83cff51ec4020247ed9e2d0418b56e0c93039130589c49ffd",
+  "initial": [
+    {
+      "url": "http://localhost:8000/",
+      "build": {
+        "label": "1.4.1.2+build.1195.sha.8e93394b",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "development"
+      },
+      "clickFailure": null,
+      "failure": null,
+      "first": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 3.485978,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "last": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 15.508328,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "button": "Mute Arcade Music"
+    },
+    {
+      "url": "http://127.0.0.1:8000/",
+      "build": {
+        "label": "1.4.1.2+build.1195.sha.8e93394b",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "development"
+      },
+      "clickFailure": null,
+      "failure": "locator.click: Timeout 8000ms exceeded."
+    },
+    {
+      "url": "http://localhost:8001/",
+      "build": {
+        "label": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "production beta"
+      },
+      "clickFailure": null,
+      "failure": null,
+      "first": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 3.557514,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "last": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 15.614485,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "button": "Mute Arcade Music"
+    },
+    {
+      "url": "http://127.0.0.1:8001/",
+      "build": {
+        "label": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "production beta"
+      },
+      "clickFailure": null,
+      "failure": "locator.click: Timeout 8000ms exceeded."
+    },
+    {
+      "url": "https://sgwoods.github.io/Aurora-Galactica/dev/",
+      "build": {
+        "label": "1.4.1.2+build.1195.sha.8e93394b",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "development"
+      },
+      "clickFailure": null,
+      "failure": "locator.click: Timeout 8000ms exceeded."
+    }
+  ],
+  "followUp": [
+    {
+      "url": "http://localhost:8001/",
+      "build": {
+        "label": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "production beta"
+      },
+      "clickFailure": null,
+      "failure": null,
+      "first": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 3.506297,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "last": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 15.549808,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "button": "Mute Arcade Music"
+    },
+    {
+      "url": "http://127.0.0.1:8001/",
+      "build": {
+        "label": "1.4.2-beta.1+build.1195.sha.8e93394b.beta",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "production beta"
+      },
+      "clickFailure": null,
+      "failure": null,
+      "first": [
+        {
+          "error": "This video is unavailable",
+          "unavailable": true,
+          "videos": [
+            {
+              "time": 0,
+              "paused": true,
+              "muted": false,
+              "readyState": 0,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "last": [
+        {
+          "error": "This video is unavailable",
+          "unavailable": true,
+          "videos": [
+            {
+              "time": 0,
+              "paused": true,
+              "muted": false,
+              "readyState": 0,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "button": "Starting Arcade Music"
+    },
+    {
+      "url": "https://sgwoods.github.io/Aurora-Galactica/dev/",
+      "build": {
+        "label": "1.4.1.2+build.1195.sha.8e93394b",
+        "commit": "8e93394bbc290d374d005cf13206e42e8c099b78",
+        "channel": "development"
+      },
+      "clickFailure": null,
+      "failure": null,
+      "first": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 1.784794,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "last": [
+        {
+          "error": "",
+          "unavailable": false,
+          "videos": [
+            {
+              "time": 13.810012,
+              "paused": false,
+              "muted": false,
+              "readyState": 4,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "button": "Starting Arcade Music"
+    }
+  ],
+  "betaFilesUnchanged": true,
+  "betaPublished": false,
+  "productionPublished": false,
+  "limitations": [
+    "Provider underlying origin restriction not proved",
+    "Initial short click timeouts did not measure failed-origin media",
+    "Media playback is not human audibility or live-login acceptance"
+  ],
+  "followUpMethodSha256": "4c47e07dec0bc3fd5480e8af45185fa7d22d617265e7a01c49fcf90043517528",
+  "hostedDevMedia": "unmuted-advancing-ready4; status still loading",
+  "independentReview": "Bounded read-only review; no promotion defect established"
+}

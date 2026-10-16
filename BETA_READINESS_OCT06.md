@@ -1,10 +1,22 @@
 # Beta Candidate Readiness
 
-Updated October 15, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
+Updated October 16, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
 Scope: Aurora correctness and release hardening. No beta or production publication
 is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
+
+October16 correction: local frozen beta music playback is verified at
+http://localhost:8001/ without changing a single frozen file or playlist.
+Actual media clock advances unpaused/unmuted, not merely a playing label,
+in isolated Chromium and the built-in browser. The prior127.0.0.1:8001 review
+origin failed; use the configured localhost browser hostname instead. This
+narrows the October15 music blocker, not a universal provider-policy diagnosis.
+Hosted music/live login/human beta listening and final current gates remain
+separate acceptance conditions. HostedDEV media playback also passes in a longer
+probe, but its Starting indicator lags actual unmuted playback. A status/API
+synchronization repair remains. No beta/production publication. No gameplay
+or audio-source change. See analyses/music-origin-oct16/REVIEW.md.
 
 October15: step6 exact frozen beta checks PASS. Both games, 13 page policies,
 public channel/account surfaces, ordinary results/restart, settings persistence
