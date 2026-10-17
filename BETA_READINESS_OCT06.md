@@ -6,6 +6,20 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October17 beta.3 local candidate READY FOR HUMAN REVIEW at
+http://localhost:8002/: `1.4.2-beta.3+build.1205.sha.6e51c9b0.beta`.
+This replaces only the review server root, not either preserved older freeze or
+primary dist/beta. Exact recovery UI, runtime/account,12 lifecycle and7 music
+status checks pass; real media playback also passes with truthful status.
+All599 new files match the read-only inventory;50 private audio hashes excluded,
+zero tracked security observations. Human must refresh/confirm beta.3, request
+a fresh reset email and complete new-password save plus password-based sign-in.
+That acceptance and human audio listening are NOT yet established. Existing tabs
+may still run beta.2; same origin retains storage/session. No account action was
+automated. No push/deploy/approval. Hosted DEV is still8e93394b, so integration,
+matching authorized DEV review and final release gates remain. NOT BETA-READY.
+Packet: analyses/beta3-local-oct17/REVIEW.md.
+
 October17 local repair complete: recovery now opens the new-password form and
 persists through ordinary auth events; explicit Save/Cancel/sign-out is tested.
 Twelve actual-module cases, DEV/public-fixture browser checks, desktop/mobile

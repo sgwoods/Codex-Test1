@@ -14,6 +14,35 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October17 beta.3 is prepared and now served at the stable review origin
+http://localhost:8002/. Refresh existing beta.2 tabs before inspection; server
+identity is not proof that an already-open tab has reloaded. Full new identity:
+`1.4.2-beta.3+build.1205.sha.6e51c9b0.beta`, clean preparation source
+`6e51c9b0a3b8954fb2a7f61194cc9e81683d8b13`, DEV1.4.1.4 build1205 on8000.
+Separate read-only599-file freeze, canonical isolated promotion/PDF and inventory
+retained at private-artifacts/beta-candidate-recovery-oct17/. Beta.1, beta.2 and
+primary dist/beta remain byte-for-byte exact; only the8002 serving root changed.
+Exact beta.3 recovery browser, runtime/flows, public account,12 lifecycle and7
+music-status cases PASS. Desktop/mobile recovery screenshots inspected. Public
+checks use fake auth with external traffic blocked, never real credentials.
+Real music separately PASS: five monotonic samples3.221->15.249s, same media
+source, ready4/unpaused/unmuted, correct playing indicator, no ad/page/provider
+errors. Playlist metadata is application-derived, not independent provider-ID
+proof.50 private audio hashes excluded; all six tracked security observations
+false. Independent freeze review found no blocker. These bounded checks are not
+full security or sustained/all-seed gameplay acceptance; no new long soak claimed.
+The human has been asked to refresh/confirm beta.3, sign out, request a fresh
+reset email, explicitly save a new password and then sign out/in with it. Do not
+reuse or request their token/link/password. Live recovery/password login and
+human listening remain unverified until reported. Same origin retains human
+storage/session; no account action or storage change was automated.
+No main integration, source push or hosted publication. Hosted DEV still8e93394b;
+current main/matching authorized DEV review/final gates remain required. Initial
+review gate correctly blocked the new release note; refreshed code-review gate
+now passes with zeroP0/P1 and two advisoryP2 tags, not a full release waiver.
+Public packet: analyses/beta3-local-oct17/REVIEW.md. Next: complete human
+acceptance, then integrate/review matching DEV through existing release gates.
+
 October 17 password-recovery repair is locally implemented and validated above
 `ce9f0b74` on codex/local-review-music-status-oct16. Recovery intent is captured
 before SDK URL cleanup; the listener registers before getSession, opens the

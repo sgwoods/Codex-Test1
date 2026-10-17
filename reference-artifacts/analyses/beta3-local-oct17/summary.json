@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "candidate": "1.4.2-beta.3+build.1205.sha.6e51c9b0.beta",
+  "source": "6e51c9b0a3b8954fb2a7f61194cc9e81683d8b13",
+  "devLabel": "1.4.1.4+build.1205.sha.6e51c9b0",
+  "files": 599,
+  "bytes": 86245899,
+  "indexSha256": "e19d4f0e72270a318d99ce739d32c54b5cd33da554163657f9481c992ff8eb43",
+  "inventorySha256": "209a70402ab2484da70cf765621230fd047d45e43c498370ed14dacce75b091f",
+  "methods": [
+    {
+      "path": "prepare.js",
+      "sha256": "c92bb38d2343d83651640099a9b0c57a6ae1c03121ce4d06bf0e9402a709ab74"
+    },
+    {
+      "path": "freeze.js",
+      "sha256": "924bf2d21e6dcc309d285ad6f4a7231fec6fa6e66a5e7011ff71815863352bea"
+    },
+    {
+      "path": "validate.js",
+      "sha256": "c3a27580361b1ae9643249af5c915a3bc7abdb754d36d77de6d9e4b17984309d"
+    },
+    {
+      "path": "music.js",
+      "sha256": "ba6f5d794300bc68bbedebcdecc02506d4fac7c8b8c65d308c93c449c1ba98d6"
+    }
+  ],
+  "checks": [
+    {
+      "name": "recovery-browser",
+      "status": 0,
+      "method": "tools/harness/check-password-recovery-browser.js",
+      "methodSha256": "3350eb3d3ff3581097906053a6f407f2fe75d486453867bede0496624d53a658"
+    },
+    {
+      "name": "runtime",
+      "status": 0,
+      "method": "tools/harness/check-public-package-runtime.js",
+      "methodSha256": "b39a8da5a5a21dcd52d86b3818e9e3158f67a11b3dcbcc7de5bd785b56569c21"
+    },
+    {
+      "name": "account",
+      "status": 0,
+      "method": "tools/harness/check-beta-account-boundary.js",
+      "methodSha256": "c7f16457dc018b48e5cb16d5fe9ccbcc30b5b6d6efd6f26c20f22948422abf7a"
+    },
+    {
+      "name": "recovery-lifecycle",
+      "status": 0,
+      "method": "tools/harness/check-password-recovery.js",
+      "methodSha256": "4eb77144491faf629e6631a2751bff76efcad109def3a10bd171807e86e8ae3d"
+    },
+    {
+      "name": "music-status",
+      "status": 0,
+      "method": "tools/harness/check-arcade-music-playback-status.js",
+      "methodSha256": "67087a147ca11414db50d1c34287b003ae40cdbd5b05a1c32e4e973ee9b160a2"
+    }
+  ],
+  "recoveryBrowser": {
+    "ok": true,
+    "bundleHash": "e19d4f0e72270a318d99ce739d32c54b5cd33da554163657f9481c992ff8eb43",
+    "methodHash": "3350eb3d3ff3581097906053a6f407f2fe75d486453867bede0496624d53a658",
+    "fixture": {
+      "creates": 1,
+      "updates": 3,
+      "signouts": 1,
+      "events": [
+        "PASSWORD_RECOVERY",
+        "SIGNED_IN",
+        "TOKEN_REFRESHED",
+        "USER_UPDATED",
+        "TOKEN_REFRESHED",
+        "PASSWORD_RECOVERY",
+        "TOKEN_REFRESHED",
+        "PASSWORD_RECOVERY",
+        "SIGNED_OUT"
+      ],
+      "unexpected": []
+    },
+    "errors": []
+  },
+  "music": {
+    "ok": true,
+    "firstSeconds": 3.220724,
+    "lastSeconds": 15.248798,
+    "samples": 5,
+    "readyState": 4,
+    "paused": false,
+    "muted": false,
+    "indicator": "Mute Arcade Music",
+    "methodSha256": "ba6f5d794300bc68bbedebcdecc02506d4fac7c8b8c65d308c93c449c1ba98d6"
+  },
+  "privacy": {
+    "privateAudioCompared": 50,
+    "hashMatches": 0,
+    "trackedSecurityObservations": 0
+  },
+  "oldFreezesAndDistBetaUnchanged": true,
+  "reviewUrl": "http://localhost:8002/",
+  "humanBrowserRequiresReload": true,
+  "liveRecovery": "pending human",
+  "passwordLogin": "pending human",
+  "humanListening": "pending human",
+  "mainIntegrated": false,
+  "sourcePushed": false,
+  "published": false,
+  "independentFreezeReview": "no blocker",
+  "limitations": [
+    "Synthetic auth not live emailed-link/password-policy acceptance.",
+    "No new long soak or all-seed gameplay claim.",
+    "Stable media source is not independently verified provider track identity.",
+    "Hosted DEV does not match; current main, explicit release authority and full final gates remain required."
+  ],
+  "codeReviewGate": {
+    "passed": true,
+    "p0": 0,
+    "p1": 0,
+    "p2": 2,
+    "fullReleasePreflight": false
+  }
+}
