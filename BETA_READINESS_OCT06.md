@@ -1,10 +1,19 @@
 # Beta Candidate Readiness
 
-Updated October 16, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
+Updated October 17, 2026. Prior baseline: cf0e7a666067ede385865ba02e73d1454eb132d1.
 Scope: Aurora correctness and release hardening. No beta or production publication
 is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
+
+October 17 BETA BLOCKER: human reset-email link signed the pilot in without a
+new-password prompt. Recovery-link access is observed; password reset completion
+and password-based login are NOT accepted. Source-level execution reproduces
+recovery event not opening the form and later SIGNED_IN clearing recovery mode.
+Exact live event ordering remains unverified. Repair and focused auth regression
+coverage are the next priority, before promotion; no real account or frozen beta
+was modified. See analyses/password-recovery-oct17/REVIEW.md. Audio listening
+approval remains separate. NOT BETA-READY.
 
 October 16 replacement preparation: distinct local beta.2 is frozen at
 http://localhost:8002/, full identity

@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 16, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 17, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,26 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 17 human beta.2 recovery observation: clicking the Supabase reset-email
+link returned to the game signed in (PILOT SGW) without a new-password prompt.
+Record recovery-link session access only, not completed password reset or normal
+password-login acceptance. Password change and human audio approval remain
+unverified. This is a beta acceptance blocker; do not promote on the signed-in
+badge alone. No real account mutation, sign-out, email request or frozen-package
+change was performed during diagnosis.
+The real auth module, executed against a fake Supabase boundary, reproduces:
+PASSWORD_RECOVERY sets mode1 but leaves account panel closed; subsequent
+SIGNED_IN clears mode0. Initialization also subscribes after getSession/profile
+work, so event ordering needs dedicated regression coverage. The human's exact
+event sequence has not been captured; these are confirmed source defects, not
+proof of that exact path. Next bounded repair: reliably open/preserve recovery
+mode until explicit save/cancel/sign-out, address initialization ordering, and
+test initial recovery, later auth events, invalid/mismatched passwords, update
+failure and successful explicit save without real credentials. Keep both freezes
+unchanged; a runtime repair requires a separately validated candidate.
+Evidence: reference-artifacts/analyses/password-recovery-oct17/REVIEW.md;
+primary screenshot, method and report: private-artifacts/password-recovery-oct17/.
 
 October 16 beta.2 preparation: source `a809a3d5`, clean feature branch build
 `1.4.1.3+build.1201.sha.a809a3d5`; local beta
