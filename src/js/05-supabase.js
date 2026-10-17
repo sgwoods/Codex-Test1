@@ -20,6 +20,7 @@ const accountPassword=document.getElementById('accountPassword');
 const accountPasswordToggle=document.getElementById('accountPasswordToggle');
 const accountPasswordLabel=document.getElementById('accountPasswordLabel');
 const accountRecoveryFields=document.getElementById('accountRecoveryFields');
+const accountCancelResetBtn=document.getElementById('accountCancelResetBtn');
 const accountPasswordConfirm=document.getElementById('accountPasswordConfirm');
 const accountPasswordConfirmToggle=document.getElementById('accountPasswordConfirmToggle');
 const accountSignupBtn=document.getElementById('accountSignupBtn');
@@ -257,6 +258,7 @@ if(accountSignupBtn)accountSignupBtn.addEventListener('click',signUpAccount);
 if(accountLoginBtn)accountLoginBtn.addEventListener('click',loginAccount);
 if(accountResetBtn)accountResetBtn.addEventListener('click',resetAccountPassword);
 if(accountApplyResetBtn)accountApplyResetBtn.addEventListener('click',applyRecoveredPassword);
+if(accountCancelResetBtn)accountCancelResetBtn.addEventListener('click',exitRecoveryMode);
 if(accountLogoutBtn)accountLogoutBtn.addEventListener('click',logoutAccount);
 if(accountSaveInitialsBtn)accountSaveInitialsBtn.addEventListener('click',saveAccountInitials);
 if(accountGuideBtn)accountGuideBtn.addEventListener('click',()=>{

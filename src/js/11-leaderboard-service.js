@@ -1,14 +1,19 @@
 // Shared remote leaderboard fetch, cache, and score-submit helpers.
 async function loadOwnProfile(){
  if(!LEADERBOARD.client||!LEADERBOARD.user){LEADERBOARD.profile=null;return null;}
- let {data}=await LEADERBOARD.client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',LEADERBOARD.user.id).maybeSingle();
+ const client=LEADERBOARD.client;
+ const user=LEADERBOARD.user;
+ const current=()=>LEADERBOARD.client===client&&LEADERBOARD.user?.id===user.id;
+ let {data}=await client.from('profiles').select('user_id,display_initials,created_at').eq('user_id',user.id).maybeSingle();
+ if(!current())return null;
  if(!data){
-  const initials=preferredInitialsFromUser(LEADERBOARD.user);
+  const initials=preferredInitialsFromUser(user);
   if(initials){
-   const seeded=await LEADERBOARD.client.from('profiles').upsert({user_id:LEADERBOARD.user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
+   const seeded=await client.from('profiles').upsert({user_id:user.id,display_initials:initials}).select('user_id,display_initials,created_at').maybeSingle();
    if(!seeded.error)data=seeded.data||null;
   }
  }
+ if(!current())return null;
  LEADERBOARD.profile=data||null;
  syncAccountUi();
  return LEADERBOARD.profile;

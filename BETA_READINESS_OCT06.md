@@ -6,6 +6,17 @@ is authorized by this preparation packet. Stage 7 remains paused.
 
 ## Status
 
+October17 local repair complete: recovery now opens the new-password form and
+persists through ordinary auth events; explicit Save/Cancel/sign-out is tested.
+Twelve actual-module cases, DEV/public-fixture browser checks, desktop/mobile
+action accessibility and account-panel gameplay regression pass. No real
+password/account was changed. Repair is available on development8000 only;
+frozen beta.2 at8002 still lacks it and remains held. Prepare a new distinct
+candidate, then complete real emailed-link recovery, password login and human
+listening before approval. Existing frozen bytes were not changed. Public test
+fixture is not a release candidate. Full main/DEV/release gates remain pending.
+See analyses/password-recovery-repair-oct17/REVIEW.md. NOT BETA-READY.
+
 October 17 BETA BLOCKER: human reset-email link signed the pilot in without a
 new-password prompt. Recovery-link access is observed; password reset completion
 and password-based login are NOT accepted. Source-level execution reproduces

@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "harness:check:password-recovery": "node tools/harness/check-password-recovery.js",
+    "harness:check:password-recovery-browser": "node tools/harness/check-password-recovery-browser.js",
     "harness:check:arcade-music-playback-status": "node tools/harness/check-arcade-music-playback-status.js",
     "harness:check:local-browser-origin": "node tools/harness/check-local-browser-origin.js",
     "build:production": "node tools/build/build-index.js --lane production",

@@ -93,7 +93,7 @@ async function resetAccountPassword(){
  syncAccountUi();
 }
 async function applyRecoveredPassword(){
- if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
+ if(!LEADERBOARD.client||!LEADERBOARD.user||LEADERBOARD.authBusy||!remoteAuthEnabled()||!LEADERBOARD.recoveryMode)return;
  const password=String(accountPassword?.value||'');
  const confirm=String(accountPasswordConfirm?.value||'');
  if(!password){
@@ -114,24 +114,38 @@ async function applyRecoveredPassword(){
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.auth.updateUser({password});
- LEADERBOARD.authBusy=0;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ let result;
+ try{
+  result=await client.auth.updateUser({password});
+ }catch{
+  result={error:{message:'Connection failed. Try saving the new password again.'}};
+ }finally{
+  LEADERBOARD.authBusy=0;
+ }
+ if(client!==LEADERBOARD.client||LEADERBOARD.user?.id!==userId){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+  syncAccountUi();
+  return;
+ }
+ const {error}=result;
  if(error){
   setAccountNotice(`Could not update password: ${error.message}`);
   syncAccountUi();
   return;
  }
- const {data:{session}}=await LEADERBOARD.client.auth.getSession();
- LEADERBOARD.user=session?.user||LEADERBOARD.user;
- if(LEADERBOARD.user)await loadOwnProfile();
- await refreshSignedInPilotRecords(1);
+ LEADERBOARD.user=result.data?.user||LEADERBOARD.user;
+ exitRecoveryMode();
  setAccountNotice('Password updated. You can now keep using this pilot account.');
- LEADERBOARD.recoveryMode=0;
- if(accountPassword)accountPassword.value='';
- if(accountPasswordConfirm)accountPasswordConfirm.value='';
  syncLeaderboardBest();
  syncAccountUi();
  syncLeaderboardUi();
+ try{
+  await loadOwnProfile();
+  if(LEADERBOARD.user?.id===userId)await refreshSignedInPilotRecords(1);
+ }catch{}
 }
 async function logoutAccount(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!remoteAuthEnabled())return;
@@ -204,18 +218,77 @@ async function initLeaderboard(){
   return;
  }
  try{
+  // Capture recovery intent before the SDK consumes and removes URL tokens.
+  const authHash=new URLSearchParams(location.hash.slice(1));
+  const hadAuthHash=remoteAuthEnabled()&&authHash.has('access_token');
+  let recoveryFromUrl=remoteAuthEnabled()&&authHash.get('type')==='recovery';
   LEADERBOARD.client=supabaseFactory.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
    auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
   });
+  const client=LEADERBOARD.client;
+  let authEventVersion=0;
+  function acceptAuthUser(user,event=''){
+   const previousId=LEADERBOARD.user?.id;
+   LEADERBOARD.user=user||null;
+   const prohibited=RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount();
+   if(prohibited){
+    user=null;
+    LEADERBOARD.user=null;
+    recoveryFromUrl=false;
+   }
+   if(!user){
+    if(event==='SIGNED_OUT')recoveryFromUrl=false;
+    exitRecoveryMode();
+    LEADERBOARD.profile=null;
+    LEADERBOARD.remote.mine=[];
+    LEADERBOARD.cacheStamp.mine=0;
+    if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
+   }else{
+    if(previousId&&previousId!==user.id)exitRecoveryMode();
+    if(event==='PASSWORD_RECOVERY'||recoveryFromUrl){
+     recoveryFromUrl=false;
+     enterRecoveryMode();
+    }else if(!LEADERBOARD.recoveryMode&&previousId!==user.id)setAccountNotice('');
+   }
+   return prohibited;
+  }
+  if(remoteAuthEnabled()){
+   client.auth.onAuthStateChange((event,sessionState)=>{
+    if(client!==LEADERBOARD.client)return;
+    const version=++authEventVersion;
+    const prohibited=acceptAuthUser(sessionState?.user,event);
+    syncLeaderboardBest();
+    syncLeaderboardUi();
+    // Supabase delivers events under its auth lock. Do provider work after it returns.
+    setTimeout(async()=>{
+     if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+     try{
+      if(prohibited){
+       await client.auth.signOut();
+       if(version===authEventVersion)acceptAuthUser(null,'SIGNED_OUT');
+       setAccountNotice('The test pilot account is disabled in production.');
+      }else if(LEADERBOARD.user){
+       hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
+       await loadOwnProfile();
+       if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+       await refreshSignedInPilotRecords(1);
+      }
+      if(client!==LEADERBOARD.client||version!==authEventVersion)return;
+      syncLeaderboardBest();
+      syncLeaderboardUi();
+      primeLeaderboard();
+      scheduleLeaderboardRefresh();
+     }catch{}
+    },0);
+   });
+  }
   hydrateLeaderboardCache('all');
   hydrateLeaderboardCache('validated');
   if(!remoteAuthEnabled()&&LEADERBOARD.view==='mine')LEADERBOARD.view='local';
-  const hadAuthHash=remoteAuthEnabled()&&location.hash.includes('access_token=');
-  const hadRecoveryHash=remoteAuthEnabled()&&location.hash.includes('type=recovery');
   if(remoteAuthEnabled()){
    const {data:{session}}=await LEADERBOARD.client.auth.getSession();
-   LEADERBOARD.user=session?.user||null;
-   if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
+   const prohibited=!authEventVersion&&acceptAuthUser(session?.user);
+   if(prohibited){
     await LEADERBOARD.client.auth.signOut();
     LEADERBOARD.user=null;
     setAccountNotice('The test pilot account is disabled in production.');
@@ -223,7 +296,6 @@ async function initLeaderboard(){
    if(LEADERBOARD.user){
     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
     await loadOwnProfile();
-    if(hadRecoveryHash)enterRecoveryMode();
    }
   }else{
    LEADERBOARD.user=null;
@@ -238,35 +310,6 @@ async function initLeaderboard(){
   syncLeaderboardUi();
   primeLeaderboard();
   scheduleLeaderboardRefresh();
-  if(remoteAuthEnabled()){
-   LEADERBOARD.client.auth.onAuthStateChange(async(event,sessionState)=>{
-    LEADERBOARD.user=sessionState?.user||null;
-    if(event==='PASSWORD_RECOVERY')LEADERBOARD.recoveryMode=1;
-    else if(sessionState?.user)LEADERBOARD.recoveryMode=0;
-    if(RELEASE_CHANNEL==='production'&&isSignedInAsTestAccount()){
-     await LEADERBOARD.client.auth.signOut();
-     LEADERBOARD.user=null;
-     setAccountNotice('The test pilot account is disabled in production.');
-    }
-    if(LEADERBOARD.user){
-     if(!LEADERBOARD.recoveryMode)setAccountNotice('');
-     hydrateLeaderboardCache('mine',LEADERBOARD.user.id);
-     await loadOwnProfile();
-     await refreshSignedInPilotRecords(1);
-    }else{
-     LEADERBOARD.recoveryMode=0;
-     setAccountNotice('');
-     LEADERBOARD.profile=null;
-     LEADERBOARD.remote.mine=[];
-     LEADERBOARD.cacheStamp.mine=0;
-     if(LEADERBOARD.view==='mine')LEADERBOARD.view='all';
-    }
-    syncLeaderboardBest();
-    syncLeaderboardUi();
-    primeLeaderboard();
-    scheduleLeaderboardRefresh();
-   });
-  }
  }catch(err){
   LEADERBOARD.client=null;
   LEADERBOARD.configured=0;

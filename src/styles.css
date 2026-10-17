@@ -780,3 +780,6 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
 }
 #accountPanel,#leaderboardPanel,#leaderboardViews,#settingsPanel,#helpPanel,#feedbackPanel,#platformSplashPanel,#gamePreviewPanel{max-height:var(--overlay-max-height);overflow:auto}
 #accountPanelHead,#leaderboardPanelHead{position:sticky;top:0;z-index:1;padding-bottom:8px;background:linear-gradient(180deg,rgba(7,12,24,.98),rgba(7,12,24,.9))}
+@media (max-width:620px){
+ #accountPanel[data-recovering="true"] #accountPanelHead{position:static}
+}

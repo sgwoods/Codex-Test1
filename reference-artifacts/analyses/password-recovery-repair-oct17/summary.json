@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "baseline": "ce9f0b74",
+  "sourceHashes": [
+    {
+      "path": "src/js/04-leaderboard-ui.js",
+      "sha256": "9dc7998e6f04baefb613701b05a55d7b7021b5def3a283ec900d5e49e04e033e"
+    },
+    {
+      "path": "src/js/05-supabase.js",
+      "sha256": "fa7209fb3939d80849951b9206a02a0f00256cc0a451716a40d2bcdc0c35f31c"
+    },
+    {
+      "path": "src/js/11-leaderboard-service.js",
+      "sha256": "d4853e349a54e6e94c190fbad72222cfdab6a3d003ea6dd9441c062748f28a35"
+    },
+    {
+      "path": "src/js/12-auth-session.js",
+      "sha256": "51d9aec3d82199036d86c70a2eb31beb3e51beca7fa3ec407340d7c2df9f55a4"
+    },
+    {
+      "path": "src/index.template.html",
+      "sha256": "d4529f5800450db69a3b051a224f8074e98afe8996da69cf23233a5c19157401"
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "a5174591c588e7c130a73a774dbdb7d64fe47197db87e28a4d25e4b4c9c1c979"
+    },
+    {
+      "path": "tools/harness/check-password-recovery.js",
+      "sha256": "4eb77144491faf629e6631a2751bff76efcad109def3a10bd171807e86e8ae3d"
+    },
+    {
+      "path": "tools/harness/check-password-recovery-browser.js",
+      "sha256": "3350eb3d3ff3581097906053a6f407f2fe75d486453867bede0496624d53a658"
+    }
+  ],
+  "fixtures": {
+    "baseline": {
+      "cases": 12,
+      "failures": 11
+    },
+    "repaired": {
+      "cases": 12,
+      "failures": 0
+    }
+  },
+  "browser": {
+    "dev": {
+      "build": "1.4.1.3+build.1203.sha.ce9f0b74.dirty",
+      "channel": "development",
+      "source": "ce9f0b741ec04bf4f9061e3ef590a2417257c22b",
+      "bundleHash": "e1b8272f4df8798648afe6dbbdd9e359cac68648b585ddaf59e9dff3918d5763",
+      "methodHash": "3350eb3d3ff3581097906053a6f407f2fe75d486453867bede0496624d53a658",
+      "limitations": [
+        "Synthetic Supabase factory; no credentials, email tokens or real account mutation.",
+        "Proves built UI/event handling, not live emailed-link or provider acceptance."
+      ],
+      "ok": true,
+      "fixture": {
+        "creates": 1,
+        "updates": 3,
+        "signouts": 1,
+        "events": [
+          "PASSWORD_RECOVERY",
+          "SIGNED_IN",
+          "TOKEN_REFRESHED",
+          "USER_UPDATED",
+          "TOKEN_REFRESHED",
+          "PASSWORD_RECOVERY",
+          "TOKEN_REFRESHED",
+          "PASSWORD_RECOVERY",
+          "SIGNED_OUT"
+        ],
+        "unexpected": []
+      },
+      "errors": []
+    },
+    "pub": {
+      "build": "1.4.2-beta.2+build.1203.sha.ce9f0b74.beta",
+      "channel": "production beta",
+      "source": "ce9f0b741ec04bf4f9061e3ef590a2417257c22b",
+      "bundleHash": "d66bec7f946c759188ac22bb72e5374ddfd5f903eb80cae27c2d472fde5904d7",
+      "methodHash": "3350eb3d3ff3581097906053a6f407f2fe75d486453867bede0496624d53a658",
+      "limitations": [
+        "Synthetic Supabase factory; no credentials, email tokens or real account mutation.",
+        "Proves built UI/event handling, not live emailed-link or provider acceptance."
+      ],
+      "ok": true,
+      "fixture": {
+        "creates": 1,
+        "updates": 3,
+        "signouts": 1,
+        "events": [
+          "PASSWORD_RECOVERY",
+          "SIGNED_IN",
+          "TOKEN_REFRESHED",
+          "USER_UPDATED",
+          "TOKEN_REFRESHED",
+          "PASSWORD_RECOVERY",
+          "TOKEN_REFRESHED",
+          "PASSWORD_RECOVERY",
+          "SIGNED_OUT"
+        ],
+        "unexpected": []
+      },
+      "errors": []
+    }
+  },
+  "accountPanelGameplay": "pass",
+  "independentReview": {
+    "source": "no remaining blocker after profile identity/client/quarantine fixes",
+    "browser": "no blocker; scoped mobile CSS and pointer checks accepted"
+  },
+  "realAccountMutated": false,
+  "realRecoveryAccepted": false,
+  "frozenBetasChanged": false,
+  "published": false,
+  "limitations": [
+    "Fake provider, not live emailed-link/password-policy acceptance.",
+    "Public transformation fixture is from dirty source, not a release candidate.",
+    "Reload mid-recovery and cross-browser redirect handling not established."
+  ],
+  "dataApiContract": "pass",
+  "signedInGameOver": "pass",
+  "mockedScoreSubmit": "pass",
+  "codeReviewGate": {
+    "result": "pass",
+    "p0": 0,
+    "p1": 0,
+    "p2": 2,
+    "fullReleasePreflight": false
+  }
+}

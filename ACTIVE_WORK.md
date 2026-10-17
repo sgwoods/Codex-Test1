@@ -14,6 +14,32 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 17 password-recovery repair is locally implemented and validated above
+`ce9f0b74` on codex/local-review-music-status-oct16. Recovery intent is captured
+before SDK URL cleanup; the listener registers before getSession, opens the
+existing reset panel synchronously and defers provider work outside the auth
+lock. Same-user sign-in/refresh/update events preserve recovery and typed input.
+Explicit Save, Cancel Reset, sign-out or account replacement end recovery;
+closing/reopening the panel does not cancel it. Save errors remain retryable;
+success clears secrets before unrelated profile refresh. Stale-client/profile
+responses are rejected, and prohibited production test users are quarantined
+before the recovery form can appear. No automatic password update is introduced.
+Twelve actual-module fixtures pass (baseline11 failures); real built UI passes
+against a fake provider on DEV and an isolated public-transformation fixture.
+Desktop/mobile screenshots inspected; recovery-only narrow-screen header now
+scrolls normally, with pointer hit-tests confirming unobstructed Save/Cancel.
+Existing account-panel-to-game regression passes. Fake provider only; no real
+account, email request, password update, sign-out, token or credential capture.
+Both599-file freezes and primary dist/beta remain exact. Repair is on DEV8000,
+NOT on frozen beta.2 at8002. The public test fixture is from dirty development
+input, not a candidate or approval. Next: prepare a separate updated beta
+candidate, then repeat real email recovery and password login with the human;
+matching hosted DEV/current main/final gates remain required before publication.
+Live recovery remains unaccepted until that test; do not promote the old beta.
+Packet: reference-artifacts/analyses/password-recovery-repair-oct17/REVIEW.md.
+Primary methods, logs, fake-provider reports and screenshots remain under
+private-artifacts/password-recovery-oct17/.
+
 October 17 human beta.2 recovery observation: clicking the Supabase reset-email
 link returned to the game signed in (PILOT SGW) without a new-password prompt.
 Record recovery-link session access only, not completed password reset or normal

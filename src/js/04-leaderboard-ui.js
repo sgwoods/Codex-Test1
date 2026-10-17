@@ -378,6 +378,10 @@ function buildStartAccountPrompt(){
  return 'SIGN IN OR CREATE AN ACCOUNT FOR <span class="k">VALIDATED SCORES</span>';
 }
 function enterRecoveryMode(){
+ if(!LEADERBOARD.recoveryMode){
+  if(accountPassword)accountPassword.value='';
+  if(accountPasswordConfirm)accountPasswordConfirm.value='';
+ }
  LEADERBOARD.recoveryMode=1;
  LEADERBOARD.accountPanelOpen=1;
  LEADERBOARD.panelOpen=0;
@@ -405,9 +409,14 @@ function syncAccountUi(){
  const hasLockedInitials=!!signedIn;
  const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
  const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanel)accountPanel.dataset.recovering=recovering?'true':'false';
  if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
  if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
+ if(accountCancelResetBtn){
+  accountCancelResetBtn.hidden=!recovering;
+  accountCancelResetBtn.disabled=!!LEADERBOARD.authBusy;
+ }
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
  if(accountPasswordLabel)accountPasswordLabel.hidden=signedIn&&!recovering;
