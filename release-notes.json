@@ -1,6 +1,20 @@
 {
   "notes": [
     {
+      "version": "1.4.2-beta.4",
+      "date": "2026-10-18",
+      "title": "Local per-game scoring beta candidate",
+      "summary": "Adds signed-in account scoring for Aurora and Guardians through a checked submission function, isolated game storage and caches. New scores remain unverified. Requires live per-game persistence acceptance and release gates; not published.",
+      "sourceDoc": "RELEASE_NOTE_1.4.2_BETA_4.md"
+    },
+    {
+      "version": "1.4.1.5-dev",
+      "date": "2026-10-18",
+      "title": "Per-game score persistence review",
+      "summary": "Local review source shared with beta.4. Preserves legacy Aurora scores and separates Guardians storage; retains password recovery repair. Hosted lanes unchanged.",
+      "sourceDoc": "RELEASE_NOTE_1.4.2_BETA_4.md"
+    },
+    {
       "version": "1.4.2-beta.3",
       "date": "2026-10-17",
       "title": "Local password-recovery beta candidate",

@@ -329,20 +329,14 @@ function stripPublicClientScoreWriteSurface(text){
   const start = source.indexOf(startNeedle);
   const end = start >= 0 ? source.indexOf(endNeedle, start) : -1;
   if(start < 0 || end < 0) return source;
-  const replacement = `async function submitScoreRemote(entry){
- if(entry&&typeof recordSystemIssue==='function'){
-  recordSystemIssue('score_submit_blocked','Remote score submit disabled in public lanes pending server-side validation',{
-   score:+entry.score|0,
-   stage:+entry.stage|0,
-   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
-   releaseChannel:RELEASE_CHANNEL
-  },{level:'info'});
- }
- setLeaderboardStatus('Saved locally · online submit disabled pending server validation');
- syncLeaderboardUi();
- return 0;
-}
-`;
+  const original = source.slice(start, end);
+  const directInsert = 'const {error}=await scoreTableQuery(gameKey).insert(payload);';
+  if(!original.includes(directInsert)) throw new Error('Public score submission transform no longer matches source');
+  const replacement = original
+    .replace(directInsert, `const {error}=await LEADERBOARD.client.rpc('submit_platform_score',{
+   p_game_key:gameKey,p_initials:payload.initials,p_score:payload.score,p_stage:payload.stage,p_build:payload.build
+  });`)
+    .replace('payload.is_verified=!!LEADERBOARD.user.email_confirmed_at;', 'payload.is_verified=false;');
   return `${source.slice(0, start)}${replacement}${source.slice(end)}`;
 }
 

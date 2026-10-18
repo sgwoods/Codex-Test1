@@ -7,6 +7,10 @@ const SQL_PATH = path.join(ROOT, 'supabase', 'data-api-access-contract.sql');
 const DOC_PATH = path.join(ROOT, 'SUPABASE_DATA_API_ACCESS.md');
 
 const REQUIRED_TABLES = {
+  game_scores: {
+    grants: { anon: ['select', 'insert'], authenticated: ['select', 'insert', 'delete'], service_role: ['all'] },
+    policies: ['game scores public read', 'game scores guest insert', 'game scores owner insert', 'game scores owner delete']
+  },
   scores: {
     grants: {
       anon: ['select', 'insert'],
@@ -140,7 +144,7 @@ function assertTableContract(sql, table, spec){
 }
 
 function main(){
-  const sqlRaw = readRequired(SQL_PATH);
+  const sqlRaw = readRequired(SQL_PATH) + '\n' + readRequired(path.join(ROOT, 'supabase', 'add-platform-game-scores.sql'));
   const doc = readRequired(DOC_PATH);
   const sql = normalizeSql(sqlRaw);
   const tablesInContract = contractTables(sqlRaw);

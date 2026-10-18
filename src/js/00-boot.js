@@ -1491,7 +1491,7 @@ function scoreRowMatchesGame(row={},gameKey=currentScoreStorageGameKey()){
 }
 
 function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
- return normalizeScoreRecordGameKey(gameKey)===DEFAULT_SCORE_GAME_KEY;
+ return ['aurora-galactica','galaxy-guardians-preview'].includes(String(gameKey));
 }
 
 function createAuroraRuntimeState(opts={}){

@@ -18,10 +18,25 @@ async function loadOwnProfile(){
  syncAccountUi();
  return LEADERBOARD.profile;
 }
-function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
- let select='id,initials,score,stage,achieved_at,is_verified,build';
- if(includeGameColumns)select+=',game_key,game_title';
- let query=LEADERBOARD.client.from('scores').select(select).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
+function scoreTableQuery(gameKey=currentScoreStorageGameKey()){
+ if(gameKey==='aurora-galactica')return LEADERBOARD.client.from('scores');
+ if(gameKey==='galaxy-guardians-preview')return LEADERBOARD.client.from('game_scores');
+ throw new Error('Online scores are unavailable for this game.');
+}
+function ensureLeaderboardScope(){
+ const scope=`${currentScoreStorageGameKey()}:${LEADERBOARD.user?.id||'anon'}`;
+ if(LEADERBOARD.scope===scope&&LEADERBOARD.scopeClient===LEADERBOARD.client)return scope;
+ LEADERBOARD.scopeClient=LEADERBOARD.client;
+ LEADERBOARD.scope=scope;
+ LEADERBOARD.remote={all:[],validated:[],mine:[]};
+ LEADERBOARD.cacheStamp={all:0,validated:0,mine:0};
+ LEADERBOARD.loading={all:0,validated:0,mine:0};
+ LEADERBOARD.lastRemoteOk=0;
+ return scope;
+}
+function buildLeaderboardScoresQuery(view='all',gameKey=currentScoreStorageGameKey()){
+ const select='id,initials,score,stage,achieved_at,is_verified,build,game_key,game_title';
+ let query=scoreTableQuery(gameKey).select(select).eq('game_key',gameKey).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
  if(view==='validated')query=query.eq('is_verified',true);
  if(shouldHideTestAccountScores()&&view!=='mine'){
   const hiddenIds=configuredTestAccountUserIds();
@@ -32,13 +47,13 @@ function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
  return query;
 }
 async function fetchLeaderboardScores(view='all'){
- let result=await buildLeaderboardScoresQuery(view,{includeGameColumns:1});
- if(!result.error)return result;
- const message=String(result.error?.message||'').toLowerCase();
- if(!message.includes('game_key')&&!message.includes('game_title'))return result;
- return buildLeaderboardScoresQuery(view,{includeGameColumns:0});
+ return buildLeaderboardScoresQuery(view);
 }
 async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
+ const scope=ensureLeaderboardScope();
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user?.id;
+ const gameKey=currentScoreStorageGameKey();
  view=normalizeLeaderboardViewForLane(view);
  if(view==='local'){
   syncLeaderboardBest();
@@ -63,10 +78,15 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
   return leaderboardRowsForView(view);
  }
  if(LEADERBOARD.loading[view])return leaderboardRowsForView(view);
- LEADERBOARD.loading[view]=1;
+ const request={};
+ LEADERBOARD.loading[view]=request;
  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
- const {data,error}=await fetchLeaderboardScores(view);
+ let result;
+ try{result=await fetchLeaderboardScores(view);}
+ catch(error){result={error};}
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()||scope!==LEADERBOARD.scope||LEADERBOARD.loading[view]!==request)return [];
+ const {data,error}=result;
  LEADERBOARD.loading[view]=0;
  if(error){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'fallback'));
@@ -164,6 +184,8 @@ async function submitScoreRemote(entry){
   return 0;
  }
  const payload={
+  game_key:gameKey,
+  game_title:gameTitle,
   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
   score:+entry.score|0,
   stage:+entry.stage|0,
@@ -171,7 +193,8 @@ async function submitScoreRemote(entry){
  };
  if(LEADERBOARD.user?.id){
   payload.user_id=LEADERBOARD.user.id;
-  payload.is_verified=!!LEADERBOARD.user.email_confirmed_at;
+  // Account ownership does not establish gameplay validity.
+  payload.is_verified=false;
  }
  if(typeof recordSystemIssue==='function'){
   recordSystemIssue('score_submit_attempt','Attempting remote score submit',{
@@ -185,7 +208,7 @@ async function submitScoreRemote(entry){
   },{level:'info'});
  }
  try{
-  const {error}=await LEADERBOARD.client.from('scores').insert(payload);
+  const {error}=await scoreTableQuery(gameKey).insert(payload);
   if(error){
    const failureCopy=typeof remoteScoreFailureCopy==='function'
     ? remoteScoreFailureCopy(gameTitle)

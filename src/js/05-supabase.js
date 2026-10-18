@@ -167,6 +167,7 @@ function mergePilotProfileRows(remoteRows,localRows){
  return merged;
 }
 function rowsForPilotProfile(){
+ ensureLeaderboardScope();
  if(LEADERBOARD.user){
   const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)
    ? LEADERBOARD.remote.mine.filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true).slice()
@@ -221,10 +222,10 @@ function localLeaderboardRows(gameKey=currentScoreStorageGameKey()){
  return loadScoreboard(gameKey).map(row=>Object.assign({verified:0},row));
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function platformLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
- return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;
+ return `${PLATFORM_LEADERBOARD_CACHE_PREFIX}game.${currentScoreStorageGameKey()}.${view}${view==='mine'?`.${userId}`:''}`;
 }
 function legacyLeaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEGACY_LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;

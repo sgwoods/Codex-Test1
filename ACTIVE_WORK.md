@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 17, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 18, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,90 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October18 human reports phase2 SQL completed in Galaga Tribute production.
+Supplied SQL Editor screenshot shows committed migration followed by aggregates:
+scores / aurora-galactica =42; game_scores / galaxy-guardians-preview =0.
+This supersedes the phase2 NOT applied status below. Both expected tables are
+present and the original row count is retained. Screenshot evidence is not a
+full row-content comparison or live client permission/RPC acceptance test.
+Runtime changes remain uncommitted locally on codex/local-review-music-status-oct16;
+beta.3 remains the previous package. Next checkpoint/review source, prepare a
+distinct public candidate, test exact-package score RPC behavior, then verify
+human signed-in save/reload/second-session retrieval for each game. No release
+publication or real account mutation performed by the lead.
+
+October17 per-game persistence implementation is local, not live accepted.
+Human screenshot confirms phase1 applied: all42 scores classified Aurora.
+Phase2 SQL supabase/add-platform-game-scores.sql is prepared and NOT applied.
+It retains scores for legacy Aurora clients, adds game_scores for Guardians,
+and an authenticated submit_platform_score RPC. Public transforms use RPC;
+source development uses guarded direct submission. Signed-in beta/production
+writes are now enabled in source; guests remain local, DEV retains test policy.
+New submissions are unverified, with structural validation enforced in SQL;
+historical records and verification flags remain intact. No cheat-proof claim.
+Per-game server filters precede ranking/limit. Caches include game and mine-user
+identity; stale game/user/client responses are discarded and bests are isolated.
+Independent reviews found/fixed client reset and public packaging/bypass issues.
+Eight schema cases, fresh-context persistence (development/public transforms),
+12 recovery cases, access contract and isolated PostgreSQL SQL/RLS tests PASS.
+PostgreSQL test verifies preservation of42 complete fixture rows and rejects
+direct forged verification/invalid initials for both tables. Browser score
+submission and Guardians ownership checks pass; no live cross-device proof.
+Methods/hashes/output: private-artifacts/game-scores-oct17/validation.json.
+Local DEV8000 rebuilt; frozen beta.3 on8002 unchanged. No publication or source
+push. Next human runs phase2 SQL in authenticated Supabase editor, then prepare
+new exact public candidate and verify real signed-in saves/retrieval per game.
+
+October17 user requires persistent signed-in scoring for every platform game
+and authorizes additive database preparation. Prepared read-only preflight
+supabase/inspect-score-game-identity.sql and transactional additive migration
+supabase/add-score-game-identity.sql. NOT applied or database-tested: no Supabase
+connector or accessible authenticated dashboard is present in connected browsers.
+Migration adds game_key/game_title with Aurora defaults; existing fields,
+permissions and policies remain unchanged. Lock/statement timeouts bound waits;
+existing identity columns cause an abort for inspection. Critical rollout issue:
+old clients read all rows as Aurora. Guardians writes must remain disabled until
+legacy readers are upgraded or isolated. Column addition alone does not complete
+per-game persistence. Next inspect live preflight, apply reviewed migration, then
+implement game-filtered reads/cache ownership and isolated compatible writes.
+
+October17 human confirms step2 complete: fresh email recovery and subsequent
+password login succeed on beta.3 after adding localhost:8002 to Supabase's
+redirect allowlist. This supersedes the recovery acceptance hold below.
+Leaderboard repair now uses only the deployed scores columns, removing the
+guaranteed missing-game-column probe on each refresh. No database migration or
+permission change. Six executable schema cases pass; baseline e9f72dfe fails
+the one-request assertion (two requests). Ranking, verified/mine filtering,
+single/multiple test-account exclusions and error propagation are covered.
+Build,12 recovery cases, static Data API contract and mocked browser remote
+score submission success/failure pass. DEV localhost8000 serves exact new
+dist/dev bytes, build1206 e9f72dfe dirty; beta.3 on8002 remains unchanged.
+Live reduction in hosted errors is not established: hosted/old open clients
+still contain the old query. Independent review supports the narrow repair;
+future mixed-game storage requires a separate schema migration. Next prepare
+a new candidate and matching DEV review through release gates. No publication.
+
+October17 human follow-up confirms a fresh reset requested from beta.3 at
+localhost:8002 returns to https://sgwoods.github.io/Aurora-Galactica/,
+whose screenshot shows production1.4.1. The callback therefore does not exercise
+the repaired beta.3 runtime. Current source passes origin+pathname as redirectTo.
+Next inspect Supabase Authentication URL Configuration for the exact allowed
+http://localhost:8002/ URL, then Reset Password email template for a hardcoded
+production/SiteURL destination. Missing allowlist or template override remain
+hypotheses until provider configuration is inspected. Keep production Site URL
+unchanged. No provider settings changed. Live recovery acceptance remains blocked.
+
+October17 follow-up live recovery remains blocked. Human reports the email link
+again signed in without a password form; a second reset request produced no
+email. Read-only Codex browser inspection found the existing localhost:8002 tab
+still displays 1.4.2-beta.2 and offers REFRESH NOW. HTTP build-info at the same
+origin confirms the server serves beta.3 build1205/source6e51c9b0. Thus the open
+tab is stale; this does not establish which browser/origin received the email
+callback. Requested only callback host/port and the second request's UI outcome,
+never tokens/passwords. No email request, reload, account mutation or publication
+performed. Next: confirm callback destination and refresh to beta.3 before a
+fresh live attempt; investigate provider delivery/rate-limit only from evidence.
 
 October17 beta.3 is prepared and now served at the stable review origin
 http://localhost:8002/. Refresh existing beta.2 tabs before inspection; server

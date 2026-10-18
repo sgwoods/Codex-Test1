@@ -116,6 +116,7 @@ function latestCompletedLocalScoreRow(){
  return history[0]||null;
 }
 function leaderboardRowsForView(view=LEADERBOARD.view,opts={}){
+ ensureLeaderboardScope();
  const targetGameKey=typeof normalizeScoreRecordGameKey==='function'
   ? normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey())
   : String(opts.gameKey||'').trim();
@@ -152,14 +153,15 @@ function persistLeaderboardCache(view){
  }catch{}
 }
 function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
+ ensureLeaderboardScope();
  if(view==='local')return 0;
  try{
   const raw=localStorage.getItem(leaderboardCacheKey(view,userId))
    ||localStorage.getItem(platformLeaderboardCacheKey(view,userId))
-   ||localStorage.getItem(legacyLeaderboardCacheKey(view,userId));
+   ||(currentScoreStorageGameKey()==='aurora-galactica'?localStorage.getItem(legacyLeaderboardCacheKey(view,userId)):null);
   if(!raw)return 0;
   const parsed=JSON.parse(raw);
-  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow):[];
+  const rows=Array.isArray(parsed?.rows)?parsed.rows.map(normalizeRemoteScoreRow).filter(row=>scoreRowMatchesGame(row)):[];
   const fetchedAt=+parsed?.fetchedAt||0;
   LEADERBOARD.remote[view]=rows;
   LEADERBOARD.cacheStamp[view]=fetchedAt;
@@ -170,6 +172,7 @@ function hydrateLeaderboardCache(view,userId=LEADERBOARD.user?.id||'anon'){
  }
 }
 function leaderboardCacheFresh(view){
+ ensureLeaderboardScope();
  const stamp=LEADERBOARD.cacheStamp[view]||0;
  return !!stamp&&(Date.now()-stamp)<LEADERBOARD_STALE_MS;
 }
@@ -517,8 +520,12 @@ function syncLeaderboardUi(){
  syncAccountUi();
 }
 function syncLeaderboardBest(){
+ ensureLeaderboardScope();
+ const gameKey=currentScoreStorageGameKey();
  const localBest=localLeaderboardRows()[0]?.score||0;
- const remoteBest=LEADERBOARD.remote.all[0]?.score||0;
- S.best=Math.max(S.best||0,localBest,remoteBest);
- writePref(BEST_SCORE_KEY,String(S.best));
+ const remoteBest=LEADERBOARD.remote.all.filter(row=>scoreRowMatchesGame(row,gameKey))[0]?.score||0;
+ const previous=LEADERBOARD.bestGameKey===gameKey?S.best||0:+readPref(scoreBestKey(gameKey))||0;
+ LEADERBOARD.bestGameKey=gameKey;
+ S.best=Math.max(previous,localBest,remoteBest);
+ writePref(scoreBestKey(gameKey),String(S.best));
 }

@@ -91,6 +91,7 @@ function harnessForceRemoteWriteEnabled(){
 }
 function remoteWriteEnabled(){
  if(harnessForceRemoteWriteEnabled())return true;
+ if(RELEASE_CHANNEL==='production'||RELEASE_CHANNEL==='production beta')return !!LEADERBOARD.user?.id;
  return RELEASE_CHANNEL==='development'&&isSignedInAsTestAccount();
 }
 function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){

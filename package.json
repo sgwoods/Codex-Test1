@@ -1,10 +1,13 @@
 {
   "name": "aurora-galactica",
-  "version": "1.4.2-beta.3",
+  "version": "1.4.2-beta.4",
   "description": "Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.",
   "main": "index.js",
   "scripts": {
     "build": "node tools/build/build-index.js",
+    "harness:check:leaderboard-schema": "node tools/harness/check-leaderboard-schema.js",
+    "harness:check:game-score-persistence": "node tools/harness/check-game-score-persistence.js",
+    "harness:check:public-game-score-persistence": "node tools/harness/check-game-score-persistence.js --public",
     "harness:check:password-recovery": "node tools/harness/check-password-recovery.js",
     "harness:check:password-recovery-browser": "node tools/harness/check-password-recovery-browser.js",
     "harness:check:arcade-music-playback-status": "node tools/harness/check-arcade-music-playback-status.js",

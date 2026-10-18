@@ -187,7 +187,7 @@ function observeIssues(dir){
   });
 
   const supabaseKey = includesAny(texts, ['SUPABASE_ANON_KEY', 'sb_publishable_']);
-  const scoreInsert = includesAny(texts, [".from('scores').insert", '.from("scores").insert']);
+  const scoreInsert = includesAny(texts, [".from('scores').insert", '.from("scores").insert', "scoreTableQuery(gameKey).insert", ".from('game_scores').insert"]);
   observations.set('SEC-003', {
     observed: supabaseKey.observed && scoreInsert.observed,
     evidence: supabaseKey.observed && scoreInsert.observed

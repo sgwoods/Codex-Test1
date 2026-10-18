@@ -182,11 +182,17 @@ async function saveAccountInitials(){
 }
 async function resetTestPilotScores(){
  if(!LEADERBOARD.client||LEADERBOARD.authBusy||!isSignedInAsTestAccount())return;
+ const client=LEADERBOARD.client;
+ const userId=LEADERBOARD.user.id;
+ const gameKey=currentScoreStorageGameKey();
  setAccountNotice('');
  LEADERBOARD.authBusy=1;
  syncAccountUi();
- const {error}=await LEADERBOARD.client.from('scores').delete().eq('user_id',LEADERBOARD.user.id);
+ let error;
+ try{({error}=await scoreTableQuery(gameKey).delete().eq('game_key',gameKey).eq('user_id',userId));}
+ catch(failure){error=failure;}
  LEADERBOARD.authBusy=0;
+ if(client!==LEADERBOARD.client||userId!==LEADERBOARD.user?.id||gameKey!==currentScoreStorageGameKey()){syncAccountUi();return;}
  if(error){
   setAccountNotice(`Could not reset test pilot scores: ${error.message}`);
   syncAccountUi();
@@ -195,7 +201,7 @@ async function resetTestPilotScores(){
  LEADERBOARD.remote.mine=[];
  LEADERBOARD.cacheStamp.mine=0;
  setLeaderboardStatus('Test pilot scores cleared');
- setAccountNotice('Cleared remote scores for the configured test pilot.');
+ setAccountNotice('Cleared this game\'s remote scores for the configured test pilot.');
  syncLeaderboardUi();
  refreshLeaderboard('all',{force:1});
  refreshLeaderboard('validated',{force:1});
