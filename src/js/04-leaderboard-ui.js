@@ -352,6 +352,7 @@ function openAccountPanel(){
  syncAccountPanelVisibility();
  syncAccountUi();
  if(typeof window.refreshMovieCatalog==='function')window.refreshMovieCatalog({silent:1});
+ if(LEADERBOARD.user&&remoteAuthEnabled())refreshSignedInPilotRecords(1);
  syncOverlayPause();
 }
 function closeAccountPanel(){

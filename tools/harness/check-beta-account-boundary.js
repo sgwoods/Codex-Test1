@@ -69,6 +69,9 @@ async function main(){
   const html = fs.readFileSync(indexPath, 'utf8');
   const bundleHash = createHash('sha256').update(html).digest('hex');
   const remoteSubmitBlocked = html.includes('Remote score submit disabled in public lanes pending server-side validation');
+  const checkedScoreRpc = html.includes("LEADERBOARD.client.rpc('submit_platform_score',")
+    && !html.includes('scoreTableQuery(gameKey).insert(payload)')
+    && html.includes("return !!LEADERBOARD.user?.id;");
   const { server, port } = await serve(APP_ROOT);
   const browser = await launchHarnessBrowser();
 
@@ -97,6 +100,7 @@ async function main(){
       passwordValueLength: String(document.getElementById('accountPassword')?.value || '').length
     }));
     result.remoteSubmitBlocked = remoteSubmitBlocked;
+    result.checkedScoreRpc = checkedScoreRpc;
 
     if(!/production beta/i.test(String(result.channel || '').trim())){
       fail('beta account boundary check did not run against a beta lane', result);
@@ -113,8 +117,8 @@ async function main(){
     if(!/const TEST_ACCOUNT_EMAILS=\[\];/.test(html)){
       fail('beta artifact should not expose non-production test pilot emails', result);
     }
-    if(!result.remoteSubmitBlocked){
-      fail('beta artifact should keep public score writes disabled pending server-side validation', result);
+    if(!result.remoteSubmitBlocked&&!result.checkedScoreRpc){
+      fail('beta artifact must block writes or use the signed-in checked score RPC; pair with the executable public scoring test', result);
     }
 
     assert.equal(createHash('sha256').update(fs.readFileSync(indexPath)).digest('hex'), bundleHash,

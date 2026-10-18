@@ -59,34 +59,56 @@ function fixture(){
    });
    await context.addInitScript(fixture);
    const page=await context.newPage();page.on('pageerror',e=>errors.push(String(e)));
+   await page.clock.install();
    await page.goto(origin,{waitUntil:'domcontentloaded'});
-   await page.waitForFunction(()=>typeof LEADERBOARD!=='undefined'&&LEADERBOARD.user?.id==='fixture-pilot');
+   await page.waitForFunction(()=>document.getElementById('accountIdentityEmail')?.textContent.includes('fixture@example.invalid'));
    return {page,context};
   }
-  const first=await open();
-  for(const [game,score] of [['aurora-galactica',12345],['galaxy-guardians-preview',54321]]){
-   const result=await first.page.evaluate(async({game,score})=>{
-    installGamePack(game,{persist:0});
-    const saved=await submitScoreRemote({gameKey:game,initials:'TST',score,stage:2});
-    await refreshLeaderboard('mine',{force:1});
-    return {saved};
-   },{game,score});assert.equal(result.saved,1);
+  async function select(page,game){
+   await page.locator('#gamePickerDockBtn').click();
+   await page.locator(`#gamePickerList [data-pack-key="${game}"]`).click();
+  }
+  for(const game of ['aurora-galactica','galaxy-guardians-preview']){
+   console.log('Testing natural game-over submission:',game);
+   const first=await open(),page=first.page;
+   if(game!=='aurora-galactica')await select(page,game);
+   await page.keyboard.press('Enter');
+   await page.keyboard.down('Space');
+   let ended=false;
+   for(let second=0;second<240;second++){
+    if(second<10){
+     await page.keyboard.up(second%2?'ArrowLeft':'ArrowRight');
+     await page.keyboard.down(second%2?'ArrowRight':'ArrowLeft');
+    }else{
+     await page.keyboard.up('Space');await page.keyboard.up('ArrowLeft');await page.keyboard.up('ArrowRight');
+    }
+    await page.clock.runFor(1000);
+    if(await page.locator('#msg.gameOverScreen').count()){ended=true;break;}
+   }
+   assert(ended,'Natural game over did not complete: '+game);
+   await page.keyboard.up('Space');await page.keyboard.up('ArrowLeft');await page.keyboard.up('ArrowRight');
+   await page.clock.runFor(500);
+   assert(calls.some(c=>c.rpc&&c.args.p_game_key===game),'Game over did not submit: '+game);
+   console.log('Submission passed:',game);
+   await first.context.close();
   }
   assert.equal(calls.filter(c=>c.rpc).length,2);
-  await first.context.close();
   const second=await open();
-  for(const [game,score] of [['aurora-galactica',12345],['galaxy-guardians-preview',54321]]){
-   const result=await second.page.evaluate(async game=>{
-    installGamePack(game,{persist:0});await refreshLeaderboard('mine',{force:1});
-    return leaderboardRowsForView('mine').map(r=>({score:r.score,game:r.gameKey,verified:r.verified}));
-   },game);
-   assert.deepEqual(result,[{score,game,verified:false}]);
+  for(const game of ['aurora-galactica','galaxy-guardians-preview']){
+   if(game!=='aurora-galactica')await select(second.page,game);
+   await second.page.locator('#accountDockBtn').click();
+   await second.page.clock.runFor(1000);
+   const table=game==='aurora-galactica'?'scores':'game_scores';
+   await second.page.locator('#accountRecordsTop5 .accountRecordRow').first().waitFor({state:'visible'});
+   const text=await second.page.locator('#accountRecordsTop5').textContent();
+   assert(text.replaceAll(',','').includes(String(rows[table][0].score)),'Saved score missing from fresh profile');
+   await second.page.locator('#accountPanelClose').click();
   }
   await second.page.evaluate(()=>window.fixtureAuth(false));
-  const guest=await second.page.evaluate(()=>submitScoreRemote({gameKey:'aurora-galactica',initials:'TST',score:1,stage:1}));
-  assert.equal(guest,0);assert.equal(calls.filter(c=>c.rpc).length,2);
+  await second.page.clock.runFor(100);
+  assert.equal(calls.filter(c=>c.rpc).length,2);
   assert.deepEqual(errors,[]);
-  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({ok:true,build:info.label,source:info.commit,indexSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'index.html'))).digest('hex'),calls,errors,limitations:'Exact compiled public package; fake provider shared across fresh browser contexts. No real credentials, scores or live backend requests. Direct submit function invocation, not natural gameplay completion.'},null,2));
-  console.log('PASS exact beta: both games RPC save and second browser-context retrieval; guests blocked; no direct inserts or page errors.');
+  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({ok:true,build:info.label,source:info.commit,indexSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'index.html'))).digest('hex'),calls,errors,limitations:'Exact compiled public package; fake provider shared across fresh browser contexts. Natural gameplay with accelerated browser clock and normal inputs. No real credentials, scores or live backend requests. Guest blocking separately covered by executable module tests.'},null,2));
+  console.log('PASS exact beta: both games natural game-over RPC save and fresh browser-context profile retrieval; no direct inserts or page errors.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});
