@@ -312,6 +312,7 @@ function guardiansPersonaEffectiveCfg(state,cfg){
    edgeEscapeInset
   },expertSafeLane||{});
  }
+ if(effective.name==='expert')effective=Object.assign({},effective,{safeLane:1});
  if(rank>=3&&(effective.name==='expert'||effective.name==='professional')){
   return Object.assign({}, effective, {
    diveThreatY:Math.min(effective.diveThreatY,rank>=5?126:136),
@@ -323,47 +324,54 @@ function guardiansPersonaEffectiveCfg(state,cfg){
 
 function guardiansPersonaSafeLaneAxis(state,cfg,target){
  const player=state.player||{};
- const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const rules=guardiansRuntimeRules(state);
+ const playfieldWidth=rules.playfieldWidth||280;
  const playerX=+player.x||0;
  const playerY=+player.y||0;
- const step=Math.max(18,+cfg.safeLaneStep||30);
- const shotLook=Math.max(+cfg.urgentShotLook||0,+cfg.safeLaneShotLook||180);
- const shotDx=Math.max(+cfg.urgentShotDx||0,+cfg.safeLaneShotDx||24);
- const diveY=Number.isFinite(+cfg.safeLaneDiveY)?+cfg.safeLaneDiveY:(+cfg.diveThreatY||140);
- const diveDx=Math.max(+cfg.diveThreatDx||0,+cfg.safeLaneDiveDx||28);
- const shotWeight=Math.max(.2,+cfg.safeLaneShotWeight||1);
- const diveWeight=Math.max(.2,+cfg.safeLaneDiveWeight||1);
- const shots=(state.enemyShots||[]).filter(shot=>
-  shot&&shot.active!==0&&shot.y<playerY&&playerY-shot.y<shotLook
- );
- const dives=(state.aliens||[]).filter(alien=>
-  alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')&&alien.y<playerY&&alien.y>=diveY
- );
- if(!shots.length&&!dives.length)return null;
- const targetX=target?+target.x||playerX:playfieldWidth/2;
+ const memory=guardiansPersonaMemory(state,cfg);
+ const previous=memory.safeLaneObservations||{};
+ const observations={};
+ const threats=[];
+ // Estimate motion from successive observations, without advancing enemy state.
+ const observe=(entity,key,hitbox)=>{
+  const old=previous[key];
+  const elapsed=old?(+state.t||0)-old.t:0;
+  const continuous=elapsed>0&&elapsed<=.1&&old.mode===entity.mode
+   &&Math.abs(entity.x-old.x)<40&&Math.abs(entity.y-old.y)<40;
+  const vx=continuous?(entity.x-old.x)/elapsed:elapsed===0?(old?.vx||0):0;
+  const vy=continuous?(entity.y-old.y)/elapsed:elapsed===0?(old?.vy||0):0;
+  observations[key]={x:entity.x,y:entity.y,t:+state.t||0,mode:entity.mode,vx,vy};
+  threats.push({x:entity.x,y:entity.y,vx,vy,hitbox});
+ };
+ (state.enemyShots||[]).forEach((shot,index)=>{
+  if(shot&&shot.active!==0)observe(shot,`shot:${shot.id??index}`,rules.enemyShotPlayerHitbox||7);
+ });
+ (state.aliens||[]).forEach((alien,index)=>{
+  if(alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')){
+   observe(alien,`alien:${alien.id??index}`,rules.alienCollisionHitbox||10);
+  }
+ });
+ memory.safeLaneObservations=observations;
+ const targetX=Math.max(12,Math.min(playfieldWidth-12,target?+target.x:playfieldWidth/2));
+ const speed=rules.playerSpeed||108;
  const scored=[-1,0,1].map(axis=>{
-  const x=Math.max(18,Math.min(playfieldWidth-18,playerX+axis*step));
   let risk=0;
-  for(const shot of shots){
-   const dx=Math.abs((+shot.x||0)-x);
-   const dy=Math.max(0,playerY-(+shot.y||0));
-   if(dx<=shotDx)risk+=shotWeight*(4+(shotDx-dx)/Math.max(1,shotDx)*4+Math.max(0,1-dy/Math.max(1,shotLook))*2);
+  let x=playerX;
+  for(let tick=1;tick<=13;tick++){
+   const t=tick*.05;
+   x=Math.max(12,Math.min(playfieldWidth-12,playerX+axis*speed*t));
+   if(axis&&Math.sign(targetX-playerX)===axis&&Math.abs(x-playerX)>Math.abs(targetX-playerX))x=targetX;
+   for(const threat of threats){
+    const dx=Math.abs(threat.x+threat.vx*t-x);
+    const dy=Math.abs(threat.y+threat.vy*t-playerY);
+    const margin=threat.hitbox+6+t*8;
+    if(dx<margin&&dy<margin)risk+=(1-dx/margin)*(1-dy/margin)*(1-t*.5)*1000;
+   }
   }
-  for(const alien of dives){
-   const dx=Math.abs((+alien.x||0)-x);
-   const dy=Math.max(0,playerY-(+alien.y||0));
-   if(dx<=diveDx)risk+=diveWeight*(5+(diveDx-dx)/Math.max(1,diveDx)*5+Math.max(0,1-dy/Math.max(1,playerY-diveY))*2);
-  }
-  if(x<=22||x>=playfieldWidth-22)risk+=3;
-  risk+=Math.abs(targetX-x)*.006;
-  if(axis===0)risk+=.15;
-  return {axis,risk};
+  const pursuit=Math.abs(targetX-x)*.05;
+  return {axis,risk:risk+pursuit};
  }).sort((a,b)=>a.risk-b.risk||Math.abs(a.axis)-Math.abs(b.axis));
- const best=scored[0];
- const current=scored.find(row=>row.axis===0);
- if(!best||!Number.isFinite(best.risk))return null;
- if(current&&current.risk<=best.risk+.45)return 0;
- return best.axis;
+ return scored[0]?.axis??null;
 }
 
 function guardiansPersonaMoveAxis(state,cfg,target){
@@ -757,6 +765,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   attract:0,
   simT:0,
   stageClock:0,
+  playerTwo:{enabled:false},
   watchMode:watchMode?1:0,
   watchPersona,
   watchScope
@@ -814,7 +823,8 @@ function galaxyGuardiansInputFromKeys(){
 function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  const manualInput=galaxyGuardiansInputFromKeys();
- const personaInput=!guardiansHasManualInput(manualInput)
+ const automatedTurn=!!S.watchMode;
+ const personaInput=automatedTurn||!guardiansHasManualInput(manualInput)
   ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,S.harnessPersona||S.watchPersona||'')
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);

@@ -40,7 +40,8 @@ async function main(){
     window.__galagaHarness__.forcePerfectChallengeClear();
     window.__galagaHarness__.advanceFor(16.5);
     const afterClear = window.__galagaHarness__.state();
-    const events = window.__galagaHarness__.sessionEvents(800);
+    // This bounded session includes per-frame pilot decisions; retain its early clear event.
+    const events = window.__galagaHarness__.sessionEvents(Number.MAX_SAFE_INTEGER);
     return {
       frontDoorHtml,
       start,

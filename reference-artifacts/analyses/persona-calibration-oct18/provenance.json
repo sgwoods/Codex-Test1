@@ -1,0 +1,48 @@
+{
+  "started": "2026-10-18T19:08:51.670Z",
+  "baseline": "02166971875b19b7f0c41c035efab30868c179a0",
+  "dirty": true,
+  "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+  ],
+  "personas": [
+    "novice",
+    "advanced",
+    "expert",
+    "professional"
+  ],
+  "duration": 900,
+  "step": "1/60",
+  "method": "Real browser, controlled clock, Watch game scope, 10 matched held-out seeds per persona per game. No policy changes during measurement.",
+  "guardiansStageCap": 99,
+  "buildLabel": "1.4.1.5+build.1209.sha.02166971.dirty",
+  "hashes": {
+    "src/js/05-player-flow.js": "21fe6dfc9bf61be13c76c9c4110802dafa6e1c86c689cedd62f2454d0bae6677",
+    "src/js/13-galaxy-guardians-gameplay-adapter.js": "d8f5fc58137525956679f183dc164da5886f65171f3ceacfcc63f3aeed154e09",
+    "tools/harness/run-gameplay.js": "ecce8d3e5d0a3c055dd1a567f76d6d913770afe231773c506c6eebe7e4c32bb6",
+    "dist/dev/index.html": "93b30d5603fc866f752bad6bbc25ce88074c942e289aec2132d3c14f7a96b6f2"
+  },
+  "runnerSha256": "aa92cd4f67d0596fceffccc57c0cb42e88132410576d7a80798bf85daa2e6a03",
+  "primaryPacket": "private-artifacts/persona-distribution-oct18",
+  "completion": {
+    "finished": "2026-10-18T19:16:26.304Z",
+    "runs": 80,
+    "errors": 0,
+    "inputUnchanged": true
+  },
+  "verification": {
+    "checkedAt": "2026-10-18T19:17:44.084Z",
+    "runs": 80,
+    "failures": [],
+    "passed": true
+  }
+}

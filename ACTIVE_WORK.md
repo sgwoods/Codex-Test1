@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 18, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 20, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,177 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 20 requested steps 1-4: fresh validation complete; skill calibration
+improved but incomplete; live scoring blocked on a working signed-in browser;
+local checkpoint preparation complete, main integration and publication held.
+Professional Stage4-6 candidate passed fresh seeds85001-85010: median56,060,
+all Stage8+. Continuous clearance now covers Expert/Professional normal stages4+.
+Professional normal stages4+ use Expert movement/target/rescue policy with
+reliable aligned firing; opening and challenge policy remain unchanged.
+Final fresh seeds87001-87010, ten runs/persona: medians Beginner26,365,
+Intermediate33,675, Expert190,135, Professional156,705. Expert reaches75k in8/10;
+Professional reaches150k in5/10,200k in4/10. Expert still outperforms Professional.
+Four runs per upper tier remain alive at the900s limit: scores are censored.
+Do not declare the skill ladder calibrated or the consistent150k target met.
+Guardians proposals rejected; accepted Expert source preserved, other tiers
+remain weak. No Wizard. Persona parity now includes later stages and transitions.
+The existing Stage2 short-window score gate still fails51201,2820vs4250;
+no threshold was waived. Live scoring needs normal signed-in completion/reload/
+separate-session retrieval for both games. The Codex beta tab is crashed and a
+browser-policy denial prevents inspection; user asked to reload/sign in.
+Three role-identifier findings were reviewed as not credential values. Narrow
+scanner classification and17 executable tests added; original findings retained.
+Report:reference-artifacts/analyses/persona-calibration-oct20/REVIEW.md.
+Keep localhost8000 available; frozen8002 unchanged. No publish/push authorized.
+
+October 19 Aurora Professional collision candidate passes its matched diagnostic
+gate, but is provisional pending fresh seeds and movement-conflict fixtures.
+Normal Stages 4-6 now retain continuous collision-box clearance across lane
+boundaries and below the player center. No enemy, scoring or firing change.
+Ten browser Watch runs, seeds 72001-72010: median 40,475 -> 57,035 (+40.9%);
+all reach Stage 8+, maximum 199,440 at Stage 28. All end in game over.
+Six threat-filter fixtures, 66 mode-parity cases, build/syntax/diff checks pass.
+Review notes lateral-threshold oscillation and competing bullet/body escape
+remain possible. These diagnostic seeds are not fresh validation. Expert's
+75k-100k and Professional's consistent 150k+ targets remain unmet; Wizard deferred.
+DEV 8000 serves this provisional candidate; beta 8002 stays unchanged.
+No commit, push or publication. Next fresh-seed validation and fixture-driven
+hazard arbitration, followed by shared safety and per-game skill calibration.
+Report: reference-artifacts/analyses/persona-calibration-oct18/AURORA-CLEARANCE.md.
+Beta also requires live per-game save/retrieval, review finding disposition,
+clean integration, a new exact package and authorized release gates.
+
+October19 ExpertStage3handoff extension retained locally:existing predictive
+planner now remains enabled for Expert at all stages. Diagnostic83001-83010:
+all10reachStage4+,median14720;fresh84001-84010:9reachStage4+,median13785,
+9alive/censored at900s,oneStage3gameover. Browser84001matchesStage6/13610/900s.
+11pursuit cases,66mode-parity,build/runtime-slice/Stage5policy checks pass.
+Independent review supports scoped extension; enemyphysics/scoring unchanged.
+Aurora collision preparation complete:10sampled losses show16-29direction
+reversals in preceding0.5s,returntoward collider after evasion,lane/center-based
+threat release. Next implement boundedProfessionalStage4-6body-clearance
+arbitration with executable fixtures; noAurorasourcechange thisstep.
+Skill-ladder ProfessionalVMprototype improvesmedian2165->13655but remains
+belowmatchedExpert14720;notretained ordeclaredcalibrated. Nextcompare targeting/
+shot-use oncompetent safetyfoundation andaddressIntermediatehybrid separately.
+Report:reference-artifacts/analyses/persona-calibration-oct18/STAGE3-AND-LADDER.md.
+DEV8000rebuilt/verified;beta8002unchanged. Uncommitted,no push/publication;betaheld.
+
+October18 approved persona plan:retain local GuardiansExpert opening repair.
+Observed-motion650ms safety/pursuit planner replaces only existingStage1-2
+safe-lane arbitration. Diagnostic72001-72010:Stage2reach2->10of10,
+Stage3reach0->8of10,median2340->5250,timeouts8->0. Fresh83001-83010:
+all10reachStage3,median6260; all end inStage3. Frozen acceptance passes.
+Browser83001matchesVM Stage3/7040/360.633s. New10case pursuit regression,
+66mode-parity, runtime-slice, Stage5policy, Watchbrowser, build/syntax/diff pass.
+Independentreview recommendskeep; rightedge/wrap reset tests added. Source is
+uncommitted, no push/publication. DEV8000rebuilt/verified; frozenbeta8002unchanged.
+User-approved Aurora targets:Expert75k-100k,Professional150k+with200k+upside;
+Wizard remainslater diagnostic tier, notimplemented. NextGuardiansStage3handoff
+analysis/extension and separateAuroraStage4-6collision repair. OtherGuardians
+personas remainuncalibrated. Betaheld andoldAurorashort-windowgateunresolved.
+Report:reference-artifacts/analyses/persona-calibration-oct18/GUARDIANS-EXPERT-KEEPER.md.
+
+October18 Guardians diagnosis complete:40instrumented runtime replays match all
+40browser outcomes. Expert stationary92.66%of actionable time; safe-lane hold
+while target-misaligned90.70%; longest scoreless interval699.6s. Actual-controller
+fixture confirms distant-shot-triggered hold suppresses safe pursuit through
+the.45threshold versus maximum.354target/idle improvement. IntermediateStage1
+uses a hidden hybrid config; declared moveMul is unused. No new gameplay tuning.
+User competence targets recorded provisionally forAurora:Expert75k-100k,
+Professional150k+with200k+upside; possibleWizarddiagnostic tier. No Wizard added
+or world-record capability claimed. Next implement bounded GuardiansExpert
+safety/pursuit arbitration, preserving physics, then separate AuroraStage4-6
+collision planning. Keep shared policies and do not equate current automated
+actuator with human input. Plan/evidence:reference-artifacts/analyses/persona-
+calibration-oct18/COMPETENCE-PLAN.md. Beta remains held; hosted lanes unchanged.
+
+October18 held-out persona distribution complete:80browser Watch runs,10each
+persona per game, seeds72001-72010, Stage1/three ships/900seconds. No tuning.
+Aurora mean stages Beginner3.1,Intermediate4.7,Expert5.6,Professional6.1;
+mean scores16782/31707/38417/40956. All40end in game over. Professional has
+zero early destruction losses but one Stage2capture life decrement; all ten
+reachStage5+, eight end atStage6. Guardians mean stages1.8/1.6/1.2/1.6;
+Beginner outscored Intermediate and Professional. Eight Expert runs time out
+atStage1or2; report them as censored, not successful completions. All80requested
+identities and outcomes verified; no harness errors; source/input unchanged.
+Report:reference-artifacts/analyses/persona-calibration-oct18/DISTRIBUTION.md.
+Primary evidence:private-artifacts/persona-distribution-oct18/. This panel is
+now diagnostic, not held-out for future tuning. Next:Guardians stall/skill-order
+decision traces and bounded AuroraStage4-6collision analysis. Freeze criteria
+before a fresh-seed validation. Beta remains held; no deployment or source push.
+
+October18 persona consistency repair is implemented locally; full calibration
+is NOT complete and beta remains held. Aurora Professional now uses existing
+lower-field avoidance; all three natural-start seeds51101/51201/51301 clear
+Stages1-2 without losses, reaching stages9/5/8 instead of the reproduced Stage2
+wipeout. Four-persona shared-seed matrix has increasing mean score/progression.
+Removed Aurora P2-only policy variance. Watch and owned P2 turns ignore incidental
+human controls; P1 remains human. Guardians Watch now owns its input and launch
+clears stale Aurora P2 state; Guardians P2 remains explicitly unsupported.
+New executable mode-parity check passes66/66; four full Watch/harness runs match
+score/stage and every ship-loss timestamp on seed51101. P2 existing browser
+regression passes. All source changes are on local DEV8000, NOT frozen beta8002.
+Guardians twelve-run assessment finds Intermediate weaker than Beginner on these
+seeds and Expert stalls atStage1. Target-filter, safe-lane fallback/deadband and
+declared-policy experiments were measured then rejected/restored; no speculative
+Guardians gameplay tuning retained. The existing16-second Stage2 score gate FAILS
+one paired seed although Professional loses no ships; it was NOT weakened.
+This remains an explicit safety/short-window-throughput acceptance issue.
+No source push or hosted publication. Next bounded work: Guardians decision
+traces and held-out calibration, plus disposition of that existing score gate;
+do not label the entire requested persona calibration complete.
+Packet: reference-artifacts/analyses/persona-calibration-oct18/REPAIR.md.
+
+October18 user reports Professional losing three ships in Stage2. Reproduced
+on preserved beta.4 development input (02166971), natural Stage1 start,
+full-run-persona, seed51301: all three losses in Stage2 at38.417/41.683/44.867s,
+all enemy_collision, final score8260. Seed51101: Professional Stage5/36310,
+Expert Stage6/41930. Three controlled runs only, not a distribution or exact
+replay of the human's unrecorded Watch run. No gameplay source changes.
+Professional lacks Expert's optional lower-field dive avoidance parameters.
+Independent review confirms shared Watch/harness controller but differing input
+handoff and direct position movement rather than the human acceleration path.
+Do not use this pilot as a human-feasibility witness or weaken gameplay to make
+its score improve. Beta acceptance now includes resolving this calibration issue
+or an explicit product disposition. Next inspect the three loss decision traces,
+test a bounded Professional avoidance repair, then matched-seed skill ladder and
+Watch checks, preserving challenge/capture behavior and frozen beta bytes.
+Report: reference-artifacts/analyses/persona-calibration-oct18/REVIEW.md.
+
+October18 follow-up: two exact frozen beta.4 browser scoring runs PASS.
+The diagnostic run with original inputs showed normal Guardians progression
+and eventual game over; the earlier 240-second timeout is not a reproduced
+persistence defect. A second run uses ordinary left/right traversal after
+ten seconds of firing, then no firing, to exercise the loss path. It passed
+both-game RPC saves and fresh-context profile retrieval with no page errors.
+Only the harness changed: read-only progress snapshots are persisted and the
+Guardians loss-path inputs continue moving. No gameplay state assignments,
+live backend writes, package mutation, or publication. All five freezes verify.
+Reports and progress: private-artifacts/beta-candidate-scores-oct18-r2/
+browser-diagnosis/ and browser-traversal/. Fake-provider checks do not establish
+live persistence. Next live signed-in save/reload for each game; resolve review
+findings, integrate accepted source under release authority, review matching
+hosted DEV, and pass final beta gates before explicit beta publication.
+
+October18 local beta.4 checkpoint supersedes the preparation status below.
+Candidate 1.4.2-beta.4+build.1209.sha.02166971.beta is served at
+http://localhost:8002/ from private-artifacts/beta-candidate-scores-oct18-r2/beta.
+Source is 02166971875b19b7f0c41c035efab30868c179a0. Earlier candidates remain
+preserved. Per-game scoring implementation and account-open history refresh
+are committed. Exact package runtime, public account boundary and fake-provider
+password recovery checks passed. The final public scoring browser test passed
+Aurora natural game-over submission but failed to observe Guardians game over
+within 240 browser seconds. Therefore fresh-context retrieval in that test was
+not reached; do not report a complete two-game browser acceptance pass.
+The cause of this timeout is unresolved. Next inspect the Guardians test's
+launch, progression and game-over state before changing runtime or extending
+the timeout. Then verify signed-in saves and retrieval with the live service.
+At this checkpoint the gate was blocked by three service_role identifier findings, not confirmed credential disclosures,
+requiring classification; no bypass performed. No push or hosted publication.
+Local review is provisional, not beta release approval. Evidence summary:
+reference-artifacts/analyses/beta4-local-oct18/REVIEW.md.
 
 October18 human reports phase2 SQL completed in Galaga Tribute production.
 Supplied SQL Editor screenshot shows committed migration followed by aggregates:

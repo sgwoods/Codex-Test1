@@ -24,7 +24,7 @@ function fixture(){
  const info=JSON.parse(fs.readFileSync(path.join(root,'build-info.json')));
  assert.equal(info.releaseChannel,'production beta');
  fs.mkdirSync(out,{recursive:true});
- const rows={scores:[],game_scores:[]},calls=[],errors=[];
+ const rows={scores:[],game_scores:[]},calls=[],errors=[],progress=[];
  const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');const f=path.resolve(root,'.'+(url.pathname==='/'?'/index.html':decodeURIComponent(url.pathname)));
   if(!f.startsWith(root+path.sep)){res.writeHead(403).end();return;}
@@ -74,6 +74,20 @@ function fixture(){
    if(game!=='aurora-galactica')await select(page,game);
    await page.keyboard.press('Enter');
    await page.keyboard.down('Space');
+   async function record(second){
+    const state=await page.evaluate(()=>{
+     const shell=getGameplayAdapter('aurora-galactica').snapshot();
+     const owned=typeof currentGalaxyGuardiansDevPreviewState==='function'?currentGalaxyGuardiansDevPreviewState():null;
+     return {game:currentGamePackKey(),started:shell.started,paused:shell.paused,
+      time:owned?.t??shell.simT,stage:owned?.stage??shell.stage,score:owned?.score??shell.score,
+      lives:owned?.lives??shell.lives,playerX:owned?.player?.x??shell.player?.x,
+      gameOver:owned?.gameOver??false,message:document.getElementById('msg')?.textContent};
+    });
+    progress.push({game,second,state});
+    fs.writeFileSync(path.join(out,'progress.json'),JSON.stringify({build:info.label,progress,calls,errors},null,2));
+    console.log('Progress:',game,second,JSON.stringify(state));
+   }
+   await record(0);
    let ended=false;
    for(let second=0;second<240;second++){
     if(second<10){
@@ -81,8 +95,11 @@ function fixture(){
      await page.keyboard.down(second%2?'ArrowRight':'ArrowLeft');
     }else{
      await page.keyboard.up('Space');await page.keyboard.up('ArrowLeft');await page.keyboard.up('ArrowRight');
+     // A stationary survivor need not lose within the test budget. Traverse using normal input.
+     if(game==='galaxy-guardians-preview')await page.keyboard.down(Math.floor(second/3)%2?'ArrowRight':'ArrowLeft');
     }
     await page.clock.runFor(1000);
+    if((second+1)%30===0)await record(second+1);
     if(await page.locator('#msg.gameOverScreen').count()){ended=true;break;}
    }
    assert(ended,'Natural game over did not complete: '+game);

@@ -199,6 +199,19 @@ function isHtmlInjectionExecutableSurface(file){
   return /\.(js|html)$/i.test(file);
 }
 
+function isReviewedRoleDeclaration(file, text){
+  if(file === 'supabase/add-platform-game-scores.sql'){
+    return /^grant all privileges on table public\.game_scores to service[_-]?role;$/.test(text);
+  }
+  if(file === 'tools/harness/check-game-scores-migration.js'){
+    return /^await db\.exec\(`create role anon; create role authenticated; create role service[_-]?role;$/.test(text);
+  }
+  if(file === 'tools/harness/check-supabase-data-api-contract.js'){
+    return /^grants: \{ anon: \['select', 'insert'\], authenticated: \['select', 'insert', 'delete'\], service[_-]?role: \['all'\] \},$/.test(text);
+  }
+  return false;
+}
+
 function automaticFindings(files, diffLines){
   const findings = [];
   const fileSet = new Set(files.map(row => row.file));
@@ -211,7 +224,8 @@ function automaticFindings(files, diffLines){
     if(/(service[_-]?role|SUPABASE_SERVICE_ROLE|sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9_]{20,})/.test(trimmed)
       && !isSecretPolicyDescription(file, trimmed)
       && !isReviewScannerSourceLine(file, trimmed)
-      && !isReviewLedgerNarrative(file, trimmed)){
+      && !isReviewLedgerNarrative(file, trimmed)
+      && !isReviewedRoleDeclaration(file, trimmed)){
       findings.push(finding('P1', 'secret-like-token', 'Secret-looking token or service-role reference added to source.', file, trimmed));
     }
     if(/localStorage\.[^(]*(password|token|secret|session)/i.test(trimmed) || /localStorage\.setItem\([^)]*(password|token|secret|session)/i.test(trimmed)){
@@ -489,4 +503,5 @@ function main(){
   }, null, 2));
 }
 
-main();
+if(require.main === module) main();
+module.exports = { automaticFindings };

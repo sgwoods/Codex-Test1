@@ -1,0 +1,170 @@
+{
+  "baseline": "02166971875b19b7f0c41c035efab30868c179a0 plus dirty source bound by hashes",
+  "methodSha256": "f415c6f4901bf6b40f4d68e259d0302841ce720ab957f292f96c64f6e47d8153",
+  "hashes": {
+    "src/js/13-galaxy-guardians-game-pack.js": "8c5f1d3c36daf94723da8f08bdb04423cbb1122824da853de2938fdbbffad3e7",
+    "src/js/13-galaxy-guardians-gameplay-adapter.js": "9136f68eb98dc5b26c5cf543627f016a23463cfd28f0f01b27f48f1e75e82275",
+    "src/js/13-galaxy-guardians-runtime.js": "e98e9e5db3b11cefc80aeead23eb1ec6a34eb29fddbd4078ccf67017c35e3376",
+    "tools/harness/guardians-long-surface-lib.js": "8b1b99c69ac085b470208bf4db87c537b50b796d20208be9e724a0bfec29c6cf"
+  },
+  "override": "guardiansPersonaEffectiveCfg = function(state,cfg){\n if(!state||!cfg)return cfg;\n return Object.assign({},cfg,{safeLane:1});\n};",
+  "fixtureChecks": 20,
+  "method": {
+    "stage": 1,
+    "ships": 3,
+    "maxPlayableStage": 99,
+    "hz": 60,
+    "durationSeconds": 900,
+    "seeds": [
+      83001,
+      83010
+    ],
+    "reservedSeeds": [
+      86001,
+      86010
+    ],
+    "runtimeRulesPatched": false,
+    "normalInputsOnly": true,
+    "browser": false
+  },
+  "summary": [
+    {
+      "policy": "baseline",
+      "persona": "novice",
+      "medianScore": 2775,
+      "minScore": 760,
+      "maxScore": 5660,
+      "medianStage": 1.5,
+      "reachStage4": 0,
+      "censored": 0,
+      "gameOvers": 10,
+      "stage1GameOvers": 5,
+      "medianShots": 72,
+      "medianHits": 38
+    },
+    {
+      "policy": "baseline",
+      "persona": "advanced",
+      "medianScore": 2220,
+      "minScore": 410,
+      "maxScore": 6600,
+      "medianStage": 1,
+      "reachStage4": 0,
+      "censored": 0,
+      "gameOvers": 10,
+      "stage1GameOvers": 8,
+      "medianShots": 44,
+      "medianHits": 31
+    },
+    {
+      "policy": "baseline",
+      "persona": "expert",
+      "medianScore": 14720,
+      "minScore": 8720,
+      "maxScore": 18000,
+      "medianStage": 6,
+      "reachStage4": 10,
+      "censored": 8,
+      "gameOvers": 2,
+      "stage1GameOvers": 0,
+      "medianShots": 499.5,
+      "medianHits": 225
+    },
+    {
+      "policy": "baseline",
+      "persona": "professional",
+      "medianScore": 2165,
+      "minScore": 430,
+      "maxScore": 2980,
+      "medianStage": 1,
+      "reachStage4": 0,
+      "censored": 0,
+      "gameOvers": 10,
+      "stage1GameOvers": 9,
+      "medianShots": 58,
+      "medianHits": 33.5
+    },
+    {
+      "policy": "shared-safety",
+      "persona": "novice",
+      "medianScore": 13485,
+      "minScore": 4130,
+      "maxScore": 15320,
+      "medianStage": 6,
+      "reachStage4": 9,
+      "censored": 8,
+      "gameOvers": 2,
+      "stage1GameOvers": 0,
+      "medianShots": 493.5,
+      "medianHits": 223.5
+    },
+    {
+      "policy": "shared-safety",
+      "persona": "advanced",
+      "medianScore": 15005,
+      "minScore": 11340,
+      "maxScore": 16730,
+      "medianStage": 6.5,
+      "reachStage4": 10,
+      "censored": 10,
+      "gameOvers": 0,
+      "stage1GameOvers": 0,
+      "medianShots": 506,
+      "medianHits": 235.5
+    },
+    {
+      "policy": "shared-safety",
+      "persona": "expert",
+      "medianScore": 14720,
+      "minScore": 8720,
+      "maxScore": 18000,
+      "medianStage": 6,
+      "reachStage4": 10,
+      "censored": 8,
+      "gameOvers": 2,
+      "stage1GameOvers": 0,
+      "medianShots": 499.5,
+      "medianHits": 225
+    },
+    {
+      "policy": "shared-safety",
+      "persona": "professional",
+      "medianScore": 12980,
+      "minScore": 8700,
+      "maxScore": 15020,
+      "medianStage": 6,
+      "reachStage4": 10,
+      "censored": 8,
+      "gameOvers": 2,
+      "stage1GameOvers": 0,
+      "medianShots": 473.5,
+      "medianHits": 220.5
+    }
+  ],
+  "pairs": [
+    {
+      "persona": "novice",
+      "scoreWins": 10,
+      "scoreTies": 0,
+      "stageWins": 10
+    },
+    {
+      "persona": "advanced",
+      "scoreWins": 10,
+      "scoreTies": 0,
+      "stageWins": 10
+    },
+    {
+      "persona": "expert",
+      "scoreWins": 0,
+      "scoreTies": 9,
+      "stageWins": 0
+    },
+    {
+      "persona": "professional",
+      "scoreWins": 10,
+      "scoreTies": 0,
+      "stageWins": 10
+    }
+  ]
+}

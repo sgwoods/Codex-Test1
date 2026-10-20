@@ -1,0 +1,517 @@
+{
+  "baseline": "02166971875b19b7f0c41c035efab30868c179a0",
+  "sourceHashes": {
+    "src/js/13-galaxy-guardians-gameplay-adapter.js": "1791d17b10cdb78e07f2fe803fc3e08cd8e54bf60fad7ce22ff0f1f560ef094e",
+    "src/js/13-galaxy-guardians-runtime.js": "e98e9e5db3b11cefc80aeead23eb1ec6a34eb29fddbd4078ccf67017c35e3376",
+    "tools/harness/check-guardians-expert-pursuit.js": "e12f38a08b14e7ec6e63b8a2ddb4e0c504353e5e378d944ed19f4fa72f216de4",
+    "private-artifacts/persona-diagnosis-oct18/evaluate.js": "bf8b2553ac05aa8b7b904df133e73d56bc023644eda158899a871ed63bc68f44",
+    "dist/dev/index.html": "b87b0cdb1bc13b633f0f1bd59cfdd97f3adb556b89e30620e309baad548a3bb0"
+  },
+  "criteria": {
+    "stage2ReachesAtLeast": 7,
+    "stage1GameOversAtMost": 2,
+    "medianScoreAtLeast": 2340
+  },
+  "diagnostic": [
+    {
+      "seed": 72001,
+      "stage": 3,
+      "score": 5110,
+      "time": 292.100000000063,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72002,
+      "stage": 2,
+      "score": 5270,
+      "time": 210.6333333333931,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72003,
+      "stage": 3,
+      "score": 5210,
+      "time": 296.25000000005923,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72004,
+      "stage": 3,
+      "score": 5560,
+      "time": 328.9500000000295,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72005,
+      "stage": 3,
+      "score": 5670,
+      "time": 435.4166666665993,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72006,
+      "stage": 3,
+      "score": 5700,
+      "time": 341.71666666668455,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72007,
+      "stage": 3,
+      "score": 4640,
+      "time": 361.74999999999966,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72008,
+      "stage": 3,
+      "score": 6710,
+      "time": 322.183333333369,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72009,
+      "stage": 2,
+      "score": 4290,
+      "time": 206.95000000005683,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 72010,
+      "stage": 3,
+      "score": 5230,
+      "time": 378.18333333331805,
+      "gameOver": true,
+      "lives": 0
+    }
+  ],
+  "heldout": [
+    {
+      "seed": 83001,
+      "stage": 3,
+      "score": 7040,
+      "time": 360.633333333334,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83002,
+      "stage": 3,
+      "score": 6250,
+      "time": 375.7666666666536,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83003,
+      "stage": 3,
+      "score": 6850,
+      "time": 308.06666666671515,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83004,
+      "stage": 3,
+      "score": 7150,
+      "time": 321.95000000003586,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83005,
+      "stage": 3,
+      "score": 5680,
+      "time": 320.0166666667043,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83006,
+      "stage": 3,
+      "score": 6270,
+      "time": 341.0166666666852,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83007,
+      "stage": 3,
+      "score": 6100,
+      "time": 280.50000000007356,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83008,
+      "stage": 3,
+      "score": 6800,
+      "time": 329.833333333362,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83009,
+      "stage": 3,
+      "score": 6220,
+      "time": 282.583333333405,
+      "gameOver": true,
+      "lives": 0
+    },
+    {
+      "seed": 83010,
+      "stage": 3,
+      "score": 6190,
+      "time": 343.78333333334933,
+      "gameOver": true,
+      "lives": 0
+    }
+  ],
+  "fixtures": {
+    "ok": true,
+    "passed": 10,
+    "cases": [
+      {
+        "name": "Pursuit works without hazards",
+        "pass": true
+      },
+      {
+        "name": "A distant shot does not stop pursuit",
+        "pass": true
+      },
+      {
+        "name": "Aligned safe target does not force movement",
+        "pass": true
+      },
+      {
+        "name": "Does not pursue through an immediate shot",
+        "pass": true
+      },
+      {
+        "name": "Escapes a threatened left edge towards the playfield",
+        "pass": true
+      },
+      {
+        "name": "Escapes a threatened right edge towards the playfield",
+        "pass": true
+      },
+      {
+        "name": "Mode changes and wrap teleports discard stale velocity",
+        "pass": true
+      },
+      {
+        "name": "Planning neither advances game state nor consumes future RNG",
+        "pass": true
+      },
+      {
+        "name": "Motion estimates use observations and remain stable at repeated timestamps",
+        "pass": true
+      },
+      {
+        "name": "Other personas do not enter the Expert planner",
+        "pass": true
+      }
+    ]
+  },
+  "modeParity": {
+    "ok": true,
+    "sourceCommit": "02166971875b19b7f0c41c035efab30868c179a0",
+    "sourceStatus": "M src/js/05-player-flow.js\n M src/js/13-galaxy-guardians-gameplay-adapter.js",
+    "methodHash": "349ba480570d53a9e582f69718db5a4ea5b2c1b8c512d7dc4daf42ea9f1f812b",
+    "seed": 51301,
+    "step": 0.016666666666666666,
+    "sourceHashes": {
+      "src/js/00-boot.js": "add82367447d3951d378299c810a4d7e59b505dd499dac9d559f8df1fe22d5a4",
+      "src/js/05-player-flow.js": "21fe6dfc9bf61be13c76c9c4110802dafa6e1c86c689cedd62f2454d0bae6677",
+      "src/js/05-player-combat.js": "c01720fd25b08ef4e439107d2aca1a3a0915149ac675f203f61d245bf94d722f",
+      "src/js/01-runtime-shell.js": "7275f14b7591518e95d7a92d15ce9333187e4db3414f3f98eb815cfeaebfca9e",
+      "tools/harness/guardians-long-surface-lib.js": "8b1b99c69ac085b470208bf4db87c537b50b796d20208be9e724a0bfec29c6cf",
+      "src/js/13-galaxy-guardians-game-pack.js": "8c5f1d3c36daf94723da8f08bdb04423cbb1122824da853de2938fdbbffad3e7",
+      "src/js/13-galaxy-guardians-gameplay-adapter.js": "1791d17b10cdb78e07f2fe803fc3e08cd8e54bf60fad7ce22ff0f1f560ef094e",
+      "src/js/13-galaxy-guardians-runtime.js": "e98e9e5db3b11cefc80aeead23eb1ec6a34eb29fddbd4078ccf67017c35e3376"
+    },
+    "passed": 66,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "Aurora novice: harness/Watch config and actions",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 config unchanged at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 actions equal at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 config unchanged at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 actions equal at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 config unchanged at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P2 actions equal at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: owned P2 ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: Watch ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: owned P2 ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: Watch ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: interactive harness still permits manual override",
+        "pass": true
+      },
+      {
+        "name": "Aurora novice: P1 remains human-controlled",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: harness/Watch config and actions",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 config unchanged at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 actions equal at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 config unchanged at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 actions equal at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 config unchanged at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P2 actions equal at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: owned P2 ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: Watch ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: owned P2 ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: Watch ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: interactive harness still permits manual override",
+        "pass": true
+      },
+      {
+        "name": "Aurora advanced: P1 remains human-controlled",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: harness/Watch config and actions",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 config unchanged at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 actions equal at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 config unchanged at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 actions equal at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 config unchanged at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P2 actions equal at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: owned P2 ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: Watch ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: owned P2 ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: Watch ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: interactive harness still permits manual override",
+        "pass": true
+      },
+      {
+        "name": "Aurora expert: P1 remains human-controlled",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: harness/Watch config and actions",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 config unchanged at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 actions equal at variance 0.82",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 config unchanged at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 actions equal at variance 1",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 config unchanged at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P2 actions equal at variance 1.18",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: owned P2 ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: Watch ignores ArrowLeft",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: owned P2 ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: Watch ignores ArrowRight+Space",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: interactive harness still permits manual override",
+        "pass": true
+      },
+      {
+        "name": "Aurora professional: P1 remains human-controlled",
+        "pass": true
+      },
+      {
+        "name": "Guardians: P2 unsupported, not silently simulated as an implemented mode",
+        "pass": true
+      },
+      {
+        "name": "Guardians novice: harness/Watch config, decisions and runtime actions",
+        "pass": true
+      },
+      {
+        "name": "Guardians novice: Watch ignores human keys",
+        "pass": true
+      },
+      {
+        "name": "Guardians novice: human remains controllable",
+        "pass": true
+      },
+      {
+        "name": "Guardians advanced: harness/Watch config, decisions and runtime actions",
+        "pass": true
+      },
+      {
+        "name": "Guardians advanced: Watch ignores human keys",
+        "pass": true
+      },
+      {
+        "name": "Guardians advanced: human remains controllable",
+        "pass": true
+      },
+      {
+        "name": "Guardians expert: harness/Watch config, decisions and runtime actions",
+        "pass": true
+      },
+      {
+        "name": "Guardians expert: Watch ignores human keys",
+        "pass": true
+      },
+      {
+        "name": "Guardians expert: human remains controllable",
+        "pass": true
+      },
+      {
+        "name": "Guardians professional: harness/Watch config, decisions and runtime actions",
+        "pass": true
+      },
+      {
+        "name": "Guardians professional: Watch ignores human keys",
+        "pass": true
+      },
+      {
+        "name": "Guardians professional: human remains controllable",
+        "pass": true
+      },
+      {
+        "name": "Source identities remained stable during the VM matrix",
+        "pass": true
+      }
+    ],
+    "limitations": [
+      "Actual source controller and input-router VM tests, not browser launch/DOM coverage or skill calibration.",
+      "Aurora fixtures isolate controller time/cooldown and bullet updates; no full enemy/stage progression.",
+      "Guardians uses actual runtime stepping with presentation/audio/telemetry stubbed; its pack declares P2 unsupported.",
+      "No assertion that automated movement follows human acceleration physics or proves human feasibility."
+    ]
+  }
+}

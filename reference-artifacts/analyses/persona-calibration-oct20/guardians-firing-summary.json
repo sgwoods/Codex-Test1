@@ -1,0 +1,206 @@
+{
+  "hashes": {
+    "src/js/13-galaxy-guardians-gameplay-adapter.js": "9136f68eb98dc5b26c5cf543627f016a23463cfd28f0f01b27f48f1e75e82275",
+    "src/js/13-galaxy-guardians-game-pack.js": "8c5f1d3c36daf94723da8f08bdb04423cbb1122824da853de2938fdbbffad3e7",
+    "src/js/13-galaxy-guardians-runtime.js": "e98e9e5db3b11cefc80aeead23eb1ec6a34eb29fddbd4078ccf67017c35e3376",
+    "tools/harness/guardians-long-surface-lib.js": "8b1b99c69ac085b470208bf4db87c537b50b796d20208be9e724a0bfec29c6cf"
+  },
+  "methodSha256": "869e113a8257052a2b84d80295f7422e3a9332ac1ae0b73cd8fb1b971a7e7f08",
+  "changedFields": {
+    "shotCadence": [
+      0.14,
+      0.11
+    ],
+    "aimScout": [
+      13,
+      14
+    ],
+    "aimEscort": [
+      15,
+      16
+    ],
+    "aimFlagship": [
+      18,
+      19
+    ]
+  },
+  "method": {
+    "seeds": [
+      83001,
+      83010
+    ],
+    "reserved": [
+      86001,
+      86010
+    ],
+    "stage": 1,
+    "ships": 3,
+    "hz": 60,
+    "maxSeconds": 900,
+    "maxPlayableStage": 99,
+    "controllerInputsOnly": true,
+    "browser": false,
+    "internalEffectiveName": "expert retained deliberately in both clones"
+  },
+  "summaries": [
+    {
+      "variant": "expert-clone",
+      "medianScore": 14720,
+      "minScore": 8720,
+      "maxScore": 18000,
+      "medianStage": 6,
+      "stage4": 10,
+      "censored": 8,
+      "gameOvers": 2,
+      "medianShots": 499.5,
+      "medianHits": 225
+    },
+    {
+      "variant": "expert-clone-pro-fire",
+      "medianScore": 13685,
+      "minScore": 2910,
+      "maxScore": 17970,
+      "medianStage": 6,
+      "stage4": 8,
+      "censored": 8,
+      "gameOvers": 2,
+      "medianShots": 494.5,
+      "medianHits": 214
+    }
+  ],
+  "deltas": [
+    {
+      "seed": 83001,
+      "scoreDelta": 60,
+      "stageDelta": 0,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": -8,
+      "hitsDelta": -6
+    },
+    {
+      "seed": 83002,
+      "scoreDelta": -5810,
+      "stageDelta": -2,
+      "beforeGameOver": true,
+      "afterGameOver": true,
+      "shotsDelta": -182,
+      "hitsDelta": -75
+    },
+    {
+      "seed": 83003,
+      "scoreDelta": 2890,
+      "stageDelta": 2,
+      "beforeGameOver": true,
+      "afterGameOver": false,
+      "shotsDelta": 156,
+      "hitsDelta": 60
+    },
+    {
+      "seed": 83004,
+      "scoreDelta": 3040,
+      "stageDelta": 1,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": 6,
+      "hitsDelta": 38
+    },
+    {
+      "seed": 83005,
+      "scoreDelta": -510,
+      "stageDelta": 0,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": 21,
+      "hitsDelta": 11
+    },
+    {
+      "seed": 83006,
+      "scoreDelta": -1870,
+      "stageDelta": 1,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": 24,
+      "hitsDelta": 22
+    },
+    {
+      "seed": 83007,
+      "scoreDelta": -3240,
+      "stageDelta": -1,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": -21,
+      "hitsDelta": -56
+    },
+    {
+      "seed": 83008,
+      "scoreDelta": -5140,
+      "stageDelta": -1,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": 0,
+      "hitsDelta": -39
+    },
+    {
+      "seed": 83009,
+      "scoreDelta": -2730,
+      "stageDelta": 0,
+      "beforeGameOver": false,
+      "afterGameOver": false,
+      "shotsDelta": 4,
+      "hitsDelta": -16
+    },
+    {
+      "seed": 83010,
+      "scoreDelta": -9230,
+      "stageDelta": -4,
+      "beforeGameOver": false,
+      "afterGameOver": true,
+      "shotsDelta": -300,
+      "hitsDelta": -138
+    }
+  ],
+  "baselineMatches": [
+    {
+      "seed": 83001,
+      "match": true
+    },
+    {
+      "seed": 83002,
+      "match": true
+    },
+    {
+      "seed": 83003,
+      "match": true
+    },
+    {
+      "seed": 83004,
+      "match": true
+    },
+    {
+      "seed": 83005,
+      "match": true
+    },
+    {
+      "seed": 83006,
+      "match": true
+    },
+    {
+      "seed": 83007,
+      "match": true
+    },
+    {
+      "seed": 83008,
+      "match": true
+    },
+    {
+      "seed": 83009,
+      "match": true
+    },
+    {
+      "seed": 83010,
+      "match": true
+    }
+  ],
+  "dominates": false
+}

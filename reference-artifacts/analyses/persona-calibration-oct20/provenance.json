@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-20",
+  "baseline": "02166971875b19b7f0c41c035efab30868c179a0",
+  "root": "/Users/sgwoods/Development/Codex/Codex-test1",
+  "sourceHash": "09807f95f0bd6109e27ca7d5273f0e4acf43774799d2e3b164ed3205ef2766ee",
+  "testedSourceHash": "09807f95f0bd6109e27ca7d5273f0e4acf43774799d2e3b164ed3205ef2766ee",
+  "sourceMatches": true,
+  "indexHash": "6f1f0ee374329c7703e34898f171d4d92c7361aa64e02fb7e029c016f687e3f8",
+  "testedBuildHash": "6f1f0ee374329c7703e34898f171d4d92c7361aa64e02fb7e029c016f687e3f8",
+  "buildMatches": true,
+  "servedMatches": true,
+  "server": "Python http.server --directory /Users/sgwoods/Development/Codex/Codex-test1/dist/dev, localhost:8000",
+  "outcomes": {
+    "novice": {
+      "median": 26365,
+      "reach75k": 0,
+      "reach150k": 0,
+      "reach200k": 0,
+      "stages": [
+        5,
+        4,
+        5,
+        5,
+        2,
+        2,
+        4,
+        2,
+        5,
+        2
+      ],
+      "earlyDestructions": 20
+    },
+    "advanced": {
+      "median": 33675,
+      "reach75k": 0,
+      "reach150k": 0,
+      "reach200k": 0,
+      "stages": [
+        2,
+        5,
+        5,
+        2,
+        5,
+        5,
+        5,
+        10,
+        2,
+        2
+      ],
+      "earlyDestructions": 18
+    },
+    "expert": {
+      "median": 190135,
+      "reach75k": 8,
+      "reach150k": 5,
+      "reach200k": 5,
+      "stages": [
+        46,
+        9,
+        50,
+        13,
+        52,
+        10,
+        45,
+        22,
+        37,
+        14
+      ],
+      "earlyDestructions": 2
+    },
+    "professional": {
+      "median": 156705,
+      "reach75k": 7,
+      "reach150k": 5,
+      "reach200k": 4,
+      "stages": [
+        26,
+        12,
+        41,
+        44,
+        46,
+        10,
+        18,
+        16,
+        46,
+        13
+      ],
+      "earlyDestructions": 1
+    }
+  },
+  "rows": 40,
+  "inputUnchanged": true,
+  "rejectedVariants": [
+    "reliable-fire: two opening destructions",
+    "Guardians universal effective-config replacement",
+    "Guardians Professional firing parameters on Expert policy"
+  ],
+  "remaining": [
+    "Professional consistent 150k criterion",
+    "Expert/Professional ordering",
+    "Guardians ladder",
+    "existing Stage2 score gate",
+    "live signed-in persistence",
+    "main integration and release gates"
+  ],
+  "files": {
+    "src/js/05-player-flow.js": "09807f95f0bd6109e27ca7d5273f0e4acf43774799d2e3b164ed3205ef2766ee",
+    "src/js/13-galaxy-guardians-gameplay-adapter.js": "9136f68eb98dc5b26c5cf543627f016a23463cfd28f0f01b27f48f1e75e82275",
+    "tools/harness/check-persona-mode-parity.js": "3220250aba84035ae7f54484fe21795534016838356bdf1ea477dd589aaf5a3c",
+    "tools/harness/check-aurora-persona-clearance.js": "534fee09cd8a06750ede5aa9dcefa408bdc819c3571d20649d36c149cb59802c",
+    "tools/review/build-code-review-packet.js": "221b844678c4b9834b04b3db849e1d528415db56a2c3738033f4387d312bb8d6",
+    "tools/harness/check-review-role-classification.js": "b424e177a9698081a627063394289ff00175f4de097c0fe5388b50c40bc72b79"
+  }
+}

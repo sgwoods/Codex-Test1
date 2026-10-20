@@ -200,7 +200,7 @@ const HARNESS_PERSONAS={
  novice:{name:'novice',captureRescueStyle:'rare-opportunistic',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:80,captureRescueBias:150,captureRescueUnsafePenalty:60,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
  advanced:{name:'advanced',captureRescueStyle:'practical-rescue',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:110,captureRescueBias:260,captureRescueUnsafePenalty:110,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
  expert:{name:'expert',captureRescueStyle:'rescue-priority',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:135,captureRescueBias:390,captureRescueUnsafePenalty:170,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
- professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
+ professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26}
 };
 
 const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
@@ -1114,21 +1114,11 @@ function harnessPersonaCfg(state){
  const S=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();
  const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  const base=HARNESS_PERSONAS[key]||null;
- const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
- if(!base||!p2)return base;
- const skill=cl(Number.isFinite(+p2.variance)?+p2.variance:1,.82,1.18);
- const agility=.92+skill*.08;
- const precision=.94+skill*.06;
- return Object.assign({},base,{
-  moveMul:cl(base.moveMul*agility,.32,.98),
-  urgentLook:base.urgentLook*precision,
-  deadZone:Math.max(3,base.deadZone/precision),
-  aimBoss:base.aimBoss*precision,
-  aimOther:base.aimOther*precision,
-  fireChance:cl(base.fireChance*precision,.1,.999),
-  challengeFireChance:cl(base.challengeFireChance*precision,.1,.999),
-  distanceBias:base.distanceBias/precision
- });
+ // A persona has one policy across harness, Watch and the rival's real turn.
+ if(key==='professional'&&S.stage>=4&&!S.challenge){
+  return Object.assign({},HARNESS_PERSONAS.expert,{name:'professional',fireChance:1});
+ }
+ return base;
 }
 
 function harnessTargetScore(state,e,p,cfg){
@@ -1232,6 +1222,13 @@ function harnessLowerFieldThreat(state,p,cfg){
  const earlyStage=(S.stage|0)<=(cfg.cautiousUntilStage||0);
   return S.e
   .filter(e=>{
+   // Keep clearance until the diving collision box has passed the ship.
+   if((cfg.name==='professional'||cfg.name==='expert')&&S.stage>=4){
+    const he=enemyCollisionHitbox(e),hp=playerHitbox();
+    return e.hp>0&&e.dive&&e.y>=cfg.diveEmergencyY&&
+     e.y<p.y+hp.h+he.h+4&&
+     Math.abs(e.x-p.x)<cfg.lowerDiveEvadeDx+(e.t==='boss'?6:0);
+   }
    if(!(e.hp>0&&e.dive&&e.y<p.y))return 0;
    const laneGap=Math.abs(playLane(e.x)-playerLane);
    if(earlyStage&&e.y>=cfg.lowerDiveEvadeY&&laneGap<=(cfg.lowerDiveEvadeLaneGap??1)){
@@ -1350,6 +1347,7 @@ function updatePlayerControl(state,dt,p){
  if(!isAuroraRuntimeState(state)){p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
  const harnessPersona=harnessPersonaCfg(S);
+ const automatedTurn=!!S.watchMode||!!(S.playerTwo?.enabled&&S.playerTwo.activeTurn==='p2');
  const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
  const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
@@ -1361,7 +1359,7 @@ function updatePlayerControl(state,dt,p){
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(S,dt,p);
-  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
+  else if(harnessPersona&&(automatedTurn||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
   else{
    const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
@@ -1381,5 +1379,5 @@ function updatePlayerControl(state,dt,p){
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot(S);
- else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot(S);
+ else if(!S.attract&&harnessPersona&&manualFire&&!automatedTurn)shoot(S);
 }

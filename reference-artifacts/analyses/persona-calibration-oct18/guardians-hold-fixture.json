@@ -1,0 +1,40 @@
+{
+  "purpose": "Controlled causal fixture; not a game performance repair.",
+  "withRemoteShot": {
+    "left": false,
+    "right": false,
+    "fire": 0
+  },
+  "withoutRemoteShot": {
+    "left": false,
+    "right": true,
+    "fire": 0
+  },
+  "safeAxis": 0,
+  "explanation": "A distant shot activates the safe-lane branch. Movement improves target cost by at most 34*.006+.15=.354, below the .45 hold threshold when both positions are safe. Holding blocks pursuit of an unaligned target.",
+  "pass": true,
+  "intermediateStage1EffectiveConfig": {
+    "name": "advanced",
+    "moveMul": 0.88,
+    "urgentShotDx": 24,
+    "urgentShotLook": 136,
+    "diveThreatY": 142,
+    "diveThreatDx": 44,
+    "deadZone": 7,
+    "aimScout": 13,
+    "aimEscort": 15,
+    "aimFlagship": 18,
+    "shotCadence": 0.11,
+    "stageOpeningHold": 0.12,
+    "openShotY": 68,
+    "diveBias": 220,
+    "escortBias": 36,
+    "flagshipBias": 92,
+    "linkedEscortBias": 22,
+    "rackClearThreshold": 14,
+    "rackClearBonus": 54,
+    "heightBias": 1.02,
+    "distanceBias": 0.88,
+    "holdFireDuringUrgentThreat": 1
+  }
+}
