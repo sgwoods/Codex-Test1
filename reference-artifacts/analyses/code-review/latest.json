@@ -1,60 +1,43 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-10-20T15:45:50.078Z",
+  "generatedAt": "2026-10-23T21:58:11.645Z",
   "branch": "codex/local-review-music-status-oct16",
   "baseRef": "origin/main",
   "baseCommit": "148f82e8b4e628ed7c51732f63f9c414bc7a752c",
-  "headCommit": "02166971",
+  "headCommit": "3d814e7e",
   "dirty": true,
   "statusShort": [
-    "M ACTIVE_WORK.md",
-    " M package.json",
-    " M reference-artifacts/analyses/code-review/latest.json",
-    " M src/js/05-player-flow.js",
-    " M src/js/13-galaxy-guardians-gameplay-adapter.js",
-    " M tools/harness/check-challenge-tour-watch-mode.js",
-    " M tools/harness/check-public-game-score-browser.js",
-    " M tools/review/build-code-review-packet.js",
-    "?? reference-artifacts/analyses/beta4-local-oct18/",
-    "?? reference-artifacts/analyses/code-review/2026-10-20-02166971/",
-    "?? reference-artifacts/analyses/code-review/2026-10-20-02166971/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct18/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? reference-artifacts/analyses/persona-calibration-oct20/",
-    "?? tools/harness/check-aurora-persona-clearance.js",
-    "?? tools/harness/check-guardians-expert-pursuit.js",
-    "?? tools/harness/check-persona-mode-parity.js",
-    "?? tools/harness/check-review-role-classification.js"
+    "M CHALLENGE_SETPIECE_CONTRACTS.md",
+    " M CONFORMANCE_ECONOMICS.md",
+    " M RELEASE_CONFORMANCE_DASHBOARD.md",
+    " M reference-artifacts/analyses/application-artifact-conformance/latest.json",
+    " M reference-artifacts/analyses/challenge-motion-primitives/latest.json",
+    " M reference-artifacts/analyses/challenge-movement-grammar/latest.json",
+    " M reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    " M reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+    " M reference-artifacts/analyses/conformance-economics/latest.json",
+    " M reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+    " M reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
+    " M reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
+    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
+    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-10-23-3d814e7e-dirty/"
   ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
@@ -76,12 +59,12 @@
     ]
   },
   "summary": {
-    "changedFileCount": 94,
+    "changedFileCount": 238,
     "p0": 0,
     "p1": 0,
-    "p2": 2,
+    "p2": 1,
     "p3": 0,
-    "riskTaggedFileCount": 46,
+    "riskTaggedFileCount": 100,
     "securityOpenP0": 0,
     "securityOpenP1": 0,
     "securityOpenP2": 0,
@@ -97,8 +80,29 @@
     },
     {
       "status": "M",
+      "file": "AGENT_WORKFLOW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
       "file": "BETA_READINESS_OCT06.md",
       "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CHALLENGE_SETPIECE_CONTRACTS.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_ECONOMICS.md",
+      "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -140,6 +144,13 @@
       ]
     },
     {
+      "status": "M",
+      "file": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
       "status": "A",
       "file": "reference-artifacts/analyses/beta2-local-oct16/REVIEW.md",
       "source": "committed-range",
@@ -168,8 +179,168 @@
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/beta4-local-oct18/REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/compute-minutes-by-resource.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/cost-per-positive-score-point.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/cpu-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/gameplay-improvement-by-project-part.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/gpu-equivalent-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/largest-score-deltas.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/score-trends.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/latest.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -249,229 +420,1013 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/aurora-clearance-results.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/AURORA-CLEARANCE.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/COMPETENCE-PLAN.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/distribution.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/DISTRIBUTION.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/guardians-diagnosis.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/guardians-expert-keeper.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/GUARDIANS-EXPERT-KEEPER.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/guardians-hold-fixture.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/provenance.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/REPAIR.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/REVIEW.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/runs.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/STAGE3-AND-LADDER.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct18/stage3-ladder-receipt.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/archived-aurora-runner.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": [
         "browser-safety"
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/archived-fresh-runner.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": [
         "browser-safety"
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/aurora-extension-diagnostic.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/aurora-fresh-distribution.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/aurora-later-policy-diagnostic.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/aurora-rejected-whole-game.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/BETA-STATUS.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/CAPTURE-RESCUE-KEEPER.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/integrated-ladder/controller.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/integrated-ladder/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/integrated-ladder/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/ladder-baseline/controller.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/ladder-baseline/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/ladder-baseline/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-fresh/controller.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-fresh/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-fresh/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-matched/controller.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-matched/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/capture-rescue/rescue-matched/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/checks-sandbox-attempt.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/checks.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/early-comparison.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/fresh-clearance.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/guardians-diagnostic-results.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/guardians-diagnostic-summary.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/GUARDIANS-DIAGNOSTIC.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/guardians-firing-summary.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/GUARDIANS-FIRING.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/hazard-arbitration.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/HAZARD-ARBITRATION.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/LOOKAHEAD-TRIAL.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/lookahead-trial/acceptance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/lookahead-trial/candidate-function.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/lookahead-trial/fixtures.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/lookahead-trial/life-accounting.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/lookahead-trial/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct20/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/RETAINED-LOW-TAIL.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/boot.js.gz",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/combat.js.gz",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/controller.js.gz",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/decision-trace.json.gz",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/escape-window.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/joint-collision-check.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/manifest.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/receipt.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/retained-low-tail/replay-check.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-candidate-collision.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-collision-extract.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/STAGE2-COLLISION.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/STAGE2-DEADBAND.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-joint-collision.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-joint-fresh.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/STAGE2-JOINT-KEEPER.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-matched-baseline.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/stage2-replay-check.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct20/STAGE2-REPLAY.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/aurora-chrome-my-scores-oct23.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/acceptance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/archive.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/baseline.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/candidate.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/check-fixture.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/check-scope.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/prepare.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/CONFLICT-REPAIR-DECISION.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/HISTORY-CHECKPOINT.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/LIVE-SCORE-RECONCILIATION.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/NEXT-BETA-REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/SAFETY-QUALIFICATION.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/divergence-89007.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/protocol.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/STAGE2-ASSESSMENT.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/acceptance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/baseline.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/candidate.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/check-completion.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/check-retained-completion.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/check-short.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/completion-results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/prepare.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/retained-completion-results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/short-results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/stage2/stage2-diagnostic.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/TIMEBOX-REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/attack-trace-analysis.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/escape-window.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/fresh-summary.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/provenance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/retained-collision.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-distribution.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-distribution.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-lookahead-only-oct22-acceptance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-lookahead-only-oct22-results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-target-alignment-oct22-acceptance.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/timebox/stage2-target-alignment-oct22-results.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-current-ladder.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-current-ladder.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-safety-comparison.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-safety-comparison.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-score-history.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/aurora-score-history.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/guardians-score-history.png",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/guardians-score-history.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/hazard-outcomes.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/history.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/persona-score-history/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-10-23-3d814e7e-dirty/report.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
-      "file": "reference-artifacts/analyses/persona-calibration-oct20/REVIEW.md",
+      "status": "M",
+      "file": "reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -517,6 +1472,16 @@
     },
     {
       "status": "M",
+      "file": "shared/replay-store.js",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety",
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
       "file": "src/index.template.html",
       "source": "committed-range",
       "area": "docs-artifact",
@@ -548,6 +1513,18 @@
     },
     {
       "status": "M",
+      "file": "src/js/02-replay-telemetry.js",
+      "source": "committed-range",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "media-external",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "M",
       "file": "src/js/03-platform-services.js",
       "source": "committed-range",
       "area": "runtime",
@@ -572,7 +1549,7 @@
     {
       "status": "M",
       "file": "src/js/05-player-flow.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "runtime",
       "riskTags": [
         "browser-runtime",
@@ -619,12 +1596,23 @@
     {
       "status": "M",
       "file": "src/js/13-galaxy-guardians-gameplay-adapter.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "runtime",
       "riskTags": [
         "browser-runtime",
         "browser-safety",
         "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/90-harness.js",
+      "source": "committed-range",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-boundary"
       ]
     },
     {
@@ -709,6 +1697,38 @@
     },
     {
       "status": "A",
+      "file": "tools/harness/archive-persona-panel.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/build-persona-score-history.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/capture-stage2-decision-replay.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
       "file": "tools/harness/check-arcade-music-playback-status.js",
       "source": "committed-range",
       "area": "harness-tooling",
@@ -718,9 +1738,9 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "tools/harness/check-aurora-persona-clearance.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -740,7 +1760,7 @@
     {
       "status": "M",
       "file": "tools/harness/check-challenge-tour-watch-mode.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -770,9 +1790,9 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "tools/harness/check-guardians-expert-pursuit.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -824,9 +1844,49 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
+      "file": "tools/harness/check-persona-life-ledger.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
       "file": "tools/harness/check-persona-mode-parity.js",
-      "source": "working-tree",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-professional-beam-clearance.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-professional-motion-cache.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-professional-rescue-policy.js",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -855,9 +1915,62 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
+      "file": "tools/harness/check-replay-profile-browser.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-replay-profile-metadata.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-retained-escape-window.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
       "file": "tools/harness/check-review-role-classification.js",
-      "source": "working-tree",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-stage2-decision-replay.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "media-external"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-stage2-joint-collision.js",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -877,6 +1990,16 @@
     },
     {
       "status": "M",
+      "file": "tools/harness/run-gameplay.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "M",
       "file": "tools/log-viewer/server.js",
       "source": "committed-range",
       "area": "docs-artifact",
@@ -887,7 +2010,7 @@
     {
       "status": "M",
       "file": "tools/review/build-code-review-packet.js",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",
@@ -896,13 +2019,6 @@
     }
   ],
   "automaticFindings": [
-    {
-      "severity": "P2",
-      "id": "html-injection-surface",
-      "message": "HTML injection surface changed; verify content is static or sanitized.",
-      "file": "tools/harness/check-arcade-music-playback-status.js",
-      "evidence": "arcadeMusicFrameHost: { querySelector(){ return frame; }, innerHTML: '' },"
-    },
     {
       "severity": "P2",
       "id": "release-tooling-review",
