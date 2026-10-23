@@ -48,6 +48,21 @@ machine authority. Evidence freshness blocks must be resolved, never bypassed.
 
 ## Work Packet
 
+For persona-policy changes and release candidates, maintain the score distribution
+history at `reference-artifacts/analyses/persona-score-history/README.md`.
+Append immutable per-run evidence with exact source/build identity, seeds, mode,
+budget and terminal status. Regenerate the charts with
+`node tools/harness/build-persona-score-history.js`. Do not mix short Stage2
+probes with full-game distributions or carry untested tiers forward as measured.
+Report safety, short-window throughput and sustained competence separately;
+do not change existing gate thresholds without an explicit documented decision.
+
+October22 approved separation: qualify bounded safety repairs against the
+retained policy using frozen baseline-nonregression criteria. Track persona
+ranking/calibration separately from safety-repair acceptance and release
+readiness. Historical cross-persona failures remain reported; the approved
+qualification path is not a retrospective pass or publication authorization.
+
 Use `ACTIVE_WORK.md` for the current cycle and existing stamped artifact folders
 for measurements. Each packet records objective, owner, branch/worktree,
 baseline SHA, references, acceptance criteria, checks, measured results,

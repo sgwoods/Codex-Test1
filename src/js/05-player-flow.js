@@ -64,6 +64,7 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
@@ -516,6 +517,7 @@ function restorePlayerTwoBoardSnapshot(board){
  S.stage4Lane2PriorityDive=+board.stage4Lane2PriorityDive?1:0;
  S.rogue=Math.max(0,+board.rogue||0)|0;
  S.att=Math.max(0,+board.att||0)|0;
+ resetHarnessHazardState(S.p);
  S.p=Object.assign(S.p,playerTwoClonePojo(board.p,{}));
  S.e.length=0;S.e.push(...playerTwoClonePojo(board.e,[]));
  S.pb.length=0;S.pb.push(...playerTwoClonePojo(board.pb,[]));
@@ -610,6 +612,7 @@ function playerTwoLaneDisplayName(key,p2=S.playerTwo){
  return key==='p2'?`2UP ${(p2?.initials||'---')}`:'1UP';
 }
 function resetPlayerForTurn(){
+ resetHarnessHazardState(S.p);
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:1.2,dual:0,captured:0,returning:0,pending:0,spawn:.75,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0,demoTargetId:null,demoTargetT:0});
 }
 function applyPlayerTwoLaneTurn(to='p1',source='auto'){
@@ -1125,6 +1128,8 @@ function harnessPersonaCfg(state){
 function harnessTargetScore(state,e,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
+ // Wait for the carrying boss's attack; retreat shots can destroy the captive.
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&e.carry&&e.dive!==1)return -1e9;
  const rescueCandidate=!!(e.carry&&e.dive);
  const carriedBias=e.carry?(rescueCandidate?(cfg.captureRescueBias??cfg.carryBias??0):(cfg.carryBias??0)):0;
  const unsafeCarryPenalty=e.carry&&!rescueCandidate?(cfg.captureRescueUnsafePenalty||0):0;
@@ -1267,6 +1272,59 @@ function harnessMoveAxis(state,p,cfg){
  return dx>0?1:-1;
 }
 
+function resetHarnessHazardState(p){
+ p.hHazardObservation=null;
+ p.hCaptureRiskSpent=false;
+}
+function harnessResolveHazardAxis(state,p,cfg,preferredAxis,dt){
+ if(state.stage<4)p.hCaptureRiskSpent=false;
+ if(cfg.name!=='professional'||state.challenge||state.stage<4)return preferredAxis;
+ if(state.captureCountStage>0||p.dual)p.hCaptureRiskSpent=true;
+ const hp=playerHitbox(),prior=p.hHazardObservation;
+ const elapsed=prior?state.simT-prior.t:0;
+ const sameTick=prior&&prior.stage===state.stage&&elapsed===0;
+ const continuous=prior&&prior.stage===state.stage&&elapsed>0&&elapsed<=Math.min(.05,dt*1.5);
+ // Estimate only from adjacent observed frames; discard motion across state changes.
+ const positions={};
+ const hazards=state.e.filter(e=>e.hp>0).map(e=>{
+  const he=enemyCollisionHitbox(e),old=(continuous||sameTick)&&prior.positions[e.id];
+  const valid=old&&old.dive===e.dive&&old.form===e.form&&Math.hypot(e.x-old.x,e.y-old.y)<=32;
+  let vx=0,vy=0;
+  if(valid&&continuous){vx=(e.x-old.x)/elapsed;vy=(e.y-old.y)/elapsed;}
+  else if(valid&&sameTick&&old.x===e.x&&old.y===e.y){vx=old.vx;vy=old.vy;}
+  positions[e.id]={x:e.x,y:e.y,dive:e.dive,form:e.form,vx,vy};
+  return{x:e.x,y:e.y,vx,vy,w:hp.w+he.w+12,h:hp.h+he.h+12};
+ });
+ p.hHazardObservation={stage:state.stage,t:state.simT,positions};
+ for(const b of state.eb){
+  if(b.vy<=0)continue;
+  hazards.push({x:b.x,y:b.y,vx:b.vx||0,vy:b.vy,w:hp.w+8,h:hp.h+8});
+ }
+ // Permit an initial dual-fighter opportunity only while there are spare ships.
+ if((p.hCaptureRiskSpent||state.lives<2)&&canCapture(state))for(const e of state.e){
+  if(e.hp>0&&enemyHasActiveBeam(e)&&p.y>e.y+12&&p.y<e.y+VIS.beamLen){
+   hazards.push({x:e.x,y:p.y,vx:0,vy:0,w:12,h:1});
+  }
+ }
+ const clearance=axis=>{
+  let nearest=Infinity;
+  for(let step=1;step<=2;step++){
+   const x=cl(p.x+axis*p.s*dt*cfg.moveMul*step,hp.w+2,PLAY_W-hp.w-2);
+   for(const h of hazards){
+    nearest=Math.min(nearest,Math.max(Math.abs(x-h.x-h.vx*dt*step)/h.w,Math.abs(p.y-h.y-h.vy*dt*step)/h.h));
+   }
+  }
+  return nearest;
+ };
+ if(clearance(preferredAxis)>=1)return preferredAxis;
+ let bestAxis=0,bestClearance=clearance(0);
+ for(const axis of [-1,1]){
+  const value=clearance(axis);
+  if(value>bestClearance+1e-9){bestAxis=axis;bestClearance=value;}
+ }
+ return bestAxis;
+}
+
 function runHarnessPlayer(state,dt,p,cfg){
  if(!isAuroraRuntimeState(state)){cfg=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
@@ -1275,7 +1333,8 @@ function runHarnessPlayer(state,dt,p,cfg){
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
  const lowerFieldThreat=harnessLowerFieldThreat(S,p,cfg);
- const axis=harnessMoveAxis(S,p,cfg);
+ const preferredAxis=harnessMoveAxis(S,p,cfg);
+ const axis=harnessResolveHazardAxis(S,p,cfg,preferredAxis,dt);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
  const target=attackables.sort((a,b)=>compareHarnessTargets(S,a,b,p,cfg))[0]||harnessSelectTarget(S,p,cfg);
@@ -1285,6 +1344,7 @@ function runHarnessPlayer(state,dt,p,cfg){
   targetX:target?+target.x.toFixed(2):null,
   targetDx:target?+(target.x-p.x).toFixed(2):null,
   axis,
+  preferredAxis,
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
  },harnessTargetDebug(S,target,p,cfg)));
@@ -1309,6 +1369,10 @@ function runHarnessPlayer(state,dt,p,cfg){
  }
  if(S.pb.length>=bulletsMax(S)){
   logProfessionalDecision(S,p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(S,target,p,cfg)));
+  return;
+ }
+ if(cfg.name==='professional'&&S.stage>=4&&!S.challenge&&S.e.some(e=>e.hp>0&&e.carry&&e.dive!==1&&e.y<p.y&&Math.abs(e.x-p.x)<enemyHitbox(e).w+6)){
+  logProfessionalDecision(S,p,cfg,'protect_captive',{targetId:target.id});
   return;
  }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;

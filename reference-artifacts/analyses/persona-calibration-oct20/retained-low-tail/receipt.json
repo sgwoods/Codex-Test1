@@ -1,0 +1,216 @@
+{
+  "baseline": "bacb0c585f0ff516d2a3373cb16c563de5079ad3",
+  "originalBuildHash": "cdcf63b4c3997bbe2917bacc6d3b6ffd2b3212e53712dbd3e79932dedf18ca10",
+  "trialBuildHash": "cdcf63b4c3997bbe2917bacc6d3b6ffd2b3212e53712dbd3e79932dedf18ca10",
+  "instrumentedBuildHash": "231c79efabc3b440489c1334587c8442ad41668b29710d4716f1332f9316b535",
+  "controllerHash": "74b38aec094da21b4ce586812ad2d7b36b9d346f62fa2fd24d89cabbf3da2e0b",
+  "methodHash": "75c861f0e8120afd24d3ef38bd20d10a9882308ed3bd6daebc4e1574e35e23e3",
+  "scenarioHash": "5ad670d8bba5d0c9964a1bcb5b1a0f96e88852b950cfc132bd5b7f9565fa7c4f",
+  "seed": 89003,
+  "profile": "retained-low-tail",
+  "change": "No policy change; retained Stage13 encounter",
+  "runs": {
+    "control": {
+      "state": {
+        "started": 0,
+        "paused": 0,
+        "stage": 18,
+        "pendingStage": 0,
+        "score": 96450,
+        "lives": 0,
+        "challenge": false,
+        "recording": false,
+        "seed": 89003,
+        "simT": 465.433,
+        "stageClock": 5.067,
+        "persona": "professional",
+        "harnessPersona": "professional",
+        "watchMode": true,
+        "watchPersona": "professional",
+        "watchScope": "game",
+        "playerTwo": {
+          "enabled": false
+        },
+        "atmosphere": {
+          "id": "aurora-crown",
+          "group": "aurora",
+          "phase": "frontDoor",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-crown",
+          "starfield": {
+            "id": "aurora-crown-stars",
+            "count": 84,
+            "alphaMin": 0.3,
+            "alphaMax": 0.68
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "frontDoor",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-crown",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "crown-aurora",
+          "atmosphereTheme": "aurora-crown",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "gameOver",
+          "atmosphereId": "aurora-crown",
+          "audioTheme": "aurora-crown",
+          "phase": "results",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 18,
+          "challenge": false,
+          "at": 4.817,
+          "recAt": 465.433
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1,
+          "spriteRenderMode": "auto",
+          "referencePixelSprites": false,
+          "playerBounds": null,
+          "reserveShipBounds": []
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "spriteRenderMode": "auto",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "aurora-application"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 140000,
+          "awards": 2,
+          "flashT": 0,
+          "flashShips": 1
+        }
+      },
+      "files": [
+        "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2/control/runs/aurora-persona-distribution-professional-seed89003-2026-10-20T20-43-58-851Z-5008-vpqppi/neo-galaga-session-ngt-1792529044173-3-system-status.json",
+        "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2/control/runs/aurora-persona-distribution-professional-seed89003-2026-10-20T20-43-58-851Z-5008-vpqppi/neo-galaga-session-ngt-1792529044173-3.json"
+      ]
+    },
+    "capture": {
+      "state": {
+        "started": 0,
+        "paused": 0,
+        "stage": 18,
+        "pendingStage": 0,
+        "score": 96450,
+        "lives": 0,
+        "challenge": false,
+        "recording": false,
+        "seed": 89003,
+        "simT": 465.433,
+        "stageClock": 5.067,
+        "persona": "professional",
+        "harnessPersona": "professional",
+        "watchMode": true,
+        "watchPersona": "professional",
+        "watchScope": "game",
+        "playerTwo": {
+          "enabled": false
+        },
+        "atmosphere": {
+          "id": "aurora-crown",
+          "group": "aurora",
+          "phase": "frontDoor",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-crown",
+          "starfield": {
+            "id": "aurora-crown-stars",
+            "count": 84,
+            "alphaMin": 0.3,
+            "alphaMax": 0.68
+          }
+        },
+        "visualAtmosphere": {
+          "id": "aurora-borealis",
+          "group": "aurora",
+          "phase": "frontDoor",
+          "backgroundMode": "aurora-borealis",
+          "audioTheme": "aurora-crown",
+          "overrideThemeId": "aurora-borealis",
+          "starfield": {
+            "id": "aurora-borealis-stars",
+            "count": 88,
+            "alphaMin": 0.28,
+            "alphaMax": 0.64
+          }
+        },
+        "stagePresentation": {
+          "id": "crown-aurora",
+          "atmosphereTheme": "aurora-crown",
+          "backgroundMode": "aurora-borealis"
+        },
+        "audioCue": {
+          "cue": "gameOver",
+          "atmosphereId": "aurora-crown",
+          "audioTheme": "aurora-crown",
+          "phase": "results",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 18,
+          "challenge": false,
+          "at": 3.054,
+          "recAt": 465.433
+        },
+        "renderDebug": {
+          "backgroundMode": "aurora-borealis",
+          "starfieldProfile": "aurora-borealis-stars",
+          "starfieldCount": 88,
+          "starfieldIntensityScale": 1.25,
+          "starfieldSpeedScale": 1,
+          "spriteRenderMode": "auto",
+          "referencePixelSprites": false,
+          "playerBounds": null,
+          "reserveShipBounds": []
+        },
+        "graphics": {
+          "graphicsTheme": "aurora-borealis",
+          "spriteRenderMode": "auto",
+          "starfieldIntensity": 1.25,
+          "starfieldSpeed": 1
+        },
+        "audio": {
+          "audioTheme": "aurora-application"
+        },
+        "extend": {
+          "first": 20000,
+          "recurring": 70000,
+          "next": 140000,
+          "awards": 2,
+          "flashT": 0,
+          "flashShips": 1
+        }
+      },
+      "files": [
+        "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2/capture/runs/aurora-persona-distribution-professional-seed89003-2026-10-20T20-44-20-748Z-6296-rzh83q/neo-galaga-session-ngt-1792529063814-3-system-status.json",
+        "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2/capture/runs/aurora-persona-distribution-professional-seed89003-2026-10-20T20-44-20-748Z-6296-rzh83q/neo-galaga-session-ngt-1792529063814-3.json"
+      ]
+    }
+  }
+}

@@ -26,6 +26,8 @@ function section(source, start, end) {
 const boot = read('src/js/00-boot.js');
 const flow = read('src/js/05-player-flow.js');
 const combat = read('src/js/05-player-combat.js');
+const capture = read('src/js/07-capture-rescue.js');
+const entity = read('src/js/14-entity-model.js');
 const shell = read('src/js/01-runtime-shell.js');
 const cases = [];
 function check(name, fn) {
@@ -35,7 +37,7 @@ function check(name, fn) {
 
 function aurora(mode, persona, variance = 1, held = {}, scenario = 'tracking', stage = 2) {
   const state = {
-    stage, challenge: false, score: 0, lives: 2, simT: 12,
+    stage, challenge: false, score: 0, lives: 2, simT: 12, captureCountStage: 0,
     attract: false, scriptMode: false,
     harnessPersona: mode === 'human' ? '' : persona,
     watchMode: mode === 'watch', watchPersona: mode === 'watch' ? persona : '',
@@ -52,19 +54,27 @@ function aurora(mode, persona, variance = 1, held = {}, scenario = 'tracking', s
   };
   const ctx = vm.createContext({
     window: {}, keys: { ...held }, keyState: {}, performance: { now: () => state.simT * 1000 },
-    S: state, PLAY_W: 280, PLAY_H: 360,
+    S: state, PLAY_W: 280, PLAY_H: 360, VIS: { beamLen: 300 },
     isAuroraRuntimeState: s => s === state, currentAuroraRuntimeState: () => state,
     playerHitbox: () => ({ w: 7, h: 6 }), enemyHitbox: () => ({ w: 6, h: 5 }),
     enemyCollisionHitbox: () => ({ w: 4, h: 4 }),
     carriedFighterTarget: () => null, enemyRef: e => ({ id: e.id }),
-    playLane: x => Math.floor(x / 28), logEvent() {}, sfx: { shot() {}, hit() {} },
+    playLane: x => Math.floor(x / 28), logEvent() {}, stopReferenceCueSet() {},
+    holdReferenceGameplayCadence() {}, bossDamageFx() {}, sfx: { shot() {}, hit() {}, bossHit() {} },
     writePref() {}, removePref() {}, SEED_PREF_KEY: 'fixture-seed',
     setTimeout, clearTimeout
   });
+  if (scenario === 'beam') state.e = [{ id: 1, t: 'boss', hp: 100, x: 140,
+    y: 138, form: 1, dive: 2, carry: 0, beam: 1, beamT: 2, c: 4, r: 0 }];
+  if (scenario.startsWith('rescue-')) state.e = [{ id: 1, t: 'boss', hp: 100,
+    x: 140, y: 170, form: 1, dive: scenario === 'rescue-attack' ? 1 : scenario === 'rescue-retreat' ? 3 : 0,
+    carry: 1, beam: 0, c: 4, r: 0 }];
   // Load whole controller/combat modules; only boot RNG and key mapping need shell isolation.
   vm.runInContext('let RNG_SEED=0,RNG_STATE=0;\n' +
     section(boot, 'function randUnit(){', 'let DPR=') +
     section(shell, 'function movementLeftCodes(){', 'function controlMoveHelpHtml(){') +
+    section(entity, 'function enemyHasCaptureState(', 'function enemyChallengeUpperBandY(') +
+    section(capture, 'function hasCarriedFighter(', 'function capturePlayer(') +
     flow + '\n' + combat, ctx, { filename: 'actual-aurora-controller-vm.js' });
   ctx.setSeed(seed);
   const config = plain(ctx.harnessPersonaCfg(state));
@@ -83,7 +93,7 @@ function aurora(mode, persona, variance = 1, held = {}, scenario = 'tracking', s
 for (const persona of personas) {
   for (const stage of [4, 8, 31]) {
     check(`Aurora ${persona}: later-stage ${stage} policy/action parity`, () => {
-      for (const scenario of ['tracking', 'aligned', 'threat']) {
+      for (const scenario of ['tracking', 'aligned', 'threat', 'beam', 'rescue-formation', 'rescue-retreat', 'rescue-attack']) {
         const expected = aurora('harness', persona, 1, {}, scenario, stage);
         assert.deepEqual(aurora('watch', persona, 1, {}, scenario, stage), expected);
         assert.deepEqual(aurora('p2', persona, 1, {}, scenario, stage), expected);
@@ -150,6 +160,8 @@ check('Aurora Professional: opening, normal and challenge policy transitions', (
   state.stage = 8; state.challenge = false;
   assert.deepEqual(plain(ctx.harnessPersonaCfg(state)), later);
   state.stage = 2;
+  assert.deepEqual(plain(ctx.harnessPersonaCfg(state)), opening);
+  state.stage = 1;
   assert.deepEqual(plain(ctx.harnessPersonaCfg(state)), opening);
 });
 

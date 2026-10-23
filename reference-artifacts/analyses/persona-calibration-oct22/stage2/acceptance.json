@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22",
+  "baseline": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+  "candidate": "53d1de9d3183ac20bac54b1f40fc36863da0fbf41cae20c030bffb230b229d5a",
+  "scope": "Professional normal Stage2 deadZone7 plus existing two-step hazard resolver. No other policy change.",
+  "short": {
+    "seeds": [
+      51101,
+      51201,
+      51301
+    ],
+    "require": "Professional >= Expert score/kills, <= losses on every seed"
+  },
+  "matched": {
+    "seeds": "89001-89010",
+    "duration": 900,
+    "medianAtLeast": 326720,
+    "minimumAtLeast": 189800,
+    "reach150k": 10,
+    "reach200kAtLeast": 9,
+    "earlyDestructionsAtMost": 1
+  },
+  "fresh": {
+    "seeds": "92001-92010",
+    "reach150kAtLeast": 8
+  },
+  "stop": "If short gate fails, reject. If matched fails, reject. Do not alter thresholds."
+}

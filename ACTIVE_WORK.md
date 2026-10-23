@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 20, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 22, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,238 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October23 beta checkpoint cycle: user explicitly accepts Expert inconsistency
+as a documented beta limitation; calibration continues separately. Aurora and
+Guardians live account acceptance on frozen beta.4 are COMPLETE: human Chrome
+Guardians1320/Stage1 save/reload, lead Codex-browser My scores live retrieval,
+then Aurora102410/Stage13 present with Guardians1320 absent from displayed rows.
+History repair committed as882e4230 and11aa31b1. Retained persona packet is being
+reviewed/checkpointed; rejected06233924 remains evidence only. No publication
+authorized. Sparse leaderboard Build legacy rows are UI padding, not demonstrated
+database pollution. Future exact-package QA still required.
+
+October23 account acceptance update: user-supplied Chrome screenshot explicitly
+shows My Scores selected, My scores live, SWD102410/Stage13/beta.4. Separate-browser
+Aurora account retrieval is PASS; do not request another sign-in for this item.
+Evidence: persona-calibration-oct22/aurora-chrome-my-scores-oct23.png (copied from
+user attachment eac37c66-7061-4c72-be2d-c790a576f28e; visual human evidence).
+Current-cycle replay metadata VM, public score contract, browser IndexedDB/profile,
+persona mode parity and13 rescue-policy checks PASS. Fake-service scoring is not
+live Guardians acceptance. No gameplay change or publication. Guardians normal
+save/reload remains open; frozen8002 cannot qualify the newer development package.
+Next: Guardians live acceptance, narrow source checkpoint, explicit Expert
+disposition, release gates, authorized dev review, exact beta package QA/approval.
+
+October23 follow-up: browser metadata/IndexedDB/profile test PASS (internal17,
+display13, one merged local row with exact replay link). Existing pilot-record
+browser check PASS; public scoring fixture/build/diff PASS. Independent review
+found audio-tail/restart race; fixed per-recorder frozen metadata and early
+Aurora outcome freeze. Re-review no new narrow blocker, full async lifecycle
+stress and legacy reconciliation remain limitations. DEV8000 rebuilt/verified.
+Live fresh-tab Aurora My Scores retrieves102410/13; shared auth/storage means
+NOT separate-auth acceptance. Guardians ordinary-input attempt produced no
+completed nonzero score; live save remains UNVERIFIED. Temporary tab closed,
+original signed-in tab preserved; frozen8002 unchanged. No publication.
+
+October23 replay-profile metadata repair implemented provisionally for NEW runs:
+internal stage retained; explicit displayStage/completedAt/scoreEntryId stored
+and carried through replay catalog. Profile uses display/completion fields and
+local identity matching. Focused VM regression, public scoring contract, build,
+diff check PASS;8000HTTP matches rebuilt DEV. Frozen8002 unchanged.
+Legacy replay reconciliation is NOT complete; no database migration or deletion.
+New-record browser acceptance and independent review remain before keeper status.
+Beta still needs separate-session Aurora retrieval, Guardians live save/reload,
+Expert consistency disposition, checkpoint/release gates and exact package QA.
+
+October23 live Aurora102410/Stage13 observed in My Scores live after reload,
+confirmed by human. Separate-session and Guardians checks still pending.
+Duplicate profile102410/Stage17 explained by raw internal replay stage versus
+displayed score stage, plus start versus completion timestamps exceeding120s
+merge window. See persona-calibration-oct22/LIVE-SCORE-RECONCILIATION.md.
+No database or runtime change; next bounded repair is replay/profile metadata
+and identity, not score correction or broad deduplication. Frozen beta unchanged.
+
+October22 requested steps1/2 COMPLETE; step3 preparation PASS, live gate pending.
+See persona-calibration-oct22/NEXT-BETA-REVIEW.md. First89007 nonpresentation
+divergence61.333s is after unchanged earlydeath; baseline Stage5 rescue versus
+candidate Stage14 rescue identifies delayed dual opportunity, not proven cause.
+Retained full-ladder medians7235/21995/81275/240785; Expert75k6/10 remainsweak,
+Professional150k10/10. Rerun79mode/13rescue and both scoring-contract suites PASS.
+Scoring suites usefake service, not liveacceptance. User signed-in confirmation
+requested for8002; frozenbeta is not currentpersonas. No gameplayedit orpublish.
+
+October 22 approved safety qualification COMPLETE: candidate06233924 REJECTED.
+Twenty matched 900-second runs reproduce retained baseline median326720;
+candidate316660 (-3.08%) fails the frozen median floor. Minimum189800,
+150k10/10,200k9/10 and all three destruction events are unchanged. Eight scores
+are identical;89004 and89007 are lower. No fresh panels or integration.
+Retaineda27c906f remains runtime. See SAFETY-QUALIFICATION.md and its portable
+results/provenance packet;47 primary files recovery-verified. Score history now
+15panels/270observations, including rejectedA7 and retainedrecheckA6d.
+Next: inspect first divergence on89007, not another parameter sweep. Keep persona
+calibration and live-account/exact-package release checks separate. No publish.
+
+October22 user APPROVED separation of safety-repair acceptance from persona
+ranking. Prospective qualification now evaluates frozen06233924 against
+retaineda27c906f; old shortExpertcomparison remainsfailed, not retroactivelypassed.
+Protocol frozen at private-artifacts/safety-qualification-oct22/protocol.json.
+Matched full-game89001-10 first; retain existing score/safety floors. Stop on
+nonregressionfailure before freshpanels. Calibration and liveaccount/exactpackage
+release readiness remain separate holds. No publication authorized.
+
+October22 conflict repair follow-up: isolated candidate06233924 fixes93008
+completeStage2 (4810->5020,27.917s->23.050s,destructions1->0), but unchanged
+shortgate stillfails51201. All four collision variants and350scope checks pass.
+Single-selected-body detector failed; all-nearby-body detector succeeds.
+Review-found beam scope leak corrected and browser checks repeated.14browserruns.
+No runtime integration/full-game acceptance/commit/push/publish. Retaineda27c906f
+still serveslocalhost8000. See persona-calibration-oct22/CONFLICT-REPAIR-DECISION.md.
+Nextdecision: approve prospective baseline-nonregression qualification for this
+safety-only repair, separately from cross-persona opening dominance/calibration.
+Currentstopcondition remainsbinding untilapproval. Liveaccount checks await a
+permitted signed-in user session;8002frozenbeta.4 bytesverified, notcurrentpersonas.
+Primaryevidence81files archived with recoveryhashes. No beta clearance.
+
+October22 follow-up timebox: gate remains FAILED; no runtime change accepted.
+See persona-calibration-oct22/TIMEBOX-REVIEW.md (supersedes prior next action).
+45 browser runs; targeting-alignment and lookahead-only trials both rejected.
+Fresh retained Stage2 93001-10: both clear10/10; Expert median4615/21.308s,
+Professional4940/23.9415s; destructions0/1 and captures1/1. Retained93008
+collision at12.467s reproduced with35 exact decisions; final-frame all-axis
+trap, recorded escape starts12.433s. Competing body/bullet avoidance oscillates.
+Shared RNG trace confirms same seed does not mean equal attack opportunities.
+Next: recorded/mirrored/boundary fixture for narrowly scoped joint-threat
+arbitration, not blanketStage2 changes. Gate unchanged; any contract revision
+requires explicit product decision. Primary evidence archived with recovery
+hashes; separate Stage2 diagnostic chart avoids mixing full-game score panels.
+Localhost8000 exact retaineda27c906f/dist verified. No commit,push,publish.
+
+October22 Stage2 candidate REJECTED in isolated build; runtimea27c906f unchanged.
+Stage2deadZone7+two-frame hazard resolver fails unchanged score/kills gate.
+Complete-stage diagnostic confirms candidate51301 worse than retained:
+4230/28.167s versus6430/22.033s. Retained beatsExpert on2of3 complete stages;
+remaining51201 gap is730points and3.833s, both no losses/captures. Next measure
+retained51201 attack-schedule divergence3.8-5.8s:650points comes from boss689324395
+attack kill800 versusformation150. Shots58/59 nearlyequal; not proof of a missed
+equivalent shot. Capture rankings/bullet poses/attack RNG; no broad tuning.
+79mode/13rescue checks pass;localhost8000 exactdist/source verified. Primary
+evidence archived with hashes. See persona-calibration-oct22/STAGE2-ASSESSMENT.md.
+No new gameplay improvement,commit,push,publish. Beta product hold remains even
+though standaloneStage2 throughput is not wired into publication scripts.
+
+October20 one-hour repair COMPLETE; local incremental keeper, not beta approval.
+See persona-calibration-oct20/CAPTURE-RESCUE-KEEPER.md for current disposition.
+Controller a27c906f;30 distinct Professional runs all>=150k,28>=200k,all survive
+900s budget. Two matched comparisons improve medians301975->326720 and
+106735->240785. Fresh full ladder medians Beginner7235/Intermediate21995/
+Expert81275/Professional240785. Stage2 throughput remains failed;live account
+acceptance remains pending. Build,79mode,37clearance,27beam,8motion,13rescue,
+browserP2 and existingrepeatability checks pass. Independent reviews no blocker.
+Primary raw evidence privately archived with recovery hashes;portable packets
+and versioned charts persisted. Localhost8000 current DEV;beta8002 untouched.
+No commit,push,publish. Below are chronological historical milestone records.
+
+October20 one-hour block repair IN PROGRESS (20:58:54-21:59UTC).
+Professional rescue-aware motion/beam policy now integrated provisionally.
+Matched89001-10 median326720 versus301975 baseline; minimum189800 versus96450;
+150k10/10 versus6/10;200k9/10 versus6/10;early destructions remain1.
+Fresh90001-10 all exceed200k,median280480;all20 runs survive the900s budget.
+Integrated controller a27c906f reproduces all10 matched scores exactly after
+new-run/P2-lane cache reset hardening. VM parity79,clearance37,beam27,motion8,
+rescue/lifecycle13 pass. Fresh four-persona910xx panel and browser P2 checks
+running. Evidence currently private-artifacts/aurora-ladder-oct20/rescue-* and
+integrated-*; archive with hashes before closing the packet. No publish.
+Do not confuse this progress with beta acceptance: Stage2 throughput and live
+account acceptance remain open. Independent review is running in parallel.
+
+October20 two-step observed-motion trial REJECTED; isolated builds only.
+Matched890xx median301975->289075(-4.27%) fails predeclared nonregression.
+Target89003 improves96450->350930,Stage50,zero destructions,but overall150k
+attainment remains6/10. Recorded destructions10->3;captures25->33 (not rates).
+Three candidate gameovers follow five captures and no destruction events.
+Next inspect first capture89002 and validate capture-aware decisions,not another
+collision-only parameter trial. Independent review requests duplicate-tick and
+movement-transition cache fixtures before any next candidate. Eight fixtures
+pass;no accepted gameplay change. Source74b38aec/localhost unchanged.
+Evidence:persona-calibration-oct20/LOOKAHEAD-TRIAL.md and lookahead-trial/.
+Score history adds rejectedA5,180runs/ninepanels. Beta held;no commit/push/publish.
+
+October20 retained low-tail replay complete; runtime unchanged at74b38aec.
+Seed89003 control/instrumented both96450/Stage18; selected gameplay events equal;
+22/22 exact decision replays. Stage13 collision329.65s is unavoidable from all
+three final-frame endpoints. Recorded-hazard reachability finds a two-right-step
+escape starting one frame earlier; not a full counterfactual simulation.
+Primary trace and frozen source persisted under persona-calibration-oct20/
+retained-low-tail/ with SHA256 manifest. See RETAINED-LOW-TAIL.md.
+Next bounded candidate: observed-motion lookahead on normalStage4+ only;
+require full-run reproduction and matched nonregression before acceptance.
+Account audit confirms existing browser checks use fixtures, not live saves.
+Live normal-game/reload/separate-session acceptance remains blocked/pending.
+No gameplay change, commit, push or publish; beta remains held.
+
+October 20 matched comparison supersedes the provisional Stage2 keeper below.
+Candidate REJECTED: same seeds 89001-89010 median 301975 -> 214465 (-29.0%),
+six of ten scores lower, 150k attainment unchanged at 6/10, one early
+destruction in each panel. Removed only Stage2 deadZone7/resolver eligibility;
+retained Stage4+ hazard policy, exact controller hash 74b38aec. Build, 79 mode
+parity and 37 clearance checks pass after restoration. Beta remains held;
+the existing Stage2 throughput gate remains unresolved, not waived.
+See reference-artifacts/analyses/persona-calibration-oct20/BETA-STATUS.md.
+Charts now preserve matched baseline A3c and rejected A4 (170 runs, 8 panels).
+No commit, push or publish in this step.
+
+October20 joint Stage2 candidate PASSES unchanged three-seed score/safety gate:
+Professional4080/4570/5570,zero losses. Stage2 only deadZone7 plus existing joint
+hazard resolver. Exact candidate chooses safe endpoints in recorded/mirrored/
+edge fixtures;79mode-parity and37clearance checks pass. Fresh89001-10 median
+214465,6/10reach150k,5/10reach200k,one early destruction: consistency NOT met.
+Provisional local keeper, not final broad acceptance. Next matched full-game
+comparison and early-loss review. Report:persona-calibration-oct20/
+STAGE2-JOINT-KEEPER.md. Chart addsA4; no publish/push. Current source63b79bab.
+
+October20 replay milestone: isolated rejected deadZone7 reconstruction repeats
+4540points/8.817s collision. Instrumented/control selected gameplay event arrays
+match;31/31 exact movement-axis replays pass using actual lane/controller code.
+Actual body collision replay confirms right hits, left/hold avoid body contact
+at that endpoint. Bullet/body priority alternation now verified, not inferred.
+No runtime tuning or chart version added. See persona-calibration-oct20/
+STAGE2-REPLAY.md. Next mirrored/edge and correct-phase bullet checks before one
+joint-policy candidate. Endpoint alternatives are not proven safe trajectories.
+
+October20 process assessment: pause isolated parameter trials. Next capture a
+complete opposing-hazard decision replay before one joint-policy experiment.
+Versioned score graphics and critique are maintained in
+reference-artifacts/analyses/persona-score-history/README.md (150observations,
+six panels, source provenance, missing tiers and censored outcomes explicit).
+Latest Professional new-seed distribution splits five57910-123300 and
+five250130-358820; median186715 does not establish consistency. No new gameplay
+change or release in this documentation step. Existing gates remain unchanged.
+
+October20 collision investigation complete: rejected trial shows early avoidance
+releases a below-center enemy before collision-box clearance, amid opposing
+diver reversals. Full-filter and overlap-only Stage2 trials both fail unchanged
+score gate; both removed. No new runtime improvement retained. Primary extract
+and report:persona-calibration-oct20/STAGE2-COLLISION.md. Next replace parameter
+trials with recorded-state opposing-hazard replay, then one joint-policy test.
+
+October20 Stage2 follow-up: measured first-shot movement difference and tested
+Professional Stage2 deadZone5->7 only. Seed51201 improves2820->4570 but51301
+adds a collision death; unchanged gate FAILS. Trial fully removed; no new
+gameplay improvement retained. See persona-calibration-oct20/STAGE2-DEADBAND.md.
+Next inspect51301 collision/escape conflict before any further parameter tuning.
+
+October20 follow-up: Professional normal-stage4+ joint hazard arbitration is a
+local provisional keeper. Matched87001-87010 median156705->190630, minimum
+57810->100830; fresh88001-88010 median186715, range57910-358820, no opening
+destructions. Both panels reach150k in only5/10: consistency target NOT met.
+79mode-parity and36clearance fixtures pass; independent review no blocker.
+Narrow opening aim trial rejected/restored; Stage2 gate remains unresolved.
+Report:reference-artifacts/analyses/persona-calibration-oct20/HAZARD-ARBITRATION.md.
+Current DEV8000 is build1210/bacb0c58.dirty with this local candidate, not the
+clean checkpoint. Frozen8002 unchanged. No commit/push/publish. Beta held for
+persona consistency, Stage2 throughput, live per-game persistence and final
+integration/package gates. Next inspect first Stage2 target/shot divergence.
 
 October 20 requested steps 1-4: fresh validation complete; skill calibration
 improved but incomplete; live scoring blocked on a working signed-in browser;

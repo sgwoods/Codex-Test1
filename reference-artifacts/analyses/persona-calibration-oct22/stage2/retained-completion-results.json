@@ -1,0 +1,124 @@
+{
+  "diagnostic": true,
+  "acceptanceUnchanged": true,
+  "rows": [
+    {
+      "seed": 51101,
+      "persona": "expert",
+      "firstClear": {
+        "t": 21.4,
+        "type": "stage_clear",
+        "stage": 2,
+        "score": 3560
+      },
+      "stage3": {
+        "t": 24.75,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": "expert"
+      },
+      "kills": 40,
+      "losses": [
+        {
+          "t": 12.9,
+          "type": "ship_lost",
+          "stage": 2,
+          "score": 2560,
+          "livesBefore": 3,
+          "stageClock": 12.9,
+          "attackers": 0,
+          "enemyBullets": 0,
+          "enemies": 10,
+          "playerX": 29.12,
+          "playerY": 335,
+          "playerLane": 1,
+          "dual": false,
+          "pending": false,
+          "carriedEnemies": 0,
+          "timeSinceCaptureStart": null,
+          "timeSinceFighterCaptured": null,
+          "playerHitbox": {
+            "w": 7,
+            "h": 6
+          },
+          "cause": "enemy_bullet",
+          "bulletKind": "formation",
+          "sourceId": 515697119,
+          "sourceType": "bee",
+          "sourceDive": 0,
+          "bulletX": 35.98,
+          "bulletY": 335.59,
+          "bulletLane": 1,
+          "bulletVx": 1.56,
+          "bulletVy": 162
+        }
+      ],
+      "captures": [],
+      "captiveDestroyed": []
+    },
+    {
+      "seed": 51101,
+      "persona": "professional",
+      "firstClear": {
+        "t": 19.133,
+        "type": "stage_clear",
+        "stage": 2,
+        "score": 3960
+      },
+      "stage3": {
+        "t": 22.483,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": "professional"
+      },
+      "kills": 40,
+      "losses": [],
+      "captures": [],
+      "captiveDestroyed": []
+    },
+    {
+      "seed": 51201,
+      "persona": "expert",
+      "firstClear": {
+        "t": 17.417,
+        "type": "stage_clear",
+        "stage": 2,
+        "score": 4570
+      },
+      "stage3": {
+        "t": 20.767,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": "expert"
+      },
+      "kills": 40,
+      "losses": [],
+      "captures": [],
+      "captiveDestroyed": []
+    },
+    {
+      "seed": 51201,
+      "persona": "professional",
+      "firstClear": {
+        "t": 21.25,
+        "type": "stage_clear",
+        "stage": 2,
+        "score": 3840
+      },
+      "stage3": {
+        "t": 24.6,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": "professional"
+      },
+      "kills": 40,
+      "losses": [],
+      "captures": [],
+      "captiveDestroyed": []
+    }
+  ]
+}

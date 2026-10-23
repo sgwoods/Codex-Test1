@@ -1,0 +1,72 @@
+{
+  "createdAt": "2026-10-22T20:43:48.166Z",
+  "authorization": "User approved recommended separation and prospective safety-repair qualification. No release authorization.",
+  "baselineHash": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+  "candidateHash": "0623392493c81d9670496eed71b3393947a7b2dc8e507ed70ec90fb842d2eb62",
+  "buildHashes": {
+    "baseline": "26700ead3aa357ebab6eaf3a245e262fd8e2b17467d855867a7f4b91d58f99ba",
+    "candidate": "b18258ac223248fba313921087c5cb48e506916b42f0bfa263dffdfc38a02d55"
+  },
+  "scenarioHash": "5ad670d8bba5d0c9964a1bcb5b1a0f96e88852b950cfc132bd5b7f9565fa7c4f",
+  "persona": "professional",
+  "stage": 1,
+  "ships": 3,
+  "duration": 900,
+  "watchMode": true,
+  "matched": {
+    "seeds": [
+      89001,
+      89002,
+      89003,
+      89004,
+      89005,
+      89006,
+      89007,
+      89008,
+      89009,
+      89010
+    ],
+    "medianAtLeast": 326720,
+    "minimumAtLeast": 189800,
+    "reach150k": 10,
+    "reach200kAtLeast": 9,
+    "earlyDestructionsAtMost": 1,
+    "stage2Destructions": "No increase versus retained baseline; review each new destruction."
+  },
+  "fresh": {
+    "panels": [
+      [
+        92001,
+        92002,
+        92003,
+        92004,
+        92005,
+        92006,
+        92007,
+        92008,
+        92009,
+        92010
+      ],
+      [
+        94001,
+        94002,
+        94003,
+        94004,
+        94005,
+        94006,
+        94007,
+        94008,
+        94009,
+        94010
+      ]
+    ],
+    "reach150kAtLeast": 8,
+    "comparison": "Run retained baseline on same panels; no median-score or aggregate Stage2 destruction regression; inspect all new losses."
+  },
+  "completeStage": "Matched Stage2 diagnostic panel93001-93010 after matchedfullgame pass; no worse median score/clear time or aggregate destructions versus retained. These are not fresh seeds.",
+  "stop": "If matched nonregression fails, do not run fresh panels or integrate. Historical short Expert comparison stays failed/calibration-only for this safety qualification.",
+  "separateHolds": [
+    "Persona ranking/calibration is not approved by safety-only acceptance.",
+    "Live account acceptance and exact-package release checks remain independent."
+  ]
+}

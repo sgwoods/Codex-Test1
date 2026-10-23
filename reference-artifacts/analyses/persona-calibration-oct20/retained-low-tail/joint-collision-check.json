@@ -1,0 +1,232 @@
+{
+  "ok": true,
+  "packet": "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2",
+  "frameTime": 329.65000000002885,
+  "normal": [
+    {
+      "axis": -1,
+      "x": 136.36000000000027,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 139.69,
+          "enemyY": 325.81,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "axis": 0,
+      "x": 142.52000000000027,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 139.69,
+          "enemyY": 325.81,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "axis": 1,
+      "x": 148.68000000000026,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 139.69,
+          "enemyY": 325.81,
+          "enemyLane": 4,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    }
+  ],
+  "mirrored": [
+    {
+      "axis": -1,
+      "x": 131.31999999999974,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 140.31,
+          "enemyY": 325.81,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "axis": 0,
+      "x": 137.47999999999973,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 140.31,
+          "enemyY": 325.81,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "axis": 1,
+      "x": 143.63999999999973,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 751477004,
+          "enemyType": "but",
+          "enemyDive": 5,
+          "enemyX": 140.31,
+          "enemyY": 325.81,
+          "enemyLane": 5,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "name": "left",
+      "offset": -133.52000000000027,
+      "results": [
+        {
+          "axis": -1,
+          "x": 9,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 6.17,
+              "enemyY": 325.81,
+              "enemyLane": 0,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        },
+        {
+          "axis": 0,
+          "x": 9,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 6.17,
+              "enemyY": 325.81,
+              "enemyLane": 0,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        },
+        {
+          "axis": 1,
+          "x": 15.16,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 6.17,
+              "enemyY": 325.81,
+              "enemyLane": 0,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right",
+      "offset": 128.47999999999973,
+      "results": [
+        {
+          "axis": -1,
+          "x": 264.84,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 268.17,
+              "enemyY": 325.81,
+              "enemyLane": 9,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        },
+        {
+          "axis": 0,
+          "x": 271,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 268.17,
+              "enemyY": 325.81,
+              "enemyLane": 9,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        },
+        {
+          "axis": 1,
+          "x": 271,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 751477004,
+              "enemyType": "but",
+              "enemyDive": 5,
+              "enemyX": 268.17,
+              "enemyY": 325.81,
+              "enemyLane": 9,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One-frame endpoint replay with frozen enemy trajectory, not a future-safe path.",
+    "Mirrored and translated edge worlds are synthetic; offscreen hazards are not respawned.",
+    "Retained source diagnostic; no repair acceptance is implied."
+  ]
+}

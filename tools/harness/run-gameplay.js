@@ -515,6 +515,11 @@ async function main(){
       const replayTime = await replay(page, spec);
       state = await waitForRun(page, spec, replayTime);
     }
+    if(args['decision-trace']){
+      const trace=await page.evaluate(()=>window.__auroraDecisionTrace);
+      if(!Array.isArray(trace)||!trace.length)throw new Error('Requested decision trace is missing');
+      fs.writeFileSync(path.join(outDir,'decision-trace.json'),JSON.stringify(trace,null,2));
+    }
     await finalizeArtifacts(page, downloads, spec, state);
     const saved = [];
     for(const download of downloads){

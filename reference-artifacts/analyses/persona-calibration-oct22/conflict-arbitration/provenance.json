@@ -1,0 +1,498 @@
+{
+  "createdAt": "2026-10-22T20:08:06.547Z",
+  "rawRecoveryVerified": true,
+  "manifest": [
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/acceptance.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/acceptance.json.gz",
+      "sha256": "a150d1f592902ea7e084ce6d45a19b45b6d6490eb55903165ae0bb60f7c7c411",
+      "compressedSha256": "28f61840e7f61b506ed96eaa7029c42e65ff8ebd953b88258cc5a8fef07fba0b"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/baseline.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/baseline.js.gz",
+      "sha256": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+      "compressedSha256": "320ecc386be07b15257000407672c4095698b64f5b2c5217e9253dfc60c059d2"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/candidate.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/candidate.js.gz",
+      "sha256": "843dc879aab38b90e9732b8310c83c4d80ce6e7036c0c46c10f3e86e711b67ae",
+      "compressedSha256": "92ebb0df284bd2215f0ec216a4190913cd19995ccbab04b4f941bcc1aa11484e"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/check-fixture.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/check-fixture.js.gz",
+      "sha256": "d1b7c4cdff06d5f206913cb3884e79224d14b1ee047e8d2984729f254ce0c909",
+      "compressedSha256": "53b6b713289811fc00c73dbb9cf38190c4f6bec84a1672d2e3712e8e2d5361eb"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/check-short.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/check-short.js.gz",
+      "sha256": "b1e871ee5d25a290d5d6ff3cdd614926c3abe8b962fef0ae84c83ebc051c4f6e",
+      "compressedSha256": "573b3b0e9ea126486d8a5324ef8fe9ed6ed3b05ddd33b43468424898714e28d1"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/fixture-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/fixture-results.json.gz",
+      "sha256": "1cca1c3df3d6bafa3bc9dfc4a1f2d0402322c37acc41849dc060414ed53d479e",
+      "compressedSha256": "c4f306b71b6d55c33dc03a048eb89e6093c04b56131cf140ba0766b34bc98a68"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/input/index.html",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/input/index.html.gz",
+      "sha256": "daee1ead37c843e3a0fe18f951148e98e4e050c6f385e064625f40e1be6b6f47",
+      "compressedSha256": "65a76330cad0fca8f5155757b7ce4a9089c385fb09d2e63683790d35fea526e5"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-only-oct22/prepare.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-only-oct22/prepare.js.gz",
+      "sha256": "0d92eaddac5f64569c5a45360467526f0b44e3953537ab39e6d7723c64c44556",
+      "compressedSha256": "b8c5aff4d0986df972fd1b32c17c11cff151a1f2ad2cfa95df5bca4867b8823f"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/acceptance.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/acceptance.json.gz",
+      "sha256": "a87844b224ad99a1648f2b6a687c37ebab3bfd67689009cef12d0755f7d5b50f",
+      "compressedSha256": "213bd2896bbbc954174634bf966dda2b80ccfecb886c7bdb09492f41370f3dbe"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/baseline.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/baseline.js.gz",
+      "sha256": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+      "compressedSha256": "320ecc386be07b15257000407672c4095698b64f5b2c5217e9253dfc60c059d2"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/candidate.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/candidate.js.gz",
+      "sha256": "0b4d88d25825eeabb02b85a24fdc5fd8bc5c0aa9d3dc1e5dc50e691b00857b32",
+      "compressedSha256": "2c26d7536e05412b9a95830ca9d0abe8c5b5c89c6c6d2f8854c7fe7b50f704a4"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/check-fixture.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/check-fixture.js.gz",
+      "sha256": "e635cf14b91300a14ba1a2c2c6c4f7abea9c66c4614223fa38282a3fdffce322",
+      "compressedSha256": "24d5c7438a39cb3f2ba2fd958aad3709952e2b3b3aa80ea4e683fee5925e6c45"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/check-short.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/check-short.js.gz",
+      "sha256": "b1e871ee5d25a290d5d6ff3cdd614926c3abe8b962fef0ae84c83ebc051c4f6e",
+      "compressedSha256": "573b3b0e9ea126486d8a5324ef8fe9ed6ed3b05ddd33b43468424898714e28d1"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/fixture-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/fixture-results.json.gz",
+      "sha256": "ac50989ba18cb14fd8f9e703a60360b9e2f419251c619c2d3cbdc1617e660d69",
+      "compressedSha256": "68a71a3a670df4c7454450be3ab7a78249daba522ce7d2d52f1a16a75177be7e"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/input/index.html",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/input/index.html.gz",
+      "sha256": "019f49c436f504f10da22a541af3b24ef9af359e3c49d65c4821f3edad91cf56",
+      "compressedSha256": "74bb3e79145a4945be5414db3bd1e309b2cb65c733080c93eb7464f6280b14eb"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/prepare.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/prepare.js.gz",
+      "sha256": "d2ef3dec26cb65821534f1b4d1dcd98c72e9399b63ea60c321dda426146a619e",
+      "compressedSha256": "452206ff6d288be20bc17995d7f3acf711631de8fc74743dafe0bf76a0955565"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/latest.json.gz",
+      "sha256": "bb07a96ecf17376ad96baffb793693e81816b5d81ca472b38b5492d2c0712f28",
+      "compressedSha256": "1f101ef37e26e9b48e1efd18b6c1284b664949065f3bbf46e0560c5765aa1f40"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-latest.json.gz",
+      "sha256": "6756a6db2b564db529acb737030f219a6f57948ddfccc4f7e9b6bbca8a1ee560",
+      "compressedSha256": "31af23c63771b985f30c66b269d528e96cc81e6fafe4781610a117931243fe91"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/neo-galaga-session-ngt-1792699147441-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/neo-galaga-session-ngt-1792699147441-3-system-status.json.gz",
+      "sha256": "e300a1c8525089b637f128126eff85e9e6b6fee02e72f05784fc41ad48e0337d",
+      "compressedSha256": "f3c2174fd3a259e1ad4424d6d5d27d556497febd2bb487b5558a7a16fa887695"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/neo-galaga-session-ngt-1792699147441-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/neo-galaga-session-ngt-1792699147441-3.json.gz",
+      "sha256": "78346ed3952ff2c470eea04a216c134b29b0e04305da22860c9bb41c0b528686",
+      "compressedSha256": "24190c190cb4eb1f64cb2f5e272585b7792a3c9a0be0e5a678133ccd4d665c9f"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T19-59-00-865Z-22260-5sdgvd/summary.json.gz",
+      "sha256": "f4b5ddffa7c8783008ff14e38694e46e90ad41f6d924529c21ad2c2fe430169b",
+      "compressedSha256": "f2fc0635fb7b9e6737f7d0371368efb7c61e6ad229d1ea8ba8b798b5c011d684"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/neo-galaga-session-ngt-1792699157989-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/neo-galaga-session-ngt-1792699157989-3-system-status.json.gz",
+      "sha256": "42fe8e3fdf4438820c426d5757e650c3fc9a688adf890525c9dcb30787fa2d2e",
+      "compressedSha256": "3111107c812f69de1d0db821127801a3f22f848386139cb18757c9c73b910ede"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/neo-galaga-session-ngt-1792699157989-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/neo-galaga-session-ngt-1792699157989-3.json.gz",
+      "sha256": "facc4ec30beb2fc2faac2cc9497102ae374ab54198e3434c91ae94559c0e7ec5",
+      "compressedSha256": "ef91d4e24f359b7842df28ca71a7386da2b29c5159b1560d4eae18eca3742388"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T19-59-13-173Z-22470-j5ho3c/summary.json.gz",
+      "sha256": "5ae268628f4bbf527696d22c3896c4aa266bed8edea0a44c146ece32012196fe",
+      "compressedSha256": "b3e3bbeece95f34cafa02916981e8cec8f594b1357bb379e923b2e3562d6f052"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/neo-galaga-session-ngt-1792699169003-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/neo-galaga-session-ngt-1792699169003-3-system-status.json.gz",
+      "sha256": "30156b964d6ca4174307c0c69a820c329b0b2c019376c1a5a312057ea2e61fd3",
+      "compressedSha256": "f76c47bbbaeb54026cfa3c8975886f27a238eec73da264ae67b041379af9d3dc"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/neo-galaga-session-ngt-1792699169003-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/neo-galaga-session-ngt-1792699169003-3.json.gz",
+      "sha256": "4a6a28b77b9beaf896457f39b29083bd00e8263f224f1254d82f203016aee204",
+      "compressedSha256": "081fd381e079166478a5f0000cb9710cc2c3667f5e56bf19a9a451d7dd3a8b73"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T19-59-23-916Z-22654-cz1tab/summary.json.gz",
+      "sha256": "4d5d548ba8af0b0f7aff8149f07d383aced8d14514ac0653a3e440d57a6c3570",
+      "compressedSha256": "8105d5235a93bc41555a49688e94a2c71feae36e502163d8d5f50cebb11d5ebf"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-latest.json.gz",
+      "sha256": "bb07a96ecf17376ad96baffb793693e81816b5d81ca472b38b5492d2c0712f28",
+      "compressedSha256": "1f101ef37e26e9b48e1efd18b6c1284b664949065f3bbf46e0560c5765aa1f40"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/neo-galaga-session-ngt-1792699152947-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/neo-galaga-session-ngt-1792699152947-3-system-status.json.gz",
+      "sha256": "63f3dee6162304bbc5453816c56eb3f693c61ab782fcddd2d60b3e0f29c412d3",
+      "compressedSha256": "c9b11bf9d1045979442dbd28e1012460a77979239e391f4f95b6167c51c3251b"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/neo-galaga-session-ngt-1792699152947-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/neo-galaga-session-ngt-1792699152947-3.json.gz",
+      "sha256": "ab0edada8af35e035fbe759373f6529c918e22b2420ab5dbd596d2fe92ff988a",
+      "compressedSha256": "34339e788bde7ebd82713512fbc34bef663670aa742e77fec3005faf2d435a58"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T19-59-07-758Z-22383-tbu4pb/summary.json.gz",
+      "sha256": "2b9d94a32fd9269e08ad3c7aef880f3ce2f401c38d180b71c8cc502cdd3789fa",
+      "compressedSha256": "77d90cd9cf56b40bbe788314c9858b94dfb28351502feec09a87f0a0c1fdc826"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/neo-galaga-session-ngt-1792699163744-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/neo-galaga-session-ngt-1792699163744-3-system-status.json.gz",
+      "sha256": "e5c816551061ec4eae4c6b6ce6737dff9366296a29e8bdfa7eae27dad55d3d45",
+      "compressedSha256": "e16c53f2df2bd9a60e4f3fb72c4a362719c552ae47bc7120c0ab69cb995a3705"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/neo-galaga-session-ngt-1792699163744-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/neo-galaga-session-ngt-1792699163744-3.json.gz",
+      "sha256": "39c2b7f1faa256f08192a09b0f571f7c4bca3833a61df12098e8f8932ed69b17",
+      "compressedSha256": "606549d678d115891ef1f0dfa56ab7680f4a7133b6f296948eaadab5420a79d2"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T19-59-18-142Z-22561-0di6ii/summary.json.gz",
+      "sha256": "72efb62a1c4d23ebcfa1417328d7fea218d81df0d016a588b4cf5db55d54b784",
+      "compressedSha256": "acbe0210694c7604f64690ab1bf83bd2419402affcead7f68d2b97a0190c1cb0"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/neo-galaga-session-ngt-1792699173894-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/neo-galaga-session-ngt-1792699173894-3-system-status.json.gz",
+      "sha256": "9263e34651b01db7566a13ba7106f4be3504da6ea133f1bd2e7b0994b9de0a8e",
+      "compressedSha256": "7efb4b087ed25d14da82158224b0e7f354c51ed0d51be302f14c722d82abc6c1"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/neo-galaga-session-ngt-1792699173894-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/neo-galaga-session-ngt-1792699173894-3.json.gz",
+      "sha256": "eb4238a1003a858360577a8dd155160e5d8dcef82f83c52ee3426d88ffe96acc",
+      "compressedSha256": "b199f50d8d4e1090b8e7c0d17559abdc8c75ed833cb81f84e6f0c1736307f50b"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T19-59-29-186Z-25149-7m2bka/summary.json.gz",
+      "sha256": "d142dfe801e3ec9e6a7dc6164099dfddfbb0a4d6a1bf3824d4f0d12e807bdde7",
+      "compressedSha256": "d2498b2e90af5d3ebc3df281201334da466744907900492451c3bfa009bd14ee"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/short-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/short-results.json.gz",
+      "sha256": "37dbf7101e2d0be6d0c2ab63cff03e230dce13f911f4a16677da925e44ef1016",
+      "compressedSha256": "042f0599ac1486dac528fb232f1598fefdb2220b85f3e8bb30b5e6b8d7a2bce7"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/target/latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/target/latest.json.gz",
+      "sha256": "a62eca04d7207919c9d896b3c97367ca21c136f58db7c4a7617b1affdf9ff2e9",
+      "compressedSha256": "433bdf445c27632d8244c40469af13cbfe85f01a797ab0230a688f7f862a738a"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-latest.json.gz",
+      "sha256": "a62eca04d7207919c9d896b3c97367ca21c136f58db7c4a7617b1affdf9ff2e9",
+      "compressedSha256": "433bdf445c27632d8244c40469af13cbfe85f01a797ab0230a688f7f862a738a"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/neo-galaga-session-ngt-1792699152355-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/neo-galaga-session-ngt-1792699152355-3-system-status.json.gz",
+      "sha256": "3262471cc4eaac4c5eefc70b78d3f282d2de22b1ca30d450bcd3267b256af3cb",
+      "compressedSha256": "e1c26145dbdcd53cb8d80cdc3d2f4c06792f60ef2d356053729599e270de1cfe"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/neo-galaga-session-ngt-1792699152355-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/neo-galaga-session-ngt-1792699152355-3.json.gz",
+      "sha256": "533c95132c097891eb0141e8befee30337ce7a1137dbbf18f66eec25dd32d8f8",
+      "compressedSha256": "a2d6eee5ca32d4f6cd11683549b5922b6b520832dca8e34c5600d93e8886e5e3"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-all-bodies-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T19-59-04-588Z-22329-8rp2aq/summary.json.gz",
+      "sha256": "983497f122003f771b38caaf8efbb9a59a4b483747c96c97bb6a6d8b4099158e",
+      "compressedSha256": "ec8aa78b66e6520bc685602ff5a2d6b4e0de6047f8bd3460cd9e3ad82551362d"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/acceptance.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/acceptance.json.gz",
+      "sha256": "c2606e52826f064a0afe4a0ac8e4c02a9b0f580acaeb2e999b6e5ab34904ef3f",
+      "compressedSha256": "30162a5cb85cae798a926c832dc3e30a38220ffcd1ded508119f7ea460ac88eb"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/archive.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/archive.js.gz",
+      "sha256": "1345f9ea3222fedfdcb8083f7009501707a0ef4352168283123f1ba750491117",
+      "compressedSha256": "20cae5a71af2e641f6f0c49c058a5d2fd49dcfbd4ac75dfe3f91a5e53df61b6d"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/baseline.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/baseline.js.gz",
+      "sha256": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+      "compressedSha256": "320ecc386be07b15257000407672c4095698b64f5b2c5217e9253dfc60c059d2"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/candidate.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/candidate.js.gz",
+      "sha256": "0623392493c81d9670496eed71b3393947a7b2dc8e507ed70ec90fb842d2eb62",
+      "compressedSha256": "499854fb36d3d33cb82ec896ecd868a8f4debd1e00ff6252e422ea425da98f79"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/check-fixture.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/check-fixture.js.gz",
+      "sha256": "e635cf14b91300a14ba1a2c2c6c4f7abea9c66c4614223fa38282a3fdffce322",
+      "compressedSha256": "24d5c7438a39cb3f2ba2fd958aad3709952e2b3b3aa80ea4e683fee5925e6c45"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/check-scope.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/check-scope.js.gz",
+      "sha256": "854bc6a0a598979cda28783175162c7c2afa7384c9d5ac5d98786c0d26713f5a",
+      "compressedSha256": "b7965be5d8ee3bc05dca9a9464583cde2d7662158631f805a17c5506f8b3a982"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/check-short.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/check-short.js.gz",
+      "sha256": "b1e871ee5d25a290d5d6ff3cdd614926c3abe8b962fef0ae84c83ebc051c4f6e",
+      "compressedSha256": "573b3b0e9ea126486d8a5324ef8fe9ed6ed3b05ddd33b43468424898714e28d1"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/fixture-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/fixture-results.json.gz",
+      "sha256": "ac50989ba18cb14fd8f9e703a60360b9e2f419251c619c2d3cbdc1617e660d69",
+      "compressedSha256": "68a71a3a670df4c7454450be3ab7a78249daba522ce7d2d52f1a16a75177be7e"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/input/index.html",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/input/index.html.gz",
+      "sha256": "b18258ac223248fba313921087c5cb48e506916b42f0bfa263dffdfc38a02d55",
+      "compressedSha256": "ac26aa94aab194e7094b27e284f3ab3b56816aec90248c2b1bd34544d8aeb438"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/prepare.js",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/prepare.js.gz",
+      "sha256": "77cb7ade6526fd0578e24918b338518361468b97efe162ff3dc4922c4efbe9b7",
+      "compressedSha256": "eadb940c90db1c101d5e8c074448608f46689539b8d9af2466d002359f24ac6c"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/latest.json.gz",
+      "sha256": "578e69efad290182b573300573a791f1505b0c43fd157f1550ec6db60bf052fc",
+      "compressedSha256": "829c90428a47204fb77b9d80f150649f1fc7ef114250ecfccd6dd748bf240173"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-latest.json.gz",
+      "sha256": "ad2ce43cbdba9592e9289df15e1b8eb7c32c12a9f5ed17512ce31b2c14fe694e",
+      "compressedSha256": "fd259f57c68ab09ee1da88f1685391f074cc6a5c25067c55114747a69d409b2d"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/neo-galaga-session-ngt-1792699446518-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/neo-galaga-session-ngt-1792699446518-3-system-status.json.gz",
+      "sha256": "6a5e70d4920689d95be100e1f4171f80c054b7452dd6dcadb42fde2221f3ccf9",
+      "compressedSha256": "16ec49d2f94f5d32ee8586208554c8ab6c641bc4db51930d8a6b1d2c06cdc6cd"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/neo-galaga-session-ngt-1792699446518-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/neo-galaga-session-ngt-1792699446518-3.json.gz",
+      "sha256": "87bdb8f233054ffe446122e364dd05a4c24baec7d3b99f8ce14aa6c4fd0fc47c",
+      "compressedSha256": "4e1fd0db648fd354282c58d770b82ec7ea9f107c86b5f37a3203906efe0f55bf"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51101-2026-10-22T20-04-00-168Z-44997-s03koc/summary.json.gz",
+      "sha256": "5291c44426b9b7bf77016a693b90657d2cce0611f679b74bb3c6d3df5ffa57c5",
+      "compressedSha256": "9cdacba53d66592480fc9921fc9b181e7473f8a23ef718f989a0aee15d6333d0"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/neo-galaga-session-ngt-1792699483904-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/neo-galaga-session-ngt-1792699483904-3-system-status.json.gz",
+      "sha256": "22352d1e06684e1dc87743136f0749fd29cbc82ad80366892c3bc0a65d45626b",
+      "compressedSha256": "ce59e82e6b41fd16e9a4201aba40092e5459bd6601768b6beea26ddf978bb443"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/neo-galaga-session-ngt-1792699483904-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/neo-galaga-session-ngt-1792699483904-3.json.gz",
+      "sha256": "5bdd8eeab7414a2ae1b3eb1755be0954a688d75487dfdf2bf775a45c1a0448cd",
+      "compressedSha256": "af63d0cf416b9bf48a0b93a83c580888d82a8d742a2ea2d70be513f6ff8c6103"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51201-2026-10-22T20-04-31-886Z-48325-rmop2x/summary.json.gz",
+      "sha256": "a08479dec079390d63a6302aa1aaa8d7fe301a45e977b5e5604a5955aa3eed84",
+      "compressedSha256": "03639ba587c9b07fab0895df5204ec37225bc4b76f09dc7362aae73022f70ba8"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/neo-galaga-session-ngt-1792699496399-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/neo-galaga-session-ngt-1792699496399-3-system-status.json.gz",
+      "sha256": "66591ea135904293c6ec8693abbd8672d077047c9126699714e41ff967bcf320",
+      "compressedSha256": "a894f5ef25cf3d294c1d0ed48e1b91ff35df28f30eab585e81c7c797f6711716"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/neo-galaga-session-ngt-1792699496399-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/neo-galaga-session-ngt-1792699496399-3.json.gz",
+      "sha256": "9b1f1f74fee5273158acba79cbc77ccb1f3934be74a58dc878139c4e4527897c",
+      "compressedSha256": "9906840d073e700b752aabf5808c24232d08452e7dbfec2cacd70c053c2d3665"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-expert-seed51301-2026-10-22T20-04-51-821Z-48617-rgikl0/summary.json.gz",
+      "sha256": "67b92598054709c5cee9561b2e0ebd6bce90cfe0bd2052d13c6dbb658526eef2",
+      "compressedSha256": "617246226aa5ded7a9f2f54e39390dcfd1ced6752485b3fa7dcb27925a4cc72c"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-latest.json.gz",
+      "sha256": "578e69efad290182b573300573a791f1505b0c43fd157f1550ec6db60bf052fc",
+      "compressedSha256": "829c90428a47204fb77b9d80f150649f1fc7ef114250ecfccd6dd748bf240173"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/neo-galaga-session-ngt-1792699471722-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/neo-galaga-session-ngt-1792699471722-3-system-status.json.gz",
+      "sha256": "0acaad54119a419611cf3af497a9cbd6f4932a123b310865272fa24c065af74b",
+      "compressedSha256": "41e9dccd59eb0131de25621dc0b261e8e5df63827bb090dbf9c499709301ffd7"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/neo-galaga-session-ngt-1792699471722-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/neo-galaga-session-ngt-1792699471722-3.json.gz",
+      "sha256": "75b9414549372093006912d569d8177682f25305b1057ef27ea9db831fe54bdb",
+      "compressedSha256": "96240fd851dac8d13bad629a1b2607eec0edf2056f938a4a8fe6df148c55dad1"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51101-2026-10-22T20-04-06-849Z-45207-sdrvfz/summary.json.gz",
+      "sha256": "9566df56046ee030ee0167aa360a461796d6d24c9da5d6d44815724304af8a4b",
+      "compressedSha256": "1ef3740b03fa67f54282f5171de55486f36e9b6a752f266ecb72ff5daba8e1f3"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/neo-galaga-session-ngt-1792699491660-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/neo-galaga-session-ngt-1792699491660-3-system-status.json.gz",
+      "sha256": "b4b602d31ea3af2ac5ba19a32acabb65875848aefd92a75b1ac8d2994f7fb211",
+      "compressedSha256": "a4802d02f5f64b867d70b5a52037f7a4a73905fb164be10a1a3a7f5955c6fed4"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/neo-galaga-session-ngt-1792699491660-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/neo-galaga-session-ngt-1792699491660-3.json.gz",
+      "sha256": "14056c6a68ec805235113471fea388c026bb2f41de0a855659acbb6c1574fe32",
+      "compressedSha256": "35afd40cc6c61ffd0eeef5ee77ac22660cae67641d7564755945819efea02858"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51201-2026-10-22T20-04-44-075Z-48497-e2235d/summary.json.gz",
+      "sha256": "671c4936754c35998eb9121a5240a72c80344b7ef0eb852c05f72ec6ff1f3b1e",
+      "compressedSha256": "88f03405bad2162653920baee84a33ec2a5d5cf619e52e995831949b51ae621e"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/neo-galaga-session-ngt-1792699500512-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/neo-galaga-session-ngt-1792699500512-3-system-status.json.gz",
+      "sha256": "e9783b832052b61b878ea78af30b610add6b97ddfb3a76077976de178705a583",
+      "compressedSha256": "dde205769025a75e58c6ded1b33b737c1395238405291ddae232493f9315404a"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/neo-galaga-session-ngt-1792699500512-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/neo-galaga-session-ngt-1792699500512-3.json.gz",
+      "sha256": "fb3fd69125689d9a3d62ddfce93a97bf614f2131abf4c8871a868fbd3355bf37",
+      "compressedSha256": "dc7923bd98a60a0a94d779df5562e5859cf532194683c760a7b502e268f34d87"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/runs/stage2-opening-professional-seed51301-2026-10-22T20-04-56-555Z-50184-deo43l/summary.json.gz",
+      "sha256": "f693b0d7b74231f9c1b68729984a8c76a91abf22ad34ca4683c8788c09560372",
+      "compressedSha256": "ce44dcc35ed6c7c9a14fe763bf14f62828b1a47b2eecfd5cc963d1032e280419"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/scope-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/scope-results.json.gz",
+      "sha256": "cc9ee7c44547ac5441e22f53fb01e66eb810db3059847b01060b327ccac69279",
+      "compressedSha256": "8b350fabc371a7c4b6c2834ba1720666a40efde9812e640dfe5c05a3e743b87a"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/short-results.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/short-results.json.gz",
+      "sha256": "9ed26b9191febe6c52b14bcba8af726f84a0bdece7485028e20329ec648c8f07",
+      "compressedSha256": "78b43b6b472d798bbba97896bca0d6fbad5d6c49750f9a89ed6f7c147290bb5d"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/target/latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/target/latest.json.gz",
+      "sha256": "0d3d8b1c72a1b77fe6adefbe8a3c4c6f6d7763d49fb83ee0e7d7a5c8cc8e108f",
+      "compressedSha256": "d7324ff05f4ea7f3d1e29dad360bca70b7a4d4dd256c254ce061fb4741478b12"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-latest.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-latest.json.gz",
+      "sha256": "0d3d8b1c72a1b77fe6adefbe8a3c4c6f6d7763d49fb83ee0e7d7a5c8cc8e108f",
+      "compressedSha256": "d7324ff05f4ea7f3d1e29dad360bca70b7a4d4dd256c254ce061fb4741478b12"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/neo-galaga-session-ngt-1792699453106-3-system-status.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/neo-galaga-session-ngt-1792699453106-3-system-status.json.gz",
+      "sha256": "cad6971fe9042c9e929a1f819f9f373f3b99f703988f88fa27b8747a122aef3d",
+      "compressedSha256": "a6bb331d101b815b52733ecf494808dd186e025df3422170aa6434102235766f"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/neo-galaga-session-ngt-1792699453106-3.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/neo-galaga-session-ngt-1792699453106-3.json.gz",
+      "sha256": "49d1f14c0085d1efe9d10b8dd4e7897a76a359c3d69c0b8fc57755d29c2ee593",
+      "compressedSha256": "5bd34c7f4be439cd3cd24df4ae0a4d63369659651e7f2f36c38e07b65df714d7"
+    },
+    {
+      "source": "private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/summary.json",
+      "archive": "private-artifacts/persistent/stage2-conflict-oct22/private-artifacts/stage2-conflict-scoped-oct22/target/stage2-completion-diagnostic-professional-seed93008-2026-10-22T20-04-03-973Z-45086-8afbyo/summary.json.gz",
+      "sha256": "ab9086889a39b8cd22dbfd5685fd700c02b7444616aebce0c14bac7a90f5994a",
+      "compressedSha256": "bf7432dde6ab350b77a0ea0adc4c368d968f487abbd101bb3b41aeb88e6e9d37"
+    }
+  ],
+  "referenceTrace": "reference-artifacts/analyses/persona-calibration-oct22/timebox/provenance.json",
+  "limitations": [
+    "Private archive local; off-machine backup not verified.",
+    "Recorded-hazard fixtures do not recompute enemy reactions or firing.",
+    "No full-game or fresh validation; current gate failed."
+  ]
+}

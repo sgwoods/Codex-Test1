@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-20",
+  "sourceHash": "63b79bab4c8ca1f3dee04903dad90686fe5ad305faf6de4050a3994f871c3a0e",
+  "buildHash": "c1a11bef06a83b8b357d66ffc043bbfb5fdef1d01eecd37b5614d40f85257c4d",
+  "methodHash": "2e5f101ee7f9666ae6b420366b863b3e81eebe1def7249f2ead71805fb0f3e66",
+  "start": 89001,
+  "personas": [
+    "professional"
+  ],
+  "duration": 900,
+  "ships": 3,
+  "stage": 1,
+  "criteria": "Diagnostic only: neither tier regresses its prior median; no opening destruction; assess user goals separately. Freeze before fresh seeds.",
+  "rows": [
+    {
+      "persona": "professional",
+      "seed": 89001,
+      "stage": 41,
+      "score": 289690,
+      "outcome": "time-limit",
+      "simTime": 899.5
+    },
+    {
+      "persona": "professional",
+      "seed": 89003,
+      "stage": 44,
+      "score": 297850,
+      "outcome": "time-limit",
+      "simTime": 899.467
+    },
+    {
+      "persona": "professional",
+      "seed": 89002,
+      "stage": 10,
+      "score": 63500,
+      "outcome": "game-over",
+      "simTime": 264.217
+    },
+    {
+      "persona": "professional",
+      "seed": 89005,
+      "stage": 22,
+      "score": 128810,
+      "outcome": "game-over",
+      "simTime": 517.133
+    },
+    {
+      "persona": "professional",
+      "seed": 89004,
+      "stage": 25,
+      "score": 153610,
+      "outcome": "game-over",
+      "simTime": 641.967
+    },
+    {
+      "persona": "professional",
+      "seed": 89008,
+      "stage": 47,
+      "score": 346030,
+      "outcome": "time-limit",
+      "simTime": 899.417
+    },
+    {
+      "persona": "professional",
+      "seed": 89007,
+      "stage": 41,
+      "score": 306480,
+      "outcome": "time-limit",
+      "simTime": 899.5
+    },
+    {
+      "persona": "professional",
+      "seed": 89006,
+      "stage": 21,
+      "score": 126620,
+      "outcome": "game-over",
+      "simTime": 548.617
+    },
+    {
+      "persona": "professional",
+      "seed": 89009,
+      "stage": 42,
+      "score": 275320,
+      "outcome": "time-limit",
+      "simTime": 899.483
+    },
+    {
+      "persona": "professional",
+      "seed": 89010,
+      "stage": 14,
+      "score": 81260,
+      "outcome": "game-over",
+      "simTime": 360.8
+    }
+  ],
+  "summary": {
+    "professional": {
+      "median": 214465,
+      "reach75k": 9,
+      "reach150k": 6,
+      "reach200k": 5,
+      "stages": [
+        41,
+        44,
+        10,
+        22,
+        25,
+        47,
+        41,
+        21,
+        42,
+        14
+      ],
+      "earlyDestructions": 1
+    }
+  },
+  "inputUnchanged": true,
+  "rawPath": "private-artifacts/aurora-ladder-oct20/stage2-joint-fresh/results.json",
+  "rawHash": "30d83549a55cf07cd8c3cc3f8200514c53e9f55d240ee5cc526c8bf7efe93a06"
+}

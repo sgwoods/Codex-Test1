@@ -1,0 +1,155 @@
+{
+  "ok": true,
+  "packet": "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/stage2-decision-replay-oct20-v3",
+  "frameTime": 8.816666666666684,
+  "normal": [
+    {
+      "axis": -1,
+      "x": 165.81333333333328,
+      "losses": []
+    },
+    {
+      "axis": 0,
+      "x": 172.2666666666666,
+      "losses": []
+    },
+    {
+      "axis": 1,
+      "x": 178.7199999999999,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 248693119,
+          "enemyType": "but",
+          "enemyDive": 1,
+          "enemyX": 189.69,
+          "enemyY": 342.02,
+          "enemyLane": 6,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    }
+  ],
+  "mirrored": [
+    {
+      "axis": -1,
+      "x": 101.28000000000007,
+      "losses": [
+        {
+          "cause": "enemy_collision",
+          "enemyId": 248693119,
+          "enemyType": "but",
+          "enemyDive": 1,
+          "enemyX": 90.31,
+          "enemyY": 342.02,
+          "enemyLane": 3,
+          "enemyForm": true,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "axis": 0,
+      "x": 107.7333333333334,
+      "losses": []
+    },
+    {
+      "axis": 1,
+      "x": 114.18666666666674,
+      "losses": []
+    }
+  ],
+  "edges": [
+    {
+      "name": "left",
+      "offset": -163.2666666666666,
+      "results": [
+        {
+          "axis": -1,
+          "x": 9,
+          "losses": []
+        },
+        {
+          "axis": 0,
+          "x": 9,
+          "losses": []
+        },
+        {
+          "axis": 1,
+          "x": 15.453333333333333,
+          "losses": [
+            {
+              "cause": "enemy_collision",
+              "enemyId": 248693119,
+              "enemyType": "but",
+              "enemyDive": 1,
+              "enemyX": 26.42,
+              "enemyY": 342.02,
+              "enemyLane": 1,
+              "enemyForm": true,
+              "challenge": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right",
+      "offset": 98.7333333333334,
+      "results": [
+        {
+          "axis": -1,
+          "x": 264.5466666666667,
+          "losses": []
+        },
+        {
+          "axis": 0,
+          "x": 271,
+          "losses": []
+        },
+        {
+          "axis": 1,
+          "x": 271,
+          "losses": []
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One-frame endpoint replay with frozen enemy trajectory, not a future-safe path.",
+    "Mirrored and translated edge worlds are synthetic; offscreen hazards are not respawned.",
+    "This reconstructs rejected deadband7, not a new accepted controller."
+  ],
+  "candidateHash": "63b79bab4c8ca1f3dee04903dad90686fe5ad305faf6de4050a3994f871c3a0e",
+  "candidateChoices": [
+    {
+      "name": "recorded",
+      "preferred": 1,
+      "axis": -1,
+      "x": 165.81333333333328,
+      "losses": []
+    },
+    {
+      "name": "mirrored",
+      "preferred": -1,
+      "axis": 1,
+      "x": 114.18666666666674,
+      "losses": []
+    },
+    {
+      "name": "left",
+      "preferred": 1,
+      "axis": 0,
+      "x": 9,
+      "losses": []
+    },
+    {
+      "name": "right",
+      "preferred": 1,
+      "axis": -1,
+      "x": 264.5466666666667,
+      "losses": []
+    }
+  ]
+}

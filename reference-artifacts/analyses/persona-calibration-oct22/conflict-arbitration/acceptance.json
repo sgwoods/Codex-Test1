@@ -1,0 +1,29 @@
+{
+  "createdAt": "2026-10-22T20:03:56.590Z",
+  "baseline": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+  "candidate": "0623392493c81d9670496eed71b3393947a7b2dc8e507ed70ec90fb842d2eb62",
+  "scope": "Conflict detector considers every nearby diving body opposite urgent bullet, not only the single preselected body. Stage2 only; ordinary pursuit, firing and Stage4+ policy unchanged. Review correction: capture-budget and beam policy remain Stage4+ only.",
+  "fixture": "Recorded/mirrored collision avoided; boundary clamps and scope preservation checked. Fixed-hazard replay is not full-game acceptance.",
+  "short": {
+    "seeds": [
+      51101,
+      51201,
+      51301
+    ],
+    "require": "Professional score/kills>=Expert and destructions<=Expert on each seed"
+  },
+  "matched": {
+    "seeds": "89001-89010",
+    "duration": 900,
+    "medianAtLeast": 326720,
+    "minimumAtLeast": 189800,
+    "reach150k": 10,
+    "reach200kAtLeast": 9,
+    "earlyDestructionsAtMost": 1
+  },
+  "fresh": {
+    "seeds": "92001-92010",
+    "reach150kAtLeast": 8
+  },
+  "stop": "Reject after fixture/short/matched failure. Consider prospective contract alternative, never relabel failedgate aspassed."
+}

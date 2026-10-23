@@ -1,0 +1,202 @@
+{
+  "hazard-arbitration": {
+    "date": "2026-10-20",
+    "sourceHash": "74b38aec094da21b4ce586812ad2d7b36b9d346f62fa2fd24d89cabbf3da2e0b",
+    "buildHash": "7fc466f5632e5c458a71f8eab237018a225bdd5ef1dad7b2698712a51e07220c",
+    "methodHash": "2e5f101ee7f9666ae6b420366b863b3e81eebe1def7249f2ead71805fb0f3e66",
+    "start": 87001,
+    "personas": [
+      "professional"
+    ],
+    "duration": 900,
+    "ships": 3,
+    "stage": 1,
+    "criteria": "Diagnostic only: neither tier regresses its prior median; no opening destruction; assess user goals separately. Freeze before fresh seeds.",
+    "rows": [
+      {
+        "persona": "professional",
+        "seed": 87002,
+        "stage": 49,
+        "score": 369190
+      },
+      {
+        "persona": "professional",
+        "seed": 87004,
+        "stage": 45,
+        "score": 297870
+      },
+      {
+        "persona": "professional",
+        "seed": 87003,
+        "stage": 17,
+        "score": 101470
+      },
+      {
+        "persona": "professional",
+        "seed": 87001,
+        "stage": 18,
+        "score": 109810
+      },
+      {
+        "persona": "professional",
+        "seed": 87005,
+        "stage": 49,
+        "score": 329620
+      },
+      {
+        "persona": "professional",
+        "seed": 87008,
+        "stage": 41,
+        "score": 269230
+      },
+      {
+        "persona": "professional",
+        "seed": 87007,
+        "stage": 17,
+        "score": 108970
+      },
+      {
+        "persona": "professional",
+        "seed": 87006,
+        "stage": 17,
+        "score": 100830
+      },
+      {
+        "persona": "professional",
+        "seed": 87010,
+        "stage": 44,
+        "score": 342980
+      },
+      {
+        "persona": "professional",
+        "seed": 87009,
+        "stage": 18,
+        "score": 112030
+      }
+    ],
+    "summary": {
+      "professional": {
+        "median": 190630,
+        "reach75k": 10,
+        "reach150k": 5,
+        "reach200k": 5,
+        "stages": [
+          49,
+          45,
+          17,
+          18,
+          49,
+          41,
+          17,
+          17,
+          44,
+          18
+        ],
+        "earlyDestructions": 1
+      }
+    },
+    "inputUnchanged": true,
+    "rawPath": "private-artifacts/aurora-ladder-oct20/hazard-arbitration/results.json",
+    "rawHash": "e5e9db5b82d8b4138f3832c3d3d18a9431ba9fef9a913547e1fb3b1e7575ad32"
+  },
+  "hazard-arbitration-fresh": {
+    "date": "2026-10-20",
+    "sourceHash": "74b38aec094da21b4ce586812ad2d7b36b9d346f62fa2fd24d89cabbf3da2e0b",
+    "buildHash": "7fc466f5632e5c458a71f8eab237018a225bdd5ef1dad7b2698712a51e07220c",
+    "methodHash": "2e5f101ee7f9666ae6b420366b863b3e81eebe1def7249f2ead71805fb0f3e66",
+    "start": 88001,
+    "personas": [
+      "professional"
+    ],
+    "duration": 900,
+    "ships": 3,
+    "stage": 1,
+    "criteria": "Diagnostic only: neither tier regresses its prior median; no opening destruction; assess user goals separately. Freeze before fresh seeds.",
+    "rows": [
+      {
+        "persona": "professional",
+        "seed": 88003,
+        "stage": 47,
+        "score": 319060
+      },
+      {
+        "persona": "professional",
+        "seed": 88002,
+        "stage": 18,
+        "score": 116720
+      },
+      {
+        "persona": "professional",
+        "seed": 88001,
+        "stage": 22,
+        "score": 122380
+      },
+      {
+        "persona": "professional",
+        "seed": 88004,
+        "stage": 20,
+        "score": 123300
+      },
+      {
+        "persona": "professional",
+        "seed": 88005,
+        "stage": 45,
+        "score": 305090
+      },
+      {
+        "persona": "professional",
+        "seed": 88006,
+        "stage": 50,
+        "score": 348970
+      },
+      {
+        "persona": "professional",
+        "seed": 88008,
+        "stage": 37,
+        "score": 250130
+      },
+      {
+        "persona": "professional",
+        "seed": 88007,
+        "stage": 18,
+        "score": 105490
+      },
+      {
+        "persona": "professional",
+        "seed": 88009,
+        "stage": 50,
+        "score": 358820
+      },
+      {
+        "persona": "professional",
+        "seed": 88010,
+        "stage": 9,
+        "score": 57910
+      }
+    ],
+    "summary": {
+      "professional": {
+        "median": 186715,
+        "reach75k": 9,
+        "reach150k": 5,
+        "reach200k": 5,
+        "stages": [
+          47,
+          18,
+          22,
+          20,
+          45,
+          50,
+          37,
+          18,
+          50,
+          9
+        ],
+        "earlyDestructions": 0
+      }
+    },
+    "inputUnchanged": true,
+    "rawPath": "private-artifacts/aurora-ladder-oct20/hazard-arbitration-fresh/results.json",
+    "rawHash": "d935172b28dcae204aa53a632f3fbd9a98b1e060737010090010bd3f04a68662"
+  }
+}

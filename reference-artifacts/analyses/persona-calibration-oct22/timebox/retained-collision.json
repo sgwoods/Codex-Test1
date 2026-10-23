@@ -1,0 +1,495 @@
+{
+  "ok": true,
+  "baseline": "bacb0c585f0ff516d2a3373cb16c563de5079ad3",
+  "controllerHash": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+  "traceHash": "d48dd52e73fd7638116e53cc4d89393f4ac0b48036abaea04f7f3cd23e3f909f",
+  "exactDecisionReplays": 35,
+  "instrumentationGameplayEventsEqual": true,
+  "loss": {
+    "t": 12.467,
+    "type": "ship_lost",
+    "stage": 2,
+    "score": 3690,
+    "livesBefore": 3,
+    "stageClock": 12.467,
+    "attackers": 2,
+    "enemyBullets": 1,
+    "enemies": 10,
+    "playerX": 185.17,
+    "playerY": 335,
+    "playerLane": 6,
+    "dual": false,
+    "pending": false,
+    "carriedEnemies": 0,
+    "timeSinceCaptureStart": null,
+    "timeSinceFighterCaptured": null,
+    "playerHitbox": {
+      "w": 7,
+      "h": 6
+    },
+    "cause": "enemy_collision",
+    "enemyId": 711405630,
+    "enemyType": "but",
+    "enemyDive": 1,
+    "enemyX": 185.14,
+    "enemyY": 324.85,
+    "enemyLane": 6,
+    "enemyForm": true,
+    "challenge": false
+  },
+  "decisions": [
+    {
+      "t": 11.90000000000017,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 11.916666666666838,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 11.933333333333506,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 11.950000000000173,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 11.96666666666684,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 11.983333333333508,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.000000000000176,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.016666666666843,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.03333333333351,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.050000000000178,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.066666666666846,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.083333333333513,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.10000000000018,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.116666666666848,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.133333333333516,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.150000000000183,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.16666666666685,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.183333333333518,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.200000000000186,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 12.216666666666853,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 12.23333333333352,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.250000000000188,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.266666666666856,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 121754433
+        }
+      ],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.283333333333523,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.30000000000019,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.316666666666858,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.333333333333526,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.350000000000193,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.36666666666686,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.383333333333528,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.400000000000196,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.416666666666863,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.43333333333353,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    },
+    {
+      "t": 12.450000000000198,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 711405630
+        }
+      ],
+      "playerX": 185.17333333333323
+    },
+    {
+      "t": 12.466666666666866,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 178.7199999999999
+    }
+  ],
+  "alternatives": [
+    {
+      "axis": -1,
+      "x": 172.2666666666666,
+      "bodyCollisions": [
+        711405630
+      ]
+    },
+    {
+      "axis": 0,
+      "x": 178.7199999999999,
+      "bodyCollisions": [
+        711405630
+      ]
+    },
+    {
+      "axis": 1,
+      "x": 185.17333333333323,
+      "bodyCollisions": [
+        711405630
+      ]
+    }
+  ],
+  "limitations": [
+    "Retained policy; one diagnostic seed only.",
+    "Counterfactuals change only the player endpoint at the recorded collision phase; they are not alternate full simulations or bullet-safety guarantees.",
+    "Mirrored and boundary encounter validation remains pending."
+  ]
+}

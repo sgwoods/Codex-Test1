@@ -1,0 +1,453 @@
+{
+  "ok": true,
+  "baseline": "bacb0c585f0ff516d2a3373cb16c563de5079ad3",
+  "controllerHash": "74b38aec094da21b4ce586812ad2d7b36b9d346f62fa2fd24d89cabbf3da2e0b",
+  "packet": "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/stage2-decision-replay-oct20-v2",
+  "traceHash": "15744190c53f9e105f01a624beddb4c9c776463473f3848cabe7496a8b968f01",
+  "exactDecisionReplays": 31,
+  "instrumentationGameplayEventsEqual": true,
+  "loss": {
+    "t": 8.817,
+    "type": "ship_lost",
+    "stage": 2,
+    "score": 2800,
+    "livesBefore": 3,
+    "stageClock": 8.817,
+    "attackers": 2,
+    "enemyBullets": 1,
+    "enemies": 22,
+    "playerX": 178.72,
+    "playerY": 335,
+    "playerLane": 6,
+    "dual": false,
+    "pending": false,
+    "carriedEnemies": 0,
+    "timeSinceCaptureStart": null,
+    "timeSinceFighterCaptured": null,
+    "playerHitbox": {
+      "w": 7,
+      "h": 6
+    },
+    "cause": "enemy_collision",
+    "enemyId": 248693119,
+    "enemyType": "but",
+    "enemyDive": 1,
+    "enemyX": 189.69,
+    "enemyY": 342.02,
+    "enemyLane": 6,
+    "enemyForm": true,
+    "challenge": false
+  },
+  "decisions": [
+    {
+      "t": 8.31666666666666,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 159.35999999999996
+    },
+    {
+      "t": 8.333333333333327,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 820051368
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.349999999999994,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 159.35999999999996
+    },
+    {
+      "t": 8.366666666666662,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.38333333333333,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.399999999999997,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.416666666666664,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.433333333333332,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.45,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.466666666666667,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.483333333333334,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.500000000000002,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.51666666666667,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.533333333333337,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.550000000000004,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.566666666666672,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.58333333333334,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.600000000000007,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.616666666666674,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.633333333333342,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.65000000000001,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.666666666666677,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 329968469
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.683333333333344,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    },
+    {
+      "t": 8.700000000000012,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.71666666666668,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 159.35999999999996
+    },
+    {
+      "t": 8.733333333333347,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.750000000000014,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 159.35999999999996
+    },
+    {
+      "t": 8.766666666666682,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 248693119
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.78333333333335,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 159.35999999999996
+    },
+    {
+      "t": 8.800000000000017,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "target-pursuit",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": null
+        },
+        {
+          "name": "harnessSelectTarget",
+          "id": 248693119
+        }
+      ],
+      "playerX": 165.81333333333328
+    },
+    {
+      "t": 8.816666666666684,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "target-pursuit",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": null
+        },
+        {
+          "name": "harnessSelectTarget",
+          "id": 248693119
+        }
+      ],
+      "playerX": 172.2666666666666
+    }
+  ],
+  "alternatives": [
+    {
+      "axis": -1,
+      "x": 165.81333333333328,
+      "bodyCollisions": []
+    },
+    {
+      "axis": 0,
+      "x": 172.2666666666666,
+      "bodyCollisions": []
+    },
+    {
+      "axis": 1,
+      "x": 178.7199999999999,
+      "bodyCollisions": [
+        248693119
+      ]
+    }
+  ],
+  "limitations": [
+    "Rejected deadband7 policy, not retained policy.",
+    "Counterfactuals change only the player endpoint at the recorded collision phase; they are not alternate full simulations or bullet-safety guarantees.",
+    "Mirrored and boundary encounter validation remains pending."
+  ]
+}

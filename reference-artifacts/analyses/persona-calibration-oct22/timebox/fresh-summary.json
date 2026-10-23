@@ -1,0 +1,277 @@
+{
+  "protocol": {
+    "createdAt": "2026-10-22T13:04:19.790Z",
+    "diagnostic": true,
+    "acceptanceUnchanged": true,
+    "seeds": [
+      93001,
+      93002,
+      93003,
+      93004,
+      93005,
+      93006,
+      93007,
+      93008,
+      93009,
+      93010
+    ],
+    "personas": [
+      "expert",
+      "professional"
+    ],
+    "duration": 90,
+    "scope": "Stage2 start, three ships; report only before Stage3 spawn. Fresh distribution of retained policy, not candidate acceptance or a full-game score panel.",
+    "controllerHash": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+    "buildHash": "26700ead3aa357ebab6eaf3a245e262fd8e2b17467d855867a7f4b91d58f99ba"
+  },
+  "personas": {
+    "expert": {
+      "runs": 10,
+      "cleared": 10,
+      "medianScore": 4615,
+      "medianTime": 21.308,
+      "destructions": 0,
+      "captures": 1
+    },
+    "professional": {
+      "runs": 10,
+      "cleared": 10,
+      "medianScore": 4940,
+      "medianTime": 23.941499999999998,
+      "destructions": 1,
+      "captures": 1
+    }
+  },
+  "paired": {
+    "professionalHigherScore": 6,
+    "professionalFaster": 3
+  },
+  "limitations": [
+    "Ten seeds per persona; diagnostic, not a population guarantee.",
+    "Same seed does not imply identical attacks because controller and enemies share RNG.",
+    "Stage2-only results must not be mixed with the 900-second full-game score-history chart.",
+    "Existing acceptance gate unchanged and failed."
+  ],
+  "rows": [
+    {
+      "seed": 93001,
+      "persona": "expert",
+      "cleared": true,
+      "time": 18.517,
+      "score": 3220,
+      "scoreFromAwards": 3220,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93001,
+      "persona": "professional",
+      "cleared": true,
+      "time": 20.9,
+      "score": 4200,
+      "scoreFromAwards": 4200,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93002,
+      "persona": "expert",
+      "cleared": true,
+      "time": 17.4,
+      "score": 3420,
+      "scoreFromAwards": 3420,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93002,
+      "persona": "professional",
+      "cleared": true,
+      "time": 27.717,
+      "score": 5070,
+      "scoreFromAwards": 5070,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93003,
+      "persona": "expert",
+      "cleared": true,
+      "time": 20.433,
+      "score": 7140,
+      "scoreFromAwards": 7140,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93003,
+      "persona": "professional",
+      "cleared": true,
+      "time": 28.817,
+      "score": 5470,
+      "scoreFromAwards": 5470,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93004,
+      "persona": "expert",
+      "cleared": true,
+      "time": 29.717,
+      "score": 5070,
+      "scoreFromAwards": 5070,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93004,
+      "persona": "professional",
+      "cleared": true,
+      "time": 26.15,
+      "score": 6660,
+      "scoreFromAwards": 6660,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93005,
+      "persona": "expert",
+      "cleared": true,
+      "time": 19.333,
+      "score": 3350,
+      "scoreFromAwards": 3350,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93005,
+      "persona": "professional",
+      "cleared": true,
+      "time": 19.583,
+      "score": 3830,
+      "scoreFromAwards": 3830,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93006,
+      "persona": "expert",
+      "cleared": true,
+      "time": 22.783,
+      "score": 6960,
+      "scoreFromAwards": 6960,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93006,
+      "persona": "professional",
+      "cleared": true,
+      "time": 21.017,
+      "score": 5300,
+      "scoreFromAwards": 5300,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93007,
+      "persona": "expert",
+      "cleared": true,
+      "time": 22.817,
+      "score": 6600,
+      "scoreFromAwards": 6600,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93007,
+      "persona": "professional",
+      "cleared": true,
+      "time": 22.4,
+      "score": 4290,
+      "scoreFromAwards": 4290,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93008,
+      "persona": "expert",
+      "cleared": true,
+      "time": 24.367,
+      "score": 6070,
+      "scoreFromAwards": 6070,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 1
+    },
+    {
+      "seed": 93008,
+      "persona": "professional",
+      "cleared": true,
+      "time": 27.917,
+      "score": 4810,
+      "scoreFromAwards": 4810,
+      "kills": 39,
+      "destructions": 1,
+      "captures": 0
+    },
+    {
+      "seed": 93009,
+      "persona": "expert",
+      "cleared": true,
+      "time": 17.617,
+      "score": 3380,
+      "scoreFromAwards": 3380,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93009,
+      "persona": "professional",
+      "cleared": true,
+      "time": 25.45,
+      "score": 3700,
+      "scoreFromAwards": 3700,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93010,
+      "persona": "expert",
+      "cleared": true,
+      "time": 22.183,
+      "score": 4160,
+      "scoreFromAwards": 4160,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 0
+    },
+    {
+      "seed": 93010,
+      "persona": "professional",
+      "cleared": true,
+      "time": 22.433,
+      "score": 5770,
+      "scoreFromAwards": 5770,
+      "kills": 40,
+      "destructions": 0,
+      "captures": 1
+    }
+  ]
+}

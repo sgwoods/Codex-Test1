@@ -1,0 +1,32 @@
+{
+  "createdAt": "2026-10-22T13:08:38.163Z",
+  "baseline": "a27c906faec56611e3295e3cc06edff59d869de70c8cf4c5cb6f6c709c0e6dfd",
+  "candidate": "0066176be07233942fdfa1729c80bc23bf047cb8df248477a9201ac8c82a811a",
+  "scope": "Enable retained observed-motion hazard resolver on Professional normal Stage2. Keep deadZone5 and original target selection. Trigger: retained93008 unavoidable final-frame collision requires earlier movement.",
+  "target": {
+    "seed": 93008,
+    "require": "No destruction in Stage2; diagnostic, not acceptance alone"
+  },
+  "short": {
+    "seeds": [
+      51101,
+      51201,
+      51301
+    ],
+    "require": "Professional score/kills >= Expert, destructions <= Expert on every seed"
+  },
+  "matched": {
+    "seeds": "89001-89010",
+    "duration": 900,
+    "medianAtLeast": 326720,
+    "minimumAtLeast": 189800,
+    "reach150k": 10,
+    "reach200kAtLeast": 9,
+    "earlyDestructionsAtMost": 1
+  },
+  "fresh": {
+    "seeds": "92001-92010",
+    "reach150kAtLeast": 8
+  },
+  "stop": "Reject after short or matched failure. No threshold changes."
+}

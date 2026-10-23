@@ -1,0 +1,252 @@
+{
+  "ok": true,
+  "baseline": "bacb0c585f0ff516d2a3373cb16c563de5079ad3",
+  "controllerHash": "74b38aec094da21b4ce586812ad2d7b36b9d346f62fa2fd24d89cabbf3da2e0b",
+  "packet": "/Users/sgwoods/Development/Codex/Codex-test1/private-artifacts/retained-low-tail-oct20-v2",
+  "traceHash": "ba39fefcaf5ff42c73a8fe9ccda3cdb5e799b91e6e81418ec742bbd109d492d0",
+  "exactDecisionReplays": 22,
+  "instrumentationGameplayEventsEqual": true,
+  "loss": {
+    "t": 329.65,
+    "type": "ship_lost",
+    "stage": 13,
+    "score": 71320,
+    "livesBefore": 3,
+    "stageClock": 13.983,
+    "attackers": 4,
+    "enemyBullets": 2,
+    "enemies": 17,
+    "playerX": 142.52,
+    "playerY": 335,
+    "playerLane": 5,
+    "dual": false,
+    "pending": false,
+    "carriedEnemies": 0,
+    "timeSinceCaptureStart": null,
+    "timeSinceFighterCaptured": null,
+    "playerHitbox": {
+      "w": 7,
+      "h": 6
+    },
+    "cause": "enemy_collision",
+    "enemyId": 751477004,
+    "enemyType": "but",
+    "enemyDive": 5,
+    "enemyX": 139.69,
+    "enemyY": 325.81,
+    "enemyLane": 4,
+    "enemyForm": true,
+    "challenge": false
+  },
+  "decisions": [
+    {
+      "t": 329.3000000000292,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "body-avoidance",
+      "visits": [
+        {
+          "name": "harnessLowerFieldThreat",
+          "id": 404494694
+        }
+      ],
+      "playerX": 117.88000000000028
+    },
+    {
+      "t": 329.3166666666958,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 124.04000000000028
+    },
+    {
+      "t": 329.3333333333625,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 130.20000000000027
+    },
+    {
+      "t": 329.3500000000291,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 136.36000000000027
+    },
+    {
+      "t": 329.3666666666958,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 142.52000000000027
+    },
+    {
+      "t": 329.38333333336243,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.4000000000291,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.41666666669573,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.4333333333624,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.45000000002904,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.4666666666957,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.48333333336234,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.500000000029,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.51666666669564,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.5333333333623,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.55000000002894,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.5666666666956,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.58333333336225,
+      "preferred": 1,
+      "actual": 1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.6000000000289,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 154.84000000000026
+    },
+    {
+      "t": 329.61666666669555,
+      "preferred": -1,
+      "actual": -1,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 148.68000000000026
+    },
+    {
+      "t": 329.6333333333622,
+      "preferred": -1,
+      "actual": 0,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 142.52000000000027
+    },
+    {
+      "t": 329.65000000002885,
+      "preferred": -1,
+      "actual": 0,
+      "branch": "bullet-avoidance",
+      "visits": [],
+      "playerX": 142.52000000000027
+    }
+  ],
+  "alternatives": [
+    {
+      "axis": -1,
+      "x": 136.36000000000027,
+      "bodyCollisions": [
+        751477004
+      ]
+    },
+    {
+      "axis": 0,
+      "x": 142.52000000000027,
+      "bodyCollisions": [
+        751477004
+      ]
+    },
+    {
+      "axis": 1,
+      "x": 148.68000000000026,
+      "bodyCollisions": [
+        751477004
+      ]
+    }
+  ],
+  "limitations": [
+    "Retained policy; one diagnostic seed only.",
+    "Counterfactuals change only the player endpoint at the recorded collision phase; they are not alternate full simulations or bullet-safety guarantees.",
+    "Mirrored and boundary encounter validation remains pending."
+  ]
+}
