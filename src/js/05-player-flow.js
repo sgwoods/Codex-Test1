@@ -160,6 +160,7 @@ function gameOver(state){
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
+ if(typeof freezeRunRecordingMeta==='function')freezeRunRecordingMeta();
  gameOverHtml=buildGameOverHtmlFromState();
  if(typeof queuePlayerTwoAutoTurn==='function'&&queuePlayerTwoAutoTurn('auto'))gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
