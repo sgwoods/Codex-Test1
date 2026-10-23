@@ -392,6 +392,22 @@ window.__galagaHarness__={
   });
   return true;
  },
+ async checkReplayProfileMetadata(){
+  await this.setupPilotRecordsPanelTest({clearExisting:true,userId:'fixture-pilot',email:'fixture@example.test',initials:'TST',score:102410,stage:13});
+  S.stage=17;S.score=102410;S.challenge=false;
+  gameOverState={score:102410,stage:17,entryId:'fixture-score'};
+  const meta=currentReplayMeta();
+  meta.id='metadata-browser-fixture';
+  await window.AuroraReplayStore.saveReplay({...meta,blob:new Blob(['fixture'],{type:'video/webm'})});
+  const catalog=await window.AuroraReplayStore.listReplays();
+  const saved=catalog.find(r=>r.id===meta.id);
+  window.__platinumReplayCatalog=[saved];
+  const rows=pilotLocalReplayRows();
+  const score={id:'fixture-score',localScore:1,score:102410,stage:13,at:meta.completedAt,gameKey:meta.gameKey};
+  const merged=mergePilotProfileRows([score],rows);
+  renderPilotRecords(merged);
+  return {saved,rows,merged,rendered:document.getElementById('accountRecordsTop5').textContent};
+ },
  async setupPilotRecordsPanelTest(cfg={}){
   const replayCreatedAt=cfg.createdAt || new Date(Date.now()-18*60*1000).toISOString();
   if(window.AuroraReplayStore?.supported?.()){

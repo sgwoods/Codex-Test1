@@ -168,6 +168,9 @@ function currentReplayMeta(){
   stage:S.stage|0,
   challenge:!!S.challenge,
   attract:!!S.attract,
+  displayStage:gameKey==='aurora-galactica'?displayStageNumber(S.stage,!!S.challenge):(S.stage|0),
+  completedAt:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?new Date().toISOString():'',
+  scoreEntryId:typeof gameOverState!=='undefined'&&gameOverState?.score===(S.score|0)&&gameOverState?.stage===(S.stage|0)?String(gameOverState.entryId||''):'',
   reason:REC?.reason||'unknown',
   persona:S.harnessPersona||null,
   watchMode:!!S.watchMode,
@@ -194,10 +197,15 @@ async function persistLocalReplay(blob,meta){
   console.warn('local replay save failed',err);
  }
 }
+function freezeRunRecordingMeta(){
+ if(!VIDEO_REC.active||!VIDEO_REC.rec)return;
+ if(!VIDEO_REC.rec.replayStopMeta)VIDEO_REC.rec.replayStopMeta=currentReplayMeta();
+}
 function stopRunRecording(){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  VIDEO_REC.active=0;
- VIDEO_REC.stopMeta=currentReplayMeta();
+ VIDEO_REC.stopMeta=VIDEO_REC.rec.replayStopMeta;
  if(sfx.recOsc){try{sfx.recOsc.stop();}catch{}try{sfx.recOsc.disconnect();}catch{}sfx.recOsc=null}
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
@@ -208,6 +216,7 @@ function stopRunRecording(){
 }
 function stopRunRecordingAfterAudioTail(delayMs=2200,sessionId=''){
  if(!VIDEO_REC.active||!VIDEO_REC.rec){flushAfterRecordingStops();return;}
+ freezeRunRecordingMeta();
  const targetSession=String(sessionId||VIDEO_REC.sessionId||'');
  const delay=Math.max(0,Number.isFinite(+delayMs)?+delayMs:2200);
  setTimeout(()=>{
@@ -248,7 +257,7 @@ function startRunRecording(){
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  rec.onstop=()=>{
   const blob=new Blob(chunks,{type:mime||'video/webm'});
-  const replayMeta=VIDEO_REC.stopMeta||currentReplayMeta();
+  const replayMeta=rec.replayStopMeta;
   if(currentStream)for(const t of currentStream.getTracks())t.stop();
   if(VIDEO_REC.stream===currentStream)VIDEO_REC.stream=null;
   if(VIDEO_REC.chunks===chunks)VIDEO_REC.chunks=[];
@@ -259,7 +268,7 @@ function startRunRecording(){
     showToast('Run video downloaded');
    }
   }
-  VIDEO_REC.stopMeta=null;
+  if(VIDEO_REC.stopMeta===replayMeta)VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
  rec.start(250);

@@ -124,8 +124,9 @@ function pilotLocalReplayRows(){
    id:`local-replay:${run.id}`,
    initials:sanitizeInitials(run.pilotInitials||preferredInitialsFromUser()||'YOU').padEnd(3,'-').slice(0,3),
    score:+run.score||0,
-   stage:+run.stage||0,
-   at:String(run.createdAt||''),
+   stage:Number.isFinite(run.displayStage)?run.displayStage:(+run.stage||0),
+   at:String(run.completedAt||run.createdAt||''),
+   scoreEntryId:String(run.scoreEntryId||''),
    verified:0,
    replayId:String(run.id||''),
    localReplay:1,
@@ -153,6 +154,8 @@ function mergePilotProfileRows(remoteRows,localRows){
    if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(row,localRow.gameKey||currentScoreStorageGameKey()))return false;
    if((+row.score||0)!== (+localRow.score||0))return false;
    if((+row.stage||0)!== (+localRow.stage||0))return false;
+   if(localRow.scoreEntryId&&(row.localScore||row.scoreEntryId))return String(row.id||'')===localRow.scoreEntryId||String(row.scoreEntryId||'')===localRow.scoreEntryId;
+   if(row.replayId&&localRow.replayId)return row.replayId===localRow.replayId;
    const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
    if(Number.isFinite(localStamp)&&Number.isFinite(rowStamp))return Math.abs(localStamp-rowStamp)<=120000;
    return false;
