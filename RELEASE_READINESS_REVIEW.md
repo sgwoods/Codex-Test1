@@ -2,6 +2,17 @@
 
 ## Current Read
 
+October 24, 2026: `1.4.2` is approved for production publication, conditional
+on all final release gates. This is not a claim of completed deployment.
+Accepted beta is1.4.2-beta.5/build1218/ea779a76. The user accepted gameplay and
+reported successful password recovery. Live Guardians160 persisted after reload;
+Aurora live account view retrieves the user's2680-point beta5 result.
+Expert inconsistency remains documented. No new gameplay tuning is included.
+Runtime source and production-documentation source are recorded separately.
+See reference-artifacts/analyses/beta5-release-oct24/acceptance-oct24.md.
+
+### Earlier Beta Assessment
+
 October 24, 2026: the authorized beta target is `1.4.2-beta.5`, with matching
 development line `1.4.1.6`. Publication is conditional on the release gates;
 this source document does not itself certify deployment. Check lane build-info.

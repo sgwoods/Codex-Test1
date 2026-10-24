@@ -3010,7 +3010,7 @@ function releaseNoteDetailHref(buildInfo, note, index = 0){
   if(!note) return '';
   if(isProductionLaneBuild(buildInfo)){
     const sourceDoc = resolveReleaseNoteSource(note);
-    return releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+    return releaseNoteGitHubHref(buildInfo.documentationCommit || buildInfo.commit, sourceDoc);
   }
   return `releases.html#${releaseNoteAnchor(note, index)}`;
 }
@@ -3027,7 +3027,7 @@ function buildLatestReleaseActions(buildInfo, note){
     `<a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>`
   ];
   const sourceDoc = resolveReleaseNoteSource(note);
-  const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  const sourceHref = releaseNoteGitHubHref(buildInfo.documentationCommit || buildInfo.commit, sourceDoc);
   if(sourceHref){
     actions.push(`<a class="button" href="${esc(sourceHref)}">Open source markdown</a>`);
   }
@@ -3037,7 +3037,7 @@ function buildLatestReleaseActions(buildInfo, note){
 function buildLatestReleaseSourceHtml(buildInfo, note){
   if(!isProductionLaneBuild(buildInfo) || !note) return '';
   const sourceDoc = resolveReleaseNoteSource(note);
-  const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  const sourceHref = releaseNoteGitHubHref(buildInfo.documentationCommit || buildInfo.commit, sourceDoc);
   return `
             <div class="releaseNoteMeta">
                 <div class="releaseNoteMetaCard">
@@ -3201,7 +3201,7 @@ function buildReleaseNotesPage(buildInfo, latestNote, releaseNotes){
   const sections = notes.map((note, index) => {
     const anchor = releaseNoteAnchor(note, index);
     const sourceDoc = resolveReleaseNoteSource(note);
-    const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+    const sourceHref = releaseNoteGitHubHref(buildInfo.documentationCommit || buildInfo.commit, sourceDoc);
     const sourceBody = `<div class="markdown">${renderReleaseNoteSourceBody(note)}</div>`;
     return `
       <section class="section" id="${esc(anchor)}">
@@ -8300,8 +8300,76 @@ function build(options = {}){
   ];
 }
 
+function regenerateProductionDocumentation(dir, info){
+  const notes = loadReleaseNotes();
+  const note = notes.find(row => row.version === info.version);
+  if(!note || JSON.stringify(note) !== JSON.stringify(info.latestReleaseNote)){
+    throw new Error('Production documentation requires the exact production release note');
+  }
+  const documentationCommit = git('rev-parse HEAD', 'unknown');
+  info = { ...info, documentationCommit };
+  ACTIVE_SOURCE_BLOB_BASE = `https://github.com/sgwoods/Codex-Test1/blob/${documentationCommit}/`;
+  const writeHtml = (file, html) => {
+    fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true });
+    fs.writeFileSync(path.join(dir, file), `${addPublicSecurityMeta(html).trimEnd()}\n`);
+  };
+  const writeJson = (file, data) => fs.writeFileSync(path.join(dir, file), `${JSON.stringify(data, null, 2)}\n`);
+  const dashboard = loadReleaseDashboard();
+  writeHtml('release-dashboard.html', buildReleaseDashboard(info, note, dashboard, notes));
+  writeHtml('public-project-page.html', buildPublicProjectPage(info, note, dashboard));
+  const releases = buildReleaseNotesPage(info, note, notes);
+  writeHtml('release-notes.html', releases);
+  writeHtml('releases.html', releases);
+  writeJson('release-notes.json', { product: info.product, platform: info.platform, applications: info.applications, notes });
+  writeHtml('white-paper.html', buildWhitePaperGuide(info, note, loadWhitePaperGuide()));
+  writeHtml('project-guide.html', buildProjectGuide(info, note, loadProjectGuide()));
+  writeHtml('application-guide.html', buildApplicationGuide(info, note, loadApplicationGuide()));
+  writeHtml('platinum-guide.html', buildPlatinumGuide(info, note, loadPlatinumGuide()));
+  writeHtml('player-guide.html', buildPlayerGuide(info, note, loadPlayerGuide()));
+  const slides = loadProjectOverviewSlides();
+  const meta = extractWhitePaperMeta(read(path.join(ROOT, 'WHITE_PAPER.md')));
+  const slidesData = buildProjectOverviewSlidesData(info, note, slides, meta);
+  writeHtml('project-overview-slides.html', buildProjectOverviewSlidesPage(info, note, slides, meta, slidesData));
+  writeJson('project-overview-slides.json', slidesData);
+  const context = {
+    releaseLane: 'production', buildLabel: info.label, buildCommit: info.commit,
+    buildBranch: info.branch, pageBuiltAt: info.builtAtUtc,
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${documentationCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${documentationCommit}/`
+  };
+  const ingestion = loadIngestionDashboard();
+  writeHtml('ingestion-dashboard.html', buildIngestionDashboardHtml(ingestion, context));
+  writeJson('ingestion-dashboard-data.json', decorateIngestionDashboardData(ingestion, context));
+  const conformance = loadConformanceDashboardData();
+  for(const prefix of ['', 'assets/']){
+    writeHtml(`${prefix}conformance-dashboard.html`, buildConformanceDashboardHtml(conformance, {
+      ...context, title: 'Aurora Conformance Dashboard',
+      gameHref: `${prefix ? '../' : ''}index.html`,
+      releaseHref: `${prefix ? '../' : ''}release-dashboard.html`,
+      dataHref: 'conformance-dashboard-data.json',
+      releasePath: `/Aurora-Galactica/${prefix}conformance-dashboard.html`,
+      releasePathLabel: 'Production candidate',
+      sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json'
+    }));
+    writeJson(`${prefix}conformance-dashboard-data.json`, conformance);
+  }
+  fs.copyFileSync(path.join(ROOT, 'README.md'), path.join(dir, 'README.md'));
+  // The PDF must be rendered again from the newly generated HTML.
+  for(const file of ['white-paper.pdf', 'white-paper-pdf.json']) fs.rmSync(path.join(dir, file), { force: true });
+  writeJson('assets/production-documentation-provenance.json', {
+    runtimeCommit: info.commit, documentationCommit,
+    generatedAt: new Date().toISOString(), approvedBeta: info.promotedFromApprovedBeta || null
+  });
+  writeJson('build-info.json', info);
+  require('./release-documentation-contract').writeDocumentationContract(ROOT, dir);
+  require('./release-documentation-contract').checkDocumentationContract(ROOT, dir);
+}
+
+if(require.main === module){
 const args = parseArgs(process.argv.slice(2));
 const outputs = build({ lane: args.lane });
 const documentationDir = path.dirname(outputs.find(file => path.basename(file) === 'build-info.json'));
 require('./release-documentation-contract').writeDocumentationContract(ROOT, documentationDir);
 for(const out of outputs)console.log(`Built ${out}`);
+}
+module.exports = { regenerateProductionDocumentation };

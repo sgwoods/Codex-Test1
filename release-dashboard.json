@@ -1,8 +1,22 @@
 {
-  "targetVersion": "1.4.2-beta.5",
-  "currentFocus": "Qualify 1.4.2-beta.5 for formal beta review through matching hosted dev, exact-package checks and frozen publication. Production remains 1.4.1. Expert consistency is an accepted beta limitation, not a completed calibration claim.",
-  "strapline": "Beta review: persistent per-game account scores, stronger Professional play, clearer recovery and smoother challenge flow. Production remains unchanged.",
+  "targetVersion": "1.4.2",
+  "currentFocus": "Publish the user-approved 1.4.2 release from accepted beta5 after final production gates. Confirm the live deployment before declaring it shipped. Expert consistency remains limited.",
+  "strapline": "Approved for publication: per-game account scores, stronger Professional play and recovery fixes.",
+  "productionApproval": {
+    "version": "1.4.2",
+    "betaLabel": "1.4.2-beta.5+build.1218.sha.ea779a76.beta",
+    "approvedAt": "2026-10-24",
+    "evidence": "reference-artifacts/analyses/beta5-release-oct24/acceptance-oct24.md"
+  },
   "timeline": [
+    {
+      "id": "production-142",
+      "title": "1.4.2 Account And Pilot Quality Release",
+      "status": "approved",
+      "summary": "User approved production publication after beta gameplay, live score persistence and password recovery acceptance. Deployment verification remains pending.",
+      "releaseNoteVersion": "1.4.2",
+      "releaseNoteDate": "2026-10-24"
+    },
     {
       "id": "foundation",
       "title": "Foundation",

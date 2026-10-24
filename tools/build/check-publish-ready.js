@@ -824,6 +824,10 @@ function checkApprovedBetaForProduction(productionInfo){
   }
   const betaInfo = loadJson(BETA_BUILD_INFO);
   const approvedInfo = loadJson(BETA_APPROVED_BUILD_INFO);
+  require('./beta-approval-contract').checkApprovalInventory(path.dirname(BETA_BUILD_INFO), approvedInfo);
+  if(JSON.stringify(productionInfo.promotedFromApprovedInventory) !== JSON.stringify(approvedInfo.inventory)){
+    throw new Error('Publish preflight failed: production beta inventory provenance mismatch.');
+  }
   if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
     throw new Error(`Publish preflight failed: approved beta candidate (${approvedInfo.label}) does not match current beta artifacts (${betaInfo.label}). Re-approve the current beta candidate first.`);
   }
@@ -835,16 +839,26 @@ function checkApprovedBetaForProduction(productionInfo){
   }
 }
 
-function checkProductionReleaseDocs(productionInfo){
-  const dashboard = loadJson(path.join(ROOT, 'release-dashboard.json'));
-  const readiness = loadText(path.join(ROOT, 'RELEASE_READINESS_REVIEW.md'));
+function checkProductionReleaseDocs(productionInfo, documents){
+  const dashboard = documents?.dashboard || loadJson(path.join(ROOT, 'release-dashboard.json'));
+  const readiness = documents?.readiness || loadText(path.join(ROOT, 'RELEASE_READINESS_REVIEW.md'));
   const version = String(productionInfo.version || '');
   const versionStep = Array.isArray(dashboard.timeline)
-    ? dashboard.timeline.find((step) => String(step.title || '').includes(version))
+    ? dashboard.timeline.find((step) => step.releaseNoteVersion === version && !/beta|dev/i.test(step.title || ''))
     : null;
 
   if(!versionStep){
     throw new Error(`Publish preflight failed: release-dashboard.json is missing a timeline entry for ${version}. Update the release dashboard before publishing production.`);
+  }
+  if(versionStep.status === 'approved'){
+    const approval = dashboard.productionApproval;
+    if(!approval || approval.version !== version ||
+      approval.betaLabel !== productionInfo.promotedFromApprovedBeta ||
+      !Number.isFinite(Date.parse(approval.approvedAt)) ||
+      !readiness.includes(`\`${version}\` is approved for production publication`)){
+      throw new Error('Publish preflight failed: production publication approval is missing or mismatched.');
+    }
+    return;
   }
   if(versionStep.status !== 'done'){
     throw new Error(`Publish preflight failed: release-dashboard.json still marks ${version} as "${versionStep.status}". Mark the shipped release as done before publishing production.`);

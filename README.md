@@ -10,6 +10,9 @@ The October 24 release target is `1.4.2-beta.5`, with matching development line
 [beta release notes](RELEASE_NOTE_1.4.2_BETA_5.md) and
 [release readiness](RELEASE_READINESS_REVIEW.md) for scope and remaining gates.
 The lane's `build-info.json` is the authority for what is actually deployed.
+See [release versioning](RELEASE_VERSIONING.md) for why development `1.4.1.6`
+and beta `1.4.2-beta.5` share build `1218` and source `ea779a76`.
+Production candidate notes are [here](RELEASE_NOTE_1.4.2_PRODUCTION.md).
 
 ![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
 
