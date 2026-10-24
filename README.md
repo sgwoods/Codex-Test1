@@ -3,6 +3,14 @@
 `Aurora Galactica` is the first shipped playable application on the `Platinum`
 browser-arcade platform.
 
+## Current Release Work
+
+The October 24 release target is `1.4.2-beta.5`, with matching development line
+`1.4.1.6`. Production remains `1.4.1`. See
+[beta release notes](RELEASE_NOTE_1.4.2_BETA_5.md) and
+[release readiness](RELEASE_READINESS_REVIEW.md) for scope and remaining gates.
+The lane's `build-info.json` is the authority for what is actually deployed.
+
 ![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
 
 ## What This Repo Contains

@@ -2,6 +2,28 @@
 
 ## Current Read
 
+October 24, 2026: the authorized beta target is `1.4.2-beta.5`, with matching
+development line `1.4.1.6`. Publication is conditional on the release gates;
+this source document does not itself certify deployment. Check lane build-info.
+
+Production remains `1.4.1` at `54398ff5`, built June 11, 2026. It was fetched
+again on October 24. Hosted beta before this cycle is `1.4.1-beta.1` at
+`edd6a736`. Local beta.2/.3/.4 packages were not hosted beta releases.
+
+The new candidate adds player-visible challenge-flow repairs, stronger shared
+Professional control, per-game account scoring, recovery and history fixes.
+It is a candidate for production evaluation, not approved for production.
+Expert inconsistency is accepted for beta. Full score anti-cheat validation,
+legacy history reconciliation and sparse leaderboard presentation remain limits.
+
+Before production: accept the exact hosted beta's account save/reload and reset
+flow, complete listening and sustained-play review, close production review
+dispositions and security gates, then obtain explicit production authorization.
+Prior live account evidence qualifies beta.4 only; mocked beta.5 checks do not
+replace that exact-hosted acceptance. See RELEASE_NOTE_1.4.2_BETA_5.md.
+
+## Historical Production Packet
+
 Aurora `1.4.1` is now the release currently live on hosted `/production`.
 
 Verified June 11, 2026:

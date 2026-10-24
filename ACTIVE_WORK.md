@@ -14,6 +14,20 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October24 formal beta cycle IN PROGRESS under explicit user authorization.
+Target1.4.2-beta.5 / matching dev1.4.1.6; no production authorization.
+Production fetched as1.4.1/build1164/54398ff5 (June11), hosted beta still
+1.4.1-beta.1/build1168/edd6a736 before this cycle. Source main is18commits
+behind the clean lead baseline2b9417e0 with no divergence. Authority Mac verified.
+Draft beta5 notes/readiness/dashboard updated; documentation fingerprints and
+exact-lane note metadata checks added. Build/promotion and behavioral contract
+checks pass provisionally. Existing8002 frozenbeta4 remains untouched.
+Next: independent review, source integration, fresh evidence/security, matching
+hosteddev, exactbeta package tests/freeze and gated publication. No new gameplay
+tuning. Expert limitation remains accepted; old account evidence is not a claim
+of final hostedbeta5 acceptance. Production comparison:22 runtime/shared/style
+files differ from54398ff5 (856insertions/199deletions), requiring beta review.
+
 October23 provisional beta package QA: isolated canonical promotion of hosted
 fde73577 produced beta.4/build1214 (not a newly numbered release). Exact-package
 account boundary, mocked password recovery and package browser smoke PASS.

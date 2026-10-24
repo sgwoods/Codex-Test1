@@ -955,6 +955,7 @@ function main(){
   checkWhitePaperPresentation(cfg);
   checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
+  require('./release-documentation-contract').checkDocumentationContract(ROOT, cfg.dir);
   checkAudioThemeAndMixReleaseGates();
   if(cfg.lane === 'beta' || cfg.lane === 'production'){
     checkSecurityReleaseGate({ lane: cfg.lane });

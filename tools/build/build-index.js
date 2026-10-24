@@ -8302,4 +8302,6 @@ function build(options = {}){
 
 const args = parseArgs(process.argv.slice(2));
 const outputs = build({ lane: args.lane });
+const documentationDir = path.dirname(outputs.find(file => path.basename(file) === 'build-info.json'));
+require('./release-documentation-contract').writeDocumentationContract(ROOT, documentationDir);
 for(const out of outputs)console.log(`Built ${out}`);

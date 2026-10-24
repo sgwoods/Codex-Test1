@@ -9,6 +9,7 @@ const {
   BETA_BUILD_INFO
 } = require('./paths');
 const { betaFiles } = require('./lane-files');
+const { selectReleaseNoteForBuild } = require('./release-note-selection');
 
 const BETA_DIR = DIST_BETA;
 const FILES = betaFiles(DIST_DEV).filter(file => file !== 'README.txt');
@@ -114,6 +115,10 @@ function buildBetaInfo(sourceInfo){
     branch: 'beta',
     state: `beta@${sourceInfo.shortCommit} clean`,
     releaseChannel: 'production beta',
+    latestReleaseNote: selectReleaseNoteForBuild(
+      JSON.parse(fs.readFileSync(path.join(ROOT, 'release-notes.json'), 'utf8')).notes,
+      { version: betaVersion }, { lane: 'beta' }
+    ),
     promotedFromState: sourceState,
     dirty: false,
     dirtyFiles: []
