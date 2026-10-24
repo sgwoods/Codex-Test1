@@ -1,12 +1,12 @@
 {
   "schemaVersion": "security-release-review-0.2",
   "artifactType": "security-release-review",
-  "generatedAt": "2026-06-11T15:32:04.730Z",
-  "lane": "production",
-  "artifactDir": "dist/production",
+  "generatedAt": "2026-10-24T15:39:15.692Z",
+  "lane": "beta",
+  "artifactDir": "dist/beta",
   "artifactMissing": false,
-  "headCommit": "0e2c8c153bd78e8c8863bc1ba23d4f3a98679e99",
-  "branch": "main",
+  "headCommit": "e557af1432e5046c38f3650dfa10393819be14e1",
+  "branch": "codex/local-review-music-status-oct16",
   "issueSource": "security-issues.json",
   "humanPlan": "SECURITY_ISSUES_RESOLUTION_PLAN.md",
   "reviewSource": "Passive public-site review of https://sgwoods.github.io/Aurora-Galactica/ on 2026-06-10.",
@@ -139,8 +139,23 @@
       "observationDetails": {
         "manualReviewRequired": true,
         "metaPolicyPresent": true,
-        "cspFile": "application-guide.html",
-        "referrerFile": "application-guide.html"
+        "checkedHtmlFiles": [
+          "application-guide.html",
+          "conformance-dashboard.html",
+          "index.html",
+          "ingestion-dashboard.html",
+          "platinum-guide.html",
+          "player-guide.html",
+          "project-guide.html",
+          "project-overview-slides.html",
+          "public-project-page.html",
+          "release-dashboard.html",
+          "release-notes.html",
+          "releases.html",
+          "white-paper.html"
+        ],
+        "missingCspFiles": [],
+        "missingReferrerFiles": []
       },
       "productionBlocker": false,
       "reason": "not-blocking",

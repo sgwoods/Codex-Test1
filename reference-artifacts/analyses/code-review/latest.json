@@ -1,43 +1,52 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-10-23T21:58:11.645Z",
+  "generatedAt": "2026-10-24T15:39:43.838Z",
   "branch": "codex/local-review-music-status-oct16",
   "baseRef": "origin/main",
   "baseCommit": "148f82e8b4e628ed7c51732f63f9c414bc7a752c",
-  "headCommit": "3d814e7e",
+  "headCommit": "e557af14",
   "dirty": true,
   "statusShort": [
-    "M CHALLENGE_SETPIECE_CONTRACTS.md",
+    "M ACTIVE_WORK.md",
+    " M CHALLENGE_SETPIECE_CONTRACTS.md",
     " M CONFORMANCE_ECONOMICS.md",
     " M RELEASE_CONFORMANCE_DASHBOARD.md",
+    " M SECURITY_ISSUES_RESOLUTION_PLAN.md",
     " M reference-artifacts/analyses/application-artifact-conformance/latest.json",
     " M reference-artifacts/analyses/challenge-motion-primitives/latest.json",
     " M reference-artifacts/analyses/challenge-movement-grammar/latest.json",
     " M reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
     " M reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+    " M reference-artifacts/analyses/code-review/latest.json",
     " M reference-artifacts/analyses/conformance-economics/latest.json",
     " M reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+    " M reference-artifacts/analyses/security-release-review/latest-beta.json",
+    " M reference-artifacts/analyses/security-release-review/latest.json",
     " M reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
     " M reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
-    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/",
-    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-10-23-3d814e7e-dirty/"
+    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-motion-primitives/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-movement-grammar/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/challenge-trajectory-controls/2026-10-24T15-38-16-e557af14/",
+    "?? reference-artifacts/analyses/code-review/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/code-review/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/",
+    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-10-24-e557af14-dirty/",
+    "?? reference-artifacts/analyses/security-release-review/2026-10-24-e557af14-beta/",
+    "?? reference-artifacts/analyses/security-release-review/2026-10-24-e557af14-beta/"
   ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
@@ -59,12 +68,12 @@
     ]
   },
   "summary": {
-    "changedFileCount": 238,
+    "changedFileCount": 269,
     "p0": 0,
     "p1": 0,
     "p2": 1,
     "p3": 0,
-    "riskTaggedFileCount": 100,
+    "riskTaggedFileCount": 113,
     "securityOpenP0": 0,
     "securityOpenP1": 0,
     "securityOpenP2": 0,
@@ -95,14 +104,14 @@
     {
       "status": "M",
       "file": "CHALLENGE_SETPIECE_CONTRACTS.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "M",
       "file": "CONFORMANCE_ECONOMICS.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -145,8 +154,15 @@
     },
     {
       "status": "M",
+      "file": "README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
       "file": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -186,15 +202,29 @@
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-24T15-38-16-e557af14/README.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-23T21-58-09-3d814e7e/report.json",
+      "file": "reference-artifacts/analyses/challenge-motion-primitives/2026-10-24T15-38-16-e557af14/report.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -202,20 +232,34 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/challenge-motion-primitives/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-24T15-38-16-e557af14/README.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-23T21-58-09-3d814e7e/report.json",
+      "file": "reference-artifacts/analyses/challenge-movement-grammar/2026-10-24T15-38-16-e557af14/report.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -223,20 +267,34 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/challenge-movement-grammar/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-24T15-38-16-e557af14/README.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-23T21-58-09-3d814e7e/report.json",
+      "file": "reference-artifacts/analyses/challenge-setpiece-contracts/2026-10-24T15-38-16-e557af14/report.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -244,20 +302,34 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/report.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-24T15-38-16-e557af14/README.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-23T21-58-09-3d814e7e/report.json",
+      "file": "reference-artifacts/analyses/challenge-trajectory-controls/2026-10-24T15-38-16-e557af14/report.json",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
@@ -265,50 +337,89 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/compute-minutes-by-resource.svg",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/cost-per-positive-score-point.svg",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": [
         "score-trust"
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/cpu-use-by-purpose.svg",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/gameplay-improvement-by-project-part.svg",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/gpu-equivalent-use-by-purpose.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/largest-score-deltas.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/README.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/report.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/score-trends.svg",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/compute-minutes-by-resource.svg",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/largest-score-deltas.svg",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/cost-per-positive-score-point.svg",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": [
@@ -317,21 +428,51 @@
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/README.md",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/cpu-use-by-purpose.svg",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/report.json",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/gameplay-improvement-by-project-part.svg",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "??",
-      "file": "reference-artifacts/analyses/conformance-economics/2026-10-23-3d814e7e/score-trends.svg",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/gpu-equivalent-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/largest-score-deltas.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-10-24-e557af14/score-trends.svg",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": [
@@ -341,7 +482,7 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/conformance-economics/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -968,6 +1109,13 @@
     },
     {
       "status": "A",
+      "file": "reference-artifacts/analyses/persona-calibration-oct22/BETA-PACKAGE-QA.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
       "file": "reference-artifacts/analyses/persona-calibration-oct22/conflict-arbitration/acceptance.json",
       "source": "committed-range",
       "area": "docs-artifact",
@@ -1393,8 +1541,17 @@
       ]
     },
     {
-      "status": "??",
+      "status": "A",
       "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-10-23-3d814e7e-dirty/report.json",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-10-24-e557af14-dirty/report.json",
       "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
@@ -1404,30 +1561,70 @@
     {
       "status": "M",
       "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "release-tooling",
       "riskTags": [
         "release-lane"
       ]
     },
     {
+      "status": "??",
+      "file": "reference-artifacts/analyses/security-release-review/2026-10-24-e557af14-beta/README.md",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane",
+        "security-release"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/security-release-review/2026-10-24-e557af14-beta/report.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane",
+        "security-release"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/security-release-review/latest-beta.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane",
+        "security-release"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/security-release-review/latest.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane",
+        "security-release"
+      ]
+    },
+    {
       "status": "M",
       "file": "reference-artifacts/ingestion/challenge-motion-primitives/aurora-0.1.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "M",
       "file": "reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
     {
       "status": "M",
       "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
-      "source": "working-tree",
+      "source": "committed-range",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -1453,6 +1650,29 @@
       "riskTags": []
     },
     {
+      "status": "A",
+      "file": "RELEASE_NOTE_1.4.2_BETA_5.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_READINESS_REVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "release-dashboard.json",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
       "status": "M",
       "file": "release-manifest.json",
       "source": "committed-range",
@@ -1468,6 +1688,15 @@
       "area": "release-tooling",
       "riskTags": [
         "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "SECURITY_ISSUES_RESOLUTION_PLAN.md",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "security-release"
       ]
     },
     {
@@ -1676,6 +1905,16 @@
     },
     {
       "status": "M",
+      "file": "tools/build/check-publish-ready.js",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
       "file": "tools/build/check-security-release-gate.js",
       "source": "committed-range",
       "area": "release-tooling",
@@ -1688,6 +1927,16 @@
     {
       "status": "M",
       "file": "tools/build/promote-beta.js",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/build/release-documentation-contract.js",
       "source": "committed-range",
       "area": "release-tooling",
       "riskTags": [
@@ -1916,6 +2165,17 @@
     },
     {
       "status": "A",
+      "file": "tools/harness/check-release-documentation-contract.js",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "A",
       "file": "tools/harness/check-replay-profile-browser.js",
       "source": "committed-range",
       "area": "harness-tooling",
@@ -2032,8 +2292,8 @@
     "issueSource": "security-issues.json",
     "humanPlan": "SECURITY_ISSUES_RESOLUTION_PLAN.md",
     "latestReview": "reference-artifacts/analyses/security-release-review/latest.json",
-    "latestReviewGeneratedAt": "2026-06-11T15:32:04.730Z",
-    "latestReviewLane": "production",
+    "latestReviewGeneratedAt": "2026-10-24T15:39:15.692Z",
+    "latestReviewLane": "beta",
     "openByPriority": {
       "P0": 0,
       "P1": 0,
