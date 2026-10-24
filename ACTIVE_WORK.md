@@ -14,6 +14,18 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October23 hosted dev publication COMPLETE under explicit user step6 authority.
+Source fde73577; dev1.4.1.5+build.1214.sha.fde73577. Hosting repository commit
+2890237 changes only22 dev/ paths; beta/production untouched. npm run publish:dev
+passed build, PDF, code-review, readiness, live asset verification and hosted
+browser smoke. Report harness-artifacts/hosted-lane-smoke/latest-dev.json and
+screenshot latest-dev.png. Smoke observed playerShot/gameStart cues, Aurora
+Public Mix, Aurora Application Mix, music60%, game sound40%. This is smoke
+coverage, not full subjective audio or signed-in acceptance on the new package.
+Next: exact beta candidate preparation and package QA, then explicit beta
+publication approval. Expert limitation accepted; sparse leaderboard UI padding
+remains a known presentation concern. No beta or production publication.
+
 October23 beta checkpoint cycle: user explicitly accepts Expert inconsistency
 as a documented beta limitation; calibration continues separately. Aurora and
 Guardians live account acceptance on frozen beta.4 are COMPLETE: human Chrome
