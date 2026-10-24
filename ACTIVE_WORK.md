@@ -14,6 +14,14 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October23 provisional beta package QA: isolated canonical promotion of hosted
+fde73577 produced beta.4/build1214 (not a newly numbered release). Exact-package
+account boundary, mocked password recovery and package browser smoke PASS.
+599-file inventory unchanged after tests; private-reference audio excluded.
+Port8002 frozen package unchanged; no publication. See persona-calibration-oct22/
+BETA-PACKAGE-QA.md. Next assign final beta version/release notes, freeze final
+identity, complete package replay/scoring/live acceptance and approval.
+
 October23 hosted dev publication COMPLETE under explicit user step6 authority.
 Source fde73577; dev1.4.1.5+build.1214.sha.fde73577. Hosting repository commit
 2890237 changes only22 dev/ paths; beta/production untouched. npm run publish:dev
