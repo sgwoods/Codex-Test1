@@ -3,10 +3,13 @@
 ## Current Read
 
 October 24, 2026: `1.4.2` is approved for production publication, conditional
-on all final release gates. This is not a claim of completed deployment.
-Accepted beta is1.4.2-beta.5/build1218/ea779a76. The user accepted gameplay and
-reported successful password recovery. Live Guardians160 persisted after reload;
-Aurora live account view retrieves the user's2680-point beta5 result.
+on all final release gates. This document does not certify deployment; the
+deployed lane's `build-info.json` is the authority for current identity.
+The previous production release is `1.4.1`.
+Accepted beta is 1.4.2-beta.5 / build 1218 / ea779a76. Acceptance record,
+October 24: the user accepted gameplay and reported successful password
+recovery. A live Guardians 160-point run persisted after reload; the Aurora
+live account view retrieved the user's 2680-point beta5 result.
 Expert inconsistency remains documented. No new gameplay tuning is included.
 Runtime source and production-documentation source are recorded separately.
 See reference-artifacts/analyses/beta5-release-oct24/acceptance-oct24.md.
@@ -17,8 +20,8 @@ October 24, 2026: the authorized beta target is `1.4.2-beta.5`, with matching
 development line `1.4.1.6`. Publication is conditional on the release gates;
 this source document does not itself certify deployment. Check lane build-info.
 
-Production remains `1.4.1` at `54398ff5`, built June 11, 2026. It was fetched
-again on October 24. Hosted beta before this cycle is `1.4.1-beta.1` at
+At that assessment, production was `1.4.1` at `54398ff5`, built June 11, 2026,
+as fetched on October 24. Hosted beta before this cycle is `1.4.1-beta.1` at
 `edd6a736`. Local beta.2/.3/.4 packages were not hosted beta releases.
 
 The new candidate adds player-visible challenge-flow repairs, stronger shared
@@ -35,9 +38,9 @@ replace that exact-hosted acceptance. See RELEASE_NOTE_1.4.2_BETA_5.md.
 
 ## Historical Production Packet
 
-Aurora `1.4.1` is now the release currently live on hosted `/production`.
+Aurora `1.4.1` is the previous production release.
 
-Verified June 11, 2026:
+Verified June 11, 2026, when `1.4.1` was published:
 
 - hosted `/production`
   - production quality family: `1.4.1`
@@ -46,8 +49,8 @@ Verified June 11, 2026:
 - hosted `/dev`
   - forward review line: `1.4.1.1`
 
-For exact active labels, use each lane's `build-info.json`. This readiness
-review is the production-facing posture for the explicit `1.4.1` promotion
+For exact active labels, use each lane's `build-info.json`. This section is
+the historical production-facing posture for the explicit `1.4.1` promotion
 packet.
 
 ## What This Production Release Means

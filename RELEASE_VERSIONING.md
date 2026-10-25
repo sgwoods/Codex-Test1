@@ -10,12 +10,12 @@ For the October 24 candidate:
 | --- | --- | --- | --- |
 | Development | 1.4.1.6 | 1218 | ea779a76 |
 | Beta | 1.4.2-beta.5 | 1218 | ea779a76 |
-| Current production | 1.4.1 | 1164 | 54398ff5 |
+| Previous production | 1.4.1 | 1164 | 54398ff5 |
 
-Development 1.4.1.6 means the sixth development increment based on the current
-production family 1.4.1. It is a custom four-part label, not a SemVer release.
+Development 1.4.1.6 means the sixth development increment based on the 1.4.1
+production family. It is a custom four-part label, not a SemVer release.
 Beta 1.4.2-beta.5 means the fifth named prerelease candidate for target 1.4.2.
-It does not mean five publications occurred. Build1218 and source ea779a76
+It does not mean five publications occurred. Build 1218 and source ea779a76
 show that these dev and beta artifacts came from the same source build.
 Lane configuration and packaging can differ even when source identity matches.
 
