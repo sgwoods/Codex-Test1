@@ -1,0 +1,83 @@
+# Quality Conformance Score
+
+This artifact rolls Aurora quality into evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.
+
+## Overall
+
+- Overall score: 8.3/10
+- Strongest category: combat-responsiveness (10/10)
+- Weakest category: challenge-set-piece (4.2/10)
+
+## Categories
+
+### Player movement conformance
+- Score: 5.7/10
+- Evidence: player-movement report
+- Read: Current movement scored 5.7/10 against the control-principles profile, versus 7.9/10 for the shipped local baseline.
+
+### Shot and hit responsiveness
+- Score: 10/10
+- Evidence: close-shot-hit, movement fire window
+- Read: Close-shot responsiveness passed, and movement-fire post-shot travel was 102.06, with shot delay 2036ms.
+
+### Stage-1 opening timing fidelity
+- Score: 8.5/10
+- Evidence: stage1-opening-first-dive report
+- Read: 4/4 metrics were within tolerance; worst current delta was 0.18.
+
+### Stage-1 opening geometry fidelity
+- Score: 10/10
+- Evidence: stage1-opening-spacing report
+- Read: Geometry held steady with 0 changed targets and max drift 0.
+
+### Dive fairness and safety
+- Score: 9.1/10
+- Evidence: persona-stage2-safety
+- Read: Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail.
+
+### Capture and rescue rule fidelity
+- Score: 9.9/10
+- Evidence: capture-rescue correspondence
+- Read: 3/3 capture scenarios matched, with worst tracked-time drift 0.017.
+
+### Challenge-stage timing fidelity
+- Score: 10/10
+- Evidence: challenge-stage correspondence
+- Read: 5/5 challenge timing metrics were within tolerance; worst current delta was 0.032.
+
+### Challenge-stage set-piece conformance
+- Score: 4.2/10
+- Evidence: challenge-stage-conformance strict scorer
+- Read: Strict challenge-stage score is 4.2/10 with movement 4.2/10, graphics 4.5/10, alien novelty 3.9/10, and safety 10/10. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.2/10, strict graphics is 4.5/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 6.18/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.7/10, which is why the old read was too generous.
+
+### Progression and persona depth
+- Score: 6.7/10
+- Evidence: persona-progression correspondence
+- Read: 14/20 persona checks passed; progression ordering is still missing one ordering edge case.
+
+### Boss entry and formation grammar
+- Score: 9.4/10
+- Evidence: formation-boss-grammar-conformance report, stage-signature-distance report, level-expansion cycle evidence
+- Read: Boss/formation grammar scores 9.4/10 across 11 evidence windows; weakest metric is Path shape and set-formation precision (8.2/10).
+
+### Level arc and encounter shape
+- Score: 8.6/10
+- Evidence: level-arc-conformance report, stage-signature-distance report, level-expansion cycle evidence
+- Read: Level arc score is 8.6/10 with 6/6 stage families blueprinted and 11/6 evidence windows present; weakest submetric is Long-run non-repetition (6/10).
+
+### Audio identity and cue alignment
+- Score: 7/10
+- Evidence: audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap, aurora-audio-event-gap semantic read
+- Read: Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 25 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.53/10, and highest segment risk is challengePerfect onset.
+
+### UI, shell, and graphics integrity
+- Score: 9.2/10
+- Evidence: dev candidate surface suite
+- Read: The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed.
+
+## Next release reading
+
+- Challenge-stage set-piece conformance: 4.2/10
+- Player movement conformance: 5.7/10
+- Progression and persona depth: 6.7/10
+

@@ -36,10 +36,20 @@ conformance artifacts still record e557af14. In the isolated worktree,
 quality/level-arc reports because the cited 2026-06-07 reports are gitignored
 and local-only. Scores shifted from the wrong inputs (overall 8.7 to 8.8, audio
 7 to 7.3), so that refresh was discarded and not committed.
-Next: the lead runs that refresh in the primary checkout, which holds the
-2026-06-07 evidence, then `npm run build`, and commits it. Then rerun
-`npm run publish:production` through the gates. The main-branch and machine
-authority guards were not exercised (fixture-only).
+October 25 resolution (user-approved evidence transfer): the exact cited inputs
+(2026-06-07 quality/level-arc reports and READMEs, other missing cited reports,
+sibling READMEs) were copied read-only from the primary checkout, hash-verified
+and force-added. See
+`reference-artifacts/analyses/release-conformance-input-transfer/2026-10-25-84a6c134/`.
+The generators select reports by mtime, so mtimes of byte-identical reports
+were aligned to primary. The existing refresh plus `npm run build` reproduced
+the e557af14 measurements exactly; only provenance changed (overall 8.7,
+audio 7, level arc 8.6, application average 7.46). `checkDocumentationFreshness`
+and `checkCurrentConformanceDocArtifacts` now pass. No window widened or
+bypassed; beta5 runtime and inventory untouched. Limitation: a fresh clone
+gets checkout mtimes, so a later refresh elsewhere may select different
+"latest" reports. Next: rerun `npm run publish:production` through the gates.
+The main-branch and machine authority guards were not exercised (fixture-only).
 
 October24 user confirmed successful password reset and authorized steps1-4,
 including production publication after gates. Recovery accepted as human report;
