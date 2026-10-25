@@ -50,6 +50,18 @@ bypassed; beta5 runtime and inventory untouched. Limitation: a fresh clone
 gets checkout mtimes, so a later refresh elsewhere may select different
 "latest" reports. Next: rerun `npm run publish:production` through the gates.
 The main-branch and machine authority guards were not exercised (fixture-only).
+October 25 follow-up: the refresh left the code-review packet stale, so
+`review:code:check` would have stopped `publish:production`. It was regenerated
+with `npm run review:code` (d79979aa, no P0/P1). At d79979aa the chain build,
+promotion, PDF and `review:code:check` pass; all 24 production preflight checks
+and `harness:check:production-promotion-contract` pass on the real package
+(1.4.2 / 1218 / ea779a76). Wrong runtime/build, stale docs, unapproved
+production, tampered beta and beta lane are rejected. Evidence: `r8-*.log` in
+the evidence directory above. CLI preflight stops only at the main-branch guard.
+Deferred existing defect (not a 1.4.2 gameplay change): `promote-production.js`
+rewrites every `state:'…'` literal in index.html (including `ARCADE_MUSIC.state`
+and Galaxy Guardians milestone states) to the production state string; unchanged
+since base and present in hosted 1.4.1.
 
 October24 user confirmed successful password reset and authorized steps1-4,
 including production publication after gates. Recovery accepted as human report;
