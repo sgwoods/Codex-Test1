@@ -8348,7 +8348,7 @@ function regenerateProductionDocumentation(dir, info){
       releaseHref: `${prefix ? '../' : ''}release-dashboard.html`,
       dataHref: 'conformance-dashboard-data.json',
       releasePath: `/Aurora-Galactica/${prefix}conformance-dashboard.html`,
-      releasePathLabel: 'Production candidate',
+      releasePathLabel: 'Production lane dashboard',
       sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json'
     }));
     writeJson(`${prefix}conformance-dashboard-data.json`, conformance);
