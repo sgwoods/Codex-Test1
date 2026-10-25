@@ -1,8 +1,8 @@
 # Platinum, Aurora, and the Conformance Project
 
 Status: living white paper
-Current draft: `v0.4.1-draft`
-Date: `2026-06-07`
+Current draft: `v0.4.2-draft`
+Date: `2026-10-25`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
 
@@ -137,7 +137,13 @@ Further detail:
 
 ### 2. Program Snapshot
 
-As of `2026-06-07`, the project can be described in one page:
+The measurements below and the challenge-stage case study describe the
+`2026-06-07` evidence baseline. They are not new October measurements.
+At this editorial revision, production remains `1.4.1`; `1.4.2-beta.5`
+is the approved beta, and the `1.4.2` production package is under review.
+Package preparation does not mean publication.
+
+The historical baseline can be described in one page:
 
 | Area | Current role | Why it matters |
 | --- | --- | --- |
@@ -189,12 +195,14 @@ claims: `Aurora Galactica` and `Galaxy Guardians` are not supposed to be two
 skins on one game. They are meant to be separate applications living on one
 host platform.
 
-> TODO illustration:
-> Choose a small three-panel progression strip that shows how the public face
-> of the project evolved from `1.0.0` launch to `1.2.0` Platinum framing to
-> `1.4.0` multi-game posture. The most illustrative version may be gameplay
-> first, shell first, or docs/release-surface first, and we should pick that
-> deliberately rather than guessing.
+| Public game | Reusable platform | Multiple applications |
+| --- | --- | --- |
+| `1.0.0`: Aurora launch | `1.2.0`: Platinum framing | `1.4.0`: multi-game posture |
+| Establish a playable product and scoring. | Separate the host from the game. | Give each game its own identity and evidence. |
+
+This release-led progression summarizes the release history; it does not
+present current screenshots as historical captures. Section 10 gives the
+milestone details and release-note links.
 
 Further detail:
 
@@ -309,11 +317,19 @@ only nice-to-have research notes. A serious game line should maintain:
 That makes the second and third games less likely to inherit Aurora-specific
 assumptions by accident.
 
-> TODO illustration:
-> Pick the single best “ingestion in action” image for v1. The strongest option
-> might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged
-> comparison between raw source footage and the structured artifact family that
-> comes out of it.
+The stage-opening contact sheet above is the primary ingestion example:
+successive frames make arrival order and timing inspectable. The Guardians
+contact sheet provides a separate source family, not evidence about Aurora.
+
+| Evidence step | Output | What it can establish |
+| --- | --- | --- |
+| Preserve the source and its provenance | Source package | Which recording was studied |
+| Extract a bounded window | Clip and contact sheet | Visible order and positions |
+| Annotate events and paths | Timing and trajectory targets | A measurable comparison target |
+| Capture the runtime | Comparable game window | What this implementation does |
+| Compare and review | Conformance report and release decision | Whether the measured change is acceptable |
+
+A contact sheet alone cannot prove audio alignment or gameplay completeness.
 
 Further detail:
 
@@ -599,7 +615,7 @@ Further detail:
 The operating loop of this project is more important than any single feature.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Choose highest-value gap"] --> B["Gather or refine reference evidence"]
     B --> C["Build or tighten scorer / harness"]
     C --> D["Run local measurement"]
@@ -614,12 +630,14 @@ The aggressiveness comes from fast iteration and model-assisted leverage. The
 control comes from evidence, harnesses, explicit ownership boundaries, and
 release discipline.
 
-> TODO illustration:
-> Add one compact “question -> evidence -> harness -> change -> rerun” visual
-> from a real case study. Audio cue alignment, stage-opening timing, or a
-> Galaxy Guardians reference-promotion slice are the strongest current
-> candidates, but we should choose the one that is most legible to a broad
-> reader.
+The challenge-stage case in Section 5 gives this loop a concrete outcome:
+
+| Question | Evidence | Check | Decision |
+| --- | --- | --- | --- |
+| Does the Stage 3 candidate improve the challenge? | Reference-backed group targets and candidate captures | Compare target fit and human-perfect potential | Reject the candidate: slightly better expected-label fit did not justify a `1.6/10` loss in human-perfect potential. |
+
+This is evidence of a rejected trade-off, not a claim that the challenge-stage
+fidelity problem was solved. The dated case study supplies the scope.
 
 ### 10. Historical Evolution So Far
 
@@ -648,10 +666,10 @@ The next phase should be to prove that this method scales:
 - a third-game intake path, currently represented by Space Invaders / Windigo
   Invaders preserved-source and planning lanes
 
-> TODO illustration:
-> Build a release-history gallery with one screenshot or architectural surface
-> per milestone. The current paper names the milestones clearly, but a short
-> visual strip would make the progression easier to absorb at a glance.
+The three-column progression in Section 2 and the milestone table here are the
+release-history view for this edition. A screenshot gallery is not required
+to establish these milestones; any future gallery must use captures from the
+named releases, with build identity and provenance.
 
 Further detail:
 
@@ -800,16 +818,10 @@ Good triggers for a new white paper release:
 - a meaningful change in the AI/harness/evidence operating model
 - recovery of an important citation or conceptual influence
 
-## Immediate Next Additions
+## Research Limits and Future Work
 
 - Recover and link the earlier Karpathy-style assessment if it exists outside
   this repo.
-- Add one deliberate progression gallery for milestone history and one deliberate
-  “evidence in action” case-study image once we decide which examples explain
-  the project most clearly.
-- Add a compact public diagram that shows the new source-to-metric pipeline:
-  preserved source package -> extracted window -> semantic event/crop/path
-  target -> runtime capture -> conformance score -> release gate.
 - Add a deeper table that compares Aurora, Galaxy Guardians, and Windigo by
   ingestion maturity, not only by current playability.
 - Decide which evidence families should be summarized publicly and which should

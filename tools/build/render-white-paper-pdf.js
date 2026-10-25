@@ -96,6 +96,33 @@ async function waitForWhitePaperDiagrams(page){
     if(svgCount >= mermaidCount) return;
     await page.waitForTimeout(250);
   }
+  throw new Error('White-paper diagrams did not finish rendering; refusing incomplete PDF.');
+}
+
+async function checkDiagramContrast(page){
+  return page.evaluate(() => {
+    const luminance = color => {
+      const values = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(v => {
+        v /= 255;
+        return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+      });
+      return values[0] * 0.2126 + values[1] * 0.7152 + values[2] * 0.0722;
+    };
+    const nodes = [...document.querySelectorAll('.mermaid .node')];
+    const ratios = nodes.map(node => {
+      const shape = node.querySelector('rect, polygon, circle, path');
+      const label = node.querySelector('.nodeLabel p, .nodeLabel, text');
+      if(!shape || !label) throw new Error('Diagram node lacks a measurable label or shape.');
+      const a = luminance(getComputedStyle(shape).fill);
+      const b = luminance(getComputedStyle(label).color);
+      return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    });
+    if(document.querySelector('.mermaid') && !nodes.length) throw new Error('No diagram nodes rendered.');
+    if(ratios.some(ratio => !Number.isFinite(ratio) || ratio < 4.5)){
+      throw new Error('Printed diagram label contrast is below 4.5:1.');
+    }
+    return { nodeCount: nodes.length, minimumContrast: ratios.length ? Math.min(...ratios) : null };
+  });
 }
 
 async function main(){
@@ -133,6 +160,8 @@ async function main(){
       await page.waitForLoadState('networkidle', { timeout: 15000 });
     }catch{}
     await waitForWhitePaperDiagrams(page);
+    await page.emulateMedia({ media: 'print' });
+    const diagramCheck = await checkDiagramContrast(page);
     await page.pdf({
       path: cfg.pdf,
       printBackground: true,
@@ -158,6 +187,7 @@ async function main(){
       whitePaperVersion: whitePaper.version,
       updatedDate: whitePaper.updatedDate,
       whitePaperStatus: whitePaper.status,
+      diagramCheck,
       byteLength: stat.size
     };
     fs.writeFileSync(cfg.meta, `${JSON.stringify(meta, null, 2)}\n`);
@@ -175,7 +205,11 @@ async function main(){
   }
 }
 
-main().catch((err) => {
-  console.error(err.message || String(err));
-  process.exit(1);
-});
+if(require.main === module){
+  main().catch((err) => {
+    console.error(err.message || String(err));
+    process.exit(1);
+  });
+}
+
+module.exports = { checkDiagramContrast };

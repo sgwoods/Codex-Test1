@@ -49,6 +49,14 @@ same seriousness as other user-visible documentation and release artifacts.
 
 ## Release Review
 
+- Reject unfinished editorial markers in source and rendered content, not only
+  malformed Markdown. `node tools/harness/check-white-paper-completeness.js`
+  checks all sources selected by `white-paper.json` and runs marker regressions.
+- Resolve missing illustrations with evidence-backed visuals, tables, or
+  explicit scope decisions. Do not rename an unfinished instruction to pass.
+- Date historical measurements separately from the current editorial revision.
+- Render and inspect the changed PDF pages. Automated text checks cannot judge
+  legibility, factual support, or page layout.
 - Run `npm run white-paper:review` for the active dev draft.
 - Run `npm run white-paper:review:beta` or
   `npm run white-paper:review:production` before publishing those lanes.
