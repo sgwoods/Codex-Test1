@@ -7,6 +7,7 @@ const {
   BETA_APPROVED_BUILD_INFO
 } = require('./paths');
 const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
+const { approvalInventory } = require('./beta-approval-contract');
 
 if(!fs.existsSync(DIST_BETA) || !fs.existsSync(BETA_BUILD_INFO)){
   throw new Error(`Missing beta artifacts. Run "npm run build && npm run promote:beta" first.`);
@@ -18,6 +19,7 @@ assertReleaseMainCurrent('Beta approval');
 const info = JSON.parse(fs.readFileSync(BETA_BUILD_INFO, 'utf8'));
 const approved = {
   ...info,
+  inventory: approvalInventory(DIST_BETA),
   approvedAt: new Date().toISOString(),
   approvalSource: 'local-beta-approval'
 };

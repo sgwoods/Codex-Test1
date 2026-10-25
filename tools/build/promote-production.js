@@ -13,6 +13,9 @@ const { checkGitClean } = require('./check-publish-ready');
 const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
 const { productionFiles } = require('./lane-files');
 const { selectReleaseNoteForBuild } = require('./release-note-selection');
+const { checkApprovalInventory } = require('./beta-approval-contract');
+const { checkDocumentationContract } = require('./release-documentation-contract');
+const { regenerateProductionDocumentation } = require('./build-index');
 
 const FILES = productionFiles(DIST_BETA);
 const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
@@ -131,9 +134,6 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote
   fs.writeFileSync(filePath, text);
 }
 
-fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
-fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
-
 assertReleaseAuthority('promote:production');
 assertReleaseMainCurrent('Production promotion');
 checkGitClean();
@@ -147,12 +147,23 @@ if(!fs.existsSync(BETA_APPROVED_BUILD_INFO)){
 
 const betaInfo = JSON.parse(fs.readFileSync(BETA_BUILD_INFO, 'utf8'));
 const approvedInfo = JSON.parse(fs.readFileSync(BETA_APPROVED_BUILD_INFO, 'utf8'));
+checkApprovalInventory(DIST_BETA, approvedInfo);
+// The inventory protects accepted beta docs. Production docs use current sources.
 if(betaInfo.label !== approvedInfo.label || betaInfo.commit !== approvedInfo.commit){
   throw new Error(`Approved beta candidate mismatch. Current beta is ${betaInfo.label}, but approved beta is ${approvedInfo.label}. Re-approve the current beta candidate before promoting production.`);
 }
 if(/\bdirty\b/i.test(betaInfo.promotedFromState || '') || /\bdirty\b/i.test(approvedInfo.promotedFromState || '')){
   throw new Error('Approved beta candidate was promoted from a dirty source state. Rebuild from a clean tree, re-promote beta, and re-approve it before promoting production.');
 }
+const productionVersion = normalizeProductionVersion(betaInfo.version);
+if(!loadReleaseNotes().some(note => note.version === productionVersion && note.sourceDoc &&
+  fs.existsSync(path.join(ROOT, note.sourceDoc)))){
+  throw new Error(`Missing production release-note source for ${productionVersion}`);
+}
+
+// Do not replace the previous local package until approval preconditions pass.
+fs.rmSync(DIST_PRODUCTION, { recursive: true, force: true });
+fs.mkdirSync(DIST_PRODUCTION, { recursive: true });
 
 for(const file of FILES){
   const src = file === 'README.md'
@@ -171,6 +182,7 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   const selectedReleaseNote = selectReleaseNoteForBuild(releaseNotes, productionPreview, { lane: 'production' });
   const productionInfo = buildProductionInfo(sourceInfo, selectedReleaseNote);
   productionInfo.promotedFromApprovedBeta = approvedInfo.label;
+  productionInfo.promotedFromApprovedInventory = approvedInfo.inventory;
   productionInfo.promotedFromApprovedAt = approvedInfo.approvedAt || '';
   fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(productionInfo, null, 2) + '\n');
   rewriteProductionText(path.join(DIST_PRODUCTION, 'index.html'), sourceInfo, productionInfo, selectedReleaseNote);
@@ -186,6 +198,8 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'public-project-page.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  regenerateProductionDocumentation(DIST_PRODUCTION, productionInfo);
 }
 
+checkDocumentationContract(ROOT, DIST_PRODUCTION);
 console.log(`Promoted approved beta artifacts to ${DIST_PRODUCTION}`);

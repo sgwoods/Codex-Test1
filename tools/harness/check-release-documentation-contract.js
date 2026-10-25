@@ -12,7 +12,7 @@ const write = (file, value) => {
 };
 try{
   const note = { version: '1.4.2-beta.5', date: '2026-10-24', title: 'Beta', summary: 'Review', sourceDoc: 'NOTE.md' };
-  for(const file of ['README.md', 'WHITE_PAPER.md', 'RELEASE_READINESS_REVIEW.md', 'NOTE.md']) write(path.join(root, file), 'Current documentation');
+  for(const file of ['README.md', 'WHITE_PAPER.md', 'RELEASE_READINESS_REVIEW.md', 'RELEASE_VERSIONING.md', 'NOTE.md']) write(path.join(root, file), 'Current documentation');
   for(const file of ['package.json', 'release-manifest.json', 'release-dashboard.json', 'application-guide.json']) write(path.join(root, file), {});
   write(path.join(root, 'documentation-provenance.json'), { surfaces: [] });
   write(path.join(root, 'release-notes.json'), { notes: [note] });

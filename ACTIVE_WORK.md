@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 22, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 24, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,145 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 25 PR CI follow-up: user requested stopping the waiting no-mistakes run
+and adding PR validation. Run 01M5QGK759J3CPY7JYW3GZNTZ3 cancelled explicitly;
+custody check confirms synchronized clean e9bbc8fd, preserving all pipeline fixes.
+Added Release Contracts PR workflow with read-only contents permission, no secrets,
+no deployment, full Git history for ancestry tests, and four isolated-fixture
+contract checks. No dependency install or local dist/beta package is required.
+This is a bounded CI suite, not full package acceptance: documentation generation,
+actual frozen-beta promotion, PDF, machine authority and hosted verification remain
+release gates. All four checks PASS in both primary checkout and a clean temporary
+clone at /tmp/aurora-release-ci.yAhvft/repo with no dist or node_modules.
+actionlint PASS; independent Nash review found no blockers (read-only review).
+Workflow is local only; hosted CI has not run. No merge or publication.
+Next: validate/push this checkpoint through no-mistakes, confirm PR251 CI passes,
+then integrate and run the real main-branch production release gates.
+
+October 25 gate repair (user-approved, narrow): approved production `checkBuildInfo`
+now binds runtime to the exact approved beta inventory and matching runtime
+identity (commit, short commit, build number, label), requires the approved
+runtime to be an ancestor of HEAD, and checks the production `documentationCommit`
+against the unchanged four-commit window. Non-production lanes and unapproved
+production keep the commit-age check. No window widened, no history rewritten,
+no beta gameplay rebuilt. Test: `tools/harness/check-production-runtime-identity-gate.js`
+(in `harness:check:production-promotion-contract`) drives `checkBuildInfo` and
+accepts an approved older runtime. It rejects a wrong runtime or build, a foreign
+history, a tampered beta, and stale or missing docs commits. It confirms that
+unapproved production and beta keep the window. It fails before the repair.
+Real-package stepwise preflight (beta5 snapshot, local approval,
+real promotion, fresh PDF, clean temporary commit) passes `checkBuildInfo`,
+`checkApprovedBetaForProduction`, `checkProductionReleaseDocs`,
+`checkProductionReleaseNoteLinkage` and all other checks except
+`checkDocumentationFreshness` and `checkCurrentConformanceDocArtifacts`. Evidence:
+`~/.no-mistakes/evidence/01M5QGK759J3CPY7JYW3GZNTZ3/r5-*.log`. Limitation: the
+conformance artifacts still record e557af14. In the isolated worktree,
+`npm run harness:refresh:release-conformance-docs` used older 2026-05-24
+quality/level-arc reports because the cited 2026-06-07 reports are gitignored
+and local-only. Scores shifted from the wrong inputs (overall 8.7 to 8.8, audio
+7 to 7.3), so that refresh was discarded and not committed.
+October 25 resolution (user-approved evidence transfer): the exact cited inputs
+(2026-06-07 quality/level-arc reports and READMEs, other missing cited reports,
+sibling READMEs) were copied read-only from the primary checkout, hash-verified
+and force-added. See
+`reference-artifacts/analyses/release-conformance-input-transfer/2026-10-25-84a6c134/`.
+The generators select reports by mtime, so mtimes of byte-identical reports
+were aligned to primary. The existing refresh plus `npm run build` reproduced
+the e557af14 measurements exactly; only provenance changed (overall 8.7,
+audio 7, level arc 8.6, application average 7.46). `checkDocumentationFreshness`
+and `checkCurrentConformanceDocArtifacts` now pass. No window widened or
+bypassed; beta5 runtime and inventory untouched. Limitation: a fresh clone
+gets checkout mtimes, so a later refresh elsewhere may select different
+"latest" reports. Next: rerun `npm run publish:production` through the gates.
+The main-branch and machine authority guards were not exercised (fixture-only).
+October 25 follow-up: the refresh left the code-review packet stale, so
+`review:code:check` would have stopped `publish:production`. It was regenerated
+with `npm run review:code` (d79979aa, no P0/P1). At d79979aa the chain build,
+promotion, PDF and `review:code:check` pass; all 24 production preflight checks
+and `harness:check:production-promotion-contract` pass on the real package
+(1.4.2 / 1218 / ea779a76). Wrong runtime/build, stale docs, unapproved
+production, tampered beta and beta lane are rejected. Evidence: `r8-*.log` in
+the evidence directory above. CLI preflight stops only at the main-branch guard.
+Deferred existing defect (not a 1.4.2 gameplay change): `promote-production.js`
+rewrites every `state:'…'` literal in index.html (including `ARCADE_MUSIC.state`
+and Galaxy Guardians milestone states) to the production state string; unchanged
+since base and present in hosted 1.4.1.
+
+October24 user confirmed successful password reset and authorized steps1-4,
+including production publication after gates. Recovery accepted as human report;
+no credentials stored. Source checkpoint, production PDF/preflight and publication
+are now authorized. Never mark deployed before hosted verification. Fix legacy
+documentation gate to represent approved-before-publish rather than false live
+claims. Prior beta5 runtime and frozen inventory remain unchanged.
+
+October 24 production follow-through: documentation regeneration implemented
+using existing renderers, without rebuilding the accepted game. Separate runtime
+and documentation commits recorded. Production note is explicitly a candidate.
+Old PDF removed so release pipeline must rerender it. Inventory bound at approval,
+promotion and publish preflight. Four-part production-promotion-contract suite PASS,
+including actual promotion in an isolated temporary fixture; accepted beta's600
+files unchanged, gameplay source preserved except explicit lane metadata.
+Independent Nash review found wrong-commit source links; fixed all four renderers,
+strengthened distinct-commit tests; reviewer confirmed narrow finding resolved.
+No live approval, promotion, commit, push or deployment performed this cycle.
+
+Live beta5 acceptance with user-signed-in IAB tab12: SWD identity survives reload.
+Aurora My scores live retrieves2680/Stage1/beta5 after reload. Lead's separate80
+run is below remote top10, so its individual write is not proven by this view.
+Guardians ordinary-input run160/Stage1 completed, then reload/reselect/My scores
+live retrieves exact160/beta5. Separate-game views confirmed. Full live recovery
+needs human password entry; requested user perform reset/new-password/login in
+hostedbeta. Do not request another routine sign-in or repeat Guardians acceptance.
+Local8002 remains frozenbeta4/build1209; not currentbeta5. Hostedbeta unchanged.
+Next: receive recovery result, checkpoint source, render actual production PDF
+and run final production gates, then release decision. See acceptance-oct24.md.
+
+
+October 24 approval hardening: added inventory-bound beta approval and promotion
+verification. Approval metadata alone is excluded from the content digest.
+Changed/added/deleted files and legacy approvals are rejected. Promotion checks
+beta documentation before replacing local production output and validates final
+production documentation before reporting success. No approval or promotion run.
+RELEASE_VERSIONING.md explains distinct lane labels and identical build1218.
+Production documentation regeneration remains open; fail-closed checks do not
+claim it is fixed. Hosted beta account-input test PASS; it tests input controls,
+not authentication or a live score submission.
+Exact beta recovery browser fixture PASS (3 updates,1 signout,no errors).
+Both-game ordinary-input game-over RPC submission and fresh-context retrieval
+PASS against simulated provider; report private-artifacts/beta5-oct24-qa/
+retest-scoring/report.json. Approval inventory regression and documentation
+contract regression PASS; syntax and diff checks PASS. Changes local only.
+Next: production documentation generation repair and end-to-end promotion
+fixture, then real-provider acceptance. No production publication.
+
+
+October 24 production follow-up: user reports beta5 play is fine; gameplay
+acceptance recorded. This does not assert password recovery or signed-in
+score acceptance. Live dev and beta rechecked: both source ea779a76/build1218,
+built 2026-10-24T15:41:12.341Z. Dev1.4.1.6 is a different naming scheme,
+not older source. In-game exact-build release details requested for later.
+Production audit confirms approve-beta records label/commit, not inventory;
+production promotion copies beta assets and rewrites selected documents without
+refreshing the documentation fingerprint contract. Next bounded engineering
+work: inventory-bound approval and tested production documentation provenance,
+without rebuilding or changing accepted beta gameplay. Live account acceptance
+and production release decision remain open.
+
+
+October 24 publication COMPLETE. This entry supersedes pending status below.
+User-approved 24ef849c included; main integrated and pushed at ea779a76.
+Matching dev 1.4.1.6/build1218 verified (hosting commit 1671c88).
+Beta 1.4.2-beta.5/build1218/source ea779a76 published (hosting commit 54fe9e8).
+Hosted identity, 13 assets, browser smoke and all 600 frozen file hashes PASS.
+Production root remains 1.4.1/build1164/54398ff5, independently fetched after
+beta verification. No production publication or acceptance approval performed.
+Evidence and production checklist: reference-artifacts/analyses/beta5-release-oct24/README.md.
+Exact-package scoring/recovery used fixtures; live beta5 account acceptance
+remains open. Prior beta4 acceptance is retained, not repeated evidence for beta5.
+Additional no-mistakes review unavailable due expired Claude OAuth; repository
+gates passed. Expert inconsistency remains an accepted beta limitation.
+
 
 October24 continuation: user explicitly approved inclusion of24ef849c and
 completion of dev/beta publication, followed by production readiness process.

@@ -5,11 +5,15 @@ browser-arcade platform.
 
 ## Current Release Work
 
-The October 24 release target is `1.4.2-beta.5`, with matching development line
-`1.4.1.6`. Production remains `1.4.1`. See
+On October 24, 2026, `1.4.2` was approved for production from accepted beta
+`1.4.2-beta.5` (build `1218`, source `ea779a76`), with matching development
+line `1.4.1.6`. The previous production release is `1.4.1`. See the
+[1.4.2 production release notes](RELEASE_NOTE_1.4.2_PRODUCTION.md),
 [beta release notes](RELEASE_NOTE_1.4.2_BETA_5.md) and
-[release readiness](RELEASE_READINESS_REVIEW.md) for scope and remaining gates.
-The lane's `build-info.json` is the authority for what is actually deployed.
+[release readiness](RELEASE_READINESS_REVIEW.md) for scope and gates.
+Each deployed lane's `build-info.json` is the authority for current identity.
+See [release versioning](RELEASE_VERSIONING.md) for why development `1.4.1.6`
+and beta `1.4.2-beta.5` share build `1218` and source `ea779a76`.
 
 ![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
 

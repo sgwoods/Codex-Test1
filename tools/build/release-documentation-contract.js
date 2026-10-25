@@ -6,7 +6,7 @@ const MANIFEST = 'assets/release-documentation-sources.json';
 const SOURCES = [
   'package.json', 'release-manifest.json', 'release-notes.json',
   'release-dashboard.json', 'README.md', 'WHITE_PAPER.md',
-  'RELEASE_READINESS_REVIEW.md', 'application-guide.json',
+  'RELEASE_READINESS_REVIEW.md', 'RELEASE_VERSIONING.md', 'application-guide.json',
   'documentation-provenance.json'
 ];
 const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
