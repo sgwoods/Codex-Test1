@@ -774,7 +774,37 @@ function checkPublicProjectPageArtifact(cfg){
   }
 }
 
-function checkBuildInfo(cfg){
+// Approved production keeps the frozen beta runtime, so its runtime is bound to
+// the approved beta identity and inventory; its regenerated docs keep the age window.
+function checkApprovedProductionRuntime(info, acceptedCommits, opts = {}){
+  const betaBuildInfo = opts.betaBuildInfo || BETA_BUILD_INFO;
+  const approvedBuildInfo = opts.approvedBuildInfo || BETA_APPROVED_BUILD_INFO;
+  if(!fs.existsSync(betaBuildInfo) || !fs.existsSync(approvedBuildInfo)){
+    throw new Error('Publish preflight failed: production runtime requires dist/beta/build-info.json and approved-build-info.json.');
+  }
+  const approved = loadJson(approvedBuildInfo);
+  const beta = loadJson(betaBuildInfo);
+  require('./beta-approval-contract').checkApprovalInventory(path.dirname(betaBuildInfo), approved);
+  const sameRuntime = ['commit', 'shortCommit', 'buildNumber'].every((key) => info[key] === approved[key] && beta[key] === approved[key]);
+  if(!sameRuntime || info.promotedFromApprovedBeta !== approved.label || beta.label !== approved.label ||
+    JSON.stringify(info.promotedFromApprovedInventory) !== JSON.stringify(approved.inventory)){
+    throw new Error(`Publish preflight failed: production runtime ${info.shortCommit || info.commit} does not match approved beta ${approved.label}.`);
+  }
+  try{
+    git(['merge-base', '--is-ancestor', approved.commit, 'HEAD']);
+  }catch(err){
+    throw new Error(`Publish preflight failed: approved beta runtime ${approved.commit} is not in the current release history.`);
+  }
+  if(!commitMatchesHead(info.documentationCommit, acceptedCommits)){
+    throw new Error(
+      `Publish preflight failed: production documentation was generated from ${info.documentationCommit || 'unknown'}, ` +
+      `but the acceptable release-prep heads are ${acceptedCommits.map((value) => value.slice(0, 7)).join(', ')}. ` +
+      'Run "npm run promote:production" again from the current checkout.'
+    );
+  }
+}
+
+function checkBuildInfo(cfg, opts = {}){
   const info = loadJson(cfg.buildInfo);
   const acceptedCommits = git(['rev-list', '--max-count', '4', 'HEAD'])
     .split('\n')
@@ -784,7 +814,9 @@ function checkBuildInfo(cfg){
   if(info.dirty){
     throw new Error(`Publish preflight failed: ${cfg.buildInfo} is marked dirty. Rebuild from a clean tree first.`);
   }
-  if(!commitMatchesHead(info.commit, acceptedCommits)){
+  if(cfg.lane === 'production' && info.promotedFromApprovedBeta){
+    checkApprovedProductionRuntime(info, acceptedCommits, opts);
+  }else if(!commitMatchesHead(info.commit, acceptedCommits)){
     throw new Error(
       `Publish preflight failed: ${cfg.buildInfo} was built from ${info.shortCommit || info.commit}, ` +
       `but the acceptable release-prep heads are ${acceptedCommits.map((value) => value.slice(0, 7)).join(', ')} (current HEAD ${head.slice(0, 7)}). ` +

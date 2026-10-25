@@ -1,13 +1,17 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-10-25T00:11:46.802Z",
+  "generatedAt": "2026-10-25T17:10:30.926Z",
   "branch": "",
   "baseRef": "origin/main",
   "baseCommit": "ea779a76aa761a3c34d679bd519e978bddee8cf8",
-  "headCommit": "135eed8a",
-  "dirty": false,
-  "statusShort": [],
+  "headCommit": "8a627f4c",
+  "dirty": true,
+  "statusShort": [
+    "M package.json",
+    " M tools/build/check-publish-ready.js",
+    "?? tools/harness/check-production-runtime-identity-gate.js"
+  ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
     "modelDoc": "CODE_REVIEW_MODEL.md"
@@ -28,12 +32,12 @@
     ]
   },
   "summary": {
-    "changedFileCount": 30,
+    "changedFileCount": 31,
     "p0": 0,
     "p1": 0,
     "p2": 1,
     "p3": 0,
-    "riskTaggedFileCount": 25,
+    "riskTaggedFileCount": 26,
     "securityOpenP0": 0,
     "securityOpenP1": 0,
     "securityOpenP2": 0,
@@ -299,6 +303,16 @@
       "status": "A",
       "file": "tools/harness/check-production-promotion-fixture.js",
       "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/harness/check-production-runtime-identity-gate.js",
+      "source": "working-tree",
       "area": "harness-tooling",
       "riskTags": [
         "browser-safety",

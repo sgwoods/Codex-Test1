@@ -14,6 +14,33 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 25 gate repair (user-approved, narrow): approved production `checkBuildInfo`
+now binds runtime to the exact approved beta inventory and matching runtime
+identity (commit, short commit, build number, label), requires the approved
+runtime to be an ancestor of HEAD, and checks the production `documentationCommit`
+against the unchanged four-commit window. Non-production lanes and unapproved
+production keep the commit-age check. No window widened, no history rewritten,
+no beta gameplay rebuilt. Test: `tools/harness/check-production-runtime-identity-gate.js`
+(in `harness:check:production-promotion-contract`) drives `checkBuildInfo` and
+accepts an approved older runtime. It rejects a wrong runtime or build, a foreign
+history, a tampered beta, and stale or missing docs commits. It confirms that
+unapproved production and beta keep the window. It fails before the repair.
+Real-package stepwise preflight (beta5 snapshot, local approval,
+real promotion, fresh PDF, clean temporary commit) passes `checkBuildInfo`,
+`checkApprovedBetaForProduction`, `checkProductionReleaseDocs`,
+`checkProductionReleaseNoteLinkage` and all other checks except
+`checkDocumentationFreshness` and `checkCurrentConformanceDocArtifacts`. Evidence:
+`~/.no-mistakes/evidence/01M5QGK759J3CPY7JYW3GZNTZ3/r5-*.log`. Limitation: the
+conformance artifacts still record e557af14. In the isolated worktree,
+`npm run harness:refresh:release-conformance-docs` used older 2026-05-24
+quality/level-arc reports because the cited 2026-06-07 reports are gitignored
+and local-only. Scores shifted from the wrong inputs (overall 8.7 to 8.8, audio
+7 to 7.3), so that refresh was discarded and not committed.
+Next: the lead runs that refresh in the primary checkout, which holds the
+2026-06-07 evidence, then `npm run build`, and commits it. Then rerun
+`npm run publish:production` through the gates. The main-branch and machine
+authority guards were not exercised (fixture-only).
+
 October24 user confirmed successful password reset and authorized steps1-4,
 including production publication after gates. Recovery accepted as human report;
 no credentials stored. Source checkpoint, production PDF/preflight and publication
