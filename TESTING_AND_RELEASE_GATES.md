@@ -768,6 +768,22 @@ Production promotion must also start from a clean tree:
 - the public sync step must validate the current `src/public/aurora-galactica.template.html` template and the production artifact must have been rebuilt from that exact clean checkout
 - if either condition fails, production promotion should stop
 
+Production keeps the approved beta runtime and regenerates only its documentation:
+
+- `promote:production` rejects a `dist/beta` package whose file inventory no
+  longer matches the inventory recorded by `approve:beta`, and requires a
+  `release-notes.json` entry with a `sourceDoc` for the exact production version
+- the production runtime is validated against the approved beta commit, build
+  number, label and inventory rather than the recent-commit window; that commit
+  must still be an ancestor of `HEAD`
+- the regenerated documentation records its own `documentationCommit` (see
+  `assets/production-documentation-provenance.json`), which must be a current
+  release-prep head; the stale white-paper PDF is removed so
+  `npm run white-paper:pdf:production` renders it again from that output
+- a release-dashboard timeline entry with status `approved` additionally needs a
+  matching `productionApproval` block and the readiness review approval line
+- `npm run harness:check:production-promotion-contract` exercises these checks
+
 ## First-Class Hosted Documentation Requirement
 
 The hosted documentation set is now part of the release surface.
