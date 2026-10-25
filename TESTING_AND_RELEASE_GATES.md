@@ -783,6 +783,10 @@ Production keeps the approved beta runtime and regenerates only its documentatio
 - a release-dashboard timeline entry with status `approved` additionally needs a
   matching `productionApproval` block and the readiness review approval line
 - `npm run harness:check:production-promotion-contract` exercises these checks
+- the `Release Contracts` pull-request workflow runs the fixture-only subset
+  `npm run harness:check:release-contracts:ci` (no dependencies, `dist`,
+  secrets or deployment rights); it does not replace the full production
+  package gates above
 
 ## First-Class Hosted Documentation Requirement
 

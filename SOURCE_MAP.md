@@ -76,6 +76,9 @@ gameplay or tuning values.
 - `/Users/steven/Documents/Codex-Test1/.github/workflows/sync-public-pages.yml`
   - updates the public project-summary pages in `sgwoods/public`
 
+- `/Users/steven/Documents/Codex-Test1/.github/workflows/release-contracts.yml`
+  - runs the isolated-fixture release-contract checks on pull requests with read-only permissions
+
 ## Gameplay Areas
 
 ### Stage Flow
