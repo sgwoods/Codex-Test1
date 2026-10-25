@@ -14,6 +14,21 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 25 PR CI follow-up: user requested stopping the waiting no-mistakes run
+and adding PR validation. Run 01M5QGK759J3CPY7JYW3GZNTZ3 cancelled explicitly;
+custody check confirms synchronized clean e9bbc8fd, preserving all pipeline fixes.
+Added Release Contracts PR workflow with read-only contents permission, no secrets,
+no deployment, full Git history for ancestry tests, and four isolated-fixture
+contract checks. No dependency install or local dist/beta package is required.
+This is a bounded CI suite, not full package acceptance: documentation generation,
+actual frozen-beta promotion, PDF, machine authority and hosted verification remain
+release gates. All four checks PASS in both primary checkout and a clean temporary
+clone at /tmp/aurora-release-ci.yAhvft/repo with no dist or node_modules.
+actionlint PASS; independent Nash review found no blockers (read-only review).
+Workflow is local only; hosted CI has not run. No merge or publication.
+Next: validate/push this checkpoint through no-mistakes, confirm PR251 CI passes,
+then integrate and run the real main-branch production release gates.
+
 October 25 gate repair (user-approved, narrow): approved production `checkBuildInfo`
 now binds runtime to the exact approved beta inventory and matching runtime
 identity (commit, short commit, build number, label), requires the approved

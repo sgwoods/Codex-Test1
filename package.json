@@ -4,6 +4,7 @@
   "description": "Classic fixed-screen browser shooter with keyboard controls, capture-and-rescue mechanics, multi-stage progression, and arcade-style tuning.",
   "main": "index.js",
   "scripts": {
+    "harness:check:release-contracts:ci": "node tools/harness/check-beta-approval-contract.js && node tools/harness/check-release-documentation-contract.js && node tools/harness/check-production-approval-posture.js && node tools/harness/check-production-runtime-identity-gate.js",
     "build": "node tools/build/build-index.js",
     "harness:check:production-promotion-contract": "node tools/harness/check-beta-approval-contract.js && node tools/harness/check-release-documentation-contract.js && node tools/harness/check-production-documentation-generation.js && node tools/harness/check-production-promotion-fixture.js && node tools/harness/check-production-approval-posture.js && node tools/harness/check-production-runtime-identity-gate.js",
     "harness:check:leaderboard-schema": "node tools/harness/check-leaderboard-schema.js",
