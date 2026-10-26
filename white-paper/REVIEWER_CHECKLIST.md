@@ -49,6 +49,10 @@ same seriousness as other user-visible documentation and release artifacts.
 
 ## Release Review
 
+- Diagrams are compiled to inline SVG with the pinned local Mermaid dependency.
+  Documentation generation requires the managed Chromium browser; readers do
+  not need JavaScript or a CDN. Run `npm run harness:check:static-white-paper`
+  against production-policy output with JavaScript disabled and network blocked.
 - Reject unfinished editorial markers in source and rendered content, not only
   malformed Markdown. `node tools/harness/check-white-paper-completeness.js`
   checks all sources selected by `white-paper.json` and runs marker regressions.

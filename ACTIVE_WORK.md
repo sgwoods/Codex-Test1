@@ -14,6 +14,52 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 26 evidence refresh: harness:refresh:release-conformance-docs passed
+at source d8989b0d on the static-diagram branch. Preserved inputs were reanalyzed;
+this is not a new gameplay measurement or an improvement claim. Overall remains
+8.7, application 7.46, strict challenge 4.3, control readiness 8.6. Economics
+covers 984 runs and 2591 metric points. Provenance and historical source dates
+remain in the generated reports under reference-artifacts/analyses, including
+conformance-economics/2026-10-26-d8989b0d and
+release-conformance-dashboard/2026-10-26-d8989b0d-dirty. Pending review/CI and
+integration; actual production regeneration and full preflight remain separate.
+
+October 26 static diagram repair (local branch codex/static-white-paper-diagrams,
+baseline d8989b0d): build compiles Mermaid with pinned dev dependency 12.2.0
+using managed Chromium, inlines SVG in HTML, and emits no CDN module. Production
+CSP unchanged. Renderer blocks network and fails closed on invalid diagrams.
+SVG-native labels avoid document paragraph styling/clipping. Browser fixture
+regenerates production docs, disables JS, blocks network, checks two diagrams,
+15 nodes and 16.20:1 minimum contrast, and generates PDF. Harness is wired into
+production white-paper review; all production-promotion contracts and release
+CI contracts pass. Nash read-only review found no additional issues. Visual
+architecture check passed after correcting HTML-label clipping.
+Preview PDF was an ephemeral temp-directory output (removed after each run unless
+--keep-output); it is not retained evidence. The regression now derives
+production build-info from committed package.json, release-notes.json and the
+public-safe release manifest, so it runs from a fresh checkout without
+dist/production. Accepted evidence remains the reproducible harness result.
+Dependency audit: new renderer tree has no reported advisories; existing ws
+8.20.0 high advisory remains, outside this documentation-only repair. No beta
+changes, merge, or publication. Conformance evidence refresh is complete (entry
+above). Remaining: integrate repair, regenerate actual production candidate,
+rerun full release preflight.
+
+October 26 production preparation after PR252 merge (d8989b0d): promote:production
+PASS on clean main. Candidate remains 1.4.2+build.1218.sha.ea779a76 with runtime
+ea779a76 and documentationCommit d8989b0d. All six production-promotion contract
+checks PASS. Frozen beta inventory: 600 expected files checked, zero mismatches.
+NOT READY: PDF generation failed twice because production CSP blocks the
+Mermaid CDN module (cdn.jsdelivr.net); read-only Chromium console confirmed
+script-src refusal, not a transient network timeout. No incomplete PDF accepted.
+Full publish:check:production attempted and BLOCKED at documentation freshness:
+conformance-economics/latest.json points to 84a6c134, outside accepted heads.
+Remaining preflight gates are not claimed passed. Next repair: make diagrams
+compatible with production CSP without bypassing it; refresh release-conformance
+evidence with preserved inputs, validate/integrate, then regenerate and rerun
+production PDF and full preflight. No publication or gameplay changes. This
+status entry is the only local tracked change after the checks.
+
 October 25 PDF contrast follow-up: user identified dark labels on dark Mermaid
 nodes. Print paragraph styling overrode labels but retained the dark diagram
 theme. Added print-specific light nodes and dark labels/edges. Renderer now

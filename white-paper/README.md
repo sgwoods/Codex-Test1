@@ -83,7 +83,9 @@ The white paper is meant to be both:
 - `npm run white-paper:review:beta`
   - run the same white-paper review spine for the beta lane
 - `npm run white-paper:review:production`
-  - run the same white-paper review spine for the production lane
+  - run the same white-paper review spine for the production lane, preceded by
+    the offline static-diagram regression
+    (`npm run harness:check:static-white-paper`)
 
 ## Suggested White Paper Release Triggers
 
