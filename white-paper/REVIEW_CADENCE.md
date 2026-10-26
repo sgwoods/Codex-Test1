@@ -45,6 +45,7 @@ instead of leaving it as a good intention.
 ## Current Review Spine
 
 - `npm run white-paper:review`
+  - run the diagram-contrast checker regression
   - refresh the dev-lane PDF
   - refresh and check the generated overview deck
   - refresh the code-review packet

@@ -785,7 +785,8 @@ Production keeps the approved beta runtime and regenerates only its documentatio
 - `npm run harness:check:production-promotion-contract` exercises these checks
 - the `Release Contracts` pull-request workflow runs the fixture-only subset
   `npm run harness:check:release-contracts:ci` (no dependencies, `dist`,
-  secrets or deployment rights); it does not replace the full production
+  secrets or deployment rights), plus white-paper source completeness and
+  release-wording consistency checks; it does not replace the full production
   package gates above
 
 ## First-Class Hosted Documentation Requirement
