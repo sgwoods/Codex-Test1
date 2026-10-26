@@ -1,8 +1,8 @@
 # Challenge Set-Piece Contracts
 
-Generated: 2026-10-26T17:31:06.529Z
-Commit: d8989b0d
-Branch: codex/static-white-paper-diagrams
+Generated: 2026-10-26T17:54:45.812Z
+Commit: 52747607
+Branch: codex/production-evidence-security
 
 ## Purpose
 

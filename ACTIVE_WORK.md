@@ -14,6 +14,24 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 26 production follow-through at merged PR253 / 52747607: static diagram
+repair passed review, tests and CI. Production promotion and full white-paper
+review passed: two diagrams, 15 nodes, minimum contrast 16.20:1, PDF 696206 bytes,
+21 slides. Actual PDF is dist/production/white-paper.pdf. Publish preflight
+stopped on the review packet's newly generated uncommitted evidence; no bypass.
+Conformance evidence was refreshed again at 52747607 to preserve freshness after
+review commits, without new gameplay measurements. Pending evidence integration
+and repeat clean-main promotion/preflight; no publication.
+
+Dependency disposition: read-only review identified Node ws 8.20.0 affected by
+GHSA-58qx-3vcg-4xpx and GHSA-96hv-2xvq-fx4p. No demonstrated reachability in the
+static browser runtime (native WebSocket), but no risk exception is needed:
+lockfile-only update resolves ws 8.22.0 within the existing dependency range.
+Clean npm ci --ignore-scripts and npm audit passed with zero vulnerabilities
+(131 installed dependencies). All six production-promotion contract checks pass;
+all 600 approved beta inventory hashes still match. No Supabase version change,
+gameplay rebuild, score operation or deployment. This follow-up awaits CI.
+
 October 26 evidence refresh: harness:refresh:release-conformance-docs passed
 at source d8989b0d on the static-diagram branch. Preserved inputs were reanalyzed;
 this is not a new gameplay measurement or an improvement claim. Overall remains

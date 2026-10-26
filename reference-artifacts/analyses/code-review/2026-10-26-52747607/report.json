@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-code-review-packet",
+  "generatedAt": "2026-10-26T17:53:41.080Z",
+  "branch": "main",
+  "baseRef": "origin/main",
+  "baseCommit": "527476077a289b84a327322cbfe569ad4020d9a8",
+  "headCommit": "52747607",
+  "dirty": false,
+  "statusShort": [],
+  "reviewSkill": {
+    "path": "codex-skills/platinum-code-review/SKILL.md",
+    "modelDoc": "CODE_REVIEW_MODEL.md"
+  },
+  "architecture": {
+    "installedArchitectSkillFound": false,
+    "repoArchitectureDocs": [
+      "ARCHITECTURE.md",
+      "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+      "APPLICATIONS_ON_PLATINUM.md",
+      "PLATINUM_GAME_BOUNDARY_AUDIT.md"
+    ],
+    "boundaryHarnesses": [
+      "npm run harness:check:gameplay-adapter-boundaries",
+      "npm run harness:check:pack-registry-boundaries",
+      "npm run harness:check:platinum-renderer-boundaries",
+      "npm run harness:check:platinum-pack-boot"
+    ]
+  },
+  "summary": {
+    "changedFileCount": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0,
+    "p3": 0,
+    "riskTaggedFileCount": 0,
+    "securityOpenP0": 0,
+    "securityOpenP1": 0,
+    "securityOpenP2": 0,
+    "securityOpenP3": 0
+  },
+  "changedFiles": [],
+  "automaticFindings": [],
+  "securityBestPractices": {
+    "available": true,
+    "issueSource": "security-issues.json",
+    "humanPlan": "SECURITY_ISSUES_RESOLUTION_PLAN.md",
+    "latestReview": "reference-artifacts/analyses/security-release-review/latest.json",
+    "latestReviewGeneratedAt": "2026-10-24T17:46:20.374Z",
+    "latestReviewLane": "production",
+    "openByPriority": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    },
+    "productionBlockerCount": 0,
+    "topOpenIssues": []
+  },
+  "recommendedChecks": [
+    "npm run build",
+    "npm run review:code:check"
+  ]
+}
