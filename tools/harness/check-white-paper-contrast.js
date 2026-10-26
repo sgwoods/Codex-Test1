@@ -1,10 +1,9 @@
 const assert = require('assert');
-const { chromium } = require('playwright-core');
-const { resolveHarnessBrowser, browserLaunchArgs } = require('./browser-launch');
+const { launchHarnessBrowser } = require('./browser-launch');
 const { checkDiagramContrast } = require('../build/render-white-paper-pdf');
 
 (async () => {
-  const browser = await chromium.launch({ executablePath: resolveHarnessBrowser().path, headless: true, args: browserLaunchArgs() });
+  const browser = await launchHarnessBrowser();
   try {
     const page = await browser.newPage();
     await page.emulateMedia({ media: 'print' });
