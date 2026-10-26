@@ -8389,4 +8389,18 @@ const documentationDir = path.dirname(outputs.find(file => path.basename(file) =
 require('./release-documentation-contract').writeDocumentationContract(ROOT, documentationDir);
 for(const out of outputs)console.log(`Built ${out}`);
 }
-module.exports = { regenerateProductionDocumentation };
+function productionDocumentationFixtureInfo(){
+  const version = normalizeVersionForChannel(pkg.version, 'production');
+  const manifest = publicSafeReleaseManifest(loadReleaseManifest(version));
+  const commit = git('rev-parse HEAD', 'unknown');
+  const shortCommit = git('rev-parse --short HEAD', 'unknown');
+  return {
+    product: manifest.product, version, versionLine: version, versionScheme: 'semver',
+    label: `${version}+build.fixture.sha.${shortCommit}`, buildNumber: 'fixture',
+    commit, shortCommit, branch: 'fixture', state: 'fixture', releaseChannel: 'production',
+    builtAtUtc: new Date().toISOString(), platform: manifest.platform, applications: manifest.applications,
+    latestReleaseNote: loadReleaseNotes().find(note => note.version === version)
+  };
+}
+
+module.exports = { regenerateProductionDocumentation, productionDocumentationFixtureInfo };

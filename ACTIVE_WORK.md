@@ -34,7 +34,11 @@ regenerates production docs, disables JS, blocks network, checks two diagrams,
 production white-paper review; all production-promotion contracts and release
 CI contracts pass. Nash read-only review found no additional issues. Visual
 architecture check passed after correcting HTML-label clipping.
-Preview PDF: /var/folders/z8/hqkwn1q543zgs63rhbqlpsbr0000gn/T/static-paper-LU2een/white-paper.pdf
+Preview PDF was an ephemeral temp-directory output (removed after each run unless
+--keep-output); it is not retained evidence. The regression now derives
+production build-info from committed package.json, release-notes.json and the
+public-safe release manifest, so it runs from a fresh checkout without
+dist/production. Accepted evidence remains the reproducible harness result.
 Dependency audit: new renderer tree has no reported advisories; existing ws
 8.20.0 high advisory remains, outside this documentation-only repair. No beta
 changes, merge, or publication. Remaining: integrate repair, refresh stale

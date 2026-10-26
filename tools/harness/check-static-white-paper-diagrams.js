@@ -3,18 +3,16 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { pathToFileURL } = require('url');
-const { regenerateProductionDocumentation } = require('../build/build-index');
+const { regenerateProductionDocumentation, productionDocumentationFixtureInfo } = require('../build/build-index');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { checkDiagramContrast } = require('../build/render-white-paper-pdf');
 const { renderStaticDiagram } = require('../build/static-diagram');
 
 (async () => {
-  const root = path.resolve(__dirname, '../..');
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'static-paper-'));
   let browser;
   try {
-    const info = JSON.parse(fs.readFileSync(path.join(root, 'dist/production/build-info.json')));
-    regenerateProductionDocumentation(dir, info);
+    regenerateProductionDocumentation(dir, productionDocumentationFixtureInfo());
     browser = await launchHarnessBrowser();
     const page = await browser.newPage({ javaScriptEnabled: false });
     const remote = [];
