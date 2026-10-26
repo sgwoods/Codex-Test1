@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
+const { renderStaticDiagram } = require('./static-diagram');
 const {
   ROOT,
   DIST_DEV,
@@ -1967,6 +1968,7 @@ function whitePaperGuideStyles(){
     .markdown .mermaid svg{
       max-width:100%;
       height:auto;
+      background:#fff;
     }
     @media print{
       html,body{
@@ -2116,18 +2118,6 @@ function whitePaperGuideStyles(){
   `.trim();
 }
 
-function whitePaperMermaidScript(){
-  return `
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({
-        startOnLoad: true,
-        securityLevel: 'loose',
-        theme: 'dark'
-      });
-    </script>
-  `.trim();
-}
 
 function projectOverviewSlidesStyles(){
   return `
@@ -3484,7 +3474,7 @@ function renderMarkdown(md='', options = {}){
     }
     i++;
     if(allowMermaid && String(lang || '').toLowerCase() === 'mermaid'){
-      out.push(`<div class="mermaid">${esc(block.join('\n'))}</div>`);
+      out.push(`<div class="mermaid">${renderStaticDiagram(block.join('\n'))}</div>`);
     }else{
       out.push(`<pre><code${lang ? ` data-lang="${esc(lang)}"` : ''}>${esc(block.join('\n'))}</code></pre>`);
     }
@@ -3907,7 +3897,6 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
   `).join('\n');
   const sections = (guide.sections || []).map(renderGuideSection).join('\n');
   const sourceDocs = (guide.sourceDocs || []).map(renderSourceDocSection).join('\n');
-  const hasMermaid = (guide.sourceDocs || []).some(section => section.renderMode === 'mermaid-markdown');
   const body = `
     <main class="shell">
       <div class="main">
@@ -3981,7 +3970,6 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
         </p>
       </aside>
     </main>
-    ${hasMermaid ? whitePaperMermaidScript() : ''}
   `.trim();
   return template
     .replace('{{PROJECT_GUIDE_TITLE}}', esc(guide.title || 'Aurora / Platinum White Paper'))
