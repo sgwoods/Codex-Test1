@@ -139,9 +139,8 @@ Further detail:
 
 The measurements below and the challenge-stage case study describe the
 `2026-06-07` evidence baseline. They are not new October measurements.
-At this editorial revision, production remains `1.4.1`; `1.4.2-beta.5`
-is the approved beta, and the `1.4.2` production package is under review.
-Package preparation does not mean publication.
+This editorial revision was prepared for the `1.4.2` release, built from
+the approved `1.4.2-beta.5` gameplay.
 
 The historical baseline can be described in one page:
 

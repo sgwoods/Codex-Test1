@@ -23,6 +23,14 @@ Visually checked the reported architecture diagram on page 10. Added browser
 regressions for low contrast, missing diagrams, and readable nodes. This is a
 documentation-only repair; production package still requires regeneration.
 
+October 26 review follow-up (user-approved): Program Snapshot now says the
+revision was prepared for the 1.4.2 release from approved 1.4.2-beta.5
+gameplay; the "production remains 1.4.1" claim was removed so the shipped
+paper stays accurate. Contrast regression is wired as
+harness:check:white-paper-contrast into white-paper:review:* and publish:*
+(browser lanes); PR CI has no harness browser so it is not run there.
+Approved beta and gameplay preserved; no deployment.
+
 October 25 white-paper editorial repair: production progression PAUSED for this
 user-requested correction. Branch codex/white-paper-completeness, baseline
 f17fa592. Resolved four illustration instructions with release-history tables,
