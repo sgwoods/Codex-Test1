@@ -31,6 +31,22 @@ harness:check:white-paper-contrast into white-paper:review:* and publish:*
 (browser lanes); PR CI has no harness browser so it is not run there.
 Approved beta and gameplay preserved; no deployment.
 
+October 26 stale-release follow-up (user-approved): the "as of this draft"
+production recommendation (1.4.0 / not yet 1.4.1) is now labeled the June 2026
+historical assessment (2026-06-07). The same check found two similar claims,
+now dated or reworded: the /dev 1.4.0.1 evidence list and the "Current"
+1.4.0 history row. Added tools/build/white-paper-release-consistency.js. It
+treats paragraphs, lead-in plus list blocks, and table rows as claim units. A
+unit with present-tense wording (current, now, remains, as of this draft) must
+name only canonical package.json versions (1.4.2-beta.5 / 1.4.2) or carry
+"historical" plus a date. It runs in harness:check:release-contracts:ci, with
+regressions for the actual stale paragraph, the row and valid dated history. It
+also runs in the white-paper presentation check (review and publish preflight).
+Limitations: these are wording heuristics over white-paper.json source docs.
+They do not prove semantic accuracy, cover unversioned claims or past-tense
+wording, or check other documentation families. Rendered HTML derives from the
+checked sources and is not parsed separately. No deployment.
+
 October 25 white-paper editorial repair: production progression PAUSED for this
 user-requested correction. Branch codex/white-paper-completeness, baseline
 f17fa592. Resolved four illustration instructions with release-history tables,

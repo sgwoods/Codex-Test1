@@ -164,13 +164,14 @@ Current maintained metric read:
 | `Galaxy Guardians` long-surface/persona review | `7.0/10` | Credible second-game process proof, but not yet a production-mature public game; v1 needs opening-slice quality, score/result identity, platform parity, and Watch/Rival/persona reuse. |
 | Resource/economics ledger | `904` measured runs, `58,277s` tracked wall time, `58,392s` CPU time, about `1.48GB` artifact accounting | Shows the operating doctrine: turn model-assisted insight into local CPU/browser harnesses and track the cost of quality movement. |
 
-The evidence program also became more concrete in the latest pass:
+In the June 2026 historical baseline (`2026-06-07`), the evidence program
+also became more concrete:
 
 - release authority moved from `iMacM1` to this MacBook M4 for the current
   release path
 - release conformance artifacts, the game conformance catalog, and white-paper
   PDF metadata are refreshed enough for `publish:check:dev`
-- hosted `/dev` now carries the current `1.4.0.1` forward-review line,
+- hosted `/dev` then carried the `1.4.0.1` forward-review line,
   including the
   consolidated Aurora challenge grammar, Guardians ingestion/conformance
   cleanup, refreshed dashboards, public project guide, white-paper PDF, slides,
@@ -517,8 +518,8 @@ just because the words are present. The release surface should also be reviewed
 for lane coherence, build metadata, conformance freshness, and historical path
 drift.
 
-As of this draft, the current production recommendation is deliberately
-conservative:
+In the June 2026 historical assessment (`2026-06-07`), the production
+recommendation was deliberately conservative:
 
 - hosted `/production` remains the stable public `1.4.0` line
 - hosted `/dev` and `/beta` are review lanes for the next candidate family
@@ -647,7 +648,7 @@ easy to retell.
 | --- | --- | --- |
 | `1.0.0` | First public Aurora launch | The project became a real public product with live scoring, pilot identity, replay visibility, and a real release ladder. |
 | `1.2.0` | Platinum Release 1 | Aurora was reframed as the first application on a reusable platform, making platform/application separation explicit. |
-| `1.4.0` | Current multi-game and conformance baseline | The public line now carries stronger documentation, review evidence, persona/replay follow-through, and a clearer Galaxy Guardians posture. |
+| `1.4.0` | Multi-game and conformance baseline | The public line gained stronger documentation, review evidence, persona/replay follow-through, and a clearer Galaxy Guardians posture. |
 
 This means the project has already moved through three meaningful phases:
 

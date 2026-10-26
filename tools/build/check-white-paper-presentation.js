@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { assertComplete, checkWhitePaperSources } = require('./white-paper-completeness');
+const { checkWhitePaperReleaseConsistency } = require('./white-paper-release-consistency');
 const {
   ROOT,
   DEV_WHITE_PAPER,
@@ -98,6 +99,7 @@ function parseProjectOverviewSlideSource(){
 
 function main(){
   checkWhitePaperSources(ROOT);
+  checkWhitePaperReleaseConsistency(ROOT);
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || 'dev').toLowerCase();
   const cfg = laneConfig(lane);
