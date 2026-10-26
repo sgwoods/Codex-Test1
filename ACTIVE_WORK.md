@@ -41,8 +41,9 @@ public-safe release manifest, so it runs from a fresh checkout without
 dist/production. Accepted evidence remains the reproducible harness result.
 Dependency audit: new renderer tree has no reported advisories; existing ws
 8.20.0 high advisory remains, outside this documentation-only repair. No beta
-changes, merge, or publication. Remaining: integrate repair, refresh stale
-conformance evidence, regenerate actual candidate, rerun full release preflight.
+changes, merge, or publication. Conformance evidence refresh is complete (entry
+above). Remaining: integrate repair, regenerate actual production candidate,
+rerun full release preflight.
 
 October 26 production preparation after PR252 merge (d8989b0d): promote:production
 PASS on clean main. Candidate remains 1.4.2+build.1218.sha.ea779a76 with runtime
