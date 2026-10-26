@@ -14,6 +14,15 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 26 final evidence packet: PR254 merged at ee1fef69 after review/tests/CI;
+ws advisory remedy is integrated. User approved the final review-packet commit.
+Regenerate conformance from the same historic inputs at ee1fef69 alongside this
+packet so the reviewed integration/merge does not age evidence out. No changed
+gameplay measurements. Generate review packet last, covering these evidence
+and status changes. After integration, run promotion, PDF rendering and read-only
+review checks without generating another review packet. Full production preflight
+must pass on clean current main; no publication is authorized by this packet.
+
 October 26 production follow-through at merged PR253 / 52747607: static diagram
 repair passed review, tests and CI. Production promotion and full white-paper
 review passed: two diagrams, 15 nodes, minimum contrast 16.20:1, PDF 696206 bytes,
