@@ -11,8 +11,9 @@ we still need to choose the most illustrative image or chart deliberately.
   artifact.
 - Put deeper evidence families in the hosted guides, dashboards, and linked
   source documents instead of overloading the main narrative.
-- When a visual choice is ambiguous, keep a placeholder in the paper and record
-  the decision debt here.
+- Resolve ambiguous choices before release. Use an evidence-backed table or
+  caption when a new image is not justified. Do not put editorial instructions
+  in the published paper. Record optional enhancements separately.
 
 ## Current In-Paper Visuals
 
@@ -45,47 +46,30 @@ directly into the main narrative unless a specific section needs them.
 - hosted `project-guide.html`
 - hosted `public-project-page.html`
 
-## Open Illustration TODOs
+## Illustration Decisions, 2026-10-25
 
 ### Release-history progression strip
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- `1.0.0` public game surface
-- `1.2.0` Platinum framing surface
-- `1.4.0` multi-game and conformance surface
-- Decision question: should the strip emphasize gameplay evolution, platform
-  architecture, or public release/documentation maturity?
+- Use the three-column release progression in Section 2. The release notes
+  support the milestones. Current screenshots are not historical evidence.
 
 ### Ingestion in action
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- contact sheet only
-- waveform plus contact sheet pair
-- raw source clip to structured artifact pipeline graphic
-- Decision question: what most clearly teaches the ingestion idea to a
-  non-expert reader in one glance?
+- Use the existing stage-opening contact sheet as the primary example, with
+  the source-to-decision table and an explicit limit on what frames can prove.
+  Keep the Guardians sheet as a separate source-family example.
 
 ### Evidence loop case study
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- question -> artifact -> harness -> result graphic
-- screenshot pair showing before and after measured correction
-- release-note excerpt plus chart plus artifact collage
-- Decision question: which single case study best shows how AI-assisted work is
-  kept honest by rerunnable evidence?
+- Use the dated Stage 3 rejected-candidate case from Section 5. The compact
+  decision table shows why a fit improvement did not justify reduced scoring
+  opportunity. It does not claim that all fidelity work is complete.
 
 ### Milestone gallery
 
-- White-paper placeholder exists.
-- Best candidate still needs discussion:
-- one screenshot per milestone release
-- one diagram per maturity phase
-- one mixed gallery of game, platform, and dashboard surfaces
-- Decision question: should the gallery feel product-led, architecture-led, or
-  release-led?
+- Use the milestone table in Section 10 together with the Section 2 progression.
+  A future gallery needs release-specific captures and provenance; it is not
+  a requirement for this edition.
 
 ## Likely Next Additions
 

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { assertComplete, checkWhitePaperSources } = require('./white-paper-completeness');
+const { checkWhitePaperReleaseConsistency } = require('./white-paper-release-consistency');
 const {
   ROOT,
   DEV_WHITE_PAPER,
@@ -96,6 +98,8 @@ function parseProjectOverviewSlideSource(){
 }
 
 function main(){
+  checkWhitePaperSources(ROOT);
+  checkWhitePaperReleaseConsistency(ROOT);
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || 'dev').toLowerCase();
   const cfg = laneConfig(lane);
@@ -126,12 +130,7 @@ function main(){
   if(!html.includes('Reviewer Checklist')){
     fail('White-paper presentation check failed: hosted white-paper page is missing the Reviewer Checklist section.', { lane });
   }
-  if(html.includes('&gt; TODO') || html.includes('> TODO illustration:')){
-    fail('White-paper presentation check failed: raw TODO blockquote markers leaked into the rendered HTML.', { lane });
-  }
-  if(!html.includes('<blockquote>')){
-    fail('White-paper presentation check failed: expected blockquote callouts are missing from the rendered HTML.', { lane });
-  }
+  assertComplete(html, `${lane} white-paper.html`);
   if(meta.artifactType !== 'white-paper-pdf'){
     fail('White-paper presentation check failed: PDF metadata artifactType is wrong.', meta);
   }

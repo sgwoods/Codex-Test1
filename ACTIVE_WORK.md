@@ -14,6 +14,72 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 25 PDF contrast follow-up: user identified dark labels on dark Mermaid
+nodes. Print paragraph styling overrode labels but retained the dark diagram
+theme. Added print-specific light nodes and dark labels/edges. Renderer now
+fails on missing diagrams or node label contrast below 4.5:1 and records results
+in PDF metadata. Regenerated dev PDF: 15 nodes, minimum contrast 16.20:1.
+Visually checked the reported architecture diagram on page 10. Added browser
+regressions for low contrast, missing diagrams, and readable nodes. This is a
+documentation-only repair; production package still requires regeneration.
+
+October 26 review follow-up (user-approved): Program Snapshot now says the
+revision was prepared for the 1.4.2 release from approved 1.4.2-beta.5
+gameplay; the "production remains 1.4.1" claim was removed so the shipped
+paper stays accurate. Contrast regression is wired as
+harness:check:white-paper-contrast into white-paper:review:* and publish:*
+(browser lanes); PR CI has no harness browser so it is not run there.
+Approved beta and gameplay preserved; no deployment.
+
+October 26 stale-release follow-up (user-approved): the "as of this draft"
+production recommendation (1.4.0 / not yet 1.4.1) is now labeled the June 2026
+historical assessment (2026-06-07). The same check found two similar claims,
+now dated or reworded: the /dev 1.4.0.1 evidence list and the "Current"
+1.4.0 history row. Added tools/build/white-paper-release-consistency.js. It
+treats paragraphs, lead-in plus list blocks, and table rows as claim units. A
+unit with present-tense wording (current, now, remains, as of this draft) must
+name only canonical package.json versions (1.4.2-beta.5 / 1.4.2) or carry
+"historical" plus a date. It runs in harness:check:release-contracts:ci, with
+regressions for the actual stale paragraph, the row and valid dated history. It
+also runs in the white-paper presentation check (review and publish preflight).
+Limitations: these are wording heuristics over white-paper.json source docs.
+They do not prove semantic accuracy, cover unversioned claims or past-tense
+wording, or check other documentation families. Rendered HTML derives from the
+checked sources and is not parsed separately. No deployment.
+
+October 25 white-paper editorial repair: production progression PAUSED for this
+user-requested correction. Branch codex/white-paper-completeness, baseline
+f17fa592. Resolved four illustration instructions with release-history tables,
+contact-sheet interpretation, and the dated Stage 3 rejected-candidate example.
+Paper v0.4.2-draft / October 25 distinguishes June measurements from current
+release preparation. No new conformance measurements or gameplay changes.
+Root cause: presentation gate checked malformed markup, not visible editorial
+markers. Added source/rendered-content checks and regression fixtures to the
+PR release-contract suite; publish preflight already invokes presentation gate.
+Nash read-only review confirmed the historical 1.6-point result and found an
+HTML numeric-entity bypass; repaired with decimal/hex regression fixtures.
+Local preview: dist/dev/white-paper.pdf. Prepared dist/production is now stale
+against documentation sources and MUST be regenerated after integration.
+No beta artifact changes or publication. Next: integrate documentation repair,
+regenerate production documentation/PDF, run full release preflight, then seek
+the applicable publication decision. Preserve frozen beta runtime.
+
+October 25 production preparation steps 1-2 COMPLETE, superseding pending entries
+below. PR251 merged as f17fa592; local main matches origin/main. All 600 accepted
+beta5 files match the committed frozen inventory before approval and after
+promotion. Real approve:beta and promote:production succeeded with machine/main
+guards enabled. Approval: dist/beta/approved-build-info.json. Prepared production:
+dist/production, label 1.4.2+build.1218.sha.ea779a76, runtime ea779a76,
+documentationCommit f17fa592. Beta gameplay was not rebuilt.
+Fresh white-paper.pdf and white-paper-pdf.json generated; production presentation
+check and documentation fingerprint contract PASS. First PDF page visually
+inspected; no full-page visual audit claimed. White-paper source version remains
+v0.4.1-draft / June 7, distinct from current package generation.
+No full production preflight or publication in this cycle, as requested.
+Next: checkpoint this status note, run all clean-main release gates (refresh stale
+evidence if required), then publish and verify hosted production in a later cycle.
+This status note is the only tracked local change; prepared artifacts are ignored.
+
 October 25 PR CI follow-up: user requested stopping the waiting no-mistakes run
 and adding PR validation. Run 01M5QGK759J3CPY7JYW3GZNTZ3 cancelled explicitly;
 custody check confirms synchronized clean e9bbc8fd, preserving all pipeline fixes.

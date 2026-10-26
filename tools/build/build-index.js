@@ -2049,6 +2049,35 @@ function whitePaperGuideStyles(){
         border-color:#d7d7d7;
         box-shadow:none;
       }
+      .markdown .mermaid svg{
+        background:#fff !important;
+      }
+      .markdown .mermaid .node rect,
+      .markdown .mermaid .node polygon,
+      .markdown .mermaid .node circle,
+      .markdown .mermaid .node path{
+        fill:#eef3f7 !important;
+        stroke:#334155 !important;
+      }
+      .markdown .mermaid .nodeLabel,
+      .markdown .mermaid .nodeLabel p,
+      .markdown .mermaid text,
+      .markdown .mermaid .edgeLabel,
+      .markdown .mermaid .edgeLabel p{
+        color:#161616 !important;
+        fill:#161616 !important;
+      }
+      .markdown .mermaid .edgeLabel,
+      .markdown .mermaid .edgeLabel p{
+        background:#fff !important;
+      }
+      .markdown .mermaid .flowchart-link{
+        stroke:#334155 !important;
+      }
+      .markdown .mermaid marker path{
+        fill:#334155 !important;
+        stroke:#334155 !important;
+      }
       .markdown pre{
         background:#f5f7f9;
         color:#111;
