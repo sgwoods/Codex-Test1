@@ -8118,7 +8118,7 @@ function build(options = {}){
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_RELEASE_DETAILS_JSON: require('./packaged-release-details').serializeReleaseDetails({
-      label: buildLabel, version: buildVersion, buildNumber, commit: buildCommit,
+      label: buildLabel, versionLine: buildVersionLine, buildNumber, commit: buildCommit,
       releaseChannel: buildReleaseChannel, builtAtEt: buildReleaseEt, latestReleaseNote: latestNote
     }),
     BUILD_VERSION_LINE: buildVersionLine,

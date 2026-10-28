@@ -42,6 +42,7 @@ try {
   const promoted = JSON.parse(fs.readFileSync(paths.PRODUCTION_BUILD_INFO));
   assert.equal(packaged.lane, 'production');
   assert.equal(packaged.label, promoted.label);
+  assert.equal(packaged.version, promoted.versionLine);
   assert.equal(packaged.note.summary, promoted.latestReleaseNote.summary);
   assert.equal(packaged.note.date, promoted.latestReleaseNote.date);
   // The gameplay source section excludes the generated shell and release metadata.

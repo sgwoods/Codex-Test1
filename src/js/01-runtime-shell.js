@@ -1008,7 +1008,7 @@ function renderPlatformMessagePanel(){
   let details={};
   try{details=JSON.parse(document.getElementById('buildReleaseDetails')?.textContent||'{}');}catch(_error){}
   const note=details.note||{};
-  const fields=[['Lane',details.lane||BUILD_INFO.releaseChannel],['Version',details.version||BUILD_INFO.version],
+  const fields=[['Lane',details.lane||BUILD_INFO.releaseChannel],['Version',details.version||BUILD_INFO.versionLine],
    ['Full build',details.label||BUILD_INFO.label],['Build number',details.buildNumber],
    ['Source revision',details.commit||BUILD_INFO.commit],['Build time',details.builtAt||BUILD_INFO.released],
    ['Release note date',note.date||'Not recorded'],['Release note version',note.version||'Not recorded']];

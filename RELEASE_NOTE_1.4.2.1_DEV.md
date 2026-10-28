@@ -4,7 +4,7 @@ Prepared October 28, 2026. Authorized destination: `/dev` only.
 
 The build strip opens Platform Messages. Its BUILD row now opens an in-game
 view of the release summary packaged with that exact artifact. It includes
-lane, full build label, package version, build number, source revision, build
+lane, full build label, visible version, build number, source revision, build
 time and release-note date. Note date is not a claim of deployment date.
 
 Enter and Space activate the row; Back and Escape return to the messages.

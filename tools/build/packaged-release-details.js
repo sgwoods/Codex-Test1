@@ -3,7 +3,7 @@ const marker = /(<script type="application\/json" id="buildReleaseDetails">)[\s\
 function serializeReleaseDetails(info){
   const note = info.latestReleaseNote || {};
   return JSON.stringify({
-    label: info.label, version: info.version, buildNumber: info.buildNumber,
+    label: info.label, version: info.versionLine, buildNumber: info.buildNumber,
     commit: info.commit, lane: info.releaseChannel,
     builtAt: info.builtAtEt || info.builtAtUtc,
     note: { title: note.title, date: note.date, summary: note.summary, version: note.version }

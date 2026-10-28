@@ -19,6 +19,7 @@ const { withHarnessPage } = require('./browser-check-util');
       const text=await page.locator('#platformMessagePanelList').innerText();
       const details=await page.locator('#buildReleaseDetails').textContent().then(JSON.parse);
       assert(text.includes(details.label));
+      assert.equal(details.version,await page.evaluate(()=>BUILD_INFO.versionLine));
       assert(text.includes(details.note.summary));
       await page.waitForTimeout(300);
       assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Back to platform messages');
