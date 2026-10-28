@@ -1,5 +1,9 @@
 # Product Roadmap
 
+October 28 update: [refreshed plan](PROJECT_PLAN_2026-10-28.md) is the current
+discussion baseline. Production 1.4.2 is live; dev-only accumulation is authorized,
+not another beta. The version assignments and execution notes below are historical.
+
 October 4 execution note: ACTIVE_WORK.md and OCTOBER_GO_FORWARD_PLAN.md own
 current execution. PROJECT_DIRECTION_REVIEW.md records verified state and
 pending investment/acceptance/version choices. Earlier version assignments below

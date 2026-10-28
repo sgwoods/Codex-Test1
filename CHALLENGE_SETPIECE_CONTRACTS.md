@@ -1,8 +1,8 @@
 # Challenge Set-Piece Contracts
 
-Generated: 2026-10-26T18:16:53.151Z
-Commit: ee1fef69
-Branch: codex/final-production-review-packet
+Generated: 2026-10-28T12:01:44.911Z
+Commit: e80af082
+Branch: codex/oct28-plan-dev-evidence
 
 ## Purpose
 

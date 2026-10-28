@@ -1,5 +1,9 @@
 # October Go-Forward Plan
 
+Superseded for current planning by [October 28 reassessment](PROJECT_PLAN_2026-10-28.md).
+The dated October 3-4 packet below remains historical evidence and acceptance
+context. ACTIVE_WORK.md owns the current cycle; beta progression is on hold.
+
 October 3, 2026. Lead: Aurora Project Lead. No deployment authorization.
 
 October 4 review: see PROJECT_DIRECTION_REVIEW.md for verified package progress,

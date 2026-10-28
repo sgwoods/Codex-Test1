@@ -1,5 +1,10 @@
 # Long-Term Aurora / Platinum Release Roadmap
 
+October 28 update: use [the refreshed plan](PROJECT_PLAN_2026-10-28.md) for
+current priorities and options, and ACTIVE_WORK.md for authorized execution.
+All release-family assignments and schedule references below are historical
+strategic background, not current dates or approval to ship.
+
 October 4 execution note: retain this document for strategic background.
 Its version-family mappings conflict with other roadmap tables; use
 PROJECT_DIRECTION_REVIEW.md for the pending reconciliation and ACTIVE_WORK.md
