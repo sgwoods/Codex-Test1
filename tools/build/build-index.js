@@ -427,7 +427,7 @@ function copyCatalogMediaAssets(destAssetsDir){
 
 function fillBuildTokens(input, tokens){
   return Object.entries(tokens).reduce(
-    (out, [key, value]) => out.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), String(value)),
+    (out, [key, value]) => out.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), () => String(value)),
     input
   );
 }
@@ -8117,6 +8117,10 @@ function build(options = {}){
   const publicArtifactBoundaryEnabled = true;
   const tokens = {
     BUILD_VERSION: buildVersion,
+    BUILD_RELEASE_DETAILS_JSON: require('./packaged-release-details').serializeReleaseDetails({
+      label: buildLabel, versionLine: buildVersionLine, buildNumber, commit: buildCommit,
+      releaseChannel: buildReleaseChannel, builtAtEt: buildReleaseEt, latestReleaseNote: latestNote
+    }),
     BUILD_VERSION_LINE: buildVersionLine,
     BUILD_LABEL: buildLabel,
     BUILD_CHANNEL: buildReleaseChannel,
@@ -8403,4 +8407,4 @@ function productionDocumentationFixtureInfo(){
   };
 }
 
-module.exports = { regenerateProductionDocumentation, productionDocumentationFixtureInfo };
+module.exports = { regenerateProductionDocumentation, productionDocumentationFixtureInfo, fillBuildTokens };
