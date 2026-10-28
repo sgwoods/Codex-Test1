@@ -1,10 +1,11 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const path = require('node:path');
 const { withHarnessPage } = require('./browser-check-util');
 
 (async()=>{
   for(const viewport of [{width:1440,height:1800},{width:390,height:844}]){
-    await withHarnessPage({viewport}, async({page, context})=>{
+    await withHarnessPage({viewport}, async({page, context, root})=>{
       // Exclude optional external media from this offline panel regression.
       await page.evaluate(()=>document.querySelectorAll('iframe').forEach(frame=>frame.remove()));
       await page.waitForTimeout(1000);
@@ -19,7 +20,10 @@ const { withHarnessPage } = require('./browser-check-util');
       const text=await page.locator('#platformMessagePanelList').innerText();
       const details=await page.locator('#buildReleaseDetails').textContent().then(JSON.parse);
       assert(text.includes(details.label));
-      assert.equal(details.version,await page.evaluate(()=>BUILD_INFO.versionLine));
+      const buildInfo=JSON.parse(fs.readFileSync(path.join(root,'build-info.json'),'utf8'));
+      assert.equal(details.version,buildInfo.versionLine);
+      const versionRow=await page.locator('.platformBuildFields dt',{hasText:/^Version$/}).locator('xpath=following-sibling::dd[1]').innerText();
+      assert.equal(versionRow,buildInfo.versionLine);
       assert(text.includes(details.note.summary));
       await page.waitForTimeout(300);
       assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Back to platform messages');
