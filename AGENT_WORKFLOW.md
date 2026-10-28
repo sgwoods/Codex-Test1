@@ -3,6 +3,13 @@
 Adopted October 3, 2026. This operating model complements
 `MULTI_MACHINE_WORKFLOW.md` and existing conformance and release gates.
 
+October 28 reassessment: [PROJECT_PLAN_2026-10-28.md](PROJECT_PLAN_2026-10-28.md)
+proposes a two-week execution pilot. The current one-lead/two-specialist model
+remains in force. Immutable-bundle worker mode, canonical-output isolation and
+content-based freshness are proposed improvements, not implemented capabilities
+or permission to bypass existing checks. Parallel agents do not imply parallel
+browser capacity; measure one versus two heavy jobs before increasing it.
+
 ## Ownership
 
 The designated primary chat is **Aurora Project Lead**

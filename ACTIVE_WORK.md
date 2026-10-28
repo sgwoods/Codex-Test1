@@ -14,6 +14,30 @@ remains implementation owner.
 
 ## Current Integration Packet
 
+October 28 integration milestone: PR256 merged at e80af082 after no-mistakes
+review/tests and hosted Release Contracts CI. User chose visible version only:
+Version shows 1.4.2.1, not package SemVer. Pipeline also repaired the new browser
+test to compare the rendered value with served build-info rather than an internal
+IIFE variable. No production/account writes and no hosted publish occurred.
+Next: integrate this planning/evidence packet, clean-main dev preflight, dev
+publish and hosted verification with protected production/beta comparison.
+
+Refreshed discussion plan: PROJECT_PLAN_2026-10-28.md. Read-only product and
+execution reviews by Nash and Hypatia support one lead plus two specialists,
+an Aurora-quality-first pilot, bounded test-runner isolation and a Guardians
+core-loop definition. Proposed allocations, thresholds and timelines are not
+approved implementation or release commitments. Existing score-history chart
+retained; no new persona runs. Historical roadmap pointers now lead to this plan.
+Current packet branch codex/oct28-plan-dev-evidence; baseline e80af082.
+
+October 28 pre-publish evidence refresh passed at e80af082, using the same
+preserved historical inputs: overall 8.7, application 7.46, strict challenge
+4.3; economics 984 runs / 2591 metric points. No new gameplay measurement.
+Artifacts: reference-artifacts/analyses/conformance-economics/2026-10-28-e80af082/
+and release-conformance-dashboard/2026-10-28-e80af082-dirty/. Documentation
+freshness and release CI contracts pass. Full clean-main preflight and hosted
+delivery remain subsequent operations; this refresh does not waive them.
+
 October 28 authorization: integrate the build-details feature through review,
 PR and CI and publish `/dev` only. Explicitly do not progress to beta; accumulate
 a meaningful batch first. Visible dev label becomes 1.4.2.1 with its own note,

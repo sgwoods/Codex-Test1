@@ -1,5 +1,11 @@
 # Project Direction Review
 
+Current discussion plan: [October 28 reassessment](PROJECT_PLAN_2026-10-28.md).
+It supersedes the priorities and current-state claims below. Preserve this dated
+review as history; ACTIVE_WORK.md owns execution and release authorization.
+
+## Historical October 4 Review
+
 October 4, 2026. Baseline 032cd18d. Owner: Aurora Project Lead.
 Status: verified findings plus proposals; product decisions below remain open.
 No version reassignment, deployment or gate waiver is authorized by this review.
