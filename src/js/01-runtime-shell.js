@@ -995,18 +995,50 @@ function currentPlatformMessageRows(){
  });
  return rows;
 }
+var platformBuildDetailsOpen=false;
+var platformMessageRenderedHtml='';
+function showPlatformBuildDetails(show){
+ platformBuildDetailsOpen=show;
+ renderPlatformMessagePanel();
+ platformMessagePanelList?.querySelector('button')?.focus();
+}
 function renderPlatformMessagePanel(){
  if(!platformMessagePanel)return;
+ if(platformBuildDetailsOpen){
+  let details={};
+  try{details=JSON.parse(document.getElementById('buildReleaseDetails')?.textContent||'{}');}catch(_error){}
+  const note=details.note||{};
+  const fields=[['Lane',details.lane||BUILD_INFO.releaseChannel],['Version',details.version||BUILD_INFO.version],
+   ['Full build',details.label||BUILD_INFO.label],['Build number',details.buildNumber],
+   ['Source revision',details.commit||BUILD_INFO.commit],['Build time',details.builtAt||BUILD_INFO.released],
+   ['Release note date',note.date||'Not recorded'],['Release note version',note.version||'Not recorded']];
+  if(platformMessagePanelStatus)platformMessagePanelStatus.textContent='BUILD RELEASE DETAILS';
+  const html=`<button type="button" class="platformDetailsBack" aria-label="Back to platform messages">&#8592;</button>
+   <h3>${shellEscapeHtml(note.title||'Release notes unavailable')}</h3>
+   <p>${shellEscapeHtml(note.summary||'No release note was packaged with this build.')}</p>
+   <dl class="platformBuildFields">${fields.map(([key,value])=>`<dt>${shellEscapeHtml(key)}</dt><dd>${shellEscapeHtml(value??'Not recorded')}</dd>`).join('')}</dl>`;
+  if(platformMessageRenderedHtml!==html){
+   platformMessageRenderedHtml=html;
+   platformMessagePanelList.innerHTML=html;
+   platformMessagePanelList.querySelector('button').addEventListener('click',()=>showPlatformBuildDetails(false));
+  }
+  return;
+ }
  const rows=currentPlatformMessageRows();
  if(platformMessagePanelStatus)platformMessagePanelStatus.textContent=`${rows.length} current platform notice${rows.length===1?'':'s'}.`;
  if(platformMessagePanelList){
-  platformMessagePanelList.innerHTML=rows.map(row=>`
-   <div class="platformMessageRow">
+  const html=rows.map(row=>`
+   <${row.kicker==='BUILD'?'button type="button" aria-label="Show build release details"':'div'} class="platformMessageRow">
     <span class="platformMessageKicker">${shellEscapeHtml(row.kicker)}</span>
     <span class="platformMessageMain">${shellEscapeHtml(row.main)}</span>
     <span class="platformMessageMeta">${shellEscapeHtml(row.meta)}</span>
-   </div>
+   </${row.kicker==='BUILD'?'button':'div'}>
   `).join('');
+  if(platformMessageRenderedHtml!==html){
+   platformMessageRenderedHtml=html;
+   platformMessagePanelList.innerHTML=html;
+   platformMessagePanelList.querySelector('button')?.addEventListener('click',()=>showPlatformBuildDetails(true));
+  }
  }
 }
 function syncPlatformMessagePanelVisibility(){
@@ -1019,14 +1051,18 @@ function openPlatformMessagePanel(){
  if(!platformMessagePanel)return;
  closeDockOverlays('platformMessages');
  platformMessagePanelOpen=1;
+ platformBuildDetailsOpen=false;
  renderPlatformMessagePanel();
  syncPlatformMessagePanelVisibility();
+ platformMessagePanelList?.querySelector('button')?.focus();
  if(typeof syncOverlayPause==='function')syncOverlayPause();
  if(typeof syncPauseUi==='function')syncPauseUi();
 }
 function closePlatformMessagePanel(){
+ const restoreFocus=platformMessagePanelOpen&&platformMessagePanel?.contains(document.activeElement);
  platformMessagePanelOpen=0;
  syncPlatformMessagePanelVisibility();
+ if(restoreFocus)buildStamp?.focus();
  if(typeof syncOverlayPause==='function')syncOverlayPause();
  if(typeof syncPauseUi==='function')syncPauseUi();
 }

@@ -131,6 +131,7 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote
     if(!sourceHref) continue;
     text = text.replace(new RegExp(escapeRegex(legacyHref), 'g'), sourceHref);
   }
+  text = require('./packaged-release-details').rewriteReleaseDetails(text, productionInfo);
   fs.writeFileSync(filePath, text);
 }
 

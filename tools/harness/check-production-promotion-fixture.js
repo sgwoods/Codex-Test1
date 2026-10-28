@@ -30,11 +30,20 @@ try {
   fs.cpSync(path.join(root, 'dist/beta'), betaDir, { recursive: true });
   fs.rmSync(paths.BETA_APPROVED_BUILD_INFO, { force: true });
   const info = JSON.parse(fs.readFileSync(paths.BETA_BUILD_INFO));
+  const { serializeReleaseDetails } = require('../build/packaged-release-details');
+  const fixtureIndex = path.join(betaDir, 'index.html');
+  fs.writeFileSync(fixtureIndex, `<script type="application/json" id="buildReleaseDetails">${serializeReleaseDetails(info)}</script>\n` + fs.readFileSync(fixtureIndex, 'utf8'));
   const inventory = approvalInventory(betaDir);
   fs.writeFileSync(paths.BETA_APPROVED_BUILD_INFO, JSON.stringify({ ...info, inventory, approvedAt: 'fixture' }));
   const before = fs.readFileSync(path.join(betaDir, 'index.html'), 'utf8');
   run();
   const after = fs.readFileSync(path.join(prodDir, 'index.html'), 'utf8');
+  const packaged = JSON.parse(after.match(/id="buildReleaseDetails">([\s\S]*?)<\/script>/)[1]);
+  const promoted = JSON.parse(fs.readFileSync(paths.PRODUCTION_BUILD_INFO));
+  assert.equal(packaged.lane, 'production');
+  assert.equal(packaged.label, promoted.label);
+  assert.equal(packaged.note.summary, promoted.latestReleaseNote.summary);
+  assert.equal(packaged.note.date, promoted.latestReleaseNote.date);
   // The gameplay source section excludes the generated shell and release metadata.
   const marker = '// Source: src/js/';
   const normalize = text => text.slice(text.indexOf(marker))

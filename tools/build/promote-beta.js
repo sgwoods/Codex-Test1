@@ -151,6 +151,7 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
   }
   text = stripPublicAccountReviewSurface(stripPublicClientScoreWriteSurface(stripPublicHarnessDebugSurface(stripPublicPrivateReferenceAudioPaths(text))));
   if(/\.html$/i.test(filePath)) text = addPublicSecurityMeta(text);
+  text = require('./packaged-release-details').rewriteReleaseDetails(text, betaInfo);
   fs.writeFileSync(filePath, text);
 }
 

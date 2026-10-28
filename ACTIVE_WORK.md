@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 24, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 28, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,76 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 28 authorization: integrate the build-details feature through review,
+PR and CI and publish `/dev` only. Explicitly do not progress to beta; accumulate
+a meaningful batch first. Visible dev label becomes 1.4.2.1 with its own note,
+without changing package SemVer or the frozen beta. User also requests a refreshed
+overall project plan and modern agent/harness strategy for discussion. Two
+read-only specialists assess product priorities and execution bottlenecks; lead
+owns integration and synthesis. Production 1.4.2 remains unchanged.
+
+October 27 follow-up: user confirms My Scores persists after reload and a new
+tab, closing the human persistence check (not a direct database inspection).
+Branch codex/build-release-details, baseline 3c7d2667. Read-only Nash probe on
+production 1.4.2/build1218/ea779a76 did not reproduce historical movement
+issues #248/#249: guest arrows/A/D/Z/C continued moving during a second held
+interval (absolute travel 50.35-52.01px), velocity zero within 220ms of release
+and stable position for the following 130ms. External/account requests blocked;
+no writes. Raw probe was not saved; these are retained delegated-report results,
+not a raw replay artifact. Historical 1.0.2 commit 2d6ceb2a fixed hidden settings
+cleanup clearing held input. Recommend resolving those historical reports;
+guest-specific historical causation remains unproven. No gameplay tuning.
+
+Issue #250 implemented locally: clickable BUILD row, packaged release summary,
+note date distinct from build time, lane/version/build/source details, keyboard
+activation and back/close focus restoration. No remote note fetch. Promotion
+rewrites embedded metadata when present; older approved artifacts are preserved.
+Tests cover safe serialization and offline desktop/mobile interaction;
+screenshots: harness-artifacts/build-release-details/. Independent review found
+replacement-string interpolation and close-focus defects, repaired with tests.
+Preview localhost:8000 serves this checkout's dist/dev, build1245/3c7d2667 dirty.
+Production and frozen beta unchanged. Remaining: final validation, review and
+integration through normal gates, authorized dev review, then beta/production
+decisions. Persona calibration remains separate. This is local, uncommitted work.
+
+October 27 final local checks: build, packaged-details unit tests, release CI
+contracts, six production-promotion contracts, existing build-stamp browser
+check and new desktop/mobile offline details check PASS. Actual isolated
+promotion additionally verified embedded production label/note/date, preserving
+beta input and gameplay. Desktop/mobile screenshots inspected, including
+scrolling to metadata. Nash re-review confirmed both fixes, no remaining blocker
+in the narrow review. No hosted CI, no-mistakes integration, merge or deployment
+has run for this feature. Offline test excludes optional external media and
+expected network errors; not a claim that all game services work offline.
+
+October 27 post-release communication: user reported playing a game. Screenshots
+show signed-in profile with latest 680/Stage 1, best 2,680, two sorties and matching
+device-local replay. No independent post-refresh or remote-persistence assertion
+is made from screenshots alone. Production release note now records deployment
+outcome, measured persona scope and human check; Slack-ready copy is in
+RELEASE_ANNOUNCEMENT_1.4.2_SLACK.md. No account identifiers copied into release
+docs. These source edits have not been republished, and no Slack message sent.
+Next: close remaining production refresh-persistence check, triage movement
+issues, then in-game build details (#250); persona calibration stays separate.
+
+October 26 production release COMPLETE: user explicitly approved publication
+and post-deploy verification. Preflight passed on clean main 3c7d2667. Published
+the already-validated 1.4.2+build.1218.sha.ea779a76 candidate, documentationCommit
+3c7d2667cca3fb2da7515cb7d2a1fd1f543873f8, to Aurora-Galactica main as 9c2888c.
+Deploy Pages run 40379387684 succeeded. Live identity and all 12 documentation
+assets verified. Hosted white-paper HTML/PDF and production-documentation
+provenance are byte-identical to local candidate. Hosted browser smoke passed:
+startup, account input controls, public settings, canvas change, gameStart and
+playerShot cues; no page exceptions. Nonblocking console 404 and aborted
+YouTube telemetry were recorded; no failed smoke assertions. No account/score
+submission or full playthrough was performed. Public canonical and legacy
+portfolio sync and rendered verification passed. Database state was not changed
+by release operations. Beta was not rebuilt. Final smoke receipt is preserved at
+private-artifacts/production-readiness-2026-10-26/hosted-smoke-production.json.
+Next: human production sanity play/account check; then prioritize follow-up work
+(in-game release details, movement issue triage, separate persona calibration).
+This post-deploy status update is local and does not change the shipped snapshot.
 
 October 26 final evidence packet: PR254 merged at ee1fef69 after review/tests/CI;
 ws advisory remedy is integrated. User approved the final review-packet commit.

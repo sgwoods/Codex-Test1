@@ -3314,6 +3314,14 @@ addEventListener('keydown',e=>{
  const wasDown=!!keys[e.code];
  const now=performance.now();
  logEvent('key_down',{code:e.code,key:e.key,repeat:!!e.repeat,alreadyDown:wasDown});
+ if(platformMessagePanelOpen){
+  if(e.code==='Escape'){
+   e.preventDefault();
+   if(platformBuildDetailsOpen)showPlatformBuildDetails(false);
+   else{closePlatformMessagePanel();buildStamp?.focus();}
+  }
+  return;
+ }
  if(e.code==='F1'||e.key==='?'){e.preventDefault();openFeedback();return;}
  if(platformSplashOpen){if(e.code==='Escape'){e.preventDefault();closePlatformSplash();}return;}
  if(gamePreviewOpen){if(e.code==='Escape'){e.preventDefault();closeGamePreview();}return;}
