@@ -3,6 +3,10 @@
 This document describes the expected release discipline for `Platinum` and the
 applications it hosts.
 
+For focused engineering checks, start with [TEST_MAP.md](TEST_MAP.md): `npm test`,
+`npm run test:docs`, `npm run test:sim`, and the explicit-bundle isolated browser
+runner. These are development checks; the release requirements below still apply.
+
 The rule is simple:
 
 - automate the gate whenever we reasonably can

@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 28, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 29, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 The human has designated this chat as the primary work-driving session.
@@ -13,6 +13,93 @@ No fixed automation schedule is reported. Dot tracks continuity; this chat
 remains implementation owner.
 
 ## Current Integration Packet
+
+October 29 continuation IN PROGRESS: user authorized the recommended next
+cycle, integration of the adoption tools followed by the bounded Expert trace.
+Baseline 2e33ef4d; branch codex/adopt-test-contracts. Lead owns the integration
+commit and no-mistakes/PR/CI process. Aquinas independently identifies observational
+trace points and acceptance checks, read-only; no concurrent source writer.
+The trace will use a private copy of the retained build around145.900-147.100s,
+preserving its original bundle and accepted telemetry projection. No persona,
+physics, score rules or public runtime changes are authorized by this packet.
+Localhost8000/PID32762 verified still serving this checkout's dist/dev build1251.
+No new dev, beta or production publication; beta hold remains in force.
+
+October 28 adoption cycle COMPLETE locally; independent re-review reports no
+remaining blocker in scope. Baseline 2e33ef4d; branch codex/adopt-test-contracts.
+Delivered focused npm test/docs/sim/browser entry points, 12 executable doc
+claims, copied-bundle/private-output experiments and PR CI receipt retention.
+Lead alone edits; Archimedes verified historical Expert/control-path evidence;
+Goodall reviewed tooling. Six review defects received fixes and regression
+coverage. Full packet: ADOPTION_CYCLE_2026-10-28.md; commands: TEST_MAP.md.
+
+Latest local acceptance: 19 tooling tests, seven release-contract fixtures,
+12 claims and 79 controller cases passed. Browser smoke passed; deliberate
+Chromium timeout failed as expected with unchanged hashes and no cleanup error.
+Process tests require approved ps access; the restricted-sandbox failure is
+retained, not counted as acceptance. Hosted CI/full preflight not run; no commit,
+push, PR, runtime tuning, account/score writes or publication this cycle.
+
+Private evidence: private-artifacts/adoption-cycle-2026-10-28/diagnosis.json and
+its diagnose.js; runs/gameplay-2026-10-28T15-07-36-300Z-rQ3LZK (historical replay),
+runs/gameplay-2026-10-28T15-33-15-373Z-dtcuLs (smoke), and
+runs/gameplay-2026-10-28T15-32-41-649Z-9cM4TZ (expected timeout). Fast receipt:
+harness-artifacts/test-runs/fast-2026-10-28T15-32-08-771Z-WFh5px;
+docs-2026-10-28T15-30-16-112Z-LJzbaa and
+simulation-2026-10-28T15-24-30-303Z-L5wELs under the same test-runs parent.
+
+Expert seed91001 reproduced historical build1210/bacb0c58.dirty: 46,960/Stage8,
+game-over219.433s; 1,449 non-audio events and 435 snapshots match after excluding
+only cosmetic counts.effects. Not a new distribution or full-state/audio proof.
+Current actual-source actuator probe: first tick6.16px automated versus0.827px
+human, different reversal/bounds; no causal collision or improvement claim.
+Next: reviewed integration, then an unrounded trace around the146.900s collision
+before one bounded Expert candidate. Existing distribution chart unchanged.
+Localhost8000/PID32762 still serves this checkout's dist/dev build1251/2e33ef4d.
+Production1.4.2/beta.5 untouched; accumulate a meaningful dev batch first and
+obtain an explicit beta decision. No beta date/version assigned.
+
+October 28 cross-project assessment COMPLETE: reviewed Star Swarm source
+cc463a0be578aee2131976b3556c633a2d5181b5, its matching live build and portfolio
+overview. Lead ran 2493 tests / 87 files (70.21s), typecheck, lint and build;
+all passed on Node25.9 with a Vitest engine-range warning. Hosted CI run
+40114955074 succeeded. Two bounded read-only specialist reviews completed.
+Findings/proposals: STAR_SWARM_ASSESSMENT_2026-10-28.md; source archive,
+identity, observations and screenshot in private-artifacts/star-swarm-assessment-2026-10-28/.
+Adopt small test entry points and executable doc claims; measure Aurora's
+automated/manual actuator difference before further persona tuning; add replay
+checkpoints incrementally. Do not infer Claude/Firstmate performance superiority
+or transplant the runtime. No runtime edits, account writes or publication.
+Localhost8000 still serves build1251/2e33ef4d from this checkout's dist/dev.
+Next: discuss the proposed contract/Expert-diagnosis packet. Beta hold unchanged.
+Comparison HTML: .lavish/star-swarm-comparison/index.html, matching Aurora's
+cyan/amber typography. Desktop/mobile/dark-mode layout and form checks passed;
+review-qa.json and screenshots retained with assessment evidence. Lavish launch
+returned HTTP500, so deliver the local page; no live feedback monitor established.
+
+October 28 dev delivery COMPLETE: PR256 (feature) and PR257 (plan/evidence)
+merged; source main 2e33ef4d. Full clean-main preflight and publish:dev passed.
+Live 1.4.2.1+build.1251.sha.2e33ef4d, public commit aec0103; Pages run
+40689249245 succeeded. All 13 hosted assets and general browser smoke passed.
+Exact details panel passed desktop 1440x1800 and mobile 390x844, offline,
+keyboard navigation/focus, metadata identity and overflow checks. No page
+exceptions; general smoke retained a nonblocking console 404 and aborted
+external YouTube requests. No account/score writes or new persona measurements.
+All 1280 non-dev public blobs unchanged; all 600 frozen beta files match.
+Receipts and screenshots: private-artifacts/dev-release-2026-10-28/.
+Localhost:8000 serves this checkout's dist/dev with the same build identity.
+Production 1.4.2 and beta.5 unchanged; next beta remains explicitly on hold.
+
+One preflight started before the remote fetch finished, then stopped correctly
+on old evidence. Its redundant generated output is preserved in a named Git
+stash ("Preserve redundant preflight output before PR257 fetch completed"),
+not accepted evidence. Clean-main rerun passed after the fetch/fast-forward.
+This post-deployment status note and the plan's delivery receipt are local
+follow-up edits, not a change to the already shipped source snapshot.
+Next: discuss Path A/B/C and prospective Expert/Guardians criteria in the
+refreshed plan; recommended first packet is immutable-runner/test-map pilot
+plus read-only Expert weak-tail diagnosis. No broader implementation authorized
+by the discussion draft alone.
 
 October 28 integration milestone: PR256 merged at e80af082 after no-mistakes
 review/tests and hosted Release Contracts CI. User chose visible version only:

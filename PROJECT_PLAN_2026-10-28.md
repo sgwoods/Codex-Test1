@@ -4,7 +4,29 @@ October 28, 2026. Discussion draft from Aurora Project Lead.
 Implementation baseline: 3c7d2667; build-details PR #256 merged at e80af082 (submission 65883aad).
 Supersedes October 4 planning priorities, not preserved experimental results.
 
+Delivery receipt, October 28: PR256 and PR257 merged; dev-only publication
+completed from source 2e33ef4d as 1.4.2.1/build1251. Hosted identity, 13 assets,
+browser smoke and offline desktop/mobile build details passed. All 1280 public
+non-dev blobs and 600 frozen beta files are unchanged. Receipts are retained in
+private-artifacts/dev-release-2026-10-28/. Production/beta hold remains in force.
+This receipt is a local post-deployment update; the discussion remains open.
+
+Adoption cycle, October 28: the user authorized the recommended first packet.
+Focused test commands, executable documentation claims, isolated copied-bundle
+experiments and PR workflow updates are implemented locally on
+`codex/adopt-test-contracts`. Retained Expert telemetry reproduced exactly within
+the documented exclusions; the automated/human actuator difference is measured,
+not repaired. See [cycle evidence and next packet](ADOPTION_CYCLE_2026-10-28.md).
+No hosted CI, integration or new publication yet; beta remains on hold.
+
 ## Recommendation
+
+Cross-project follow-up: [Star Swarm assessment](STAR_SWARM_ASSESSMENT_2026-10-28.md)
+supports the quality-first pilot, with a smaller test-command surface, executable
+documentation claims and checkpointed failure replay. It identifies a real
+automated/manual actuator difference to measure before persona tuning. The
+comparison does not establish model/harness superiority and does not authorize a
+runtime rewrite, new orchestration service or beta promotion.
 
 Keep production 1.4.2 stable. Accumulate a player-facing Aurora quality batch
 on `/dev`, supported by a small, measurable harness-efficiency pilot. Prioritize
@@ -23,12 +45,12 @@ records and evidence that humans can inspect.
 | --- | --- | --- |
 | Production | 1.4.2/build1218/ea779a76 shipped October 26; hosted smoke and documentation checks passed | This plan is not a new full production audit |
 | Accounts and scores | Per-game signed-in storage shipped; human confirmed reload/new-tab persistence | Account-linked does not mean cheat-proof or replay-validated |
-| Build details | PR #256 integrated after review, tests and CI; dev delivery underway | Hosted acceptance remains required; no beta promotion |
+| Build details | 1.4.2.1/build1251 live on dev; review, tests, CI and hosted checks passed | Human inspection remains useful; no beta promotion |
 | Aurora personas | October 20 integrated panel: Beginner median 7,235; Intermediate 21,995; Expert 81,275; Professional 240,785 | Ten seeds each, 900-second cap; Expert only 6/10 at 75k; not final career distributions |
 | Professional | Across three distinct repaired panels, 30/30 reached 150k and 28/30 reached 200k | All survived the time cap; no population or world-record guarantee |
 | Fidelity | Accepted safety, capture/rescue and transition improvements | Exact original-game fidelity, all-level perfect feasibility and human actuator equivalence not established |
 | Guardians | Playable preview with persistent game-specific scores | Not accepted v1; its score scale and incomplete persona evidence cannot be treated as Aurora's ladder |
-| Infrastructure | Release-contract CI, local browser tests, PDF/diagram and documentation gates exist | No general meaningful npm test entrypoint; over 400 named harness scripts need a navigable test map |
+| Infrastructure | Focused npm test/docs/sim/browser entry points, executable claims and copied-bundle runner implemented locally; existing PDF/diagram/release gates retained | PR integration/hosted CI pending; legacy harnesses are not automatically isolated; no measured speedup or general multi-browser capacity claim |
 
 October 26 conformance figures (8.7 overall, 7.46 application average, 4.3 strict
 challenge) reanalyze older inputs. They are not new October 28 gameplay results
@@ -63,8 +85,9 @@ A cycle is one bounded diagnosis/change/validation packet, not a fixed day.
 
 | Window | Work and dependencies | Exit decision |
 | --- | --- | --- |
-| Current cycle | Integrate build details, pass gates, deploy and verify dev only | Exact hosted identity and panel behavior; production/beta unchanged |
-| Days 1-3, Oct 29-Nov 2 | Map tests by subsystem; archive reproducible input probe; freeze Expert baseline and identify lower-tail failures; verify private reference recovery | One reproducible failure mechanism and one safe parallel test pilot |
+| Completed dev cycle | Build details integrated and dev-only publication verified | 1.4.2.1/build1251; production/beta unchanged |
+| Current local adoption cycle | Test map, executable claims, private runner and retained Expert replay implemented/checked; integrate through review/CI next | Tooling and diagnostic evidence, not a player-quality gain or release |
+| Days 1-3, Oct 29-Nov 2 | Instrument the reproduced Expert collision; evaluate one versus two isolated workers; verify private reference recovery | One reproducible failure mechanism and one safe parallel test pilot |
 | Days 4-10, Nov 3-11 | One Expert candidate at a time; matched and fresh-seed panels; shared-controller Watch/P2 checks; fix highest-value reproduced player bug | Accepted quality gain or recorded rejection; inspect dev batch with human |
 | Weeks 3-4, Nov 12-25 | If A succeeds, qualify one Guardians normal-play loop and its own persona baseline; scope replay/feedback improvements | Keep preview or accept a named capability milestone, not automatic v1 |
 | Weeks 5-8, Nov 26-Dec 23 | Choose deeper Aurora levels/fidelity versus Guardians depth, using pilot evidence | Scope next product milestone; third game only after two-game contracts prove reusable |
@@ -109,10 +132,11 @@ return to evidence and alternatives. No endless tuning to satisfy one seed.
 
 ### P2: Faster trustworthy tests and releases
 
-Create a small feature-to-test map, not a replacement for 400 scripts at once.
-Offer executable smoke/unit, browser-package, persona and release tiers.
-Require negative cases as well as happy paths. Extend PR CI only with portable,
-bounded, proven tests; retain Mac/audio/live-service acceptance where necessary.
+The first local packet now provides the [test map](TEST_MAP.md), focused commands,
+negative fixtures, executable claims and a copied-bundle experiment wrapper.
+Integrate it, then extend subsystem coverage incrementally, not by replacing 400
+scripts at once. Retain Mac/audio/live-service acceptance where necessary.
+Hosted CI acceptance and measured pilot-efficiency outcomes remain pending.
 
 Build once for a candidate and record immutable artifact hashes. Each worker
 gets a unique output directory and port. Disable implicit rebuilds and canonical
@@ -222,8 +246,9 @@ data migration, require a separate additive migration/rollback review.
 3. Prioritize Guardians core-loop completeness before Rival, or require Rival
    in the first accepted milestone and accept a longer timeline?
 
-Recommended first packet after dev: a short immutable-runner/test-map pilot
-alongside read-only Expert failure analysis. Then one measured Expert repair.
+The first local runner/test-map packet and read-only Expert reproduction are
+implemented; reviewed integration and an unrounded collision trace are next.
+Then consider one measured Expert repair, separate from actuator migration.
 No next beta date or version is assigned.
 
 ## Evidence and Sources

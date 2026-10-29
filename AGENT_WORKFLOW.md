@@ -5,10 +5,13 @@ Adopted October 3, 2026. This operating model complements
 
 October 28 reassessment: [PROJECT_PLAN_2026-10-28.md](PROJECT_PLAN_2026-10-28.md)
 proposes a two-week execution pilot. The current one-lead/two-specialist model
-remains in force. Immutable-bundle worker mode, canonical-output isolation and
-content-based freshness are proposed improvements, not implemented capabilities
-or permission to bypass existing checks. Parallel agents do not imply parallel
-browser capacity; measure one versus two heavy jobs before increasing it.
+remains in force. The first adoption cycle adds the focused [test map](TEST_MAP.md),
+executable documentation claims and a hash-verified copied-bundle runner with
+per-run outputs. These are local development tools, not replacement release gates.
+General worker isolation and content-based release freshness remain future work.
+Parallel agents do not imply parallel browser capacity; measure one versus two
+heavy jobs before increasing it. Legacy harness commands may still rebuild or
+write canonical outputs: do not assume they use the new isolation contract.
 
 ## Ownership
 
