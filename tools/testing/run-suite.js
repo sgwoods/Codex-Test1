@@ -12,15 +12,20 @@ const releaseContracts = [
 ].map(file => [`tools/harness/${file}`]);
 const SUITES = {
   fast: [
-    ['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/isolated-gameplay.test.js', 'tools/testing/run-suite.test.js', 'tools/testing/managed-child.test.js'],
+    ['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js', 'tools/testing/isolated-gameplay.test.js', 'tools/testing/run-suite.test.js', 'tools/testing/managed-child.test.js'],
     ['tools/testing/doc-claims.js'], ...releaseContracts,
   ],
   simulation: [['tools/harness/check-persona-mode-parity.js']],
-  docs: [['--test', 'tools/testing/doc-claims.test.js'], ['tools/testing/doc-claims.js']],
+  docs: [['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js'], ['tools/testing/doc-claims.js']],
 };
 
 function inputs(root) {
   const docs = new Set(['package.json', 'package-lock.json', 'TEST_MAP.md', 'release-manifest.json', 'white-paper.json']);
+  const history = path.join(root, 'WORK_HISTORY.json');
+  if (fs.existsSync(history)) {
+    const manifest = JSON.parse(fs.readFileSync(history, 'utf8'));
+    for (const file of ['WORK_HISTORY.json', manifest.activePacket, manifest.index, ...manifest.archives.map(a => a.file)]) docs.add(file);
+  }
   const guide = path.join(root, 'white-paper.json');
   if (fs.existsSync(guide)) {
     for (const doc of JSON.parse(fs.readFileSync(guide, 'utf8')).sourceDocs || []) docs.add(doc.file);

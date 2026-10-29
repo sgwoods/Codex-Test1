@@ -2,6 +2,12 @@
 
 October 28, 2026. Assessment and proposals, not implementation authorization.
 
+Planning follow-through, October 29: the six Highest Value Lessons below are now
+G1-G6 in the [plan of record](PROJECT_PLAN_2026-10-28.md#major-goals-and-minor-goals),
+with subordinate minor goals, current statuses and acceptance evidence. Use that
+register for current work; the assessment and its proposed sequence below remain
+the dated source rationale. Adoption, not beta advancement, is the current focus.
+
 ## Conclusion
 
 Star Swarm is a useful engineering comparison, especially its simulation/input boundary, data-driven content, small test command surface, and executable documentation claims. Adopt those patterns incrementally. Do not replace Aurora, merge the products, migrate orchestration platforms, or relax release gates on this evidence.

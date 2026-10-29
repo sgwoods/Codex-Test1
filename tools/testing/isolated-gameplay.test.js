@@ -83,6 +83,16 @@ test('source mutations are reported, not repaired or accepted', async t => {
   assert.equal(report.sourceBundleUnchanged, false);
   assert.equal(fs.readFileSync(path.join(options.bundle, 'index.html'), 'utf8'), 'external edit');
 });
+test('failed cleanup scope is persisted without accepting the run', async t => {
+  const options = fixture(t);
+  const cleanup = { scope: 'observed-descendants', status: 'verified', detachedDescendants: 'not-verifiable' };
+  const { out, report } = await runIsolated(options, () => ({ status: 0, cleanup,
+    error: new Error('Interrupted browser run; cleanup cannot verify unobserved detached descendants') }));
+  assert.equal(report.ok, false);
+  const persisted = JSON.parse(fs.readFileSync(path.join(out, 'run.json')));
+  assert.deepEqual(persisted.cleanup, cleanup);
+  assert.match(persisted.error, /cannot verify unobserved detached descendants/);
+});
 test('symlinks, overlapping outputs and path-like scenario names are rejected', async t => {
   const options = fixture(t);
   const before = inventory(options.bundle);

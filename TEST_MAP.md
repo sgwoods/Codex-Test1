@@ -9,7 +9,7 @@ measurements, normal-life persona panels, or human acceptance.
 | Command | Scope | Side effects and limitations |
 | --- | --- | --- |
 | `npm test` | Documentation/runner regressions and the seven existing release-contract fixture checks | Node built-ins plus POSIX process inspection for cleanup tests. No build, browser, accounts or deployment. Not full release acceptance. |
-| `npm run test:docs` | The executable claim blocks below and deliberately invalid claim fixtures | Checks explicit facts, not arbitrary prose truth or rendered readability. |
+| `npm run test:docs` | Executable claims, work-history integrity/navigation and negative fixtures | Checks explicit facts and artifact contracts, not arbitrary prose truth or rendered readability. |
 | `npm run test:sim` | Actual-source Aurora/Guardians controller parity fixtures | Watch/P2/test policy and action parity, not full careers, human-physics equivalence, or skill attainment. Guardians P2 remains unsupported. |
 | `npm run test:browser -- --bundle /absolute/private/build` | Ten-second seeded offline harness smoke over a copied existing bundle | Requires repo-managed Chromium and a private build exposing the harness. No automatic rebuild. Public hosted bundles intentionally lack this API. |
 | `npm run harness:check:release-contracts:ci` | Existing focused release-contract checks | Still available individually; included by `npm test`. |
@@ -39,8 +39,15 @@ bounded at one hour. Browser-worker supervision currently supports macOS/Linux;
 Windows fails explicitly before launching a worker. A timeout terminates the
 worker and its observed descendants, including separately grouped browser
 processes, refreshing discovery during shutdown and verifying termination.
-Inspection/cleanup failures remain explicit failed receipts. This supervises
-trusted harness workers, not adversarial processes escaping OS containment.
+Inspection/cleanup failures remain explicit failed receipts. Every timeout or
+interruption also reports that unobserved detached descendants cannot be verified:
+a benign worker can detach a child between snapshots and exit before discovery.
+Receipts retain `cleanup.scope: observed-descendants`, its `status`
+(`not-attempted`, `verified`, `incomplete`) and
+`detachedDescendants: not-verifiable`. Verified means only the observed set;
+timeout/interruption still fails. The 1,500ms budget bounds inspection/cleanup
+attempts, not settlement if child close or inherited pipes never complete.
+This supervises trusted workers, not OS containment.
 The wrapper always disables video, enables deterministic
 replay, and blocks requests outside its local server. It does not use an existing
 signed-in browser. Use another approved harness for real-time/video/audio work.
@@ -63,6 +70,13 @@ source identity, input hashes, elapsed times, exit/signal status and per-command
 logs. They stop after the first failure. A killed parent may leave an unfinished
 receipt with `ok: false`; never count it as completed. Test inputs must remain
 unchanged for a passing receipt. CI retains these receipts without deploy rights.
+
+Fast/docs also validate [work-history integrity](WORK_HISTORY.json): immutable
+archive hashes/bytes/lines, indexed navigation, existing linked files and the
+150-line active-packet limit. Negative fixtures exercise each failure class.
+These document contracts supplement the twelve executable claims; they do not
+validate every historical statement. Archive and current-packet inputs are
+included in suite fingerprints so concurrent edits cannot yield a passing receipt.
 
 ## Executable Claims
 

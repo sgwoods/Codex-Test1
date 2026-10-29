@@ -49,3 +49,16 @@ test('white-paper source documents are included in mutation detection', t => {
   assert.equal(result.report.ok, false);
   assert.equal(result.report.inputsUnchanged, false);
 });
+test('work-history archives and active packet are included in mutation detection', t => {
+  for (const changedFile of ['ACTIVE.md', 'INDEX.md', 'OLD.md', 'WORK_HISTORY.json']) {
+    const options = fixture(t);
+    fs.writeFileSync(path.join(options.root, 'WORK_HISTORY.json'), JSON.stringify({
+      activePacket: 'ACTIVE.md', index: 'INDEX.md', archives: [{ file: 'OLD.md' }],
+    }));
+    for (const file of ['ACTIVE.md', 'INDEX.md', 'OLD.md']) fs.writeFileSync(path.join(options.root, file), 'fixture');
+    const result = runSuite('docs', { ...options, commands: [['-e',
+      `require("fs").appendFileSync(${JSON.stringify(changedFile)}," ")`]] });
+    assert.equal(result.report.ok, false);
+    assert.equal(result.report.inputsUnchanged, false);
+  }
+});

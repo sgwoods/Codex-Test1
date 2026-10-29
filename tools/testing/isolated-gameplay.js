@@ -85,6 +85,7 @@ async function runIsolated(options, run = execute) {
     report.exitCode = result.status;
     report.signal = result.signal || null;
     report.error = result.error?.message || null;
+    report.cleanup = result.cleanup || null;
     report.inputsUnchanged = inventory(frozen).sha256 === before.sha256 &&
       digest(fs.readFileSync(inputScenario)) === report.scenarioSha256;
     report.sourceBundleUnchanged = inventory(bundle).sha256 === before.sha256;
