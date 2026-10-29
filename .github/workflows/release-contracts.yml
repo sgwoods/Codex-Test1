@@ -24,5 +24,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Test release contracts with isolated fixtures
-        run: npm run harness:check:release-contracts:ci
+      - name: Test fast development and release contracts with isolated fixtures
+        run: npm test
+      - name: Test controller parity with source-backed simulations
+        run: npm run test:sim
+      - name: Retain development test receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: development-test-receipts
+          path: harness-artifacts/test-runs/
+          if-no-files-found: warn

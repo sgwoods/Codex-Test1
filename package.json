@@ -482,7 +482,10 @@
     "harness:check:rescue-join-stage-clear": "node tools/harness/check-rescue-join-on-stage-clear.js",
     "harness": "node tools/harness/run-gameplay.js",
     "log-viewer": "node tools/log-viewer/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tools/testing/run-suite.js fast",
+    "test:docs": "node tools/testing/run-suite.js docs",
+    "test:sim": "node tools/testing/run-suite.js simulation",
+    "test:browser": "node tools/testing/isolated-gameplay.js"
   },
   "repository": {
     "type": "git",

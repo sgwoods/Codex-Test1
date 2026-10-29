@@ -440,6 +440,7 @@ async function main(){
     console.log('   or: npm run harness -- --scenario stage3-challenge');
     console.log('Optional: --persona novice|advanced|expert');
     console.log('Optional: --auto-video 0|1');
+    console.log('Optional: --offline (block requests outside this local run)');
     process.exit(args.help ? 0 : 1);
   }
   const appRoot = args.root ? path.resolve(String(args.root)) : APP_ROOT;
@@ -463,13 +464,23 @@ async function main(){
   const initAutoVideo = spec.autoVideo === false ? '0' : '1';
 
   const { server, port } = await serve(appRoot);
-  const browser = await launchHarnessBrowser({ headed: !!args.headed });
+  let browser;
 
   try{
+    browser = await launchHarnessBrowser({ headed: !!args.headed });
     const context = await browser.newContext({
       acceptDownloads: true,
+      serviceWorkers: args.offline ? 'block' : 'allow',
       viewport: { width: 1440, height: 1800 }
     });
+    if(args.offline){
+      await context.routeWebSocket('**/*', socket => socket.close());
+      const origin = new URL(localUrl(port, '/index.html', { browser: true })).origin;
+      await context.route('**/*', route => {
+        const url = new URL(route.request().url());
+        return url.origin === origin ? route.continue() : route.abort();
+      });
+    }
     const page = await context.newPage();
     const downloads = [];
     page.on('download', d => downloads.push(d));
@@ -556,8 +567,8 @@ async function main(){
     summary.latest = writeLatestRunArtifacts(outBase, outDir, summary);
     console.log(JSON.stringify(summary, null, 2));
   } finally {
-    await browser.close();
-    server.close();
+    try { if(browser) await browser.close(); }
+    finally { server.close(); }
   }
 }
 
