@@ -114,7 +114,7 @@ function stepAuroraRuntime(state,dt,input={}){
   // was enough to shift formation pulse phase and change early same-column hit
   // order in stage 2 carryover comparisons.
   if(typeof isHarnessClockControlled==='function'&&isHarnessClockControlled()&&!S.challenge){
-   S.simT=Math.max(0,(+S.simT||0)-(1/60));
+   S.simT=Math.max(0,(+S.simT||0)-dt);
   }
   S.nextStageT=0;
   if(S.pendingStage){S.stage=S.pendingStage;S.pendingStage=0;}

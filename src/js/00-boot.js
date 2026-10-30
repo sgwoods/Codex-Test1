@@ -1823,7 +1823,7 @@ function useDeterministicHarnessClock(){
 }
 function advanceGameplayClock(dt,state=S){
  state.simT=(Number.isFinite(state.simT)?state.simT:0)+dt;
- if(useDeterministicHarnessClock())return state.simT;
+ if(isHarnessClockControlled()||useDeterministicHarnessClock())return state.simT;
  return performance.now()/1000;
 }
 function resetHarnessFrameClock(){

@@ -36,9 +36,15 @@ const rescueLadder=read(rescueRoot+'integrated-ladder/results.json');
 const rescueBaseline=read(rescueRoot+'ladder-baseline/results.json');
 const safety=read('reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/results.json');
 const expertVeto=read('reference-artifacts/analyses/persona-calibration-oct29/expert-body-veto.json');
+const currentBuild=read('reference-artifacts/analyses/persona-calibration-oct30/current-build.json');
 const normalize = r => ({persona:r.persona, seed:r.seed, score:r.score, stage:r.stage,
   outcome:r.outcome || (typeof r.latest?.gameOver === 'boolean' ? (r.latest.gameOver ? 'game-over':'time-limit') : 'unknown')});
 const versions = [
+  ...[['A9a','matched','control'],['A9b','matched','candidate'],['A9c','reserved','control'],['A9d','reserved','candidate']].map(([id,panel,arm])=>({
+    id,game:'aurora',label:`Oct 30 | build1256 / ${currentBuild.sourceCommit.slice(0,8)} ${panel} ${arm}${arm==='candidate'?' (UNSHIPPED)':''}`,
+    identity:currentBuild[arm+'IndexSha256'],method:'Hash-bound snapshot browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
+    rows:currentBuild.rows.filter(r=>r.panel===panel&&r.arm===arm).map(normalize)
+  })),
   ...[['A6e','matched','control'],['A8a','matched','candidate'],['A6f','reserved','control'],['A8b','reserved','candidate']].map(([id,panel,policy])=>({
     id,game:'aurora',label:`Oct 29 | Expert ${panel} ${policy} (${policy==='control'?'historical replay':expertVeto.passed?'qualified experiment; UNSHIPPED':'REJECTED'})`,
     identity:expertVeto[policy+'IndexSha256'],method:'Historical browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
@@ -135,4 +141,5 @@ for(const game of ['aurora','guardians'])fs.writeFileSync(path.join(out,`${game}
 fs.writeFileSync(path.join(out,'aurora-current-ladder.svg'),chart('aurora',['A6c','A3d']));
 fs.writeFileSync(path.join(out,'aurora-safety-comparison.svg'),chart('aurora',['A6d','A7']));
 fs.writeFileSync(path.join(out,'aurora-expert-veto-comparison.svg'),expertComparison());
+fs.writeFileSync(path.join(out,'aurora-current-build-comparison.svg'),chart('aurora',['A9a','A9b']));
 console.log(`Validated ${versions.length} panels, ${versions.reduce((n,v)=>n+v.rows.length,0)} observed runs; generated history.json and SVG charts.`);
