@@ -112,7 +112,7 @@ Twelve jobs pass228 cases/96 comparisons with identical recorded mechanics.
 Median pair22.939s serial vs14.296s two-worker; provisional cap2 for this workload
 only. Broader resource/soak and managed failure-path containment remain open.
 Managed follow-through:24 additional jobs pass;1.662x throughput, sampled peak
-RSS1551MiB serial/2987MiB parallel. Cancellation repair passes13 tests; unattended
+RSS1551MiB serial/2987MiB parallel. Local bounded settlement passes17 tests; detached
 containment remains open. See the report for measured-source and sampling limits.
 
 October30 merged qualification: PR261 merged as `cb70121e9c5f29c483eec54f17b44e115a87c55f`;
@@ -127,13 +127,13 @@ Local reconciliation complete: new branch starts at merged main; old branches an
 their commit histories remain unchanged. The post-merge packet update was carried
 forward explicitly. The subsequent G1.3 pilot is summarized above.
 
-1. G1.2: bound/reproduce open-pipe and failed-worker descendant behavior; define
-   fail-closed settlement and assess containment. No unattended capacity claim.
+1. G1.2: integrate local bounded settlement and failed-worker cleanup; unobserved
+   detached containment remains open. No unattended capacity claim.
 2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
    human feasibility limits; Expert policy remains private pending integration.
 3. Preserve per-seed regression, capped outcomes and all immutable evidence.
-4. In parallel, G5.1 refusal rules and G6.1 three-claim reference crosswalk;
-   then one G5.2 configuration slice. G6.3 needs approved off-machine recovery.
+4. Integrate local G5.1 refusal rules and G6.1 crosswalk; G5.2 still needs visual
+   playability evidence. G6.3 needs approved off-machine recovery.
    The plan of record gives the phase exit criteria and cycle estimates.
 
 Report goal IDs advanced, evidence, limitations and next recommended minor goals.

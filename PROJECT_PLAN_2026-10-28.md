@@ -78,7 +78,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G1.1 Focused test entry points | Complete for the initial scope in PR258; extend coverage only as needed | Test map, fast/docs/sim/browser commands, negative fixtures and retained CI receipts |
-| G1.2 Safe worker lifecycle and isolation | Partial: PR260 diagnostics and PR262 cancellation integrated;13 supervisor tests pass | Caller cancellation preserved, siblings cancelled/awaited; unkillable/open-pipe settlement, failed-worker descendants and unobserved detached containment remain open |
+| G1.2 Safe worker lifecycle and isolation | Partial: PR260 diagnostics and PR262 cancellation integrated; bounded missing-close settlement and failed-worker observed-descendant cleanup implemented locally, reviewed integration pending;17 managed-child tests pass | Caller cancellation preserved, siblings cancelled/awaited; missing close settles as incomplete within the cleanup budget; unobserved detached/reparented containment remains open |
 | G1.3 Measured agent/harness efficiency | Bounded pilot complete, broader goal partial: two supervised workers only for measured lifecycle workload | Six monitored paired rounds:135.062s serial/81.248s parallel;1.662x throughput, peak sampled RSS1551/2987MiB; not three end-to-end delivery packets or full-career capacity |
 | G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
 
@@ -140,15 +140,15 @@ still untouched. No beta or deployment is authorized.
 October30 phase checkpoint: foundations are integrated; the adoption phase is
 still in progress. Do not collapse partial G1/G3/G4 results into an overall pass.
 
-1. Bound the next G1.2 containment packet: reproduce open-pipe/failed-worker
-   descendant cases, define a fail-closed settlement contract, and assess a real
-   containment boundary. Until qualified, retain supervised cap2 for short
-   lifecycle jobs and sequential full-career jobs. Do not build a new scheduler.
-2. In parallel, begin G5.1 refusal rules and G6.1 three-claim reference crosswalk
-   as independent bounded work. These need no expansion of browser concurrency.
-3. Use those contracts for one existing G5.2 configuration slice with measured
-   runtime effect. This is the next concrete player-value demonstration, not a
-   general authoring platform or third game.
+1. Integrate the local G1.2 packet: bounded missing-close settlement and
+   failed-worker observed-descendant cleanup are implemented, not yet merged.
+   Unobserved detached containment remains open. Until qualified, retain supervised
+   cap2 for short lifecycle jobs and sequential full-career jobs. No new scheduler.
+2. Integrate the local G5.1 refusal rules and G6.1 three-claim crosswalk recorded
+   in the October30 phase review. These need no expansion of browser concurrency.
+3. Complete the G5.2 configuration slice: runtime-consumption proof exists locally;
+   visual playability evidence remains required. This is the next player-value
+   demonstration, not a general authoring platform or third game.
 4. Return to G3/G4 natural late-stage and input-boundary qualification; decide
    Expert integration separately, retaining the regressing seed and censored
    outcomes. Keep Wizard and controller migration out of this packet.
