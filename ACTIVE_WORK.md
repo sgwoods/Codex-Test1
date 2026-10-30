@@ -18,15 +18,15 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 ## Current Cycle
 
-- Goals: G4.2 lifecycle repair and G3.3 fresh-build qualification.
+- Goals: G1.3 bounded browser concurrency measurement after G3/G4 integration.
 - Authorization: user's "go ahead as recommended, work maximally parallel";
   isolated experiments, not deployment or live persona/physics changes.
-- Qualification source: `16baa705365d275903f7395ba0f08ed368f54f41` (PR260).
-- Branch: `codex/controlled-clock-qualification`. Prior local experiment/chart/plan
+- Qualification source: merged `cb70121e9c5f29c483eec54f17b44e115a87c55f` (PR261).
+- Branch: `codex/post-261-adoption`, based on merged main `cb70121e`. Prior experiment/chart/plan
   edits are retained; this cycle does not replace their immutable measurements.
-- Lead edits/integrates. Averroes reviews lifecycle/transition evidence read-only.
+- Lead edits/integrates. Kepler and Einstein completed read-only concurrency reviews.
   Prior clock and late-stage specialist assignments are complete.
-  Heavy browser jobs remain sequential until concurrency safety is measured.
+  Full-career browser jobs remain sequential pending separate measurement.
 - Acceptance: unchanged policy/thresholds, complete hashed private dependencies,
   explicit terminal/censored outcomes, matched/reserved Expert nonregression,
   other-persona mechanical equality, actual browser input/lifecycle checks.
@@ -39,9 +39,9 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 | Goal | Accepted position | Remaining work |
 | --- | --- | --- |
-| G1 Tests and parallel execution | Foundations and G1.2 diagnostic/teardown hardening merged in PR260 | Physical containment, wider isolation and G1.3 efficiency remain pending |
+| G1 Tests and parallel execution | Foundations merged; G1.3 pilot measures1.66x two-worker throughput; cancellation changes await integration | Physical containment and broader workload qualification remain pending |
 | G2 Documentation and memory | Twelve claims and G2.2 checked compact packet/archive merged | Maintain contract and extend high-value claims |
-| G3 Persona/input contracts | Full-game gates and bounded browser matrices pass; fresh isolated dirty build passes19 cases | Exact committed-package qualification, natural late-stage and common human input boundary remain open |
+| G3 Persona/input contracts | PR261 merged; clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage and common human input boundary remain open |
 | G4 Failure diagnostics | Motion clock, initialization and alternate-step transition repairs pass; pause/release and rounded board clocks tested | Reusable full-state replay and natural transition pacing remain open |
 | G5 Content authoring | Existing pack/adapter boundaries identified | Refusal rules, one configuration slice and agreed Guardians core-loop scope |
 | G6 Reference evidence | Assessment sources and local raw experiment archive retained | Three-claim crosswalk and off-machine recovery test |
@@ -101,24 +101,34 @@ database change, hosted publication or new beta decision is authorized here.
 
 ## Next Minor Goals
 
-October30 integration preflight: simulation and documentation suites pass again
-(`simulation-2026-10-30T16-23-20-011Z-kpoVgT`,
-`docs-2026-10-30T16-23-20-951Z-TkuxCQ`). Live pipeline sync inspection reports
-`merged_remote_retained` / `blocked_merged` for completed PR260, with no offered
-next-action command. Local, pipeline and pushed heads all equal `16baa705`;
-follow-up changes remain uncommitted. No reset, rebase, push or branch replacement
-was attempted during that preflight. User subsequently approved a new follow-up
-branch, created without moving the old branch or dropping changes; AXI reports
-no active run on the new branch. Integration validation is next;
-exact committed-build qualification and concurrency measurements remain pending.
+G1.3 pilot: [bounded concurrency report](reference-artifacts/analyses/persona-calibration-oct30/CONCURRENCY.md).
+Twelve jobs pass228 cases/96 comparisons with identical recorded mechanics.
+Median pair22.939s serial vs14.296s two-worker; provisional cap2 for this workload
+only. Broader resource/soak and managed failure-path containment remain open.
+Managed follow-through:24 additional jobs pass;1.662x throughput, sampled peak
+RSS1551MiB serial/2987MiB parallel. Cancellation repair passes13 tests; unattended
+containment remains open. See the report for measured-source and sampling limits.
 
-1. Review/integrate the coherent local clock/test/evidence packet through existing
-   gates, then qualify its exact committed build. No hosted publication implied.
+October30 merged qualification: PR261 merged as `cb70121e9c5f29c483eec54f17b44e115a87c55f`;
+its tree equals CI-validated `084dd8d0`. Isolated clean build1257 passed all19
+lifecycle cases/eight comparisons. Provenance and write-once receipts:
+`private-artifacts/p2-clock-oct30/merged-provenance.json` and
+`private-artifacts/p2-clock-oct30/merged-lifecycle-v1/summary.json`.
+An earlier build was correctly marked dirty solely for the temporary node_modules
+symlink; its copied input remains retained. Only that dependency link was excluded
+locally before the clean rebuild. No runtime source changes or deployments.
+Local reconciliation complete: new branch starts at merged main; old branches and
+their commit histories remain unchanged. The post-merge packet update was carried
+forward explicitly. The subsequent G1.3 pilot is summarized above.
+
+1. Review/integrate targeted cancellation, batch cleanup tests and the concurrency
+   report through existing gates. No hosted publication implied.
 2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
    human feasibility limits; Expert policy remains private pending integration.
 3. Preserve per-seed regression, capped outcomes and all immutable evidence.
-4. G1.3: measure comparable packets before increasing heavy-browser concurrency;
-   then select G5.1/G5.2 content work and G6.1 reference comparison by impact.
+4. G1.3: address unkillable/open-pipe and detached-process containment before
+   unattended concurrency; separately qualify full-career workloads. Then select
+   G5.1/G5.2 content work and G6.1 reference comparison by impact.
 
 Report goal IDs advanced, evidence, limitations and next recommended minor goals.
 Keep release state a short constraint note unless the user reopens release work.
