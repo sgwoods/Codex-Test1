@@ -10,7 +10,7 @@ measurements, normal-life persona panels, or human acceptance.
 | --- | --- | --- |
 | `npm test` | Documentation/runner regressions and the seven existing release-contract fixture checks | Node built-ins plus POSIX process inspection for cleanup tests. No build, browser, accounts or deployment. Not full release acceptance. |
 | `npm run test:docs` | Executable claims, work-history integrity/navigation and negative fixtures | Checks explicit facts and artifact contracts, not arbitrary prose truth or rendered readability. |
-| `npm run test:sim` | Controlled-motion clock regressions and actual-source Aurora/Guardians controller parity fixtures | Watch/P2/test policy and action parity, not full careers, human-physics equivalence, or skill attainment. Guardians P2 remains unsupported. |
+| `npm run test:sim` | Controlled-motion clock regressions, formation authoring refusal/runtime-effect proof and actual-source Aurora/Guardians controller parity fixtures | Watch/P2/test policy and action parity, not full careers, human-physics equivalence, visual content playability or skill attainment. Guardians P2 remains unsupported. |
 | `npm run test:browser -- --bundle /absolute/private/build` | Ten-second seeded offline harness smoke over a copied existing bundle | Requires repo-managed Chromium and a private build exposing the harness. No automatic rebuild. Public hosted bundles intentionally lack this API. |
 | `npm run harness:check:release-contracts:ci` | Existing focused release-contract checks | Still available individually; included by `npm test`. |
 | `npm run release:preflight:dev` | Full existing dev preflight | May rebuild and refresh tracked evidence. Lead-only; do not put it in parallel workers. It does not publish. |

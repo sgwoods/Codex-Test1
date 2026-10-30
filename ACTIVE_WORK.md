@@ -18,19 +18,20 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 ## Current Cycle
 
-- Goals: G1.3 bounded browser concurrency measurement after G3/G4 integration.
+- Goals: G1.2 bounded settlement, G5.1/G5.2 content proof, G6.1 crosswalk and recovery review.
 - Authorization: user's "go ahead as recommended, work maximally parallel";
   isolated experiments, not deployment or live persona/physics changes.
 - Qualification source: merged `cb70121e9c5f29c483eec54f17b44e115a87c55f` (PR261).
-- Branch: `codex/post-261-adoption`, based on merged main `cb70121e`. Prior experiment/chart/plan
+- Branch: `codex/adoption-phase-status`, based on merged main `5b139564`. Prior experiment/chart/plan
   edits are retained; this cycle does not replace their immutable measurements.
-- Lead edits/integrates. Kepler and Einstein completed read-only concurrency reviews.
+- Lead edits/integrates. Socrates/Bohr completed content/reference reviews;
+  Jason reviewed cleanup and found the now-repaired premature pipe teardown.
   Prior clock and late-stage specialist assignments are complete.
   Full-career browser jobs remain sequential pending separate measurement.
 - Acceptance: unchanged policy/thresholds, complete hashed private dependencies,
   explicit terminal/censored outcomes, matched/reserved Expert nonregression,
   other-persona mechanical equality, actual browser input/lifecycle checks.
-- Status: PR260 merged October30, validated source `16baa705`.
+- Status: PR262 merged October30 as `5b139564`, validated source `9c10591f`.
   No-mistakes review/tests/docs/syntax checks passed; hosted release-contracts
   CI passed. No pipeline code fixes or overrides. See
   [G1.2/G2.2 cycle report](ADOPTION_HARDENING_2026-10-29.md).
@@ -39,12 +40,12 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 | Goal | Accepted position | Remaining work |
 | --- | --- | --- |
-| G1 Tests and parallel execution | Foundations merged; G1.3 pilot measures1.66x two-worker throughput; cancellation changes await integration | Physical containment and broader workload qualification remain pending |
+| G1 Tests and parallel execution | Foundations and PR262 cancellation merged; G1.3 pilot measures1.66x two-worker throughput | Physical containment, full-career capacity and end-to-end delivery efficiency remain pending |
 | G2 Documentation and memory | Twelve claims and G2.2 checked compact packet/archive merged | Maintain contract and extend high-value claims |
 | G3 Persona/input contracts | PR261 merged; clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage and common human input boundary remain open |
 | G4 Failure diagnostics | Motion clock, initialization and alternate-step transition repairs pass; pause/release and rounded board clocks tested | Reusable full-state replay and natural transition pacing remain open |
-| G5 Content authoring | Existing pack/adapter boundaries identified | Refusal rules, one configuration slice and agreed Guardians core-loop scope |
-| G6 Reference evidence | Assessment sources and local raw experiment archive retained | Three-claim crosswalk and off-machine recovery test |
+| G5 Content authoring | Local refusal validator and real formation-consumer proof pass | Visual playability evidence, reviewed integration and Guardians scope |
+| G6 Reference evidence | Three-claim crosswalk recorded;156 files restored locally with hashes | Approved off-machine recovery; challenge settlement product decision |
 
 ## Latest Accepted Evidence
 
@@ -101,6 +102,11 @@ database change, hosted publication or new beta decision is authorized here.
 
 ## Next Minor Goals
 
+[Current phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) records the four-step
+follow-through, content refusal matrix, crosswalk and fresh recovery receipt.
+Local code is not merged/deployed. G5.2 visual playability and G6.3 remote restore
+still prevent full phase acceptance. Expert remains private; scoring is unchanged.
+
 G1.3 pilot: [bounded concurrency report](reference-artifacts/analyses/persona-calibration-oct30/CONCURRENCY.md).
 Twelve jobs pass228 cases/96 comparisons with identical recorded mechanics.
 Median pair22.939s serial vs14.296s two-worker; provisional cap2 for this workload
@@ -121,14 +127,14 @@ Local reconciliation complete: new branch starts at merged main; old branches an
 their commit histories remain unchanged. The post-merge packet update was carried
 forward explicitly. The subsequent G1.3 pilot is summarized above.
 
-1. Review/integrate targeted cancellation, batch cleanup tests and the concurrency
-   report through existing gates. No hosted publication implied.
+1. G1.2: bound/reproduce open-pipe and failed-worker descendant behavior; define
+   fail-closed settlement and assess containment. No unattended capacity claim.
 2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
    human feasibility limits; Expert policy remains private pending integration.
 3. Preserve per-seed regression, capped outcomes and all immutable evidence.
-4. G1.3: address unkillable/open-pipe and detached-process containment before
-   unattended concurrency; separately qualify full-career workloads. Then select
-   G5.1/G5.2 content work and G6.1 reference comparison by impact.
+4. In parallel, G5.1 refusal rules and G6.1 three-claim reference crosswalk;
+   then one G5.2 configuration slice. G6.3 needs approved off-machine recovery.
+   The plan of record gives the phase exit criteria and cycle estimates.
 
 Report goal IDs advanced, evidence, limitations and next recommended minor goals.
 Keep release state a short constraint note unless the user reopens release work.

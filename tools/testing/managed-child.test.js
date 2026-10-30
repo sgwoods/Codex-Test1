@@ -155,12 +155,73 @@ test('late worker error preserves timeout and cleanup uncertainty', { skip: proc
 test('supervisor preserves normal status and launch errors', { skip: process.platform === 'win32' }, async () => {
   const result = await managedNode(['-e', 'process.exit(7)'], { timeout: 5000, stdio: 'ignore' });
   assert.equal(result.status, 7);
-  assert.equal(result.error, null);
-  assert.equal(result.cleanup.status, 'not-attempted');
+  assert.match(result.error.message, /exited with 7/);
+  assert.equal(result.cleanup.status, 'verified');
   const invalid = await managedNode(['-e', 'process.exit(0)'], { cwd: '/does-not-exist/aurora', timeout: 5000, stdio: 'ignore' });
   assert(invalid.error);
   assert.equal(invalid.cleanup.status, 'not-attempted');
 });
+
+test('missing close settles incomplete instead of waiting indefinitely', { timeout: 4000 }, async () => {
+  const child = new EventEmitter(); child.pid = 20000001;
+  let unref = false, destroyed = false;
+  child.unref = () => { unref = true; };
+  child.stdout = { destroy: () => { destroyed = true; } };
+  const start = performance.now();
+  const result = await managedNode([], { timeout: 1 }, async () => [
+    { pid: process.pid, parent: 1, group: 20000003, state: 'S' },
+    { pid: child.pid, parent: process.pid, group: child.pid, state: 'S' },
+  ], { spawn: () => child, signal: () => {} });
+  assert.match(result.error.message, /close not observed/);
+  assert.equal(result.cleanup.status, 'incomplete');
+  assert(unref && destroyed); assert(performance.now() - start < 3000);
+});
+test('empty process snapshots wait for delayed close and preserve output', async () => {
+  const child = new EventEmitter(); child.pid = 20000001;
+  let destroyed = false;
+  child.stdout = { destroy: () => { destroyed = true; } };
+  const run = managedNode([], { timeout: 5000 }, async () => [
+    { pid: process.pid, parent: 1, group: 20000003, state: 'S' },
+  ], { spawn: () => child, signal: () => {} });
+  child.emit('exit', 7, null);
+  setTimeout(() => child.emit('close', 7, null), 50);
+  const result = await run;
+  assert.equal(result.status, 7);
+  assert.equal(result.cleanup.status, 'verified');
+  assert.equal(destroyed, false);
+  const diagnostic = result.error.message;
+  child.emit('error', new Error('late'));
+  child.emit('close', 0, null);
+  assert.equal(result.error.message, diagnostic);
+  assert.equal(result.status, 7);
+});
+
+test('empty snapshots without close still settle incomplete at the deadline', { timeout: 4000 }, async () => {
+  const child = new EventEmitter(); child.pid = 20000001;
+  const before = ['SIGINT', 'SIGTERM'].map(name => process.listenerCount(name));
+  const start = performance.now();
+  const run = managedNode([], { timeout: 5000 }, async () => [
+    { pid: process.pid, parent: 1, group: 20000003, state: 'S' },
+  ], { spawn: () => child, signal: () => {} });
+  child.emit('exit', 7, null);
+  const result = await run;
+  assert.equal(result.status, 7);
+  assert.equal(result.cleanup.status, 'incomplete');
+  assert.match(result.error.message, /close not observed/);
+  assert(performance.now() - start >= 1400);
+  assert(performance.now() - start < 3000);
+  assert.deepEqual(['SIGINT', 'SIGTERM'].map(name => process.listenerCount(name)), before);
+});
+
+test('failed worker cleanup terminates same-group pipe holder', { skip: process.platform === 'win32', timeout: 6000 }, async () => {
+  const result = await managedNode(['-e', `
+    const child=require('node:child_process').spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{stdio:'inherit'});
+    child.on('spawn',()=>process.exit(7));
+  `], { timeout: 4000, stdio: ['ignore', 'pipe', 'pipe'] });
+  assert.equal(result.status, 7);
+  assert.equal(result.cleanup.status, 'verified', result.error?.message);
+});
+
 test('process-inspection failure is explicit, never accepted as successful cleanup', { skip: process.platform === 'win32', timeout: 10000 }, async () => {
   const previousPath = process.env.PATH;
   let result;
