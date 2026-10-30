@@ -29,7 +29,11 @@ function signal(pid, name) {
 function managedNode(args, options, readProcesses = processTableAsync, backend = {}) {
   if (process.platform === 'win32') throw new Error('Isolated browser supervision currently requires macOS or Linux');
   return new Promise(resolve => {
-    const { timeout, ...spawnOptions } = options;
+    const { timeout, signal: abortSignal, ...spawnOptions } = options;
+    if (abortSignal?.aborted) {
+      resolve({ status: null, signal: null, error: new Error('Cancelled before spawn'), cleanup: { status: 'not-needed' } });
+      return;
+    }
     const child = (backend.spawn || spawn)(process.execPath, args, { ...spawnOptions, detached: true });
     let status = null, exitSignal = null, error = null, closed = false, stopping = false, cleaned = false;
     const cleanup = { scope: 'observed-descendants', status: 'not-attempted', detachedDescendants: 'not-verifiable' };
@@ -37,6 +41,7 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
     function finish() {
       if (!closed || (stopping && !cleaned)) return;
       clearTimeout(timer);
+      abortSignal?.removeEventListener('abort', cancel);
       process.removeListener('SIGTERM', interrupt);
       process.removeListener('SIGINT', interrupt);
       resolve({ status, signal: exitSignal, error, cleanup });
@@ -129,6 +134,7 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
       });
     }
     function interrupt() { stop('Interrupted browser run'); }
+    function cancel() { stop('Cancelled browser run'); }
     process.once('SIGTERM', interrupt);
     process.once('SIGINT', interrupt);
     timer = setTimeout(() => stop(`Browser run timed out after ${timeout}ms`), timeout);
@@ -137,6 +143,22 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
       else error = failure;
     });
     child.on('close', (code, name) => { status = code; exitSignal = name; closed = true; finish(); });
+    abortSignal?.addEventListener('abort', cancel, { once: true });
+    if (abortSignal?.aborted) cancel();
   });
 }
-module.exports = { managedNode, processTable };
+// A batch returns only after every started sibling has settled its cleanup.
+async function managedBatch(jobs, run = managedNode) {
+  const controller = new AbortController();
+  const results = await Promise.all(jobs.map(async job => {
+    let result;
+    const signal = job.options?.signal
+      ? AbortSignal.any([controller.signal, job.options.signal]) : controller.signal;
+    try { result = await run(job.args, { ...job.options, signal }); }
+    catch (error) { result = { status: null, error, cleanup: { status: 'unknown' } }; }
+    if (result.status !== 0 || result.error) controller.abort();
+    return result;
+  }));
+  return { passed: results.every(r => r.status === 0 && !r.error), results };
+}
+module.exports = { managedNode, managedBatch, processTable };

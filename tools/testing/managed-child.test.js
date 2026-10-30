@@ -5,7 +5,65 @@ const os = require('node:os');
 const path = require('node:path');
 const { performance } = require('node:perf_hooks');
 const { EventEmitter } = require('node:events');
-const { managedNode, processTable } = require('./managed-child');
+const { managedNode, managedBatch, processTable } = require('./managed-child');
+
+test('pre-aborted jobs never spawn', async () => {
+  const controller = new AbortController(); controller.abort();
+  const result = await managedNode([], { timeout: 100, signal: controller.signal }, undefined,
+    { spawn: () => { throw new Error('must not spawn'); } });
+  assert.match(result.error.message, /before spawn/);
+  assert.equal(result.cleanup.status, 'not-needed');
+});
+
+test('batch preserves caller cancellation and reports rejected runners', async () => {
+  const controller = new AbortController(); controller.abort();
+  const cancelled = await managedBatch([{ args: [], options: { signal: controller.signal } }], async (_, options) => {
+    assert(options.signal.aborted);
+    return { status: null, error: new Error('caller cancelled') };
+  });
+  assert.equal(cancelled.passed, false);
+  const rejected = await managedBatch([{ args: [] }], async () => { throw new Error('runner failed'); });
+  assert.equal(rejected.passed, false);
+  assert.equal(rejected.results[0].cleanup.status, 'unknown');
+});
+
+test('targeted abort removes listener and waits for cleanup', async () => {
+  const controller = new AbortController(), child = new EventEmitter(); child.pid = 20000001;
+  let alive = true, removed = 0;
+  const remove = controller.signal.removeEventListener.bind(controller.signal);
+  controller.signal.removeEventListener = (...args) => { removed++; return remove(...args); };
+  const run = managedNode([], { timeout: 1000, signal: controller.signal }, async () => [
+    { pid: process.pid, parent: 1, group: 20000003, state: 'S' },
+    ...(alive ? [{ pid: child.pid, parent: process.pid, group: child.pid, state: 'S' }] : []),
+  ], { spawn: () => child, signal: () => { if (alive) { alive = false; child.emit('close', null, 'SIGTERM'); } } });
+  controller.abort();
+  const result = await run;
+  assert.equal(result.cleanup.status, 'verified'); assert.equal(removed, 1);
+  assert.match(result.error.message, /Cancelled/);
+});
+
+test('batch failure cancels and awaits sibling cleanup', async () => {
+  let cleaned = false;
+  const result = await managedBatch([{ args: ['fail'] }, { args: ['wait'] }], async (args, options) => {
+    if (args[0] === 'fail') { await new Promise(r => setTimeout(r, 10)); return { status: 1 }; }
+    await new Promise(r => options.signal.addEventListener('abort', r, { once: true }));
+    await new Promise(r => setTimeout(r, 20)); cleaned = true;
+    return { status: null, error: new Error('cancelled'), cleanup: { status: 'verified' } };
+  });
+  assert.equal(result.passed, false);
+  assert(cleaned);
+  assert.equal(result.results.length, 2);
+});
+
+test('real failed batch terminates a hanging sibling', { skip: process.platform === 'win32', timeout: 5000 }, async () => {
+  const result = await managedBatch([
+    { args: ['-e', 'setTimeout(()=>process.exit(2),100)'], options: { timeout: 2000, stdio: 'ignore' } },
+    { args: ['-e', 'setInterval(()=>{},1000)'], options: { timeout: 2000, stdio: 'ignore' } },
+  ]);
+  assert.equal(result.passed, false);
+  assert.match(result.results[1].error.message, /Cancelled/);
+  assert.equal(result.results[1].cleanup.status, 'verified');
+});
 
 async function interruptAfterReadiness(run, ready) {
   let settled = false, value, result;
