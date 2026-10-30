@@ -1,9 +1,25 @@
 # Persona Score History And Process Review
 
-Updated October 20, 2026. Includes the local capture/rescue policy keeper.
-No release was published. All scores below are measured, not estimated.
+Updated October 29, 2026. Includes retained policies and unshipped experiments.
+No release was published by this cycle. All scores below are measured, not estimated.
 
 ## Current Result
+
+The Expert body-veto experiment passes matched and reserved historical
+nonregression gates, but is **not integrated or shipped**. Matched median
+81,275 ->102,020 and75k attainment6/10 ->7/10; reserved median97,780 and8/10
+attainment are unchanged. Destructions fall32 ->29 and34 ->29. One reserved
+seed regresses. Current-build qualification and broader mode/persona checks
+remain. [Full report](../persona-calibration-oct29/EXPERT-BODY-VETO.md).
+
+![Expert candidate, matched and reserved panels](aurora-expert-veto-comparison.png)
+
+The history contains19 panels and310 observations. New A6e/A8a and A6f/A8b
+are paired controls/candidates on a historical bundle, not new release versions.
+Other tiers were not retested in these panels. Three candidate observations are
+budget-censored. Production1.4.2 is unchanged; next beta remains on hold.
+
+## Historical October 20-22 Result
 
 October22: Stage2-only trial rejected. No new900-second distribution was run;
 this chart remains the accepted policy evidence, not an October22 retest.
@@ -15,8 +31,9 @@ A6a/A6b/A6c contain30 distinct Professional runs: all reach150k,28reach200k,
 all survive the900-second budget. A6a versus A3c and A6c versus A3d are matched
 comparisons. A6c also measures all four tiers on the integrated source.
 Expert median81275 meets the central score range but only6/10reach75k.
-Professional consistency is now a bounded local keeper; Stage2 throughput and
-live-account acceptance still block beta. Full history contains13panels/250runs.
+At that checkpoint, Professional consistency was a bounded local keeper while
+Stage2 throughput and live-account acceptance were open. That is historical
+release status, not the current beta checklist. The then-history had13panels/250runs.
 See [keeper report](../persona-calibration-oct20/CAPTURE-RESCUE-KEEPER.md).
 
 ## Aurora
@@ -138,8 +155,8 @@ For every accepted persona-policy version and release candidate:
 - Preserve raw evidence provenance. Rebuild this graphic and inspect it in the
   same work packet; link it from ACTIVE_WORK.md and the release assessment.
 
-history.json contains180observations across nine panels and hashes of its input
-files. hazard-outcomes.json restores terminal status from preserved raw packets,
+history.json contains310 observations across19 panels and hashes of its input
+files. hazard-outcomes.json restores older terminal status from preserved raw packets,
 checked against their recorded SHA256 and seed/score identity. Historical gaps
 are disclosed; this backfill is not a claim of full coverage for every old build.
 

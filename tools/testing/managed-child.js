@@ -26,33 +26,39 @@ function signal(pid, name) {
 
 // Remember descendant groups as well as PIDs: Chromium can detach, and a
 // shutdown handler can create children after the worker has exited.
-function managedNode(args, options, readProcesses = processTableAsync) {
+function managedNode(args, options, readProcesses = processTableAsync, backend = {}) {
   if (process.platform === 'win32') throw new Error('Isolated browser supervision currently requires macOS or Linux');
   return new Promise(resolve => {
     const { timeout, ...spawnOptions } = options;
-    const child = spawn(process.execPath, args, { ...spawnOptions, detached: true });
+    const child = (backend.spawn || spawn)(process.execPath, args, { ...spawnOptions, detached: true });
     let status = null, exitSignal = null, error = null, closed = false, stopping = false, cleaned = false;
-    let timer;
+    const cleanup = { scope: 'observed-descendants', status: 'not-attempted', detachedDescendants: 'not-verifiable' };
+    let timer, cleanupFailure;
     function finish() {
       if (!closed || (stopping && !cleaned)) return;
       clearTimeout(timer);
       process.removeListener('SIGTERM', interrupt);
       process.removeListener('SIGINT', interrupt);
-      resolve({ status, signal: exitSignal, error });
+      resolve({ status, signal: exitSignal, error, cleanup });
     }
     function stop(reason) {
       if (stopping) return;
       stopping = true;
-      error = new Error(reason);
+      cleanup.status = 'incomplete';
+      // A detached child can be reparented between snapshots, even for benign workers.
+      const diagnostic = `${reason}; cleanup cannot verify unobserved detached descendants (snapshot-based supervision)`;
+      error = new Error(diagnostic);
       const ids = new Set(child.pid ? [child.pid] : []);
       const groups = new Set(child.pid ? [child.pid] : []);
       const termIds = new Set(), termGroups = new Set();
       const failures = new Set();
       const started = performance.now(), killAt = started + 500, deadline = started + 1500;
       function fail(message) {
+        cleanup.status = 'incomplete';
         failures.add(message);
-        error = new Error([reason, ...failures].join('; '));
+        error = new Error([diagnostic, ...failures].join('; '));
       }
+      cleanupFailure = fail;
       function discover(rows) {
         const ownGroup = rows.find(row => row.pid === process.pid)?.group;
         if (!ownGroup) throw new Error('Supervisor process group not found');
@@ -73,12 +79,12 @@ function managedNode(args, options, readProcesses = processTableAsync) {
       function send(name) {
         for (const group of groups) {
           if (name === 'SIGTERM' && termGroups.has(group)) continue;
-          try { signal(-group, name); } catch (failure) { fail(`cleanup failed: ${failure.message}`); }
+          try { (backend.signal || signal)(-group, name); } catch (failure) { fail(`cleanup failed: ${failure.message}`); }
           termGroups.add(group);
         }
         for (const pid of [...ids].reverse()) {
           if (name === 'SIGTERM' && termIds.has(pid)) continue;
-          try { signal(pid, name); } catch (failure) { fail(`cleanup failed: ${failure.message}`); }
+          try { (backend.signal || signal)(pid, name); } catch (failure) { fail(`cleanup failed: ${failure.message}`); }
           termIds.add(pid);
         }
       }
@@ -105,6 +111,7 @@ function managedNode(args, options, readProcesses = processTableAsync) {
           if (performance.now() >= killAt) send('SIGKILL');
           const alive = await inspect();
           if (alive && !alive.length) {
+            if (!failures.size) cleanup.status = 'verified';
             return;
           }
           if (performance.now() >= killAt) send('SIGKILL');
@@ -125,7 +132,10 @@ function managedNode(args, options, readProcesses = processTableAsync) {
     process.once('SIGTERM', interrupt);
     process.once('SIGINT', interrupt);
     timer = setTimeout(() => stop(`Browser run timed out after ${timeout}ms`), timeout);
-    child.on('error', failure => { error = failure; });
+    child.on('error', failure => {
+      if (stopping) cleanupFailure(`child process failed: ${failure.message}`);
+      else error = failure;
+    });
     child.on('close', (code, name) => { status = code; exitSignal = name; closed = true; finish(); });
   });
 }

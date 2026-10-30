@@ -35,9 +35,15 @@ const rescueFresh=read(rescueRoot+'rescue-fresh/results.json');
 const rescueLadder=read(rescueRoot+'integrated-ladder/results.json');
 const rescueBaseline=read(rescueRoot+'ladder-baseline/results.json');
 const safety=read('reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/results.json');
+const expertVeto=read('reference-artifacts/analyses/persona-calibration-oct29/expert-body-veto.json');
 const normalize = r => ({persona:r.persona, seed:r.seed, score:r.score, stage:r.stage,
   outcome:r.outcome || (typeof r.latest?.gameOver === 'boolean' ? (r.latest.gameOver ? 'game-over':'time-limit') : 'unknown')});
 const versions = [
+  ...[['A6e','matched','control'],['A8a','matched','candidate'],['A6f','reserved','control'],['A8b','reserved','candidate']].map(([id,panel,policy])=>({
+    id,game:'aurora',label:`Oct 29 | Expert ${panel} ${policy} (${policy==='control'?'historical replay':expertVeto.passed?'qualified experiment; UNSHIPPED':'REJECTED'})`,
+    identity:expertVeto[policy+'IndexSha256'],method:'Historical browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
+    rows:expertVeto.rows.filter(r=>r.panel===panel&&r.policy===policy).map(normalize)
+  })),
   ...[['A6d','baseline','retained control recheck'],['A7','candidate','conflict repair (REJECTED)']].map(([id,policy,label])=>({id,game:'aurora',label:'Oct 22 | '+label,identity:safety[policy==='baseline'?'baselineHash':'candidateHash'],method:'Browser Watch',seeds:'89001-89010',rows:safety.rows.filter(r=>r.policy===policy).map(normalize)})),
   {id:'A1',game:'aurora',label:'Oct 18 | opening repair',identity:provenance.hashes['src/js/05-player-flow.js'],method:'Browser Watch',seeds:'72001-72010',rows:old.filter(r=>r.game==='aurora').map(normalize)},
   {id:'A2',game:'aurora',label:'Oct 20 | later-stage policy',identity:later.sourceHash,method:'Browser Watch',seeds:'87001-87010',rows:later.rows.map(normalize)},
@@ -85,6 +91,39 @@ function chart(game,ids=null) {
   svg+=text(36,height-15,game==='aurora'?'Dashed marks: Expert 75k and Professional 150k targets. Censored scores are lower bounds, not final career scores.':'Guardians uses its own score scale. Later Expert data do not establish the current ranking of the other personas.','small');
   return svg+'</svg>';
 }
+function expertComparison(){
+  const width=1400,height=630,left=220,right=1080,scale=score=>left+score/400000*(right-left);
+  const text=(x,y,s,cls='')=>`<text x="${x}" y="${y}" class="${cls}">${esc(s)}</text>`;
+  let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img"><title>Expert body-veto experiment, matched and reserved score distributions</title><rect width="100%" height="100%" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#20252b;font-size:18px}.title{font-size:28px;font-weight:bold}.heading{font-size:21px;font-weight:bold}.small{font-size:16px;fill:#52616b}</style>`;
+  svg+=text(36,44,'Expert safety candidate | Full-game score distributions','title');
+  svg+=text(36,76,'Historical build 1210; one frozen policy change. Experimental, not integrated or released.','small');
+  svg+=text(36,103,'Each point is a run. Circle = game over; triangle = budget-censored. Black bar = median. Lines connect matched seeds.','small');
+  for(const [i,panel]of['matched','reserved'].entries()){
+    const top=150+i*220;
+    svg+=text(36,top,`${panel==='matched'?'Matched 91001-91010':'Reserved 93001-93010'} | ${expertVeto.panels[panel].pass?'frozen gate passed':'frozen gate failed'}`,'heading');
+    for(let n=0;n<=400000;n+=100000){const x=scale(n);svg+=`<path d="M${x} ${top+24}V${top+145}" stroke="#e0e4e8"/>`;svg+=text(x-14,top+170,`${n/1000}k`,'small');}
+    svg+=`<path d="M${scale(75000)} ${top+24}V${top+145}" stroke="#a2aab1" stroke-dasharray="4 4"/>`;
+    const rows=expertVeto.rows.filter(r=>r.panel===panel);
+    for(const r of rows.filter(r=>r.policy==='control')){
+      const b=rows.find(b=>b.policy==='candidate'&&b.seed===r.seed),j=(r.seed%10-4.5)*2;
+      svg+=`<path d="M${scale(r.score)} ${top+55+j}L${scale(b.score)} ${top+120+j}" stroke="#d2dae0"/>`;
+    }
+    for(const [j,policy]of['control','candidate'].entries()){
+      const y=top+55+j*65,color=j?'#087f8c':'#657585',summary=expertVeto.panels[panel][policy];
+      svg+=text(36,y+6,j?'Candidate':'Control');
+      for(const r of rows.filter(r=>r.policy===policy)){
+        const x=scale(r.score),yy=y+(r.seed%10-4.5)*2,tip=`Seed ${r.seed}: ${r.score}, Stage ${r.stage}, ${r.outcome}`;
+        svg+=r.outcome==='time-limit'?`<path d="M${x} ${yy-7}l-7 13h14z" fill="${color}"><title>${tip}</title></path>`:`<circle cx="${x}" cy="${yy}" r="6" fill="${color}"><title>${tip}</title></circle>`;
+      }
+      svg+=`<path d="M${scale(summary.median)} ${y-19}V${y+19}" stroke="#111" stroke-width="3"/>`;
+      svg+=text(1110,y,`Median ${summary.median.toLocaleString('en-US')}`,'small');
+      svg+=text(1110,y+24,`${summary.reached75k}/10 at 75k; ${summary.destroyedShips} destructions`,'small');
+    }
+  }
+  svg+=text(36,595,'900-second update budget; censored scores are lower bounds. Other personas not retested in these panels.','small');
+  svg+=text(36,619,'Reserved median is unchanged; one reserved seed regresses. No human-actuator or live-browser mode-equivalence claim.','small');
+  return svg+'</svg>';
+}
 for(const v of versions){
   const keys=new Set();
   for(const r of v.rows){if(!Number.isFinite(r.score)||r.score<0||keys.has(`${r.persona}/${r.seed}`))throw Error(`Invalid run ${v.id}`);keys.add(`${r.persona}/${r.seed}`);}
@@ -95,4 +134,5 @@ fs.writeFileSync(path.join(out,'history.json'),JSON.stringify({schemaVersion:1,s
 for(const game of ['aurora','guardians'])fs.writeFileSync(path.join(out,`${game}-score-history.svg`),chart(game));
 fs.writeFileSync(path.join(out,'aurora-current-ladder.svg'),chart('aurora',['A6c','A3d']));
 fs.writeFileSync(path.join(out,'aurora-safety-comparison.svg'),chart('aurora',['A6d','A7']));
+fs.writeFileSync(path.join(out,'aurora-expert-veto-comparison.svg'),expertComparison());
 console.log(`Validated ${versions.length} panels, ${versions.reduce((n,v)=>n+v.rows.length,0)} observed runs; generated history.json and SVG charts.`);

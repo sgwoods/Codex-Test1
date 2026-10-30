@@ -13,6 +13,13 @@ Parallel agents do not imply parallel browser capacity; measure one versus two
 heavy jobs before increasing it. Legacy harness commands may still rebuild or
 write canonical outputs: do not assume they use the new isolation contract.
 
+October 29 priority update: the plan's G1-G6 major goals and numbered minor goals
+are the adoption backlog. P1-P4 remain supporting work packets. Report each cycle
+by goal IDs advanced, accepted evidence, limitations and next minor goals.
+Persona experiments demonstrate adoption capabilities; they are not the whole
+program. Beta advancement is not the current objective. Mention release state
+briefly as a constraint unless the human explicitly reopens release planning.
+
 ## Ownership
 
 The designated primary chat is **Aurora Project Lead**
@@ -39,7 +46,8 @@ One shared checkout must not have multiple active editing owners.
 ## Cycle
 
 1. Read `ACTIVE_WORK.md`, check source status, and verify relevant evidence.
-2. Choose one player-visible objective and record acceptance criteria.
+2. Choose one bounded minor goal from the plan of record and record acceptance
+   criteria, its major-goal contribution and intended player or engineering value.
 3. Assign independent research or review with baseline SHA, scope, deliverable,
    allowed changes, and required checks. Keep dependent repairs sequential.
 4. Build and inspect locally. Record served checkout and build identity.
@@ -49,8 +57,9 @@ One shared checkout must not have multiple active editing owners.
    delivered gameplay improvement from evidence/testing that protects it.
    Continue the next justified bounded step under existing authorization; report
    outcomes at milestones without requiring routine repeated go-ahead messages.
-7. Integrate accepted work into clean main. Bundle related accepted changes for
-   an explicitly authorized `/dev` review through existing gates.
+7. Integrate accepted work into clean main through review and existing gates.
+   Bundle related changes for `/dev` only when that lane is explicitly authorized;
+   a successful adoption cycle does not require a release or beta progression.
 
 Localhost is the active inspection surface. Hosted `/dev` is the shared review
 surface. Beta and production remain explicit release decisions under existing
@@ -78,6 +87,13 @@ for measurements. Each packet records objective, owner, branch/worktree,
 baseline SHA, references, acceptance criteria, checks, measured results,
 limitations, and next steps. Preserve closed packets in existing project notes
 or issue records before replacing them. GitHub issues track queued work.
+
+Keep `ACTIVE_WORK.md` at 150 lines or fewer: current goals, owner/baseline,
+acceptance evidence, limitations and next minor goals. Index closed reports in
+`WORK_HISTORY.md`; immutable snapshots are recorded in `WORK_HISTORY.json`.
+Preserve bytes and relative-link context when archiving, and run `test:docs`.
+Do not repeatedly prepend complete historical narratives to the startup packet.
+Historical approvals and next actions do not authorize current work.
 
 ## Managing The Project
 
