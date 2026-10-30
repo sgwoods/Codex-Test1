@@ -93,7 +93,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G3.1 Characterize automated versus human control | Initial probe complete; extend shadow trajectories before deciding a common input boundary | Same timestep/input history with acceleration, reversal, bounds and ownership differences recorded; no human-equivalence claim from automated parity |
-| G3.2 Qualify the narrow Expert safety candidate | Current-source matched/reserved gates pass October30; private candidate not integrated | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
+| G3.2 Qualify the narrow Expert safety candidate | Snapshot build1256 / `16baa705` matched/reserved gates pass October30; private candidate not integrated | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
 | G3.3 Full-persona and real-mode nonregression | 100-run matrix passes; clock repair passes original and enhanced browser matrices plus synthetic Stage6 veto | Clean rebuild and natural late-stage qualification; no full browser-equivalence or common human boundary claim |
 | G3.4 Decide input migration and skill-ladder scope | Decision pending after G3.1-G3.3; keep migration separate from policy tuning | Approved capability criteria and any migration's matched movement/collision/score/audio/human-feel acceptance; Wizard remains a later unranked stress-test option |
 

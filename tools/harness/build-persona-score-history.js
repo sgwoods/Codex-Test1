@@ -41,8 +41,8 @@ const normalize = r => ({persona:r.persona, seed:r.seed, score:r.score, stage:r.
   outcome:r.outcome || (typeof r.latest?.gameOver === 'boolean' ? (r.latest.gameOver ? 'game-over':'time-limit') : 'unknown')});
 const versions = [
   ...[['A9a','matched','control'],['A9b','matched','candidate'],['A9c','reserved','control'],['A9d','reserved','candidate']].map(([id,panel,arm])=>({
-    id,game:'aurora',label:`Oct 30 | Current build ${panel} ${arm}${arm==='candidate'?' (UNSHIPPED)':''}`,
-    identity:currentBuild[arm+'IndexSha256'],method:'Current-source browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
+    id,game:'aurora',label:`Oct 30 | build1256 / ${currentBuild.sourceCommit.slice(0,8)} ${panel} ${arm}${arm==='candidate'?' (UNSHIPPED)':''}`,
+    identity:currentBuild[arm+'IndexSha256'],method:'Hash-bound snapshot browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
     rows:currentBuild.rows.filter(r=>r.panel===panel&&r.arm===arm).map(normalize)
   })),
   ...[['A6e','matched','control'],['A8a','matched','candidate'],['A6f','reserved','control'],['A8b','reserved','candidate']].map(([id,panel,policy])=>({

@@ -6,18 +6,18 @@ No release was published by this cycle. All scores below are measured, not estim
 ## Current Result
 
 The Expert body-veto experiment passes matched and reserved historical
-and current-source nonregression gates, but is **not integrated or shipped**. Matched median
+and build1256 / `16baa705` snapshot nonregression gates, but is **not integrated or shipped**. Matched median
 81,275 ->102,020 and75k attainment6/10 ->7/10; reserved median97,780 and8/10
 attainment are unchanged. Destructions fall32 ->29 and34 ->29. One reserved
-seed regresses. Current-source100-run qualification passes; actual browser
+seed regresses. Snapshot build1256 / `16baa705` 100-run qualification passes; actual browser
 P2 equivalence remains open. [Current report](../persona-calibration-oct30/CURRENT-BUILD.md).
 
-![Current-source matched distributions](aurora-current-build-comparison.png)
+![build1256 / 16baa705 matched distributions](aurora-current-build-comparison.png)
 
 ![Expert candidate, matched and reserved panels](aurora-expert-veto-comparison.png)
 
 The history contains23 panels and410 observations. A9a/A9b test all four
-personas on matched current-source arms; A9c/A9d add reserved Expert arms.
+personas on matched build1256 / `16baa705` snapshot arms; A9c/A9d add reserved Expert arms.
 Other-persona mechanics are unchanged. Professional median240,785 is a
 900-second lower bound: all ten candidate observations are censored.
 Earlier A6e/A8a and A6f/A8b

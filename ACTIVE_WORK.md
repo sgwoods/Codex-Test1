@@ -74,7 +74,7 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
   event equality initially failed on missing private-reference-audio warnings;
   October30 new inputs restore all24 canonical files, hash-verified. Original
   failed inputs remain retained. All24 decode in both browser arms.
-  Packet: `private-artifacts/expert-current-oct29/README.md`, raw receipts and
+  Packet: `private-artifacts/expert-current-oct30/README.md`, raw receipts and
   provenance retained there. Browser-v2 individual assertions pass32/32, but
   quiet/held comparisons pass14/16: candidate Beginner P2 and control Professional
   P2 diverge. Both browser suites correctly fail; no full-mode acceptance claim.
