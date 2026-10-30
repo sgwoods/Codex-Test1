@@ -15,7 +15,7 @@ const SUITES = {
     ['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js', 'tools/testing/isolated-gameplay.test.js', 'tools/testing/run-suite.test.js', 'tools/testing/managed-child.test.js'],
     ['tools/testing/doc-claims.js'], ...releaseContracts,
   ],
-  simulation: [['tools/harness/check-persona-mode-parity.js']],
+  simulation: [['--test', 'tools/testing/gameplay-clock.test.js'], ['tools/harness/check-persona-mode-parity.js']],
   docs: [['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js'], ['tools/testing/doc-claims.js']],
 };
 

@@ -76,7 +76,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G1.1 Focused test entry points | Complete for the initial scope in PR258; extend coverage only as needed | Test map, fast/docs/sim/browser commands, negative fixtures and retained CI receipts |
-| G1.2 Safe worker lifecycle and isolation | Partial: issue #259 diagnostic/teardown path implemented locally; integration and broader worker-path qualification remain | Deterministic race and late-error regressions, persisted scoped cleanup results, unconditional readiness teardown; unobserved detached descendants remain unverifiable, not physically contained |
+| G1.2 Safe worker lifecycle and isolation | Partial: issue #259 diagnostic/teardown path merged in PR260 October30; broader worker-path qualification remains | Deterministic race and late-error regressions, persisted scoped cleanup results, unconditional readiness teardown; unobserved detached descendants remain unverifiable, not physically contained |
 | G1.3 Measured agent/harness efficiency | Planned: benchmark one versus two heavy workers only after G1.2; retain one lead and up to two specialists | Three comparable packets with elapsed critical path, lead review, retries, flakes and output collisions; the proposed 20% target is not an observed gain |
 | G1.4 Evidence validity and reviewed integration | Planned: integrate accepted adoption changes through review/CI; design dependency-based validity separately | Fail-closed runtime/method/fixture/asset-change tests before replacing any current freshness gate; integration does not authorize publication |
 
@@ -85,7 +85,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G2.1 Initial semantic documentation contracts | Complete for twelve explicit claims; extend high-value current-state claims incrementally | Positive and deliberately failing fixtures; retain release hashes and PDF/diagram visual checks |
-| G2.2 Compact active packet and goal reporting | Complete locally: 2,768-line working copy preserved byte-for-byte; compact active packet and history index implemented | SHA-256/size/line checks, negative fixtures, reachable file links and a 150-line startup budget; see WORK_HISTORY.md |
+| G2.2 Compact active packet and goal reporting | Merged in PR260 October30: 2,768-line working copy preserved byte-for-byte; compact active packet and history index implemented | SHA-256/size/line checks, negative fixtures, reachable file links and a 150-line startup budget; see WORK_HISTORY.md |
 | G2.3 Documentation follows accepted outcomes | Ongoing: update goal status, limitations, test map and score-history graphics together | Reports distinguish measured, proposed, integrated and shipped; untested personas are never carried forward as new measurements |
 
 ### G3: Persona And Input Contracts
@@ -93,8 +93,8 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G3.1 Characterize automated versus human control | Initial probe complete; extend shadow trajectories before deciding a common input boundary | Same timestep/input history with acceleration, reversal, bounds and ownership differences recorded; no human-equivalence claim from automated parity |
-| G3.2 Qualify the narrow Expert safety candidate | Historical matched/reserved gates passed; next qualify the unchanged candidate on an isolated current build | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
-| G3.3 Full-persona and real-mode nonregression | Pending: test all four personas and actual browser Watch/P2 ownership, lifecycle and score exclusions | Same controller identity across test/Watch/P2, preserved Professional behavior, separate human-input checks; VM cases alone are insufficient |
+| G3.2 Qualify the narrow Expert safety candidate | Current-source matched/reserved gates pass October30; private candidate not integrated | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
+| G3.3 Full-persona and real-mode nonregression | 100-run matrix passes; clock repair passes original and enhanced browser matrices plus synthetic Stage6 veto | Clean rebuild and natural late-stage qualification; no full browser-equivalence or common human boundary claim |
 | G3.4 Decide input migration and skill-ladder scope | Decision pending after G3.1-G3.3; keep migration separate from policy tuning | Approved capability criteria and any migration's matched movement/collision/score/audio/human-feel acceptance; Wizard remains a later unranked stress-test option |
 
 ### G4: Reproducible Failures And Diagnostics
@@ -126,12 +126,15 @@ Any rule-changing variant needs distinct identity and scoring eligibility first.
 
 ## Current Recommended Order
 
-1. Review/integrate the local G1.2 diagnostic hardening and G2.2 archive/index
-   packet through normal gates. Local scope and receipts are in
+1. G1.2 diagnostic hardening and G2.2 archive/index are merged through PR260
+   with hosted CI on October30. Scope and original receipts are in
    [the hardening report](ADOPTION_HARDENING_2026-10-29.md). Broader worker isolation
    and OS containment are not established by the diagnostic fix.
-2. Apply the foundations to G3.2/G3.3 current-build qualification while developing
-   G4.2's transition/replay contract as a separate bounded task. Use one heavy
+2. G3.2 current-build gates pass; [October30 evidence](reference-artifacts/analyses/persona-calibration-oct30/CURRENT-BUILD.md)
+   retains the full100-run panel. [Controlled clock follow-through](reference-artifacts/analyses/persona-calibration-oct30/P2-CLOCK.md)
+   resolves the measured P2 confound locally. [Lifecycle follow-through](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md)
+   covers pause/restart and alternate steps on a fresh dirty build. Next review
+   and integrate the packet, then qualify its exact committed package. Use one heavy
    browser workload until G1.3 demonstrates that more is safe and useful.
 3. Measure G1.3 across comparable packets and use the results to choose the next
    increment. Begin the small G5.1/G5.2 content slice and G6.1 reference crosswalk

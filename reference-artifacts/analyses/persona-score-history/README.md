@@ -1,20 +1,26 @@
 # Persona Score History And Process Review
 
-Updated October 29, 2026. Includes retained policies and unshipped experiments.
+Updated October 30, 2026. Includes retained policies and unshipped experiments.
 No release was published by this cycle. All scores below are measured, not estimated.
 
 ## Current Result
 
 The Expert body-veto experiment passes matched and reserved historical
-nonregression gates, but is **not integrated or shipped**. Matched median
+and current-source nonregression gates, but is **not integrated or shipped**. Matched median
 81,275 ->102,020 and75k attainment6/10 ->7/10; reserved median97,780 and8/10
 attainment are unchanged. Destructions fall32 ->29 and34 ->29. One reserved
-seed regresses. Current-build qualification and broader mode/persona checks
-remain. [Full report](../persona-calibration-oct29/EXPERT-BODY-VETO.md).
+seed regresses. Current-source100-run qualification passes; actual browser
+P2 equivalence remains open. [Current report](../persona-calibration-oct30/CURRENT-BUILD.md).
+
+![Current-source matched distributions](aurora-current-build-comparison.png)
 
 ![Expert candidate, matched and reserved panels](aurora-expert-veto-comparison.png)
 
-The history contains19 panels and310 observations. New A6e/A8a and A6f/A8b
+The history contains23 panels and410 observations. A9a/A9b test all four
+personas on matched current-source arms; A9c/A9d add reserved Expert arms.
+Other-persona mechanics are unchanged. Professional median240,785 is a
+900-second lower bound: all ten candidate observations are censored.
+Earlier A6e/A8a and A6f/A8b
 are paired controls/candidates on a historical bundle, not new release versions.
 Other tiers were not retested in these panels. Three candidate observations are
 budget-censored. Production1.4.2 is unchanged; next beta remains on hold.
@@ -155,7 +161,7 @@ For every accepted persona-policy version and release candidate:
 - Preserve raw evidence provenance. Rebuild this graphic and inspect it in the
   same work packet; link it from ACTIVE_WORK.md and the release assessment.
 
-history.json contains310 observations across19 panels and hashes of its input
+history.json contains410 observations across23 panels and hashes of its input
 files. hazard-outcomes.json restores older terminal status from preserved raw packets,
 checked against their recorded SHA256 and seed/score identity. Historical gaps
 are disclosed; this backfill is not a claim of full coverage for every old build.

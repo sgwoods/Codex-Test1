@@ -62,9 +62,6 @@ window.__galagaHarness__={
   });
  }
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
- if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
-  S.simT=+cfg.initialSimT;
- }
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  window.__platinumHarnessLaunchCfg=Object.assign({},cfg);
  window.__auroraHarnessLaunchCfg=window.__platinumHarnessLaunchCfg;
@@ -81,6 +78,9 @@ window.__galagaHarness__={
    if(previousAuroraStageMode===undefined)delete window.__auroraStartStageMode;
    else window.__auroraStartStageMode=previousAuroraStageMode;
   }
+ }
+ if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
+  S.simT=+cfg.initialSimT;
  }
 },
  checkAuroraRuntimeStateIsolation(){

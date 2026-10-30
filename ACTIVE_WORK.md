@@ -1,6 +1,6 @@
 # Active Work
 
-Updated October 29, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated October 30, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 ## Read First
@@ -18,31 +18,31 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 ## Current Cycle
 
-- Goals: integrate G1.2/G2.2, then start G3.2/G3.3 current-build qualification.
-- Authorization: user's "do 1 and start 2"; source review/CI integration and
+- Goals: G4.2 lifecycle repair and G3.3 fresh-build qualification.
+- Authorization: user's "go ahead as recommended, work maximally parallel";
   isolated experiments, not deployment or live persona/physics changes.
-- Baseline: `0977fef40298e8160897faff4d50e1f1bc642c1b` (merged PR258).
-- Branch: `codex/expert-immediate-body-veto`. Prior local experiment/chart/plan
+- Qualification source: `16baa705365d275903f7395ba0f08ed368f54f41` (PR260).
+- Branch: `codex/controlled-clock-qualification`. Prior local experiment/chart/plan
   edits are retained; this cycle does not replace their immutable measurements.
-- Lead is sole writer. Raman's completed read-only supervision review is retained;
-  Rawls checks isolated current-build preparation read-only this cycle.
-- Acceptance: deterministic snapshot/detached-spawn/parent-exit regression,
-  explicit cleanup uncertainty, failed-run semantics, bounded inspection effort,
-  unconditional readiness-test teardown; byte-identical history, reachable index
-  and a bounded active packet with current goal status.
-- Status: local implementation and independent review complete; 26 tooling
-  tests, twelve claims and seven release-contract fixtures pass. No commit/PR
-  or hosted CI for this packet yet; integration is now in progress. See
+- Lead edits/integrates. Averroes reviews lifecycle/transition evidence read-only.
+  Prior clock and late-stage specialist assignments are complete.
+  Heavy browser jobs remain sequential until concurrency safety is measured.
+- Acceptance: unchanged policy/thresholds, complete hashed private dependencies,
+  explicit terminal/censored outcomes, matched/reserved Expert nonregression,
+  other-persona mechanical equality, actual browser input/lifecycle checks.
+- Status: PR260 merged October30, validated source `16baa705`.
+  No-mistakes review/tests/docs/syntax checks passed; hosted release-contracts
+  CI passed. No pipeline code fixes or overrides. See
   [G1.2/G2.2 cycle report](ADOPTION_HARDENING_2026-10-29.md).
 
 ## Major Goal Status
 
 | Goal | Accepted position | Remaining work |
 | --- | --- | --- |
-| G1 Tests and parallel execution | Foundations merged; G1.2 diagnostic/teardown hardening locally checked | Integrate local packet; physical containment, wider isolation and G1.3 efficiency remain pending |
-| G2 Documentation and memory | Twelve claims integrated; G2.2 compact packet and checked archive/index complete locally | Integrate and maintain the new contract; extend high-value claims |
-| G3 Persona/input contracts | Automated/human boundary measured; historical Expert candidate passed frozen diagnostic gates | Current-build/all-persona tests and actual browser Watch/P2 checks; common human input boundary not implemented |
-| G4 Failure diagnostics | One collision traced and independently replayed within stated exclusions | Transition case, restart-state completeness and reusable first-divergence contract |
+| G1 Tests and parallel execution | Foundations and G1.2 diagnostic/teardown hardening merged in PR260 | Physical containment, wider isolation and G1.3 efficiency remain pending |
+| G2 Documentation and memory | Twelve claims and G2.2 checked compact packet/archive merged | Maintain contract and extend high-value claims |
+| G3 Persona/input contracts | Full-game gates and bounded browser matrices pass; fresh isolated dirty build passes19 cases | Exact committed-package qualification, natural late-stage and common human input boundary remain open |
+| G4 Failure diagnostics | Motion clock, initialization and alternate-step transition repairs pass; pause/release and rounded board clocks tested | Reusable full-state replay and natural transition pacing remain open |
 | G5 Content authoring | Existing pack/adapter boundaries identified | Refusal rules, one configuration slice and agreed Guardians core-loop scope |
 | G6 Reference evidence | Assessment sources and local raw experiment archive retained | Three-claim crosswalk and off-machine recovery test |
 
@@ -58,11 +58,38 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 - Independent verification covered raw hashes, ten archived-control comparisons
   and twenty pair prefixes. 45 behavior cases, 70 geometry cases and 80 VM mode
   cases per arm passed. VM parity does not establish browser or human-input parity.
+- [Current-build qualification](reference-artifacts/analyses/persona-calibration-oct30/CURRENT-BUILD.md):
+  100 runs, all frozen full-game gates pass. 40 Expert historical comparisons
+  independently verified; 30 other-persona pairs preserve recorded mechanics.
+  Professional median240,785; all ten900-second outcomes are lower bounds.
 - [Score history](reference-artifacts/analyses/persona-score-history/README.md):
-  19 panels / 310 observations. No untested persona values carried forward.
+  23 panels / 410 observations. No untested persona values carried forward.
 - Raw Expert archive: `private-artifacts/persistent/expert-body-veto-oct29/`,
   156 compressed artifacts plus manifest; local hashes verified, remote restore
   untested. Working methods: `private-artifacts/expert-body-veto-2026-10-29/`.
+- Current-build start: private build1256/source `16baa705`, seed91001,
+  control 46,960/Stage8 -> candidate 131,920/Stage24; seven interventions.
+  First active destruction 146.900s -> 403.917s; both completed game over.
+  Frozen first-pair criteria and input/method hashes pass. Strict historical
+  event equality initially failed on missing private-reference-audio warnings;
+  October30 new inputs restore all24 canonical files, hash-verified. Original
+  failed inputs remain retained. All24 decode in both browser arms.
+  Packet: `private-artifacts/expert-current-oct29/README.md`, raw receipts and
+  provenance retained there. Browser-v2 individual assertions pass32/32, but
+  quiet/held comparisons pass14/16: candidate Beginner P2 and control Professional
+  P2 diverge. Both browser suites correctly fail; no full-mode acceptance claim.
+  Independent review found controlled recorded time but wall-clock enemy motion
+  when P2 leaves global autopilot off. Retained archive:594 hashed artifacts in
+  `private-artifacts/persistent/expert-current-oct30/`; remote restore untested.
+- [Clock repair follow-through](reference-artifacts/analyses/persona-calibration-oct30/P2-CLOCK.md):
+  one-line local source repair; original browser32/32 and enhanced56/56 cases
+  pass on new hash-bound derived inputs. Tick repeat/held comparisons pass;
+  all eight synthetic Stage6 Expert cases show expected control/candidate action.
+  Five clock regressions join test:sim. Prior failed evidence is not overwritten.
+- [Lifecycle/fresh build](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md):
+  eight clock tests pass; derived and freshly built inputs each pass19 browser
+  cases/eight comparisons at three steps. Fresh build is correctly dirty, not a
+  committed release. InitialSimT ordering and fixed1/60 correction repaired locally.
 
 ## Inspection And Boundaries
 
@@ -74,11 +101,22 @@ database change, hosted publication or new beta decision is authorized here.
 
 ## Next Minor Goals
 
-1. Integrate the checked G1.2/G2.2 packet through normal review/CI; retain explicit
-   supervision limits rather than claiming OS containment or parallel capacity.
-2. G3.2/G3.3: qualify the unchanged Expert candidate on an isolated current build
-   and test all personas plus real Watch/P2 lifecycle/input ownership.
-3. G4.2: add a transition replay/checkpoint contract as a separate bounded task.
+October30 integration preflight: simulation and documentation suites pass again
+(`simulation-2026-10-30T16-23-20-011Z-kpoVgT`,
+`docs-2026-10-30T16-23-20-951Z-TkuxCQ`). Live pipeline sync inspection reports
+`merged_remote_retained` / `blocked_merged` for completed PR260, with no offered
+next-action command. Local, pipeline and pushed heads all equal `16baa705`;
+follow-up changes remain uncommitted. No reset, rebase, push or branch replacement
+was attempted during that preflight. User subsequently approved a new follow-up
+branch, created without moving the old branch or dropping changes; AXI reports
+no active run on the new branch. Integration validation is next;
+exact committed-build qualification and concurrency measurements remain pending.
+
+1. Review/integrate the coherent local clock/test/evidence packet through existing
+   gates, then qualify its exact committed build. No hosted publication implied.
+2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
+   human feasibility limits; Expert policy remains private pending integration.
+3. Preserve per-seed regression, capped outcomes and all immutable evidence.
 4. G1.3: measure comparable packets before increasing heavy-browser concurrency;
    then select G5.1/G5.2 content work and G6.1 reference comparison by impact.
 

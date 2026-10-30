@@ -60,9 +60,753 @@
     {
       "file": "reference-artifacts/analyses/persona-calibration-oct29/expert-body-veto.json",
       "sha256": "107b1c1cef772c40d67a7a0166147286b632c5ea430bff4b84cf0a93cf86dee3"
+    },
+    {
+      "file": "reference-artifacts/analyses/persona-calibration-oct30/current-build.json",
+      "sha256": "0206b9e11af1c192fb37b9f111eff995e143787c69bf4ca7ef77cb18ab4fe6e8"
     }
   ],
   "versions": [
+    {
+      "id": "A9a",
+      "game": "aurora",
+      "label": "Oct 30 | Current build matched control",
+      "identity": "1d23fe9b244a443034019463e045a8e4f7d4c365879b1dd05a95fe728cacb8b6",
+      "method": "Current-source browser Watch",
+      "seeds": "91001-91010",
+      "rows": [
+        {
+          "persona": "expert",
+          "seed": 91001,
+          "score": 46960,
+          "stage": 8,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91002,
+          "score": 99220,
+          "stage": 17,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91003,
+          "score": 79530,
+          "stage": 13,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91004,
+          "score": 54130,
+          "stage": 9,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91005,
+          "score": 128610,
+          "stage": 20,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91006,
+          "score": 60640,
+          "stage": 10,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91007,
+          "score": 69670,
+          "stage": 12,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91008,
+          "score": 83020,
+          "stage": 14,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91009,
+          "score": 198120,
+          "stage": 33,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91010,
+          "score": 94620,
+          "stage": 16,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91001,
+          "score": 6610,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91002,
+          "score": 6630,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91003,
+          "score": 7180,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91004,
+          "score": 5770,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91005,
+          "score": 6740,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91006,
+          "score": 7290,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91007,
+          "score": 7790,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91008,
+          "score": 31540,
+          "stage": 4,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91009,
+          "score": 34300,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91010,
+          "score": 37650,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91001,
+          "score": 8840,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91002,
+          "score": 36040,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91003,
+          "score": 37000,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91004,
+          "score": 7700,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91005,
+          "score": 2560,
+          "stage": 1,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91006,
+          "score": 35150,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91007,
+          "score": 5000,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91008,
+          "score": 7170,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91009,
+          "score": 43220,
+          "stage": 6,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91010,
+          "score": 38900,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "professional",
+          "seed": 91001,
+          "score": 254780,
+          "stage": 38,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91002,
+          "score": 200830,
+          "stage": 34,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91003,
+          "score": 341820,
+          "stage": 47,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91004,
+          "score": 226790,
+          "stage": 38,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91005,
+          "score": 201040,
+          "stage": 32,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91006,
+          "score": 336920,
+          "stage": 44,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91007,
+          "score": 260800,
+          "stage": 43,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91008,
+          "score": 213800,
+          "stage": 34,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91009,
+          "score": 197300,
+          "stage": 33,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91010,
+          "score": 356660,
+          "stage": 50,
+          "outcome": "time-limit"
+        }
+      ]
+    },
+    {
+      "id": "A9b",
+      "game": "aurora",
+      "label": "Oct 30 | Current build matched candidate (UNSHIPPED)",
+      "identity": "e3f06c41e22b9a7f6bd63cff178a6c418e079c83c1108944e6585809f11a146d",
+      "method": "Current-source browser Watch",
+      "seeds": "91001-91010",
+      "rows": [
+        {
+          "persona": "expert",
+          "seed": 91001,
+          "score": 131920,
+          "stage": 24,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91002,
+          "score": 137450,
+          "stage": 22,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91003,
+          "score": 79530,
+          "stage": 13,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91004,
+          "score": 54130,
+          "stage": 9,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91005,
+          "score": 326150,
+          "stage": 42,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "expert",
+          "seed": 91006,
+          "score": 62600,
+          "stage": 10,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91007,
+          "score": 69670,
+          "stage": 12,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91008,
+          "score": 83020,
+          "stage": 14,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 91009,
+          "score": 310010,
+          "stage": 46,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "expert",
+          "seed": 91010,
+          "score": 121020,
+          "stage": 21,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91001,
+          "score": 6610,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91002,
+          "score": 6630,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91003,
+          "score": 7180,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91004,
+          "score": 5770,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91005,
+          "score": 6740,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91006,
+          "score": 7290,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91007,
+          "score": 7790,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91008,
+          "score": 31540,
+          "stage": 4,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91009,
+          "score": 34300,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "novice",
+          "seed": 91010,
+          "score": 37650,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91001,
+          "score": 8840,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91002,
+          "score": 36040,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91003,
+          "score": 37000,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91004,
+          "score": 7700,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91005,
+          "score": 2560,
+          "stage": 1,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91006,
+          "score": 35150,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91007,
+          "score": 5000,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91008,
+          "score": 7170,
+          "stage": 2,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91009,
+          "score": 43220,
+          "stage": 6,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "advanced",
+          "seed": 91010,
+          "score": 38900,
+          "stage": 5,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "professional",
+          "seed": 91001,
+          "score": 254780,
+          "stage": 38,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91002,
+          "score": 200830,
+          "stage": 34,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91003,
+          "score": 341820,
+          "stage": 47,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91004,
+          "score": 226790,
+          "stage": 38,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91005,
+          "score": 201040,
+          "stage": 32,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91006,
+          "score": 336920,
+          "stage": 44,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91007,
+          "score": 260800,
+          "stage": 43,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91008,
+          "score": 213800,
+          "stage": 34,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91009,
+          "score": 197300,
+          "stage": 33,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "professional",
+          "seed": 91010,
+          "score": 356660,
+          "stage": 50,
+          "outcome": "time-limit"
+        }
+      ]
+    },
+    {
+      "id": "A9c",
+      "game": "aurora",
+      "label": "Oct 30 | Current build reserved control",
+      "identity": "1d23fe9b244a443034019463e045a8e4f7d4c365879b1dd05a95fe728cacb8b6",
+      "method": "Current-source browser Watch",
+      "seeds": "93001-93010",
+      "rows": [
+        {
+          "persona": "expert",
+          "seed": 93001,
+          "score": 102100,
+          "stage": 17,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93002,
+          "score": 83050,
+          "stage": 14,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93003,
+          "score": 65530,
+          "stage": 10,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93004,
+          "score": 105680,
+          "stage": 17,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93005,
+          "score": 93460,
+          "stage": 16,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93006,
+          "score": 91000,
+          "stage": 16,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93007,
+          "score": 146380,
+          "stage": 22,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93008,
+          "score": 53040,
+          "stage": 8,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93009,
+          "score": 116880,
+          "stage": 18,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93010,
+          "score": 110330,
+          "stage": 17,
+          "outcome": "game-over"
+        }
+      ]
+    },
+    {
+      "id": "A9d",
+      "game": "aurora",
+      "label": "Oct 30 | Current build reserved candidate (UNSHIPPED)",
+      "identity": "e3f06c41e22b9a7f6bd63cff178a6c418e079c83c1108944e6585809f11a146d",
+      "method": "Current-source browser Watch",
+      "seeds": "93001-93010",
+      "rows": [
+        {
+          "persona": "expert",
+          "seed": 93001,
+          "score": 102100,
+          "stage": 17,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93002,
+          "score": 83510,
+          "stage": 14,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93003,
+          "score": 65530,
+          "stage": 10,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93004,
+          "score": 324410,
+          "stage": 47,
+          "outcome": "time-limit"
+        },
+        {
+          "persona": "expert",
+          "seed": 93005,
+          "score": 93460,
+          "stage": 16,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93006,
+          "score": 91000,
+          "stage": 16,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93007,
+          "score": 117210,
+          "stage": 20,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93008,
+          "score": 53040,
+          "stage": 8,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93009,
+          "score": 116880,
+          "stage": 18,
+          "outcome": "game-over"
+        },
+        {
+          "persona": "expert",
+          "seed": 93010,
+          "score": 110330,
+          "stage": 17,
+          "outcome": "game-over"
+        }
+      ]
+    },
     {
       "id": "A6e",
       "game": "aurora",

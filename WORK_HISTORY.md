@@ -22,7 +22,10 @@ the active packet's 150-line limit. It does not certify every historical claim.
 
 | Topic | Entry point | Scope |
 | --- | --- | --- |
-| Current adoption hardening | [October 29 cycle](ADOPTION_HARDENING_2026-10-29.md) | G1.2 supervision and G2.2 archival checks; local work |
+| Lifecycle and fresh build | [October30 lifecycle report](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md) | Initialization/step correction; fresh dirty build passes bounded browser suite |
+| Controlled P2 motion clock | [October30 follow-through](reference-artifacts/analyses/persona-calibration-oct30/P2-CLOCK.md) | Local clock repair; browser tick and synthetic late-stage checks pass |
+| Current-build qualification | [October30 results](reference-artifacts/analyses/persona-calibration-oct30/CURRENT-BUILD.md) | 100-run gates pass; browser P2 equivalence remains open |
+| Current adoption hardening | [October 29 cycle](ADOPTION_HARDENING_2026-10-29.md) | G1.2 supervision and G2.2 archival checks; PR260 merged October30 |
 | Expert historical qualification | [Measured candidate report](reference-artifacts/analyses/persona-calibration-oct29/EXPERT-BODY-VETO.md) | Qualified private candidate, not current runtime integration |
 | Persona distributions | [Versioned evidence and charts](reference-artifacts/analyses/persona-score-history/README.md) | Measured panels, rejected experiments and censoring |
 | Initial adoption implementation | [October 28 cycle](ADOPTION_CYCLE_2026-10-28.md) | Pre-integration report; PR258 later merged at 0977fef4 |
