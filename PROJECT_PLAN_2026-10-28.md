@@ -1,11 +1,13 @@
 # Aurora and Platinum Project Plan
 
-Created October 28, 2026; priority and goal hierarchy updated October 29.
+Created October 28, 2026; phase status refreshed October 30 after PR262.
 Plan of record from Aurora Project Lead. The user has directed that adopting
 Star Swarm lessons, not progressing toward another beta, is the current focus.
 Original implementation baseline: 3c7d2667; build-details PR #256 merged at e80af082 (submission 65883aad).
-Current integrated baseline: 0977fef4 (PR258). The Expert experiment and its
-documentation remain local follow-through, not an integrated runtime change.
+Current integrated baseline: `5b139564` (PR262). PR260 integrated lifecycle
+diagnostics and compact memory; PR261 integrated controlled-clock repairs and
+historical evidence; PR262 integrated targeted/batch cancellation and measured
+concurrency reporting. The Expert policy candidate remains private, not integrated.
 Supersedes October 4 planning priorities, not preserved experimental results.
 
 Delivery receipt, October 28: PR256 and PR257 merged; dev-only publication
@@ -64,21 +66,21 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 
 | Major goal | Outcome | Current status | Supporting packets |
 | --- | --- | --- | --- |
-| G1. Small, trustworthy tests and effective parallel execution | Agents can select checks, isolate work and demonstrate useful delivery efficiency | Foundations integrated; hardening and efficiency measurement pending | P2, agent operating model |
-| G2. Executable documentation and compact project memory | Current claims fail visibly when stale; current priorities are distinct from history | Twelve claims integrated; compact packet and checked archive/index implemented locally | P2, P4 |
-| G3. Explicit persona/input contracts and credible capabilities | Testing, Watch and Rival share defined behavior; human-control differences and skill limits remain explicit | Boundary measured; one historical candidate qualified, not integrated | P1 |
-| G4. Reproducible failures and first-divergence diagnostics | Replay real runtime behavior with sufficient identity and checkpoints to explain failures | One collision reproduced and audited; reusable replay contract incomplete | P1, P2 |
-| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | Queued; existing pack/adapter contracts are the starting point | P3, P2 |
-| G6. Shared reference evidence with provenance | Cross-project findings improve measured fidelity without importing unverified constants | Source comparison retained; claim crosswalk and recovery test pending | P4, reference/conformance workflow |
+| G1. Small, trustworthy tests and effective parallel execution | Agents can select checks, isolate work and demonstrate useful delivery efficiency | Foundations/cancellation merged; bounded two-worker pilot measures1.66x throughput; general containment incomplete | P2, agent operating model |
+| G2. Executable documentation and compact project memory | Current claims fail visibly when stale; current priorities are distinct from history | Twelve claims, compact packet and checked archive/index integrated; ongoing upkeep | P2, P4 |
+| G3. Explicit persona/input contracts and credible capabilities | Testing, Watch and Rival share defined behavior; human-control differences and skill limits remain explicit | Historical100-run panel retained; clean build1257 lifecycle qualified; Expert candidate private and human boundary open | P1 |
+| G4. Reproducible failures and first-divergence diagnostics | Replay real runtime behavior with sufficient identity and checkpoints to explain failures | Collision explained; clock/restart/transition repairs merged; reusable full-state replay incomplete | P1, P2 |
+| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | Local refusal validator and runtime formation proof pass; visual playability pending | P3, P2 |
+| G6. Shared reference evidence with provenance | Cross-project findings improve measured fidelity without importing unverified constants | Three-claim crosswalk recorded;156-artifact local restore verified; remote restore pending | P4, reference/conformance workflow |
 
 ### G1: Trustworthy Tests And Parallel Execution
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G1.1 Focused test entry points | Complete for the initial scope in PR258; extend coverage only as needed | Test map, fast/docs/sim/browser commands, negative fixtures and retained CI receipts |
-| G1.2 Safe worker lifecycle and isolation | Partial: issue #259 diagnostic/teardown path merged in PR260 October30; broader worker-path qualification remains | Deterministic race and late-error regressions, persisted scoped cleanup results, unconditional readiness teardown; unobserved detached descendants remain unverifiable, not physically contained |
-| G1.3 Measured agent/harness efficiency | Planned: benchmark one versus two heavy workers only after G1.2; retain one lead and up to two specialists | Three comparable packets with elapsed critical path, lead review, retries, flakes and output collisions; the proposed 20% target is not an observed gain |
-| G1.4 Evidence validity and reviewed integration | Planned: integrate accepted adoption changes through review/CI; design dependency-based validity separately | Fail-closed runtime/method/fixture/asset-change tests before replacing any current freshness gate; integration does not authorize publication |
+| G1.2 Safe worker lifecycle and isolation | Partial: PR260 diagnostics and PR262 cancellation integrated; bounded missing-close settlement and failed-worker observed-descendant cleanup implemented locally, reviewed integration pending;17 managed-child tests pass | Caller cancellation preserved, siblings cancelled/awaited; missing close settles as incomplete within the cleanup budget; unobserved detached/reparented containment remains open |
+| G1.3 Measured agent/harness efficiency | Bounded pilot complete, broader goal partial: two supervised workers only for measured lifecycle workload | Six monitored paired rounds:135.062s serial/81.248s parallel;1.662x throughput, peak sampled RSS1551/2987MiB; not three end-to-end delivery packets or full-career capacity |
+| G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
 
 ### G2: Executable Documentation And Project Memory
 
@@ -94,7 +96,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | --- | --- | --- |
 | G3.1 Characterize automated versus human control | Initial probe complete; extend shadow trajectories before deciding a common input boundary | Same timestep/input history with acceleration, reversal, bounds and ownership differences recorded; no human-equivalence claim from automated parity |
 | G3.2 Qualify the narrow Expert safety candidate | Snapshot build1256 / `16baa705` matched/reserved gates pass October30; private candidate not integrated | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
-| G3.3 Full-persona and real-mode nonregression | 100-run matrix passes; clock repair passes original and enhanced browser matrices plus synthetic Stage6 veto | Clean rebuild and natural late-stage qualification; no full browser-equivalence or common human boundary claim |
+| G3.3 Full-persona and real-mode nonregression | Historical100-run matrix passes; PR261 clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage qualification and common human input boundary remain open; bounded checks are not full-career browser equivalence |
 | G3.4 Decide input migration and skill-ladder scope | Decision pending after G3.1-G3.3; keep migration separate from policy tuning | Approved capability criteria and any migration's matched movement/collision/score/audio/human-feel acceptance; Wizard remains a later unranked stress-test option |
 
 ### G4: Reproducible Failures And Diagnostics
@@ -102,15 +104,15 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G4.1 Explain one preserved collision | Complete for the retained Expert failure and documented telemetry projection | Archived control equality, unrounded trace, independently replayed decisions and first-divergence evidence; not full-state/audio determinism |
-| G4.2 Generalize the diagnostic replay contract | Planned: cover one transition as well as the collision; identify missing restart state | Versioned build/game/content/rules/controller identity, seed/RNG, inputs/timesteps and archived checkpoints; malformed or mismatched inputs rejected |
+| G4.2 Generalize the diagnostic replay contract | Partial: controlled motion clock, initialSimT ordering and timestep transition correction integrated in PR261 | Pause/restart, three timesteps and rounded board clocks tested; reusable full-state capture/restore and natural transition pacing remain open |
 | G4.3 Runtime-backed first-divergence inspection | Deferred until G4.2 is demonstrated | Reconstruct with the actual adapter/runtime, compare against archived checkpoints and retain visual video evidence; no second approximate simulation |
 
 ### G5: Bounded Content Authoring
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
-| G5.1 Explicit task boundaries and refusal rules | Planned: distinguish reference analysis, content/config edits and runtime repair | Permitted paths, supported capability checks and unsupported-request fixtures; a content task cannot silently change the engine |
-| G5.2 Validate one existing configuration slice | Planned after G5.1: choose a timing/path configuration already supported by Aurora | Schema/reference checks, runtime effect and playability evidence; reject accepted-but-ignored fields rather than treating schema success as completion |
+| G5.1 Explicit task boundaries and refusal rules | Local implementation complete; reviewed integration pending | Formation allowlist, atomic unsupported-field rejection and refusal matrix in October30 phase review |
+| G5.2 Validate one existing configuration slice | Partial: real formation consumers prove gx/gy/oy effects for stages4/5 |40 entities, unchanged other fields and sampled unaffected stages; visual playability evidence remains required |
 | G5.3 Prove the contracts with Guardians' core loop | Queued: define the bounded stage/lifecycle slice with the human before expanding features | Start/handoff/loss/restart, controls/audio, per-game scores and replay isolation; personas use Guardians' own score scale; preview status retained until accepted |
 
 Named player variants remain a later option, not a current marketplace goal.
@@ -120,11 +122,47 @@ Any rule-changing variant needs distinct identity and scoring eligibility first.
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
-| G6.1 Cross-project reference crosswalk | Planned: compare three high-impact arcade claims from the preserved assessment sources | Source revision, artifact/measurement, confidence and agreement/disagreement or intentional product difference for each claim |
+| G6.1 Cross-project reference crosswalk | Complete for three source-level claims in October30 phase review | Preserved revision/hash; cadence and no-fire agreement; non-perfect settlement discrepancy recorded without changing scoring |
 | G6.2 Measurement-led fidelity and defect work | Ongoing method; next select a reproduced high-impact issue, including game-over audio #247 if still current | Saved clip/cue timeline, waveform/contact-sheet or timing analysis before tuning; preserve full canonical phrases when feasible |
-| G6.3 Recoverable private evidence | Local persistence verified; off-machine restore still pending | Approved destination/access, restored artifact hashes and a repeatable recovery receipt; no account identifiers or licensed private media in public artifacts |
+| G6.3 Recoverable private evidence |156 artifacts restored locally, hashes/readback verified and138 JSON files parsed; off-machine restore pending | Private receipt in recovery-oct30-DeiWOs; no remote transfer or replay-execution claim |
 
 ## Current Recommended Order
+
+Latest [four-step phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) advances the
+checkpoint below: local bounded-settlement repair, refusal/runtime proof,
+three-claim crosswalk and local recovery are implemented. Integrate through gates,
+finish visual playability and approved off-machine recovery before declaring the
+whole phase complete. Then prioritize player-quality defects, natural persona
+qualification, and a bounded Guardians core loop, in that order. The sequence
+below is the retained pre-follow-through checkpoint, not a claim those steps are
+still untouched. No beta or deployment is authorized.
+
+October30 phase checkpoint: foundations are integrated; the adoption phase is
+still in progress. Do not collapse partial G1/G3/G4 results into an overall pass.
+
+1. Integrate the local G1.2 packet: bounded missing-close settlement and
+   failed-worker observed-descendant cleanup are implemented, not yet merged.
+   Unobserved detached containment remains open. Until qualified, retain supervised
+   cap2 for short lifecycle jobs and sequential full-career jobs. No new scheduler.
+2. Integrate the local G5.1 refusal rules and G6.1 three-claim crosswalk recorded
+   in the October30 phase review. These need no expansion of browser concurrency.
+3. Complete the G5.2 configuration slice: runtime-consumption proof exists locally;
+   visual playability evidence remains required. This is the next player-value
+   demonstration, not a general authoring platform or third game.
+4. Return to G3/G4 natural late-stage and input-boundary qualification; decide
+   Expert integration separately, retaining the regressing seed and censored
+   outcomes. Keep Wizard and controller migration out of this packet.
+5. Close the phase only after evidence recovery is tested, the content slice
+   passes, and remaining limitations have explicit dispositions. Consider a
+   meaningful dev batch then; no beta date or deployment is authorized now.
+
+Planning estimate, not a commitment: containment decision1-2 bounded cycles;
+G5.1/G6.1 one parallel cycle; G5.2 and runtime validation1-2 cycles; recovery and
+phase review one cycle once an approved backup destination is available. Failed
+acceptance checks may add cycles. Do not wait for perfect OS containment to do
+safe read-only reference work or serial content validation.
+
+### Earlier Sequence (Historical)
 
 1. G1.2 diagnostic hardening and G2.2 archive/index are merged through PR260
    with hosted CI on October30. Scope and original receipts are in
@@ -159,7 +197,7 @@ the original pilot, not beta targets or authorization for every proposed task.
 | Professional | Across three distinct repaired panels, 30/30 reached 150k and 28/30 reached 200k | All survived the time cap; no population or world-record guarantee |
 | Fidelity | Accepted safety, capture/rescue and transition improvements | Exact original-game fidelity, all-level perfect feasibility and human actuator equivalence not established |
 | Guardians | Playable preview with persistent game-specific scores | Not accepted v1; its score scale and incomplete persona evidence cannot be treated as Aurora's ladder |
-| Infrastructure | Focused npm test/docs/sim/browser entry points, executable claims and copied-bundle runner merged in PR258 after hosted CI; existing PDF/diagram/release gates retained | Legacy harnesses are not automatically isolated; no measured speedup or general multi-browser capacity claim; detached startup cleanup hardening queued in issue259 |
+| Infrastructure | PR258/260/261/262 integrated focused tests, checked memory, clock fixes and cancellation; bounded concurrency pilot measures1.66x throughput | Legacy harnesses not automatically isolated; no general unattended or full-career capacity claim; issue259 containment remains partial |
 
 October 26 conformance figures (8.7 overall, 7.46 application average, 4.3 strict
 challenge) reanalyze older inputs. They are not new October 28 gameplay results
@@ -252,7 +290,8 @@ The first local packet now provides the [test map](TEST_MAP.md), focused command
 negative fixtures, executable claims and a copied-bundle experiment wrapper.
 PR258 integrated it on October29. Extend subsystem coverage incrementally, not by replacing 400
 scripts at once. Retain Mac/audio/live-service acceptance where necessary.
-Hosted CI acceptance passed; measured pilot-efficiency outcomes remain pending.
+Hosted CI acceptance passed. Short-workload throughput is measured; end-to-end
+delivery efficiency across three comparable work packets remains unmeasured.
 
 Build once for a candidate and record immutable artifact hashes. Each worker
 gets a unique output directory and port. Disable implicit rebuilds and canonical
@@ -322,8 +361,8 @@ evidence persists in repo/private storage with recovery hashes. Chat is a workin
 conversation, not the only source of truth. Keep run-specific scratch state out
 of growing top-level status prose; index dated completed packets instead.
 
-One heavy browser workload initially; benchmark one versus two before increasing
-concurrency. Preserve responsive localhost for human play. Agent concurrency
+Two supervised short lifecycle workers are provisionally supported by the October30
+pilot; full-career jobs remain sequential. Preserve responsive localhost for human play. Agent concurrency
 and CPU/browser concurrency are independent controls. Escalate only real product
 choices, permission barriers and failed gates; continue routine bounded work.
 

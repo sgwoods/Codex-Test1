@@ -35,11 +35,12 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
       return;
     }
     const child = (backend.spawn || spawn)(process.execPath, args, { ...spawnOptions, detached: true });
-    let status = null, exitSignal = null, error = null, closed = false, stopping = false, cleaned = false;
+    let status = null, exitSignal = null, error = null, closed = false, stopping = false, cleaned = false, settled = false;
     const cleanup = { scope: 'observed-descendants', status: 'not-attempted', detachedDescendants: 'not-verifiable' };
     let timer, cleanupFailure;
     function finish() {
-      if (!closed || (stopping && !cleaned)) return;
+      if (settled || (!closed && !cleaned) || (stopping && !cleaned)) return;
+      settled = true;
       clearTimeout(timer);
       abortSignal?.removeEventListener('abort', cancel);
       process.removeListener('SIGTERM', interrupt);
@@ -127,8 +128,16 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
       })().catch(failure => {
         fail(`cleanup failed: ${failure.message}`);
         send('SIGKILL');
-      }).finally(() => {
+      }).finally(async () => {
         clearTimeout(killTimer);
+        while (!closed && performance.now() < deadline) {
+          await new Promise(done => setTimeout(done, Math.max(1, Math.min(20, deadline - performance.now()))));
+        }
+        if (!closed) {
+          fail('child close not observed; returning incomplete cleanup after deadline');
+          for (const stream of [child.stdin, child.stdout, child.stderr]) stream?.destroy();
+          child.unref?.();
+        }
         cleaned = true;
         finish();
       });
@@ -139,10 +148,21 @@ function managedNode(args, options, readProcesses = processTableAsync, backend =
     process.once('SIGINT', interrupt);
     timer = setTimeout(() => stop(`Browser run timed out after ${timeout}ms`), timeout);
     child.on('error', failure => {
+      if (settled) return;
       if (stopping) cleanupFailure(`child process failed: ${failure.message}`);
       else error = failure;
     });
-    child.on('close', (code, name) => { status = code; exitSignal = name; closed = true; finish(); });
+    child.on('exit', (code, name) => {
+      if (settled) return;
+      status = code; exitSignal = name;
+      if (code !== 0 && child.pid) stop(`Browser worker exited with ${name || code}`);
+    });
+    child.on('close', (code, name) => {
+      if (settled) return;
+      status = code; exitSignal = name; closed = true;
+      if (code !== 0 && child.pid && !stopping && !error) stop(`Browser worker closed with ${name || code}`);
+      finish();
+    });
     abortSignal?.addEventListener('abort', cancel, { once: true });
     if (abortSignal?.aborted) cancel();
   });
