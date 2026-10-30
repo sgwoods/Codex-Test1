@@ -18,11 +18,11 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 
 ## Current Cycle
 
-- Goals: G1.2 bounded settlement, G5.1/G5.2 content proof, G6.1 crosswalk and recovery review.
+- Goals: merge PR263 and close bounded G5.2 visual/input proof; clarify G6.3 recovery.
 - Authorization: user's "go ahead as recommended, work maximally parallel";
   isolated experiments, not deployment or live persona/physics changes.
 - Qualification source: merged `cb70121e9c5f29c483eec54f17b44e115a87c55f` (PR261).
-- Branch: `codex/adoption-phase-status`, based on merged main `5b139564`. Prior experiment/chart/plan
+- Branch: `codex/formation-visual-proof`, based on merged main `e0987756`. Prior experiment/chart/plan
   edits are retained; this cycle does not replace their immutable measurements.
 - Lead edits/integrates. Socrates/Bohr completed content/reference reviews;
   Jason reviewed cleanup and found the now-repaired premature pipe teardown.
@@ -31,10 +31,10 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 - Acceptance: unchanged policy/thresholds, complete hashed private dependencies,
   explicit terminal/censored outcomes, matched/reserved Expert nonregression,
   other-persona mechanical equality, actual browser input/lifecycle checks.
-- Status: PR262 merged October30 as `5b139564`, validated source `9c10591f`.
+- Status: PR263 merged October30 as `e0987756`, validated source `b90dbe70`.
   No-mistakes review/tests/docs/syntax checks passed; hosted release-contracts
-  CI passed. No pipeline code fixes or overrides. See
-  [G1.2/G2.2 cycle report](ADOPTION_HARDENING_2026-10-29.md).
+  CI passed. Pipeline corrected stale documentation status; no code fixes or
+  overrides. See [phase report](ADOPTION_PHASE_REVIEW_2026-10-30.md).
 
 ## Major Goal Status
 
@@ -44,7 +44,7 @@ link their reports from the index. Keep this startup packet at 150 lines or fewe
 | G2 Documentation and memory | Twelve claims and G2.2 checked compact packet/archive merged | Maintain contract and extend high-value claims |
 | G3 Persona/input contracts | PR261 merged; clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage and common human input boundary remain open |
 | G4 Failure diagnostics | Motion clock, initialization and alternate-step transition repairs pass; pause/release and rounded board clocks tested | Reusable full-state replay and natural transition pacing remain open |
-| G5 Content authoring | Local refusal validator and real formation-consumer proof pass | Visual playability evidence, reviewed integration and Guardians scope |
+| G5 Content authoring | PR263 integrated; named22/20/32 configuration passes four local visual/input cases | Guard tightening/evidence integration, broader configurations and Guardians scope |
 | G6 Reference evidence | Three-claim crosswalk recorded;156 files restored locally with hashes | Approved off-machine recovery; challenge settlement product decision |
 
 ## Latest Accepted Evidence
@@ -104,8 +104,9 @@ database change, hosted publication or new beta decision is authorized here.
 
 [Current phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) records the four-step
 follow-through, content refusal matrix, crosswalk and fresh recovery receipt.
-Local code is not merged/deployed. G5.2 visual playability and G6.3 remote restore
-still prevent full phase acceptance. Expert remains private; scoring is unchanged.
+PR263 is merged, not deployed. [Visual proof](reference-artifacts/analyses/formation-authoring-oct30/README.md)
+qualifies one configuration; G6.3 remote restore still prevents full phase acceptance.
+Expert remains private; shipped layouts and scoring are unchanged.
 
 G1.3 pilot: [bounded concurrency report](reference-artifacts/analyses/persona-calibration-oct30/CONCURRENCY.md).
 Twelve jobs pass228 cases/96 comparisons with identical recorded mechanics.
@@ -127,13 +128,13 @@ Local reconciliation complete: new branch starts at merged main; old branches an
 their commit histories remain unchanged. The post-merge packet update was carried
 forward explicitly. The subsequent G1.3 pilot is summarized above.
 
-1. G1.2: integrate local bounded settlement and failed-worker cleanup; unobserved
+1. G1.2: bounded settlement/failed-worker cleanup integrated; unobserved
    detached containment remains open. No unattended capacity claim.
 2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
    human feasibility limits; Expert policy remains private pending integration.
 3. Preserve per-seed regression, capped outcomes and all immutable evidence.
-4. Integrate local G5.1 refusal rules and G6.1 crosswalk; G5.2 still needs visual
-   playability evidence. G6.3 needs approved off-machine recovery.
+4. G5.1/G6.1 integrated; G5.2 bounded visual/input proof recorded locally.
+   G6.3 needs approved off-machine recovery; baseline entry-overlap debt retained.
    The plan of record gives the phase exit criteria and cycle estimates.
 
 Report goal IDs advanced, evidence, limitations and next recommended minor goals.

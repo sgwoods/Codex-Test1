@@ -1,0 +1,882 @@
+{
+  "source": "e0987756dbee9ab8268a99807e0c0a74046b45f6",
+  "build": "1.4.2.1+build.1257.sha.cb70121e",
+  "bundleHash": "e75da83616ce4e6eddb97a79e446f5e8b413d7fc4114bd1e3387ffca0884f3fe",
+  "methodSha256": "78af97985f0936dbc9745442f9db3792176ab24e105660eb8fbb7b146baf5210",
+  "validatorSha256": "41ca5fe185a58e11ca7b87888da7fbd3d749a2a6b66ffaf5613bf94176cddf07",
+  "inputsUnchanged": true,
+  "smokeAssertionsPassed": true,
+  "visualPasses": 32,
+  "visualFailures": 8,
+  "cases": [
+    {
+      "name": "1100-s4-baseline",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": null,
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 9,
+      "score": 1600,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-rejected-tight",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 18,
+        "gy": 16,
+        "oy": 28
+      },
+      "negative": true,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 0,
+      "verticalGap": 2,
+      "maxActiveOverlap": 9,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-20-18-28",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-20-18-32",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 9,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-20-20-28",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-20-20-32",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-22-18-28",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-22-18-32",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 8,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-22-20-28",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s4-22-20-32",
+      "stage": 4,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": true,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-baseline",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": null,
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-rejected-tight",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 18,
+        "gy": 16,
+        "oy": 28
+      },
+      "negative": true,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 0,
+      "verticalGap": 2,
+      "maxActiveOverlap": 9,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-20-18-28",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-20-18-32",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-20-20-28",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-20-20-32",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-22-18-28",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-22-18-32",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-22-20-28",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "1100-s5-22-20-32",
+      "stage": 5,
+      "viewport": {
+        "width": 1100,
+        "height": 1000
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": true,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-baseline",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": null,
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 9,
+      "score": 1600,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-rejected-tight",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 18,
+        "gy": 16,
+        "oy": 28
+      },
+      "negative": true,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 0,
+      "verticalGap": 2,
+      "maxActiveOverlap": 9,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-20-18-28",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-20-18-32",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 9,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-20-20-28",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-20-20-32",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-22-18-28",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-22-18-32",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 8,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-22-20-28",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s4-22-20-32",
+      "stage": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": true,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 2,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-baseline",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": null,
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-rejected-tight",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 18,
+        "gy": 16,
+        "oy": 28
+      },
+      "negative": true,
+      "smokePassed": true,
+      "visualGuardPassed": false,
+      "qualifiedCandidate": false,
+      "horizontalGap": 0,
+      "verticalGap": 2,
+      "maxActiveOverlap": 9,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-20-18-28",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-20-18-32",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-20-20-28",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-20-20-32",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 20,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 2,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-22-18-28",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-22-18-32",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 18,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 4,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-22-20-28",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 28
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": false,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 50,
+      "pageErrors": []
+    },
+    {
+      "name": "390-s5-22-20-32",
+      "stage": 5,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "patch": {
+        "gx": 22,
+        "gy": 20,
+        "oy": 32
+      },
+      "negative": false,
+      "smokePassed": true,
+      "visualGuardPassed": true,
+      "qualifiedCandidate": true,
+      "horizontalGap": 4,
+      "verticalGap": 6,
+      "maxActiveOverlap": 3,
+      "score": 160,
+      "pageErrors": []
+    }
+  ],
+  "limitations": [
+    "Controlled-clock visual/input smoke, not balance, real-time audio, full careers or all continuous parameter values.",
+    "Only auto sprite renderer and desktop/mobile viewports; no touch-input certification.",
+    "No remote requests permitted; no score submission."
+  ]
+}

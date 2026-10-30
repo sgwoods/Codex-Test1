@@ -70,7 +70,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | G2. Executable documentation and compact project memory | Current claims fail visibly when stale; current priorities are distinct from history | Twelve claims, compact packet and checked archive/index integrated; ongoing upkeep | P2, P4 |
 | G3. Explicit persona/input contracts and credible capabilities | Testing, Watch and Rival share defined behavior; human-control differences and skill limits remain explicit | Historical100-run panel retained; clean build1257 lifecycle qualified; Expert candidate private and human boundary open | P1 |
 | G4. Reproducible failures and first-divergence diagnostics | Replay real runtime behavior with sufficient identity and checkpoints to explain failures | Collision explained; clock/restart/transition repairs merged; reusable full-state replay incomplete | P1, P2 |
-| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | Local refusal validator and runtime formation proof pass; visual playability pending | P3, P2 |
+| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | PR263 integrated; one named configuration has local visual/input evidence; broader variants remain gated | P3, P2 |
 | G6. Shared reference evidence with provenance | Cross-project findings improve measured fidelity without importing unverified constants | Three-claim crosswalk recorded;156-artifact local restore verified; remote restore pending | P4, reference/conformance workflow |
 
 ### G1: Trustworthy Tests And Parallel Execution
@@ -78,9 +78,9 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G1.1 Focused test entry points | Complete for the initial scope in PR258; extend coverage only as needed | Test map, fast/docs/sim/browser commands, negative fixtures and retained CI receipts |
-| G1.2 Safe worker lifecycle and isolation | Partial: PR260 diagnostics and PR262 cancellation integrated; bounded missing-close settlement and failed-worker observed-descendant cleanup implemented locally, reviewed integration pending;17 managed-child tests pass | Caller cancellation preserved, siblings cancelled/awaited; missing close settles as incomplete within the cleanup budget; unobserved detached/reparented containment remains open |
+| G1.2 Safe worker lifecycle and isolation | Partial: PR263 merged bounded missing-close settlement and failed-worker observed-descendant cleanup;17 managed-child tests pass | Caller cancellation preserved, siblings cancelled/awaited; missing close settles as incomplete within the cleanup budget; unobserved detached/reparented containment remains open |
 | G1.3 Measured agent/harness efficiency | Bounded pilot complete, broader goal partial: two supervised workers only for measured lifecycle workload | Six monitored paired rounds:135.062s serial/81.248s parallel;1.662x throughput, peak sampled RSS1551/2987MiB; not three end-to-end delivery packets or full-career capacity |
-| G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
+| G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262/263; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
 
 ### G2: Executable Documentation And Project Memory
 
@@ -111,8 +111,8 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
-| G5.1 Explicit task boundaries and refusal rules | Local implementation complete; reviewed integration pending | Formation allowlist, atomic unsupported-field rejection and refusal matrix in October30 phase review |
-| G5.2 Validate one existing configuration slice | Partial: real formation consumers prove gx/gy/oy effects for stages4/5 |40 entities, unchanged other fields and sampled unaffected stages; visual playability evidence remains required |
+| G5.1 Explicit task boundaries and refusal rules | PR263 integrated; conservative minimum-spacing follow-through local | Formation allowlist, atomic unsupported-field rejection and refusal matrix in October30 phase review |
+| G5.2 Validate one existing configuration slice | Bounded local proof complete for22/20/32; follow-through integration pending | Real consumers plus four desktop/mobile stage4/5 visual/input cases;32/40 exploratory visual passes,8 retained failures; not all configurations certified |
 | G5.3 Prove the contracts with Guardians' core loop | Queued: define the bounded stage/lifecycle slice with the human before expanding features | Start/handoff/loss/restart, controls/audio, per-game scores and replay isolation; personas use Guardians' own score scale; preview status retained until accepted |
 
 Named player variants remain a later option, not a current marketplace goal.
@@ -127,6 +127,13 @@ Any rule-changing variant needs distinct identity and scoring eligibility first.
 | G6.3 Recoverable private evidence |156 artifacts restored locally, hashes/readback verified and138 JSON files parsed; off-machine restore pending | Private receipt in recovery-oct30-DeiWOs; no remote transfer or replay-execution claim |
 
 ## Current Recommended Order
+
+PR263 is now merged (`e0987756`). The [formation visual proof](reference-artifacts/analyses/formation-authoring-oct30/README.md)
+qualifies one named configuration, with source/bundle unchanged and baseline
+overlap failures retained. Integrate its conservative validator tightening and
+evidence. G6.3 still needs an approved private destination and off-machine restore.
+It blocks formal adoption closure, not independent player-quality investigations.
+The following dated checkpoints preserve their historical state.
 
 Latest [four-step phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) advances the
 checkpoint below: local bounded-settlement repair, refusal/runtime proof,
