@@ -22,6 +22,7 @@ the active packet's 150-line limit. It does not certify every historical claim.
 
 | Topic | Entry point | Scope |
 | --- | --- | --- |
+| Formation authoring visual proof | [October30 visual/input evidence](reference-artifacts/analyses/formation-authoring-oct30/README.md) | One named configuration qualified; negative and baseline overlap failures retained |
 | Adoption phase follow-through | [October30 phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) | Local containment/content proof, reference crosswalk, recovery and explicit remaining exit criteria |
 | Lifecycle and fresh build | [October30 lifecycle report](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md) | Initialization/step correction; fresh dirty build passes bounded browser suite |
 | Controlled P2 motion clock | [October30 follow-through](reference-artifacts/analyses/persona-calibration-oct30/P2-CLOCK.md) | Local clock repair; browser tick and synthetic late-stage checks pass |

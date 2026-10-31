@@ -1,5 +1,12 @@
 # Adoption Phase Review
 
+Follow-through: PR263 merged as `e0987756`; the subsequent
+[visual proof](reference-artifacts/analyses/formation-authoring-oct30/README.md)
+qualifies one named configuration and retains baseline/readability failures.
+The historical packet below predates that follow-through. The authoring proof
+envelope is now conservatively gx20-22/gy18-20/oy28-32, not the original lower
+limits quoted below. G6.3 remote recovery remains open; no deployment occurred.
+
 October 30, 2026. Baseline `5b1395647a9d604709f552c41c0cd33f18a02045`.
 This packet records local follow-through, not merged or deployed acceptance.
 Lead implementation; Socrates reviewed content boundaries, Bohr reviewed

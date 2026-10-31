@@ -38,7 +38,7 @@ test('authoring proof rejects unsupported patches atomically', () => {
   const layouts = [{ fromStage: 4, gx: 20, gy: 18, oy: 30 }];
   const before = JSON.stringify(layouts);
   for (const json of ['{}', 'null', '[]', '"gx"', '{"gx":"22"}', '{"gx":1e999}',
-    '{"gx":23}', '{"gy":15}', '{"oy":33}', '{"gx":22,"spacingX":99}',
+    '{"gx":23}', '{"gx":18}', '{"gx":19.9}', '{"gy":16}', '{"gy":17.9}', '{"oy":33}', '{"gx":22,"spacingX":99}',
     '{"__proto__":{}}', '{"constructor":1}', '{"gx":{}}', '{"fromStage":6}']) {
     assert.throws(() => formationSlice(layouts, json), json);
     assert.equal(JSON.stringify(layouts), before);

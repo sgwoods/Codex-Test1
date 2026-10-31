@@ -1,5 +1,5 @@
 // Proof-only authoring boundary; this is not a runtime importer or a playability gate.
-const LIMITS = Object.freeze({ gx: [18, 22], gy: [16, 20], oy: [28, 32] });
+const LIMITS = Object.freeze({ gx: [20, 22], gy: [18, 20], oy: [28, 32] });
 
 function formationSlice(layouts, json) {
   if (typeof json !== 'string') throw new Error('Expected JSON text');
