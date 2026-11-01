@@ -39,14 +39,14 @@ byte for byte and links completed cycles. Keep this packet at150 lines or fewer.
 
 ## Latest Evidence
 
-- Player-quality audio: baseline cancellation race reproduced;11 actual-source
+- Player-quality audio: baseline cancellation race reproduced;10 actual-source
   tests and fresh-build browser buffer/restart checks pass. Requested/last-loaded
   metadata mismatch alone does not prove wrong playback. Issue247 remains open.
 - Guest controls: fresh build1260 passes seven reachable paths,42 movements and
   seven firing/release checks. At390px the hidden pilot button blocks the eighth
   path. Overall probe remains failed; no authentication gate was reproduced.
   Touch, OS focus switching and actual authentication transitions remain untested.
-- Rival HUD: five before-fix failures;8 tests and five fresh-build browser cases
+- Rival HUD: five before-fix failures;9 tests and five fresh-build browser cases
   pass. A reverted-condition browser fixture fails. Score storage is unchanged.
 - Natural seed91001 qualification:12 cases/14 comparisons pass with a separately
   labeled1800-second budget. Candidate Rival reaches567,390/internal Stage85 and

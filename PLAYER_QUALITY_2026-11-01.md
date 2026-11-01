@@ -21,7 +21,7 @@ cancellation now applies the same cue/clip predicate to pending and active
 playbacks without evicting shared decoded buffers or cancelling unrelated cues.
 
 - Before patch: six of nine executable VM regressions failed.
-- After patch: eleven regressions pass, including cache microtasks, mixed active
+- After patch: ten regressions pass, including cache microtasks, mixed active
   and pending cues, same-buffer isolation, new requests after stop and failed loads.
 - Browser baseline failure: `private-artifacts/player-quality-nov01/audio-browser-baseline/summary.json`.
 - Browser repaired passes: `private-artifacts/player-quality-nov01/audio-browser-v2/summary.json`
@@ -69,10 +69,10 @@ waived or a release-readiness pass.
 Visual inspection of the natural Rival game-over screenshot found a display bug:
 the top1UP label showed the Rival's567,390 points while the results panel correctly
 showed the human's zero. The HUD selected the saved human score only during an
-active P2 turn, not after completion. It now uses the saved human score in every
-non-P1 Rival state, retaining the live score while P1 is active. Scoring, storage
-and lane state are unchanged. Five regressions fail before the repair;8/8 pass
-after it. A fresh isolated dirty build also passes five injected browser UI cases
+active P2 turn, not after completion. It now uses the saved human score in the
+P2/ready/done/final states, retaining the live score while P1 is active, queued or
+simulated. Scoring, storage and lane state are unchanged. Five regressions fail
+before the repair;9/9 pass after it. A fresh isolated dirty build also passes five injected browser UI cases
 (`private-artifacts/player-quality-nov01/fresh-hud-v1/summary.json`). These are
 display fixtures, not natural scoring or persistence evidence. The same build
 with only the HUD condition reverted fails at the first completed/non-P1 state
