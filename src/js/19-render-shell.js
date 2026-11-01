@@ -369,7 +369,7 @@ function syncCabinetShellLayout({
 
 function syncHudAndShellMessages({ox,oy,viewW,viewH}){
  const playerTwoRun=S.playerTwo;
- const oneUpScore=playerTwoRun?.enabled&&playerTwoRun.activeTurn!=='p1'
+ const oneUpScore=playerTwoRun?.enabled&&['p2','done','final','ready'].includes(playerTwoRun.activeTurn)
   ? (playerTwoRun.p1?.score??playerTwoRun.humanScore??0)
   : S.score;
  left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${formatScore(oneUpScore)}</span>`;

@@ -29,11 +29,13 @@ test('solo and disabled Rival display the live score', () => {
   assert.equal(renderScore({ enabled: false, activeTurn: 'done', p1: { score: 0 } }), expected(567390));
 });
 
-test('active P1 displays its live score rather than a stale saved lane', () => {
-  assert.equal(renderScore({ enabled: true, activeTurn: 'p1', p1: { score: 0 }, humanScore: 100 }), expected(567390));
-});
+for (const activeTurn of ['p1', 'queued', 'simulated']) {
+  test(`${activeTurn} displays the live human score rather than a stale saved lane`, () => {
+    assert.equal(renderScore({ enabled: true, activeTurn, p1: { score: 0 }, humanScore: 100 }), expected(567390));
+  });
+}
 
-for (const activeTurn of ['p2', 'ready', 'done', 'final', 'queued']) {
+for (const activeTurn of ['p2', 'ready', 'done', 'final']) {
   test(`${activeTurn} displays the saved human score, including zero`, () => {
     for (const score of [0, 12340]) {
       assert.equal(renderScore({ enabled: true, activeTurn, p1: { score }, humanScore: 999 }), expected(score));

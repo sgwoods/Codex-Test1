@@ -34,7 +34,7 @@ Password-manager retrieval on another device has not been independently tested.
 ## Download Restore Verified November 1
 
 Agent observed the archive on iCloud.com. User reports downloading it into
-`/Users/sgwoods/Downloads/expert-evidence-2026-10-31.tar.enc`.
+`~/Downloads/expert-evidence-2026-10-31.tar.enc`.
 That downloaded file is exactly 9,192,480 bytes and matches the encrypted
 SHA256 above. Decryption and tar checksum passed; a fresh extraction verified
 the manifest and all 156 compressed/raw hashes, and parsed 138 JSON files.

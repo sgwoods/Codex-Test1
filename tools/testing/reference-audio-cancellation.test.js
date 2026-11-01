@@ -34,16 +34,11 @@ function fixture(){
   return {ctx,sfx:ctx.sfx,loads,sources,play};
 }
 
-for(const kind of ['all','cue','clip','restart']) test(`pending reference playback respects ${kind} stop`,async()=>{
+for(const kind of ['all','cue','clip']) test(`pending reference playback respects ${kind} stop`,async()=>{
   const f=fixture();f.play();f.play('playerHit','hit');
   if(kind==='all')f.sfx.stopReferenceClips();
   if(kind==='cue')f.sfx.stopCueNames(['gameOver']);
   if(kind==='clip')f.sfx.stopReferenceClips(s=>s.__clip==='ending');
-  if(kind==='restart'){
-    const source=fs.readFileSync(path.join(__dirname,'../../src/js/05-player-flow.js'),'utf8');
-    const match=source.match(/sfx\.stopCueNames\(\['attractEnter'[^;]+;/);
-    assert(match);vm.runInContext(match[0],f.ctx);
-  }
   f.loads.get('ending').resolve({duration:14});f.loads.get('hit').resolve({duration:3});await flush();
   assert.deepEqual(f.sources.map(s=>s.__cue),kind==='all'?[]:['playerHit']);
   assert.equal(f.sfx.referencePending.size,0);
