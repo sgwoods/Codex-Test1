@@ -22,6 +22,9 @@ the active packet's 150-line limit. It does not certify every historical claim.
 
 | Topic | Entry point | Scope |
 | --- | --- | --- |
+| Player quality and natural personas | [November1 cycle](PLAYER_QUALITY_2026-11-01.md) | Audio/HUD repaired and qualified Expert rule integrated locally;100 careers and natural lifecycle pass; narrow account control remains blocked |
+| Interim iCloud archive | [October31 archive / November1 restore](ICLOUD_RECOVERY_2026-10-31.md) | User-downloaded copy restored; all156 files verified; full lost-machine/key recovery untested |
+| Guest input audit | [October31 bounded reproduction](GUEST_INPUT_AUDIT_2026-10-31.md) | Four cases, 24 keyboard checks pass; lifecycle and hosted reproduction remain open |
 | Formation authoring visual proof | [October30 visual/input evidence](reference-artifacts/analyses/formation-authoring-oct30/README.md) | One named configuration qualified; negative and baseline overlap failures retained |
 | Adoption phase follow-through | [October30 phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) | Local containment/content proof, reference crosswalk, recovery and explicit remaining exit criteria |
 | Lifecycle and fresh build | [October30 lifecycle report](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md) | Initialization/step correction; fresh dirty build passes bounded browser suite |

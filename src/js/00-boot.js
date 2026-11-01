@@ -920,7 +920,7 @@ function syncAudioDebugState(){
 }
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
- a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
+ a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referencePending:new Set(),referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
  resolveAtmosphere(opts={}){
   const attractPhase=opts.attractPhase!==undefined?opts.attractPhase:((typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'');
   const frontDoor=opts.frontDoor!==undefined?!!opts.frontDoor:(!started&&!S.attract);
@@ -1113,6 +1113,11 @@ const sfx={
  },
  stopReferenceClips(predicate=null){
   const matches=typeof predicate==='function'?predicate:()=>true;
+  for(const request of this.referencePending){
+   if(!matches(request))continue;
+   request.cancelled=true;
+   this.referencePending.delete(request);
+  }
   const active=[...this.referenceActive];
   for(const source of active){
    if(!source||!matches(source))continue;
@@ -1158,8 +1163,13 @@ const sfx={
   const clipStart=Math.max(0,Number.isFinite(+opts.clipStart)?+opts.clipStart:0);
   const clipDuration=Math.max(0,Number.isFinite(+opts.clipDuration)?+opts.clipDuration:0);
   const delay=Math.max(0,Number.isFinite(+opts.delay)?+opts.delay:0);
+  // A stop during shared fetch/decode cancels this playback, not the cached buffer.
+  const request={__cue:String(opts?.cueEntry?.cue||'').trim(),__clip:clip,
+   __clipStart:clipStart,__clipDuration:clipDuration,cancelled:false};
+  this.referencePending.add(request);
   this.loadReferenceBuffer(clip).then(buffer=>{
-   if(!buffer)return;
+   this.referencePending.delete(request);
+   if(request.cancelled||!buffer)return;
    if(audioMuted){
     this.recordReferenceBlocked('muted',clip,opts);
     return;
@@ -1201,7 +1211,7 @@ const sfx={
       };
       source.addEventListener('ended',cleanup,{once:true});
     }catch{}
-  }).catch(()=>{});
+  }).catch(()=>{this.referencePending.delete(request);});
  },
  loadReferenceBuffer(src=''){
   const clip=String(src||'').trim();

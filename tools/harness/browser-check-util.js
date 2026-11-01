@@ -32,7 +32,8 @@ function serve(root = APP_ROOT){
       res.end(data);
     });
   });
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
+    server.once('error', reject);
     server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
@@ -98,18 +99,29 @@ function ensureLaneBuildFresh(root, { lane = 'dev', releaseChannel = '' } = {}){
   return { rebuilt: true, reason: drift, buildInfo: readBuildInfo(root) };
 }
 
-async function withHarnessPage(cfg, fn){
+async function withHarnessPage(cfg, fn, { launch = launchHarnessBrowser, startServer = serve } = {}){
   const appRoot = cfg.root ? path.resolve(cfg.root) : APP_ROOT;
   if(!fs.existsSync(path.join(appRoot, 'index.html'))){
     throw new Error(`Built app not found at ${appRoot}. Run "npm run build" first.`);
   }
-  const { server, port } = await serve(appRoot);
-  const browser = await launchHarnessBrowser(cfg);
+  const { server, port } = await startServer(appRoot);
+  let browser, context;
   try{
-    const context = await browser.newContext({
+    browser = await launch(cfg);
+    context = await browser.newContext({
       acceptDownloads: true,
+      ...(cfg.offline ? { serviceWorkers: 'block' } : {}),
       viewport: cfg.viewport || { width: 1440, height: 1800 }
     });
+    if(cfg.offline){
+      const origin = new URL(localUrl(port, '/index.html', { browser: true })).origin;
+      await context.route('**/*', route => {
+        const request = route.request();
+        return new URL(request.url()).origin === origin && ['GET', 'HEAD'].includes(request.method())
+          ? route.continue() : route.abort();
+      });
+      await context.routeWebSocket('**/*', socket => socket.close());
+    }
     const page = await context.newPage();
     const pageErrors = [];
     const consoleErrors = [];
@@ -156,12 +168,18 @@ async function withHarnessPage(cfg, fn){
         persona: cfg.persona || null
       }, testCfg.extendFirst !== undefined ? { extendFirst: testCfg.extendFirst } : {}, testCfg.extendRecurring !== undefined ? { extendRecurring: testCfg.extendRecurring } : {}));
     }
-    const result = await fn({ page, context, browser, port, root: appRoot });
-    await context.close();
-    return result;
+    return await fn({ page, context, browser, port, root: appRoot });
   } finally {
-    await browser.close();
-    server.close();
+    try {
+      await context?.close();
+    } finally {
+      try {
+        await browser?.close();
+      } finally {
+        server.closeAllConnections();
+        await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+      }
+    }
   }
 }
 

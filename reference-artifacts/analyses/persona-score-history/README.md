@@ -1,25 +1,36 @@
 # Persona Score History And Process Review
 
-Updated October 30, 2026. Includes retained policies and unshipped experiments.
+Updated November 1, 2026. Includes retained policies and unshipped experiments.
 No release was published by this cycle. All scores below are measured, not estimated.
 
 ## Current Result
 
-The Expert body-veto experiment passes matched and reserved historical
-and build1256 / `16baa705` snapshot nonregression gates, but is **not integrated or shipped**. Matched median
+The Expert body-veto experiment passes matched and reserved historical,
+build1256 / `16baa705`, and build1257 / `cb70121e` snapshot nonregression gates.
+This qualifies a private derived candidate, not a released build. Matched median
 81,275 ->102,020 and75k attainment6/10 ->7/10; reserved median97,780 and8/10
 attainment are unchanged. Destructions fall32 ->29 and34 ->29. One reserved
-seed regresses. Snapshot build1256 / `16baa705` 100-run qualification passes; actual browser
-P2 equivalence remains open. [Current report](../persona-calibration-oct30/CURRENT-BUILD.md).
+seed (93007) regresses. The build1257 / `cb70121e` 100-run qualification passes;
+this score panel makes no live P2 mode-parity or human-actuator feasibility claim.
+[Current report](../persona-calibration-nov01/CURRENT-BUILD.md).
 
-![build1256 / 16baa705 matched distributions](aurora-current-build-comparison.png)
+After separate natural lifecycle qualification and independent review, the exact
+policy was integrated locally on November1. The combined fresh-build seed91001
+reproduces131,920/Stage24 with identical non-audio events and mechanical snapshots.
+See [integration and player-quality report](../../../PLAYER_QUALITY_2026-11-01.md).
+This is not a hosted release, human-actuator equivalence or a general ladder pass.
+
+![build1257 / cb70121e matched distributions](aurora-current-build-comparison.png)
 
 ![Expert candidate, matched and reserved panels](aurora-expert-veto-comparison.png)
 
-The history contains23 panels and410 observations. A9a/A9b test all four
-personas on matched build1256 / `16baa705` snapshot arms; A9c/A9d add reserved Expert arms.
-Other-persona mechanics are unchanged. Professional median240,785 is a
+The history contains27 panels and510 observations. A10a/A10b test all four
+personas on matched build1257 / `cb70121e` snapshot arms; A10c/A10d add reserved Expert arms.
+All prior410 observations, including A9 build1256 panels, remain unchanged.
+Natural lifecycle repeats are excluded. The30 other-persona pairs preserve
+non-audio events and mechanical snapshots (visual effects excluded). Professional median240,785 is a
 900-second lower bound: all ten candidate observations are censored.
+The new100-run panel has23 censored observations:20 Professional and3 candidate Expert.
 Earlier A6e/A8a and A6f/A8b
 are paired controls/candidates on a historical bundle, not new release versions.
 Other tiers were not retested in these panels. Three candidate observations are
@@ -144,7 +155,10 @@ below explain the earlier failed trials and remain useful process lessons.
 ## Maintain This Graphic
 
 `node tools/harness/build-persona-score-history.js` validates source records,
-rebuilds history.json, and renders both SVGs without private sessions or network.
+rebuilds history.json, and renders the SVG charts without private sessions or network.
+The [Nov1 exporter](../persona-calibration-nov01/EXPORT.md) first verifies the
+completed100-run private panel and writes allowlisted public data. The append
+guard requires27 panels/510 observations and an exact hash of all23 prior panels.
 PNG files are presentation copies; SVGs are the canonical documentation graphics.
 To regenerate PNGs use a local Sharp installation, for each game:
 `sharp(inputSvg).png().toFile(outputPng)`. The current PNGs were visually checked.
@@ -161,7 +175,7 @@ For every accepted persona-policy version and release candidate:
 - Preserve raw evidence provenance. Rebuild this graphic and inspect it in the
   same work packet; link it from ACTIVE_WORK.md and the release assessment.
 
-history.json contains410 observations across23 panels and hashes of its input
+history.json contains510 observations across27 panels and hashes of its input
 files. hazard-outcomes.json restores older terminal status from preserved raw packets,
 checked against their recorded SHA256 and seed/score identity. Historical gaps
 are disclosed; this backfill is not a claim of full coverage for every old build.

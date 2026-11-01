@@ -1276,8 +1276,25 @@ function resetHarnessHazardState(p){
  p.hHazardObservation=null;
  p.hCaptureRiskSpent=false;
 }
+function harnessExpertBodyVeto(state,p,cfg,preferredAxis,dt){
+ const hp=playerHitbox();
+ const bodies=state.e.filter(e=>e.hp>0).map(e=>({e,box:enemyCollisionHitbox(e)}))
+  .filter(({e,box})=>Math.abs(e.y-p.y)<box.h+hp.h);
+ const endpoint=axis=>cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
+ const bodyClear=x=>bodies.every(({e,box})=>Math.abs(e.x-x)>=box.w+hp.w);
+ if(bodyClear(endpoint(preferredAxis)))return preferredAxis;
+ const bulletClear=x=>state.eb.every(b=>[0,dt].every(t=>
+  Math.abs(b.x+(b.vx||0)*t-x)>=hp.w||Math.abs(b.y+b.vy*t-p.y)>=hp.h));
+ for(const axis of new Set([0,-preferredAxis,-1,1])){
+  const x=endpoint(axis);
+  if(bodyClear(x)&&bulletClear(x))return axis;
+ }
+ return preferredAxis;
+}
+
 function harnessResolveHazardAxis(state,p,cfg,preferredAxis,dt){
  if(state.stage<4)p.hCaptureRiskSpent=false;
+ if(cfg.name==='expert'&&!state.challenge&&state.stage>=4)return harnessExpertBodyVeto(state,p,cfg,preferredAxis,dt);
  if(cfg.name!=='professional'||state.challenge||state.stage<4)return preferredAxis;
  if(state.captureCountStage>0||p.dual)p.hCaptureRiskSpent=true;
  const hp=playerHitbox(),prior=p.hHazardObservation;

@@ -1,13 +1,15 @@
 # Aurora and Platinum Project Plan
 
-Created October 28, 2026; phase status refreshed October 30 after PR262.
+Created October 28, 2026; phase status refreshed November 1 after PR264 and recovery.
 Plan of record from Aurora Project Lead. The user has directed that adopting
 Star Swarm lessons, not progressing toward another beta, is the current focus.
 Original implementation baseline: 3c7d2667; build-details PR #256 merged at e80af082 (submission 65883aad).
-Current integrated baseline: `5b139564` (PR262). PR260 integrated lifecycle
+Current integrated baseline: `b17c5d63` (PR264). PR260 integrated lifecycle
 diagnostics and compact memory; PR261 integrated controlled-clock repairs and
 historical evidence; PR262 integrated targeted/batch cancellation and measured
-concurrency reporting. The Expert policy candidate remains private, not integrated.
+concurrency reporting. PR263/264 integrated bounded settlement and formation
+validation/proof. November1 locally integrates the exact Expert safety rule after
+natural lifecycle and refreshed100-career qualification; review/merge remain separate.
 Supersedes October 4 planning priorities, not preserved experimental results.
 
 Delivery receipt, October 28: PR256 and PR257 merged; dev-only publication
@@ -68,10 +70,10 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | --- | --- | --- | --- |
 | G1. Small, trustworthy tests and effective parallel execution | Agents can select checks, isolate work and demonstrate useful delivery efficiency | Foundations/cancellation merged; bounded two-worker pilot measures1.66x throughput; general containment incomplete | P2, agent operating model |
 | G2. Executable documentation and compact project memory | Current claims fail visibly when stale; current priorities are distinct from history | Twelve claims, compact packet and checked archive/index integrated; ongoing upkeep | P2, P4 |
-| G3. Explicit persona/input contracts and credible capabilities | Testing, Watch and Rival share defined behavior; human-control differences and skill limits remain explicit | Historical100-run panel retained; clean build1257 lifecycle qualified; Expert candidate private and human boundary open | P1 |
+| G3. Explicit persona/input contracts and credible capabilities | Testing, Watch and Rival share defined behavior; human-control differences and skill limits remain explicit | Refreshed100-career and natural lifecycle panels pass; exact Expert rule locally integrated; human boundary open | P1 |
 | G4. Reproducible failures and first-divergence diagnostics | Replay real runtime behavior with sufficient identity and checkpoints to explain failures | Collision explained; clock/restart/transition repairs merged; reusable full-state replay incomplete | P1, P2 |
-| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | PR263 integrated; one named configuration has local visual/input evidence; broader variants remain gated | P3, P2 |
-| G6. Shared reference evidence with provenance | Cross-project findings improve measured fidelity without importing unverified constants | Three-claim crosswalk recorded;156-artifact local restore verified; remote restore pending | P4, reference/conformance workflow |
+| G5. Bounded data-only content authoring | Agents change supported content safely and refuse unsupported behavior | PR263/264 integrated; one named configuration has visual/input evidence; broader variants remain gated | P3, P2 |
+| G6. Shared reference evidence with provenance | Cross-project findings improve measured fidelity without importing unverified constants | Three-claim crosswalk and156-file downloaded iCloud restore verified; broader recovery remains open | P4, reference/conformance workflow |
 
 ### G1: Trustworthy Tests And Parallel Execution
 
@@ -80,7 +82,7 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 | G1.1 Focused test entry points | Complete for the initial scope in PR258; extend coverage only as needed | Test map, fast/docs/sim/browser commands, negative fixtures and retained CI receipts |
 | G1.2 Safe worker lifecycle and isolation | Partial: PR263 merged bounded missing-close settlement and failed-worker observed-descendant cleanup;17 managed-child tests pass | Caller cancellation preserved, siblings cancelled/awaited; missing close settles as incomplete within the cleanup budget; unobserved detached/reparented containment remains open |
 | G1.3 Measured agent/harness efficiency | Bounded pilot complete, broader goal partial: two supervised workers only for measured lifecycle workload | Six monitored paired rounds:135.062s serial/81.248s parallel;1.662x throughput, peak sampled RSS1551/2987MiB; not three end-to-end delivery packets or full-career capacity |
-| G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262/263; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
+| G1.4 Evidence validity and reviewed integration | Adoption packets integrated through PR258/260/261/262/263/264; dependency-based validity still planned | Review/CI passed; retain existing freshness gates until fail-closed dependency tests qualify a replacement; no publication implied |
 
 ### G2: Executable Documentation And Project Memory
 
@@ -94,9 +96,9 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
-| G3.1 Characterize automated versus human control | Initial probe complete; extend shadow trajectories before deciding a common input boundary | Same timestep/input history with acceleration, reversal, bounds and ownership differences recorded; no human-equivalence claim from automated parity |
-| G3.2 Qualify the narrow Expert safety candidate | Snapshot build1256 / `16baa705` matched/reserved gates pass October30; private candidate not integrated | Frozen criteria, all per-run outcomes and hashes; preserve the regressing seed and three censored results; no concurrent actuator/clock change |
-| G3.3 Full-persona and real-mode nonregression | Historical100-run matrix passes; PR261 clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage qualification and common human input boundary remain open; bounded checks are not full-career browser equivalence |
+| G3.1 Characterize automated versus human control | Initial probe and November1 forced-axis actual-source audit complete; shadow trajectories remain next | Expert reverses6.16 units immediately at1/60s while human still drifts3.437 units opposite requested direction in the measured fixture; not human-feasibility proof |
+| G3.2 Qualify the narrow Expert safety candidate | November1 frozen build1257 panel passes; exact helper/dispatch locally integrated after independent review | Matched median102,020, reserved97,780; preserve regressing93007 and three censored Expert runs;115 source/collider tests and combined-build seed pass |
+| G3.3 Full-persona and real-mode nonregression | Refreshed100 careers pass; natural1800-second Watch/Rival matrix passes12 cases/14 comparisons | Quiet/repeat/held equality within arm/mode; natural handoff and manual-owner updates observed. P1 idle, not human-feasibility or cross-mode trajectory equality |
 | G3.4 Decide input migration and skill-ladder scope | Decision pending after G3.1-G3.3; keep migration separate from policy tuning | Approved capability criteria and any migration's matched movement/collision/score/audio/human-feel acceptance; Wizard remains a later unranked stress-test option |
 
 ### G4: Reproducible Failures And Diagnostics
@@ -111,8 +113,8 @@ research and acceptance evidence. Unapproved thresholds remain proposals.
 
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
-| G5.1 Explicit task boundaries and refusal rules | PR263 integrated; conservative minimum-spacing follow-through local | Formation allowlist, atomic unsupported-field rejection and refusal matrix in October30 phase review |
-| G5.2 Validate one existing configuration slice | Bounded local proof complete for22/20/32; follow-through integration pending | Real consumers plus four desktop/mobile stage4/5 visual/input cases;32/40 exploratory visual passes,8 retained failures; not all configurations certified |
+| G5.1 Explicit task boundaries and refusal rules | PR263/264 integrated including conservative minimum-spacing follow-through | Formation allowlist, atomic unsupported-field rejection and refusal matrix in October30 phase review |
+| G5.2 Validate one existing configuration slice | Bounded proof complete for22/20/32; integrated in PR264 | Real consumers plus four desktop/mobile stage4/5 visual/input cases;32/40 exploratory visual passes,8 retained failures; not all configurations certified |
 | G5.3 Prove the contracts with Guardians' core loop | Queued: define the bounded stage/lifecycle slice with the human before expanding features | Start/handoff/loss/restart, controls/audio, per-game scores and replay isolation; personas use Guardians' own score scale; preview status retained until accepted |
 
 Named player variants remain a later option, not a current marketplace goal.
@@ -123,16 +125,20 @@ Any rule-changing variant needs distinct identity and scoring eligibility first.
 | Minor goal | Status and next action | Acceptance evidence |
 | --- | --- | --- |
 | G6.1 Cross-project reference crosswalk | Complete for three source-level claims in October30 phase review | Preserved revision/hash; cadence and no-fire agreement; non-perfect settlement discrepancy recorded without changing scoring |
-| G6.2 Measurement-led fidelity and defect work | Ongoing method; next select a reproduced high-impact issue, including game-over audio #247 if still current | Saved clip/cue timeline, waveform/contact-sheet or timing analysis before tuning; preserve full canonical phrases when feasible |
-| G6.3 Recoverable private evidence |156 artifacts restored locally, hashes/readback verified and138 JSON files parsed; off-machine restore pending | Private receipt in recovery-oct30-DeiWOs; no remote transfer or replay-execution claim |
+| G6.2 Measurement-led fidelity and defect work | November1 audio cancellation race reproduced and repaired locally; historical wrong-asset claim unproven | Real decoded-buffer identity and restart baseline failure/fix pass; no waveform or phrase retuning; see player-quality report |
+| G6.3 Recoverable private evidence | Bounded scope complete November1: user-downloaded iCloud archive restored,156 files verified,138 JSON parsed | Archive SHA-256 and restored content verified; full lost-machine/password-manager recovery and broader archive coverage remain open |
 
 ## Current Recommended Order
 
-PR263 is now merged (`e0987756`). The [formation visual proof](reference-artifacts/analyses/formation-authoring-oct30/README.md)
-qualifies one named configuration, with source/bundle unchanged and baseline
-overlap failures retained. Integrate its conservative validator tightening and
-evidence. G6.3 still needs an approved private destination and off-machine restore.
-It blocks formal adoption closure, not independent player-quality investigations.
+PR264 is merged (`b17c5d63`) and the bounded [iCloud restore](ICLOUD_RECOVERY_2026-10-31.md)
+is verified. The current [November1 cycle](PLAYER_QUALITY_2026-11-01.md) prioritizes
+player-quality repairs, then natural persona qualification. Audio cancellation,
+Rival HUD ownership and exact Expert integration now have local evidence.
+Finish reviewed integration, then separately qualify shared movement execution
+before recalibrating skill labels. Repair narrow board/toolbar accessibility and
+measure the full final-loss audio phrase; follow with a bounded Guardians
+core-loop slice. General containment/full-state replay remain open;
+the completed adoption packets do not imply those broader goals are complete.
 The following dated checkpoints preserve their historical state.
 
 Latest [four-step phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) advances the

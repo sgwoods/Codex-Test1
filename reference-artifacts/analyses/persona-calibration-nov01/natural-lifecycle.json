@@ -1,0 +1,616 @@
+{
+  "sourceCommit": "cb70121e9c5f29c483eec54f17b44e115a87c55f",
+  "sourceInventorySha256": "e75da83616ce4e6eddb97a79e446f5e8b413d7fc4114bd1e3387ffca0884f3fe",
+  "methodSha256": "23ee334bb19c1d73a8ba582f1dbbbda74d52057e80fe075124c619f9967f178b",
+  "policySha256": "737862f389315c0763c2c978fe55c955e7bc4413cc3f8515f2ccb92ec683c3a5",
+  "seed": 91001,
+  "simulatedSeconds": 1800,
+  "passed": true,
+  "summarySha256": "0fb6585ca4380057a40ff8fb4be9f07fea750414d782b784daf88ddc28fe47d6",
+  "provenanceSha256": "6dd117c45db4a718838205a4af5da4142a07b60b3635c277949cc9ccdd27bb6d",
+  "cases": [
+    {
+      "name": "control-watch-quiet",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 6739,
+        "heldTicks": 0,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 46960,
+      "stage": 8,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 219.51666666666668
+      },
+      "interventions": 0,
+      "receiptSha256": "56f6ae08d718a35af028df0f25d5a5e1684047deaf37c4ff602a9debed95ec2f",
+      "tickSha256": "3cdcfff6d223297f47d1fa5cf9114523b3682adee901351e7439015b66c9a974",
+      "eventSha256": "e73669328ab934310ceceefa5052534b084b4783aff39dbbcd070ed170eaf251",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-watch-quiet",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 26577,
+        "heldTicks": 0,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 28329,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 131920,
+      "stage": 24,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 619.1166666666667
+      },
+      "interventions": 7,
+      "receiptSha256": "cadc4662405a254cf02fa4b299af4af8f47cc15d3c35603a0c0878129ccdd8e9",
+      "tickSha256": "7d23602625c9fe96b9c7b5ea1823ff8a7116cee73966eed712a43aff1b1b211b",
+      "eventSha256": "acdac4e15050dff20db63f340262f47921956e37c16ed021229fe8422a6c8d12",
+      "traceSha256": "0cffa195d3e155fe6575b05e809a73e456534f7e42c31c9c280af8a88c43966b"
+    },
+    {
+      "name": "control-p2-quiet",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 11875,
+        "heldTicks": 0,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 69620,
+      "stage": 12,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 347.06666666666666
+      },
+      "interventions": 0,
+      "receiptSha256": "601f3d3cf39fcb49fe8902a74f259e0fbca99b7bd68cbfbcdb4e600aa1e60c0b",
+      "tickSha256": "243b385f03be3f6f1b4d3c82b8afe2616346fdcbe6a5e63233d325d6a0013e71",
+      "eventSha256": "522c92990e111201ad876c59d29b1eec77983abe07e427c6dc50760a7aa91847",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-p2-quiet",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 82185,
+        "heldTicks": 0,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 86453,
+          "returned": true,
+          "manualTicks": 309
+        }
+      },
+      "score": 567390,
+      "stage": 85,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 1775.2666666666667
+      },
+      "interventions": 6,
+      "receiptSha256": "fe34889192de01c78d1d65c6bd6bb951a552dabc62ae79df52c168112025f3df",
+      "tickSha256": "06093ea897dd93bc99b01f4afb7004184f2b247f8f9704e424a98a2fd52e2fd6",
+      "eventSha256": "d3873a4e7dbe3317a2759f542582099eaba8c0c00cb361fbcc2e2a91353ec263",
+      "traceSha256": "ce7eeee649f033591efa0be1cec3a25e2c64585e2e3f660d50dc415705eeaa0b"
+    },
+    {
+      "name": "control-watch-repeat",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 6739,
+        "heldTicks": 0,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 46960,
+      "stage": 8,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 219.51666666666668
+      },
+      "interventions": 0,
+      "receiptSha256": "2ff08896bd59f8597d21d7f8aa41c981f593b869516d8a071c44e21d6e2b6c56",
+      "tickSha256": "3cdcfff6d223297f47d1fa5cf9114523b3682adee901351e7439015b66c9a974",
+      "eventSha256": "5122821f21349f163d76ebe5a1465dc3ef64f33ff5c94b5fbe8a92e52daeba35",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-watch-repeat",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 26577,
+        "heldTicks": 0,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 28329,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 131920,
+      "stage": 24,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 619.1166666666667
+      },
+      "interventions": 7,
+      "receiptSha256": "62cae4dfbbcae2dab00d00cf4620d561c9ef25a498497ebf2c896b5b3d79457a",
+      "tickSha256": "7d23602625c9fe96b9c7b5ea1823ff8a7116cee73966eed712a43aff1b1b211b",
+      "eventSha256": "2ec8419c1866763590b3b504f9c50370e3f47de5dfd82ba1c06f0ca4893b9cf0",
+      "traceSha256": "0cffa195d3e155fe6575b05e809a73e456534f7e42c31c9c280af8a88c43966b"
+    },
+    {
+      "name": "control-p2-repeat",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 11875,
+        "heldTicks": 0,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 69620,
+      "stage": 12,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 347.06666666666666
+      },
+      "interventions": 0,
+      "receiptSha256": "f4bedff07797785a374a4d7db21043e0deb952eb9c76f862591104bc6c1aee7e",
+      "tickSha256": "243b385f03be3f6f1b4d3c82b8afe2616346fdcbe6a5e63233d325d6a0013e71",
+      "eventSha256": "c9c60d0715b31f0bea9ad605597b22d4067250cd7824ba38e209e5fa9271e672",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-p2-repeat",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 82185,
+        "heldTicks": 0,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 86453,
+          "returned": true,
+          "manualTicks": 309
+        }
+      },
+      "score": 567390,
+      "stage": 85,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 1775.2666666666667
+      },
+      "interventions": 6,
+      "receiptSha256": "f4844357a2cfbb17afdbb3ad654ce13a1e9bc4dfea6ca1e94e1e95b5ebf7dca2",
+      "tickSha256": "06093ea897dd93bc99b01f4afb7004184f2b247f8f9704e424a98a2fd52e2fd6",
+      "eventSha256": "10de57027a0435bcfe6905f92cab7a65c62b7862f8def711e472889485bcaabc",
+      "traceSha256": "ce7eeee649f033591efa0be1cec3a25e2c64585e2e3f660d50dc415705eeaa0b"
+    },
+    {
+      "name": "control-watch-held",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 6739,
+        "heldTicks": 13171,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 46960,
+      "stage": 8,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 219.51666666666668
+      },
+      "interventions": 0,
+      "receiptSha256": "caedbb267ca64ed16db49f72ba718e786806548a2ddd26a0e308bb35a1a5ab34",
+      "tickSha256": "3cdcfff6d223297f47d1fa5cf9114523b3682adee901351e7439015b66c9a974",
+      "eventSha256": "c7e481ea795ac4d6e54e5b798f8b5482876eb1d46d27e708bd8eb68b014b03b2",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-watch-held",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 26577,
+        "heldTicks": 37147,
+        "p2Entered": false,
+        "postVeto": {
+          "automatedTicks": 28329,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 131920,
+      "stage": 24,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 619.1166666666667
+      },
+      "interventions": 7,
+      "receiptSha256": "70e56f3278b34cac9ff4c855e5f936fe602be4509def38c3eb2a4a2215a20166",
+      "tickSha256": "7d23602625c9fe96b9c7b5ea1823ff8a7116cee73966eed712a43aff1b1b211b",
+      "eventSha256": "8140659ddbe3a37390d7288c0e6384c2858e95f385e6fc2c6f08f0c9de3ddbe8",
+      "traceSha256": "0cffa195d3e155fe6575b05e809a73e456534f7e42c31c9c280af8a88c43966b"
+    },
+    {
+      "name": "control-p2-held",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 11875,
+        "heldTicks": 19212,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 0,
+          "returned": false,
+          "manualTicks": 0
+        }
+      },
+      "score": 69620,
+      "stage": 12,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 347.06666666666666
+      },
+      "interventions": 0,
+      "receiptSha256": "80434683401c59c5e1c052bf29e5189208cd8ed0dd5a3b7e3a1acfa9724b1c1d",
+      "tickSha256": "243b385f03be3f6f1b4d3c82b8afe2616346fdcbe6a5e63233d325d6a0013e71",
+      "eventSha256": "80ba984007844fdd743579f92915d18603137d3661748acd70d103413cfb73b7",
+      "traceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-p2-held",
+      "passed": true,
+      "coverage": {
+        "status": "complete",
+        "missing": [],
+        "lateTicks": 82185,
+        "heldTicks": 104902,
+        "p2Entered": true,
+        "postVeto": {
+          "automatedTicks": 86453,
+          "returned": true,
+          "manualTicks": 309
+        }
+      },
+      "score": 567390,
+      "stage": 85,
+      "lives": 0,
+      "outcome": {
+        "kind": "game-over",
+        "censored": false,
+        "requestedSeconds": 1775.2666666666667
+      },
+      "interventions": 6,
+      "receiptSha256": "4613292dd0726ce1e2d887afdc3b18fb050d209c55161bf172c0f497dbe2ba37",
+      "tickSha256": "06093ea897dd93bc99b01f4afb7004184f2b247f8f9704e424a98a2fd52e2fd6",
+      "eventSha256": "1a41d11dd958733154e752d66c6f5c42bc5d9f75aae12813de07b2f22bece5e9",
+      "traceSha256": "ce7eeee649f033591efa0be1cec3a25e2c64585e2e3f660d50dc415705eeaa0b"
+    }
+  ],
+  "comparisons": [
+    {
+      "left": "control-watch-quiet",
+      "right": "control-watch-repeat",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        13171,
+        13171
+      ],
+      "eventsCounts": [
+        1418,
+        1418
+      ],
+      "traceCounts": [
+        0,
+        0
+      ]
+    },
+    {
+      "left": "control-watch-quiet",
+      "right": "control-watch-held",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        13171,
+        13171
+      ],
+      "eventsCounts": [
+        1418,
+        1418
+      ],
+      "traceCounts": [
+        0,
+        0
+      ]
+    },
+    {
+      "left": "candidate-watch-quiet",
+      "right": "candidate-watch-repeat",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        37147,
+        37147
+      ],
+      "eventsCounts": [
+        4412,
+        4412
+      ],
+      "traceCounts": [
+        7,
+        7
+      ]
+    },
+    {
+      "left": "candidate-watch-quiet",
+      "right": "candidate-watch-held",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        37147,
+        37147
+      ],
+      "eventsCounts": [
+        4412,
+        4412
+      ],
+      "traceCounts": [
+        7,
+        7
+      ]
+    },
+    {
+      "left": "control-watch-quiet",
+      "right": "candidate-watch-quiet",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 8818,
+      "ticksCounts": [
+        8817,
+        8817
+      ],
+      "eventsCounts": [
+        987,
+        987
+      ]
+    },
+    {
+      "left": "control-watch-repeat",
+      "right": "candidate-watch-repeat",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 8818,
+      "ticksCounts": [
+        8817,
+        8817
+      ],
+      "eventsCounts": [
+        987,
+        987
+      ]
+    },
+    {
+      "left": "control-watch-held",
+      "right": "candidate-watch-held",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 8818,
+      "ticksCounts": [
+        8817,
+        8817
+      ],
+      "eventsCounts": [
+        987,
+        987
+      ]
+    },
+    {
+      "left": "control-p2-quiet",
+      "right": "control-p2-repeat",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        20824,
+        20824
+      ],
+      "eventsCounts": [
+        2230,
+        2230
+      ],
+      "traceCounts": [
+        0,
+        0
+      ]
+    },
+    {
+      "left": "control-p2-quiet",
+      "right": "control-p2-held",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        20824,
+        20824
+      ],
+      "eventsCounts": [
+        2230,
+        2230
+      ],
+      "traceCounts": [
+        0,
+        0
+      ]
+    },
+    {
+      "left": "candidate-p2-quiet",
+      "right": "candidate-p2-repeat",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        106516,
+        106516
+      ],
+      "eventsCounts": [
+        14603,
+        14603
+      ],
+      "traceCounts": [
+        6,
+        6
+      ]
+    },
+    {
+      "left": "candidate-p2-quiet",
+      "right": "candidate-p2-held",
+      "kind": "within-arm-mode",
+      "passed": true,
+      "exclusiveCutoffTick": null,
+      "ticksCounts": [
+        106516,
+        106516
+      ],
+      "eventsCounts": [
+        14603,
+        14603
+      ],
+      "traceCounts": [
+        6,
+        6
+      ]
+    },
+    {
+      "left": "control-p2-quiet",
+      "right": "candidate-p2-quiet",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 19754,
+      "ticksCounts": [
+        19753,
+        19753
+      ],
+      "eventsCounts": [
+        2123,
+        2123
+      ]
+    },
+    {
+      "left": "control-p2-repeat",
+      "right": "candidate-p2-repeat",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 19754,
+      "ticksCounts": [
+        19753,
+        19753
+      ],
+      "eventsCounts": [
+        2123,
+        2123
+      ]
+    },
+    {
+      "left": "control-p2-held",
+      "right": "candidate-p2-held",
+      "kind": "pre-intervention-prefix",
+      "passed": true,
+      "exclusiveCutoffTick": 19754,
+      "ticksCounts": [
+        19753,
+        19753
+      ],
+      "eventsCounts": [
+        2123,
+        2123
+      ]
+    }
+  ],
+  "limitations": [
+    "Derived experimental arms retain original build metadata; neither is an unchanged clean build.",
+    "No injected losses, points, board replacement, stage jumps or post-start clock resets.",
+    "P1 is idle; this does not prove manual actuator feasibility or manual movement/fire after return.",
+    "Watch/Rival trajectories are not compared: shared RNG and rounded board restoration differ.",
+    "Tick projections use rounded public snapshots/enemy poses, not bit-exact full-state replay.",
+    "All raw observed events retained; equality uses an explicit mechanical event allowlist.",
+    "Local preferences/score storage are disposable; all external requests and network writes blocked before boot.",
+    "managedNode cleanup is snapshot-based and covers observed descendants/groups only; unobserved detached descendants remain not verifiable.",
+    "Normal worker close relies on successful explicit context/browser teardown; incomplete or unknown cleanup blocks the next case."
+  ]
+}
