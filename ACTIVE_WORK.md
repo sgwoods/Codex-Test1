@@ -23,8 +23,9 @@ byte for byte and links completed cycles. Keep this packet at150 lines or fewer.
 - Frozen Expert policy/thresholds retained; no simultaneous actuator migration.
 - [November1 report](PLAYER_QUALITY_2026-11-01.md) records implementation,
   accepted evidence, failed fixtures, limitations and next work.
-- Status: locally implemented and independently reviewed; gated PR/CI pending.
-  No merge or deployment is implied by local acceptance.
+- Status: PR265 passed the no-mistakes pipeline and CI at `125d6eca`;
+  final evidence/status documentation follows that tested runtime. Not merged.
+  Review corrected live-human queued/simulated HUD states and a source-only test.
 
 ## Major Goal Status
 
@@ -48,6 +49,8 @@ byte for byte and links completed cycles. Keep this packet at150 lines or fewer.
   Touch, OS focus switching and actual authentication transitions remain untested.
 - Rival HUD: five before-fix failures;9 tests and five fresh-build browser cases
   pass. A reverted-condition browser fixture fails. Score storage is unchanged.
+  Final reviewed build passes seven browser states, including queued/simulated;
+  final audio restart check also passes. Receipts: `final-reviewed-*/summary.json`.
 - Natural seed91001 qualification:12 cases/14 comparisons pass with a separately
   labeled1800-second budget. Candidate Rival reaches567,390/internal Stage85 and
   naturally completes; quiet/repeat/held trajectories match within each arm/mode.
@@ -90,14 +93,15 @@ Existing `http://localhost:8000/` serves this checkout's `dist/dev`, build
 It does not contain this cycle's changes. Fresh combined validation uses a
 separate isolated build and disposable offline contexts, not the signed-in tab.
 New preview: `http://127.0.0.1:8003/`, isolated checkout
-`/private/tmp/aurora-quality-build-nov01`, build1260/b17c5d63 dirty, built16:19UTC.
-PID26425 and serving cwd/build identity verified; includes all three runtime fixes.
+`/private/tmp/aurora-quality-build-nov01`, build1260/b17c5d63 dirty, rebuilt16:41UTC.
+PID26425/cwd and HTTP verified; three runtime files match reviewed `125d6eca`.
+`private-artifacts/player-quality-nov01/final-preview-receipt.json` binds hashes.
 Production1.4.2, frozen beta.5 and hosted dev remain unchanged. No account/score
 writes, database changes, hosted publication or new beta decision authorized.
 
 ## Next Minor Goals
 
-1. Finish reviewed integration of this local packet through existing gates.
+1. Review/merge PR265 after final documentation validation; no deployment implied.
 2. G3.4: separately qualify a shared human/automated movement executor before
    retuning the skill ladder. Measured Expert reverses instantly; humans retain
    momentum. Preserve policy baseline and compare trajectories/collisions/scores.
@@ -113,3 +117,7 @@ writes, database changes, hosted publication or new beta decision authorized.
 Wizard remains a later explicitly unranked stress-test option. Preserve known
 regressions and censoring. Report goals advanced, evidence, remaining concerns
 and next decision; mention release state briefly unless the user reopens it.
+
+Next experiment designs are retained privately as `next-movement-contract.md`
+and `next-audio-measurement.md` in the player-quality evidence folder. Human
+motion extraction must preserve behavior before any bot-inertia experiment.

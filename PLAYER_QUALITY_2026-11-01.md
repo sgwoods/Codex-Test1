@@ -176,17 +176,38 @@ their short evasions human-feasible. Watch/Rival/test agreement therefore does
 not establish human actuator equivalence. No movement constants were changed.
 The recommended next calibration experiment is a separately qualified shared
 movement executor, not simultaneous score-threshold tuning or a Wizard claim.
+The forced Professional row uses its nominal config; Stage4+ non-challenge
+dispatch actually uses the Expert speed multiplier. Do not generalize that row
+to every Professional state. The next experiment specification is retained at
+`private-artifacts/player-quality-nov01/next-movement-contract.md`: first extract
+human motion without behavioral change, then diagnose bot inertia separately.
+Neutral/reverse predictions must use the same executor before safety acceptance.
 
 ## Validation And Next Work
 
-Independent review found no blocking regression in the audio, HUD, exact Expert
-integration or new helpers. The fast suite initially failed because sandboxed
+Initial specialist review found no blocking regression, but the subsequent
+no-mistakes review found missed HUD ownership states and a source-only test.
+It narrowed saved-human scoring to p2/ready/done/final, preserved live scoring
+for queued/simulated, removed the source-regex restart case, and corrected docs.
+Actual browser restart coverage remains. The fast suite initially failed because sandboxed
 process-tree inspection returned EPERM; the unchanged suite passed with required
 macOS access. Both receipts are retained under `harness-artifacts/test-runs/`.
 Simulation and documentation suites pass locally. No test thresholds were relaxed.
-The no-mistakes review/PR/CI gate is the remaining integration step, not deployment.
+The no-mistakes run `01M6BZ150F9315FB2M9X6GAQ4N` returned checks-passed on
+`125d6eca47336f5cf37330dd1b50151e949dfad6`; PR265 is open, not merged.
+The gate reported incomplete automated review coverage for25 files; prior
+specialist evidence review and tests supplement, not erase, that limitation.
+This final documentation follow-up does not change the accepted runtime.
 
-1. Complete reviewed integration through existing gates; retain this report's
+The refreshed build's seven-state browser check passes at
+`private-artifacts/player-quality-nov01/final-reviewed-hud-v1/summary.json`,
+including queued and simulated live-human states. Its audio/restart check passes
+at `final-reviewed-audio-v1/summary.json`. Frozen instrumented input hash:
+`bf98c0662fa7374e6953d650c14ce6d167f2603c59ee5001408add507f40aa20`.
+The preview's three runtime sources byte-match125d6eca; source/HTTP hashes and
+build time are retained in `final-preview-receipt.json`. Earlier receipts remain.
+
+1. Review/merge PR265 after final documentation validation; retain this report's
    local-versus-merged distinction until the forge confirms completion.
 2. Qualify a shared movement executor separately, then tune the skill ladder.
    Do not change persona policy and human motion simultaneously.
@@ -195,11 +216,17 @@ The no-mistakes review/PR/CI gate is the remaining integration step, not deploym
 4. Measure the full final-loss audio phrase and bounded Guardians lifecycle.
    Physical worker containment, full-state replay and broader recovery stay open.
 
+The retained `next-audio-measurement.md` identifies the verified14s source,
+current [2.3,6.5) crop and7s recording-stop window. These are source/metadata
+constraints, not measured phrase boundaries or audible-tail acceptance. Preserve
+the full phrase where feasible; measure warm/cold start and transition timing
+before changing crop or recording windows. No acoustic tuning was performed.
+
 Production1.4.2, frozen beta.5 and hosted dev are unchanged. No score/account
 writes, database mutation, publishing or new beta decision occurred.
 
 Local preview: `http://127.0.0.1:8003/`, served from the isolated checkout
 `/private/tmp/aurora-quality-build-nov01/dist/dev`, build1260/b17c5d63 dirty at
-16:19UTC. It includes the three runtime changes and canonical private audio,
+16:41UTC. It includes the final reviewed runtime changes and canonical private audio,
 without the probe-only state hooks. PID26425/cwd and HTTP build identity checked.
 Existing port8000 remains untouched on its older build1251.
