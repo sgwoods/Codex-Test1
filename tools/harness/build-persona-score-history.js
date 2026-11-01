@@ -37,9 +37,17 @@ const rescueBaseline=read(rescueRoot+'ladder-baseline/results.json');
 const safety=read('reference-artifacts/analyses/persona-calibration-oct22/safety-qualification/results.json');
 const expertVeto=read('reference-artifacts/analyses/persona-calibration-oct29/expert-body-veto.json');
 const currentBuild=read('reference-artifacts/analyses/persona-calibration-oct30/current-build.json');
+const novemberBuild=read('reference-artifacts/analyses/persona-calibration-nov01/current-build.json');
+if(novemberBuild.verifiedRows!==100 || novemberBuild.rows.length!==100 || novemberBuild.naturalRepeatObservations!==0)
+  throw Error('Nov 1 requires the verified 100-row qualification export, without natural repeats');
 const normalize = r => ({persona:r.persona, seed:r.seed, score:r.score, stage:r.stage,
   outcome:r.outcome || (typeof r.latest?.gameOver === 'boolean' ? (r.latest.gameOver ? 'game-over':'time-limit') : 'unknown')});
 const versions = [
+  ...[['A10a','matched','control'],['A10b','matched','candidate'],['A10c','reserved','control'],['A10d','reserved','candidate']].map(([id,panel,arm])=>({
+    id,game:'aurora',label:`Nov 1 | build1257 / ${novemberBuild.sourceCommit.slice(0,8)} ${panel} ${arm}${arm==='candidate'?' (LOCAL / UNSHIPPED)':''}`,
+    identity:novemberBuild[arm+'IndexSha256'],method:'Hash-bound snapshot browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
+    rows:novemberBuild.rows.filter(r=>r.panel===panel&&r.arm===arm).map(normalize)
+  })),
   ...[['A9a','matched','control'],['A9b','matched','candidate'],['A9c','reserved','control'],['A9d','reserved','candidate']].map(([id,panel,arm])=>({
     id,game:'aurora',label:`Oct 30 | build1256 / ${currentBuild.sourceCommit.slice(0,8)} ${panel} ${arm}${arm==='candidate'?' (UNSHIPPED)':''}`,
     identity:currentBuild[arm+'IndexSha256'],method:'Hash-bound snapshot browser Watch',seeds:panel==='matched'?'91001-91010':'93001-93010',
@@ -135,11 +143,16 @@ for(const v of versions){
   for(const r of v.rows){if(!Number.isFinite(r.score)||r.score<0||keys.has(`${r.persona}/${r.seed}`))throw Error(`Invalid run ${v.id}`);keys.add(`${r.persona}/${r.seed}`);}
   for(const p of new Set(v.rows.map(r=>r.persona)))if(v.rows.filter(r=>r.persona===p).length!==10)throw Error(`Expected 10 runs: ${v.id}/${p}`);
 }
+// The Nov 1 append must not rewrite any of the 410 earlier observations or panel identities.
+if(versions.length!==27 || versions.reduce((n,v)=>n+v.rows.length,0)!==510 ||
+  sha(JSON.stringify(versions.filter(v=>!/^A10[a-d]$/.test(v.id))))!==
+    'c200902be4466e43ff357ba79cae95d4a14396c68ee050b5af99c7ea99c0aacf')
+  throw Error('Expected append-only history: 27 panels / 510 observations, prior 23 panels unchanged');
 fs.mkdirSync(out,{recursive:true});
 fs.writeFileSync(path.join(out,'history.json'),JSON.stringify({schemaVersion:1,sources,versions},null,2)+'\n');
 for(const game of ['aurora','guardians'])fs.writeFileSync(path.join(out,`${game}-score-history.svg`),chart(game));
 fs.writeFileSync(path.join(out,'aurora-current-ladder.svg'),chart('aurora',['A6c','A3d']));
 fs.writeFileSync(path.join(out,'aurora-safety-comparison.svg'),chart('aurora',['A6d','A7']));
 fs.writeFileSync(path.join(out,'aurora-expert-veto-comparison.svg'),expertComparison());
-fs.writeFileSync(path.join(out,'aurora-current-build-comparison.svg'),chart('aurora',['A9a','A9b']));
+fs.writeFileSync(path.join(out,'aurora-current-build-comparison.svg'),chart('aurora',['A10a','A10b']));
 console.log(`Validated ${versions.length} panels, ${versions.reduce((n,v)=>n+v.rows.length,0)} observed runs; generated history.json and SVG charts.`);

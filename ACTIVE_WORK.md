@@ -1,141 +1,115 @@
 # Active Work
 
-Updated October 30, 2026. Owner: Codex lead in Aurora Project Lead.
+Updated November 1, 2026. Owner: Codex lead in Aurora Project Lead.
 Primary lead chat: `019eb8a3-78b6-7ce2-acc7-4f5e64c41275`.
 
 ## Read First
 
 The user directs work toward adopting Star Swarm lessons, not another beta.
 The [plan of record](PROJECT_PLAN_2026-10-28.md#major-goals-and-minor-goals)
-owns major goals G1-G6 and subordinate minor goals. Read [agent workflow](AGENT_WORKFLOW.md)
-for ownership, isolation and evidence rules. Historical records are evidence,
-not current instructions or release authority.
-
-[Work history index](WORK_HISTORY.md) preserves the previous 2,768-line packet
-byte for byte, including local follow-through notes. Its manifest and hash are
-checked by the documentation suite. Do not append completed cycle narratives here;
-link their reports from the index. Keep this startup packet at 150 lines or fewer.
+owns goals G1-G6. Read [agent workflow](AGENT_WORKFLOW.md) for ownership,
+isolation and evidence rules. Historical approvals are not release authority.
+[Work history index](WORK_HISTORY.md) preserves the original2,768-line packet
+byte for byte and links completed cycles. Keep this packet at150 lines or fewer.
 
 ## Current Cycle
 
-- Goals: merge PR263 and close bounded G5.2 visual/input proof; clarify G6.3 recovery.
-- Authorization: user's "go ahead as recommended, work maximally parallel";
-  isolated experiments, not deployment or live persona/physics changes.
-- Qualification source: merged `cb70121e9c5f29c483eec54f17b44e115a87c55f` (PR261).
-- Branch: `codex/formation-visual-proof`, based on merged main `e0987756`. Prior experiment/chart/plan
-  edits are retained; this cycle does not replace their immutable measurements.
-- Lead edits/integrates. Socrates/Bohr completed content/reference reviews;
-  Jason reviewed cleanup and found the now-repaired premature pipe teardown.
-  Prior clock and late-stage specialist assignments are complete.
-  Full-career browser jobs remain sequential pending separate measurement.
-- Acceptance: unchanged policy/thresholds, complete hashed private dependencies,
-  explicit terminal/censored outcomes, matched/reserved Expert nonregression,
-  other-persona mechanical equality, actual browser input/lifecycle checks.
-- Status: PR263 merged October30 as `e0987756`, validated source `b90dbe70`.
-  No-mistakes review/tests/docs/syntax checks passed; hosted release-contracts
-  CI passed. Pipeline corrected stale documentation status; no code fixes or
-  overrides. See [phase report](ADOPTION_PHASE_REVIEW_2026-10-30.md).
+- User authorized two hours of uninterrupted player quality, then persona work.
+- Lead branch `codex/guest-input-audit`, merged baseline `b17c5d63` (PR264).
+- Two isolated specialists prepared measurements and independently reviewed
+  evidence; lead alone integrates. Full-career browser jobs ran sequentially.
+- Local changes: pending reference-audio cancellation; correct human1UP score
+  after Rival completion; exact qualified Expert body-veto safety rule.
+- Frozen Expert policy/thresholds retained; no simultaneous actuator migration.
+- [November1 report](PLAYER_QUALITY_2026-11-01.md) records implementation,
+  accepted evidence, failed fixtures, limitations and next work.
+- Status: locally implemented and independently reviewed; gated PR/CI pending.
+  No merge or deployment is implied by local acceptance.
 
 ## Major Goal Status
 
 | Goal | Accepted position | Remaining work |
 | --- | --- | --- |
-| G1 Tests and parallel execution | Foundations and PR262 cancellation merged; G1.3 pilot measures1.66x two-worker throughput | Physical containment, full-career capacity and end-to-end delivery efficiency remain pending |
-| G2 Documentation and memory | Twelve claims and G2.2 checked compact packet/archive merged | Maintain contract and extend high-value claims |
-| G3 Persona/input contracts | PR261 merged; clean build1257 passes19 lifecycle cases/eight comparisons | Natural late-stage and common human input boundary remain open |
-| G4 Failure diagnostics | Motion clock, initialization and alternate-step transition repairs pass; pause/release and rounded board clocks tested | Reusable full-state replay and natural transition pacing remain open |
-| G5 Content authoring | PR263 integrated; named22/20/32 configuration passes four local visual/input cases | Guard tightening/evidence integration, broader configurations and Guardians scope |
-| G6 Reference evidence | Three-claim crosswalk recorded;156 files restored locally with hashes | Approved off-machine recovery; challenge settlement product decision |
+| G1 Tests and parallel execution | Foundations/PR262 cancellation merged; bounded pilot1.66x throughput; new offline/cleanup regressions local | Physical containment, full-career capacity and end-to-end delivery efficiency |
+| G2 Documentation and memory | Twelve claims and checked compact packet/archive merged; score history refreshed with actual observations | Maintain contracts and high-value current claims |
+| G3 Persona/input contracts | New100-career panel and natural Watch/Rival qualification pass; exact Expert rule locally integrated | Human-compatible movement experiment and broader skill calibration |
+| G4 Failure diagnostics | Motion clock/initialization/transition repairs merged; every-tick natural comparisons retained | Reusable full-state replay and natural pacing |
+| G5 Content authoring | PR263/264 integrated; named22/20/32 configuration has four visual/input cases | Broader configurations and bounded Guardians scope |
+| G6 Reference evidence | Crosswalk and156-file iCloud restore verified; audio cancellation fixed locally | Full-phrase acoustic fidelity, broader recovery/key drill, challenge settlement |
 
-## Latest Accepted Evidence
+## Latest Evidence
 
-- [Adoption foundations](ADOPTION_CYCLE_2026-10-28.md): PR258 merged with hosted
-  CI; the original report is dated before integration and retains that history.
-- [Expert safety report](reference-artifacts/analyses/persona-calibration-oct29/EXPERT-BODY-VETO.md):
-  40 historical full-game observations; matched median 81,275 -> 102,020 and
-  attainment 6/10 -> 7/10; reserved median 97,780 and 8/10 attainment unchanged.
-  One reserved seed regresses 146,380 -> 117,210; three candidate runs are capped.
-  Both frozen gates pass, not general skill improvement or runtime integration.
-- Independent verification covered raw hashes, ten archived-control comparisons
-  and twenty pair prefixes. 45 behavior cases, 70 geometry cases and 80 VM mode
-  cases per arm passed. VM parity does not establish browser or human-input parity.
-- [Current-build qualification](reference-artifacts/analyses/persona-calibration-oct30/CURRENT-BUILD.md):
-  100 runs, all frozen full-game gates pass. 40 Expert historical comparisons
-  independently verified; 30 other-persona pairs preserve recorded mechanics.
-  Professional median240,785; all ten900-second outcomes are lower bounds.
-- [Score history](reference-artifacts/analyses/persona-score-history/README.md):
-  23 panels / 410 observations. No untested persona values carried forward.
-- Raw Expert archive: `private-artifacts/persistent/expert-body-veto-oct29/`,
-  156 compressed artifacts plus manifest; local hashes verified, remote restore
-  untested. Working methods: `private-artifacts/expert-body-veto-2026-10-29/`.
-- Current-build start: private build1256/source `16baa705`, seed91001,
-  control 46,960/Stage8 -> candidate 131,920/Stage24; seven interventions.
-  First active destruction 146.900s -> 403.917s; both completed game over.
-  Frozen first-pair criteria and input/method hashes pass. Strict historical
-  event equality initially failed on missing private-reference-audio warnings;
-  October30 new inputs restore all24 canonical files, hash-verified. Original
-  failed inputs remain retained. All24 decode in both browser arms.
-  Packet: `private-artifacts/expert-current-oct30/README.md`, raw receipts and
-  provenance retained there. Browser-v2 individual assertions pass32/32, but
-  quiet/held comparisons pass14/16: candidate Beginner P2 and control Professional
-  P2 diverge. Both browser suites correctly fail; no full-mode acceptance claim.
-  Independent review found controlled recorded time but wall-clock enemy motion
-  when P2 leaves global autopilot off. Retained archive:594 hashed artifacts in
-  `private-artifacts/persistent/expert-current-oct30/`; remote restore untested.
-- [Clock repair follow-through](reference-artifacts/analyses/persona-calibration-oct30/P2-CLOCK.md):
-  one-line local source repair; original browser32/32 and enhanced56/56 cases
-  pass on new hash-bound derived inputs. Tick repeat/held comparisons pass;
-  all eight synthetic Stage6 Expert cases show expected control/candidate action.
-  Five clock regressions join test:sim. Prior failed evidence is not overwritten.
-- [Lifecycle/fresh build](reference-artifacts/analyses/persona-calibration-oct30/LIFECYCLE.md):
-  eight clock tests pass; derived and freshly built inputs each pass19 browser
-  cases/eight comparisons at three steps. Fresh build is correctly dirty, not a
-  committed release. InitialSimT ordering and fixed1/60 correction repaired locally.
+- Player-quality audio: baseline cancellation race reproduced;11 actual-source
+  tests and fresh-build browser buffer/restart checks pass. Requested/last-loaded
+  metadata mismatch alone does not prove wrong playback. Issue247 remains open.
+- Guest controls: fresh build1260 passes seven reachable paths,42 movements and
+  seven firing/release checks. At390px the hidden pilot button blocks the eighth
+  path. Overall probe remains failed; no authentication gate was reproduced.
+  Touch, OS focus switching and actual authentication transitions remain untested.
+- Rival HUD: five before-fix failures;8 tests and five fresh-build browser cases
+  pass. A reverted-condition browser fixture fails. Score storage is unchanged.
+- Natural seed91001 qualification:12 cases/14 comparisons pass with a separately
+  labeled1800-second budget. Candidate Rival reaches567,390/internal Stage85 and
+  naturally completes; quiet/repeat/held trajectories match within each arm/mode.
+  Earlier900-second coverage-incomplete run is retained. P1 is idle; Watch/Rival
+  are not assumed to share trajectories or human actuator feasibility.
+- Independent natural review verified532,974 tick records and regenerated8,952
+  checkpoint hashes. Full-state replay is not established. See
+  [natural receipt](reference-artifacts/analyses/persona-calibration-nov01/natural-lifecycle.json).
+- New100-career panel uses clean build1257/`cb70121e`, original900-second budget
+  and frozen policy. All gates pass;400 raw hashes,30 other-persona mechanical
+  pairs and20 Expert full/prefix comparisons independently verified.
+- Expert matched median81,275 ->102,020;75k attainment6/10 ->7/10. Reserved
+  median97,780 and8/10 unchanged. Seed93007 regresses146,380 ->117,210; three
+  candidate Expert careers are censored. No universal improvement claim.
+- Other persona medians unchanged: Beginner7,235; Intermediate21,995;
+  Professional240,785. All ten Professional seeds hit900s alive: lower bounds.
+- Exact helper/dispatch integration recovers baseline flow bytes when removed.
+  Actual-source behavior/collider tests115/115 pass (17 failed before);
+  simulation/controller parity passes. No other persona or human physics changed.
+  Combined fresh-build seed91001 reproduces131,920/Stage24 with exact non-audio
+  events/mechanical snapshots; combined audio and HUD browser checks pass.
+- [Score history](reference-artifacts/analyses/persona-score-history/README.md)
+  preserves old/rejected observations; natural repetitions are not score panels.
+- [iCloud recovery](ICLOUD_RECOVERY_2026-10-31.md): downloaded9,192,480-byte copy
+  restored156 files/138 JSON documents with hashes verified. Key location:
+  Apple Passwords, **Codex-test-1 Backup Key**. Never store the key here.
+  Full lost-machine/key recovery and newer/broader archive coverage remain open.
 
-## Inspection And Boundaries
+Private cycle evidence: `private-artifacts/player-quality-nov01/`,
+`private-artifacts/persona-natural-nov01/`, `private-artifacts/expert-current-nov01/`.
+Historical Expert archive: `private-artifacts/persistent/expert-body-veto-oct29/`.
+Historical current-build archive: `private-artifacts/persistent/expert-current-oct30/`.
+Current source, methods, assets, outcomes, failures and limitations are recorded
+in the dated report; archived evidence must not be silently replaced or relabeled.
 
-Localhost `http://localhost:8000/` serves this checkout's `dist/dev`, build
-`1.4.2.1+build.1251.sha.2e33ef4d`, PID32762. Build identity and process cwd checked
-at cycle start. It does not contain the private Expert candidate.
-Production 1.4.2 and frozen beta.5 are unchanged. No account/score writes,
-database change, hosted publication or new beta decision is authorized here.
+## Inspection And Release Boundaries
+
+Existing `http://localhost:8000/` serves this checkout's `dist/dev`, build
+`1.4.2.1+build.1251.sha.2e33ef4d`, PID32762 (identity/cwd checked at cycle start).
+It does not contain this cycle's changes. Fresh combined validation uses a
+separate isolated build and disposable offline contexts, not the signed-in tab.
+New preview: `http://127.0.0.1:8003/`, isolated checkout
+`/private/tmp/aurora-quality-build-nov01`, build1260/b17c5d63 dirty, built16:19UTC.
+PID26425 and serving cwd/build identity verified; includes all three runtime fixes.
+Production1.4.2, frozen beta.5 and hosted dev remain unchanged. No account/score
+writes, database changes, hosted publication or new beta decision authorized.
 
 ## Next Minor Goals
 
-[Current phase review](ADOPTION_PHASE_REVIEW_2026-10-30.md) records the four-step
-follow-through, content refusal matrix, crosswalk and fresh recovery receipt.
-PR263 is merged, not deployed. [Visual proof](reference-artifacts/analyses/formation-authoring-oct30/README.md)
-qualifies one configuration; G6.3 remote restore still prevents full phase acceptance.
-Expert remains private; shipped layouts and scoring are unchanged.
+1. Finish reviewed integration of this local packet through existing gates.
+2. G3.4: separately qualify a shared human/automated movement executor before
+   retuning the skill ladder. Measured Expert reverses instantly; humans retain
+   momentum. Preserve policy baseline and compare trajectories/collisions/scores.
+3. Player quality: repair narrow board/toolbar accessibility coherently across
+   tall/short phones, safe areas and keyboard navigation; no tall-only overlay.
+4. G6.2: measure full final-loss audio phrase/tail and restart timing against
+   preserved references; cancellation proof is not acoustic fidelity proof.
+5. G5.3: define a bounded Guardians lifecycle/core-loop qualification after the
+   Aurora input contract. Keep its scoring scale and preview status separate.
+6. G1.2/G4.2/G6.3: physical worker containment, reusable full-state replay and
+   broader recoverable archives remain partial. No general completion claim.
 
-G1.3 pilot: [bounded concurrency report](reference-artifacts/analyses/persona-calibration-oct30/CONCURRENCY.md).
-Twelve jobs pass228 cases/96 comparisons with identical recorded mechanics.
-Median pair22.939s serial vs14.296s two-worker; provisional cap2 for this workload
-only. Broader resource/soak and managed failure-path containment remain open.
-Managed follow-through:24 additional jobs pass;1.662x throughput, sampled peak
-RSS1551MiB serial/2987MiB parallel. Local bounded settlement passes17 tests; detached
-containment remains open. See the report for measured-source and sampling limits.
-
-October30 merged qualification: PR261 merged as `cb70121e9c5f29c483eec54f17b44e115a87c55f`;
-its tree equals CI-validated `084dd8d0`. Isolated clean build1257 passed all19
-lifecycle cases/eight comparisons. Provenance and write-once receipts:
-`private-artifacts/p2-clock-oct30/merged-provenance.json` and
-`private-artifacts/p2-clock-oct30/merged-lifecycle-v1/summary.json`.
-An earlier build was correctly marked dirty solely for the temporary node_modules
-symlink; its copied input remains retained. Only that dependency link was excluded
-locally before the clean rebuild. No runtime source changes or deployments.
-Local reconciliation complete: new branch starts at merged main; old branches and
-their commit histories remain unchanged. The post-merge packet update was carried
-forward explicitly. The subsequent G1.3 pilot is summarized above.
-
-1. G1.2: bounded settlement/failed-worker cleanup integrated; unobserved
-   detached containment remains open. No unattended capacity claim.
-2. G3.3/G4.2: retain synthetic-versus-natural progression, rounded restoration and
-   human feasibility limits; Expert policy remains private pending integration.
-3. Preserve per-seed regression, capped outcomes and all immutable evidence.
-4. G5.1/G6.1 integrated; G5.2 bounded visual/input proof recorded locally.
-   G6.3 needs approved off-machine recovery; baseline entry-overlap debt retained.
-   The plan of record gives the phase exit criteria and cycle estimates.
-
-Report goal IDs advanced, evidence, limitations and next recommended minor goals.
-Keep release state a short constraint note unless the user reopens release work.
+Wizard remains a later explicitly unranked stress-test option. Preserve known
+regressions and censoring. Report goals advanced, evidence, remaining concerns
+and next decision; mention release state briefly unless the user reopens it.

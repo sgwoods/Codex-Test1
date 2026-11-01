@@ -12,10 +12,10 @@ const releaseContracts = [
 ].map(file => [`tools/harness/${file}`]);
 const SUITES = {
   fast: [
-    ['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js', 'tools/testing/isolated-gameplay.test.js', 'tools/testing/run-suite.test.js', 'tools/testing/managed-child.test.js'],
+    ['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js', 'tools/testing/isolated-gameplay.test.js', 'tools/testing/run-suite.test.js', 'tools/testing/managed-child.test.js', 'tools/harness/export-persona-current-build.test.js'],
     ['tools/testing/doc-claims.js'], ...releaseContracts,
   ],
-  simulation: [['--test', 'tools/testing/gameplay-clock.test.js', 'tools/testing/content-slice.test.js'], ['tools/harness/check-persona-mode-parity.js']],
+  simulation: [['--test', 'tools/testing/gameplay-clock.test.js', 'tools/testing/content-slice.test.js', 'tools/testing/reference-audio-cancellation.test.js', 'tools/testing/player-two-hud.test.js', 'tools/testing/expert-body-veto.test.js', 'tools/harness/check-natural-persona-lifecycle.test.js', 'tools/harness/browser-check-util.test.js'], ['tools/harness/check-persona-mode-parity.js']],
   docs: [['--test', 'tools/testing/doc-claims.test.js', 'tools/testing/work-history.test.js'], ['tools/testing/doc-claims.js']],
 };
 

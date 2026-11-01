@@ -8,9 +8,9 @@ measurements, normal-life persona panels, or human acceptance.
 
 | Command | Scope | Side effects and limitations |
 | --- | --- | --- |
-| `npm test` | Documentation/runner regressions and the seven existing release-contract fixture checks | Node built-ins plus POSIX process inspection for cleanup tests. No build, browser, accounts or deployment. Not full release acceptance. |
+| `npm test` | Documentation/runner regressions, sanitized persona-export checks and seven existing release-contract fixture checks | Node built-ins plus POSIX process inspection for cleanup tests. No build, browser, accounts or deployment. Not full release acceptance. |
 | `npm run test:docs` | Executable claims, work-history integrity/navigation and negative fixtures | Checks explicit facts and artifact contracts, not arbitrary prose truth or rendered readability. |
-| `npm run test:sim` | Controlled-motion clock regressions, formation authoring refusal/runtime-effect proof and actual-source Aurora/Guardians controller parity fixtures | Watch/P2/test policy and action parity, not full careers, human-physics equivalence, visual content playability or skill attainment. Guardians P2 remains unsupported. |
+| `npm run test:sim` | Controlled clocks, audio cancellation, Rival HUD ownership, Expert body-veto/colliders, formation proof, offline/cleanup helpers and Aurora/Guardians controller parity | Watch/P2/test policy and action parity, not full careers, acoustic fidelity, human-physics equivalence or skill attainment. Guardians P2 remains unsupported. |
 | `npm run test:browser -- --bundle /absolute/private/build` | Ten-second seeded offline harness smoke over a copied existing bundle | Requires repo-managed Chromium and a private build exposing the harness. No automatic rebuild. Public hosted bundles intentionally lack this API. |
 | `npm run harness:check:release-contracts:ci` | Existing focused release-contract checks | Still available individually; included by `npm test`. |
 | `npm run release:preflight:dev` | Full existing dev preflight | May rebuild and refresh tracked evidence. Lead-only; do not put it in parallel workers. It does not publish. |
@@ -19,6 +19,32 @@ Use the existing targeted `harness:check:*` commands when a change affects their
 subsystem. The small simulation suite is intentionally not every simulation in
 the repository. Browser prerequisites and macOS sandbox requirements remain in
 `TESTING_AND_RELEASE_GATES.md`; do not substitute a different Playwright runtime.
+
+`node tools/harness/check-guest-input-lifecycle.js FROZEN_BUNDLE NEW_OUTPUT`
+checks natural guest keyboard launch, movement/fire/release, account focus, Settings recovery and
+synthetic blur at desktop/narrow widths. External HTTP and WebSockets are blocked
+before navigation. Offline account-field enabling is explicitly a DOM fixture,
+not authentication evidence. Inaccessible controls are failed coverage, not passes.
+It writes screenshots and a hash-bound receipt without rebuilding the input.
+
+`node tools/harness/check-reference-audio-lifecycle.js INSTRUMENTED_BUNDLE NEW_OUTPUT`
+checks real decoded buffer identity and delayed ending cancellation on restart.
+It requires a private fixture exposing `window.__qualityAudio`, never a public
+runtime export. Unit regressions run without private audio files in `test:sim`.
+Browser audio-node assertions do not establish speaker output or full-phrase fidelity.
+
+`node tools/harness/check-natural-persona-lifecycle.js --repo REPO --bundle CLEAN_BUILD1257 --policy FROZEN_POLICY --out NEW_OUTPUT`
+qualifies the private Expert experiment from natural Stage1 starts in Watch and
+Rival. Twelve sequential cases compare quiet/repeat/DOM-held trajectories and
+pre-intervention prefixes, with no injected deaths or stage jumps. It requires
+the exact frozen bundle/policy hashes and24 private audio assets. Missing natural
+handoff/intervention coverage fails acceptance;900-second active outcomes are
+censored. Disposable contexts block external requests and writes before boot.
+It reuses managed-child supervision and retains its observed-descendant limits.
+Method regressions run in `test:sim`; full private runs are not public CI fixtures.
+`--extended` uses a separately labeled1800-second budget and360-second worker
+deadline to observe later natural handoffs; it never silently changes the900-second
+score-panel budget. `--smoke` is12 seconds and always incomplete qualification.
 
 On restricted macOS sessions, the process-cleanup regressions require approved
 `ps` access. Inspection denial is an explicit test failure, not evidence that
